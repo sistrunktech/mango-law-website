@@ -1,4 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="12" fill="#000000"/>
-  <path d="M20 44c0-9 8-16 18-16h2v-6c0-1.1-.9-2-2-2h-2c-6.6 0-12-5.4-12-12h-4c0 9 8 16 18 16h2v6c0 1.1.9 2 2 2h2c6.6 0 12 5.4 12 12h4c0-9-8-16-18-16h-2v-6c0-1.1-.9-2-2-2h-2c-6.6 0-12-5.4-12-12h-4c0 9 8 16 18 16h2v6c0 1.1.9 2 2 2h2c6.6 0 12 5.4 12 12h4c0-9-8-16-18-16h-2" stroke="#F4A300" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Mango Law LLC Favicon - Elegant mango icon matching brand -->
+  <defs>
+    <linearGradient id="favGold" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#E2B857"/>
+      <stop offset="35%" stop-color="#D4A84B"/>
+      <stop offset="70%" stop-color="#C49A3D"/>
+      <stop offset="100%" stop-color="#A8863A"/>
+    </linearGradient>
+    <linearGradient id="favHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0D078" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#D4A84B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="favLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4A84B"/>
+      <stop offset="100%" stop-color="#C49A3D"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="32" height="32" rx="4" fill="#1F1F1F"/>
+  
+  <!-- Mango body - elegant teardrop shape -->
+  <path d="M16 6 
+           C11 6, 6 12, 6 19 
+           C6 25, 10 28, 16 28 
+           C22 28, 26 25, 26 19 
+           C26 12, 21 6, 16 6 Z" 
+        fill="url(#favGold)"/>
+  
+  <!-- Inner highlight curve for dimension -->
+  <path d="M12 10 
+           C9 14, 8 18, 9 23" 
+        stroke="url(#favHighlight)" 
+        stroke-width="2.5" 
+        stroke-linecap="round"
+        fill="none"/>
+  
+  <!-- Stem -->
+  <path d="M16 6 L16 3" 
+        stroke="#C49A3D" 
+        stroke-width="1.5" 
+        stroke-linecap="round"/>
+  
+  <!-- Leaf - elegant curved shape -->
+  <path d="M16 4 
+           C19 2, 23 2, 25 4 
+           C23 6, 19 5.5, 16 4 Z" 
+        fill="url(#favLeaf)"/>
 </svg>

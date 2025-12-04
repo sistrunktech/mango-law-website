@@ -12,58 +12,67 @@ const sizes = {
 
 /**
  * Mango icon based on the Mango Law LLC logo
- * Features a stylized mango fruit with leaf - using organic mango colors
+ * Elegant stylized mango with gold gradient and highlight curve
  */
 export default function MangoIcon({ className = '', size = 'md' }: Props) {
+  // Unique ID for this instance to avoid gradient conflicts
+  const id = Math.random().toString(36).substr(2, 9);
+  
   return (
     <svg
-      viewBox="0 0 40 40"
+      viewBox="0 0 40 52"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`${sizes[size]} ${className}`}
       aria-hidden="true"
     >
-      {/* Mango fruit body - gradient from blush to gold */}
       <defs>
-        <linearGradient id="mangoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" className="[stop-color:#C47A69]" />
-          <stop offset="40%" className="[stop-color:#E8A33C]" />
-          <stop offset="100%" className="[stop-color:#F4B95A]" />
+        {/* Rich gold gradient for mango body */}
+        <linearGradient id={`mangoGold-${id}`} x1="20%" y1="0%" x2="80%" y2="100%">
+          <stop offset="0%" stopColor="#E8C060"/>
+          <stop offset="25%" stopColor="#D4A84B"/>
+          <stop offset="60%" stopColor="#C49A3D"/>
+          <stop offset="100%" stopColor="#A8863A"/>
+        </linearGradient>
+        {/* Highlight gradient */}
+        <linearGradient id={`highlight-${id}`} x1="0%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stopColor="#F5E0A0" stopOpacity="0.6"/>
+          <stop offset="100%" stopColor="#D4A84B" stopOpacity="0"/>
+        </linearGradient>
+        {/* Leaf gradient */}
+        <linearGradient id={`leaf-${id}`} x1="0%" y1="50%" x2="100%" y2="50%">
+          <stop offset="0%" stopColor="#C9A043"/>
+          <stop offset="100%" stopColor="#D4A84B"/>
         </linearGradient>
       </defs>
-      <ellipse
-        cx="20"
-        cy="24"
-        rx="12"
-        ry="14"
-        fill="url(#mangoGradient)"
+      
+      {/* Mango body - elegant teardrop shape */}
+      <path 
+        d="M20 8 C12 8, 5 18, 5 30 C5 40, 11 48, 20 48 C29 48, 35 40, 35 30 C35 18, 28 8, 20 8 Z" 
+        fill={`url(#mangoGold-${id})`}
       />
-      {/* Highlight/shine */}
-      <ellipse
-        cx="15"
-        cy="20"
-        rx="4"
-        ry="6"
-        className="fill-brand-mangoLight opacity-30"
+      
+      {/* Inner highlight curve */}
+      <path 
+        d="M14 14 C10 20, 8 28, 10 40" 
+        stroke={`url(#highlight-${id})`}
+        strokeWidth="2.5" 
+        strokeLinecap="round"
+        fill="none"
       />
+      
       {/* Stem */}
-      <path
-        d="M20 10 L20 5"
-        className="stroke-brand-leafDark"
-        strokeWidth="2"
+      <path 
+        d="M20 8 L20 3" 
+        stroke="#B8923A" 
+        strokeWidth="1.5" 
         strokeLinecap="round"
       />
+      
       {/* Leaf */}
-      <path
-        d="M20 7 Q28 2 33 7 Q28 12 20 7"
-        className="fill-brand-leaf"
-      />
-      {/* Leaf vein */}
-      <path
-        d="M21 7 Q26 5.5 30 7"
-        className="stroke-brand-leafDark"
-        strokeWidth="0.5"
-        fill="none"
+      <path 
+        d="M20 5 C24 2, 30 2, 34 4 C30 7, 24 6, 20 5 Z" 
+        fill={`url(#leaf-${id})`}
       />
     </svg>
   );
@@ -73,68 +82,75 @@ export default function MangoIcon({ className = '', size = 'md' }: Props) {
  * Mango icon for dark backgrounds - brighter colors
  */
 export function MangoIconLight({ className = '', size = 'md' }: Props) {
+  const id = Math.random().toString(36).substr(2, 9);
+  
   return (
     <svg
-      viewBox="0 0 40 40"
+      viewBox="0 0 40 52"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`${sizes[size]} ${className}`}
       aria-hidden="true"
     >
-      {/* Mango fruit body - gradient */}
       <defs>
-        <linearGradient id="mangoGradientLight" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" className="[stop-color:#C47A69]" />
-          <stop offset="40%" className="[stop-color:#E8A33C]" />
-          <stop offset="100%" className="[stop-color:#F4B95A]" />
+        <linearGradient id={`mangoGoldLight-${id}`} x1="20%" y1="0%" x2="80%" y2="100%">
+          <stop offset="0%" stopColor="#F0D070"/>
+          <stop offset="25%" stopColor="#E8C060"/>
+          <stop offset="60%" stopColor="#D4A84B"/>
+          <stop offset="100%" stopColor="#C49A3D"/>
+        </linearGradient>
+        <linearGradient id={`highlightLight-${id}`} x1="0%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.5"/>
+          <stop offset="100%" stopColor="#F0D070" stopOpacity="0"/>
         </linearGradient>
       </defs>
-      <ellipse
-        cx="20"
-        cy="24"
-        rx="12"
-        ry="14"
-        fill="url(#mangoGradientLight)"
+      
+      {/* Mango body */}
+      <path 
+        d="M20 8 C12 8, 5 18, 5 30 C5 40, 11 48, 20 48 C29 48, 35 40, 35 30 C35 18, 28 8, 20 8 Z" 
+        fill={`url(#mangoGoldLight-${id})`}
       />
-      {/* Highlight/shine */}
-      <ellipse
-        cx="15"
-        cy="20"
-        rx="4"
-        ry="6"
-        className="fill-white opacity-30"
-      />
-      {/* Stem */}
-      <path
-        d="M20 10 L20 5"
-        className="stroke-brand-leaf"
-        strokeWidth="2"
+      
+      {/* Highlight curve */}
+      <path 
+        d="M14 14 C10 20, 8 28, 10 40" 
+        stroke={`url(#highlightLight-${id})`}
+        strokeWidth="2.5" 
         strokeLinecap="round"
+        fill="none"
       />
+      
+      {/* Stem */}
+      <path d="M20 8 L20 3" stroke="#D4A84B" strokeWidth="1.5" strokeLinecap="round"/>
+      
       {/* Leaf */}
-      <path
-        d="M20 7 Q28 2 33 7 Q28 12 20 7"
-        className="fill-brand-leafLight"
-      />
+      <path d="M20 5 C24 2, 30 2, 34 4 C30 7, 24 6, 20 5 Z" fill="#D4A84B"/>
     </svg>
   );
 }
 
 /**
  * Simple mango silhouette for subtle decorative use
+ * Elegant teardrop shape matching the brand
  */
 export function MangoSilhouette({ className = '' }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 40 48"
+      viewBox="0 0 40 52"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-hidden="true"
     >
-      <ellipse cx="20" cy="28" rx="14" ry="18" fill="currentColor" />
-      <path d="M20 10 L20 4" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M20 6 Q30 0 36 6 Q30 12 20 6" fill="currentColor" />
+      {/* Mango body - teardrop */}
+      <path 
+        d="M20 8 C12 8, 5 18, 5 30 C5 40, 11 48, 20 48 C29 48, 35 40, 35 30 C35 18, 28 8, 20 8 Z" 
+        fill="currentColor"
+      />
+      {/* Stem */}
+      <path d="M20 8 L20 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      {/* Leaf */}
+      <path d="M20 4 C25 1, 32 1, 36 4 C32 7, 25 6, 20 4 Z" fill="currentColor"/>
     </svg>
   );
 }

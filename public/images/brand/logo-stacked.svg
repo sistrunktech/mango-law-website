@@ -1,0 +1,33 @@
+<svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mango Law LLC - Stacked Logo (icon above text) -->
+  <!-- For dark backgrounds -->
+  
+  <defs>
+    <linearGradient id="mangoGoldStacked" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#D4A84B"/>
+      <stop offset="50%" stop-color="#C9A043"/>
+      <stop offset="100%" stop-color="#B8923A"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Mango Icon (centered, smaller) -->
+  <g transform="translate(70, 0) scale(0.6)">
+    <!-- Stem -->
+    <path d="M50 28 L50 18" stroke="#C9A043" stroke-width="4" stroke-linecap="round"/>
+    <!-- Leaf -->
+    <path d="M50 20 Q70 8 80 18 Q70 28 50 20" fill="#C9A043"/>
+    <!-- Mango body -->
+    <ellipse cx="50" cy="70" rx="35" ry="45" fill="url(#mangoGoldStacked)"/>
+    <!-- Highlight -->
+    <path d="M30 50 Q25 70 35 95" stroke="#E8C36B" stroke-width="2" stroke-linecap="round" opacity="0.4" fill="none"/>
+  </g>
+  
+  <!-- Text: "Mango Law" -->
+  <text x="100" y="135" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="28">
+    <tspan fill="#D4A84B" font-weight="700">Mango </tspan>
+    <tspan fill="#FFFFFF" font-weight="300">Law</tspan>
+  </text>
+  
+  <!-- Text: "LLC" -->
+  <text x="100" y="155" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#FFFFFF" opacity="0.6" font-weight="500" letter-spacing="0.15em">LLC</text>
+</svg>

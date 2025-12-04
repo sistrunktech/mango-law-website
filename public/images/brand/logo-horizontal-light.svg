@@ -1,0 +1,34 @@
+<svg viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mango Law LLC - Horizontal Logo with tagline -->
+  <!-- For LIGHT backgrounds -->
+  
+  <defs>
+    <linearGradient id="mangoGoldHorizLight" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#C9A043"/>
+      <stop offset="50%" stop-color="#B8923A"/>
+      <stop offset="100%" stop-color="#A68030"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Mango Icon (left side) -->
+  <g transform="translate(0, 5) scale(0.45)">
+    <!-- Stem -->
+    <path d="M50 28 L50 18" stroke="#A68030" stroke-width="4" stroke-linecap="round"/>
+    <!-- Leaf -->
+    <path d="M50 20 Q70 8 80 18 Q70 28 50 20" fill="#A68030"/>
+    <!-- Mango body -->
+    <ellipse cx="50" cy="70" rx="35" ry="45" fill="url(#mangoGoldHorizLight)"/>
+    <!-- Highlight -->
+    <path d="M30 50 Q25 70 35 95" stroke="#D4A84B" stroke-width="2" stroke-linecap="round" opacity="0.4" fill="none"/>
+  </g>
+  
+  <!-- Text: "Mango Law LLC" -->
+  <text x="60" y="32" font-family="Inter, system-ui, sans-serif" font-size="24">
+    <tspan fill="#C9A043" font-weight="700">Mango </tspan>
+    <tspan fill="#1A1A1A" font-weight="300">Law</tspan>
+    <tspan fill="#1A1A1A" opacity="0.6" font-size="10" font-weight="500" dx="6">LLC</tspan>
+  </text>
+  
+  <!-- Tagline -->
+  <text x="60" y="50" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#1A1A1A" opacity="0.7" font-weight="500" letter-spacing="0.1em">CRIMINAL &amp; OVI/DUI DEFENSE</text>
+</svg>
