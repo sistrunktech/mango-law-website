@@ -1,36 +1,79 @@
+import { Link } from 'react-router-dom';
+import { ArrowRight, Phone } from 'lucide-react';
+
 type Props = {
+  eyebrow?: string;
   title: string;
   body?: string;
   primaryLabel: string;
   primaryHref: string;
   secondaryLabel?: string;
   secondaryHref?: string;
+  /** Optional background image URL for FAL.ai generated assets */
+  backgroundUrl?: string;
 };
 
-export default function CTASection({ title, body, primaryLabel, primaryHref, secondaryLabel, secondaryHref }: Props) {
+export default function CTASection({
+  eyebrow = 'Ready to talk',
+  title,
+  body,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+  backgroundUrl,
+}: Props) {
   return (
-    <section className="bg-brand-black text-brand-offWhite">
-      <div className="container flex flex-col gap-4 py-12 lg:flex-row lg:items-center lg:justify-between">
-        <div className="max-w-2xl space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-mango">Ready to talk</p>
-          <h2 className="text-2xl font-bold md:text-3xl">{title}</h2>
-          {body && <p className="text-brand-offWhite/80">{body}</p>}
+    <section className="relative overflow-hidden bg-cta-gradient text-brand-offWhite">
+      {/* Background image placeholder */}
+      {backgroundUrl && (
+        <div className="absolute inset-0">
+          <img
+            src={backgroundUrl}
+            alt=""
+            className="h-full w-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/90 to-transparent" />
         </div>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href={primaryHref}
-            className="inline-flex items-center rounded-full bg-brand-gold px-5 py-3 text-sm font-semibold text-brand-black shadow-md transition hover:bg-brand-mango"
-          >
-            {primaryLabel}
-          </a>
-          {secondaryLabel && secondaryHref && (
-            <a
-              href={secondaryHref}
-              className="inline-flex items-center rounded-full border border-brand-offWhite/30 px-5 py-3 text-sm font-semibold text-brand-offWhite transition hover:bg-white/10"
+      )}
+
+      {/* Decorative elements */}
+      <div className="pointer-events-none absolute -right-20 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-brand-teal/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-10 top-0 h-[200px] w-[200px] rounded-full bg-brand-mango/10 blur-3xl" />
+
+      <div className="container relative section-tight">
+        <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+          {/* Content */}
+          <div className="max-w-2xl space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="h-1 w-8 rounded-full bg-brand-mango" />
+              <p className="eyebrow text-brand-mango">{eyebrow}</p>
+            </div>
+            <h2 className="text-display-sm md:text-display-md">{title}</h2>
+            {body && (
+              <p className="text-lg text-brand-offWhite/70">{body}</p>
+            )}
+          </div>
+
+          {/* Actions */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Link
+              to={primaryHref}
+              className="btn btn-primary group"
             >
-              {secondaryLabel}
-            </a>
-          )}
+              {primaryLabel}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            {secondaryLabel && secondaryHref && (
+              <a
+                href={secondaryHref}
+                className="btn border-2 border-brand-offWhite/20 text-brand-offWhite hover:border-brand-offWhite/40 hover:bg-white/5"
+              >
+                <Phone className="h-4 w-4" />
+                {secondaryLabel}
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </section>
