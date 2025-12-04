@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X, Phone, Clock } from 'lucide-react';
 import { navLinks } from '../data/navigation';
-import MangoIcon from './MangoIcon';
 
 const PHONE_NUMBER = '(740) 602-2155';
 const PHONE_DIRECT = '(740) 602-2155';
@@ -46,17 +45,13 @@ export default function SiteHeader() {
       {/* Main navigation bar */}
       <div className="bg-brand-black">
         <div className="container flex items-center justify-between py-4">
-          {/* Logo - matching actual Mango Law logo style */}
-          <Link to="/" className="group flex items-center gap-3">
-            {/* Mango icon in gold box like the real logo */}
-            <div className="flex h-10 w-10 items-center justify-center rounded bg-brand-mango/20 transition-colors group-hover:bg-brand-mango/30">
-              <MangoIcon size="sm" />
-            </div>
-            {/* Logo text styled like original - Mango in gold, Law in white */}
+          {/* Logo - text version until proper cropped PNGs are ready */}
+          <Link to="/" className="group flex items-center gap-2">
+            {/* Logo text matching FAL.ai generated style */}
             <div className="flex items-baseline">
-              <span className="text-2xl font-bold text-brand-mango">Mango</span>
-              <span className="text-2xl font-light tracking-wide text-brand-offWhite">Law</span>
-              <span className="ml-1.5 text-[10px] font-medium uppercase tracking-widest text-brand-offWhite/50">LLC</span>
+              <span className="text-2xl font-semibold text-[#D4A84B]">Mango</span>
+              <span className="text-2xl font-light tracking-wide text-white">Law</span>
+              <span className="ml-1.5 text-[10px] font-medium uppercase tracking-widest text-white/50">LLC</span>
             </div>
           </Link>
 
