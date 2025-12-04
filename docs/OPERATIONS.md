@@ -19,14 +19,24 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - Supabase: mirror the same secrets per environment; do not expose `SERVICE_ROLE_KEY` or `SUPABASE_JWT_SECRET` to the client.
 - Keep service-role keys server-side only; client should only see `VITE_*` and non-sensitive config.
 
-## Edge Functions (to implement)
-- `submit-contact`: validate payload + honeypot, insert into Supabase, send notification via Resend, honor `ORIGIN_ALLOWLIST`, add rate limiting/logging.
-- `chat-intake` (optional): similar pattern for chat leads.
+## Edge Functions (deployed)
+- **submit-contact**: Validates payload with honeypot protection, inserts into `contact_leads`, sends notification via Resend. Includes CORS validation against `ORIGIN_ALLOWLIST`, rate limiting (10 req/min per IP), comprehensive security headers, and structured JSON logging.
+- **chat-intake**: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP.
 
-## Database (planned)
-- Supabase Postgres with tables `contact_leads` (id, name, email, phone, message, how_heard, source, meta JSONB, created_at) and `chat_leads` (similar).
-- Enable RLS; allow inserts via Edge Functions using service key; audit/log access.
-- Backups/PITR via Supabase defaults; add monitoring alerts when available.
+### Security Features
+- **Security Headers**: All responses include CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers.
+- **Rate Limiting**: Database-backed rate limiting tracks requests per IP/endpoint. Returns HTTP 429 with Retry-After header when limits exceeded. Limits: submit-contact (10/min), chat-intake (20/min).
+- **Structured Logging**: JSON-formatted logs include timestamp, level, message, endpoint, method, IP, user agent, status, duration, and error details.
+- **Input Validation**: Email format, phone format, required fields validated before processing.
+- **Spam Protection**: Honeypot field detection for bot submissions.
+
+## Database (deployed)
+- **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).
+- **chat_leads**: Captures chat intake submissions (id, name, email, phone, initial_message, conversation_context, ip_address, user_agent, created_at).
+- **rate_limit_requests**: Tracks API requests for rate limiting (id, ip_address, endpoint, created_at). Auto-cleanup removes records older than 1 hour.
+- **RLS Enabled**: All tables use Row Level Security. Service role can INSERT/SELECT, all other operations denied by default.
+- **Indexes**: Added on email and created_at for performance; composite index on (ip_address, endpoint, created_at) for rate limiting.
+- **Backups/PITR**: Via Supabase defaults; add monitoring alerts when available.
 
 ## CI/CD
 - Build-only workflow in `.github/workflows/ci.yml` (Node 20, npm ci, npm run build).
