@@ -74,14 +74,14 @@ export default {
       boxShadow: {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         'soft-lg': '0 10px 40px -10px rgba(0, 0, 0, 0.1), 0 4px 25px -5px rgba(0, 0, 0, 0.05)',
-        'glow-mango': '0 0 30px -5px rgba(244, 163, 0, 0.3)',
-        'glow-teal': '0 0 30px -5px rgba(15, 110, 99, 0.25)',
+        'glow-mango': '0 0 30px -5px rgba(232, 163, 60, 0.3)',
+        'glow-leaf': '0 0 30px -5px rgba(107, 127, 74, 0.25)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-pattern': 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0F6E63 100%)',
-        'hero-dark': 'linear-gradient(180deg, #000000 0%, #111111 100%)',
-        'cta-gradient': 'linear-gradient(135deg, #000000 0%, #0F6E63 100%)',
+        'hero-pattern': 'linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 50%, #1C2331 100%)',
+        'hero-dark': 'linear-gradient(180deg, #1A1A1A 0%, #111111 100%)',
+        'cta-gradient': 'linear-gradient(135deg, #1A1A1A 0%, #6B7F4A 100%)',
         'card-shine': 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
       },
       animation: {
