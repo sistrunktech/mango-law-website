@@ -78,4 +78,8 @@ feat: initialize Mango Law website repo with Sistech Website 2025 base structure
 - RESEND_API_KEY
 - CONTACT_NOTIFY_TO
 - FROM_EMAIL
+
+## Ops docs
+- Operations guide: `docs/OPERATIONS.md`
+- Changelog: `CHANGELOG.md`
 >>>>>>> 9928ed5 (feat: initialize Mango Law website repo with Sistech Website 2025 base structure, brand tokens, and law-template scaffolding)
