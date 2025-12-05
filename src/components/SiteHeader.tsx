@@ -4,7 +4,7 @@ import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
 
-const PHONE_NUMBER = '(740) 602-2155';
+const PHONE_NUMBER = '(740) 417-6191';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);

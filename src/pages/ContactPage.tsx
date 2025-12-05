@@ -10,7 +10,7 @@ export default function ContactPage() {
         title="Schedule a consult with Mango Law."
         description="Share a few details and we’ll respond promptly. For urgent matters, call the office."
         ctaLabel="Call the office"
-        ctaHref="tel:5550000000"
+        ctaHref="tel:7404176191"
         variant="light"
       />
 

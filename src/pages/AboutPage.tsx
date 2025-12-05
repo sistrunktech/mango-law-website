@@ -21,9 +21,9 @@ export default function AboutPage() {
                 <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
                   <div className="p-4">
                     <img
-                      src="/images/nick_mango_profile_shot.jpg"
+                      src="/images/headshots/nick-mango-01.jpg"
                       alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                      className="w-full h-auto rounded-xl object-cover max-h-[500px]"
+                      className="h-[480px] w-full rounded-xl object-cover object-top"
                     />
                   </div>
                 </div>
@@ -31,6 +31,13 @@ export default function AboutPage() {
                   <h3 className="text-2xl font-bold text-brand-black">Dominic "Nick" Mango</h3>
                   <p className="text-brand-black/70 font-medium">Criminal Defense Attorney</p>
                   <div className="flex flex-col gap-3 pt-3 border-t border-brand-black/10">
+                    <a
+                      href="tel:7404176191"
+                      className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
+                    >
+                      <span className="text-lg">📞</span>
+                      <span className="font-semibold">(740) 417-6191 (Office)</span>
+                    </a>
                     <a
                       href="tel:7406022155"
                       className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
@@ -118,7 +125,7 @@ export default function AboutPage() {
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
         secondaryLabel="Call the office"
-        secondaryHref="tel:5550000000"
+        secondaryHref="tel:7404176191"
       />
     </>
   );

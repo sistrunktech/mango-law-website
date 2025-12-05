@@ -29,6 +29,8 @@ Note: These PNGs are legacy Wayback screenshots for visual/reference only. Do **
   - Vertical lockup: `public/images/brand/mango-logo-vertical.svg`
   - Horizontal lockup: `public/images/brand/mango-logo-horizontal.svg`
 - Alternates already available (gold/white/black variants): `icon-*.svg`, `logo-stacked-*.svg`, `logo-horizontal*.svg` in `public/images/brand/`.
-- Headshots: `public/images/headshots/` — pending final source; add `dominic-mango-01.jpg` when provided.
+- Headshots:
+  - `public/images/headshots/nick-mango-01.jpg` (cropped portrait)
+  - `public/images/headshots/geoff-spall-01.jpg` (cropped portrait)
 
 When new brand/headshot assets are added, update this file with final filenames and sources.
