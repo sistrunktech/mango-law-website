@@ -1,44 +1,35 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, Phone, Clock } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 
 const PHONE_NUMBER = '(740) 602-2155';
-const PHONE_DIRECT = '(740) 602-2155';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
     <header className="relative z-50">
-      {/* Top bar - Gold/Mango colored with contact info */}
-      <div className="bg-gradient-to-r from-brand-mango via-brand-mangoLight to-brand-mango">
-        <div className="container flex items-center justify-between py-2.5">
-          {/* Left side - tagline */}
-          <div className="hidden items-center gap-2 text-sm font-medium text-brand-black md:flex">
-            <Clock className="h-4 w-4" />
-            <span>Get Help 24/7 – Call or text anytime:</span>
-          </div>
+      {/* Top bar - Fresh green accent */}
+      <div className="bg-brand-leaf">
+        <div className="container flex items-center justify-between py-2">
+          {/* Left side - phone */}
+          <a
+            href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`}
+            className="flex items-center gap-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+          >
+            <Phone className="h-4 w-4" />
+            <span>{PHONE_NUMBER}</span>
+          </a>
           
-          {/* Right side - phone numbers */}
-          <div className="flex w-full items-center justify-center gap-6 text-sm font-bold md:w-auto md:justify-end">
-            <a
-              href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`}
-              className="flex items-center gap-2 text-brand-black transition-opacity hover:opacity-70"
-            >
-              <Phone className="h-4 w-4" />
-              <span className="text-xs font-medium">Office:</span>
-              <span>{PHONE_NUMBER}</span>
-            </a>
-            <a
-              href={`tel:${PHONE_DIRECT.replace(/\D/g, '')}`}
-              className="hidden items-center gap-2 text-brand-black transition-opacity hover:opacity-70 sm:flex"
-            >
-              <Phone className="h-4 w-4" />
-              <span className="text-xs font-medium">Direct:</span>
-              <span>{PHONE_DIRECT}</span>
-            </a>
-          </div>
+          {/* Right side - chat button */}
+          <button
+            type="button"
+            className="flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-sm font-medium text-white transition-all hover:bg-white/30"
+          >
+            <MessageCircle className="h-4 w-4" />
+            <span className="hidden sm:inline">Chat with us</span>
+          </button>
         </div>
       </div>
 

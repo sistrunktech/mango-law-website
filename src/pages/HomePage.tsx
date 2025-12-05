@@ -65,8 +65,9 @@ export default function HomePage() {
               <div className="grid gap-6 sm:grid-cols-2">
                 {whyChooseUs.map((item, i) => (
                   <div key={i} className="flex gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-mango/10">
-                      <item.icon className="h-5 w-5 text-brand-mango" />
+                    {/* Consistent green icons */}
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10">
+                      <item.icon className="h-5 w-5 text-brand-leaf" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-brand-black">{item.title}</h3>
@@ -79,11 +80,11 @@ export default function HomePage() {
 
             {/* Attorney image placeholder - ready for real headshot */}
             <div className="relative">
-              <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-brand-black to-brand-teal/80 shadow-xl">
+              <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-brand-leafDark via-brand-leaf to-brand-mango/30 shadow-xl">
                 {/* Placeholder for attorney photo */}
                 <div className="flex h-full items-center justify-center">
                   <div className="text-center text-brand-offWhite/60">
-                    <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-brand-mango/20">
+                    <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-mango/30 to-brand-leaf/30">
                       <Users className="h-12 w-12 text-brand-mango" />
                     </div>
                     <p className="text-sm font-medium">Attorney Photo</p>
@@ -91,8 +92,8 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-              {/* Decorative accent */}
-              <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl bg-brand-mango/20" />
+              {/* Decorative accent - gradient from mango to leaf */}
+              <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl bg-gradient-to-br from-brand-mango/30 to-brand-leaf/30" />
             </div>
           </div>
         </div>

@@ -68,8 +68,8 @@ export default function PageHero({
           'text-brand-offWhite',
         ].join(' ')}
       >
-        {/* Rich gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-brand-charcoal to-brand-navy" />
+        {/* Deep forest green gradient - fresh, authoritative */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#0F1A14] to-brand-forest" />
         
         {/* Diagonal gold accent stripe */}
         <div 
@@ -160,20 +160,22 @@ export default function PageHero({
               </a>
             </div>
 
-            {/* Trust badges */}
+            {/* Trust badges - clean, consistent green icons */}
             {!compact && (
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-brand-offWhite/50">
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-brand-offWhite/70">
                 <span className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-brand-mango" />
-                  Available 24/7
+                  <Clock className="h-5 w-5 text-brand-leaf" />
+                  <span>Available 24/7</span>
                 </span>
+                <span className="hidden h-4 w-px bg-brand-offWhite/20 sm:block" />
                 <span className="flex items-center gap-2">
-                  <Award className="h-4 w-4 text-brand-mango" />
-                  Free Consultation
+                  <Award className="h-5 w-5 text-brand-leaf" />
+                  <span>Free Consultation</span>
                 </span>
+                <span className="hidden h-4 w-px bg-brand-offWhite/20 sm:block" />
                 <span className="flex items-center gap-2">
-                  <Shield className="h-4 w-4 text-brand-mango" />
-                  Confidential
+                  <Shield className="h-5 w-5 text-brand-leaf" />
+                  <span>Confidential</span>
                 </span>
               </div>
             )}
@@ -192,15 +194,16 @@ export default function PageHero({
                   to={action.href}
                   className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl"
                 >
-                  {/* Accent bar */}
-                  <div className="absolute left-0 top-0 h-full w-1.5 bg-brand-mango transition-all group-hover:w-2" />
+                  {/* Accent bar - mango gold */}
+                  <div className="absolute left-0 top-0 h-full w-1 bg-brand-mango transition-all group-hover:w-1.5" />
                   
                   <div className="flex items-start gap-4 pl-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-brand-mango/10 transition-colors group-hover:bg-brand-mango/20">
-                      <action.icon className="h-7 w-7 text-brand-mango" />
+                    {/* Icon */}
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10 transition-colors group-hover:bg-brand-leaf/20">
+                      <action.icon className="h-7 w-7 text-brand-leaf" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-brand-black group-hover:text-brand-teal">
+                      <h3 className="text-lg font-bold text-brand-black group-hover:text-brand-mango">
                         {action.title}
                       </h3>
                       <p className="mt-1 text-sm text-brand-black/60">

@@ -15,23 +15,24 @@ export default {
           gold: '#D4A84B',         // Gold from logo
           offWhite: '#FAF9F7',
           cream: '#FFF8E7',
-          // Organic accent colors from mango skin
-          leaf: '#6B7F4A',         // Muted olive/sage green (mango leaf)
-          leafLight: '#8A9F68',
-          leafDark: '#4D5C36',
+          // Organic accent colors - vibrant lime green
+          leaf: '#7CB342',         // Vibrant lime green
+          leafLight: '#9CCC65',
+          leafDark: '#558B2F',
           blush: '#A65D4C',        // Muted terracotta/burgundy (mango blush)
           blushLight: '#C47A69',
           blushDark: '#8B4A3C',
           // Legacy teal aliases (pointing to leaf for compatibility)
-          teal: '#6B7F4A',
-          tealLight: '#8A9F68',
-          tealDark: '#4D5C36',
-          accent: '#6B7F4A',
-          accentLight: '#8A9F68',
-          accentDark: '#4D5C36',
+          teal: '#7CB342',
+          tealLight: '#9CCC65',
+          tealDark: '#558B2F',
+          accent: '#7CB342',
+          accentLight: '#9CCC65',
+          accentDark: '#558B2F',
           // Additional
-          navy: '#1C2331',         // Deep navy for contrast
-          charcoal: '#2A2A2A',
+          navy: '#1B4332',         // Deep forest green for hero
+          charcoal: '#0F0F0F',     // Pure dark, no brown
+          forest: '#1B4332',       // Deep forest green
         },
       },
       fontFamily: {
@@ -75,13 +76,13 @@ export default {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         'soft-lg': '0 10px 40px -10px rgba(0, 0, 0, 0.1), 0 4px 25px -5px rgba(0, 0, 0, 0.05)',
         'glow-mango': '0 0 30px -5px rgba(232, 163, 60, 0.3)',
-        'glow-leaf': '0 0 30px -5px rgba(107, 127, 74, 0.25)',
+        'glow-leaf': '0 0 30px -5px rgba(124, 179, 66, 0.3)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-pattern': 'linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 50%, #1C2331 100%)',
-        'hero-dark': 'linear-gradient(180deg, #1A1A1A 0%, #111111 100%)',
-        'cta-gradient': 'linear-gradient(135deg, #1A1A1A 0%, #6B7F4A 100%)',
+        'hero-pattern': 'linear-gradient(135deg, #0A0A0A 0%, #1B4332 100%)',
+        'hero-dark': 'linear-gradient(180deg, #0A0A0A 0%, #0F0F0F 100%)',
+        'cta-gradient': 'linear-gradient(135deg, #1B4332 0%, #7CB342 100%)',
         'card-shine': 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
       },
       animation: {

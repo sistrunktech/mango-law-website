@@ -38,18 +38,15 @@ export default function PracticeAreaCardGrid() {
               className="card card-hover group relative overflow-hidden"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              {/* Hover gradient */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-mango/0 to-brand-teal/0 opacity-0 transition-opacity duration-300 group-hover:opacity-5" />
-
               <div className="relative">
-                {/* Icon placeholder - ready for custom icons */}
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-mango/10 transition-colors group-hover:bg-brand-mango/20">
-                  <span className="text-lg font-bold text-brand-mango">
+                {/* Icon - green background */}
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-leaf/10 transition-colors group-hover:bg-brand-leaf/20">
+                  <span className="text-lg font-bold text-brand-leaf">
                     {area.title.charAt(0)}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-brand-black group-hover:text-brand-teal">
+                <h3 className="text-lg font-bold text-brand-black group-hover:text-brand-mango">
                   {area.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-brand-black/60">
@@ -57,7 +54,7 @@ export default function PracticeAreaCardGrid() {
                 </p>
 
                 {/* Learn more link */}
-                <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-brand-teal opacity-0 transition-all duration-200 group-hover:opacity-100">
+                <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-brand-mango opacity-0 transition-all duration-200 group-hover:opacity-100">
                   Learn more
                   <ArrowUpRight className="h-4 w-4" />
                 </div>

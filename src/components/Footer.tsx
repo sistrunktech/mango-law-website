@@ -5,10 +5,12 @@ import MangoIcon, { MangoSilhouette } from './MangoIcon';
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-brand-black via-brand-charcoal to-brand-navy text-brand-offWhite">
-      {/* Decorative elements */}
-      <div className="pointer-events-none absolute -right-40 top-0 h-[400px] w-[400px] rounded-full bg-brand-accent/5 blur-3xl" />
-      <MangoSilhouette className="pointer-events-none absolute right-10 top-20 h-64 w-64 text-brand-mango/[0.02] rotate-12" />
+    <footer className="relative overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-brand-forest text-brand-offWhite">
+      {/* Top accent bar - vibrant lime */}
+      <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-brand-leaf via-brand-mango to-brand-leaf" />
+      
+      {/* Subtle decorative element */}
+      <div className="pointer-events-none absolute -right-40 top-0 h-[400px] w-[400px] rounded-full bg-brand-mango/5 blur-3xl" />
 
       {/* Main footer content */}
       <div className="container relative py-16 lg:py-20">
@@ -36,8 +38,8 @@ export default function Footer() {
                 href="tel:7406022155"
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-mango"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-offWhite/5">
-                  <Phone className="h-4 w-4 text-brand-mango" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-leaf/10">
+                  <Phone className="h-4 w-4 text-brand-leaf" />
                 </div>
                 (740) 602-2155
               </a>
@@ -45,8 +47,8 @@ export default function Footer() {
                 href="mailto:nick@mangolaw.com"
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-mango"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-offWhite/5">
-                  <Mail className="h-4 w-4 text-brand-mango" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-leaf/10">
+                  <Mail className="h-4 w-4 text-brand-leaf" />
                 </div>
                 nick@mangolaw.com
               </a>
