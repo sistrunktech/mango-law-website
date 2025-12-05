@@ -2,17 +2,20 @@
 import fs from "fs/promises";
 import path from "path";
 import process from "process";
-import fal from "@fal-ai/client";
+import { fal } from "@fal-ai/client";
 import { createClient } from "@supabase/supabase-js";
 import "dotenv/config";
 
-// Default preference order (vector-first, then high-quality raster).
+// Default preference order (vector-first, then high-quality raster) for text-to-image.
 const modelsPreference = [
   "fal-ai/star-vector",
   "fal-ai/recraft-v3",
   "fal-ai/stable-diffusion-v35-large",
   "fal-ai/flux/dev",
 ];
+
+// Default preference for image-to-image (logo refinement).
+const modelsImageToImage = ["fal-ai/recraft/v3/image-to-image"];
 
 function slugify(text) {
   return text
@@ -22,12 +25,12 @@ function slugify(text) {
     .slice(0, 80);
 }
 
-function ensureEnv(name) {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required env: ${name}`);
+function ensureEnv(name, fallbackNames = []) {
+  const candidates = [name, ...fallbackNames];
+  for (const key of candidates) {
+    if (process.env[key]) return process.env[key];
   }
-  return value;
+  throw new Error(`Missing required env: ${candidates.join(" or ")}`);
 }
 
 async function downloadToBuffer(url) {
@@ -39,13 +42,15 @@ async function downloadToBuffer(url) {
 }
 
 async function generateImage(prompt, modelOverride, extraInput = {}) {
-  const apiKey = ensureEnv("FAL_API_KEY");
+  const apiKey = ensureEnv("FAL_API_KEY", ["FAL_KEY"]);
   fal.config({ credentials: apiKey });
 
   let result;
+  const isImageToImage = extraInput.image_url || extraInput.image_data_url;
+  const baseCandidates = isImageToImage ? modelsImageToImage : modelsPreference;
   const candidates = modelOverride
-    ? [modelOverride, ...modelsPreference.filter((m) => m !== modelOverride)]
-    : modelsPreference;
+    ? [modelOverride, ...baseCandidates.filter((m) => m !== modelOverride)]
+    : baseCandidates;
 
   for (const model of candidates) {
     try {
@@ -236,6 +241,9 @@ async function main() {
       const count = Math.max(1, parseInt(task.count || 1, 10) || 1);
       const modelOverride = task.model || null;
       const extraInput = await buildExtraInput(task.image);
+      if (task.strength !== undefined) extraInput.strength = Number(task.strength);
+      if (task.style) extraInput.style = task.style;
+      if (task.colors) extraInput.colors = task.colors;
       if (!prompt) {
         console.warn("Skipping task without prompt");
         continue;
@@ -250,6 +258,26 @@ async function main() {
   const imageIdx = args.findIndex((a) => a === "--image");
   const imageArg = imageIdx !== -1 && args[imageIdx + 1] ? args[imageIdx + 1] : null;
   const extraInput = await buildExtraInput(imageArg);
+
+  const strengthIdx = args.findIndex((a) => a === "--strength");
+  if (strengthIdx !== -1 && args[strengthIdx + 1] !== undefined) {
+    const s = Number(args[strengthIdx + 1]);
+    if (!Number.isNaN(s)) extraInput.strength = s;
+  }
+
+  const styleIdx = args.findIndex((a) => a === "--style");
+  if (styleIdx !== -1 && args[styleIdx + 1]) {
+    extraInput.style = args[styleIdx + 1];
+  }
+
+  const colorsIdx = args.findIndex((a) => a === "--colors");
+  if (colorsIdx !== -1 && args[colorsIdx + 1]) {
+    try {
+      extraInput.colors = JSON.parse(args[colorsIdx + 1]);
+    } catch (err) {
+      console.warn(`Could not parse --colors JSON: ${err.message}`);
+    }
+  }
 
   const promptArgIndex = args.findIndex((a) => a === "--prompt");
   const prompt =

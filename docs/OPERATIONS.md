@@ -40,7 +40,8 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
   - `--count N` (up to 10 per prompt)
   - `--model fal-ai/star-vector` (override model; defaults favor star-vector/recraft/SD/flux)
   - `--image pathOrUrl` to run image-to-image (e.g., recraft v3 i2i) using a local file or URL
-  - `--batch path/to/tasks.json` for multiple prompts; JSON array supports `{ prompt, count?, model?, image? }`
+  - `--strength`, `--style`, `--colors '[{"r":212,"g":175,"b":55}]'` to pass i2i parameters
+  - `--batch path/to/tasks.json` for multiple prompts; JSON array supports `{ prompt, count?, model?, image?, strength?, style?, colors? }`
 
 ## Database (deployed)
 - **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).
