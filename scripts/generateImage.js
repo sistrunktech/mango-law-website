@@ -70,8 +70,11 @@ async function generateImage(prompt) {
     throw new Error("No image URL returned from FAL response.");
   }
 
+  const images = result.images || (result.data && result.data.images) || [];
+
   return {
     imageUrl,
+    images,
     model: result.model || result.model_name || "unknown",
     seed: result.seed || result.images?.[0]?.seed,
     prompt: result.prompt || prompt,
@@ -133,51 +136,66 @@ async function main() {
       ? args[promptArgIndex + 1]
       : args.join(" ").trim();
 
+  const countIdx = args.findIndex((a) => a === "--count");
+  const count =
+    countIdx !== -1 && args[countIdx + 1] ? Math.max(1, parseInt(args[countIdx + 1], 10) || 1) : 1;
+
   if (!prompt) {
-    console.error("Usage: npm run generate:image -- --prompt \"your prompt here\"");
+    console.error("Usage: npm run generate:image -- --prompt \"your prompt here\" [--count N]");
     process.exit(1);
   }
+
+  if (count > 10) {
+    console.warn("Count capped at 10 to avoid long queues; adjusting to 10.");
+  }
+  const total = Math.min(count, 10);
 
   console.log(`Generating image for prompt: "${prompt}"`);
   const result = await generateImage(prompt);
   const timestamp = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
   const fileBase = `${slugify(prompt) || "image"}-${timestamp}`;
-  const fileName = `${fileBase}.png`;
 
-  const buffer = await downloadToBuffer(result.imageUrl);
+  const outputs = [];
+  for (let i = 0; i < total; i++) {
+    const imageInfo = result.images?.[i] || result.images?.[0] || {};
+    const url = imageInfo.url || result.imageUrl;
+    if (!url) continue;
 
-  const meta = {
-    prompt: result.prompt,
-    model: result.model,
-    seed: result.seed,
-    createdAt: new Date().toISOString(),
-    sourceUrl: result.imageUrl,
-  };
+    const buffer = await downloadToBuffer(url);
+    const suffix = total > 1 ? `-${i + 1}` : "";
+    const fileName = `${fileBase}${suffix}.png`;
 
-  let cdnUrl = null;
-  try {
-    cdnUrl = await uploadToSupabase(buffer, fileName, prompt, meta);
-    console.log(`Uploaded to Supabase: ${cdnUrl}`);
-  } catch (err) {
-    console.warn(`Supabase upload skipped/failed: ${err.message}`);
+    const meta = {
+      prompt: result.prompt || prompt,
+      model: result.model,
+      seed: imageInfo.seed || result.seed,
+      createdAt: new Date().toISOString(),
+      sourceUrl: url,
+      index: i + 1,
+    };
+
+    let cdnUrl = null;
+    try {
+      cdnUrl = await uploadToSupabase(buffer, fileName, prompt, meta);
+      console.log(`Uploaded to Supabase: ${cdnUrl}`);
+    } catch (err) {
+      console.warn(`Supabase upload skipped/failed: ${err.message}`);
+    }
+
+    const local = await saveLocal(buffer, fileName, meta);
+    console.log(`Saved locally: ${local.localPath}`);
+    console.log(`Metadata: ${local.metaPath}`);
+
+    outputs.push({
+      prompt,
+      model: result.model,
+      cdnUrl,
+      localPath: local.localPath,
+      index: i + 1,
+    });
   }
 
-  const local = await saveLocal(buffer, fileName, meta);
-  console.log(`Saved locally: ${local.localPath}`);
-  console.log(`Metadata: ${local.metaPath}`);
-
-  console.log(
-    JSON.stringify(
-      {
-        prompt,
-        model: result.model,
-        cdnUrl,
-        localPath: local.localPath,
-      },
-      null,
-      2,
-    ),
-  );
+  console.log(JSON.stringify(outputs, null, 2));
 }
 
 main().catch((err) => {
