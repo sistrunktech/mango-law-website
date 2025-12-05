@@ -37,11 +37,12 @@ export default function SiteHeader() {
       <div className="bg-brand-black">
         <div className="container flex items-center justify-between py-4">
           {/* Logo */}
-          <Link to="/" className="group flex items-center gap-2">
+          <Link to="/" className="group flex items-center gap-3">
             <img
-              src="/images/brand/fphht0w135ufwmj8gaogd_(1).png"
+              src="/images/brand/mango-logo-horizontal.svg"
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
-              className="h-14 w-auto transition-opacity hover:opacity-90"
+              className="h-12 w-auto transition-opacity hover:opacity-90"
+              loading="lazy"
             />
           </Link>
 
