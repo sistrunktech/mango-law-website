@@ -17,17 +17,12 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand column */}
           <div className="space-y-6">
-            <Link to="/" className="group inline-flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-mango/20 transition-colors group-hover:bg-brand-mango/30">
-                <MangoIcon size="md" />
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-baseline">
-                  <span className="text-xl font-bold text-brand-mango">Mango</span>
-                  <span className="text-xl font-light text-brand-offWhite">Law</span>
-                </div>
-                <span className="text-[10px] font-medium uppercase tracking-widest text-brand-offWhite/50">Criminal Defense</span>
-              </div>
+            <Link to="/" className="group inline-block">
+              <img
+                src="/images/brand/generated/mango-logo-vertical-white.svg"
+                alt="Mango Law LLC"
+                className="h-24 w-auto transition-opacity group-hover:opacity-90"
+              />
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-brand-offWhite/60">
               Criminal defense for Delaware, Ohio. Clear guidance, assertive advocacy, and steady communication when it matters most.

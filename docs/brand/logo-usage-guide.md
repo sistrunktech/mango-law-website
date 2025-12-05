@@ -1,0 +1,80 @@
+# Mango Law Logo Usage Guide
+
+This guide documents the AI-generated brand assets for Mango Law LLC and how to use them throughout the website.
+
+## Available Logo Assets
+
+All logo assets are located in `/public/images/brand/generated/` and are in SVG format with transparent backgrounds.
+
+### Icon Only (4 variants)
+- `mango-icon-original.svg` - Golden mango with natural gradient
+- `mango-icon-white.svg` - All-white version for dark backgrounds
+- `mango-icon-black.svg` - All-black version for light backgrounds
+- `mango-icon-gradient.svg` - Warm mango-to-gold gradient
+
+**Usage:** Favicons, social media avatars, small decorative elements
+
+### Vertical Lockup (4 variants)
+- `mango-logo-vertical-original.svg` - Icon above text, full color
+- `mango-logo-vertical-white.svg` - All-white for dark backgrounds
+- `mango-logo-vertical-black.svg` - All-black for light backgrounds
+- `mango-logo-vertical-gradient.svg` - Gradient version
+
+**Usage:** Mobile headers, square/portrait layouts, footer
+
+### Horizontal Lockup (4 variants)
+- `mango-logo-horizontal-original.svg` - Icon beside text, full color
+- `mango-logo-horizontal-white.svg` - All-white for dark backgrounds
+- `mango-logo-horizontal-black.svg` - All-black for light backgrounds
+- `mango-logo-horizontal-gradient.svg` - Gradient version
+
+**Usage:** Desktop headers, letterheads, wide layouts
+
+## Current Implementation
+
+### Site Header
+- **File:** `src/components/SiteHeader.tsx`
+- **Asset:** `mango-logo-horizontal-original.svg`
+- **Size:** `h-16 w-auto`
+
+### Footer
+- **File:** `src/components/Footer.tsx`
+- **Asset:** `mango-logo-vertical-white.svg`
+- **Size:** `h-24 w-auto`
+
+### Favicon
+- **File:** `public/favicon.svg`
+- **Source:** `mango-icon-original.svg`
+
+### MangoIcon Component
+- **File:** `src/components/MangoIcon.tsx`
+- **Default:** Uses `mango-icon-original.svg`
+- **Light variant:** Uses `mango-icon-white.svg`
+- **Silhouette:** Uses `mango-icon-black.svg`
+
+## Color Guidelines
+
+**Primary Colors:**
+- Mango: `#D4A84B` (brand-mango)
+- Gold: `#C9A043` (brand-gold)
+- Leaf: `#22C55E` (brand-leaf)
+
+**Neutral Colors:**
+- Black: `#0A0A0A` (brand-black)
+- Off-white: `#FAFAFA` (brand-offWhite)
+
+## Best Practices
+
+1. **Always use SVG format** for crisp rendering at any size
+2. **Choose the right variant** based on background color
+3. **Maintain adequate clear space** around logos (minimum 50% of icon height)
+4. **Never distort** - always maintain aspect ratio
+5. **Use original colors** unless specifically requiring monochrome
+
+## Generation Details
+
+All assets were generated using FAL.ai's Recraft V3 model with vector illustration style based on the reference logo. The generation process is documented in the project's image generation script.
+
+**Generation Date:** December 5, 2025
+**Model:** fal-ai/recraft-v3
+**Format:** SVG with transparent backgrounds
