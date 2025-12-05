@@ -6,7 +6,9 @@ import fal from "@fal-ai/client";
 import { createClient } from "@supabase/supabase-js";
 import "dotenv/config";
 
+// Default preference order (vector-first, then high-quality raster).
 const modelsPreference = [
+  "fal-ai/star-vector",
   "fal-ai/recraft-v3",
   "fal-ai/stable-diffusion-v35-large",
   "fal-ai/flux/dev",
@@ -36,12 +38,16 @@ async function downloadToBuffer(url) {
   return Buffer.from(await res.arrayBuffer());
 }
 
-async function generateImage(prompt) {
+async function generateImage(prompt, modelOverride) {
   const apiKey = ensureEnv("FAL_API_KEY");
   fal.config({ credentials: apiKey });
 
   let result;
-  for (const model of modelsPreference) {
+  const candidates = modelOverride
+    ? [modelOverride, ...modelsPreference.filter((m) => m !== modelOverride)]
+    : modelsPreference;
+
+  for (const model of candidates) {
     try {
       result = await fal.subscribe(model, {
         input: {
@@ -88,16 +94,17 @@ async function uploadToSupabase(buffer, filePath, prompt, meta) {
   const supabase = createClient(supabaseUrl, supabaseKey);
 
   const bucket = "generated-images";
+  const contentType = filePath.endsWith(".svg") ? "image/svg+xml" : "image/png";
   const { error } = await supabase.storage.from(bucket).upload(filePath, buffer, {
     cacheControl: "3600",
-    contentType: "image/png",
+    contentType,
     upsert: true,
   });
   if (error) {
     throw new Error(`Supabase upload failed: ${error.message}`);
   }
 
-  const metaPath = filePath.replace(/\.png$/, ".json");
+  const metaPath = filePath.replace(/\.(png|svg)$/, ".json");
   const { error: metaError } = await supabase.storage
     .from(bucket)
     .upload(metaPath, JSON.stringify(meta, null, 2), {
@@ -140,8 +147,13 @@ async function main() {
   const count =
     countIdx !== -1 && args[countIdx + 1] ? Math.max(1, parseInt(args[countIdx + 1], 10) || 1) : 1;
 
+  const modelIdx = args.findIndex((a) => a === "--model");
+  const modelOverride = modelIdx !== -1 && args[modelIdx + 1] ? args[modelIdx + 1] : null;
+
   if (!prompt) {
-    console.error("Usage: npm run generate:image -- --prompt \"your prompt here\" [--count N]");
+    console.error(
+      "Usage: npm run generate:image -- --prompt \"your prompt here\" [--count N] [--model fal-ai/star-vector]",
+    );
     process.exit(1);
   }
 
@@ -151,7 +163,7 @@ async function main() {
   const total = Math.min(count, 10);
 
   console.log(`Generating image for prompt: "${prompt}"`);
-  const result = await generateImage(prompt);
+  const result = await generateImage(prompt, modelOverride);
   const timestamp = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
   const fileBase = `${slugify(prompt) || "image"}-${timestamp}`;
 
@@ -162,8 +174,13 @@ async function main() {
     if (!url) continue;
 
     const buffer = await downloadToBuffer(url);
+    // Detect SVG by probing the buffer
+    const isSvg =
+      buffer.slice(0, 100).toString("utf8").toLowerCase().includes("<svg") ||
+      url.toLowerCase().endsWith(".svg");
     const suffix = total > 1 ? `-${i + 1}` : "";
-    const fileName = `${fileBase}${suffix}.png`;
+    const ext = isSvg ? ".svg" : ".png";
+    const fileName = `${fileBase}${suffix}${ext}`;
 
     const meta = {
       prompt: result.prompt || prompt,
