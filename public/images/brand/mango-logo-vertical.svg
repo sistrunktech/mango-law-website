@@ -1,0 +1,41 @@
+<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mango Law LLC - Stacked Logo - Gold on Dark -->
+  <defs>
+    <linearGradient id="mangoGoldStacked" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#E8C060"/>
+      <stop offset="30%" stop-color="#D4A84B"/>
+      <stop offset="70%" stop-color="#C49A3D"/>
+      <stop offset="100%" stop-color="#A8863A"/>
+    </linearGradient>
+    <linearGradient id="highlightStacked" x1="0%" y1="20%" x2="60%" y2="80%">
+      <stop offset="0%" stop-color="#F5E0A0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#D4A84B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="leafGoldStacked" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C9A043"/>
+      <stop offset="100%" stop-color="#A8863A"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Mango Icon (centered, scaled) -->
+  <g transform="translate(60, 5) scale(0.8)">
+    <!-- Mango body -->
+    <path d="M50 18 C32 18, 14 40, 14 68 C14 92, 30 110, 50 110 C70 110, 86 92, 86 68 C86 40, 68 18, 50 18 Z" 
+          fill="url(#mangoGoldStacked)"/>
+    <!-- Highlight -->
+    <path d="M34 32 C24 48, 20 68, 24 94" stroke="url(#highlightStacked)" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <!-- Stem -->
+    <path d="M50 18 L50 6" stroke="#A8863A" stroke-width="4" stroke-linecap="round"/>
+    <!-- Leaf -->
+    <path d="M50 10 C58 4, 72 3, 82 8 C72 14, 58 12, 50 10 Z" fill="url(#leafGoldStacked)"/>
+  </g>
+  
+  <!-- Text: "Mango" -->
+  <text x="100" y="145" text-anchor="middle" font-family="Montserrat, Inter, system-ui, sans-serif" font-size="32" font-weight="600" fill="#D4A84B">Mango</text>
+  
+  <!-- Text: "Law" + "LLC" -->
+  <text x="100" y="178" text-anchor="middle" font-family="Montserrat, Inter, system-ui, sans-serif">
+    <tspan font-size="32" font-weight="300" fill="#FFFFFF">Law </tspan>
+    <tspan font-size="16" font-weight="400" fill="#FFFFFF" opacity="0.6">LLC</tspan>
+  </text>
+</svg>

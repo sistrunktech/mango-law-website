@@ -24,7 +24,11 @@
 Note: These PNGs are legacy Wayback screenshots for visual/reference only. Do **not** ship them to production builds.
 
 ## Brand assets
-- `public/images/brand/` (logos) — pending clean logo files from HubSpot URLs (current links returned 404; need updated URLs).
-- `public/images/headshots/` (headshots) — pending download; will save as `dominic-mango-01.jpg` once a valid source is provided.
+- Logos (gold, transparent):
+  - Icon: `public/images/brand/mango-icon.svg`
+  - Vertical lockup: `public/images/brand/mango-logo-vertical.svg`
+  - Horizontal lockup: `public/images/brand/mango-logo-horizontal.svg`
+- Alternates already available (gold/white/black variants): `icon-*.svg`, `logo-stacked-*.svg`, `logo-horizontal*.svg` in `public/images/brand/`.
+- Headshots: `public/images/headshots/` — pending final source; add `dominic-mango-01.jpg` when provided.
 
 When new brand/headshot assets are added, update this file with final filenames and sources.
