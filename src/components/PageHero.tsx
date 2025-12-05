@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
-import { MangoSilhouette } from './MangoIcon';
 
 type Props = {
   eyebrow?: string;
@@ -100,10 +99,6 @@ export default function PageHero({
           </div>
         )}
 
-        {/* Decorative mango silhouettes */}
-        <MangoSilhouette className="pointer-events-none absolute -right-20 top-10 h-80 w-80 text-brand-mango/[0.03] rotate-12" />
-        <MangoSilhouette className="pointer-events-none absolute -left-10 bottom-20 h-48 w-48 text-brand-mango/[0.02] -rotate-12" />
-        
         {/* Gradient orbs - emerald + mango for brand energy */}
         <div className="pointer-events-none absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-brand-leaf/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-brand-mango/6 blur-[100px]" />
