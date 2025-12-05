@@ -135,34 +135,13 @@ async function saveLocal(buffer, fileName, meta) {
   return { localPath: `/generated/${fileName}`, metaPath };
 }
 
-async function main() {
-  const args = process.argv.slice(2);
-  const promptArgIndex = args.findIndex((a) => a === "--prompt");
-  const prompt =
-    promptArgIndex !== -1 && args[promptArgIndex + 1]
-      ? args[promptArgIndex + 1]
-      : args.join(" ").trim();
-
-  const countIdx = args.findIndex((a) => a === "--count");
-  const count =
-    countIdx !== -1 && args[countIdx + 1] ? Math.max(1, parseInt(args[countIdx + 1], 10) || 1) : 1;
-
-  const modelIdx = args.findIndex((a) => a === "--model");
-  const modelOverride = modelIdx !== -1 && args[modelIdx + 1] ? args[modelIdx + 1] : null;
-
-  if (!prompt) {
-    console.error(
-      "Usage: npm run generate:image -- --prompt \"your prompt here\" [--count N] [--model fal-ai/star-vector]",
-    );
-    process.exit(1);
-  }
-
+async function processPrompt(prompt, count, modelOverride) {
   if (count > 10) {
     console.warn("Count capped at 10 to avoid long queues; adjusting to 10.");
   }
   const total = Math.min(count, 10);
 
-  console.log(`Generating image for prompt: "${prompt}"`);
+  console.log(`Generating image for prompt: "${prompt}"${modelOverride ? ` (model: ${modelOverride})` : ""}`);
   const result = await generateImage(prompt, modelOverride);
   const timestamp = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
   const fileBase = `${slugify(prompt) || "image"}-${timestamp}`;
@@ -174,7 +153,6 @@ async function main() {
     if (!url) continue;
 
     const buffer = await downloadToBuffer(url);
-    // Detect SVG by probing the buffer
     const isSvg =
       buffer.slice(0, 100).toString("utf8").toLowerCase().includes("<svg") ||
       url.toLowerCase().endsWith(".svg");
@@ -212,6 +190,61 @@ async function main() {
     });
   }
 
+  return outputs;
+}
+
+async function main() {
+  const args = process.argv.slice(2);
+  const batchIdx = args.findIndex((a) => a === "--batch");
+  if (batchIdx !== -1 && args[batchIdx + 1]) {
+    const batchPath = path.resolve(args[batchIdx + 1]);
+    const raw = await fs.readFile(batchPath, "utf8");
+    let tasks;
+    try {
+      tasks = JSON.parse(raw);
+    } catch (err) {
+      throw new Error(`Failed to parse batch file: ${err.message}`);
+    }
+    if (!Array.isArray(tasks)) {
+      throw new Error("Batch file must be a JSON array of { prompt, count?, model? }");
+    }
+    const allOutputs = [];
+    for (const task of tasks) {
+      const prompt = task.prompt;
+      const count = Math.max(1, parseInt(task.count || 1, 10) || 1);
+      const modelOverride = task.model || null;
+      if (!prompt) {
+        console.warn("Skipping task without prompt");
+        continue;
+      }
+      const outputs = await processPrompt(prompt, count, modelOverride);
+      allOutputs.push(...outputs);
+    }
+    console.log(JSON.stringify(allOutputs, null, 2));
+    return;
+  }
+
+  const promptArgIndex = args.findIndex((a) => a === "--prompt");
+  const prompt =
+    promptArgIndex !== -1 && args[promptArgIndex + 1]
+      ? args[promptArgIndex + 1]
+      : args.join(" ").trim();
+
+  const countIdx = args.findIndex((a) => a === "--count");
+  const count =
+    countIdx !== -1 && args[countIdx + 1] ? Math.max(1, parseInt(args[countIdx + 1], 10) || 1) : 1;
+
+  const modelIdx = args.findIndex((a) => a === "--model");
+  const modelOverride = modelIdx !== -1 && args[modelIdx + 1] ? args[modelIdx + 1] : null;
+
+  if (!prompt) {
+    console.error(
+      "Usage: npm run generate:image -- --prompt \"your prompt here\" [--count N] [--model fal-ai/star-vector] [--batch path/to/tasks.json]",
+    );
+    process.exit(1);
+  }
+
+  const outputs = await processPrompt(prompt, count, modelOverride);
   console.log(JSON.stringify(outputs, null, 2));
 }
 
