@@ -51,11 +51,13 @@ export default function PersonalInjuryPage() {
     <>
       <PageHero
         eyebrow="Personal Injury"
-        title="Selective personal injury matters."
+        title="Selective personal injury matters"
         description="Limited-scope representation for cases where we can add value—clear liability, coverage, and a practical strategy."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
-        variant="light"
+        showQuickActions={false}
+        alignLeft={true}
+        compact={true}
       />
 
       <section className="section bg-white">

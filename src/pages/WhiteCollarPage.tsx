@@ -51,11 +51,13 @@ export default function WhiteCollarPage() {
     <>
       <PageHero
         eyebrow="White Collar Crimes"
-        title="Strategic defense for white collar investigations and charges."
+        title="Strategic defense for white collar investigations and charges"
         description="Fraud, embezzlement, securities issues, and related matters with careful document review and motion practice."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
-        variant="light"
+        showQuickActions={false}
+        alignLeft={true}
+        compact={true}
       />
 
       <section className="section bg-white">

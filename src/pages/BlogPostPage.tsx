@@ -27,7 +27,7 @@ export default function BlogPostPage() {
         <div className="container max-w-4xl">
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-sm font-medium text-brand-leaf transition-colors hover:text-brand-leaf/80"
+            className="inline-flex items-center gap-2 text-sm font-medium text-brand-mango transition-colors hover:text-brand-leaf"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to all articles

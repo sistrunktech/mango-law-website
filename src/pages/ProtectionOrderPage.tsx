@@ -51,11 +51,13 @@ export default function ProtectionOrderPage() {
     <>
       <PageHero
         eyebrow="Protection Orders"
-        title="Defense in civil protection order matters."
+        title="Defense in civil protection order matters"
         description="Procedural precision, evidence review, and strategy to limit collateral impacts and protect your rights."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
-        variant="light"
+        showQuickActions={false}
+        alignLeft={true}
+        compact={true}
       />
 
       <section className="section bg-white">

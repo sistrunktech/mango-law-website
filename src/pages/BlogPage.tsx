@@ -51,7 +51,7 @@ export default function BlogPage() {
                   {post.excerpt}
                 </p>
 
-                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-leaf">
+                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango transition-colors group-hover:text-brand-leaf">
                   Read article
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>

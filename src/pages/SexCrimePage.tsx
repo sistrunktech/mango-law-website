@@ -51,11 +51,13 @@ export default function SexCrimePage() {
     <>
       <PageHero
         eyebrow="Sex Crimes"
-        title="Discreet, assertive defense for sensitive allegations."
+        title="Discreet, assertive defense for sensitive allegations"
         description="Protecting privacy while challenging evidence, procedure, and credibility. Clear communication, no scare tactics."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
-        variant="light"
+        showQuickActions={false}
+        alignLeft={true}
+        compact={true}
       />
 
       <section className="section bg-white">

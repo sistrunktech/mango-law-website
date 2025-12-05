@@ -79,6 +79,9 @@ export default function CTASection({
           </div>
         </div>
       </div>
+
+      {/* Gradient separator bar */}
+      <div className="h-1.5 w-full bg-accent-bar" />
     </section>
   );
 }

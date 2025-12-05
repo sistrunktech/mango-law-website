@@ -51,11 +51,13 @@ export default function CriminalDefensePage() {
     <>
       <PageHero
         eyebrow="Criminal Defense"
-        title="Defense for felony and misdemeanor charges in Delaware County."
+        title="Defense for felony and misdemeanor charges in Delaware County"
         description="Clear communication, organized discovery review, and strategic motion practice to protect your record."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
-        variant="light"
+        showQuickActions={false}
+        alignLeft={true}
+        compact={true}
       />
 
       <section className="section bg-white">

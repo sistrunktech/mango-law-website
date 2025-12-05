@@ -51,11 +51,13 @@ export default function DrugCrimePage() {
     <>
       <PageHero
         eyebrow="Drug Crimes"
-        title="Drug crime defense with attention to testing, searches, and diversion paths."
+        title="Drug crime defense with attention to testing, searches, and diversion paths"
         description="Possession, trafficking, paraphernalia, and related allegations—handled with motion practice and practical strategies."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
-        variant="light"
+        showQuickActions={false}
+        alignLeft={true}
+        compact={true}
       />
 
       <section className="section bg-white">

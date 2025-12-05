@@ -22,7 +22,7 @@ export default function PracticeAreaCardGrid() {
           </div>
           <Link
             to="/practice-areas"
-            className="group hidden items-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-leaf/80 md:inline-flex"
+            className="group hidden items-center gap-2 text-sm font-semibold text-brand-mango transition-colors hover:text-brand-leaf md:inline-flex"
           >
             View all practice areas
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -53,8 +53,8 @@ export default function PracticeAreaCardGrid() {
                   {area.summary}
                 </p>
 
-                {/* Learn more link - green */}
-                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-leaf opacity-0 transition-all duration-200 group-hover:opacity-100">
+                {/* Learn more link - gold to green on hover */}
+                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-brand-leaf">
                   Learn more
                   <ArrowUpRight className="h-4 w-4" />
                 </div>

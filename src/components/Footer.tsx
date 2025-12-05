@@ -31,19 +31,19 @@ export default function Footer() {
             <div className="space-y-3 pt-2">
               <a
                 href="tel:7406022155"
-                className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-mango"
+                className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-leaf/10">
-                  <Phone className="h-4 w-4 text-brand-leaf" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
+                  <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
                 (740) 602-2155
               </a>
               <a
                 href="mailto:office@mango.law"
-                className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-mango"
+                className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-leaf/10">
-                  <Mail className="h-4 w-4 text-brand-leaf" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
+                  <Mail className="h-4 w-4 text-brand-mango" />
                 </div>
                 office@mango.law
               </a>
@@ -64,7 +64,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-mango"
+                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
                   >
                     {link.label}
                   </Link>
@@ -81,7 +81,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-mango"
+                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
                   >
                     {link.label}
                   </Link>
@@ -111,10 +111,10 @@ export default function Footer() {
         <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-brand-offWhite/50 sm:flex-row">
           <span>© {new Date().getFullYear()} Mango Law LLC. All rights reserved.</span>
           <div className="flex items-center gap-6">
-            <Link to="/privacy" className="transition-colors hover:text-brand-mango">
+            <Link to="/privacy" className="transition-colors hover:text-brand-leaf">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="transition-colors hover:text-brand-mango">
+            <Link to="/terms" className="transition-colors hover:text-brand-leaf">
               Terms of Service
             </Link>
           </div>
