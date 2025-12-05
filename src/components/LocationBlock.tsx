@@ -9,9 +9,9 @@ export default function LocationBlock() {
             Serving Delaware County and nearby courts with local knowledge, motion practice, and courtroom experience.
           </p>
           <div className="mt-4 space-y-1 text-sm text-brand-black/80">
-            <p>123 Main Street</p>
-            <p>Delaware, OH</p>
-            <p>Phone: (555) 000-0000</p>
+            <p>43 S Franklin St</p>
+            <p>Delaware, OH 43015</p>
+            <p>Phone: (740) 602-2155</p>
           </div>
         </div>
         <div className="rounded-xl bg-brand-black/5 p-4">

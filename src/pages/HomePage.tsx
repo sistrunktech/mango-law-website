@@ -65,9 +65,9 @@ export default function HomePage() {
               <div className="grid gap-6 sm:grid-cols-2">
                 {whyChooseUs.map((item, i) => (
                   <div key={i} className="flex gap-4">
-                    {/* Consistent green icons */}
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10">
-                      <item.icon className="h-5 w-5 text-brand-leaf" />
+                    {/* Gold icons */}
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-mango/10">
+                      <item.icon className="h-5 w-5 text-brand-mango" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-brand-black">{item.title}</h3>

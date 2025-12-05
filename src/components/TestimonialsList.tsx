@@ -17,8 +17,8 @@ export default function TestimonialsList() {
               key={item.name}
               className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5 shadow-sm"
             >
-              <p className="text-sm text-brand-black/80 leading-relaxed">“{item.quote}”</p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-brand-teal">{item.name}</p>
+              <p className="text-sm text-brand-black/80 leading-relaxed">"{item.quote}"</p>
+              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-brand-gold">{item.name}</p>
             </div>
           ))}
         </div>

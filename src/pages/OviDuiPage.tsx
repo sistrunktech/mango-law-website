@@ -60,13 +60,13 @@ export default function OviDuiPage() {
     <>
       <PageHero
         eyebrow="OVI / DUI Defense"
-        title="OVI and DUI defense with targeted motion practice and local insight."
+        title="OVI and DUI defense with targeted motion practice and local insight"
         description="High-test, felony OVI, refusals, underage DUI, and drug OVI. Clear timelines and informed negotiation, backed by detailed discovery review."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
-        secondaryCtaLabel="(740) 602-2155"
-        secondaryCtaHref="tel:7406022155"
-        variant="light"
+        showQuickActions={false}
+        alignLeft={true}
+        compact={true}
       />
 
       <section className="section bg-white">

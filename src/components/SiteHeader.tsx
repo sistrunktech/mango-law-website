@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { navLinks } from '../data/navigation';
+import MegaMenu from './MegaMenu';
 
 const PHONE_NUMBER = '(740) 602-2155';
 
@@ -12,7 +13,7 @@ export default function SiteHeader() {
     <header className="relative z-50">
       {/* Top bar - Fresh green accent */}
       <div className="bg-brand-leaf">
-        <div className="container flex items-center justify-between py-2">
+        <div className="container flex items-center justify-between py-1">
           {/* Left side - phone */}
           <a
             href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`}
@@ -48,20 +49,25 @@ export default function SiteHeader() {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-1 lg:flex">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.href}
-                to={link.href}
-                className={({ isActive }) => [
-                  'px-4 py-2 text-sm font-medium transition-colors',
-                  isActive
-                    ? 'text-brand-mango'
-                    : 'text-brand-offWhite/80 hover:text-brand-mango',
-                ].join(' ')}
-              >
-                {link.label}
-              </NavLink>
-            ))}
+            {navLinks.map((link) => {
+              if (link.label === 'Practice Areas') {
+                return <MegaMenu key="practice-areas-mega" />;
+              }
+              return (
+                <NavLink
+                  key={link.href}
+                  to={link.href}
+                  className={({ isActive }) => [
+                    'px-4 py-2 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'text-brand-mango'
+                      : 'text-brand-offWhite/80 hover:text-brand-mango',
+                  ].join(' ')}
+                >
+                  {link.label}
+                </NavLink>
+              );
+            })}
           </nav>
 
           {/* Desktop CTA */}

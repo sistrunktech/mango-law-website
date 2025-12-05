@@ -22,7 +22,7 @@ export default function PracticeAreaCardGrid() {
           </div>
           <Link
             to="/practice-areas"
-            className="group hidden items-center gap-2 text-sm font-semibold text-brand-teal transition-colors hover:text-brand-mango md:inline-flex"
+            className="group hidden items-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-leaf/80 md:inline-flex"
           >
             View all practice areas
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -39,9 +39,9 @@ export default function PracticeAreaCardGrid() {
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <div>
-                {/* Icon - green to gold on hover */}
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-mango/10">
-                  <span className="text-xl font-bold text-brand-leaf transition-colors group-hover:text-brand-mango">
+                {/* Icon - gold with gold background */}
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-mango/10 transition-all group-hover:bg-brand-mango/20">
+                  <span className="text-xl font-bold text-brand-mango transition-colors">
                     {area.title.charAt(0)}
                   </span>
                 </div>
@@ -53,8 +53,8 @@ export default function PracticeAreaCardGrid() {
                   {area.summary}
                 </p>
 
-                {/* Learn more link - gold to green on hover */}
-                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-brand-leaf">
+                {/* Learn more link - green */}
+                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-leaf opacity-0 transition-all duration-200 group-hover:opacity-100">
                   Learn more
                   <ArrowUpRight className="h-4 w-4" />
                 </div>

@@ -1,17 +1,22 @@
 export const testimonials = [
   {
-    name: 'Client, Delaware County',
+    name: 'Alex Hawks',
     quote:
-      'Dominic was clear, direct, and always prepared. He pushed on the details that mattered and kept me informed at every turn.',
+      'Honestly, I\'m pretty impressed with them. Attorney Mango and his team are really phenomenal at what they do! You can rest assured that you\'ve picked the best attorney to represent you in your case. I was referred to Mango Law from a Delaware contact of mine. I was pretty skeptical at first, but they did not disappoint in the court room.',
   },
   {
-    name: 'OVI Client',
+    name: 'Jamie Goulette',
     quote:
-      'Smart strategy and no fear tactics. Dominic walked me through the process, challenged the stop, and achieved a better outcome than expected.',
+      'Nick is a fantastic lawyer!! If you need someone to fight for you I highly recommend him. He is honest and hard working. He has helped so many of my friends. He cares and takes the time to explain everything to you. Give him a call if you want things done correctly and right.',
   },
   {
-    name: 'Federal Investigation Client',
+    name: 'Nicholas H',
     quote:
-      'Professional, calm, and assertive. He made sure every communication was precise and protected my interests from day one.',
+      'Great lawyer, really does everything he can to help his clients out. Wouldn\'t go with anyone else!',
+  },
+  {
+    name: 'Brittney Hart',
+    quote:
+      'The whole Team is AMAZING!!! I would most definitely use their service again',
   },
 ];

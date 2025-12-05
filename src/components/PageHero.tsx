@@ -20,6 +20,8 @@ type Props = {
   showQuickActions?: boolean;
   /** Compact variant for inner pages */
   compact?: boolean;
+  /** Align content to the left (for practice area pages) */
+  alignLeft?: boolean;
 };
 
 const quickActions = [
@@ -54,6 +56,7 @@ export default function PageHero({
   attorneyPhotoUrl,
   showQuickActions = true,
   compact = false,
+  alignLeft = false,
 }: Props) {
   const isDark = variant === 'dark';
 
@@ -99,12 +102,24 @@ export default function PageHero({
           </div>
         )}
 
+        {/* Faded mango icon decoration - tilted, off-center right */}
+        <div className="pointer-events-none absolute right-[10%] top-1/2 -translate-y-1/2 opacity-[0.03] rotate-12">
+          <img
+            src="/images/brand/mango-icon-white.svg"
+            alt=""
+            className="h-[500px] w-[500px]"
+          />
+        </div>
+
         {/* Gradient orbs - emerald + mango for brand energy */}
         <div className="pointer-events-none absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-brand-leaf/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-brand-mango/6 blur-[100px]" />
 
         <div className="container relative">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className={[
+            alignLeft ? 'max-w-3xl' : 'mx-auto max-w-4xl',
+            alignLeft ? 'text-left' : 'text-center',
+          ].join(' ')}>
             {/* Eyebrow */}
             {eyebrow && (
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-brand-mango">
@@ -121,25 +136,37 @@ export default function PageHero({
 
             {/* Main headline */}
             <h1 className={[
-              'font-display font-black uppercase tracking-tight',
-              compact
+              'font-display font-black tracking-tight',
+              compact || alignLeft
                 ? 'text-3xl md:text-4xl lg:text-5xl'
-                : 'text-4xl md:text-5xl lg:text-6xl xl:text-7xl',
+                : 'text-4xl uppercase md:text-5xl lg:text-6xl xl:text-7xl',
             ].join(' ')}>
-              <span className="text-brand-mango">Hire an Aggressive</span>
-              <br />
-              <span className="text-brand-offWhite">Attorney</span>
+              {alignLeft ? (
+                <span className="text-brand-offWhite">{title}</span>
+              ) : (
+                <>
+                  <span className="text-brand-mango">Hire an Aggressive</span>
+                  <br />
+                  <span className="text-brand-offWhite">Attorney</span>
+                </>
+              )}
             </h1>
 
             {/* Description */}
             {description && (
-              <p className="mx-auto mt-6 max-w-2xl text-lg text-brand-offWhite/70 md:text-xl">
+              <p className={[
+                'mt-6 text-lg text-brand-offWhite/70 md:text-xl',
+                alignLeft ? 'max-w-2xl' : 'mx-auto max-w-2xl',
+              ].join(' ')}>
                 {description}
               </p>
             )}
 
             {/* CTA Buttons */}
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className={[
+              'mt-8 flex flex-col gap-4 sm:flex-row',
+              alignLeft ? 'items-start justify-start' : 'items-center justify-center',
+            ].join(' ')}>
               {ctaLabel && ctaHref && (
                 <Link
                   to={ctaHref}
@@ -193,9 +220,9 @@ export default function PageHero({
                   className="group relative rounded-2xl bg-white border border-brand-black/10 p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg"
                 >
                   <div className="flex items-start gap-5">
-                    {/* Icon - green to gold on hover */}
-                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-mango/10">
-                      <action.icon className="h-8 w-8 text-brand-leaf transition-colors group-hover:text-brand-mango" />
+                    {/* Icon - gold with gold background */}
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-brand-mango/10 transition-all group-hover:bg-brand-mango/20">
+                      <action.icon className="h-8 w-8 text-brand-mango transition-colors" />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mango">
@@ -204,7 +231,7 @@ export default function PageHero({
                       <p className="mt-2 text-sm leading-relaxed text-brand-black/60">
                         {action.description}
                       </p>
-                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-mango transition-colors group-hover:text-brand-leaf">
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-leaf transition-colors">
                         {action.label}
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </span>

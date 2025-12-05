@@ -12,6 +12,9 @@ import ProtectionOrderPage from './pages/ProtectionOrderPage';
 import PersonalInjuryPage from './pages/PersonalInjuryPage';
 import ReviewsPage from './pages/ReviewsPage';
 import ContactPage from './pages/ContactPage';
+import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
+import OfCounselPage from './pages/OfCounselPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
@@ -31,6 +34,9 @@ function App() {
         <Route path="/personal-injury-lawyer-delaware-oh" element={<PersonalInjuryPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/of-counsel" element={<OfCounselPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
       </Routes>

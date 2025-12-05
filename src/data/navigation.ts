@@ -5,6 +5,7 @@ export const navLinks = [
     label: 'Practice Areas',
     href: '/practice-areas',
   },
+  { label: 'Blog', href: '/blog' },
   { label: 'Reviews', href: '/reviews' },
   { label: 'Contact', href: '/contact' },
 ];
