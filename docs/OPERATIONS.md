@@ -36,7 +36,11 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - Script: `npm run generate:image -- --prompt "your prompt here"`
 - Dependencies: `@fal-ai/client`, Supabase storage bucket `generated-images` (public if you want CDN links), env vars `FAL_API_KEY`, `SUPABASE_URL`, `SERVICE_ROLE_KEY`.
 - Output: Saves images to `public/generated/` with matching metadata JSON; uploads to Supabase bucket (if configured) and prints CDN + local paths.
-- Options: `--count N` (up to 10 per prompt), `--model fal-ai/star-vector` to force a model, `--batch path/to/tasks.json` for multiple prompts.
+- Options:
+  - `--count N` (up to 10 per prompt)
+  - `--model fal-ai/star-vector` (override model; defaults favor star-vector/recraft/SD/flux)
+  - `--image pathOrUrl` to run image-to-image (e.g., recraft v3 i2i) using a local file or URL
+  - `--batch path/to/tasks.json` for multiple prompts; JSON array supports `{ prompt, count?, model?, image? }`
 
 ## Database (deployed)
 - **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).

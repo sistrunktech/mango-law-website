@@ -38,7 +38,7 @@ async function downloadToBuffer(url) {
   return Buffer.from(await res.arrayBuffer());
 }
 
-async function generateImage(prompt, modelOverride) {
+async function generateImage(prompt, modelOverride, extraInput = {}) {
   const apiKey = ensureEnv("FAL_API_KEY");
   fal.config({ credentials: apiKey });
 
@@ -52,6 +52,7 @@ async function generateImage(prompt, modelOverride) {
       result = await fal.subscribe(model, {
         input: {
           prompt,
+          ...extraInput,
         },
       });
       if (result) {
@@ -135,14 +136,35 @@ async function saveLocal(buffer, fileName, meta) {
   return { localPath: `/generated/${fileName}`, metaPath };
 }
 
-async function processPrompt(prompt, count, modelOverride) {
+async function buildExtraInput(imageArg) {
+  if (!imageArg) return {};
+  if (imageArg.startsWith("http://") || imageArg.startsWith("https://")) {
+    return { image_url: imageArg };
+  }
+  const absPath = path.resolve(imageArg);
+  const data = await fs.readFile(absPath);
+  const ext = path.extname(absPath).replace(".", "").toLowerCase() || "png";
+  let mime = "image/png";
+  if (ext === "svg") mime = "image/svg+xml";
+  else if (ext === "jpg" || ext === "jpeg") mime = "image/jpeg";
+  else if (ext === "webp") mime = "image/webp";
+  else if (ext === "gif") mime = "image/gif";
+  const b64 = data.toString("base64");
+  return { image_data_url: `data:${mime};base64,${b64}` };
+}
+
+async function processPrompt(prompt, count, modelOverride, extraInput) {
   if (count > 10) {
     console.warn("Count capped at 10 to avoid long queues; adjusting to 10.");
   }
   const total = Math.min(count, 10);
 
-  console.log(`Generating image for prompt: "${prompt}"${modelOverride ? ` (model: ${modelOverride})` : ""}`);
-  const result = await generateImage(prompt, modelOverride);
+  console.log(
+    `Generating image for prompt: "${prompt}"${modelOverride ? ` (model: ${modelOverride})` : ""}${
+      extraInput && extraInput.image_url ? " [image_url]" : extraInput && extraInput.image_data_url ? " [image_data_url]" : ""
+    }`,
+  );
+  const result = await generateImage(prompt, modelOverride, extraInput);
   const timestamp = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
   const fileBase = `${slugify(prompt) || "image"}-${timestamp}`;
 
@@ -213,16 +235,21 @@ async function main() {
       const prompt = task.prompt;
       const count = Math.max(1, parseInt(task.count || 1, 10) || 1);
       const modelOverride = task.model || null;
+      const extraInput = await buildExtraInput(task.image);
       if (!prompt) {
         console.warn("Skipping task without prompt");
         continue;
       }
-      const outputs = await processPrompt(prompt, count, modelOverride);
+      const outputs = await processPrompt(prompt, count, modelOverride, extraInput);
       allOutputs.push(...outputs);
     }
     console.log(JSON.stringify(allOutputs, null, 2));
     return;
   }
+
+  const imageIdx = args.findIndex((a) => a === "--image");
+  const imageArg = imageIdx !== -1 && args[imageIdx + 1] ? args[imageIdx + 1] : null;
+  const extraInput = await buildExtraInput(imageArg);
 
   const promptArgIndex = args.findIndex((a) => a === "--prompt");
   const prompt =
@@ -239,12 +266,12 @@ async function main() {
 
   if (!prompt) {
     console.error(
-      "Usage: npm run generate:image -- --prompt \"your prompt here\" [--count N] [--model fal-ai/star-vector] [--batch path/to/tasks.json]",
+      "Usage: npm run generate:image -- --prompt \"your prompt here\" [--count N] [--model fal-ai/star-vector] [--image pathOrUrl] [--batch path/to/tasks.json]",
     );
     process.exit(1);
   }
 
-  const outputs = await processPrompt(prompt, count, modelOverride);
+  const outputs = await processPrompt(prompt, count, modelOverride, extraInput);
   console.log(JSON.stringify(outputs, null, 2));
 }
 
