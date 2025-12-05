@@ -85,7 +85,7 @@ export default function HomePage() {
                   <img
                     src="/images/nick_mango_profile_shot.jpg"
                     alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                    className="w-full h-auto rounded-xl"
+                    className="w-full h-auto rounded-xl object-cover max-h-[500px]"
                   />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8">
@@ -162,7 +162,7 @@ export default function HomePage() {
                   </div>
                 </a>
                 <a
-                  href="mailto:nick@mangolaw.com"
+                  href="mailto:office@mango.law"
                   className="group card card-interactive flex items-center gap-4 p-5"
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-leaf/20 group-hover:scale-110">
@@ -170,7 +170,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-brand-black/60">Email us</p>
-                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-leaf">nick@mangolaw.com</p>
+                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-leaf">office@mango.law</p>
                   </div>
                 </a>
               </div>

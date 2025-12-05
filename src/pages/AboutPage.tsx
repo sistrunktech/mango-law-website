@@ -23,7 +23,7 @@ export default function AboutPage() {
                     <img
                       src="/images/nick_mango_profile_shot.jpg"
                       alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                      className="w-full h-auto rounded-xl"
+                      className="w-full h-auto rounded-xl object-cover max-h-[500px]"
                     />
                   </div>
                 </div>
@@ -39,11 +39,11 @@ export default function AboutPage() {
                       <span className="font-semibold">(740) 602-2155</span>
                     </a>
                     <a
-                      href="mailto:nick@mangolaw.com"
+                      href="mailto:office@mango.law"
                       className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
                     >
                       <span className="text-lg">✉️</span>
-                      <span className="font-semibold">nick@mangolaw.com</span>
+                      <span className="font-semibold">office@mango.law</span>
                     </a>
                   </div>
                 </div>

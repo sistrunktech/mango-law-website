@@ -141,7 +141,7 @@
   
   /* Decorative accent line */
   .accent-line {
-    @apply h-1 w-12 rounded-full bg-gradient-to-r from-brand-leaf to-brand-mango;
+    @apply h-1 w-12 rounded-full bg-brand-mango;
   }
 
   /* Divider with icon */
