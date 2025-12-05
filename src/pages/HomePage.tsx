@@ -102,18 +102,24 @@ export default function HomePage() {
       <PracticeAreaCardGrid />
 
       {/* Stats/Trust Section */}
-      <section className="section-tight bg-brand-black text-brand-offWhite">
-        <div className="container">
-          <div className="grid gap-8 text-center md:grid-cols-4">
+      <section className="relative overflow-hidden py-20">
+        {/* Forest to emerald gradient for energy */}
+        <div className="absolute inset-0 bg-forest-emerald" />
+
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/20 to-transparent" />
+
+        <div className="container relative">
+          <div className="grid gap-10 text-center md:grid-cols-4">
             {[
               { value: '15+', label: 'Years Experience' },
               { value: '1000+', label: 'Cases Handled' },
               { value: '24/7', label: 'Availability' },
               { value: '100%', label: 'Confidential' },
             ].map((stat, i) => (
-              <div key={i} className="space-y-2">
-                <p className="text-display-md text-brand-mango">{stat.value}</p>
-                <p className="text-sm text-brand-offWhite/60">{stat.label}</p>
+              <div key={i} className="space-y-3">
+                <p className="text-display-md font-black text-white">{stat.value}</p>
+                <p className="text-sm font-semibold uppercase tracking-wider text-brand-offWhite/80">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -145,26 +151,26 @@ export default function HomePage() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <a
                   href="tel:7406022155"
-                  className="card card-hover flex items-center gap-4 p-4"
+                  className="group card card-interactive flex items-center gap-4 p-5"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-mango/10">
-                    <span className="text-xl">📞</span>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-mango/10 transition-all group-hover:bg-brand-mango/20 group-hover:scale-110">
+                    <span className="text-2xl">📞</span>
                   </div>
                   <div>
-                    <p className="text-sm text-brand-black/60">Call us</p>
-                    <p className="font-semibold text-brand-black">(740) 602-2155</p>
+                    <p className="text-sm font-medium text-brand-black/60">Call us</p>
+                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mango">(740) 602-2155</p>
                   </div>
                 </a>
                 <a
                   href="mailto:nick@mangolaw.com"
-                  className="card card-hover flex items-center gap-4 p-4"
+                  className="group card card-interactive flex items-center gap-4 p-5"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-teal/10">
-                    <span className="text-xl">✉️</span>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-leaf/20 group-hover:scale-110">
+                    <span className="text-2xl">✉️</span>
                   </div>
                   <div>
-                    <p className="text-sm text-brand-black/60">Email us</p>
-                    <p className="font-semibold text-brand-black">nick@mangolaw.com</p>
+                    <p className="text-sm font-medium text-brand-black/60">Email us</p>
+                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-leaf">nick@mangolaw.com</p>
                   </div>
                 </a>
               </div>

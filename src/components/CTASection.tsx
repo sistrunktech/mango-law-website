@@ -37,9 +37,12 @@ export default function CTASection({
         </div>
       )}
 
-      {/* Decorative elements */}
-      <div className="pointer-events-none absolute -right-20 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-brand-teal/10 blur-3xl" />
-      <div className="pointer-events-none absolute -left-10 top-0 h-[200px] w-[200px] rounded-full bg-brand-mango/10 blur-3xl" />
+      {/* Decorative elements - emerald and mango energy */}
+      <div className="pointer-events-none absolute -right-20 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-brand-leaf/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-10 top-0 h-[300px] w-[300px] rounded-full bg-brand-mango/8 blur-3xl" />
+
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/10 to-transparent" />
 
       <div className="container relative section-tight">
         <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
@@ -59,7 +62,7 @@ export default function CTASection({
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               to={primaryHref}
-              className="btn btn-primary group"
+              className="group inline-flex items-center justify-center gap-2 rounded-lg bg-brand-mango px-7 py-3.5 text-sm font-bold text-brand-black shadow-lg transition-all hover:bg-brand-gold hover:shadow-xl hover:-translate-y-0.5"
             >
               {primaryLabel}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -67,7 +70,7 @@ export default function CTASection({
             {secondaryLabel && secondaryHref && (
               <a
                 href={secondaryHref}
-                className="btn border-2 border-brand-offWhite/20 text-brand-offWhite hover:border-brand-offWhite/40 hover:bg-white/5"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-offWhite/30 px-7 py-3.5 text-sm font-bold text-brand-offWhite transition-all hover:border-brand-leaf hover:bg-brand-leaf/10"
               >
                 <Phone className="h-4 w-4" />
                 {secondaryLabel}

@@ -11,32 +11,35 @@
    CSS Custom Properties (Design Tokens)
    ============================================ */
 :root {
-  /* Brand Colors - Fresh Mango Palette */
+  /* Brand Colors - Vibrant & Fresh */
   --color-black: #0A0A0A;
   --color-mango: #E8A33C;
   --color-gold: #D4A84B;
   --color-off-white: #FAF9F7;
-  --color-leaf: #7CB342;        /* Vibrant lime green */
+  --color-leaf: #22C55E;        /* Vibrant emerald - Cascade energy */
+  --color-leaf-light: #4ADE80;
+  --color-leaf-dark: #16A34A;
   --color-forest: #1B4332;      /* Deep forest green */
   --color-cream: #FFF8E7;
   --color-charcoal: #0F0F0F;
-  
+
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  
+
   /* Spacing */
   --section-padding-y: 5rem;
   --section-padding-y-lg: 7rem;
-  
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;
-  
+
   /* Shadows */
   --shadow-card: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
   --shadow-card-hover: 0 12px 40px -8px rgba(0, 0, 0, 0.15);
-  
+  --shadow-lift: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+
   color: var(--color-black);
   background-color: var(--color-off-white);
 }
@@ -85,32 +88,36 @@
 @layer components {
   /* Button base styles */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all duration-200;
   }
-  
+
   .btn-primary {
-    @apply bg-brand-gold text-brand-black shadow-md hover:bg-brand-mango hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+    @apply bg-brand-mango text-brand-black shadow-md hover:bg-brand-gold hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
   }
-  
+
   .btn-secondary {
-    @apply border-2 border-brand-black/15 text-brand-black hover:border-brand-teal hover:text-brand-teal;
+    @apply border-2 border-brand-leaf text-brand-leaf hover:bg-brand-leaf hover:text-white hover:shadow-glow-leaf;
   }
-  
+
   .btn-ghost {
     @apply text-brand-black hover:bg-brand-black/5;
   }
-  
+
   .btn-dark {
-    @apply bg-brand-black text-brand-offWhite hover:bg-brand-teal;
+    @apply bg-brand-black text-brand-offWhite hover:bg-brand-leaf;
   }
-  
+
   /* Card styles */
   .card {
-    @apply rounded-3xl border border-brand-black/10 bg-white p-6 shadow-soft transition-all duration-300;
+    @apply rounded-2xl border border-brand-black/10 bg-white p-6 shadow-soft transition-all duration-300;
   }
-  
+
   .card-hover {
-    @apply hover:-translate-y-1 hover:shadow-soft-lg hover:border-brand-teal/30;
+    @apply hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20;
+  }
+
+  .card-interactive {
+    @apply cursor-pointer hover:-translate-y-2 hover:shadow-lift-lg hover:border-brand-leaf/30 active:translate-y-0;
   }
   
   /* Section spacing */
@@ -134,7 +141,18 @@
   
   /* Decorative accent line */
   .accent-line {
-    @apply h-1 w-12 rounded-full bg-gradient-to-r from-brand-mango to-brand-gold;
+    @apply h-1 w-12 rounded-full bg-gradient-to-r from-brand-leaf to-brand-mango;
+  }
+
+  /* Divider with icon */
+  .divider {
+    @apply flex items-center gap-3 text-brand-black/20;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    @apply h-px flex-1 bg-current;
   }
 }
 

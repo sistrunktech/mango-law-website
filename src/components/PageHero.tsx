@@ -68,19 +68,22 @@ export default function PageHero({
           'text-brand-offWhite',
         ].join(' ')}
       >
-        {/* Deep forest green gradient - fresh, authoritative */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#0F1A14] to-brand-forest" />
-        
-        {/* Diagonal gold accent stripe */}
-        <div 
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        {/* Deep black to forest green gradient - fresh, authoritative */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-[#0F1A14] to-brand-forest" />
+
+        {/* Subtle emerald gradient overlay for energy */}
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-brand-leaf/5" />
+
+        {/* Diagonal emerald accent stripe */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `repeating-linear-gradient(
               -45deg,
               transparent,
               transparent 100px,
-              rgba(212, 168, 75, 0.3) 100px,
-              rgba(212, 168, 75, 0.3) 102px
+              rgba(34, 197, 94, 0.3) 100px,
+              rgba(34, 197, 94, 0.3) 102px
             )`,
           }}
         />
@@ -101,9 +104,9 @@ export default function PageHero({
         <MangoSilhouette className="pointer-events-none absolute -right-20 top-10 h-80 w-80 text-brand-mango/[0.03] rotate-12" />
         <MangoSilhouette className="pointer-events-none absolute -left-10 bottom-20 h-48 w-48 text-brand-mango/[0.02] -rotate-12" />
         
-        {/* Gradient orbs */}
-        <div className="pointer-events-none absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-brand-mango/10 blur-[120px]" />
-        <div className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-brand-accent/10 blur-[100px]" />
+        {/* Gradient orbs - emerald + mango for brand energy */}
+        <div className="pointer-events-none absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-brand-leaf/8 blur-[120px]" />
+        <div className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-brand-mango/6 blur-[100px]" />
 
         <div className="container relative">
           <div className="mx-auto max-w-4xl text-center">
@@ -183,33 +186,36 @@ export default function PageHero({
         </div>
       </div>
 
-      {/* Quick Action Cards - overlapping the hero */}
+      {/* Quick Action Cards - overlapping the hero for depth */}
       {showQuickActions && !compact && (
-        <div className="relative z-10 -mt-16 pb-8">
+        <div className="relative z-10 -mt-20 pb-12">
           <div className="container">
             <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
               {quickActions.map((action, i) => (
                 <Link
                   key={i}
                   to={action.href}
-                  className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl"
+                  className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lift transition-all duration-300 hover:-translate-y-2 hover:shadow-lift-lg"
                 >
-                  {/* Accent bar - mango gold */}
-                  <div className="absolute left-0 top-0 h-full w-1 bg-brand-mango transition-all group-hover:w-1.5" />
-                  
-                  <div className="flex items-start gap-4 pl-4">
+                  {/* Gradient accent bar - emerald to mango */}
+                  <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand-leaf to-brand-mango transition-all group-hover:w-2" />
+
+                  {/* Subtle gradient background on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-leaf/0 to-brand-leaf/5 opacity-0 transition-opacity group-hover:opacity-100" />
+
+                  <div className="relative flex items-start gap-5 pl-4">
                     {/* Icon */}
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10 transition-colors group-hover:bg-brand-leaf/20">
-                      <action.icon className="h-7 w-7 text-brand-leaf" />
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-leaf/20 group-hover:scale-110">
+                      <action.icon className="h-8 w-8 text-brand-leaf transition-transform group-hover:scale-110" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-brand-black group-hover:text-brand-mango">
+                      <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-leaf">
                         {action.title}
                       </h3>
-                      <p className="mt-1 text-sm text-brand-black/60">
+                      <p className="mt-2 text-sm leading-relaxed text-brand-black/60">
                         {action.description}
                       </p>
-                      <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-mango">
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-mango transition-colors group-hover:text-brand-leaf">
                         {action.label}
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </span>

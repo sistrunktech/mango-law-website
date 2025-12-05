@@ -7,32 +7,29 @@ export default {
     extend: {
       colors: {
         brand: {
-          // Core brand colors - from actual mango fruit
-          black: '#1A1A1A',
-          mango: '#E8A33C',        // Rich mango orange-gold
-          mangoLight: '#F4B95A',   // Lighter mango flesh
+          // Core brand colors - vibrant and fresh
+          black: '#0A0A0A',        // Pure black, NO brown undertones
+          mango: '#E8A33C',        // Warm mango gold - for CTAs and action
+          mangoLight: '#F4B95A',   // Lighter mango
           mangoDark: '#C4872E',    // Deeper mango
-          gold: '#D4A84B',         // Gold from logo
+          gold: '#D4A84B',         // Secondary warmth
           offWhite: '#FAF9F7',
           cream: '#FFF8E7',
-          // Organic accent colors - vibrant lime green
-          leaf: '#7CB342',         // Vibrant lime green
-          leafLight: '#9CCC65',
-          leafDark: '#558B2F',
-          blush: '#A65D4C',        // Muted terracotta/burgundy (mango blush)
-          blushLight: '#C47A69',
-          blushDark: '#8B4A3C',
-          // Legacy teal aliases (pointing to leaf for compatibility)
-          teal: '#7CB342',
-          tealLight: '#9CCC65',
-          tealDark: '#558B2F',
-          accent: '#7CB342',
-          accentLight: '#9CCC65',
-          accentDark: '#558B2F',
-          // Additional
-          navy: '#1B4332',         // Deep forest green for hero
-          charcoal: '#0F0F0F',     // Pure dark, no brown
-          forest: '#1B4332',       // Deep forest green
+          // Vibrant emerald green - primary accent (Cascade-level energy)
+          leaf: '#22C55E',         // Vibrant emerald - should feel alive!
+          leafLight: '#4ADE80',    // For highlights, hovers
+          leafDark: '#16A34A',     // For depth
+          // Deep forest for dark sections
+          forest: '#1B4332',       // Creates depth without muddiness
+          navy: '#1B4332',         // Alias for forest
+          charcoal: '#0F0F0F',     // Deep dark
+          // Legacy aliases for compatibility
+          teal: '#22C55E',
+          tealLight: '#4ADE80',
+          tealDark: '#16A34A',
+          accent: '#22C55E',
+          accentLight: '#4ADE80',
+          accentDark: '#16A34A',
         },
       },
       fontFamily: {
@@ -76,14 +73,18 @@ export default {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         'soft-lg': '0 10px 40px -10px rgba(0, 0, 0, 0.1), 0 4px 25px -5px rgba(0, 0, 0, 0.05)',
         'glow-mango': '0 0 30px -5px rgba(232, 163, 60, 0.3)',
-        'glow-leaf': '0 0 30px -5px rgba(124, 179, 66, 0.3)',
+        'glow-leaf': '0 0 30px -5px rgba(34, 197, 94, 0.25)',
+        'lift': '0 10px 40px -10px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+        'lift-lg': '0 20px 60px -15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.05)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'hero-pattern': 'linear-gradient(135deg, #0A0A0A 0%, #1B4332 100%)',
         'hero-dark': 'linear-gradient(180deg, #0A0A0A 0%, #0F0F0F 100%)',
-        'cta-gradient': 'linear-gradient(135deg, #1B4332 0%, #7CB342 100%)',
+        'cta-gradient': 'linear-gradient(135deg, #1B4332 0%, #22C55E 100%)',
+        'accent-bar': 'linear-gradient(90deg, #22C55E 0%, #E8A33C 50%, #22C55E 100%)',
         'card-shine': 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
+        'forest-emerald': 'linear-gradient(135deg, #1B4332 0%, #22C55E 100%)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',
