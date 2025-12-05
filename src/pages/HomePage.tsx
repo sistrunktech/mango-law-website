@@ -80,20 +80,18 @@ export default function HomePage() {
 
             {/* Attorney image placeholder - ready for real headshot */}
             <div className="relative">
-              <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-brand-leafDark via-brand-leaf to-brand-mango/30 shadow-xl">
+              <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-brand-black/5 shadow-soft">
                 {/* Placeholder for attorney photo */}
                 <div className="flex h-full items-center justify-center">
-                  <div className="text-center text-brand-offWhite/60">
-                    <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-mango/30 to-brand-leaf/30">
-                      <Users className="h-12 w-12 text-brand-mango" />
+                  <div className="text-center text-brand-black/30">
+                    <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-brand-leaf/10">
+                      <Users className="h-12 w-12 text-brand-leaf" />
                     </div>
                     <p className="text-sm font-medium">Attorney Photo</p>
-                    <p className="text-xs opacity-60">Coming Soon</p>
+                    <p className="text-xs">Coming Soon</p>
                   </div>
                 </div>
               </div>
-              {/* Decorative accent - gradient from mango to leaf */}
-              <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl bg-gradient-to-br from-brand-mango/30 to-brand-leaf/30" />
             </div>
           </div>
         </div>

@@ -195,21 +195,15 @@ export default function PageHero({
                 <Link
                   key={i}
                   to={action.href}
-                  className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lift transition-all duration-300 hover:-translate-y-2 hover:shadow-lift-lg"
+                  className="group relative rounded-2xl bg-white border border-brand-black/10 p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg"
                 >
-                  {/* Gradient accent bar - emerald to mango */}
-                  <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand-leaf to-brand-mango transition-all group-hover:w-2" />
-
-                  {/* Subtle gradient background on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-leaf/0 to-brand-leaf/5 opacity-0 transition-opacity group-hover:opacity-100" />
-
-                  <div className="relative flex items-start gap-5 pl-4">
-                    {/* Icon */}
-                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-leaf/20 group-hover:scale-110">
-                      <action.icon className="h-8 w-8 text-brand-leaf transition-transform group-hover:scale-110" />
+                  <div className="flex items-start gap-5">
+                    {/* Icon - green to gold on hover */}
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-mango/10">
+                      <action.icon className="h-8 w-8 text-brand-leaf transition-colors group-hover:text-brand-mango" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-leaf">
+                      <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mango">
                         {action.title}
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-brand-black/60">

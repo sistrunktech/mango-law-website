@@ -35,32 +35,26 @@ export default function PracticeAreaCardGrid() {
             <Link
               to={area.href}
               key={area.href}
-              className="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift-lg hover:border-brand-leaf/20"
+              className="group rounded-2xl border border-brand-black/10 bg-white p-7 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-soft-lg"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              {/* Gradient accent bar on hover */}
-              <div className="absolute left-0 top-0 h-1 w-0 bg-gradient-to-r from-brand-leaf to-brand-mango transition-all duration-300 group-hover:w-full" />
-
-              {/* Subtle gradient background on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-leaf/0 to-brand-leaf/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-              <div className="relative">
-                {/* Icon with better scaling */}
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all duration-300 group-hover:bg-brand-leaf/20 group-hover:scale-110">
-                  <span className="text-xl font-bold text-brand-leaf">
+              <div>
+                {/* Icon - green to gold on hover */}
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-mango/10">
+                  <span className="text-xl font-bold text-brand-leaf transition-colors group-hover:text-brand-mango">
                     {area.title.charAt(0)}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-brand-black transition-colors duration-200 group-hover:text-brand-leaf">
+                <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mango">
                   {area.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-brand-black/60">
                   {area.summary}
                 </p>
 
-                {/* Learn more link with smooth fade-in */}
-                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
+                {/* Learn more link - gold to green on hover */}
+                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-brand-leaf">
                   Learn more
                   <ArrowUpRight className="h-4 w-4" />
                 </div>
