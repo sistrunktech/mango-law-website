@@ -15,20 +15,25 @@ export default function AboutPage() {
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-5 lg:items-start">
-            <div className="lg:col-span-2">
+          <div className="grid gap-12 lg:grid-cols-3 lg:items-start">
+            <div className="lg:col-span-1">
               <div className="sticky top-24">
-                <div className="overflow-hidden rounded-2xl bg-brand-black/5 shadow-soft-lg">
-                  <img
-                    src="/images/nick_mango_profile_shot.jpg"
-                    alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                    className="h-full w-full object-cover"
-                  />
+                <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
+                  <div className="p-4">
+                    <div className="relative overflow-hidden rounded-xl" style={{ maxHeight: '450px' }}>
+                      <img
+                        src="/images/nick_mango_profile_shot.jpg"
+                        alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
+                        className="w-full h-auto object-cover object-top"
+                        style={{ maxHeight: '450px' }}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-6 space-y-2">
+                <div className="mt-6 space-y-3 bg-brand-offWhite rounded-xl p-6 shadow-soft">
                   <h3 className="text-2xl font-bold text-brand-black">Dominic "Nick" Mango</h3>
-                  <p className="text-brand-black/70">Criminal Defense Attorney</p>
-                  <div className="flex flex-col gap-2 pt-4">
+                  <p className="text-brand-black/70 font-medium">Criminal Defense Attorney</p>
+                  <div className="flex flex-col gap-3 pt-3 border-t border-brand-black/10">
                     <a
                       href="tel:7406022155"
                       className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
@@ -48,7 +53,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-3 space-y-8">
+            <div className="lg:col-span-2 space-y-8">
               <div className="space-y-4">
                 <h2 className="text-3xl font-bold text-brand-black">Defense approach</h2>
                 <p className="text-lg text-brand-black/80 leading-relaxed">

@@ -36,14 +36,13 @@ export default function SiteHeader() {
       {/* Main navigation bar */}
       <div className="bg-brand-black">
         <div className="container flex items-center justify-between py-4">
-          {/* Logo - text version until proper cropped PNGs are ready */}
+          {/* Logo */}
           <Link to="/" className="group flex items-center gap-2">
-            {/* Logo text matching FAL.ai generated style */}
-            <div className="flex items-baseline">
-              <span className="text-2xl font-semibold text-[#D4A84B]">Mango</span>
-              <span className="text-2xl font-light tracking-wide text-white">Law</span>
-              <span className="ml-1.5 text-[10px] font-medium uppercase tracking-widest text-white/50">LLC</span>
-            </div>
+            <img
+              src="/images/brand/logo-horizontal.svg"
+              alt="Mango Law LLC - Criminal & OVI/DUI Defense"
+              className="h-12 w-auto transition-opacity hover:opacity-90"
+            />
           </Link>
 
           {/* Desktop Navigation */}
