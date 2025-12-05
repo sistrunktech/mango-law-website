@@ -7,15 +7,160 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
 :root {
-  color: #000;
-  background-color: #f9f7f4;
+  /* Brand Colors - Fresh Mango Palette */
+  --color-black: #0A0A0A;
+  --color-mango: #E8A33C;
+  --color-gold: #D4A84B;
+  --color-off-white: #FAF9F7;
+  --color-leaf: #7CB342;        /* Vibrant lime green */
+  --color-forest: #1B4332;      /* Deep forest green */
+  --color-cream: #FFF8E7;
+  --color-charcoal: #0F0F0F;
+  
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Spacing */
+  --section-padding-y: 5rem;
+  --section-padding-y-lg: 7rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  
+  /* Shadows */
+  --shadow-card: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 12px 40px -8px rgba(0, 0, 0, 0.15);
+  
+  color: var(--color-black);
+  background-color: var(--color-off-white);
 }
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+/* ============================================
+   Base Layer Overrides
+   ============================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Improved heading defaults */
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+  
+  p {
+    text-wrap: pretty;
+  }
+  
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-mango);
+    outline-offset: 2px;
+  }
+  
+  /* Selection styling */
+  ::selection {
+    background-color: var(--color-mango);
+    color: var(--color-black);
+  }
 }
 
+/* ============================================
+   Component Layer
+   ============================================ */
+@layer components {
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-brand-gold text-brand-black shadow-md hover:bg-brand-mango hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-brand-black/15 text-brand-black hover:border-brand-teal hover:text-brand-teal;
+  }
+  
+  .btn-ghost {
+    @apply text-brand-black hover:bg-brand-black/5;
+  }
+  
+  .btn-dark {
+    @apply bg-brand-black text-brand-offWhite hover:bg-brand-teal;
+  }
+  
+  /* Card styles */
+  .card {
+    @apply rounded-3xl border border-brand-black/10 bg-white p-6 shadow-soft transition-all duration-300;
+  }
+  
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-soft-lg hover:border-brand-teal/30;
+  }
+  
+  /* Section spacing */
+  .section {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+  
+  .section-tight {
+    @apply py-12 md:py-16;
+  }
+  
+  /* Eyebrow text */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em];
+  }
+  
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-mango to-brand-gold bg-clip-text text-transparent;
+  }
+  
+  /* Decorative accent line */
+  .accent-line {
+    @apply h-1 w-12 rounded-full bg-gradient-to-r from-brand-mango to-brand-gold;
+  }
+}
+
+/* ============================================
+   Utility Layer
+   ============================================ */
+@layer utilities {
+  /* Smooth image loading */
+  .img-loading {
+    @apply bg-brand-black/5 animate-pulse;
+  }
+  
+  /* Glass effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+  
+  .glass-dark {
+    @apply bg-brand-black/80 backdrop-blur-md;
+  }
+}
+
+/* ============================================
+   Link defaults
+   ============================================ */
 a {
   color: inherit;
+  text-decoration: none;
 }

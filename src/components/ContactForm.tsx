@@ -1,5 +1,16 @@
 import { FormEvent, useState } from 'react';
+import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
+
+const inputClasses = [
+  'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
+  'placeholder:text-brand-black/40',
+  'transition-all duration-200',
+  'focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20',
+  'hover:border-brand-black/20',
+].join(' ');
+
+const labelClasses = 'block text-sm font-semibold text-brand-black';
 
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -45,74 +56,139 @@ export default function ContactForm() {
     }
   }
 
+  if (status === 'success') {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center">
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-teal/10">
+          <CheckCircle className="h-8 w-8 text-brand-teal" />
+        </div>
+        <h3 className="text-xl font-bold text-brand-black">Message Sent</h3>
+        <p className="mt-2 max-w-sm text-sm text-brand-black/60">
+          Thank you for reaching out. We'll review your message and respond within one business day.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus('idle')}
+          className="mt-6 text-sm font-semibold text-brand-teal hover:text-brand-mango"
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
-      <div className="grid gap-4 sm:grid-cols-2">
+    <form className="space-y-5" onSubmit={handleSubmit}>
+      <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label className="text-sm font-semibold text-brand-black">Name</label>
+          <label htmlFor="name" className={labelClasses}>
+            Full Name <span className="text-brand-mango">*</span>
+          </label>
           <input
+            id="name"
             name="name"
             required
-            className="mt-1 w-full rounded-lg border-brand-black/10 bg-white text-brand-black"
-            placeholder="Your name"
+            className={inputClasses}
+            placeholder="Your full name"
           />
         </div>
         <div>
-          <label className="text-sm font-semibold text-brand-black">Email</label>
+          <label htmlFor="email" className={labelClasses}>
+            Email <span className="text-brand-mango">*</span>
+          </label>
           <input
+            id="email"
             name="email"
             type="email"
             required
-            className="mt-1 w-full rounded-lg border-brand-black/10 bg-white text-brand-black"
+            className={inputClasses}
             placeholder="you@example.com"
           />
         </div>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+
+      <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label className="text-sm font-semibold text-brand-black">Phone</label>
+          <label htmlFor="phone" className={labelClasses}>
+            Phone Number
+          </label>
           <input
+            id="phone"
             name="phone"
-            className="mt-1 w-full rounded-lg border-brand-black/10 bg-white text-brand-black"
-            placeholder="(000) 000-0000"
+            type="tel"
+            className={inputClasses}
+            placeholder="(555) 000-0000"
           />
         </div>
         <div>
-          <label className="text-sm font-semibold text-brand-black">How did you hear about us?</label>
-          <input
+          <label htmlFor="how_heard" className={labelClasses}>
+            How did you find us?
+          </label>
+          <select
+            id="how_heard"
             name="how_heard"
-            className="mt-1 w-full rounded-lg border-brand-black/10 bg-white text-brand-black"
-            placeholder="Referral, search, etc."
-          />
+            className={inputClasses}
+          >
+            <option value="">Select an option</option>
+            <option value="google">Google Search</option>
+            <option value="referral">Referral</option>
+            <option value="social">Social Media</option>
+            <option value="other">Other</option>
+          </select>
         </div>
       </div>
+
       <div>
-        <label className="text-sm font-semibold text-brand-black">How can we help?</label>
+        <label htmlFor="message" className={labelClasses}>
+          How can we help? <span className="text-brand-mango">*</span>
+        </label>
         <textarea
+          id="message"
           name="message"
           required
-          className="mt-1 w-full rounded-lg border-brand-black/10 bg-white text-brand-black"
+          className={inputClasses}
           rows={4}
-          placeholder="Share brief details about the situation."
+          placeholder="Briefly describe your situation and any upcoming court dates."
         />
+        <p className="mt-2 text-xs text-brand-black/50">
+          Your information is confidential and protected by attorney-client privilege.
+        </p>
       </div>
-      <div className="hidden">
+
+      {/* Honeypot */}
+      <div className="hidden" aria-hidden="true">
         <label>
           Do not fill this field
-          <input name="honey" />
+          <input name="honey" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
-      <div className="flex flex-wrap items-center gap-3">
-        <button
-          type="submit"
-          disabled={status === 'submitting'}
-          className="inline-flex items-center rounded-full bg-brand-black px-5 py-3 text-sm font-semibold text-brand-offWhite transition hover:bg-brand-gold hover:text-brand-black disabled:opacity-60"
-        >
-          {status === 'submitting' ? 'Sending…' : 'Submit'}
-        </button>
-        {status === 'success' && <p className="text-sm text-brand-teal">Thanks—your message was sent.</p>}
-        {error && <p className="text-sm text-brand-mango">Error: {error}</p>}
-      </div>
+
+      {/* Error message */}
+      {error && (
+        <div className="flex items-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+          <AlertCircle className="h-4 w-4 shrink-0" />
+          {error}
+        </div>
+      )}
+
+      {/* Submit button */}
+      <button
+        type="submit"
+        disabled={status === 'submitting'}
+        className="btn btn-primary w-full sm:w-auto"
+      >
+        {status === 'submitting' ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Sending...
+          </>
+        ) : (
+          <>
+            <Send className="h-4 w-4" />
+            Send Message
+          </>
+        )}
+      </button>
     </form>
   );
 }

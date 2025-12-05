@@ -1,81 +1,137 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 
-const linkBase =
-  'px-3 py-2 text-sm font-semibold transition-colors border-b-2 border-transparent hover:text-brand-mango';
-
-const activeClass = 'text-brand-mango border-brand-mango';
-
-function MobileMenuButton({ open, onClick }: { open: boolean; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-expanded={open}
-      className="inline-flex items-center justify-center rounded-md border border-brand-black/10 px-3 py-2 text-sm font-semibold text-brand-black hover:bg-brand-black/5 lg:hidden"
-    >
-      {open ? 'Close' : 'Menu'}
-    </button>
-  );
-}
+const PHONE_NUMBER = '(740) 602-2155';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-brand-black/5 bg-white/90 backdrop-blur">
-      <div className="container flex items-center justify-between py-3">
-        <Link to="/" className="text-lg font-bold tracking-tight text-brand-black">
-          Mango Law
-        </Link>
-        <nav className="hidden items-center gap-1 lg:flex">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.href}
-              to={link.href}
-              className={({ isActive }) => [linkBase, isActive ? activeClass : ''].join(' ')}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
-        <div className="flex items-center gap-3">
-          <Link
-            to="/contact"
-            className="hidden rounded-full bg-brand-gold px-4 py-2 text-sm font-semibold text-brand-black shadow-sm transition hover:bg-brand-mango lg:inline-flex"
+    <header className="relative z-50">
+      {/* Top bar - Fresh green accent */}
+      <div className="bg-brand-leaf">
+        <div className="container flex items-center justify-between py-2">
+          {/* Left side - phone */}
+          <a
+            href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`}
+            className="flex items-center gap-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
           >
-            Schedule a consult
-          </Link>
-          <MobileMenuButton open={open} onClick={() => setOpen((v) => !v)} />
+            <Phone className="h-4 w-4" />
+            <span>{PHONE_NUMBER}</span>
+          </a>
+          
+          {/* Right side - chat button */}
+          <button
+            type="button"
+            className="flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-sm font-medium text-white transition-all hover:bg-white/30"
+          >
+            <MessageCircle className="h-4 w-4" />
+            <span className="hidden sm:inline">Chat with us</span>
+          </button>
         </div>
       </div>
 
-      {open && (
-        <div className="border-t border-brand-black/5 bg-white lg:hidden">
-          <div className="container flex flex-col py-2">
+      {/* Main navigation bar */}
+      <div className="bg-brand-black">
+        <div className="container flex items-center justify-between py-4">
+          {/* Logo - text version until proper cropped PNGs are ready */}
+          <Link to="/" className="group flex items-center gap-2">
+            {/* Logo text matching FAL.ai generated style */}
+            <div className="flex items-baseline">
+              <span className="text-2xl font-semibold text-[#D4A84B]">Mango</span>
+              <span className="text-2xl font-light tracking-wide text-white">Law</span>
+              <span className="ml-1.5 text-[10px] font-medium uppercase tracking-widest text-white/50">LLC</span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-1 lg:flex">
             {navLinks.map((link) => (
               <NavLink
                 key={link.href}
                 to={link.href}
-                onClick={() => setOpen(false)}
-                className={({ isActive }) =>
-                  ['px-3 py-2 text-sm font-semibold', isActive ? 'text-brand-mango' : 'text-brand-black'].join(' ')
-                }
+                className={({ isActive }) => [
+                  'px-4 py-2 text-sm font-medium transition-colors',
+                  isActive
+                    ? 'text-brand-mango'
+                    : 'text-brand-offWhite/80 hover:text-brand-mango',
+                ].join(' ')}
               >
                 {link.label}
               </NavLink>
             ))}
+          </nav>
+
+          {/* Desktop CTA */}
+          <div className="hidden items-center gap-4 lg:flex">
             <Link
               to="/contact"
-              onClick={() => setOpen(false)}
-              className="mt-2 inline-flex w-max rounded-full bg-brand-gold px-4 py-2 text-sm font-semibold text-brand-black"
+              className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black transition-all hover:bg-brand-gold"
             >
-              Schedule a consult
+              Free Consultation
             </Link>
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            className="inline-flex items-center justify-center rounded-lg p-2 text-brand-offWhite transition-colors hover:bg-brand-offWhite/10 lg:hidden"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
-      )}
+
+        {/* Mobile menu */}
+        <div
+          className={[
+            'overflow-hidden transition-all duration-300 lg:hidden',
+            open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0',
+          ].join(' ')}
+        >
+          <div className="border-t border-brand-offWhite/10 pb-4">
+            <div className="container flex flex-col gap-1 pt-2">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.href}
+                  to={link.href}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    [
+                      'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
+                      isActive
+                        ? 'bg-brand-mango/20 text-brand-mango'
+                        : 'text-brand-offWhite hover:bg-brand-offWhite/5',
+                    ].join(' ')
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+              <div className="mt-4 flex flex-col gap-3 border-t border-brand-offWhite/10 pt-4">
+                <a
+                  href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`}
+                  className="flex items-center gap-2 px-4 text-sm font-medium text-brand-offWhite"
+                >
+                  <Phone className="h-4 w-4 text-brand-mango" />
+                  {PHONE_NUMBER}
+                </a>
+                <Link
+                  to="/contact"
+                  onClick={() => setOpen(false)}
+                  className="mx-4 rounded-lg bg-brand-mango px-5 py-3 text-center text-sm font-bold text-brand-black"
+                >
+                  Free Consultation
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

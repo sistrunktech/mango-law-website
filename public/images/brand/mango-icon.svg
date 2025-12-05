@@ -1,0 +1,61 @@
+<svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mango Law LLC - Icon Only -->
+  <!-- Elegant stylized mango matching the FAL-generated brand style -->
+  
+  <defs>
+    <!-- Rich gold gradient for mango body -->
+    <linearGradient id="mangoGold" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#E8C060"/>
+      <stop offset="25%" stop-color="#D4A84B"/>
+      <stop offset="60%" stop-color="#C49A3D"/>
+      <stop offset="100%" stop-color="#A8863A"/>
+    </linearGradient>
+    
+    <!-- Highlight gradient for inner curve -->
+    <linearGradient id="highlight" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#F5E0A0" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#D4A84B" stop-opacity="0"/>
+    </linearGradient>
+    
+    <!-- Leaf gradient -->
+    <linearGradient id="leafGold" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#C9A043"/>
+      <stop offset="100%" stop-color="#D4A84B"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Mango body - elegant teardrop/pear shape -->
+  <path d="M50 20 
+           C30 20, 12 45, 12 75 
+           C12 100, 28 120, 50 120 
+           C72 120, 88 100, 88 75 
+           C88 45, 70 20, 50 20 Z" 
+        fill="url(#mangoGold)"/>
+  
+  <!-- Inner highlight curve for dimension - like the original -->
+  <path d="M35 35 
+           C25 50, 20 70, 24 100" 
+        stroke="url(#highlight)" 
+        stroke-width="6" 
+        stroke-linecap="round"
+        fill="none"/>
+  
+  <!-- Stem -->
+  <path d="M50 20 L50 8" 
+        stroke="#B8923A" 
+        stroke-width="4" 
+        stroke-linecap="round"/>
+  
+  <!-- Leaf - elegant curved almond shape -->
+  <path d="M50 12 
+           C58 6, 72 5, 80 10 
+           C72 16, 58 14, 50 12 Z" 
+        fill="url(#leafGold)"/>
+  
+  <!-- Leaf vein -->
+  <path d="M52 11 C60 9, 70 9, 76 10" 
+        stroke="#A8863A" 
+        stroke-width="1" 
+        stroke-opacity="0.5"
+        fill="none"/>
+</svg>
