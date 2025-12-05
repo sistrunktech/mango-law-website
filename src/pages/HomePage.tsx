@@ -78,18 +78,18 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Attorney image placeholder - ready for real headshot */}
+            {/* Attorney Photo */}
             <div className="relative">
-              <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-brand-black/5 shadow-soft">
-                {/* Placeholder for attorney photo */}
-                <div className="flex h-full items-center justify-center">
-                  <div className="text-center text-brand-black/30">
-                    <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-brand-leaf/10">
-                      <Users className="h-12 w-12 text-brand-leaf" />
-                    </div>
-                    <p className="text-sm font-medium">Attorney Photo</p>
-                    <p className="text-xs">Coming Soon</p>
-                  </div>
+              <div className="relative overflow-hidden rounded-2xl bg-brand-black/5 shadow-soft-lg">
+                <img
+                  src="/images/nick_mango_profile_shot.jpg"
+                  alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/80 via-brand-black/40 to-transparent p-6">
+                  <h3 className="text-2xl font-bold text-white">Dominic "Nick" Mango</h3>
+                  <p className="text-sm text-brand-offWhite/90">Criminal Defense Attorney</p>
+                  <p className="mt-2 text-xs text-brand-offWhite/80">Serving Delaware & Franklin Counties, OH</p>
                 </div>
               </div>
             </div>
