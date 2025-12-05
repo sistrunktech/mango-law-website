@@ -12,6 +12,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
 - Server/CI-only: `SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`.
 - Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `APP_ENV`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`.
+- Image generation: `FAL_API_KEY` (server), `SUPABASE_URL` (server, matches `VITE_SUPABASE_URL`), plus `SERVICE_ROLE_KEY` for storage uploads.
 - See `.env.example` for the full list; update it whenever variables change.
 - Current allowlist should include staging/Bolt hosts: `https://mango.law`, `https://staging.mango.law`, and `https://sistrunktech-mango-l-lqhi.bolt.host` (add/remove as environments change).
 
@@ -30,6 +31,11 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - **Structured Logging**: JSON-formatted logs include timestamp, level, message, endpoint, method, IP, user agent, status, duration, and error details.
 - **Input Validation**: Email format, phone format, required fields validated before processing.
 - **Spam Protection**: Honeypot field detection for bot submissions.
+
+## Image generation workflow
+- Script: `npm run generate:image -- --prompt "your prompt here"`
+- Dependencies: `@fal-ai/client`, Supabase storage bucket `generated-images` (public if you want CDN links), env vars `FAL_API_KEY`, `SUPABASE_URL`, `SERVICE_ROLE_KEY`.
+- Output: Saves images to `public/generated/` with matching metadata JSON; uploads to Supabase bucket (if configured) and prints CDN + local paths.
 
 ## Database (deployed)
 - **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).

@@ -7,9 +7,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:image": "node scripts/generateImage.js"
   },
   "dependencies": {
+    "@fal-ai/client": "^1.7.2",
     "@fontsource/inter": "^5.1.0",
     "@supabase/supabase-js": "^2.48.0",
     "clsx": "^2.1.1",
