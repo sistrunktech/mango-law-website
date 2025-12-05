@@ -2,7 +2,7 @@
   {
     "prompt": "Extract only the mango fruit icon, remove all text and background, isolated icon on transparent background, preserve highlights and shadows, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.7,
     "count": 1
@@ -10,7 +10,7 @@
   {
     "prompt": "Extract only the mango fruit icon in pure white color, remove all text and background, isolated white icon on transparent background, preserve shape and highlights, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.8,
     "colors": [{"r": 255, "g": 255, "b": 255}],
@@ -19,7 +19,7 @@
   {
     "prompt": "Extract only the mango fruit icon in pure black color, remove all text and background, isolated black icon on transparent background, preserve shape and highlights, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.8,
     "colors": [{"r": 10, "g": 10, "b": 10}],
@@ -28,7 +28,7 @@
   {
     "prompt": "Extract only the mango fruit icon with warm mango to gold gradient, remove all text and background, isolated gradient icon on transparent background, preserve highlights and shadows, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.6,
     "colors": [{"r": 232, "g": 163, "b": 60}, {"r": 212, "g": 168, "b": 75}],
@@ -37,7 +37,7 @@
   {
     "prompt": "Vertical logo layout with mango icon centered above text 'Mango Law LLC' and tagline 'CRIMINAL & OVI/DUI DEFENSE', stacked arrangement, transparent background, preserve original colors and typography, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.5,
     "count": 1
@@ -45,7 +45,7 @@
   {
     "prompt": "Vertical logo layout in pure white, mango icon centered above text 'Mango Law LLC' and tagline 'CRIMINAL & OVI/DUI DEFENSE', all elements white on transparent background, stacked arrangement, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.8,
     "colors": [{"r": 255, "g": 255, "b": 255}],
@@ -54,7 +54,7 @@
   {
     "prompt": "Vertical logo layout in pure black, mango icon centered above text 'Mango Law LLC' and tagline 'CRIMINAL & OVI/DUI DEFENSE', all elements black on transparent background, stacked arrangement, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.8,
     "colors": [{"r": 10, "g": 10, "b": 10}],
@@ -63,7 +63,7 @@
   {
     "prompt": "Vertical logo layout with warm mango to gold gradient, mango icon centered above text 'Mango Law LLC' and tagline 'CRIMINAL & OVI/DUI DEFENSE', gradient colors throughout, transparent background, stacked arrangement, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.6,
     "colors": [{"r": 232, "g": 163, "b": 60}, {"r": 212, "g": 168, "b": 75}],
@@ -72,7 +72,7 @@
   {
     "prompt": "Horizontal logo layout with mango icon on left side of text 'Mango Law LLC' and tagline 'CRIMINAL & OVI/DUI DEFENSE', side-by-side arrangement, transparent background, preserve original colors and typography, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.5,
     "count": 1
@@ -80,7 +80,7 @@
   {
     "prompt": "Horizontal logo layout in pure white, mango icon on left side of text 'Mango Law LLC' and tagline 'CRIMINAL & OVI/DUI DEFENSE', all elements white on transparent background, side-by-side arrangement, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.8,
     "colors": [{"r": 255, "g": 255, "b": 255}],
@@ -89,7 +89,7 @@
   {
     "prompt": "Horizontal logo layout in pure black, mango icon on left side of text 'Mango Law LLC' and tagline 'CRIMINAL & OVI/DUI DEFENSE', all elements black on transparent background, side-by-side arrangement, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.8,
     "colors": [{"r": 10, "g": 10, "b": 10}],
@@ -98,7 +98,7 @@
   {
     "prompt": "Horizontal logo layout with warm mango to gold gradient, mango icon on left side of text 'Mango Law LLC' and tagline 'CRIMINAL & OVI/DUI DEFENSE', gradient colors throughout, transparent background, side-by-side arrangement, clean vector illustration",
     "image": "reference-logo.png",
-    "model": "fal-ai/recraft/v3/image-to-image",
+    "model": "fal-ai/recraft-v3",
     "style": "vector_illustration",
     "strength": 0.6,
     "colors": [{"r": 232, "g": 163, "b": 60}, {"r": 212, "g": 168, "b": 75}],
