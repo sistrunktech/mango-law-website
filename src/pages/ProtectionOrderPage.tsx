@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import ImagePlaceholder from '../components/ImagePlaceholder';
 
 const faqs = [
   {
@@ -74,13 +75,11 @@ export default function ProtectionOrderPage() {
                 allegations, present evidence, cross-examine witnesses, and fight to protect your rights, reputation, and future.
               </p>
             </div>
-            <div className="overflow-hidden rounded-2xl shadow-soft-lg">
-              <img
-                src="https://images.pexels.com/photos/5668882/pexels-photo-5668882.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Protection order defense and legal representation"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <ImagePlaceholder
+              aspectRatio="4:3"
+              label="Protection order defense"
+              promptHint="Protection order legal defense, attorney preparing hearing strategy and gathering evidence, professional office setting, focus on procedural precision and client advocacy"
+            />
           </div>
         </div>
       </section>

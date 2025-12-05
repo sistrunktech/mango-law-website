@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import ImagePlaceholder from '../components/ImagePlaceholder';
 
 const faqs = [
   {
@@ -74,13 +75,11 @@ export default function WhiteCollarPage() {
                 challenge the government's evidence, and negotiate with prosecutors to protect your freedom and your future.
               </p>
             </div>
-            <div className="overflow-hidden rounded-2xl shadow-soft-lg">
-              <img
-                src="https://images.pexels.com/photos/6863332/pexels-photo-6863332.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="White collar defense and financial investigations"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <ImagePlaceholder
+              aspectRatio="4:3"
+              label="White collar defense"
+              promptHint="White collar crime defense, financial documents and business records review, corporate legal setting, professional office with organized financial files"
+            />
           </div>
         </div>
       </section>

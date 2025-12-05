@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import ImagePlaceholder from '../components/ImagePlaceholder';
 
 const faqs = [
   {
@@ -75,13 +76,11 @@ export default function DrugCrimePage() {
                 appropriate, always working toward the best possible outcome.
               </p>
             </div>
-            <div className="overflow-hidden rounded-2xl shadow-soft-lg">
-              <img
-                src="https://images.pexels.com/photos/6077447/pexels-photo-6077447.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Drug crime defense and legal strategy"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <ImagePlaceholder
+              aspectRatio="4:3"
+              label="Drug crime defense"
+              promptHint="Drug crime legal defense strategy, evidence review and lab testing documentation, professional legal setting, organized case files with attention to detail"
+            />
           </div>
         </div>
       </section>

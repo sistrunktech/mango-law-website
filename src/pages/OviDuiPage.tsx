@@ -2,6 +2,7 @@ import { oviSubsections } from '../data/practiceAreas';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import ImagePlaceholder from '../components/ImagePlaceholder';
 
 const faqs = [
   {
@@ -86,13 +87,11 @@ export default function OviDuiPage() {
                 We know what it takes to win OVI cases in Delaware County.
               </p>
             </div>
-            <div className="overflow-hidden rounded-2xl shadow-soft-lg">
-              <img
-                src="https://images.pexels.com/photos/6069587/pexels-photo-6069587.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="OVI defense and legal representation"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <ImagePlaceholder
+              aspectRatio="4:3"
+              label="OVI Defense"
+              promptHint="Professional OVI/DUI defense consultation, legal documents, breathalyzer equipment, courthouse setting, mango and teal color accents"
+            />
           </div>
         </div>
       </section>
@@ -166,11 +165,11 @@ export default function OviDuiPage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="overflow-hidden rounded-2xl shadow-soft-lg order-2 lg:order-1">
-              <img
-                src="https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Legal strategy and case preparation"
-                className="h-full w-full object-cover"
+            <div className="order-2 lg:order-1">
+              <ImagePlaceholder
+                aspectRatio="4:3"
+                label="OVI Case Strategy"
+                promptHint="Attorney reviewing OVI case evidence and developing defense strategy, legal documents and testing procedures, professional setting"
               />
             </div>
             <div className="space-y-6 order-1 lg:order-2">

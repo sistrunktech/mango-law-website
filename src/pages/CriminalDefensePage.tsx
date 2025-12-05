@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import ImagePlaceholder from '../components/ImagePlaceholder';
 
 const faqs = [
   {
@@ -75,13 +76,11 @@ export default function CriminalDefensePage() {
                 on your life.
               </p>
             </div>
-            <div className="overflow-hidden rounded-2xl shadow-soft-lg">
-              <img
-                src="https://images.pexels.com/photos/8730568/pexels-photo-8730568.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Legal consultation and case review"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <ImagePlaceholder
+              aspectRatio="4:3"
+              label="Criminal defense consultation"
+              promptHint="Criminal defense attorney reviewing case files and legal documents, professional office setting, Delaware Ohio, warm lighting, organized workspace"
+            />
           </div>
         </div>
       </section>

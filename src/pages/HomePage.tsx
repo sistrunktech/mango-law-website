@@ -81,12 +81,11 @@ export default function HomePage() {
             {/* Attorney Photo */}
             <div className="relative">
               <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
-                <div className="relative" style={{ maxHeight: '500px', overflow: 'hidden' }}>
+                <div className="p-4">
                   <img
                     src="/images/nick_mango_profile_shot.jpg"
                     alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                    className="w-full h-auto object-cover object-top"
-                    style={{ maxHeight: '500px' }}
+                    className="w-full h-auto rounded-xl"
                   />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8">

@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import ImagePlaceholder from '../components/ImagePlaceholder';
 
 const faqs = [
   {
@@ -75,13 +76,11 @@ export default function SexCrimePage() {
                 evidence, and fight for your rights at every stage.
               </p>
             </div>
-            <div className="overflow-hidden rounded-2xl shadow-soft-lg">
-              <img
-                src="https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Confidential legal representation"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <ImagePlaceholder
+              aspectRatio="4:3"
+              label="Confidential legal representation"
+              promptHint="Confidential attorney-client consultation, private office setting, discrete and professional atmosphere, emphasis on privacy and trust"
+            />
           </div>
         </div>
       </section>

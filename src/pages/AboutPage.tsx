@@ -20,14 +20,11 @@ export default function AboutPage() {
               <div className="sticky top-24">
                 <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
                   <div className="p-4">
-                    <div className="relative overflow-hidden rounded-xl" style={{ maxHeight: '450px' }}>
-                      <img
-                        src="/images/nick_mango_profile_shot.jpg"
-                        alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                        className="w-full h-auto object-cover object-top"
-                        style={{ maxHeight: '450px' }}
-                      />
-                    </div>
+                    <img
+                      src="/images/nick_mango_profile_shot.jpg"
+                      alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
+                      className="w-full h-auto rounded-xl"
+                    />
                   </div>
                 </div>
                 <div className="mt-6 space-y-3 bg-brand-offWhite rounded-xl p-6 shadow-soft">

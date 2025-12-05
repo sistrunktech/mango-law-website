@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import ImagePlaceholder from '../components/ImagePlaceholder';
 
 const faqs = [
   {
@@ -74,13 +75,11 @@ export default function PersonalInjuryPage() {
                 refer you to a qualified personal injury attorney.
               </p>
             </div>
-            <div className="overflow-hidden rounded-2xl shadow-soft-lg">
-              <img
-                src="https://images.pexels.com/photos/7842460/pexels-photo-7842460.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Personal injury legal representation"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <ImagePlaceholder
+              aspectRatio="4:3"
+              label="Personal injury representation"
+              promptHint="Personal injury case consultation, attorney reviewing medical records and accident reports, professional legal office, compassionate and strategic approach"
+            />
           </div>
         </div>
       </section>
