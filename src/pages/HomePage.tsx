@@ -85,7 +85,7 @@ export default function HomePage() {
                   <img
                     src="/images/headshots/nick-mango-hero.jpg"
                     alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                    className="h-[520px] w-full rounded-xl object-cover object-center"
+                    className="mx-auto h-auto max-h-[520px] w-full rounded-xl object-contain"
                   />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8">

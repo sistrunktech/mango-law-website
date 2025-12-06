@@ -5,8 +5,8 @@ import { navLinks, practiceAreaLinks } from '../data/navigation';
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-brand-forest text-brand-offWhite">
-      {/* Top accent bar - solid gold */}
-      <div className="absolute left-0 right-0 top-0 h-1 bg-brand-mango" />
+      {/* Top accent bar - gradient only */}
+      <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-brand-leaf via-brand-mango to-brand-leaf" />
       
       {/* Subtle decorative element */}
       <div className="pointer-events-none absolute -right-40 top-0 h-[400px] w-[400px] rounded-full bg-brand-mango/5 blur-3xl" />
@@ -30,13 +30,13 @@ export default function Footer() {
             {/* Contact info */}
             <div className="space-y-3 pt-2">
               <a
-                href="tel:7406022155"
+                href="tel:7404176191"
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
                   <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
-                (740) 602-2155
+                (740) 417-6191
               </a>
               <a
                 href="mailto:office@mango.law"
