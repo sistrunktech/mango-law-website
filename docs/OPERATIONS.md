@@ -7,12 +7,13 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - React Router v6 routes for all pages in the sitemap.
 - Supabase client initialized in `src/lib/supabaseClient.ts` for the contact form.
 - CI: GitHub Actions build workflow (`.github/workflows/ci.yml`).
+- Optional OG/hero pipeline: fal.ai generation + Supabase Storage upload via `plugins/vite-og-plugin.ts` (runs only when env is present).
 
 ## Environment Variables
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
-- Server/CI-only: `SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`.
+- Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`).
 - Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `APP_ENV`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`.
-- Image generation: `FAL_API_KEY` (server), `SUPABASE_URL` (server, matches `VITE_SUPABASE_URL`), plus `SERVICE_ROLE_KEY` for storage uploads.
+- Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `VITE_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
 - See `.env.example` for the full list; update it whenever variables change.
 - Current allowlist should include staging/Bolt hosts: `https://mango.law`, `https://staging.mango.law`, and `https://sistrunktech-mango-l-lqhi.bolt.host` (add/remove as environments change).
 
@@ -43,6 +44,11 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
   - `--strength`, `--style`, `--colors '[{"r":212,"g":175,"b":55}]'` to pass i2i parameters
   - `--batch path/to/tasks.json` for multiple prompts; JSON array supports `{ prompt, count?, model?, image?, strength?, style?, colors? }`
 
+## OG/hero generation (build-time)
+- Vite plugin: `plugins/vite-og-plugin.ts` reads `og/og-specs.ts` prompts, generates OG images via fal.ai, uploads to Supabase Storage, emits `og-manifest.json`, and injects home OG tags.
+- Requirements (build/CI only): `FAL_KEY`, `SUPABASE_URL`, `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), bucket `og-images` (or override via `SB_BUCKET`), `OG_SIGNED_URL_TTL` (default 1 year).
+- Behavior: If envs are missing, plugin logs a warning and skips generation (build still succeeds). Safe to run in CI as long as service-role is kept server-side only.
+
 ## Database (deployed)
 - **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).
 - **chat_leads**: Captures chat intake submissions (id, name, email, phone, initial_message, conversation_context, ip_address, user_agent, created_at).
@@ -54,6 +60,14 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 ## CI/CD
 - Build-only workflow in `.github/workflows/ci.yml` (Node 20, npm ci, npm run build).
 - TODO: add staging/prod deploy jobs with env-specific secrets, run migrations, and smoke tests before cutover. Target hosts today: Bolt staging `https://sistrunktech-mango-l-lqhi.bolt.host`, production `https://mango.law` (and `https://staging.mango.law` when live).
+
+## Domains/DNS
+- Registrar: Porkbun. Current records (as of 2025-12-06):
+  - `ALIAS @ -> site-dns.bolt.host` (TTL 600)
+  - `CNAME www -> site-dns.bolt.host` (TTL 600)
+  - `CNAME staging -> site-dns.bolt.host` (TTL 300)
+  - ACME TXT records managed by Bolt for SSL issuance.
+- Ensure `ORIGIN_ALLOWLIST` includes `https://mango.law` and `https://staging.mango.law` when staging is live.
 
 ## Agent/PR Expectations
 - When adding/updating env vars or infra, update `.env.example`, this `docs/OPERATIONS.md`, and `CHANGELOG.md`.
