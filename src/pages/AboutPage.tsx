@@ -21,9 +21,9 @@ export default function AboutPage() {
                 <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
                   <div className="p-4">
                     <img
-                      src="/images/headshots/nick-mango-01.jpg"
+                      src="/images/headshots/nick-mango-hero.jpg"
                       alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                      className="h-[480px] w-full rounded-xl object-cover object-top"
+                      className="h-[480px] w-full rounded-xl object-cover object-center"
                     />
                   </div>
                 </div>

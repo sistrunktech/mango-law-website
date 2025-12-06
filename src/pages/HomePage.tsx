@@ -83,9 +83,9 @@ export default function HomePage() {
               <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
                 <div className="p-4">
                   <img
-                    src="/images/headshots/nick-mango-01.jpg"
+                    src="/images/headshots/nick-mango-hero.jpg"
                     alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                    className="h-[520px] w-full rounded-xl object-cover object-top"
+                    className="h-[520px] w-full rounded-xl object-cover object-center"
                   />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8">
