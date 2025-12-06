@@ -80,15 +80,17 @@ export default function HomePage() {
 
             {/* Attorney Photo */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
+              <div className="group relative overflow-hidden rounded-2xl shadow-soft-lg transition-all duration-300 hover:shadow-lift" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
                 <div className="p-4">
-                  <img
-                    src="/images/headshots/nick-mango-hero.jpg"
-                    alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                    className="mx-auto h-auto max-h-[520px] w-full rounded-xl object-contain"
-                  />
+                  <div className="duotone-forest relative overflow-hidden rounded-xl">
+                    <img
+                      src="/images/headshots/nick-mango-hero.jpg"
+                      alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
+                      className="mx-auto h-auto max-h-[520px] w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8">
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8 transition-all duration-300 group-hover:from-brand-black/95">
                   <h3 className="text-2xl font-bold text-white">Dominic "Nick" Mango</h3>
                   <p className="text-sm font-medium text-brand-gold">Criminal Defense Attorney</p>
                   <p className="mt-2 text-xs text-brand-offWhite/90">Serving Delaware & Franklin Counties, OH</p>

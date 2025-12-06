@@ -35,13 +35,13 @@ export default function PracticeAreaCardGrid() {
             <Link
               to={area.href}
               key={area.href}
-              className="group rounded-2xl border border-brand-black/10 bg-white p-7 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-soft-lg"
+              className="group relative rounded-2xl border border-brand-black/10 bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div>
-                {/* Icon - gold with gold background */}
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-mango/10 transition-all group-hover:bg-brand-mango/20">
-                  <span className="text-xl font-bold text-brand-mango transition-colors">
+              <div className="relative z-10">
+                {/* Enhanced icon with gradient background */}
+                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-brand-mango/10 to-brand-gold/10 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:from-brand-mango/20 group-hover:to-brand-gold/20 group-hover:scale-110">
+                  <span className="text-2xl font-bold text-brand-mango transition-colors">
                     {area.title.charAt(0)}
                   </span>
                 </div>
@@ -54,11 +54,14 @@ export default function PracticeAreaCardGrid() {
                 </p>
 
                 {/* Learn more link - gold to green on hover */}
-                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:text-brand-leaf">
+                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
                   Learn more
-                  <ArrowUpRight className="h-4 w-4" />
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
+
+              {/* Subtle shine effect on hover */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-leaf/0 via-transparent to-brand-mango/0 opacity-0 transition-opacity duration-300 group-hover:opacity-5" />
             </Link>
           ))}
         </div>

@@ -37,11 +37,12 @@ export default function CTASection({
         </div>
       )}
 
-      {/* Decorative elements - emerald and mango energy */}
+      {/* Decorative elements - forest and mango energy */}
       <div className="pointer-events-none absolute -right-20 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-brand-leaf/10 blur-[120px]" />
       <div className="pointer-events-none absolute -left-10 top-0 h-[300px] w-[300px] rounded-full bg-brand-mango/8 blur-3xl" />
 
-      {/* Subtle pattern overlay */}
+      {/* Subtle texture overlay for depth */}
+      <div className="absolute inset-0 texture-noise" />
       <div className="absolute inset-0 bg-gradient-to-t from-brand-black/10 to-transparent" />
 
       <div className="container relative section-tight">
@@ -62,17 +63,18 @@ export default function CTASection({
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               to={primaryHref}
-              className="group inline-flex items-center justify-center gap-2 rounded-lg bg-brand-mango px-7 py-3.5 text-sm font-bold text-brand-black shadow-lg transition-all hover:bg-brand-gold hover:shadow-xl hover:-translate-y-0.5"
+              className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg bg-brand-mango px-7 py-3.5 text-sm font-bold text-brand-black shadow-lg transition-all hover:bg-brand-gold hover:shadow-xl hover:-translate-y-1 active:translate-y-0"
             >
-              {primaryLabel}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <span className="relative z-10">{primaryLabel}</span>
+              <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             </Link>
             {secondaryLabel && secondaryHref && (
               <a
                 href={secondaryHref}
-                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-offWhite/30 px-7 py-3.5 text-sm font-bold text-brand-offWhite transition-all hover:border-brand-leaf hover:bg-brand-leaf/10"
+                className="group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-offWhite/30 px-7 py-3.5 text-sm font-bold text-brand-offWhite transition-all hover:border-brand-leaf hover:bg-brand-leaf/20 hover:shadow-glow-leaf hover:-translate-y-1 active:translate-y-0"
               >
-                <Phone className="h-4 w-4" />
+                <Phone className="h-4 w-4 transition-transform group-hover:rotate-12" />
                 {secondaryLabel}
               </a>
             )}

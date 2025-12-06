@@ -18,13 +18,15 @@ export default function AboutPage() {
           <div className="grid gap-12 lg:grid-cols-3 lg:items-start">
             <div className="lg:col-span-1">
               <div className="sticky top-24">
-                <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
+                <div className="group relative overflow-hidden rounded-2xl shadow-soft-lg transition-all duration-300 hover:shadow-lift" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
                   <div className="p-4">
-                    <img
-                      src="/images/headshots/nick-mango-hero.jpg"
-                      alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                      className="h-[480px] w-full rounded-xl object-cover object-center"
-                    />
+                    <div className="duotone-forest relative overflow-hidden rounded-xl">
+                      <img
+                        src="/images/headshots/nick-mango-hero.jpg"
+                        alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
+                        className="w-full max-h-[600px] object-contain transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="mt-6 space-y-3 bg-brand-offWhite rounded-xl p-6 shadow-soft">

@@ -70,10 +70,13 @@ export default function PageHero({
           'text-brand-offWhite',
         ].join(' ')}
       >
-        {/* Deep black to forest green gradient - fresh, authoritative */}
+        {/* Deep black to forest green gradient - sophisticated, authoritative */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-[#0F1A14] to-brand-forest" />
 
-        {/* Subtle emerald gradient overlay for energy */}
+        {/* Subtle texture overlay for depth */}
+        <div className="absolute inset-0 texture-noise" />
+
+        {/* Subtle gradient overlay for visual interest */}
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-brand-leaf/5" />
 
         {/* Diagonal emerald accent stripe */}
