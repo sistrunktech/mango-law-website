@@ -40,7 +40,7 @@ export default function HomePage() {
         description="DUI/OVI & Criminal Defense Attorney serving Delaware & Franklin Counties, OH"
         ctaLabel="Free Consultation"
         ctaHref="/contact"
-        phoneNumber="(740) 602-2155"
+        phoneNumber="(740) 417-6191"
       />
 
       {/* Why Choose Us Section */}
@@ -83,9 +83,9 @@ export default function HomePage() {
               <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
                 <div className="p-4">
                   <img
-                    src="/images/nick_mango_profile_shot.jpg"
+                    src="/images/headshots/nick-mango-01.jpg"
                     alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                    className="w-full h-auto rounded-xl object-cover max-h-[500px]"
+                    className="h-[520px] w-full rounded-xl object-cover object-top"
                   />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8">
@@ -150,7 +150,7 @@ export default function HomePage() {
               {/* Contact info cards */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <a
-                  href="tel:7406022155"
+                  href="tel:7404176191"
                   className="group card card-interactive flex items-center gap-4 p-5"
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-mango/10 transition-all group-hover:bg-brand-mango/20 group-hover:scale-110">
@@ -158,7 +158,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-brand-black/60">Call us</p>
-                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mango">(740) 602-2155</p>
+                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mango">(740) 417-6191</p>
                   </div>
                 </a>
                 <a
@@ -189,8 +189,8 @@ export default function HomePage() {
         body="Fast-moving situations deserve prompt, informed action. Schedule a consult or call to discuss your options."
         primaryLabel="Free Consultation"
         primaryHref="/contact"
-        secondaryLabel="(740) 602-2155"
-        secondaryHref="tel:7406022155"
+        secondaryLabel="(740) 417-6191"
+        secondaryHref="tel:7404176191"
       />
     </>
   );
