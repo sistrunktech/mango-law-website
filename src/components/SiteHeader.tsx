@@ -4,25 +4,38 @@ import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
 
-const PHONE_NUMBER = '(740) 417-6191';
+const OFFICE_PHONE = '(740) 417-6191';
+const CELL_PHONE = '(740) 602-2155';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
     <header className="relative z-50">
-      {/* Top bar - Fresh green accent */}
+      {/* Top bar - Forest green accent */}
       <div className="bg-brand-leaf">
-        <div className="container flex items-center justify-between py-1">
-          {/* Left side - phone */}
-          <a
-            href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`}
-            className="flex items-center gap-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
-          >
-            <Phone className="h-4 w-4" />
-            <span>{PHONE_NUMBER}</span>
-          </a>
-          
+        <div className="container flex items-center justify-between py-2">
+          {/* Phone numbers */}
+          <div className="flex items-center gap-4 sm:gap-6">
+            <a
+              href={`tel:${OFFICE_PHONE.replace(/\D/g, '')}`}
+              className="flex items-center gap-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+            >
+              <Phone className="h-4 w-4" />
+              <span className="hidden xs:inline text-xs opacity-80">Office:</span>
+              <span>{OFFICE_PHONE}</span>
+            </a>
+            <div className="h-4 w-px bg-white/30 hidden sm:block" />
+            <a
+              href={`tel:${CELL_PHONE.replace(/\D/g, '')}`}
+              className="flex items-center gap-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+            >
+              <Phone className="h-4 w-4" />
+              <span className="hidden xs:inline text-xs opacity-80">Direct:</span>
+              <span>{CELL_PHONE}</span>
+            </a>
+          </div>
+
           {/* Right side - chat button */}
           <button
             type="button"
@@ -120,11 +133,20 @@ export default function SiteHeader() {
               ))}
               <div className="mt-4 flex flex-col gap-3 border-t border-brand-offWhite/10 pt-4">
                 <a
-                  href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`}
+                  href={`tel:${OFFICE_PHONE.replace(/\D/g, '')}`}
                   className="flex items-center gap-2 px-4 text-sm font-medium text-brand-offWhite"
                 >
                   <Phone className="h-4 w-4 text-brand-mango" />
-                  {PHONE_NUMBER}
+                  <span className="text-xs opacity-70">Office:</span>
+                  {OFFICE_PHONE}
+                </a>
+                <a
+                  href={`tel:${CELL_PHONE.replace(/\D/g, '')}`}
+                  className="flex items-center gap-2 px-4 text-sm font-medium text-brand-offWhite"
+                >
+                  <Phone className="h-4 w-4 text-brand-mango" />
+                  <span className="text-xs opacity-70">Direct:</span>
+                  {CELL_PHONE}
                 </a>
                 <Link
                   to="/contact"

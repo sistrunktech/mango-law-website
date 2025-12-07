@@ -142,17 +142,9 @@ export default function PageHero({
               'font-display font-black tracking-tight',
               compact || alignLeft
                 ? 'text-3xl md:text-4xl lg:text-5xl'
-                : 'text-4xl uppercase md:text-5xl lg:text-6xl xl:text-7xl',
+                : 'text-4xl md:text-5xl lg:text-6xl xl:text-7xl',
             ].join(' ')}>
-              {alignLeft ? (
-                <span className="text-brand-offWhite">{title}</span>
-              ) : (
-                <>
-                  <span className="text-brand-mango">Hire an Aggressive</span>
-                  <br />
-                  <span className="text-brand-offWhite">Attorney</span>
-                </>
-              )}
+              <span className="text-brand-offWhite">{title}</span>
             </h1>
 
             {/* Description */}

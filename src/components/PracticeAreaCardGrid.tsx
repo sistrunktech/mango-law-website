@@ -41,9 +41,13 @@ export default function PracticeAreaCardGrid() {
               <div className="relative z-10">
                 {/* Enhanced icon with gradient background */}
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-brand-mango/10 to-brand-gold/10 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:from-brand-mango/20 group-hover:to-brand-gold/20 group-hover:scale-110">
-                  <span className="text-2xl font-bold text-brand-mango transition-colors">
-                    {area.title.charAt(0)}
-                  </span>
+                  {area.icon ? (
+                    <area.icon className="h-8 w-8 text-brand-mango transition-colors" />
+                  ) : (
+                    <span className="text-2xl font-bold text-brand-mango transition-colors">
+                      {area.title.charAt(0)}
+                    </span>
+                  )}
                 </div>
 
                 <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mango">

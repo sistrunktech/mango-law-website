@@ -2,6 +2,7 @@ import { CheckCircle, FileText, Users, Clock, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
+import BlogSection from '../components/BlogSection';
 import TestimonialsList from '../components/TestimonialsList';
 import CTASection from '../components/CTASection';
 import LocationBlock from '../components/LocationBlock';
@@ -34,11 +35,11 @@ export default function HomePage() {
   return (
     <>
       <PageHero
-        eyebrow="Accused or Arrested?"
-        subtitle="Mango Law can save your reputation and future."
-        title="Hire an Aggressive Attorney"
+        eyebrow="Delaware County Criminal Defense"
+        subtitle="Protect your rights and future with experienced, assertive advocacy."
+        title="Strategic Criminal Defense for Delaware, Ohio"
         description="DUI/OVI & Criminal Defense Attorney serving Delaware & Franklin Counties, OH"
-        ctaLabel="Free Consultation"
+        ctaLabel="Schedule a Case Review"
         ctaHref="/contact"
         phoneNumber="(740) 417-6191"
       />
@@ -102,6 +103,8 @@ export default function HomePage() {
       </section>
 
       <PracticeAreaCardGrid />
+
+      <BlogSection />
 
       {/* Stats/Trust Section */}
       <section className="relative overflow-hidden py-20">

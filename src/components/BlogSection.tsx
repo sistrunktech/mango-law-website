@@ -1,0 +1,81 @@
+import { Link } from 'react-router-dom';
+import { ArrowRight, Calendar, Tag } from 'lucide-react';
+import { blogPosts } from '../data/blogPosts';
+
+export default function BlogSection() {
+  const recentPosts = blogPosts.slice(0, 3);
+
+  return (
+    <section className="section bg-brand-offWhite">
+      <div className="container">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <div className="accent-line" />
+              <p className="eyebrow text-brand-gold">Legal Insights</p>
+            </div>
+            <h2 className="font-display text-display-sm md:text-display-md">
+              Knowledge is power
+            </h2>
+            <p className="max-w-xl text-brand-black/60">
+              Stay informed with expert legal guidance and insights into criminal defense.
+            </p>
+          </div>
+          <Link
+            to="/blog"
+            className="group hidden items-center gap-2 text-sm font-semibold text-brand-mango transition-colors hover:text-brand-leaf md:inline-flex"
+          >
+            View all articles
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+
+        <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {recentPosts.map((post) => (
+            <Link
+              key={post.slug}
+              to={`/blog/${post.slug}`}
+              className="group card card-hover p-0 overflow-hidden"
+            >
+              <div className="p-6">
+                <div className="mb-4 flex items-center gap-3 text-xs">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-leaf/10 px-3 py-1 font-semibold text-brand-leaf">
+                    <Tag className="h-3 w-3" />
+                    {post.category}
+                  </span>
+                  <span className="flex items-center gap-1.5 text-brand-black/50">
+                    <Calendar className="h-3 w-3" />
+                    {new Date(post.date).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-xl font-bold text-brand-black transition-colors group-hover:text-brand-mango">
+                  {post.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-relaxed text-brand-black/60">
+                  {post.excerpt}
+                </p>
+
+                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-leaf">
+                  Read article
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center md:hidden">
+          <Link to="/blog" className="btn btn-secondary">
+            View all articles
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}

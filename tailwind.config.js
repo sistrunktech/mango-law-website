@@ -15,26 +15,27 @@ export default {
           gold: '#D4A84B',         // Secondary warmth
           offWhite: '#FAF9F7',
           cream: '#FFF8E7',
-          // Vibrant emerald green - primary accent (Cascade-level energy)
-          leaf: '#22C55E',         // Vibrant emerald - should feel alive!
-          leafLight: '#4ADE80',    // For highlights, hovers
-          leafDark: '#16A34A',     // For depth
+          // Sophisticated forest green - professional and authoritative
+          leaf: '#2F5F4F',         // Forest green - professional primary
+          leafLight: '#3D7360',    // Light forest for hovers
+          leafDark: '#1F3F2F',     // Dark forest for depth
           // Deep forest for dark sections
           forest: '#1B4332',       // Creates depth without muddiness
           navy: '#1B4332',         // Alias for forest
           charcoal: '#0F0F0F',     // Deep dark
           // Legacy aliases for compatibility
-          teal: '#22C55E',
-          tealLight: '#4ADE80',
-          tealDark: '#16A34A',
-          accent: '#22C55E',
-          accentLight: '#4ADE80',
-          accentDark: '#16A34A',
+          teal: '#2F5F4F',
+          tealLight: '#3D7360',
+          tealDark: '#1F3F2F',
+          accent: '#2F5F4F',
+          accentLight: '#3D7360',
+          accentDark: '#1F3F2F',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
-        display: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Lora', 'Georgia', 'serif'],
+        serif: ['Lora', 'Georgia', 'serif'],
       },
       fontSize: {
         // Display sizes for hero headlines
@@ -73,7 +74,7 @@ export default {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         'soft-lg': '0 10px 40px -10px rgba(0, 0, 0, 0.1), 0 4px 25px -5px rgba(0, 0, 0, 0.05)',
         'glow-mango': '0 0 30px -5px rgba(232, 163, 60, 0.3)',
-        'glow-leaf': '0 0 30px -5px rgba(34, 197, 94, 0.25)',
+        'glow-leaf': '0 0 30px -5px rgba(47, 95, 79, 0.25)',
         'lift': '0 10px 40px -10px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05)',
         'lift-lg': '0 20px 60px -15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.05)',
       },
@@ -81,10 +82,10 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'hero-pattern': 'linear-gradient(135deg, #0A0A0A 0%, #1B4332 100%)',
         'hero-dark': 'linear-gradient(180deg, #0A0A0A 0%, #0F0F0F 100%)',
-        'cta-gradient': 'linear-gradient(135deg, #1B4332 0%, #22C55E 100%)',
-        'accent-bar': 'linear-gradient(90deg, #22C55E 0%, #E8A33C 50%, #22C55E 100%)',
+        'cta-gradient': 'linear-gradient(135deg, #1B4332 0%, #2F5F4F 100%)',
+        'accent-bar': 'linear-gradient(90deg, #2F5F4F 0%, #E8A33C 50%, #2F5F4F 100%)',
         'card-shine': 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
-        'forest-emerald': 'linear-gradient(135deg, #1B4332 0%, #22C55E 100%)',
+        'forest-emerald': 'linear-gradient(135deg, #1B4332 0%, #2F5F4F 100%)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',

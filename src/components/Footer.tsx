@@ -36,7 +36,22 @@ export default function Footer() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
                   <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
-                (740) 417-6191
+                <div>
+                  <div className="text-xs text-brand-offWhite/60">Office</div>
+                  <div>(740) 417-6191</div>
+                </div>
+              </a>
+              <a
+                href="tel:7406022155"
+                className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
+                  <Phone className="h-4 w-4 text-brand-mango" />
+                </div>
+                <div>
+                  <div className="text-xs text-brand-offWhite/60">Direct</div>
+                  <div>(740) 602-2155</div>
+                </div>
               </a>
               <a
                 href="mailto:office@mango.law"

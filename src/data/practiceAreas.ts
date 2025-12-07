@@ -1,8 +1,12 @@
+import type { LucideIcon } from 'lucide-react';
+import { Scale, Car, Pill, ShieldAlert, Briefcase, FileWarning, Stethoscope } from 'lucide-react';
+
 export type PracticeArea = {
   title: string;
   href: string;
   summary: string;
   category?: string;
+  icon?: LucideIcon;
 };
 
 export const practiceAreas: PracticeArea[] = [
@@ -10,36 +14,43 @@ export const practiceAreas: PracticeArea[] = [
     title: 'Criminal Defense',
     href: '/criminal-defense-delaware-oh',
     summary: 'Comprehensive defense strategies for felony and misdemeanor charges across Delaware County.',
+    icon: Scale,
   },
   {
     title: 'OVI / DUI Defense',
     href: '/ovi-dui-defense-delaware-oh',
     summary: 'High-test, felony OVI, underage DUI, refusals, and roadside suppression strategies.',
+    icon: Car,
   },
   {
     title: 'Drug Crimes',
     href: '/drug-crime-lawyer-delaware-oh',
     summary: 'Possession, trafficking, paraphernalia, and diversion issues with an eye on treatment options.',
+    icon: Pill,
   },
   {
     title: 'Sex Crimes',
     href: '/sex-crime-defense-lawyer-delaware-oh',
     summary: 'Discreet, aggressive defense with attention to privacy, investigation gaps, and expert testimony.',
+    icon: ShieldAlert,
   },
   {
     title: 'White Collar Crimes',
     href: '/white-collar-crimes-attorney-delaware-oh',
     summary: 'Fraud, embezzlement, securities issues, and investigations with early-motion practice.',
+    icon: Briefcase,
   },
   {
     title: 'Protection Orders',
     href: '/protection-order-lawyer-delaware-oh',
     summary: 'Defense in civil protection order matters with focus on evidence, procedure, and collateral risks.',
+    icon: FileWarning,
   },
   {
     title: 'Personal Injury',
     href: '/personal-injury-lawyer-delaware-oh',
     summary: 'Limited-scope PI; evaluate liability, coverage, and negotiation posture for select matters.',
+    icon: Stethoscope,
   },
 ];
 
