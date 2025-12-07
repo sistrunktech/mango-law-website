@@ -3,6 +3,8 @@ import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
+import LegalCodeCallout from '../components/LegalCodeCallout';
+import StatuteSidebar from '../components/StatuteSidebar';
 
 const faqs = [
   {
@@ -67,31 +69,42 @@ export default function OviDuiPage() {
         showQuickActions={false}
         alignLeft={true}
         compact={true}
+        orcSection="4511.19"
       />
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Aggressive OVI Defense</h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
-                  An OVI arrest can feel like the end of the world. Your license, your job, your freedom, and your reputation
-                  are all on the line. But an arrest is not a conviction. With the right defense strategy, many OVI charges
-                  can be challenged, reduced, or even dismissed.
-                </p>
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-12">
+              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Aggressive OVI Defense</h2>
+                    <p className="text-lg text-brand-black/70 leading-relaxed">
+                      An OVI arrest can feel like the end of the world. Your license, your job, your freedom, and your reputation
+                      are all on the line. But an arrest is not a conviction. With the right defense strategy, many OVI charges
+                      can be challenged, reduced, or even dismissed.
+                    </p>
+                  </div>
+                  <p className="text-brand-black/70 leading-relaxed">
+                    At Mango Law, we focus on the details that matter: challenging the traffic stop, questioning field sobriety
+                    test administration, scrutinizing breathalyzer calibration and procedures, and identifying procedural errors.
+                    We know what it takes to win OVI cases in Delaware County.
+                  </p>
+                </div>
+                <ImagePlaceholder
+                  aspectRatio="4:3"
+                  label="OVI Defense"
+                  promptHint="Professional OVI/DUI defense consultation, legal documents, breathalyzer equipment, courthouse setting, mango and teal color accents"
+                />
               </div>
-              <p className="text-brand-black/70 leading-relaxed">
-                At Mango Law, we focus on the details that matter: challenging the traffic stop, questioning field sobriety
-                test administration, scrutinizing breathalyzer calibration and procedures, and identifying procedural errors.
-                We know what it takes to win OVI cases in Delaware County.
-              </p>
+
+              <LegalCodeCallout section="4511.19" />
             </div>
-            <ImagePlaceholder
-              aspectRatio="4:3"
-              label="OVI Defense"
-              promptHint="Professional OVI/DUI defense consultation, legal documents, breathalyzer equipment, courthouse setting, mango and teal color accents"
-            />
+
+            <aside className="lg:col-span-1">
+              <StatuteSidebar practiceArea="ovi-dui" />
+            </aside>
           </div>
         </div>
       </section>

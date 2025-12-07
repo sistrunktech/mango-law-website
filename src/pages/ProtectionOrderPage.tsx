@@ -2,6 +2,8 @@ import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
+import LegalCodeCallout from '../components/LegalCodeCallout';
+import StatuteSidebar from '../components/StatuteSidebar';
 
 const faqs = [
   {
@@ -58,30 +60,41 @@ export default function ProtectionOrderPage() {
         showQuickActions={false}
         alignLeft={true}
         compact={true}
+        orcSection="3113.31"
       />
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Protection Order Defense</h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
-                  A protection order can upend your life overnight. It can force you out of your home, restrict contact with your
-                  children, cost you your job, and result in the loss of your firearm rights. Even a temporary order based on
-                  unproven allegations can have immediate and devastating consequences.
-                </p>
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-12">
+              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Protection Order Defense</h2>
+                    <p className="text-lg text-brand-black/70 leading-relaxed">
+                      A protection order can upend your life overnight. It can force you out of your home, restrict contact with your
+                      children, cost you your job, and result in the loss of your firearm rights. Even a temporary order based on
+                      unproven allegations can have immediate and devastating consequences.
+                    </p>
+                  </div>
+                  <p className="text-brand-black/70 leading-relaxed">
+                    At Mango Law, we provide aggressive defense in protection order hearings. We challenge false or exaggerated
+                    allegations, present evidence, cross-examine witnesses, and fight to protect your rights, reputation, and future.
+                  </p>
+                </div>
+                <ImagePlaceholder
+                  aspectRatio="4:3"
+                  label="Protection order defense"
+                  promptHint="Protection order legal defense, attorney preparing hearing strategy and gathering evidence, professional office setting, focus on procedural precision and client advocacy"
+                />
               </div>
-              <p className="text-brand-black/70 leading-relaxed">
-                At Mango Law, we provide aggressive defense in protection order hearings. We challenge false or exaggerated
-                allegations, present evidence, cross-examine witnesses, and fight to protect your rights, reputation, and future.
-              </p>
+
+              <LegalCodeCallout section="3113.31" />
             </div>
-            <ImagePlaceholder
-              aspectRatio="4:3"
-              label="Protection order defense"
-              promptHint="Protection order legal defense, attorney preparing hearing strategy and gathering evidence, professional office setting, focus on procedural precision and client advocacy"
-            />
+
+            <aside className="lg:col-span-1">
+              <StatuteSidebar practiceArea="protection-orders" />
+            </aside>
           </div>
         </div>
       </section>

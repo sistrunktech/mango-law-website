@@ -2,6 +2,8 @@ import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
+import LegalCodeCallout from '../components/LegalCodeCallout';
+import StatuteSidebar from '../components/StatuteSidebar';
 
 const faqs = [
   {
@@ -58,11 +60,14 @@ export default function DrugCrimePage() {
         showQuickActions={false}
         alignLeft={true}
         compact={true}
+        orcSection="2925.11"
       />
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-12">
+              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
               <div>
                 <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Drug Crime Defense</h2>
@@ -83,6 +88,14 @@ export default function DrugCrimePage() {
               label="Drug crime defense"
               promptHint="Drug crime legal defense strategy, evidence review and lab testing documentation, professional legal setting, organized case files with attention to detail"
             />
+              </div>
+
+              <LegalCodeCallout section="2925.11" />
+            </div>
+
+            <aside className="lg:col-span-1">
+              <StatuteSidebar practiceArea="drug-crimes" />
+            </aside>
           </div>
         </div>
       </section>
