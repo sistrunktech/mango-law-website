@@ -65,7 +65,7 @@ export default function PersonalInjuryPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
               <div>
-                <h2 className="text-display-sm font-bold text-brand-black mb-4">Strategic Personal Injury Representation</h2>
+                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Personal Injury Representation</h2>
                 <p className="text-lg text-brand-black/70 leading-relaxed">
                   While criminal defense is our primary focus, we handle select personal injury matters where we can provide
                   meaningful value. We take cases with clear liability, adequate insurance coverage, and strong evidence of damages.
@@ -89,7 +89,7 @@ export default function PersonalInjuryPage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">Types of Cases We Consider</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">Types of Cases We Consider</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               We handle select personal injury matters with clear liability and adequate insurance coverage.
             </p>
@@ -133,7 +133,7 @@ export default function PersonalInjuryPage() {
       <section className="section bg-white">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">Our Approach</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">Our Approach</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               Honest evaluation, aggressive negotiation, and practical strategy.
             </p>

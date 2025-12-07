@@ -65,7 +65,7 @@ export default function CriminalDefensePage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
               <div>
-                <h2 className="text-display-sm font-bold text-brand-black mb-4">Comprehensive Criminal Defense</h2>
+                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Comprehensive Criminal Defense</h2>
                 <p className="text-lg text-brand-black/70 leading-relaxed">
                   Facing criminal charges is overwhelming. Your reputation, your freedom, and your future are at stake.
                   Whether you are dealing with a first-time misdemeanor or a serious felony, you need an attorney who
@@ -90,7 +90,7 @@ export default function CriminalDefensePage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">Case Types We Handle</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">Case Types We Handle</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               From misdemeanors to serious felonies, we provide strategic defense tailored to your situation.
             </p>
@@ -134,7 +134,7 @@ export default function CriminalDefensePage() {
       <section className="section bg-white">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">Our Defense Strategy</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">Our Defense Strategy</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               Every case is different. We tailor our approach to your unique circumstances and goals.
             </p>

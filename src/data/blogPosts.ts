@@ -6,6 +6,7 @@ export type BlogPost = {
   category: string;
   date: string;
   author: string;
+  imageUrl?: string;
 };
 
 export const blogPosts: BlogPost[] = [
@@ -13,6 +14,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'understanding-ovi-dui-charges-ohio',
     title: 'Understanding OVI/DUI Charges in Ohio',
     excerpt: 'Learn about the differences between OVI and DUI charges in Ohio, potential penalties, and how proper defense can protect your record.',
+    imageUrl: 'https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg',
     content: `Operating a vehicle under the influence (OVI) is the legal term Ohio uses for what many other states call DUI (Driving Under the Influence). Whether you're facing a first offense or have prior convictions, understanding the charges and penalties is critical.
 
 ## What is OVI in Ohio?
@@ -46,6 +48,7 @@ Early intervention is key. Contact us immediately if you've been charged with OV
     slug: 'motion-practice-criminal-defense',
     title: 'The Power of Motion Practice in Criminal Defense',
     excerpt: 'Discover how strategic pre-trial motions can suppress evidence, dismiss charges, or significantly improve your case outcome.',
+    imageUrl: 'https://images.pexels.com/photos/8111855/pexels-photo-8111855.jpeg',
     content: `Motion practice is one of the most powerful tools in criminal defense. Many cases are won or significantly improved before trial through properly crafted and argued motions.
 
 ## What Are Pre-Trial Motions?
@@ -85,6 +88,7 @@ If you're facing charges, don't wait. Early motion practice can make all the dif
     slug: 'drug-possession-vs-trafficking-ohio',
     title: 'Drug Possession vs. Trafficking: Understanding Ohio Drug Crime Charges',
     excerpt: 'Learn the critical differences between possession and trafficking charges in Ohio, and how these distinctions affect your defense strategy.',
+    imageUrl: 'https://images.pexels.com/photos/5668842/pexels-photo-5668842.jpeg',
     content: `Ohio drug laws distinguish between simple possession and drug trafficking, with dramatically different penalties and defense strategies required for each charge.
 
 ## Drug Possession in Ohio
@@ -145,6 +149,7 @@ Contact us for a confidential consultation if you're facing drug charges in Dela
     slug: 'white-collar-crime-defense-ohio',
     title: 'White Collar Crime Defense: What You Need to Know',
     excerpt: 'Facing fraud, embezzlement, or other white collar charges? Learn about defense strategies and how to protect your professional reputation.',
+    imageUrl: 'https://images.pexels.com/photos/8111563/pexels-photo-8111563.jpeg',
     content: `White collar crimes are non-violent offenses typically committed in business or professional settings. These charges can devastate your career, reputation, and freedom—even if you're ultimately found not guilty.
 
 ## Common White Collar Charges in Ohio

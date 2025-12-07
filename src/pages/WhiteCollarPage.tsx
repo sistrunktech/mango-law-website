@@ -65,7 +65,7 @@ export default function WhiteCollarPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
               <div>
-                <h2 className="text-display-sm font-bold text-brand-black mb-4">Complex White Collar Defense</h2>
+                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Complex White Collar Defense</h2>
                 <p className="text-lg text-brand-black/70 leading-relaxed">
                   White collar criminal investigations are complex, high-stakes matters that can devastate your career, finances,
                   and reputation. Whether you are facing allegations of fraud, embezzlement, tax evasion, or securities violations,
@@ -89,7 +89,7 @@ export default function WhiteCollarPage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">White Collar Crimes We Defend</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">White Collar Crimes We Defend</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               From fraud to embezzlement, we handle complex financial crime cases with precision.
             </p>
@@ -133,7 +133,7 @@ export default function WhiteCollarPage() {
       <section className="section bg-white">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">Our Defense Strategy</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">Our Defense Strategy</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               We provide sophisticated defense for complex financial crime cases.
             </p>

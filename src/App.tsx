@@ -17,6 +17,7 @@ import BlogPostPage from './pages/BlogPostPage';
 import OfCounselPage from './pages/OfCounselPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
+import BrandGuidelinesPage from './pages/BrandGuidelinesPage';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/of-counsel" element={<OfCounselPage />} />
+        <Route path="/brand-guidelines" element={<BrandGuidelinesPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
       </Routes>

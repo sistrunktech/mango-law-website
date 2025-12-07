@@ -74,7 +74,7 @@ export default function OviDuiPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
               <div>
-                <h2 className="text-display-sm font-bold text-brand-black mb-4">Aggressive OVI Defense</h2>
+                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Aggressive OVI Defense</h2>
                 <p className="text-lg text-brand-black/70 leading-relaxed">
                   An OVI arrest can feel like the end of the world. Your license, your job, your freedom, and your reputation
                   are all on the line. But an arrest is not a conviction. With the right defense strategy, many OVI charges
@@ -99,7 +99,7 @@ export default function OviDuiPage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">OVI Case Types</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">OVI Case Types</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               From standard OVI to complex felony charges, we handle every type of impaired driving case.
             </p>
@@ -118,7 +118,7 @@ export default function OviDuiPage() {
       <section className="section bg-white">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">How We Defend OVI Cases</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">How We Defend OVI Cases</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               Every OVI case is different. We tailor our defense strategy to your specific situation.
             </p>
@@ -173,7 +173,7 @@ export default function OviDuiPage() {
               />
             </div>
             <div className="space-y-6 order-1 lg:order-2">
-              <h2 className="text-display-sm font-bold text-brand-black">Time Is Critical</h2>
+              <h2 className="font-display text-display-sm font-bold text-brand-black">Time Is Critical</h2>
               <p className="text-lg text-brand-black/70 leading-relaxed">
                 You have only 30 days to appeal an administrative license suspension after an OVI arrest. Evidence must be
                 preserved, and witnesses must be interviewed while memories are fresh. The sooner we start building your defense,

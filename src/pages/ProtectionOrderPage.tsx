@@ -65,7 +65,7 @@ export default function ProtectionOrderPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
               <div>
-                <h2 className="text-display-sm font-bold text-brand-black mb-4">Strategic Protection Order Defense</h2>
+                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Protection Order Defense</h2>
                 <p className="text-lg text-brand-black/70 leading-relaxed">
                   A protection order can upend your life overnight. It can force you out of your home, restrict contact with your
                   children, cost you your job, and result in the loss of your firearm rights. Even a temporary order based on
@@ -89,7 +89,7 @@ export default function ProtectionOrderPage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">How We Defend Protection Order Cases</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">How We Defend Protection Order Cases</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               We prepare thoroughly and fight aggressively to protect your rights.
             </p>

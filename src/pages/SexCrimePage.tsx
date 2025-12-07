@@ -65,7 +65,7 @@ export default function SexCrimePage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
               <div>
-                <h2 className="text-display-sm font-bold text-brand-black mb-4">Aggressive, Discreet Defense</h2>
+                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Aggressive, Discreet Defense</h2>
                 <p className="text-lg text-brand-black/70 leading-relaxed">
                   Sex crime allegations are some of the most serious charges you can face. A conviction can mean prison, mandatory
                   sex offender registration, and a permanent mark on your reputation. Even an accusation can destroy your career,
@@ -90,7 +90,7 @@ export default function SexCrimePage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">Sex Crime Charges We Defend</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">Sex Crime Charges We Defend</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               We handle all types of sex crime allegations with discretion and aggressive advocacy.
             </p>
@@ -134,7 +134,7 @@ export default function SexCrimePage() {
       <section className="section bg-white">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">How We Defend Sex Crime Cases</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">How We Defend Sex Crime Cases</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               We leave no stone unturned in building your defense.
             </p>

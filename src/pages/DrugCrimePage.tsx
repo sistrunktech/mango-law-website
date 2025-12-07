@@ -65,7 +65,7 @@ export default function DrugCrimePage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
               <div>
-                <h2 className="text-display-sm font-bold text-brand-black mb-4">Strategic Drug Crime Defense</h2>
+                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Drug Crime Defense</h2>
                 <p className="text-lg text-brand-black/70 leading-relaxed">
                   Drug charges can derail your life. A conviction can mean prison time, loss of professional licenses, financial
                   ruin, and a permanent criminal record that follows you for years. Whether you are facing possession, trafficking,
@@ -90,7 +90,7 @@ export default function DrugCrimePage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">Drug Charges We Handle</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">Drug Charges We Handle</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               From minor possession to serious trafficking allegations, we defend all types of drug-related charges.
             </p>
@@ -134,7 +134,7 @@ export default function DrugCrimePage() {
       <section className="section bg-white">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="text-display-sm md:text-display-md mb-4">Our Defense Strategy</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">Our Defense Strategy</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
               We challenge every element of the prosecution's case to protect your rights and freedom.
             </p>

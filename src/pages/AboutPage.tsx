@@ -61,7 +61,7 @@ export default function AboutPage() {
 
             <div className="lg:col-span-2 space-y-8">
               <div className="space-y-4">
-                <h2 className="text-3xl font-bold text-brand-black">Defense approach</h2>
+                <h2 className="font-display text-3xl font-bold text-brand-black">Defense approach</h2>
                 <p className="text-lg text-brand-black/80 leading-relaxed">
                   Dominic focuses on early case assessment, motion practice where facts support it, and candid communication.
                   You will always know what is happening, why it matters, and what the options are.
@@ -73,7 +73,7 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-brand-black">Local knowledge</h3>
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Local knowledge</h3>
                 <ul className="space-y-3 text-brand-black/80">
                   <li className="flex gap-3">
                     <span className="text-brand-mango font-bold">•</span>
@@ -91,7 +91,7 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-brand-black">Experience & Background</h3>
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Experience & Background</h3>
                 <p className="text-brand-black/80 leading-relaxed">
                   With over 15 years of criminal defense experience in Central Ohio, Nick has handled thousands of cases
                   ranging from traffic violations to serious felonies. His practice is built on thorough preparation,
@@ -106,7 +106,7 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-brand-black">Philosophy</h3>
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Philosophy</h3>
                 <p className="text-brand-black/80 leading-relaxed">
                   Every case is different, and cookie-cutter approaches don't work. Nick takes the time to understand your
                   unique situation, your goals, and what matters most to you. His defense strategy is tailored to your
