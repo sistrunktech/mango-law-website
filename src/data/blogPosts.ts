@@ -1015,4 +1015,1293 @@ We've handled these cases. We know what works. We know how to prepare, how to qu
     date: '2024-12-07',
     author: 'Dominic Mango',
   },
+  {
+    slug: 'ohio-weapons-charges-ccw-defense',
+    title: 'Ohio Weapons Charges: CCW, Improper Handling, and Weapons Disability Defense',
+    excerpt: 'Facing weapons charges in Ohio? Learn about CCW violations, improper firearm handling, weapons disability, and defense strategies under ORC sections 2923.12, 2923.13, and 2923.16.',
+    imageUrl: 'https://images.pexels.com/photos/1263419/pexels-photo-1263419.jpeg',
+    content: `Ohio's gun laws create criminal liability in situations many gun owners don't anticipate. You can be charged with weapons offenses even if you legally own your firearm, have no criminal intent, and made an honest mistake. Understanding Ohio Revised Code Chapter 2923—the state's weapons statute—is critical for anyone who owns, carries, or transports firearms in Ohio.
+
+## Ohio's Main Weapons Offenses
+
+### ORC § 2923.12: Carrying Concealed Weapons
+
+**ORC § 2923.12** is Ohio's concealed carry statute. It prohibits carrying a concealed deadly weapon—most commonly a handgun—without a valid concealed handgun license (CHL).
+
+#### What the Law Says
+
+You violate ORC § 2923.12 if you knowingly:
+- Carry a concealed handgun without a CHL
+- Carry other deadly weapons concealed (knives over a certain length, brass knuckles, etc.)
+- Carry a concealed handgun in a prohibited location even with a CHL
+
+#### Penalties
+
+Carrying concealed without a license is typically a **first-degree misdemeanor** punishable by up to 6 months in jail and fines up to $1,000. However, penalties increase if:
+- You have prior convictions
+- The weapon was loaded
+- You were in a prohibited location
+- You had drugs or alcohol in your system
+
+In some cases, CCW violations can be charged as **fourth-degree felonies** with 6-18 months in prison.
+
+#### Common Defenses
+
+- **Lack of knowledge**: You didn't know the weapon was concealed or present
+- **Valid CHL**: You had a valid license but it wasn't recognized
+- **Improper stop or search**: Police violated your Fourth Amendment rights
+- **Exempt status**: You fall under a statutory exception (law enforcement, military, etc.)
+
+### ORC § 2923.13: Having Weapons While Under Disability
+
+**ORC § 2923.13** prohibits certain people from possessing firearms or dangerous ordnance. This is Ohio's "weapons disability" statute.
+
+#### Who Is "Under Disability"?
+
+You're prohibited from possessing firearms if you:
+- Were convicted of a felony or certain violent misdemeanors
+- Are a fugitive from justice
+- Are subject to a civil protection order (CPO) under ORC § 3113.31
+- Have been adjudicated mentally incompetent or committed to a mental institution
+- Are addicted to or abuse controlled substances
+- Are a chronic alcoholic
+- Were convicted of domestic violence under federal or state law
+
+#### Federal Overlap
+
+Federal law (18 U.S.C. § 922(g)) has similar prohibitions and often runs parallel to state charges. Violating both can result in **federal prosecution**, which typically carries harsher penalties.
+
+#### Penalties
+
+Weapons disability violations are typically **third-degree felonies** punishable by 9-36 months in prison and fines up to $10,000. Enhanced penalties apply if you were previously convicted of weapons disability violations.
+
+#### Common Defenses
+
+- **Challenge the underlying conviction**: Was your felony conviction valid? Was your right to counsel violated?
+- **Expired disability**: Some disabilities have time limits
+- **Lack of knowledge**: You didn't know the weapon was in your possession
+- **Relief of disability**: You applied for and received restoration of firearm rights
+
+### ORC § 2923.16: Improper Handling of Firearms in a Motor Vehicle
+
+**ORC § 2923.16** governs how firearms can be transported in vehicles. This statute trips up many otherwise law-abiding gun owners.
+
+#### What the Law Prohibits
+
+You violate ORC § 2923.16 if you knowingly:
+- Transport or possess a **loaded firearm** in a vehicle
+- Transport or possess a firearm that is **accessible without leaving the vehicle**
+- Transport or possess a loaded firearm while under the influence of alcohol or drugs
+
+#### What "Loaded" Means
+
+A firearm is "loaded" if:
+- Ammunition is in the chamber or magazine
+- Ammunition is in a speedloader or similar device attached to the firearm
+
+This means even if the chamber is empty but you have a loaded magazine inserted, the firearm is legally "loaded."
+
+#### Exceptions and Safe Harbor
+
+Ohio law provides exceptions for:
+- **Valid CHL holders**: Can transport loaded firearms if they follow CHL rules
+- **Unloaded and properly stored**: Firearms must be unloaded and kept in a closed container, case, or compartment separate from ammunition
+- **Long guns in racks**: Some exceptions for rifles and shotguns
+
+Even with a CHL, you must:
+- Keep the handgun holstered or in a closed case/compartment
+- Not be under the influence of alcohol or drugs
+- Disclose the weapon to law enforcement during a traffic stop
+
+#### Penalties
+
+Improper handling is typically a **fourth-degree misdemeanor** (up to 30 days in jail, $250 fine) if the firearm is unloaded but improperly accessible.
+
+If the firearm is **loaded**, penalties increase to a **first-degree misdemeanor** (up to 6 months in jail, $1,000 fine).
+
+If you're under the influence or in a prohibited location, penalties can escalate to **felony charges**.
+
+#### Common Scenarios
+
+- Gun in glove box during traffic stop (improper storage)
+- Loaded magazine in center console with firearm (accessible while loaded)
+- Firearm under seat during OVI arrest (loaded + under influence)
+- Transporting after drinking at shooting range (under influence)
+
+#### Common Defenses
+
+- **Proper storage**: The firearm was unloaded and in a proper case
+- **Valid CHL and compliance**: You had a CHL and followed all requirements
+- **Lack of knowledge**: You didn't know the firearm was loaded or accessible
+- **Improper search**: Police violated your rights during the traffic stop
+
+## Overlapping Charges: Weapons and Other Offenses
+
+Weapons charges rarely stand alone. They often accompany:
+
+### OVI/DUI Charges
+
+If you're arrested for OVI under **ORC § 4511.19** and have a firearm in the vehicle, expect:
+- Improper handling charges (ORC § 2923.16)
+- Potential CCW violations if the firearm was concealed
+- Enhanced OVI penalties
+- Immediate license suspension
+
+### Drug Charges
+
+Possessing firearms during drug offenses under **ORC § 2925.11** (possession) or **ORC § 2925.03** (trafficking) triggers:
+- **Mandatory additional prison time** (firearm specifications)
+- Felony enhancements
+- Federal charges if drugs + guns = trafficking presumption
+
+### Domestic Violence
+
+If you're convicted of domestic violence under **ORC § 2919.25** or subject to a civil protection order under **ORC § 3113.31**, you:
+- **Cannot possess firearms** (state and federal law)
+- Must surrender all firearms immediately
+- Face weapons disability charges if you don't comply
+
+## Defending Ohio Weapons Charges
+
+### Challenge the Stop and Search
+
+Many weapons charges begin with traffic stops or searches. If law enforcement:
+- Lacked reasonable suspicion to stop you
+- Lacked probable cause to search your vehicle
+- Exceeded the scope of a consensual encounter
+- Violated your Fourth Amendment rights
+
+The evidence can be suppressed, resulting in dismissal of charges.
+
+### Prove Lack of Knowledge
+
+Ohio's weapons statutes require **knowing** conduct. If you can show:
+- You didn't know the firearm was present
+- You didn't know it was loaded
+- You didn't know you were in a prohibited location
+- You reasonably believed you had a valid exception
+
+You may have a viable defense.
+
+### Establish Statutory Exceptions
+
+Ohio law provides numerous exceptions to weapons offenses:
+- Law enforcement and military personnel
+- Licensed security guards and private investigators
+- Persons transporting firearms to/from shooting ranges or repair shops
+- CHL holders complying with statutory requirements
+
+If you fall under an exception, charges should be dismissed or reduced.
+
+### Challenge Prior Convictions (Weapons Disability Cases)
+
+For ORC § 2923.13 cases, challenge:
+- The validity of prior convictions (were your rights violated?)
+- Whether the prior conviction actually qualifies as a disabling offense
+- Whether you obtained relief from disability through proper legal channels
+
+### Negotiate Favorable Outcomes
+
+Experienced weapons defense attorneys can often negotiate:
+- **Dismissal** if the case is weak or evidence is suppressible
+- **Reduction** from felony to misdemeanor or from misdemeanor to minor misdemeanor
+- **Diversion** programs that result in no conviction if successfully completed
+- **Concurrent sentences** if weapons charges accompany other offenses
+
+## Delaware and Franklin County Considerations
+
+### Local Enforcement Patterns
+
+**Delaware County** and **Franklin County** see high volumes of weapons charges, particularly:
+- Traffic stops along US-23 and I-71 where firearms are discovered
+- OVI arrests where firearms are in vehicles
+- Domestic violence cases where weapons must be surrendered
+
+### Local Court Practices
+
+**Delaware Municipal Court** and **Franklin County Municipal Court** handle misdemeanor weapons charges. **Court of Common Pleas** handles felonies.
+
+Local prosecutors tend to:
+- Take weapons charges seriously, especially if drugs or alcohol are involved
+- Offer reasonable pleas if you have no criminal history and cooperate
+- File mandatory firearm specifications when applicable
+
+### Highway Patrol and Sheriff Procedures
+
+Ohio State Highway Patrol and county sheriff's deputies follow standardized procedures during traffic stops involving firearms:
+- Immediate questions about weapons during the stop
+- Requests to secure firearms during the encounter
+- Thorough searches if probable cause exists
+
+Knowing how to respond during these encounters can prevent charges from being filed in the first place.
+
+## What to Do If You're Charged
+
+### Immediate Steps
+
+1. **Do not speak to police** without an attorney present
+2. **Do not consent to searches** of your vehicle, home, or person
+3. **Document everything**: the stop, search, statements made, witnesses present
+4. **Preserve evidence**: dashcam footage, body cam requests, text messages about the firearm
+5. **Contact an attorney immediately**—weapons charges carry serious penalties
+
+### Long-Term Strategy
+
+- **Challenge evidence**: Suppress illegally obtained evidence
+- **Negotiate early**: Early intervention can prevent formal charges or secure favorable pleas
+- **Seek relief from disability**: If you're under disability, explore restoration of rights
+- **Comply with all court orders**: Surrender weapons when required, attend all hearings
+
+## Restoring Gun Rights After Conviction
+
+If you've been convicted of a weapons offense or lost your firearm rights due to other convictions, Ohio law provides mechanisms for restoration:
+
+### Expungement and Sealing
+
+Some weapons convictions can be **sealed** under **ORC § 2953.32**, removing them from public records. This doesn't automatically restore federal firearm rights but helps with state-level consequences.
+
+### Relief from Disability
+
+For felony convictions, you can apply for **relief from disability** to restore firearm rights. This requires:
+- Petitioning the court that imposed the conviction
+- Demonstrating rehabilitation
+- Showing you're not a danger to public safety
+
+Success rates vary depending on the underlying offense and your conduct since conviction.
+
+### Federal Relief
+
+Federal law prohibits firearm possession for many offenses. Restoration of federal rights typically requires:
+- State-level restoration of rights
+- Presidential pardon (rare)
+- ATF relief (currently unfunded and unavailable)
+
+## Common Myths About Ohio Gun Laws
+
+### Myth: "I can carry my gun anywhere with a CHL"
+
+**Reality**: Even with a valid CHL, you cannot carry firearms in:
+- Courthouses
+- Schools and school safety zones
+- Government buildings
+- Airports (past security)
+- Bars and establishments serving alcohol (if you're consuming)
+- Places with posted prohibitions (private property rights)
+
+### Myth: "Unloaded guns can be transported anywhere"
+
+**Reality**: Even unloaded firearms must be properly stored in a closed container or case and inaccessible from the passenger compartment unless you have a CHL and comply with ORC § 2923.16 requirements.
+
+### Myth: "If I have a CHL in another state, Ohio recognizes it"
+
+**Reality**: Ohio has reciprocity with many states, but not all. Check current reciprocity agreements before carrying in Ohio with an out-of-state CHL.
+
+### Myth: "I can't be charged if the gun wasn't mine"
+
+**Reality**: Constructive possession means you can be charged if you exercised control over a firearm even if you didn't own it. Being in a car with a firearm under the seat can result in charges.
+
+## Why You Need an Experienced Weapons Defense Attorney
+
+Weapons charges are technical, evidence-intensive, and carry serious consequences:
+- Jail time and fines
+- Loss of firearm rights (sometimes permanently)
+- Felony records affecting employment, housing, and professional licenses
+- Federal charges with mandatory minimum sentences
+
+At Mango Law, we've defended hundreds of weapons cases in Delaware and Franklin County. We know:
+- How to challenge traffic stops and searches
+- How to negotiate with prosecutors who handle these cases daily
+- How to identify weaknesses in the state's case
+- How to protect your Second Amendment rights while minimizing criminal exposure
+
+If you're facing weapons charges under ORC §§ 2923.12, 2923.13, or 2923.16, contact us immediately at **(740) 602-2155** for a confidential case evaluation.
+
+---
+
+*This article is for educational purposes and does not constitute legal advice. Ohio weapons law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+    category: 'Criminal Defense',
+    date: '2024-12-06',
+    author: 'Dominic Mango',
+  },
+  {
+    slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
+    title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
+    excerpt: 'Accused of a sex crime in Ohio? Learn about sexual battery charges, sex offender registration, defenses under ORC sections 2907.03, 2907.04, 2950.01, and what these charges mean for your future.',
+    imageUrl: 'https://images.pexels.com/photos/8730280/pexels-photo-8730280.jpeg',
+    content: `Sex crime allegations are unlike any other criminal charge. The stigma is immediate and severe. The consequences reach far beyond criminal penalties—affecting where you can live, work, and travel for the rest of your life. Being accused doesn't mean you're guilty, but it means you need experienced legal representation immediately.
+
+Ohio's sex crime statutes are found primarily in **ORC Chapter 2907** and the sex offender registration law, **ORC Chapter 2950**. These laws are complex, the penalties are harsh, and the registration requirements are life-altering.
+
+## Ohio's Primary Sex Crime Statutes
+
+### ORC § 2907.03: Sexual Battery
+
+**ORC § 2907.03** criminalizes sexual conduct when the other person cannot legally consent or when there's an inherent power imbalance.
+
+#### What the Law Prohibits
+
+You violate ORC § 2907.03 if you engage in sexual conduct with another person (not your spouse) when:
+- **The victim is under 13** (regardless of consent)
+- **The victim is 13-15 and you're at least 18**
+- **You're in a position of authority** (teacher, coach, guardian, clergy) and the victim is a minor
+- **You coerce through authority** (boss, probation officer, etc.)
+- **The victim is substantially impaired** (mentally, physically, or due to substance use) and you know it
+
+#### Consent vs. Legal Capacity to Consent
+
+Even if the victim said "yes," that doesn't mean they could legally consent. A 14-year-old can't consent to sex with an 18-year-old under Ohio law, even if they initiated it. A person who is unconscious or severely intoxicated cannot consent.
+
+#### Penalties
+
+Sexual battery is typically a **third-degree felony** (9-36 months prison, up to $10,000 fine) but can be enhanced to a **second-degree felony** (2-8 years prison) if:
+- The victim was under 13
+- You used force or threat of force
+- You drugged the victim
+- You have prior sex offense convictions
+
+#### Sex Offender Registration
+
+Sexual battery convictions **require sex offender registration** under **ORC § 2950.01** and related statutes. Registration duration depends on the offense tier (typically Tier II or III, meaning 25 years to life).
+
+### ORC § 2907.04: Unlawful Sexual Conduct with a Minor
+
+**ORC § 2907.04** prohibits sexual conduct with someone who is 13 to 15 years old when you're not married to them.
+
+#### Age Gaps Matter
+
+Penalties depend on the age difference between the offender and the victim:
+
+- **Victim 13-15, offender under 18**: First-degree misdemeanor (6 months jail)
+- **Victim 13-15, offender 18+**: Fourth-degree felony (6-18 months prison)
+- **Victim 13-15, offender 10+ years older**: Third-degree felony (9-36 months prison)
+
+#### Romeo and Juliet Exception?
+
+Ohio doesn't have a formal "Romeo and Juliet" exception, but the age-based penalty structure provides some leniency when both parties are close in age. However, **any sexual conduct with someone under 13 is always a serious felony** regardless of the offender's age.
+
+#### Common Defenses
+
+- **Reasonable mistake of age**: You reasonably believed the victim was 16 or older (difficult but possible defense)
+- **Lack of sexual conduct**: What happened didn't meet the legal definition
+- **False allegations**: The conduct never occurred
+
+### ORC § 2907.21: Importuning
+
+**ORC § 2907.21** criminalizes soliciting a minor (or someone you believe is a minor) to engage in sexual activity.
+
+#### What Counts as Importuning
+
+You violate ORC § 2907.21 if you solicit someone to engage in sexual conduct when:
+- You know the person is 13-15 years old
+- You recklessly don't know their age but they're 13-15
+- You believe the person is 13-15 (including undercover sting operations)
+
+This statute is the basis for most **online sting operations** where law enforcement officers pose as minors in chatrooms, apps, or online platforms.
+
+#### Penalties
+
+Importuning is typically a **fifth-degree felony** (6-12 months prison) but can be enhanced to a **third-degree felony** (9-36 months prison) if:
+- The victim is under 13
+- You previously were convicted of a sex offense
+- You solicited the minor to meet in person
+
+#### Common Defenses
+
+- **No intent**: You never intended to engage in sexual conduct
+- **Entrapment**: Law enforcement induced conduct you wouldn't have otherwise committed
+- **Lack of knowledge**: You didn't know or believe the person was a minor
+- **Constitutional violations**: Your communications were obtained through illegal searches
+
+### ORC § 2950.01 et seq.: Sex Offender Registration (SORN)
+
+Ohio's Sex Offender Registration and Notification law (**SORN**) requires individuals convicted of specified sex offenses to register with local sheriffs and comply with reporting requirements.
+
+#### Registration Tiers
+
+Ohio uses a three-tier system:
+
+**Tier I** (10 years):
+- Lower-level offenses
+- Annual in-person registration
+- Less public notification
+
+**Tier II** (25 years):
+- Mid-level offenses like sexual battery
+- Registration every 180 days
+- Public database listing
+
+**Tier III** (life):
+- Serious offenses including multiple convictions
+- Registration every 90 days
+- Public database with address, photo, vehicle info
+
+#### Registration Requirements
+
+You must:
+- Register within 3 days of release from prison or sentencing
+- Provide current address, employment, vehicle information, and photo
+- Update registration in person at specified intervals
+- Report address changes within 3 days
+- Report any changes (new job, new vehicle, etc.) within 3 days
+
+#### Consequences of Non-Compliance
+
+Failing to register or update your information is a **separate felony** under **ORC § 2950.05**:
+- First violation: Third-degree felony (9-36 months prison)
+- Subsequent violations: Second-degree felony (2-8 years prison)
+
+Non-compliance can also trigger federal charges under the Sex Offender Registration and Notification Act (SORNA).
+
+## Collateral Consequences of Sex Offense Convictions
+
+Beyond prison time and registration, sex crime convictions destroy lives in ways other convictions don't:
+
+### Residency Restrictions
+
+Ohio law and local ordinances restrict where registered sex offenders can live:
+- **Cannot live within 1,000 feet of schools, daycares, or parks** (many municipalities)
+- Cannot live in certain housing complexes or neighborhoods
+- Landlords can legally refuse to rent to registered offenders
+
+Many people cannot find legal housing and end up homeless or in violation of residency requirements.
+
+### Employment Restrictions
+
+Registered sex offenders face near-total barriers to employment:
+- Cannot work in schools, daycares, or anywhere children are present
+- Cannot hold professional licenses in healthcare, education, or counseling
+- Background checks disqualify you from most jobs
+- Employers can legally refuse to hire you
+
+### Travel Restrictions
+
+International travel becomes nearly impossible:
+- Many countries deny entry to registered sex offenders (Canada, UK, Australia, etc.)
+- Federal law requires advance notice before international travel
+- Some states prohibit travel across state lines without permission
+
+### Family and Custody Impact
+
+Sex offense convictions devastate family relationships:
+- Severe restrictions on child custody and visitation (even your own children)
+- Supervised visitation may be required
+- Family members may refuse contact due to stigma
+- Schools and activities may ban you from attending your children's events
+
+### Social Stigma
+
+Public registration means:
+- Your name, photo, address, and offense are publicly searchable online
+- Neighbors receive notification of your presence
+- Employers, dates, and acquaintances can easily find your record
+- Harassment and vigilante violence are real risks
+
+## Common Defenses to Sex Crime Charges
+
+### False Allegations
+
+False allegations happen more often in sex crime cases than in any other criminal category. Common motivations include:
+- **Custody disputes**: Fabricating allegations to gain an advantage in family court
+- **Revenge or retaliation**: Payback after a relationship ends badly
+- **Mental health issues**: Genuine delusions or misunderstandings
+- **Third-party pressure**: Parents, spouses, or therapists creating narratives
+
+Defense strategies include:
+- **Inconsistencies in the accuser's story**: Dates, times, locations don't match
+- **Motive evidence**: Showing why the accuser would fabricate allegations
+- **Prior false allegations**: History of similar accusations
+- **Text messages and communications**: Showing consensual or contradictory interactions
+
+### Consent (When Legally Applicable)
+
+In cases involving adults or parties close in age, consent can be a defense. However:
+- The burden is on the prosecution to prove lack of consent
+- Consent can be withdrawn at any time
+- Intoxication complicates consent (incapacitation vs. impairment)
+
+Evidence supporting consent includes:
+- Text messages before or after the encounter
+- Witness testimony about the relationship
+- Video or photographic evidence
+- Lack of physical injury or resistance
+
+### Mistaken Identity
+
+In cases involving strangers, mistaken identity is possible. DNA evidence, alibi witnesses, and forensic analysis can exonerate you.
+
+### Constitutional Violations
+
+Law enforcement must follow constitutional rules:
+- **Illegal searches and seizures**: Unlawfully obtained evidence (phones, computers, DNA) can be suppressed
+- **Coerced confessions**: Statements obtained through threats, promises, or long interrogations can be excluded
+- **Miranda violations**: Statements made during custodial interrogation without proper warnings
+
+If your rights were violated, evidence can be suppressed and charges dismissed.
+
+### Insufficient Evidence
+
+The prosecution must prove guilt **beyond a reasonable doubt**. If their case relies solely on:
+- Uncorroborated victim testimony
+- Ambiguous physical evidence
+- Circumstantial evidence
+
+Your attorney can argue for acquittal or dismissal.
+
+## Defending Online Sting Operations (Importuning Cases)
+
+Law enforcement agencies conduct online stings targeting people who allegedly solicit minors. These operations raise serious legal issues:
+
+### Entrapment
+
+Entrapment occurs when law enforcement **induces** someone to commit a crime they wouldn't have otherwise committed. If the "minor" (undercover officer):
+- Initiated contact
+- Persisted despite your reluctance
+- Used manipulative tactics
+- Offered incentives
+
+You may have an entrapment defense.
+
+### Lack of Intent
+
+You must have **intent to engage in sexual conduct** with a minor. If you:
+- Believed you were talking to an adult roleplaying
+- Never intended to meet in person
+- Were engaged in fantasy without real-world intent
+
+The prosecution may not meet its burden.
+
+### Constitutional Challenges
+
+Online stings often involve:
+- Warrantless surveillance of communications
+- Geofencing and location tracking
+- Seizure of electronic devices without probable cause
+
+These tactics can violate the Fourth Amendment.
+
+## Why Sex Crime Cases Require Immediate Legal Representation
+
+### The Stakes Are Catastrophic
+
+Sex crime convictions carry:
+- Years or decades in prison
+- Lifetime sex offender registration
+- Unemployability
+- Homelessness due to residency restrictions
+- Loss of family relationships
+- Social ostracism
+
+**You cannot afford to wait or hope charges will be dropped.**
+
+### Pre-Charge Representation
+
+If you're under investigation but not yet charged, an attorney can:
+- Intervene before charges are filed
+- Communicate with law enforcement on your behalf
+- Prevent you from making incriminating statements
+- Negotiate to avoid formal charges
+
+### Forensic Expertise Required
+
+Sex crime defense requires:
+- DNA and forensic evidence analysis
+- Expert witnesses (forensic examiners, psychologists, etc.)
+- Digital forensics (recovering deleted messages, analyzing metadata)
+- Medical experts to challenge prosecution theories
+
+## Delaware and Franklin County Sex Crime Prosecutions
+
+### Local Prosecutor Practices
+
+**Delaware County Prosecutor's Office** and **Franklin County Prosecutor's Office** handle sex crime cases aggressively:
+- Specialized sex crimes units
+- Victim advocate involvement
+- High conviction rates (cases are often overcharged to pressure pleas)
+
+However, experienced defense attorneys know:
+- Which prosecutors are reasonable and which are inflexible
+- How to negotiate for reduced charges or alternative resolutions
+- Which judges are more likely to grant suppression motions
+
+### Court of Common Pleas
+
+Felony sex crime cases are heard in **Delaware County Court of Common Pleas** and **Franklin County Court of Common Pleas**. These cases move quickly, and pretrial motions are critical.
+
+## What to Do If You're Accused
+
+### Do Not Speak to Anyone
+
+- **Do not talk to police** without an attorney present, even if you're innocent
+- **Do not try to explain yourself** to the accuser or their family
+- **Do not post on social media** or discuss the case online
+- **Do not contact the accuser** for any reason
+
+Anything you say can and will be used against you.
+
+### Preserve Evidence
+
+- **Text messages**: Save all communications with the accuser
+- **Social media**: Screenshot posts, photos, messages
+- **Witnesses**: Identify anyone who can corroborate your version of events
+- **Alibi evidence**: Gather receipts, GPS data, work records, security footage
+
+### Contact an Attorney Immediately
+
+Sex crime investigations move fast. Evidence disappears, memories fade, and prosecutors make charging decisions quickly. You need experienced legal representation from day one.
+
+## Why Choose Mango Law for Sex Crime Defense
+
+At Mango Law, we've defended clients against sex crime allegations in Delaware and Franklin County. We understand:
+- The sensitive, private nature of these cases
+- The need for aggressive investigation and expert witnesses
+- How to challenge forensic evidence and questionable victim testimony
+- How to protect your reputation, family, and future
+
+We handle every case with discretion and treat every client with dignity, regardless of the allegations.
+
+If you're facing sex crime charges or under investigation in Delaware or Franklin County, contact us immediately at **(740) 602-2155** for a confidential case evaluation. These charges require experienced, aggressive defense.
+
+---
+
+*This article is for educational purposes and does not constitute legal advice. Ohio sex crime law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+    category: 'Sex Crimes',
+    date: '2024-12-05',
+    author: 'Dominic Mango',
+  },
+  {
+    slug: 'personal-injury-claims-ohio-negligence-law',
+    title: 'Personal Injury Claims in Ohio: Understanding Negligence, Damages, and Your Legal Rights',
+    excerpt: 'Injured due to someone else\'s negligence in Ohio? Learn about personal injury law, comparative fault, damage caps under ORC sections 2315.18, 2305.10, and how to protect your claim.',
+    imageUrl: 'https://images.pexels.com/photos/8899214/pexels-photo-8899214.jpeg',
+    content: `When you're injured due to someone else's negligence, Ohio law provides a path to compensation. But personal injury claims are more complex than many people realize. Understanding Ohio's negligence laws, damage caps, and procedural rules is critical to protecting your rights and maximizing your recovery.
+
+## What Is Personal Injury Law in Ohio?
+
+Personal injury law allows you to seek compensation when another person or entity's negligence or intentional conduct causes you harm. Common personal injury claims include:
+- Car accidents
+- Slip and fall incidents
+- Medical malpractice
+- Dog bites
+- Defective products
+- Assault and battery
+
+Ohio law is found primarily in **ORC Chapter 2315** (Civil Actions) and **ORC Chapter 2305** (Limitations of Actions and Liability).
+
+## Proving Negligence in Ohio
+
+To win a personal injury claim in Ohio, you must prove four elements:
+
+### 1. Duty of Care
+
+The defendant owed you a legal duty to act (or not act) in a certain way. Examples:
+- Drivers owe other drivers a duty to operate vehicles safely
+- Property owners owe visitors a duty to maintain safe premises
+- Doctors owe patients a duty to provide competent medical care
+
+### 2. Breach of Duty
+
+The defendant breached that duty through action or inaction. This could be:
+- Running a red light
+- Failing to repair a broken staircase
+- Misdiagnosing a medical condition
+
+### 3. Causation
+
+The breach of duty directly caused your injuries. You must show:
+- **Cause in fact**: But for the defendant's conduct, you wouldn't have been injured
+- **Proximate cause**: The injury was a foreseeable result of the defendant's conduct
+
+### 4. Damages
+
+You suffered actual harm (medical bills, lost wages, pain and suffering, etc.) as a result.
+
+## Ohio's Comparative Fault Rule: ORC § 2315.33
+
+Ohio follows a **modified comparative negligence** rule under **ORC § 2315.33**. This means:
+- You can still recover damages even if you were partially at fault
+- **But** your recovery is reduced by your percentage of fault
+- **And** if you're more than 50% at fault, you recover nothing
+
+### How It Works
+
+Example: You're injured in a car accident. The jury finds:
+- Total damages: $100,000
+- Defendant 70% at fault
+- You 30% at fault
+
+You recover: $100,000 × 70% = **$70,000**
+
+But if the jury found you 51% at fault, you'd recover **nothing** under Ohio's 50% bar rule.
+
+### Why This Matters
+
+Insurance companies and defense attorneys will aggressively argue you were more than 50% at fault to bar your recovery entirely. They'll:
+- Claim you were speeding, distracted, or violated traffic laws
+- Argue you should have seen the hazard and avoided it
+- Use any prior statements or social media posts against you
+
+Protecting yourself from comparative fault arguments is critical.
+
+## Statute of Limitations: ORC § 2305.10
+
+**ORC § 2305.10** imposes strict time limits for filing personal injury lawsuits in Ohio:
+
+- **Personal injury claims**: 2 years from the date of injury
+- **Wrongful death claims**: 2 years from the date of death
+- **Medical malpractice**: 1 year from the date you discovered (or should have discovered) the injury, **or** 4 years from the date of the negligent act (whichever comes first)
+
+### What Happens If You Miss the Deadline?
+
+If you file after the statute of limitations expires, your case is **dismissed** and you lose your right to compensation—even if you have a strong claim.
+
+### Exceptions and Tolling
+
+Some circumstances "toll" (pause) the statute of limitations:
+- **Minors**: The clock doesn't start until they turn 18
+- **Fraudulent concealment**: Defendant hid their wrongdoing
+- **Mental incompetence**: Plaintiff was legally incompetent when the injury occurred
+
+But these exceptions are narrow. Don't assume you have extra time—consult an attorney immediately after an injury.
+
+## Types of Damages in Ohio Personal Injury Cases
+
+Ohio law recognizes two categories of damages: **economic** and **noneconomic**.
+
+### Economic Damages
+
+Economic damages are tangible financial losses with objective value:
+- **Medical expenses**: Hospital bills, surgery, medication, physical therapy, future medical care
+- **Lost wages**: Income you couldn't earn while recovering
+- **Loss of earning capacity**: Reduced ability to earn in the future due to permanent injuries
+- **Property damage**: Repair or replacement costs for damaged property (vehicle, personal items)
+
+Economic damages are **not capped** in most cases. You can recover the full amount of your proven financial losses.
+
+### Noneconomic Damages
+
+Noneconomic damages compensate for intangible harms:
+- **Pain and suffering**: Physical pain and discomfort
+- **Emotional distress**: Anxiety, depression, PTSD
+- **Loss of enjoyment of life**: Inability to participate in activities you once loved
+- **Loss of consortium**: Impact on your relationship with your spouse
+
+Noneconomic damages are **subject to caps** in many cases under **ORC § 2315.18**.
+
+## Ohio's Damage Caps: ORC § 2315.18
+
+**ORC § 2315.18** limits noneconomic damages in most personal injury cases to protect defendants (particularly medical providers and businesses) from excessive jury awards.
+
+### General Cap
+
+Noneconomic damages are capped at the **greater of**:
+- **$250,000**, or
+- **Three times your economic damages**, up to a maximum of **$350,000** per plaintiff or **$500,000** per incident
+
+### Exceptions to the Cap
+
+The cap does **not apply** if:
+- The injury resulted in **permanent and substantial physical deformity**, **loss of use of a limb**, or **permanent physical functional injury**
+- The defendant's conduct was **intentional** (assault, battery, intentional infliction of emotional distress)
+
+If you meet one of these exceptions, there's no cap on noneconomic damages.
+
+### Why This Matters
+
+If your injuries are serious but don't meet the "catastrophic" exception, your noneconomic damages are capped even if a jury awards more. This is why **economic damages** (medical bills, lost wages) become so important—they drive the cap calculation.
+
+## Common Personal Injury Claims in Ohio
+
+### Motor Vehicle Accidents
+
+Ohio is an **at-fault state** for car accidents. The driver who caused the accident is liable for damages. You can file a claim:
+- Against the at-fault driver's insurance
+- Through your own underinsured/uninsured motorist coverage
+- By filing a lawsuit if insurance doesn't adequately compensate you
+
+Ohio law requires:
+- Minimum liability insurance ($25,000 per person, $50,000 per accident)
+- But many drivers are uninsured or underinsured
+
+If you're hit by an uninsured driver, you may be limited to your own insurance policy unless you can recover directly from the driver (often difficult).
+
+### Premises Liability (Slip and Fall)
+
+Property owners owe different duties depending on your status:
+- **Invitees** (customers, guests): Owed the highest duty (reasonable care to inspect and warn of hazards)
+- **Licensees** (social guests): Owed a duty to warn of known hazards
+- **Trespassers**: Owed minimal duty (only to avoid willful/wanton harm)
+
+To win a slip and fall case, you must prove:
+- The property owner knew or should have known about the hazard
+- The hazard was unreasonable and not open/obvious
+- The owner failed to correct or warn about it
+
+Property owners often argue:
+- The hazard was "open and obvious" (you should have seen it)
+- You were comparatively negligent
+- They didn't have notice of the hazard
+
+### Medical Malpractice
+
+Medical malpractice claims require:
+- An expert witness to establish the **standard of care**
+- Proof the provider **breached** that standard
+- Proof the breach **caused** your injury
+
+Ohio has special requirements:
+- **Affidavit of merit** must be filed with the complaint (signed by a medical expert)
+- **1-year statute of limitations** from discovery (or 4-year outside limit)
+- **$250,000/$500,000 cap** on noneconomic damages unless catastrophic injury exception applies
+
+Medical malpractice cases are expensive and complex, requiring extensive expert testimony and medical records analysis.
+
+### Wrongful Death: ORC § 2125.01
+
+**ORC § 2125.01** allows certain family members to bring wrongful death claims when a loved one dies due to another's negligence or intentional act.
+
+#### Who Can File?
+
+The **personal representative of the estate** files the claim on behalf of:
+- Surviving spouse
+- Children
+- Parents (if no spouse or children)
+- Next of kin
+
+#### Damages
+
+Wrongful death damages include:
+- **Economic losses**: Lost financial support, medical and funeral expenses
+- **Noneconomic losses**: Loss of companionship, guidance, and consortium
+
+Noneconomic damages are **capped** under ORC § 2315.18 unless exceptions apply.
+
+## Dealing with Insurance Companies
+
+Insurance adjusters are not your friends. Their job is to minimize payouts. Common tactics include:
+
+### Lowball Initial Offers
+
+Adjusters offer quick, low settlements hoping you'll accept before understanding the full extent of your injuries.
+
+### Requesting Recorded Statements
+
+They'll ask for a recorded statement hoping you'll:
+- Admit comparative fault
+- Downplay your injuries
+- Contradict later testimony
+
+**Never give a recorded statement without consulting an attorney.**
+
+### Delaying and Denying Claims
+
+Adjusters may:
+- Request endless documentation
+- Claim the accident wasn't covered
+- Argue you weren't injured or that injuries were pre-existing
+
+### Surveillance and Social Media Monitoring
+
+Insurance companies **will** check your social media. They're looking for:
+- Photos of you engaging in physical activities (contradicting injury claims)
+- Posts suggesting you're exaggerating pain
+- Location data showing you were somewhere other than where you claimed
+
+**Do not post about your accident, injuries, or case on social media.**
+
+## Why You Need a Personal Injury Attorney
+
+### Maximizing Your Recovery
+
+Experienced attorneys know how to:
+- Calculate the **true value** of your claim (including future medical expenses and lost earning capacity)
+- Negotiate aggressively with insurance companies
+- Identify all potential sources of recovery (multiple defendants, insurance policies)
+- Prove noneconomic damages convincingly
+
+### Navigating Legal Complexity
+
+Personal injury law involves:
+- Complex procedural rules and deadlines
+- Expert witnesses and medical records
+- Insurance policy interpretation
+- Discovery and depositions
+- Trial preparation and presentation
+
+Attempting to handle a serious injury claim without an attorney almost always results in lower recovery—or no recovery at all.
+
+### Contingency Fee Arrangements
+
+Most personal injury attorneys work on **contingency**—you pay nothing unless you win. The attorney's fee comes out of your settlement or verdict (typically 33-40%).
+
+This means:
+- No upfront costs
+- No risk if you lose
+- The attorney is motivated to maximize your recovery
+
+## What to Do After an Injury
+
+### Seek Immediate Medical Treatment
+
+Your health comes first. Even if injuries seem minor, see a doctor immediately:
+- Some injuries (internal bleeding, traumatic brain injury) aren't immediately apparent
+- Delayed treatment gives insurance companies ammunition to argue injuries weren't serious
+- Medical records create documentation linking injuries to the accident
+
+### Document Everything
+
+- **Photos**: Injuries, accident scene, property damage, hazards
+- **Witnesses**: Get names and contact information
+- **Reports**: Police reports, incident reports, medical records
+- **Expenses**: Keep receipts for medical bills, medications, travel to appointments, property damage repairs
+
+### Do Not Admit Fault
+
+Never say "I'm sorry" or admit fault at the accident scene. This can be used against you later.
+
+### Contact an Attorney Before Talking to Insurance
+
+Insurance adjusters will contact you quickly. Before giving any statements or signing anything, consult with a personal injury attorney.
+
+## Delaware and Franklin County Personal Injury Practice
+
+### Local Courts
+
+Personal injury cases in Delaware and Franklin Counties are filed in:
+- **Delaware County Court of Common Pleas** (serious injury cases)
+- **Franklin County Court of Common Pleas** (serious injury cases)
+- **Municipal Courts** (smaller claims under $15,000)
+
+### Local Juries
+
+Jury attitudes vary by county:
+- **Delaware County**: More conservative, less likely to award high damages
+- **Franklin County**: More diverse, more plaintiff-friendly in some cases
+
+Experienced local counsel understands these dynamics and adjusts strategy accordingly.
+
+## Protecting Your Claim
+
+Personal injury claims require immediate action:
+- **Evidence disappears**: Security footage is erased, witnesses forget details, property is repaired
+- **Statutes of limitations run**: You have 2 years (or less for medical malpractice)
+- **Insurance companies move fast**: They're building a defense while you're recovering
+
+At Mango Law, we handle personal injury cases with the same aggressive approach we bring to criminal defense. We investigate thoroughly, negotiate effectively, and aren't afraid to take cases to trial when necessary.
+
+If you've been injured due to someone else's negligence in Delaware or Franklin County, contact us at **(740) 602-2155** for a confidential consultation. We'll review your claim, explain your options, and fight for the compensation you deserve.
+
+---
+
+*This article is for educational purposes and does not constitute legal advice. Ohio personal injury law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+    category: 'Personal Injury',
+    date: '2024-12-04',
+    author: 'Dominic Mango',
+  },
+  {
+    slug: 'assault-domestic-violence-defense-ohio',
+    title: 'Assault and Domestic Violence Defense in Ohio: Understanding ORC sections 2903.13, 2919.25, and Protection Orders',
+    excerpt: 'Charged with assault or domestic violence in Ohio? Learn about the laws, penalties, protection orders under ORC sections 2903.13, 2919.25, 3113.31, and defense strategies.',
+    imageUrl: 'https://images.pexels.com/photos/5669619/pexels-photo-5669619.jpeg',
+    content: `Assault and domestic violence charges are among the most common criminal offenses in Ohio, and they carry consequences that reach far beyond criminal penalties. You can lose your firearm rights, face mandatory protection orders, and suffer employment and housing consequences—all from charges that are often based on exaggerated or fabricated allegations.
+
+Understanding Ohio's assault and domestic violence laws is critical if you've been charged or if someone has threatened to file charges against you.
+
+## Ohio's Assault Statutes
+
+### ORC § 2903.13: Assault
+
+**ORC § 2903.13** is Ohio's general assault statute. You violate it if you:
+- **Knowingly cause or attempt to cause physical harm** to another person, or
+- **Recklessly cause serious physical harm** to another person
+
+#### "Knowingly" vs. "Recklessly"
+
+- **Knowingly**: You were aware your conduct would probably cause harm
+- **Recklessly**: You didn't care whether your conduct caused harm (heedless disregard)
+
+#### Penalties
+
+Assault is typically a **first-degree misdemeanor**:
+- Up to 180 days in jail
+- Fines up to $1,000
+- Possible probation and anger management
+
+Penalties increase to a **fourth-degree felony** (6-18 months prison) if the victim is:
+- A police officer, firefighter, or other protected person
+- A healthcare provider at a hospital
+- A school employee on school grounds
+
+### ORC § 2903.11: Felonious Assault
+
+**ORC § 2903.11** is the more serious version of assault. You violate it if you:
+- **Knowingly cause serious physical harm** to another, or
+- **Cause or attempt to cause harm by means of a deadly weapon or dangerous ordnance**
+
+#### What Counts as a "Deadly Weapon"?
+
+Almost anything used to cause harm can be a deadly weapon:
+- Knives, guns, bats
+- Vehicles (if used to strike someone)
+- Rocks, bottles, or other objects used as weapons
+
+#### Penalties
+
+Felonious assault is a **second-degree felony**:
+- 2 to 8 years in prison
+- Fines up to $15,000
+- Mandatory post-release control
+
+If the victim is a peace officer or other protected person, penalties increase to a **first-degree felony** (3-11 years prison).
+
+### ORC § 2903.21: Aggravated Menacing
+
+**ORC § 2903.21** prohibits **knowingly causing another to believe you will cause serious physical harm** to them.
+
+This is a **threat-based offense**—you don't have to actually harm anyone. Examples:
+- "I'm going to kill you"
+- Displaying a weapon in a threatening manner
+- Explicit threats to seriously injure someone
+
+Aggravated menacing is a **first-degree misdemeanor** (up to 6 months jail, $1,000 fine).
+
+## Domestic Violence: ORC § 2919.25
+
+**ORC § 2919.25** is Ohio's domestic violence statute. It applies when the victim is a **family or household member**.
+
+### Who Qualifies as a "Family or Household Member"?
+
+- Spouses and ex-spouses
+- People living together or who lived together
+- Parents of a child in common (even if never married or lived together)
+- Dating or former dating relationships
+- Family members by blood or marriage
+
+### What Conduct Violates ORC § 2919.25?
+
+You violate ORC § 2919.25 if you:
+- **Knowingly cause or attempt to cause physical harm** to a family or household member, or
+- **Recklessly cause serious physical harm** to a family or household member
+
+The conduct is the same as assault (ORC § 2903.13), but the relationship between offender and victim triggers the domestic violence statute.
+
+### Why Domestic Violence Is Treated Differently
+
+Domestic violence carries unique consequences:
+- **Mandatory protection orders**: Judges often issue no-contact orders even pretrial
+- **Firearm prohibitions**: Federal law (18 U.S.C. § 922(g)(9)) prohibits gun possession if convicted
+- **Enhanced penalties**: Subsequent domestic violence convictions carry mandatory jail time
+- **Immigration consequences**: Domestic violence is a deportable offense
+
+### Penalties
+
+First offense domestic violence is typically a **first-degree misdemeanor**:
+- Up to 180 days in jail
+- Fines up to $1,000
+- Mandatory protection orders
+- Possible anger management or batterer intervention programs
+
+Penalties increase dramatically for repeat offenses:
+- **Second offense within 10 years**: Minimum 20 days jail (can't be suspended)
+- **Third or subsequent offense**: Fourth-degree felony (6-18 months prison)
+
+### Mandatory Arrest Policies
+
+Ohio law enforcement agencies follow **mandatory arrest policies** in domestic violence cases. This means:
+- If officers have probable cause to believe domestic violence occurred, they **must** arrest someone
+- Even if the victim doesn't want to press charges
+- Even if the victim recants their statement later
+
+Officers often arrest based solely on the alleged victim's initial statement without independent investigation.
+
+## Civil Protection Orders: ORC § 3113.31
+
+Domestic violence cases often involve **civil protection orders (CPOs)** under **ORC § 3113.31**. These are separate from criminal charges but have serious consequences.
+
+### Ex Parte vs. Full Hearing Orders
+
+- **Ex parte orders**: Issued without you being present based solely on the petitioner's allegations (immediate and temporary)
+- **Full hearing orders**: Issued after a hearing where you can present evidence and cross-examine the petitioner (can last up to 5 years)
+
+### What CPOs Can Do
+
+Protection orders can:
+- Prohibit all contact with the petitioner (no calls, texts, social media, third-party contact)
+- Order you out of your home (even if you own it)
+- Restrict your contact with your children
+- Require you to surrender all firearms immediately
+- Order you to stay away from the petitioner's home, workplace, and school
+
+### Violating a Protection Order: ORC § 2919.27
+
+Violating any term of a CPO is a **separate criminal offense** under **ORC § 2919.27**:
+- First violation: First-degree misdemeanor (up to 180 days jail)
+- Subsequent violations: Fifth-degree felony (6-12 months prison)
+
+Even accidental contact (running into the petitioner at a store) can be charged as a violation.
+
+## Common Defenses to Assault and Domestic Violence Charges
+
+### Self-Defense
+
+Ohio law allows you to use reasonable force to defend yourself. You can argue self-defense if:
+- You reasonably believed you or another person was in imminent danger
+- You used no more force than necessary to defend yourself
+- You didn't provoke the attack
+
+Ohio's "Stand Your Ground" law (ORC § 2901.09) removes the duty to retreat before using force in self-defense.
+
+### Defense of Others
+
+You can use force to protect someone else if:
+- You reasonably believed they were in danger
+- You used reasonable force
+- The person you defended would have been justified in using force themselves
+
+### Mutual Combat
+
+If both parties were willing participants in a fight, both can be charged. However, you may be able to argue:
+- The alleged victim was the primary aggressor
+- You only defended yourself
+- The allegations are exaggerated to shift blame
+
+### False Allegations
+
+False allegations are common in domestic violence cases, particularly during:
+- **Divorce and custody disputes**: Fabricating allegations to gain advantage in family court
+- **Breakups**: Retaliation or attempts to control the other person
+- **Property disputes**: Using criminal charges as leverage
+
+Defense strategies include:
+- **Text messages and communications**: Showing consensual or contradictory interactions
+- **Witness testimony**: People who were present or know both parties
+- **Motive evidence**: Showing why the alleged victim would fabricate allegations
+- **Prior false allegations**: History of similar accusations
+
+### Lack of Evidence
+
+The prosecution must prove guilt **beyond a reasonable doubt**. If their case relies solely on:
+- Uncorroborated victim testimony (no injuries, no witnesses)
+- Inconsistent statements
+- Lack of physical evidence
+
+You may have a strong defense for acquittal or dismissal.
+
+### Constitutional Violations
+
+If law enforcement:
+- Entered your home without a warrant or consent
+- Conducted an illegal search
+- Coerced your statements or confession
+
+Evidence obtained in violation of your rights can be suppressed, weakening or destroying the prosecution's case.
+
+## Collateral Consequences of Convictions
+
+Assault and domestic violence convictions carry long-term consequences:
+
+### Firearm Prohibitions
+
+Federal law (18 U.S.C. § 922(g)(9)) prohibits anyone convicted of a "misdemeanor crime of domestic violence" from possessing firearms **for life**. Ohio law mirrors this.
+
+This affects:
+- Gun owners
+- Hunters
+- Law enforcement and military personnel
+- Anyone who values Second Amendment rights
+
+### Employment Consequences
+
+Convictions can result in:
+- Termination from current employment
+- Inability to obtain professional licenses (healthcare, education, law enforcement)
+- Disqualification from security clearances
+- Background check failures
+
+### Housing and Custody Impact
+
+Convictions affect:
+- Rental applications (landlords can refuse based on criminal records)
+- Child custody determinations (family courts take domestic violence seriously)
+- Visitation rights (may be supervised or restricted)
+
+### Immigration Consequences
+
+Domestic violence is an **aggravated felony** under federal immigration law. Convictions can result in:
+- Deportation (even for legal permanent residents)
+- Inadmissibility (inability to re-enter the U.S.)
+- Denial of citizenship applications
+
+## Delaware and Franklin County Domestic Violence Prosecutions
+
+### Specialized Domestic Violence Units
+
+**Delaware County Prosecutor's Office** and **Franklin County Prosecutor's Office** have specialized domestic violence units that:
+- Prosecute aggressively even when victims don't want to cooperate
+- Use "evidence-based prosecution" (photos, 911 calls, officer observations)
+- Seek mandatory jail time and protection orders
+
+### Victim Advocates
+
+Victim advocates work with alleged victims to encourage cooperation with prosecution and discourage recanting. They:
+- Accompany victims to court
+- Help obtain protection orders
+- Provide resources and support
+
+This makes domestic violence cases harder to resolve favorably, even when allegations are exaggerated or false.
+
+### Local Court Practices
+
+**Delaware Municipal Court** and **Franklin County Municipal Court** handle misdemeanor domestic violence cases. Judges:
+- Issue protection orders liberally
+- Impose mandatory anger management and batterer intervention programs
+- Take allegations seriously even when evidence is weak
+
+## What to Do If You're Charged
+
+### Immediate Steps
+
+1. **Do not contact the alleged victim** for any reason (even to "explain yourself")
+2. **Do not discuss the case** with friends, family, or on social media
+3. **Comply with all protection orders** if one has been issued
+4. **Document everything**: injuries you sustained, witnesses, communications with the alleged victim
+5. **Contact an attorney immediately**
+
+### Building Your Defense
+
+- **Gather evidence**: Text messages, social media posts, photos, videos, receipts
+- **Identify witnesses**: Anyone who saw what happened or knows both parties
+- **Preserve electronic evidence**: Phones, computers, security cameras
+- **Medical records**: If you sustained injuries, document them
+
+### Do Not Accept Plea Deals Without Understanding Consequences
+
+Prosecutors often pressure defendants into pleading guilty to "just a misdemeanor." But domestic violence misdemeanors carry:
+- Lifetime firearm prohibitions
+- Immigration consequences
+- Employment and custody impacts
+
+Never plead guilty without consulting an experienced attorney who understands the collateral consequences.
+
+## Why You Need an Experienced Assault and Domestic Violence Defense Attorney
+
+Assault and domestic violence cases are:
+- Emotionally charged and based on he-said/she-said testimony
+- Aggressively prosecuted even when evidence is weak
+- Laden with collateral consequences that destroy lives
+
+At Mango Law, we've defended hundreds of assault and domestic violence cases in Delaware and Franklin County. We know:
+- How to cross-examine alleged victims and expose inconsistencies
+- How to challenge protection orders and minimize restrictions
+- How to negotiate for reduced charges or dismissals
+- How to protect your firearm rights, custody rights, and employment
+
+If you're facing assault or domestic violence charges in Delaware or Franklin County, contact us immediately at **(740) 602-2155** for a confidential case evaluation. Early intervention can make all the difference.
+
+---
+
+*This article is for educational purposes and does not constitute legal advice. Ohio assault and domestic violence law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+    category: 'Criminal Defense',
+    date: '2024-12-03',
+    author: 'Dominic Mango',
+  },
 ];
