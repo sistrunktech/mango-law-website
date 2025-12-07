@@ -126,22 +126,22 @@ export const practiceAreas: PracticeArea[] = [
     summary: 'Discreet, aggressive defense with attention to privacy, investigation gaps, and expert testimony.',
     icon: ShieldAlert,
     practiceAreaKey: 'sex-crimes',
-    orcSection: '2907.02',
-    orcTitle: 'Rape',
-    orcDefinition: 'Criminalizes sexual conduct when the other person lacks consent due to force, threat, or incapacity.',
-    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2907.02',
+    orcSection: '2907.03',
+    orcTitle: 'Sexual Battery',
+    orcDefinition: 'Prohibits sexual conduct when consent cannot be freely given due to age, mental condition, or position of authority.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2907.03',
     orcExtras: [
-      {
-        section: '2907.03',
-        label: 'Sexual Battery',
-        definition: 'Sexual conduct when consent cannot be freely given due to age or position of authority.',
-        link: 'https://codes.ohio.gov/ohio-revised-code/section-2907.03',
-      },
       {
         section: '2907.04',
         label: 'Sexual Conduct with Minor',
         definition: 'Sexual conduct with someone between 13 and 16 years old.',
         link: 'https://codes.ohio.gov/ohio-revised-code/section-2907.04',
+      },
+      {
+        section: '2907.21',
+        label: 'Importuning',
+        definition: 'Soliciting a person to engage in sexual activity when the offender knows the person is under 16 or is a law enforcement officer posing as a person under 16.',
+        link: 'https://codes.ohio.gov/ohio-revised-code/section-2907.21',
       },
       {
         section: '2903.214',
