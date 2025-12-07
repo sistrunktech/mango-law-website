@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { practiceAreas } from '../data/practiceAreas';
+import ORCLabel from './ORCLabel';
 
 export default function PracticeAreaCardGrid() {
   return (
@@ -53,6 +54,17 @@ export default function PracticeAreaCardGrid() {
                 <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mango">
                   {area.title}
                 </h3>
+
+                {area.orcSection && (
+                  <div className="mt-2">
+                    <ORCLabel
+                      section={area.orcSection}
+                      variant="micro"
+                      className="text-brand-black/50 hover:text-brand-mango"
+                    />
+                  </div>
+                )}
+
                 <p className="mt-3 text-sm leading-relaxed text-brand-black/60">
                   {area.summary}
                 </p>

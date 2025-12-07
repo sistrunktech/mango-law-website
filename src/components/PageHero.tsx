@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
+import ORCLabel from './ORCLabel';
 
 type Props = {
   eyebrow?: string;
@@ -22,6 +23,11 @@ type Props = {
   compact?: boolean;
   /** Align content to the left (for practice area pages) */
   alignLeft?: boolean;
+  /** ORC Section for legal citation */
+  orcSection?: string;
+  orcTitle?: string;
+  orcDefinition?: string;
+  orcLink?: string;
 };
 
 const quickActions = [
@@ -57,6 +63,10 @@ export default function PageHero({
   showQuickActions = true,
   compact = false,
   alignLeft = false,
+  orcSection,
+  orcTitle,
+  orcDefinition,
+  orcLink,
 }: Props) {
   const isDark = variant === 'dark';
 
@@ -146,6 +156,17 @@ export default function PageHero({
             ].join(' ')}>
               <span className="text-brand-offWhite">{title}</span>
             </h1>
+
+            {/* ORC Label */}
+            {orcSection && (
+              <div className="mt-4">
+                <ORCLabel
+                  section={orcSection}
+                  variant="micro"
+                  className="text-brand-mango/90 hover:text-brand-mango"
+                />
+              </div>
+            )}
 
             {/* Description */}
             {description && (
