@@ -40,6 +40,7 @@ function App() {
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/glossary" element={<GlossaryPage />} />
         <Route path="/of-counsel" element={<OfCounselPage />} />
+        <Route path="/brand-guide" element={<BrandGuidelinesPage />} />
         <Route path="/brand-guidelines" element={<BrandGuidelinesPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />

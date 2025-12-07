@@ -6,7 +6,9 @@ export interface SEOProps {
   description?: string;
   image?: string;
   url?: string;
+  canonicalUrl?: string;
   type?: 'website' | 'article';
+  noindex?: boolean;
   structuredData?: object;
 }
 
@@ -23,7 +25,9 @@ export function SEO({
   description,
   image,
   url,
+  canonicalUrl,
   type = 'website',
+  noindex = false,
   structuredData,
 }: SEOProps) {
   const location = useLocation();
@@ -36,7 +40,7 @@ export function SEO({
       ? image
       : `${siteUrl}${image}`
     : `${siteUrl}${defaultSEO.image}`;
-  const fullUrl = url || `${siteUrl}${location.pathname}`;
+  const fullUrl = canonicalUrl || url || `${siteUrl}${location.pathname}`;
 
   useEffect(() => {
     document.title = fullTitle;
@@ -54,6 +58,10 @@ export function SEO({
       { name: 'twitter:description', content: fullDescription },
       { name: 'twitter:image', content: fullImage },
     ];
+
+    if (noindex) {
+      metaTags.push({ name: 'robots', content: 'noindex, nofollow' });
+    }
 
     metaTags.forEach(({ name, property, content }) => {
       const attr = name ? 'name' : 'property';
@@ -88,7 +96,7 @@ export function SEO({
       }
       script.textContent = JSON.stringify(structuredData);
     }
-  }, [fullTitle, fullDescription, fullImage, fullUrl, type, structuredData]);
+  }, [fullTitle, fullDescription, fullImage, fullUrl, type, noindex, structuredData]);
 
   return null;
 }

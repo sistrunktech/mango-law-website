@@ -3,25 +3,25 @@ export const testimonials = [
     name: 'Tyler S.',
     location: 'Delaware County, OH',
     quote:
-      'With my OVI case I was very worried at first; I had no idea what was going to happen. Nick was very professional and confident, which provided me with certainty during a stressful time. He got me a fair deal and I was able to move on with my life. I strongly recommend Dominic "Nick" Mango to anyone who values working with honest, trustworthy people.',
+      'With my OVI case I was very worried at first; I had no idea what was going to happen. As the process moved along, Nick (Dominic) was very professional and confident in his representation with my case. This provided a lot of certainty for me. He was able to get me a fair deal, which allowed me to move on and focus on the future. I highly recommend Dominic "Nick" Mango to anyone that likes working with good honest people.',
   },
   {
     name: 'Natalie P.',
     location: 'Franklin County, OH',
     quote:
-      'You made me feel very comfortable and relaxed the way you explained things to me, unlike other lawyers. I understood everything you said, and you were not pushy. You are truly a professional.',
+      'You made me feel very comfortable and relaxed the way you explained things to me, unlike other lawyers, I understood everything you said and you were not pushy like them. You are truly a professional.',
   },
   {
     name: 'Sean R.',
     location: 'Delaware County, OH',
     quote:
-      'In the duration of being a client of Mango Law Offices, I received significant attention, substantial intelligence, and precise information. This level of service directly contributed to a successful outcome in my case. Thank you, Dominic.',
+      'In the duration of being a client of Mango Law Offices, I received significant attention, substantial intelligence, and precise information that led to a successful outcome in the representation of my case from Mr. Mango.Take care & hope to talk soon.',
   },
   {
     name: 'Hazel L.',
     location: 'Franklin County, OH',
     quote:
-      'Mr. Mango, I want to take this time out to say thanks. You have not even the slightest idea the fear and anxiety I had about my cases. Thank you for standing by me, honoring your word, and being a rare example among legal representatives. Your staff is nice, courteous, and professional. One thank you is not enough.',
+      'Mr. Mango I want to take this time out to say thanks... You have not even the slightest idea the fear and anxiety I had about these cases happening to begin with, and then parallel to each other. As a legal representative you comforted your client and stood by your word and I must say that don\'t doesn\'t happen a lot in and any case, let alone legal cases. I just really wanted to take time out to tell you that obviously you have picked the right career choice because your great at it and your staff was nothing but always nice and courteous. One thank you is not enough, so again thanks.',
   },
   {
     name: 'Alex Hawks',
