@@ -3,6 +3,74 @@ import { Calendar, User, ArrowLeft } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
 
+function parseMarkdownText(text: string): JSX.Element[] {
+  const parts: JSX.Element[] = [];
+  let currentIndex = 0;
+  let key = 0;
+
+  const boldRegex = /\*\*(.+?)\*\*/g;
+  const italicRegex = /\*(.+?)\*/g;
+  const linkRegex = /\[(.+?)\]\((.+?)\)/g;
+  const codeRegex = /`(.+?)`/g;
+
+  const patterns = [
+    { regex: boldRegex, type: 'bold' as const },
+    { regex: linkRegex, type: 'link' as const },
+    { regex: codeRegex, type: 'code' as const },
+    { regex: italicRegex, type: 'italic' as const },
+  ];
+
+  const matches: Array<{ index: number; length: number; type: string; match: RegExpExecArray }> = [];
+
+  patterns.forEach(({ regex, type }) => {
+    let match;
+    const r = new RegExp(regex);
+    while ((match = r.exec(text)) !== null) {
+      matches.push({ index: match.index, length: match[0].length, type, match });
+    }
+  });
+
+  matches.sort((a, b) => a.index - b.index);
+
+  matches.forEach((m) => {
+    if (m.index > currentIndex) {
+      parts.push(<span key={key++}>{text.slice(currentIndex, m.index)}</span>);
+    }
+
+    if (m.type === 'bold') {
+      parts.push(<strong key={key++} className="font-semibold text-brand-black">{m.match[1]}</strong>);
+    } else if (m.type === 'link') {
+      parts.push(
+        <a
+          key={key++}
+          href={m.match[2]}
+          className="text-brand-mango underline hover:text-brand-leaf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {m.match[1]}
+        </a>
+      );
+    } else if (m.type === 'code') {
+      parts.push(
+        <code key={key++} className="rounded bg-brand-black/5 px-1.5 py-0.5 font-mono text-sm">
+          {m.match[1]}
+        </code>
+      );
+    } else if (m.type === 'italic') {
+      parts.push(<em key={key++}>{m.match[1]}</em>);
+    }
+
+    currentIndex = m.index + m.length;
+  });
+
+  if (currentIndex < text.length) {
+    parts.push(<span key={key++}>{text.slice(currentIndex)}</span>);
+  }
+
+  return parts;
+}
+
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = blogPosts.find((p) => p.slug === slug);
@@ -58,6 +126,15 @@ export default function BlogPostPage() {
             </div>
           </div>
 
+          {post.imageUrl && (
+            <img
+              src={post.imageUrl}
+              alt={post.title}
+              className="mt-8 w-full rounded-2xl object-cover shadow-lg"
+              style={{ maxHeight: '500px' }}
+            />
+          )}
+
           <div className="prose prose-lg mt-12 max-w-none">
             {post.content.split('\n\n').map((paragraph, index) => {
               if (paragraph.startsWith('## ')) {
@@ -89,7 +166,7 @@ export default function BlogPostPage() {
               }
               return (
                 <p key={index} className="leading-relaxed text-brand-black/80">
-                  {paragraph}
+                  {parseMarkdownText(paragraph)}
                 </p>
               );
             })}

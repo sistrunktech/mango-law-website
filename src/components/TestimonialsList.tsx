@@ -26,8 +26,11 @@ export default function TestimonialsList() {
                 <Quote className="h-4 w-4 text-brand-mango" />
               </div>
               <p className="mt-3 text-sm text-brand-black/80 leading-relaxed">"{item.quote}"</p>
-              <div className="mt-4 flex items-center gap-3 pt-3 border-t border-brand-black/10">
+              <div className="mt-4 pt-3 border-t border-brand-black/10">
                 <p className="text-xs font-bold uppercase tracking-[0.1em] text-brand-gold">{item.name}</p>
+                {'location' in item && item.location && (
+                  <p className="text-xs text-brand-black/60 mt-1">{item.location}</p>
+                )}
               </div>
             </div>
           ))}

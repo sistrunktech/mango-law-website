@@ -93,16 +93,56 @@ export default function AboutPage() {
               <div className="space-y-4">
                 <h3 className="font-display text-2xl font-semibold text-brand-black">Experience & Background</h3>
                 <p className="text-brand-black/80 leading-relaxed">
-                  With over 15 years of criminal defense experience in Central Ohio, Nick has handled thousands of cases
-                  ranging from traffic violations to serious felonies. His practice is built on thorough preparation,
-                  strategic motion work, and clear communication with clients during what is often the most stressful time
-                  of their lives.
+                  Dominic Mango is a graduate of The Ohio State University's Moritz College of Law and has been practicing
+                  criminal defense in Delaware and Franklin Counties since 2001. He is licensed to practice in all Ohio courts,
+                  including Federal Court and the Southern District of Ohio. With hundreds of jury trials under his belt,
+                  Dominic has extensive experience in jury selection, trial strategy, and courtroom advocacy.
                 </p>
                 <p className="text-brand-black/80 leading-relaxed">
-                  Nick understands the Delaware and Franklin County court systems, the local prosecutors, and what it takes
-                  to achieve favorable outcomes. He knows when to negotiate and when to fight, always keeping your best
-                  interests at the forefront of every decision.
+                  His background includes serving as an Assistant Prosecuting Attorney in Delaware County (1999-2001), where
+                  he gained invaluable insight into how prosecutors build cases. This prosecutor's perspective, combined with
+                  over two decades of defense work, gives him a strategic advantage in identifying weaknesses and defending clients.
                 </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Certifications & Training</h3>
+                <ul className="space-y-3 text-brand-black/80">
+                  <li className="flex gap-3">
+                    <span className="text-brand-mango font-bold">•</span>
+                    <span>Certified in the operation and calibration of BAC DataMaster breath testing instruments</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-brand-mango font-bold">•</span>
+                    <span>Certified in NHTSA Standardized Field Sobriety Test administration and evaluation</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-brand-mango font-bold">•</span>
+                    <span>Regular presenter at continuing legal education (CLE) seminars on OVI defense and trial practice</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-brand-mango font-bold">•</span>
+                    <span>Speaker at OVI driver intervention programs in Franklin and Delaware Counties</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Professional Timeline</h3>
+                <div className="space-y-3">
+                  <div className="border-l-4 border-brand-mango pl-4">
+                    <p className="font-semibold text-brand-black">2009 – Present</p>
+                    <p className="text-brand-black/70">Attorney, Mango Law LLC</p>
+                  </div>
+                  <div className="border-l-4 border-brand-leaf pl-4">
+                    <p className="font-semibold text-brand-black">2001 – 2009</p>
+                    <p className="text-brand-black/70">Associate Attorney, Local Firm</p>
+                  </div>
+                  <div className="border-l-4 border-brand-teal pl-4">
+                    <p className="font-semibold text-brand-black">1999 – 2001</p>
+                    <p className="text-brand-black/70">Assistant Prosecuting Attorney, Delaware County, Ohio</p>
+                  </div>
+                </div>
               </div>
 
               <div className="space-y-4">

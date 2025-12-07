@@ -14,7 +14,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'understanding-ovi-dui-charges-ohio',
     title: 'Understanding OVI/DUI Charges in Ohio',
     excerpt: 'Learn about the differences between OVI and DUI charges in Ohio, potential penalties, and how proper defense can protect your record.',
-    imageUrl: 'https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg',
+    imageUrl: '/images/generated/blog-ovi-charges.png',
     content: `Operating a vehicle under the influence (OVI) is the legal term Ohio uses for what many other states call DUI (Driving Under the Influence). Whether you're facing a first offense or have prior convictions, understanding the charges and penalties is critical.
 
 ## What is OVI in Ohio?
@@ -48,7 +48,7 @@ Early intervention is key. Contact us immediately if you've been charged with OV
     slug: 'motion-practice-criminal-defense',
     title: 'The Power of Motion Practice in Criminal Defense',
     excerpt: 'Discover how strategic pre-trial motions can suppress evidence, dismiss charges, or significantly improve your case outcome.',
-    imageUrl: 'https://images.pexels.com/photos/8111855/pexels-photo-8111855.jpeg',
+    imageUrl: '/images/generated/blog-motion-practice.png',
     content: `Motion practice is one of the most powerful tools in criminal defense. Many cases are won or significantly improved before trial through properly crafted and argued motions.
 
 ## What Are Pre-Trial Motions?
@@ -88,7 +88,7 @@ If you're facing charges, don't wait. Early motion practice can make all the dif
     slug: 'drug-possession-vs-trafficking-ohio',
     title: 'Drug Possession vs. Trafficking: Understanding Ohio Drug Crime Charges',
     excerpt: 'Learn the critical differences between possession and trafficking charges in Ohio, and how these distinctions affect your defense strategy.',
-    imageUrl: 'https://images.pexels.com/photos/5668842/pexels-photo-5668842.jpeg',
+    imageUrl: '/images/generated/blog-drug-possession-trafficking.png',
     content: `Ohio drug laws distinguish between simple possession and drug trafficking, with dramatically different penalties and defense strategies required for each charge.
 
 ## Drug Possession in Ohio
@@ -149,7 +149,7 @@ Contact us for a confidential consultation if you're facing drug charges in Dela
     slug: 'white-collar-crime-defense-ohio',
     title: 'White Collar Crime Defense: What You Need to Know',
     excerpt: 'Facing fraud, embezzlement, or other white collar charges? Learn about defense strategies and how to protect your professional reputation.',
-    imageUrl: 'https://images.pexels.com/photos/8111563/pexels-photo-8111563.jpeg',
+    imageUrl: '/images/generated/blog-white-collar-defense.png',
     content: `White collar crimes are non-violent offenses typically committed in business or professional settings. These charges can devastate your career, reputation, and freedom—even if you're ultimately found not guilty.
 
 ## Common White Collar Charges in Ohio
@@ -225,7 +225,7 @@ If you're under investigation or have been charged with a white collar offense, 
     slug: 'refuse-field-sobriety-test-ohio',
     title: 'Can I Refuse Field Sobriety Tests in Ohio? Your Rights Explained',
     excerpt: 'Learn your rights regarding field sobriety tests in Ohio, the consequences of refusal, and how this decision affects your OVI defense strategy.',
-    imageUrl: 'https://images.pexels.com/photos/8815997/pexels-photo-8815997.jpeg',
+    imageUrl: '/images/generated/blog-field-sobriety-refusal.png',
     content: `If you've been pulled over for suspected OVI/DUI in Ohio, one of the most important decisions you'll make is whether to perform field sobriety tests. Unlike chemical tests, **you have the right to refuse field sobriety tests in Ohio**—but understanding the implications is critical.
 
 ## What Are Field Sobriety Tests?
@@ -322,7 +322,7 @@ Contact us at **(740) 602-2155** for a confidential case evaluation.`,
     slug: 'ohio-dui-lookback-period',
     title: 'Ohio DUI Lookback Period: How Past Convictions Affect Your Case',
     excerpt: 'Understanding Ohio\'s 10-year lookback period for OVI offenses and how prior convictions impact penalties, license suspension, and sentencing.',
-    imageUrl: 'https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg',
+    imageUrl: '/images/generated/blog-dui-lookback-period.png',
     content: `If you're facing OVI/DUI charges in Ohio and have a prior conviction on your record, understanding the **lookback period** is critical. Ohio uses a 10-year window to determine whether your current offense counts as a repeat violation—and the difference in penalties is dramatic.
 
 ## What Is the Lookback Period?
@@ -755,7 +755,7 @@ At Mango Law, we've handled hundreds of repeat OVI cases in Delaware and Frankli
     slug: 'ex-parte-protection-orders-ohio-defense',
     title: 'Ex Parte Protection Orders in Ohio: What to Do When Accused Without Notice',
     excerpt: 'Hit with an ex parte CPO in Ohio? You were never heard, but your life changed anyway. Learn what these orders mean, why they feel so unfair, and how to defend yourself at the full hearing.',
-    imageUrl: 'https://images.pexels.com/photos/6077326/pexels-photo-6077326.jpeg',
+    imageUrl: '/images/generated/blog-ex-parte-protection-orders.png',
     content: `If you've been served with an ex parte civil protection order in Delaware or Franklin County, you know the feeling: blindsided. You received court papers. Someone made allegations. A judge signed an order. You've been removed from your home, told to stay away from someone, maybe even forced to surrender your firearms—and you never got to say a word in your defense.
 
 Ex parte protection orders are issued without you being present. No attorney. No testimony. No chance to explain what actually happened. The petitioner tells their side of the story, and the judge decides based only on what they hear in that moment. By the time you find out, the order is already in effect.
@@ -1019,7 +1019,7 @@ We've handled these cases. We know what works. We know how to prepare, how to qu
     slug: 'ohio-weapons-charges-ccw-defense',
     title: 'Ohio Weapons Charges: CCW, Improper Handling, and Weapons Disability Defense',
     excerpt: 'Facing weapons charges in Ohio? Learn about CCW violations, improper firearm handling, weapons disability, and defense strategies under ORC sections 2923.12, 2923.13, and 2923.16.',
-    imageUrl: 'https://images.pexels.com/photos/1263419/pexels-photo-1263419.jpeg',
+    imageUrl: '/images/generated/blog-ohio-weapons-charges.png',
     content: `Ohio's gun laws create criminal liability in situations many gun owners don't anticipate. You can be charged with weapons offenses even if you legally own your firearm, have no criminal intent, and made an honest mistake. Understanding Ohio Revised Code Chapter 2923—the state's weapons statute—is critical for anyone who owns, carries, or transports firearms in Ohio.
 
 ## Ohio's Main Weapons Offenses
@@ -1327,7 +1327,7 @@ If you're facing weapons charges under ORC §§ 2923.12, 2923.13, or 2923.16, co
     slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
     title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
     excerpt: 'Accused of a sex crime in Ohio? Learn about sexual battery charges, sex offender registration, defenses under ORC sections 2907.03, 2907.04, 2950.01, and what these charges mean for your future.',
-    imageUrl: 'https://images.pexels.com/photos/8730280/pexels-photo-8730280.jpeg',
+    imageUrl: '/images/generated/blog-sex-crimes-defense.png',
     content: `Sex crime allegations are unlike any other criminal charge. The stigma is immediate and severe. The consequences reach far beyond criminal penalties—affecting where you can live, work, and travel for the rest of your life. Being accused doesn't mean you're guilty, but it means you need experienced legal representation immediately.
 
 Ohio's sex crime statutes are found primarily in **ORC Chapter 2907** and the sex offender registration law, **ORC Chapter 2950**. These laws are complex, the penalties are harsh, and the registration requirements are life-altering.
@@ -1672,7 +1672,7 @@ If you're facing sex crime charges or under investigation in Delaware or Frankli
     slug: 'personal-injury-claims-ohio-negligence-law',
     title: 'Personal Injury Claims in Ohio: Understanding Negligence, Damages, and Your Legal Rights',
     excerpt: 'Injured due to someone else\'s negligence in Ohio? Learn about personal injury law, comparative fault, damage caps under ORC sections 2315.18, 2305.10, and how to protect your claim.',
-    imageUrl: 'https://images.pexels.com/photos/8899214/pexels-photo-8899214.jpeg',
+    imageUrl: '/images/generated/blog-personal-injury-claims.png',
     content: `When you're injured due to someone else's negligence, Ohio law provides a path to compensation. But personal injury claims are more complex than many people realize. Understanding Ohio's negligence laws, damage caps, and procedural rules is critical to protecting your rights and maximizing your recovery.
 
 ## What Is Personal Injury Law in Ohio?
@@ -2001,7 +2001,7 @@ If you've been injured due to someone else's negligence in Delaware or Franklin 
     slug: 'assault-domestic-violence-defense-ohio',
     title: 'Assault and Domestic Violence Defense in Ohio: Understanding ORC sections 2903.13, 2919.25, and Protection Orders',
     excerpt: 'Charged with assault or domestic violence in Ohio? Learn about the laws, penalties, protection orders under ORC sections 2903.13, 2919.25, 3113.31, and defense strategies.',
-    imageUrl: 'https://images.pexels.com/photos/5669619/pexels-photo-5669619.jpeg',
+    imageUrl: '/images/generated/blog-assault-domestic-violence.png',
     content: `Assault and domestic violence charges are among the most common criminal offenses in Ohio, and they carry consequences that reach far beyond criminal penalties. You can lose your firearm rights, face mandatory protection orders, and suffer employment and housing consequences—all from charges that are often based on exaggerated or fabricated allegations.
 
 Understanding Ohio's assault and domestic violence laws is critical if you've been charged or if someone has threatened to file charges against you.
