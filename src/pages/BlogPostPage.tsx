@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
+import { SEO } from '../lib/seo';
 
 function parseMarkdownText(text: string): JSX.Element[] {
   const parts: JSX.Element[] = [];
@@ -91,6 +92,12 @@ export default function BlogPostPage() {
 
   return (
     <>
+      <SEO
+        title={`${post.title} | Mango Law Blog`}
+        description={post.excerpt}
+        image={post.imageUrl}
+        type="article"
+      />
       <section className="bg-white py-12">
         <div className="container max-w-4xl">
           <Link

@@ -1,9 +1,15 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
+import { SEO, attorneySchema } from '../lib/seo';
 
 export default function AboutPage() {
   return (
     <>
+      <SEO
+        title="About Dominic Mango | Criminal Defense Attorney Delaware, OH"
+        description="OSU Moritz College of Law graduate with 20+ years of criminal defense experience. Former prosecutor with hundreds of jury trials. Certified in BAC DataMaster and NHTSA field sobriety testing."
+        structuredData={attorneySchema}
+      />
       <PageHero
         eyebrow="About"
         title="Dominic Mango — focused on clear, assertive defense in Delaware, Ohio."

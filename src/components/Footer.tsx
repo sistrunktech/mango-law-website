@@ -4,7 +4,7 @@ import { navLinks, practiceAreaLinks } from '../data/navigation';
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-brand-forest text-brand-offWhite">
+    <footer className="relative overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-brand-forest text-brand-offWhite" role="contentinfo">
       {/* Top accent bar - gradient only */}
       <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-brand-leaf via-brand-mango to-brand-leaf" />
       

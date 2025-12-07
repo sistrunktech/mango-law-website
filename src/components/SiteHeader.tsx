@@ -11,7 +11,7 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="relative z-50">
+    <header className="relative z-50" role="banner">
       {/* Top bar - Forest green accent */}
       <div className="bg-brand-leaf">
         <div className="container flex items-center justify-between py-2">
@@ -40,8 +40,9 @@ export default function SiteHeader() {
           <button
             type="button"
             className="flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-sm font-medium text-white transition-all hover:bg-white/30"
+            aria-label="Open chat"
           >
-            <MessageCircle className="h-4 w-4" />
+            <MessageCircle className="h-4 w-4" aria-hidden="true" />
             <span className="hidden sm:inline">Chat with us</span>
           </button>
         </div>

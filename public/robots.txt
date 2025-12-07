@@ -1,0 +1,10 @@
+# robots.txt for mango.law
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://mango.law/sitemap.xml
+
+# Disallow admin or internal pages if any
+Disallow: /brand-guidelines

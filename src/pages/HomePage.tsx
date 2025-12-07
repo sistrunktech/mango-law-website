@@ -7,6 +7,7 @@ import TestimonialsList from '../components/TestimonialsList';
 import CTASection from '../components/CTASection';
 import LocationBlock from '../components/LocationBlock';
 import ContactForm from '../components/ContactForm';
+import { SEO, localBusinessSchema } from '../lib/seo';
 
 const whyChooseUs = [
   {
@@ -34,6 +35,11 @@ const whyChooseUs = [
 export default function HomePage() {
   return (
     <>
+      <SEO
+        title="Criminal Defense & OVI Attorney Delaware, OH | Mango Law LLC"
+        description="Experienced criminal defense attorney serving Delaware and Franklin Counties. Over 20 years defending OVI/DUI, drug crimes, assault, sex crimes, and white collar cases. Former prosecutor."
+        structuredData={localBusinessSchema}
+      />
       <PageHero
         eyebrow="Delaware County Criminal Defense"
         subtitle="Protect your rights and future with experienced, assertive advocacy."

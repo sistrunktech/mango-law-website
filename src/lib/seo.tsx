@@ -1,0 +1,230 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+export interface SEOProps {
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  type?: 'website' | 'article';
+  structuredData?: object;
+}
+
+const defaultSEO = {
+  title: 'Mango Law LLC - Criminal Defense & OVI Attorney in Delaware, OH',
+  description:
+    'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. Over 20 years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
+  image: '/images/brand/mango-logo-horizontal.svg',
+  type: 'website' as const,
+};
+
+export function SEO({
+  title,
+  description,
+  image,
+  url,
+  type = 'website',
+  structuredData,
+}: SEOProps) {
+  const location = useLocation();
+
+  const siteUrl = 'https://mango.law';
+  const fullTitle = title ?? defaultSEO.title;
+  const fullDescription = description ?? defaultSEO.description;
+  const fullImage = image
+    ? image.startsWith('http')
+      ? image
+      : `${siteUrl}${image}`
+    : `${siteUrl}${defaultSEO.image}`;
+  const fullUrl = url || `${siteUrl}${location.pathname}`;
+
+  useEffect(() => {
+    document.title = fullTitle;
+
+    const metaTags: Array<{ name?: string; property?: string; content: string }> = [
+      { name: 'description', content: fullDescription },
+      { property: 'og:title', content: fullTitle },
+      { property: 'og:description', content: fullDescription },
+      { property: 'og:image', content: fullImage },
+      { property: 'og:url', content: fullUrl },
+      { property: 'og:type', content: type },
+      { property: 'og:site_name', content: 'Mango Law LLC' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: fullTitle },
+      { name: 'twitter:description', content: fullDescription },
+      { name: 'twitter:image', content: fullImage },
+    ];
+
+    metaTags.forEach(({ name, property, content }) => {
+      const attr = name ? 'name' : 'property';
+      const value = (name || property) as string;
+      let element = document.querySelector(`meta[${attr}="${value}"]`) as HTMLMetaElement | null;
+
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attr, value);
+        document.head.appendChild(element);
+      }
+
+      element.setAttribute('content', content);
+    });
+
+    const canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (canonicalLink) {
+      canonicalLink.href = fullUrl;
+    } else {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = fullUrl;
+      document.head.appendChild(link);
+    }
+
+    if (structuredData) {
+      let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement | null;
+      if (!script) {
+        script = document.createElement('script');
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(structuredData);
+    }
+  }, [fullTitle, fullDescription, fullImage, fullUrl, type, structuredData]);
+
+  return null;
+}
+
+export const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LegalService',
+  name: 'Mango Law LLC',
+  alternateName: 'Mango Law',
+  description:
+    'Criminal defense and OVI/DUI attorney serving Delaware and Franklin Counties in Ohio.',
+  url: 'https://mango.law',
+  logo: 'https://mango.law/images/brand/mango-logo-horizontal.svg',
+  image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
+  telephone: '+17404176191',
+  email: 'office@mango.law',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '46 W. Winter Street',
+    addressLocality: 'Delaware',
+    addressRegion: 'OH',
+    postalCode: '43015',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 40.2987,
+    longitude: -83.0680,
+  },
+  areaServed: [
+    {
+      '@type': 'City',
+      name: 'Delaware',
+      '@id': 'https://en.wikipedia.org/wiki/Delaware,_Ohio',
+    },
+    {
+      '@type': 'City',
+      name: 'Columbus',
+      '@id': 'https://en.wikipedia.org/wiki/Columbus,_Ohio',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Delaware County',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Franklin County',
+    },
+  ],
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '17:00',
+    },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Legal Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'OVI/DUI Defense',
+          description: 'Defense representation for OVI and DUI charges in Ohio.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Criminal Defense',
+          description:
+            'Defense for drug crimes, assault, theft, weapons charges, and other criminal matters.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Protection Order Defense',
+          description: 'Defense against civil protection orders and domestic violence allegations.',
+        },
+      },
+    ],
+  },
+  attorney: {
+    '@type': 'Person',
+    name: 'Dominic Mango',
+    alternateName: 'Nick Mango',
+    jobTitle: 'Criminal Defense Attorney',
+    alumniOf: {
+      '@type': 'EducationalOrganization',
+      name: 'The Ohio State University Moritz College of Law',
+    },
+    knowsAbout: [
+      'Criminal Defense',
+      'OVI Defense',
+      'DUI Defense',
+      'Drug Crime Defense',
+      'White Collar Defense',
+    ],
+  },
+};
+
+export const attorneySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Attorney',
+  name: 'Dominic Mango',
+  alternateName: 'Nick Mango',
+  description:
+    'Experienced criminal defense attorney with over 20 years of practice in Delaware and Franklin Counties, Ohio.',
+  url: 'https://mango.law/about',
+  image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
+  email: 'office@mango.law',
+  telephone: '+17404176191',
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'The Ohio State University Moritz College of Law',
+  },
+  knowsAbout: [
+    'Criminal Defense',
+    'OVI Defense',
+    'DUI Defense',
+    'Drug Crime Defense',
+    'Assault Defense',
+    'Domestic Violence Defense',
+    'Sex Crime Defense',
+    'White Collar Crime Defense',
+    'Protection Order Defense',
+  ],
+  award: [
+    'Certified in BAC DataMaster Operation',
+    'NHTSA Field Sobriety Test Certification',
+  ],
+};
