@@ -2,6 +2,8 @@ import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
+import StatuteSidebar from '../components/StatuteSidebar';
+import LegalCodeCallout from '../components/LegalCodeCallout';
 
 const faqs = [
   {
@@ -62,26 +64,39 @@ export default function WhiteCollarPage() {
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Complex White Collar Defense</h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
-                  White collar criminal investigations are complex, high-stakes matters that can devastate your career, finances,
-                  and reputation. Whether you are facing allegations of fraud, embezzlement, tax evasion, or securities violations,
-                  you need an attorney who understands financial crimes and federal prosecution.
-                </p>
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Complex White Collar Defense</h2>
+                    <p className="text-lg text-brand-black/70 leading-relaxed">
+                      White collar criminal investigations are complex, high-stakes matters that can devastate your career, finances,
+                      and reputation. Whether you are facing allegations of fraud, embezzlement, tax evasion, or securities violations,
+                      you need an attorney who understands financial crimes and federal prosecution.
+                    </p>
+                  </div>
+                  <p className="text-brand-black/70 leading-relaxed">
+                    At Mango Law, we provide strategic defense for white collar investigations and charges. We review financial records,
+                    challenge the government's evidence, and negotiate with prosecutors to protect your freedom and your future.
+                  </p>
+                </div>
+                <ImagePlaceholder
+                  aspectRatio="4:3"
+                  label="White collar defense"
+                  promptHint="White collar crime defense, financial documents and business records review, corporate legal setting, professional office with organized financial files"
+                />
               </div>
-              <p className="text-brand-black/70 leading-relaxed">
-                At Mango Law, we provide strategic defense for white collar investigations and charges. We review financial records,
-                challenge the government's evidence, and negotiate with prosecutors to protect your freedom and your future.
-              </p>
+
+              <LegalCodeCallout section="2913.02" />
+              <LegalCodeCallout section="2913.42" />
             </div>
-            <ImagePlaceholder
-              aspectRatio="4:3"
-              label="White collar defense"
-              promptHint="White collar crime defense, financial documents and business records review, corporate legal setting, professional office with organized financial files"
-            />
+
+            <aside className="lg:col-span-1">
+              <StatuteSidebar
+                statutes={['2913.02', '2913.42', '2913.43', '2913.49', '2921.13']}
+              />
+            </aside>
           </div>
         </div>
       </section>

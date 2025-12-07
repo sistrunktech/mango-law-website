@@ -2,6 +2,8 @@ import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
+import StatuteSidebar from '../components/StatuteSidebar';
+import LegalCodeCallout from '../components/LegalCodeCallout';
 
 const faqs = [
   {
@@ -62,27 +64,40 @@ export default function CriminalDefensePage() {
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Comprehensive Criminal Defense</h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
-                  Facing criminal charges is overwhelming. Your reputation, your freedom, and your future are at stake.
-                  Whether you are dealing with a first-time misdemeanor or a serious felony, you need an attorney who
-                  understands the system, knows the local courts, and will fight for your rights.
-                </p>
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Comprehensive Criminal Defense</h2>
+                    <p className="text-lg text-brand-black/70 leading-relaxed">
+                      Facing criminal charges is overwhelming. Your reputation, your freedom, and your future are at stake.
+                      Whether you are dealing with a first-time misdemeanor or a serious felony, you need an attorney who
+                      understands the system, knows the local courts, and will fight for your rights.
+                    </p>
+                  </div>
+                  <p className="text-brand-black/70 leading-relaxed">
+                    At Mango Law, we handle every aspect of criminal defense with precision and care. From the initial
+                    consultation to courtroom advocacy, we are committed to protecting your record and minimizing the impact
+                    on your life.
+                  </p>
+                </div>
+                <ImagePlaceholder
+                  aspectRatio="4:3"
+                  label="Criminal defense consultation"
+                  promptHint="Criminal defense attorney reviewing case files and legal documents, professional office setting, Delaware Ohio, warm lighting, organized workspace"
+                />
               </div>
-              <p className="text-brand-black/70 leading-relaxed">
-                At Mango Law, we handle every aspect of criminal defense with precision and care. From the initial
-                consultation to courtroom advocacy, we are committed to protecting your record and minimizing the impact
-                on your life.
-              </p>
+
+              <LegalCodeCallout section="2903.13" />
+              <LegalCodeCallout section="2919.25" />
             </div>
-            <ImagePlaceholder
-              aspectRatio="4:3"
-              label="Criminal defense consultation"
-              promptHint="Criminal defense attorney reviewing case files and legal documents, professional office setting, Delaware Ohio, warm lighting, organized workspace"
-            />
+
+            <aside className="lg:col-span-1">
+              <StatuteSidebar
+                statutes={['2903.11', '2903.13', '2913.02', '2919.25', '2923.12', '2925.11', '4511.19']}
+              />
+            </aside>
           </div>
         </div>
       </section>

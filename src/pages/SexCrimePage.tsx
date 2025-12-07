@@ -2,6 +2,8 @@ import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
+import StatuteSidebar from '../components/StatuteSidebar';
+import LegalCodeCallout from '../components/LegalCodeCallout';
 
 const faqs = [
   {
@@ -62,27 +64,40 @@ export default function SexCrimePage() {
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Aggressive, Discreet Defense</h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
-                  Sex crime allegations are some of the most serious charges you can face. A conviction can mean prison, mandatory
-                  sex offender registration, and a permanent mark on your reputation. Even an accusation can destroy your career,
-                  relationships, and future before you ever step into a courtroom.
-                </p>
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Aggressive, Discreet Defense</h2>
+                    <p className="text-lg text-brand-black/70 leading-relaxed">
+                      Sex crime allegations are some of the most serious charges you can face. A conviction can mean prison, mandatory
+                      sex offender registration, and a permanent mark on your reputation. Even an accusation can destroy your career,
+                      relationships, and future before you ever step into a courtroom.
+                    </p>
+                  </div>
+                  <p className="text-brand-black/70 leading-relaxed">
+                    At Mango Law, we understand the gravity of these charges. We provide aggressive, discreet defense while protecting
+                    your privacy. We challenge the accuser's credibility, investigate motives for false accusations, scrutinize the
+                    evidence, and fight for your rights at every stage.
+                  </p>
+                </div>
+                <ImagePlaceholder
+                  aspectRatio="4:3"
+                  label="Confidential legal representation"
+                  promptHint="Confidential attorney-client consultation, private office setting, discrete and professional atmosphere, emphasis on privacy and trust"
+                />
               </div>
-              <p className="text-brand-black/70 leading-relaxed">
-                At Mango Law, we understand the gravity of these charges. We provide aggressive, discreet defense while protecting
-                your privacy. We challenge the accuser's credibility, investigate motives for false accusations, scrutinize the
-                evidence, and fight for your rights at every stage.
-              </p>
+
+              <LegalCodeCallout section="2907.03" />
+              <LegalCodeCallout section="2950.01" />
             </div>
-            <ImagePlaceholder
-              aspectRatio="4:3"
-              label="Confidential legal representation"
-              promptHint="Confidential attorney-client consultation, private office setting, discrete and professional atmosphere, emphasis on privacy and trust"
-            />
+
+            <aside className="lg:col-span-1">
+              <StatuteSidebar
+                statutes={['2907.02', '2907.03', '2907.04', '2907.05', '2907.21', '2950.01']}
+              />
+            </aside>
           </div>
         </div>
       </section>

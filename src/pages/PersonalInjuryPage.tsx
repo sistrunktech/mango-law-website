@@ -2,6 +2,8 @@ import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
+import StatuteSidebar from '../components/StatuteSidebar';
+import LegalCodeCallout from '../components/LegalCodeCallout';
 
 const faqs = [
   {
@@ -62,26 +64,39 @@ export default function PersonalInjuryPage() {
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Personal Injury Representation</h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
-                  While criminal defense is our primary focus, we handle select personal injury matters where we can provide
-                  meaningful value. We take cases with clear liability, adequate insurance coverage, and strong evidence of damages.
-                </p>
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Personal Injury Representation</h2>
+                    <p className="text-lg text-brand-black/70 leading-relaxed">
+                      While criminal defense is our primary focus, we handle select personal injury matters where we can provide
+                      meaningful value. We take cases with clear liability, adequate insurance coverage, and strong evidence of damages.
+                    </p>
+                  </div>
+                  <p className="text-brand-black/70 leading-relaxed">
+                    Our approach is practical and straightforward. We evaluate your case honestly, negotiate aggressively with
+                    insurance companies, and pursue fair compensation for your injuries. If we cannot take your case, we will
+                    refer you to a qualified personal injury attorney.
+                  </p>
+                </div>
+                <ImagePlaceholder
+                  aspectRatio="4:3"
+                  label="Personal injury representation"
+                  promptHint="Personal injury case consultation, attorney reviewing medical records and accident reports, professional legal office, compassionate and strategic approach"
+                />
               </div>
-              <p className="text-brand-black/70 leading-relaxed">
-                Our approach is practical and straightforward. We evaluate your case honestly, negotiate aggressively with
-                insurance companies, and pursue fair compensation for your injuries. If we cannot take your case, we will
-                refer you to a qualified personal injury attorney.
-              </p>
+
+              <LegalCodeCallout section="2305.10" />
+              <LegalCodeCallout section="2315.18" />
             </div>
-            <ImagePlaceholder
-              aspectRatio="4:3"
-              label="Personal injury representation"
-              promptHint="Personal injury case consultation, attorney reviewing medical records and accident reports, professional legal office, compassionate and strategic approach"
-            />
+
+            <aside className="lg:col-span-1">
+              <StatuteSidebar
+                statutes={['2305.10', '2315.18', '2315.33', '2125.01', '2744.03']}
+              />
+            </aside>
           </div>
         </div>
       </section>
