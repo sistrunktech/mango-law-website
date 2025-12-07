@@ -82,10 +82,13 @@ export default function CriminalDefensePage() {
                     on your life.
                   </p>
                 </div>
-                <ImagePlaceholder
-                  aspectRatio="4:3"
-                  label="Criminal defense consultation"
-                  promptHint="Criminal defense attorney reviewing case files and legal documents, professional office setting, Delaware Ohio, warm lighting, organized workspace"
+                <img
+                  src="/images/generated/criminal-defense-hero.png"
+                  alt="Criminal defense attorney reviewing case files and legal documents in professional office setting"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+                  loading="lazy"
+                  width="1200"
+                  height="900"
                 />
               </div>
 

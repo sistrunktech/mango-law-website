@@ -1,3 +1,5 @@
+import GoogleMap from './GoogleMap';
+
 export default function LocationBlock() {
   return (
     <section className="container py-12">
@@ -14,11 +16,13 @@ export default function LocationBlock() {
             <p>Phone: (740) 602-2155</p>
           </div>
         </div>
-        <div className="rounded-xl bg-brand-black/5 p-4">
-          <p className="text-sm font-semibold text-brand-black">Map placeholder</p>
-          <p className="mt-2 text-sm text-brand-black/70">
-            Embed your preferred map or static image. Highlight proximity to Delaware County courts.
-          </p>
+        <div>
+          <GoogleMap
+            businessName="Mango Law LLC"
+            rating={4.9}
+            reviewCount={45}
+            placeId="0x0:0x5c800d103881fc5c"
+          />
         </div>
       </div>
     </section>

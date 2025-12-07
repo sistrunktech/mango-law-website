@@ -81,10 +81,13 @@ export default function WhiteCollarPage() {
                     challenge the government's evidence, and negotiate with prosecutors to protect your freedom and your future.
                   </p>
                 </div>
-                <ImagePlaceholder
-                  aspectRatio="4:3"
-                  label="White collar defense"
-                  promptHint="White collar crime defense, financial documents and business records review, corporate legal setting, professional office with organized financial files"
+                <img
+                  src="/images/generated/white-collar-defense-hero.png"
+                  alt="White collar crime defense with financial documents and business records review"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+                  loading="lazy"
+                  width="1200"
+                  height="900"
                 />
               </div>
 

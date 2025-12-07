@@ -83,10 +83,13 @@ export default function DrugCrimePage() {
                 appropriate, always working toward the best possible outcome.
               </p>
             </div>
-            <ImagePlaceholder
-              aspectRatio="4:3"
-              label="Drug crime defense"
-              promptHint="Drug crime legal defense strategy, evidence review and lab testing documentation, professional legal setting, organized case files with attention to detail"
+            <img
+              src="/images/generated/drug-crimes-defense-hero.png"
+              alt="Drug crime legal defense strategy with evidence review and lab testing documentation"
+              className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+              loading="lazy"
+              width="1200"
+              height="900"
             />
               </div>
 

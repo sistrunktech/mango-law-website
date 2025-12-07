@@ -81,10 +81,13 @@ export default function PersonalInjuryPage() {
                     refer you to a qualified personal injury attorney.
                   </p>
                 </div>
-                <ImagePlaceholder
-                  aspectRatio="4:3"
-                  label="Personal injury representation"
-                  promptHint="Personal injury case consultation, attorney reviewing medical records and accident reports, professional legal office, compassionate and strategic approach"
+                <img
+                  src="/images/generated/personal-injury-hero.png"
+                  alt="Personal injury case consultation with attorney reviewing medical records"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+                  loading="lazy"
+                  width="1200"
+                  height="900"
                 />
               </div>
 

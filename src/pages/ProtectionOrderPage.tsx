@@ -82,10 +82,13 @@ export default function ProtectionOrderPage() {
                     allegations, present evidence, cross-examine witnesses, and fight to protect your rights, reputation, and future.
                   </p>
                 </div>
-                <ImagePlaceholder
-                  aspectRatio="4:3"
-                  label="Protection order defense"
-                  promptHint="Protection order legal defense, attorney preparing hearing strategy and gathering evidence, professional office setting, focus on procedural precision and client advocacy"
+                <img
+                  src="/images/generated/protection-order-defense-hero.png"
+                  alt="Protection order legal defense with attorney preparing hearing strategy"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+                  loading="lazy"
+                  width="1200"
+                  height="900"
                 />
               </div>
 

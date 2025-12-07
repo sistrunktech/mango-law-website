@@ -82,10 +82,13 @@ export default function SexCrimePage() {
                     evidence, and fight for your rights at every stage.
                   </p>
                 </div>
-                <ImagePlaceholder
-                  aspectRatio="4:3"
-                  label="Confidential legal representation"
-                  promptHint="Confidential attorney-client consultation, private office setting, discrete and professional atmosphere, emphasis on privacy and trust"
+                <img
+                  src="/images/generated/sex-crimes-defense-hero.png"
+                  alt="Confidential attorney-client consultation in private office setting"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+                  loading="lazy"
+                  width="1200"
+                  height="900"
                 />
               </div>
 
