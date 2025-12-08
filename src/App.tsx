@@ -21,6 +21,8 @@ import ServiceAreasPage from './pages/ServiceAreasPage';
 import DUICheckpointsPage from './pages/DUICheckpointsPage';
 import CheckpointAdminPage from './pages/CheckpointAdminPage';
 import AdminLoginPage from './pages/AdminLoginPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminGuidePage from './pages/AdminGuidePage';
 import PrivacyPage from './pages/PrivacyPage';
@@ -35,6 +37,8 @@ function App() {
       <Routes>
         <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route path="/admin/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/admin/reset-password" element={<ResetPasswordPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         <Route path="/docs/admin-guide" element={<AdminGuidePage />} />
         <Route path="/handoff/:token" element={<HandoffSharePage />} />
