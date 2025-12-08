@@ -1,5 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
-import { Calendar, User, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp } from 'lucide-react';
+import {
+  Calendar, User, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp,
+  Shield, Gavel, FileText, Ban, AlertOctagon, DollarSign, Users,
+  Timer, CheckCircle, XCircle, Info, Briefcase, Home
+} from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { blogPosts } from '../data/blogPosts';
@@ -13,6 +17,9 @@ import {
   ComparisonCard,
   IconStat,
   TimelineBar,
+  StatCard,
+  HighlightBox,
+  ProgressBar,
 } from '../components/blog';
 
 function estimateReadingTime(content: string): number {
@@ -135,6 +142,7 @@ export default function BlogPostPage() {
                 if (part.match(/\[VISUAL:(\w+)\]/)) {
                   const visualType = part.match(/\[VISUAL:(\w+)\]/)?.[1];
 
+                  // BAC Limits
                   if (visualType === 'BAC_LIMITS') {
                     sections.push(
                       <div key={`visual-${index}`} className="my-8 flex flex-wrap gap-4">
@@ -260,6 +268,549 @@ export default function BlogPostPage() {
                           { label: 'Chemical Test Refusal', duration: '1 year', color: 'red', width: '60%' }
                         ]}
                       />
+                    );
+                  }
+
+                  // Motion Types
+                  else if (visualType === 'MOTION_TYPES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                        <StatCard icon={Ban} value="Suppress" label="Motion to Suppress Evidence" color="mango" description="Challenge illegally obtained evidence" />
+                        <StatCard icon={Gavel} value="Dismiss" label="Motion to Dismiss" color="gold" description="Request charge dismissal" />
+                        <StatCard icon={FileText} value="Limine" label="Motion in Limine" color="leaf" description="Exclude prejudicial evidence" />
+                      </div>
+                    );
+                  }
+
+                  // Drug Possession vs Trafficking
+                  else if (visualType === 'POSSESSION_VS_TRAFFICKING') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="Possession vs. Trafficking"
+                        leftItem={{
+                          label: 'Possession',
+                          value: 'Personal Use',
+                          description: 'Lower-level offense, smaller quantities, potential diversion'
+                        }}
+                        rightItem={{
+                          label: 'Trafficking',
+                          value: 'Sale/Distribution',
+                          description: 'Felony charges, mandatory prison, bulk amount thresholds'
+                        }}
+                        leftColor="gold"
+                        rightColor="red"
+                      />
+                    );
+                  }
+
+                  // Bulk Amount Thresholds
+                  else if (visualType === 'BULK_AMOUNT_THRESHOLDS') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="Ohio Drug Bulk Amount Thresholds"
+                        columns={[
+                          { key: 'drug', label: 'Drug Type' },
+                          { key: 'bulk', label: 'Bulk Amount' },
+                          { key: 'penalty', label: 'Penalty Range' }
+                        ]}
+                        rows={[
+                          { drug: 'Cocaine', bulk: '5+ grams', penalty: 'F4/F3 - 6 months to 3 years' },
+                          { drug: 'Heroin', bulk: '1+ gram', penalty: 'F4/F3 - 6 months to 3 years' },
+                          { drug: 'Fentanyl', bulk: '5+ grams', penalty: 'F3/F2 - 2 to 8 years' },
+                          { drug: 'Marijuana', bulk: '200+ grams', penalty: 'F5/F3 - 6 months to 5 years' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // Defense Strategies
+                  else if (visualType === 'DEFENSE_STRATEGIES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <HighlightBox variant="info" title="Challenge the Evidence">
+                          <p>Question search legality, chain of custody, and lab testing procedures</p>
+                        </HighlightBox>
+                        <HighlightBox variant="success" title="Negotiate Alternatives">
+                          <p>Pursue diversion programs, treatment courts, or reduced charges</p>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // Diversion Options
+                  else if (visualType === 'DIVERSION_OPTIONS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                        <StatCard icon={Shield} value="ILC" label="Intervention in Lieu" color="leaf" description="Treatment instead of conviction" />
+                        <StatCard icon={CheckCircle} value="Sealed" label="Record Sealing" color="gold" description="Clean record after completion" />
+                        <StatCard icon={Users} value="Community" label="Community Control" color="mango" description="Supervised probation" />
+                      </div>
+                    );
+                  }
+
+                  // White Collar Defense Strategies
+                  else if (visualType === 'WHITE_COLLAR_DEFENSE_STRATEGIES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <HighlightBox variant="info" title="Documentation Review">
+                          <p>Challenge financial records, audit procedures, and accounting interpretations</p>
+                        </HighlightBox>
+                        <HighlightBox variant="warning" title="Intent Analysis">
+                          <p>Prove lack of criminal intent or demonstrate good faith business decisions</p>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // White Collar Penalties
+                  else if (visualType === 'WHITE_COLLAR_PENALTIES') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="White Collar Crime Penalties in Ohio"
+                        columns={[
+                          { key: 'offense', label: 'Offense' },
+                          { key: 'level', label: 'Felony Level' },
+                          { key: 'penalty', label: 'Potential Penalty' }
+                        ]}
+                        rows={[
+                          { offense: 'Theft ($1,000-$7,500)', level: 'F5', penalty: '6-12 months, $2,500 fine' },
+                          { offense: 'Theft ($7,500-$150,000)', level: 'F4', penalty: '6-18 months, $5,000 fine' },
+                          { offense: 'Identity Fraud', level: 'F5-F1', penalty: 'Up to 11 years based on value' },
+                          { offense: 'Forgery', level: 'F5', penalty: '6-12 months, $2,500 fine' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // Rights Highlight
+                  else if (visualType === 'RIGHTS_HIGHLIGHT') {
+                    sections.push(
+                      <HighlightBox key={`visual-${index}`} variant="warning" title="Know Your Rights">
+                        <p>You have the right to remain silent and the right to an attorney. Field sobriety tests are voluntary, and you can politely decline without penalty.</p>
+                      </HighlightBox>
+                    );
+                  }
+
+                  // FST Refusal Comparison
+                  else if (visualType === 'FST_REFUSAL_COMPARISON') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="Field Sobriety Tests: Comply vs. Refuse"
+                        leftItem={{
+                          label: 'Taking FSTs',
+                          value: 'Evidence Created',
+                          description: 'Officer observations can be used against you even if you pass'
+                        }}
+                        rightItem={{
+                          label: 'Refusing FSTs',
+                          value: 'No Evidence',
+                          description: 'No new evidence created, no legal penalty for refusal'
+                        }}
+                        leftColor="red"
+                        rightColor="leaf"
+                      />
+                    );
+                  }
+
+                  // Chemical vs FST Comparison
+                  else if (visualType === 'CHEMICAL_VS_FST_COMPARISON') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="Chemical Tests vs. Field Sobriety Tests"
+                        leftItem={{
+                          label: 'Chemical Tests',
+                          value: 'Mandatory',
+                          description: 'Breath/blood/urine - Refusal triggers 1-year license suspension'
+                        }}
+                        rightItem={{
+                          label: 'Field Sobriety',
+                          value: 'Voluntary',
+                          description: 'Walk-and-turn, one-leg stand - No penalty for refusal'
+                        }}
+                        leftColor="red"
+                        rightColor="gold"
+                      />
+                    );
+                  }
+
+                  // Refusal Stats
+                  else if (visualType === 'REFUSAL_STATS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                        <StatCard icon={AlertTriangle} value="65-77%" label="FST Failure Rate" color="red" description="Even sober drivers struggle" />
+                        <StatCard icon={Ban} value="No Penalty" label="FST Refusal" color="leaf" description="Legal to decline FSTs" />
+                        <StatCard icon={Timer} value="1 Year" label="Chemical Refusal" color="gold" description="License suspension" />
+                      </div>
+                    );
+                  }
+
+                  // Lookback Timeline
+                  else if (visualType === 'LOOKBACK_TIMELINE') {
+                    sections.push(
+                      <TimelineBar
+                        key={`visual-${index}`}
+                        title="Ohio OVI Lookback Periods"
+                        items={[
+                          { label: 'Criminal Sentencing', duration: '10 years', color: 'mango', width: '50%' },
+                          { label: 'License Suspension (Conviction)', duration: '20 years', color: 'red', width: '100%' },
+                          { label: 'ALS Suspension (Refusal)', duration: '10 years', color: 'gold', width: '50%' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // Repeat Offense Grid
+                  else if (visualType === 'REPEAT_OFFENSE_GRID') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="Repeat OVI Offense Penalties"
+                        columns={[
+                          { key: 'offense', label: 'Offense Number' },
+                          { key: 'jail', label: 'Minimum Jail' },
+                          { key: 'suspension', label: 'License Suspension' }
+                        ]}
+                        rows={[
+                          { offense: 'Second OVI', jail: '10 days', suspension: '1-7 years' },
+                          { offense: 'Third OVI', jail: '30 days', suspension: '2-12 years' },
+                          { offense: 'Fourth OVI', jail: '60 days', suspension: '3 years to life' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // Law Change Comparison
+                  else if (visualType === 'LAW_CHANGE_COMPARISON') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="House Bill 37 Impact (Effective April 2025)"
+                        leftItem={{
+                          label: 'Before H.B. 37',
+                          value: '$375',
+                          description: 'Minimum fine plus $475 reinstatement fee'
+                        }}
+                        rightItem={{
+                          label: 'After H.B. 37',
+                          value: '$565',
+                          description: 'Increased fine, reduced $315 reinstatement'
+                        }}
+                        leftColor="gold"
+                        rightColor="mango"
+                      />
+                    );
+                  }
+
+                  // Suspension Comparison
+                  else if (visualType === 'SUSPENSION_COMPARISON') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="ALS vs. Court-Ordered Suspension"
+                        leftItem={{
+                          label: 'ALS (Admin)',
+                          value: 'Immediate',
+                          description: 'Automatic at arrest, before conviction'
+                        }}
+                        rightItem={{
+                          label: 'Court Suspension',
+                          value: 'After Conviction',
+                          description: 'Imposed by judge upon guilty verdict'
+                        }}
+                        leftColor="red"
+                        rightColor="mango"
+                      />
+                    );
+                  }
+
+                  // Lookback Scenarios
+                  else if (visualType === 'LOOKBACK_SCENARIOS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 space-y-4">
+                        <HighlightBox variant="info" title="Scenario 1: Within 10-Year Window">
+                          <p>2015 OVI + 2024 OVI = Counted as 2nd offense with enhanced penalties</p>
+                        </HighlightBox>
+                        <HighlightBox variant="success" title="Scenario 2: Outside 10-Year Window">
+                          <p>2013 OVI + 2024 OVI = Both treated as 1st offenses for criminal sentencing</p>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // Cost Breakdown (generic)
+                  else if (visualType === 'COST_BREAKDOWN') {
+                    sections.push(
+                      <CostBreakdown
+                        key={`visual-${index}`}
+                        title="Estimated Legal Costs"
+                        items={[
+                          { label: 'Court Fines', amount: '$500-$1,500', description: 'Mandatory court-imposed penalties' },
+                          { label: 'Attorney Fees', amount: '$2,500-$10,000', description: 'Legal representation costs' },
+                          { label: 'Court Costs', amount: '$200-$500', description: 'Filing and administrative fees' },
+                          { label: 'Total Estimated', amount: '$3,200-$12,000', isTotal: true }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // Ex Parte Restrictions
+                  else if (visualType === 'EX_PARTE_RESTRICTIONS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 space-y-3">
+                        <HighlightBox variant="warning" title="Common Ex Parte CPO Restrictions">
+                          <ul className="list-disc pl-5 space-y-1">
+                            <li>No contact with protected person (direct or indirect)</li>
+                            <li>Stay away from residence and workplace</li>
+                            <li>Surrender firearms within 24 hours</li>
+                            <li>Move out of shared residence immediately</li>
+                          </ul>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // CPO Misuse Scenarios
+                  else if (visualType === 'CPO_MISUSE_SCENARIOS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <HighlightBox variant="error" title="Custody Disputes">
+                          <p>False allegations filed to gain advantage in divorce or custody proceedings</p>
+                        </HighlightBox>
+                        <HighlightBox variant="warning" title="Retaliation">
+                          <p>Orders sought as revenge for breakup or to harass former partner</p>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // CPO Dos and Don'ts
+                  else if (visualType === 'CPO_DOS_DONTS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <HighlightBox variant="success" title="DO">
+                          <ul className="list-disc pl-5 space-y-1">
+                            <li>Read order carefully and comply fully</li>
+                            <li>Hire an attorney immediately</li>
+                            <li>Document all evidence</li>
+                            <li>Attend full hearing</li>
+                          </ul>
+                        </HighlightBox>
+                        <HighlightBox variant="error" title="DON'T">
+                          <ul className="list-disc pl-5 space-y-1">
+                            <li>Contact petitioner directly</li>
+                            <li>Go near protected locations</li>
+                            <li>Ignore court deadlines</li>
+                            <li>Violate any order provisions</li>
+                          </ul>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // Hearing Timeline
+                  else if (visualType === 'HEARING_TIMELINE') {
+                    sections.push(
+                      <TimelineBar
+                        key={`visual-${index}`}
+                        title="CPO Process Timeline"
+                        items={[
+                          { label: 'Ex Parte Filed', duration: 'Day 0', color: 'red', width: '0%' },
+                          { label: 'Service of Order', duration: '1-3 days', color: 'gold', width: '20%' },
+                          { label: 'Full Hearing', duration: '7-10 days', color: 'mango', width: '50%' },
+                          { label: 'Final Order', duration: 'Up to 5 years', color: 'leaf', width: '100%' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // SORN Tiers
+                  else if (visualType === 'SORN_TIERS') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="Ohio Sex Offender Registration Tiers"
+                        columns={[
+                          { key: 'tier', label: 'Tier' },
+                          { key: 'duration', label: 'Duration' },
+                          { key: 'frequency', label: 'Reporting' }
+                        ]}
+                        rows={[
+                          { tier: 'Tier I', duration: '15 years', frequency: 'Annual' },
+                          { tier: 'Tier II', duration: '25 years', frequency: 'Every 180 days' },
+                          { tier: 'Tier III', duration: 'Life', frequency: 'Every 90 days' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // Collateral Consequences
+                  else if (visualType === 'COLLATERAL_CONSEQUENCES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                        <StatCard icon={Home} value="Housing" label="Residence Restrictions" color="red" description="Limited where you can live" />
+                        <StatCard icon={Briefcase} value="Employment" label="Job Limitations" color="gold" description="Many careers closed off" />
+                        <StatCard icon={Users} value="Relationships" label="Social Stigma" color="mango" description="Public registry listing" />
+                      </div>
+                    );
+                  }
+
+                  // Sex Crimes Defenses
+                  else if (visualType === 'SEX_CRIMES_DEFENSES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <HighlightBox variant="info" title="Challenge Credibility">
+                          <p>Examine inconsistencies in accuser's statements and timeline</p>
+                        </HighlightBox>
+                        <HighlightBox variant="success" title="Present Evidence">
+                          <p>Alibi witnesses, phone records, surveillance footage</p>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // Comparative Fault Examples
+                  else if (visualType === 'COMPARATIVE_FAULT_EXAMPLES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 space-y-4">
+                        <HighlightBox variant="info" title="Example: 20% at Fault">
+                          <p>$100,000 damages × 80% = $80,000 recovery</p>
+                        </HighlightBox>
+                        <HighlightBox variant="warning" title="Example: 51% at Fault">
+                          <p>No recovery allowed under Ohio's modified comparative fault rule</p>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // Statute of Limitations
+                  else if (visualType === 'STATUTE_LIMITATIONS') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="Ohio Personal Injury Statute of Limitations"
+                        columns={[
+                          { key: 'type', label: 'Claim Type' },
+                          { key: 'deadline', label: 'Filing Deadline' }
+                        ]}
+                        rows={[
+                          { type: 'Personal Injury (general)', deadline: '2 years from injury' },
+                          { type: 'Medical Malpractice', deadline: '1 year from discovery or 4 years max' },
+                          { type: 'Wrongful Death', deadline: '2 years from death' },
+                          { type: 'Product Liability', deadline: '2 years from injury' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // Damage Caps
+                  else if (visualType === 'DAMAGE_CAPS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <StatCard icon={DollarSign} value="$250K-$500K" label="Non-Economic Cap" color="mango" description="Pain & suffering limits" />
+                        <StatCard icon={AlertTriangle} value="No Cap" label="Economic Damages" color="leaf" description="Medical bills, lost wages" />
+                      </div>
+                    );
+                  }
+
+                  // Assault Penalty Grid
+                  else if (visualType === 'ASSAULT_PENALTY_GRID') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="Ohio Assault Penalties"
+                        columns={[
+                          { key: 'offense', label: 'Offense' },
+                          { key: 'level', label: 'Level' },
+                          { key: 'penalty', label: 'Penalty' }
+                        ]}
+                        rows={[
+                          { offense: 'Simple Assault', level: 'M1', penalty: 'Up to 180 days jail' },
+                          { offense: 'Felonious Assault', level: 'F2', penalty: '2-8 years prison' },
+                          { offense: 'Aggravated Assault', level: 'F4', penalty: '6-18 months prison' },
+                          { offense: 'Assault on Police', level: 'F4', penalty: '6-18 months prison' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // DV Repeat Penalties
+                  else if (visualType === 'DV_REPEAT_PENALTIES') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="Domestic Violence Repeat Offenses"
+                        columns={[
+                          { key: 'offense', label: 'Offense' },
+                          { key: 'level', label: 'Level' },
+                          { key: 'jail', label: 'Minimum Jail' }
+                        ]}
+                        rows={[
+                          { offense: 'First DV', level: 'M1', jail: 'Up to 180 days' },
+                          { offense: 'Second DV (within 5 years)', level: 'M4', jail: '30 days mandatory' },
+                          { offense: 'Third DV', level: 'F4', jail: '6-18 months' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // CPO Timeline
+                  else if (visualType === 'CPO_TIMELINE') {
+                    sections.push(
+                      <TimelineBar
+                        key={`visual-${index}`}
+                        title="Civil Protection Order Duration"
+                        items={[
+                          { label: 'Ex Parte (Temporary)', duration: '7-10 days', color: 'red', width: '20%' },
+                          { label: 'Standard CPO', duration: 'Up to 5 years', color: 'mango', width: '100%' }
+                        ]}
+                      />
+                    );
+                  }
+
+                  // Defense Comparison
+                  else if (visualType === 'DEFENSE_COMPARISON') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="Defense Strategy Approaches"
+                        leftItem={{
+                          label: 'Self-Defense',
+                          value: 'Justified Force',
+                          description: 'Prove you acted in reasonable self-defense'
+                        }}
+                        rightItem={{
+                          label: 'False Allegations',
+                          value: 'No Crime Occurred',
+                          description: 'Demonstrate inconsistencies and lack of evidence'
+                        }}
+                        leftColor="leaf"
+                        rightColor="mango"
+                      />
+                    );
+                  }
+
+                  // Firearm Consequences
+                  else if (visualType === 'FIREARM_CONSEQUENCES') {
+                    sections.push(
+                      <HighlightBox key={`visual-${index}`} variant="error" title="Weapons Consequences">
+                        <p>DV convictions trigger federal firearms prohibition under 18 U.S.C. § 922(g)(9). You cannot possess firearms or ammunition, even for hunting or work.</p>
+                      </HighlightBox>
+                    );
+                  }
+
+                  // Fallback for unknown visual types
+                  else {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-6 rounded-lg border-2 border-brand-mango/20 bg-brand-mango/5 p-4">
+                        <p className="text-sm text-brand-black/70">
+                          <span className="font-semibold">Visual Component:</span> {visualType}
+                        </p>
+                      </div>
                     );
                   }
                 } else if (part.trim()) {

@@ -1,14 +1,15 @@
 interface PenaltyRow {
-  offense: string;
+  offense?: string;
   jail?: string;
   fine?: string;
   license?: string;
   other?: string;
+  [key: string]: string | undefined;
 }
 
 interface PenaltyGridProps {
   title?: string;
-  columns: Array<{ key: keyof PenaltyRow; label: string }>;
+  columns: Array<{ key: string; label: string }>;
   rows: PenaltyRow[];
 }
 
@@ -39,7 +40,7 @@ export default function PenaltyGrid({ title, columns, rows }: PenaltyGridProps) 
               >
                 {columns.map((col) => (
                   <td key={col.key} className="px-4 py-4 text-sm text-brand-black">
-                    {col.key === 'offense' ? (
+                    {columns[0].key === col.key ? (
                       <span className="font-semibold">{row[col.key]}</span>
                     ) : (
                       row[col.key]

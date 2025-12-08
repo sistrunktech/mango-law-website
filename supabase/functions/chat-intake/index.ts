@@ -250,10 +250,16 @@ Deno.serve(async (req: Request) => {
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     const fromEmail = Deno.env.get("FROM_EMAIL") || "noreply@example.com";
     const chatNotifyTo = Deno.env.get("CHAT_LEAD_NOTIFY_TO") || Deno.env.get("CONTACT_NOTIFY_TO") || "admin@example.com";
+    const chatNotifyCC = Deno.env.get("CHAT_LEAD_NOTIFY_CC");
     const sourceLabel = Deno.env.get("CHAT_LEAD_SOURCE_LABEL") || "Chat Widget";
+    const enableSmsAlerts = Deno.env.get("ENABLE_SMS_LEAD_ALERTS") === "true";
+    const smsGatewayOffice = Deno.env.get("SMS_GATEWAY_OFFICE");
+    const smsGatewayNick = Deno.env.get("SMS_GATEWAY_NICK");
+    const smsGatewayTest = Deno.env.get("SMS_GATEWAY_TEST");
 
     if (resendApiKey) {
       try {
+        // Send standard email notification
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
@@ -263,11 +269,12 @@ Deno.serve(async (req: Request) => {
           body: JSON.stringify({
             from: fromEmail,
             to: [chatNotifyTo],
+            cc: chatNotifyCC ? [chatNotifyCC] : undefined,
             subject: `New ${sourceLabel} Lead from ${intakeData.name}`,
             html: `
               <h2>New ${sourceLabel} Lead</h2>
               <p><strong>Name:</strong> ${intakeData.name}</p>
-              <p><strong>Email:</strong> ${intakeData.email}</p>
+              <p><strong>Email:</strong> ${intakeData.email || "Not provided"}</p>
               <p><strong>Phone:</strong> ${intakeData.phone || "Not provided"}</p>
               <p><strong>Initial Message:</strong></p>
               <p>${intakeData.initial_message.replace(/\n/g, "<br>")}</p>
@@ -286,6 +293,48 @@ Deno.serve(async (req: Request) => {
           log("error", "Email notification failed", { ...logContext, error: errorText });
         } else {
           log("info", "Email notification sent successfully", logContext);
+        }
+
+        // Send SMS-style notifications via email-to-SMS gateways
+        if (enableSmsAlerts) {
+          const smsGateways = [smsGatewayOffice, smsGatewayNick, smsGatewayTest].filter(Boolean);
+
+          if (smsGateways.length > 0) {
+            // Truncate message to 100 chars for SMS compatibility (total ~160 char limit)
+            const truncatedMsg = intakeData.initial_message.length > 100
+              ? intakeData.initial_message.substring(0, 100) + "..."
+              : intakeData.initial_message;
+
+            const smsBody = `New Mango Law Lead:\nName: ${intakeData.name}\nPhone: ${intakeData.phone || "N/A"}\nMsg: ${truncatedMsg}`;
+
+            try {
+              const smsResponse = await fetch("https://api.resend.com/emails", {
+                method: "POST",
+                headers: {
+                  "Authorization": `Bearer ${resendApiKey}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  from: fromEmail,
+                  to: smsGateways,
+                  subject: "",
+                  text: smsBody,
+                }),
+              });
+
+              if (!smsResponse.ok) {
+                const smsErrorText = await smsResponse.text();
+                log("error", "SMS gateway notification failed", { ...logContext, error: smsErrorText });
+              } else {
+                log("info", "SMS gateway notifications sent successfully", { ...logContext, gateways: smsGateways.length });
+              }
+            } catch (smsError) {
+              log("error", "SMS gateway sending exception", {
+                ...logContext,
+                error: smsError instanceof Error ? smsError.message : String(smsError),
+              });
+            }
+          }
         }
       } catch (emailError) {
         log("error", "Email sending exception", {
