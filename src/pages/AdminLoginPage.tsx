@@ -27,15 +27,15 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#1B4332] via-[#2F5F4F] to-[#1B4332] flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/20">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] rounded-full flex items-center justify-center mb-4 shadow-lg">
               <Shield className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">Admin Login</h1>
-            <p className="text-slate-300 text-center">
+            <p className="text-slate-200 text-center">
               Sign in to access the CMS dashboard
             </p>
           </div>
@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E8A33C] focus:border-transparent transition"
                 placeholder="admin@example.com"
               />
             </div>
@@ -70,7 +70,7 @@ export default function AdminLoginPage() {
                 </label>
                 <Link
                   to="/admin/forgot-password"
-                  className="text-sm text-amber-400 hover:text-amber-300 transition"
+                  className="text-sm text-[#E8A33C] hover:text-[#FFB84D] transition"
                 >
                   Forgot Password?
                 </Link>
@@ -81,7 +81,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E8A33C] focus:border-transparent transition"
                 placeholder="••••••••"
               />
             </div>
@@ -89,14 +89,14 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-lg hover:from-amber-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#E8A33C] to-[#FFB84D] text-white font-semibold rounded-lg hover:from-[#D9941A] hover:to-[#E8A33C] focus:outline-none focus:ring-2 focus:ring-[#E8A33C] focus:ring-offset-2 focus:ring-offset-[#1B4332] transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-300 text-sm">
               Authorized personnel only
             </p>
           </div>

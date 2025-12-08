@@ -38,7 +38,7 @@ export default function ForgotPasswordPage() {
 
   if (sent) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-[#1B4332] via-[#2F5F4F] to-[#1B4332] flex items-center justify-center px-4 py-12">
         <div className="max-w-md w-full">
           <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 shadow-2xl">
             <div className="flex justify-center mb-6">
@@ -51,15 +51,15 @@ export default function ForgotPasswordPage() {
               Check Your Email
             </h1>
 
-            <p className="text-slate-300 text-center mb-6">
+            <p className="text-slate-200 text-center mb-6">
               We've sent a password reset link to <strong className="text-white">{email}</strong>
             </p>
 
-            <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-6">
-              <p className="text-sm text-amber-200">
+            <div className="bg-[#E8A33C]/10 border border-[#E8A33C]/20 rounded-lg p-4 mb-6">
+              <p className="text-sm text-[#FFB84D]">
                 <strong>Next Steps:</strong>
               </p>
-              <ol className="text-sm text-amber-100 mt-2 space-y-1 list-decimal list-inside">
+              <ol className="text-sm text-slate-200 mt-2 space-y-1 list-decimal list-inside">
                 <li>Check your email inbox (and spam folder)</li>
                 <li>Click the reset link in the email</li>
                 <li>Enter your new password</li>
@@ -89,14 +89,14 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-[#1B4332] via-[#2F5F4F] to-[#1B4332] flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <MangoIcon className="w-16 h-16 text-amber-500" />
+            <MangoIcon className="w-16 h-16 text-[#E8A33C]" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">Reset Password</h1>
-          <p className="text-slate-300">
+          <p className="text-slate-200">
             Enter your email to receive a password reset link
           </p>
         </div>
@@ -122,7 +122,7 @@ export default function ForgotPasswordPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@example.com"
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E8A33C] focus:border-transparent"
                 />
               </div>
             </div>
@@ -130,7 +130,7 @@ export default function ForgotPasswordPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-lg hover:from-amber-600 hover:to-orange-700 transition shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full px-6 py-3 bg-gradient-to-r from-[#E8A33C] to-[#FFB84D] text-white font-semibold rounded-lg hover:from-[#D9941A] hover:to-[#E8A33C] transition shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {loading ? 'Sending...' : 'Send Reset Link'}
             </button>
@@ -138,7 +138,7 @@ export default function ForgotPasswordPage() {
             <div className="text-center">
               <Link
                 to="/admin/login"
-                className="text-slate-300 hover:text-white transition text-sm inline-flex items-center gap-2"
+                className="text-slate-200 hover:text-white transition text-sm inline-flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Login
@@ -147,7 +147,7 @@ export default function ForgotPasswordPage() {
           </form>
         </div>
 
-        <div className="mt-6 text-center text-sm text-slate-400">
+        <div className="mt-6 text-center text-sm text-slate-300">
           <p>Only admin users can reset their password</p>
         </div>
       </div>
