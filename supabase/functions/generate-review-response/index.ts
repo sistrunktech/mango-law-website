@@ -1,4 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -12,6 +13,7 @@ interface ReviewResponseRequest {
   rating: number;
   authorName: string;
   tone?: 'grateful' | 'professional' | 'empathetic' | 'friendly';
+  useModel?: string;
 }
 
 Deno.serve(async (req: Request) => {
@@ -23,7 +25,31 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const { reviewId, reviewText, rating, authorName, tone = 'professional' }: ReviewResponseRequest = await req.json();
+    const { reviewId, reviewText, rating, authorName, tone = 'professional', useModel }: ReviewResponseRequest = await req.json();
+
+    const openaiApiKey = Deno.env.get("OPENAI_API_KEY");
+    const defaultModel = Deno.env.get("OPENAI_MODEL_REVIEW_RESPONSE") || "gpt-4o-mini";
+    const model = useModel || defaultModel;
+
+    if (!openaiApiKey) {
+      console.warn("No OpenAI API key found, using fallback mock response");
+      const mockResponse = generateMockResponse(rating, authorName, reviewText);
+      return new Response(
+        JSON.stringify({
+          reviewId,
+          generatedResponse: mockResponse,
+          tone,
+          model: "mock",
+          confidence: 0.75,
+          usedFallback: true,
+          suggestedEdits: ["OpenAI API not configured - using fallback response"]
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 200,
+        }
+      );
+    }
 
     const toneGuidelines = {
       grateful: "Express genuine gratitude and enthusiasm. Use warm, appreciative language.",
@@ -58,19 +84,67 @@ Guidelines:
 - Do NOT argue or be defensive
 
 Review text: "${reviewText}"
-Rating: ${rating}/5 stars`;
+Rating: ${rating}/5 stars
 
-    const mockResponse = generateMockResponse(rating, authorName, reviewText);
+Generate ONLY the response text, no preamble or explanation.`;
+
+    const openaiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${openaiApiKey}`,
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: `Please write a ${tone} response to this review.` }
+        ],
+        temperature: 0.7,
+        max_tokens: 300,
+      }),
+    });
+
+    if (!openaiResponse.ok) {
+      const errorText = await openaiResponse.text();
+      console.error("OpenAI API error:", errorText);
+      throw new Error(`OpenAI API error: ${errorText}`);
+    }
+
+    const openaiData = await openaiResponse.json();
+    const generatedResponse = openaiData.choices[0].message.content.trim();
+
+    const confidence = rating >= 4 ? 0.92 : rating === 3 ? 0.85 : 0.80;
+    const wordCount = generatedResponse.split(/\s+/).length;
+    const suggestedEdits = [];
+
+    if (wordCount < 40) {
+      suggestedEdits.push("Consider adding more personalization");
+    }
+    if (wordCount > 180) {
+      suggestedEdits.push("Consider shortening for better readability");
+    }
+    if (rating <= 2 && !generatedResponse.includes("740")) {
+      suggestedEdits.push("Add direct contact number for urgent cases");
+    }
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    await supabase.from("ai_model_config").update({
+      usage_count: supabase.rpc("increment", { x: 1 })
+    }).eq("use_case", "review_response").eq("model_name", model);
 
     const response = {
       reviewId,
-      generatedResponse: mockResponse,
+      generatedResponse,
       tone,
-      confidence: 0.85 + (Math.random() * 0.15),
-      suggestedEdits: [
-        "Consider personalizing the opening",
-        "Add specific reference to their case type if known"
-      ]
+      model,
+      confidence,
+      usedFallback: false,
+      suggestedEdits,
+      wordCount,
     };
 
     return new Response(

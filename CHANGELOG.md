@@ -1,6 +1,88 @@
 # Changelog
 
-## 2025-12-08
+## 2025-12-08 (Evening Update)
+
+### CMS Transformation & AI Integration
+
+#### Visual Redesign - WordPress-Inspired Dark Theme
+- **Complete CMS Rebrand**: Replaced forest green theme with professional dark charcoal aesthetic
+  - Main background: `#0F0F0F` (charcoal black)
+  - Card backgrounds: `#1A1A1A` and `#232323` (layered grays)
+  - Borders: `#2A2A2A` (subtle separation)
+  - Primary accent: `#E8A33C` (mango gold) for CTAs and active states
+  - Text: White, slate-400, and slate-300 for hierarchy
+- **Design Philosophy**: Modern SaaS aesthetic similar to WordPress, Notion, and Linear
+- **Brand Alignment**: Uses existing brand colors from tailwind.config.js
+- **Components Updated**: AdminDashboardPage, ReviewManager, and all admin components
+
+#### OpenAI Integration (GPT-4o & GPT-4o Mini)
+- **Real AI API Integration**: All mock responses replaced with OpenAI API calls
+- **Model Selection System**:
+  - gpt-4o-mini: Fast, cost-effective ($0.15/1K tokens) - default for review responses, social media
+  - gpt-4o: Premium quality ($2.50/1K tokens) - for blog content, complex queries
+  - text-embedding-3-small: Semantic search and embeddings ($0.02/1K tokens)
+  - Legacy support: gpt-3.5-turbo and gpt-4-turbo
+- **Model Optimization UI**: New ModelSelector component with:
+  - Speed/cost/quality ratings with visual indicators
+  - Usage tracking and cost monitoring
+  - Intelligent recommendations per use case
+  - Real-time configuration from database
+- **Edge Functions**:
+  - `generate-review-response`: Real OpenAI integration with confidence scoring
+  - Automatic fallback to mock responses if API key not configured
+  - Temperature and token controls per use case
+
+#### Google Business Profile Integration
+- **OAuth 2.0 Connection**: Full authentication flow for Google Business Profile API
+- **Review Sync System**:
+  - `sync-google-reviews` Edge Function: Auto-fetches reviews from Google
+  - Refresh token management with automatic token renewal
+  - Intelligent upsert logic (new reviews inserted, existing updated)
+  - Sync logging with detailed metrics (fetched, new, updated counts)
+  - Integration tracking in `google_integrations` table
+- **Multi-Platform Review System**:
+  - Google, Facebook, LinkedIn review platform support
+  - Platform-specific URLs and priorities in `review_platforms` table
+  - Short URL support for SMS campaigns
+  - Review metrics tracking (total reviews, average rating per platform)
+
+#### Database Enhancements
+- **Admin Access Control**:
+  - `admin_users` table with role hierarchy (owner, super_admin, admin)
+  - Owner: Nick Mango (nick@mango.law) - full system control
+  - Super Admin: Tim Sistrunk (tim@sistrunktech.com) - developer access
+  - `allowed_domains` for team access (mango.law, sistrunktech.com)
+  - `admin_activity_log` for audit trails
+- **Google Integrations**:
+  - `google_integrations`: OAuth tokens, account IDs, sync frequency
+  - `review_platforms`: Multi-platform review URLs and metrics
+  - Enhanced `google_reviews` with AI metadata (response_model, response_confidence, auto_pilot_eligible, sentiment_analyzed_at, key_themes)
+- **AI Configuration**:
+  - `ai_model_config`: Per-use-case model settings with cost tracking
+  - 9 pre-configured models with speed/cost/quality ratings
+  - Usage counters and total cost tracking
+
+#### Environment Variables & Configuration
+- **OpenAI Setup**:
+  - `OPENAI_API_KEY`: Main API key (Sistrunk Tech account)
+  - `OPENAI_ORG_ID`: Optional organization ID
+  - Model selection per use case (6 different use cases configured)
+- **Google APIs**:
+  - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`: OAuth credentials
+  - `GOOGLE_REFRESH_TOKEN`: Long-lived refresh token
+  - `GOOGLE_BUSINESS_ACCOUNT_ID`, `GOOGLE_LOCATION_ID`: Business profile identifiers
+  - `GOOGLE_SHEETS_SPREADSHEET_ID`: For client imports
+- **Review Platform URLs**:
+  - Google, Facebook, LinkedIn review URLs pre-configured
+  - Ready for campaign email templates
+
+#### Security & Compliance
+- **Row Level Security**: All new tables protected with RLS policies
+- **Role-Based Access**: Proper permission checks for owner/super_admin/admin roles
+- **Token Management**: Secure storage of Google OAuth tokens
+- **Activity Logging**: All admin actions tracked for audit compliance
+
+## 2025-12-08 (Morning Update)
 
 ### Major Feature Releases
 

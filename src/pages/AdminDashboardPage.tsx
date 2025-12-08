@@ -36,7 +36,7 @@ export default function AdminDashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1B4332] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );
@@ -62,40 +62,40 @@ export default function AdminDashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#1B4332]">
-      <header className="bg-[#2F5F4F] border-b border-[#1B4332] sticky top-0 z-50 shadow-lg">
+    <div className="min-h-screen bg-[#0F0F0F]">
+      <header className="bg-[#1A1A1A] border-b border-[#2A2A2A] sticky top-0 z-50 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] rounded-lg flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] rounded-lg flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-lg">ML</span>
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white">Mango Law CMS</h1>
-                <p className="text-xs text-slate-300">Admin Dashboard</p>
+                <p className="text-xs text-slate-400">Admin Dashboard</p>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
               <button
                 onClick={() => window.open('/docs/admin-guide', '_blank')}
-                className="flex items-center gap-2 px-3 py-2 text-slate-200 hover:text-white hover:bg-[#1B4332] rounded-lg transition"
+                className="flex items-center gap-2 px-3 py-2 text-slate-400 hover:text-white hover:bg-[#232323] rounded-lg transition"
                 title="Help & Documentation"
               >
                 <HelpCircle className="w-5 h-5" />
                 <span className="hidden sm:inline">Help</span>
               </button>
 
-              <div className="flex items-center gap-3 px-3 py-2 bg-[#1B4332] rounded-lg">
-                <div className="w-8 h-8 bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] rounded-full flex items-center justify-center text-white font-semibold text-sm">
+              <div className="flex items-center gap-3 px-3 py-2 bg-[#232323] rounded-lg border border-[#2A2A2A]">
+                <div className="w-8 h-8 bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-md">
                   {user.email?.[0].toUpperCase()}
                 </div>
-                <span className="text-sm text-slate-200 hidden sm:inline">{user.email}</span>
+                <span className="text-sm text-slate-300 hidden sm:inline">{user.email}</span>
               </div>
 
               <button
                 onClick={handleSignOut}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition"
+                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition shadow-md"
               >
                 <LogOut className="w-4 h-4" />
                 <span className="hidden sm:inline">Sign Out</span>
@@ -112,8 +112,8 @@ export default function AdminDashboardPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 px-4 py-3 font-medium text-sm transition ${
                     activeTab === tab.id
-                      ? 'text-[#E8A33C] border-b-2 border-[#E8A33C]'
-                      : 'text-slate-300 hover:text-white'
+                      ? 'text-[#E8A33C] border-b-2 border-[#E8A33C] bg-[#232323]/50'
+                      : 'text-slate-400 hover:text-white hover:bg-[#232323]/30'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
