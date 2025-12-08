@@ -77,9 +77,10 @@
   - Instant mobile alerts to office, attorney, and test numbers
   - No Twilio subscription required
   - Configured via environment variables:
-    - `OFFICE_SMS_EMAIL`: 7406022155@vtext.com
-    - `NICK_SMS_EMAIL`: 7404176191@vtext.com
-    - `TEST_SMS_EMAIL`: 6149000604@vtext.com
+    - `SMS_GATEWAY_OFFICE`: 7406022155@vtext.com
+    - `SMS_GATEWAY_NICK`: 7404176191@vtext.com
+    - `SMS_GATEWAY_TEST`: 6149000604@vtext.com
+    - `ENABLE_SMS_LEAD_ALERTS`: true/false to toggle SMS notifications
 - **Enhanced chat-intake Edge Function**:
   - Full SMS notification support
   - Conversation context tracking
@@ -132,9 +133,10 @@
 - `VITE_MAPBOX_PUBLIC_TOKEN`: Mapbox API access token (client-side)
 - `MAPBOX_PUBLIC_TOKEN`: Fallback token for server-side usage
 - `VITE_MAPBOX_STYLE_URL`: Optional custom Mapbox style URL
-- `OFFICE_SMS_EMAIL`: Email-to-SMS gateway for office notifications
-- `NICK_SMS_EMAIL`: Email-to-SMS gateway for attorney notifications
-- `TEST_SMS_EMAIL`: Email-to-SMS gateway for test notifications
+- `SMS_GATEWAY_OFFICE`: Email-to-SMS gateway for office notifications (format: phone@carrier-gateway.com)
+- `SMS_GATEWAY_NICK`: Email-to-SMS gateway for attorney notifications
+- `SMS_GATEWAY_TEST`: Email-to-SMS gateway for test notifications
+- `ENABLE_SMS_LEAD_ALERTS`: Enable/disable SMS notifications via email-to-SMS gateways
 
 ### Database Migrations
 - `20251208022003_add_dui_checkpoints_table.sql`: Core checkpoint storage

@@ -13,7 +13,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback).
 - Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `APP_ENV`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`.
-- SMS Notifications (email-to-SMS gateways): `OFFICE_SMS_EMAIL` (Verizon), `NICK_SMS_EMAIL` (Verizon), `TEST_SMS_EMAIL` (AT&T test).
+- SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
 - Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `VITE_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
 - See `.env.example` for the full list; update it whenever variables change.
 - Current allowlist should include staging/Bolt hosts: `https://mango.law`, `https://staging.mango.law`, and `https://sistrunktech-mango-l-lqhi.bolt.host` (add/remove as environments change).
@@ -63,7 +63,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - **reviews**, **review_invitations**, **review_analytics**: Review management tables for tracking client reviews and competitive analysis.
 - **RLS Enabled**: All tables use Row Level Security. Public read access to checkpoints and geocoding cache; service role has full access; rate limiting enforces IP-based restrictions.
 - **Indexes**: Comprehensive indexes on frequently queried columns including composite indexes for date range queries, location searches, and rate limiting.
-- **Functions**: Helper functions for `increment_geocoding_cache_hit()`, `cleanup_old_scraper_logs()`, `invoke_checkpoint_scraper()`, `trigger_checkpoint_scraper_now()`.
+- **Functions**: Helper functions for `increment_column()` (generic counter for views/metrics), `increment()` (backward-compatible wrapper), `increment_geocoding_cache_hit()`, `cleanup_old_scraper_logs()`, `update_checkpoint_status()` (auto-transitions statuses), `invoke_checkpoint_scraper()`, `trigger_checkpoint_scraper_now()`.
 - **pg_cron Extension**: Enabled for scheduled jobs. Daily scraper runs at 2:00 AM EST (7:00 AM UTC).
 - **pg_net Extension**: Enabled for async HTTP requests from database functions to Edge Functions.
 - **Backups/PITR**: Via Supabase defaults; add monitoring alerts when available.
@@ -90,12 +90,14 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 
 ## Admin Dashboard
 - **Location**: `/admin/checkpoints` page (CheckpointAdminPage.tsx).
+- **Authentication**: Protected with password authentication (password: `mango2024admin`). Session expires after 24 hours. Change password in `src/components/AdminAuth.tsx`.
 - **Features**:
-  - **Scraper Logs Viewer**: Real-time view of scraper execution history with success/failure stats, error details, and manual trigger button.
+  - **Status Update Button**: Manually trigger checkpoint status updates based on current time (upcoming → active → completed).
+  - **Scraper Logs Viewer**: Real-time view of scraper execution history with success/failure stats, error details, and manual trigger button. Logs are publicly viewable for transparency.
   - **Checkpoint CRUD**: Create, edit, and delete checkpoints with geocoding preview.
   - **Geocoding Preview**: Real-time address validation and coordinate lookup as you type. Shows confidence level (high/medium/low) and formatted address.
   - **Manual Entry**: Full form with all checkpoint fields including source tracking and verification status.
-- **Security**: Admin routes should be protected (currently open for development).
+- **Automated Updates**: pg_cron job runs hourly to automatically update checkpoint statuses. Manual refresh available via "Update Statuses" button.
 
 ## Blog System
 - **Visual Components**: 31+ blog-specific components for rich content display including:

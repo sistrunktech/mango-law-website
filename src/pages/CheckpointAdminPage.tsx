@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
-import { getCheckpoints, createCheckpoint, updateCheckpoint, deleteCheckpoint } from '../lib/checkpointService';
+import { Plus, Edit, Trash2, Save, X, RefreshCw } from 'lucide-react';
+import { getCheckpoints, createCheckpoint, updateCheckpoint, deleteCheckpoint, updateCheckpointStatuses } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
 import { ohioCounties, getStatusLabel, formatCheckpointDateRange } from '../data/checkpoints';
 import GeocodingPreview from '../components/GeocodingPreview';
 import ScraperLogsViewer from '../components/ScraperLogsViewer';
+import AdminAuth from '../components/AdminAuth';
 
 export default function CheckpointAdminPage() {
   const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [isUpdatingStatuses, setIsUpdatingStatuses] = useState(false);
   const [formData, setFormData] = useState<Partial<DUICheckpoint>>({
     title: '',
     location_address: '',
@@ -97,23 +99,49 @@ export default function CheckpointAdminPage() {
     setShowForm(false);
   };
 
+  const handleUpdateStatuses = async () => {
+    try {
+      setIsUpdatingStatuses(true);
+      await updateCheckpointStatuses();
+      await loadCheckpoints();
+      alert('Checkpoint statuses updated successfully');
+    } catch (error) {
+      console.error('Failed to update statuses:', error);
+      alert('Failed to update checkpoint statuses');
+    } finally {
+      setIsUpdatingStatuses(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-brand-offWhite py-12">
+    <AdminAuth>
+      <div className="min-h-screen bg-brand-offWhite py-12">
       <div className="container max-w-6xl">
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-brand-black">Checkpoint Management</h1>
             <p className="mt-2 text-brand-black/70">Manage DUI checkpoint data and scraper activity</p>
           </div>
-          {!showForm && (
+          <div className="flex gap-3">
             <button
-              onClick={() => setShowForm(true)}
-              className="flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-3 font-semibold text-white transition-all hover:bg-brand-gold hover:shadow-md"
+              onClick={handleUpdateStatuses}
+              disabled={isUpdatingStatuses}
+              className="flex items-center gap-2 rounded-lg border border-brand-black/20 bg-white px-4 py-3 font-semibold text-brand-black transition-all hover:bg-brand-offWhite hover:shadow-md disabled:opacity-50"
+              title="Manually update checkpoint statuses based on current time"
             >
-              <Plus className="h-5 w-5" />
-              Add Checkpoint
+              <RefreshCw className={`h-5 w-5 ${isUpdatingStatuses ? 'animate-spin' : ''}`} />
+              Update Statuses
             </button>
-          )}
+            {!showForm && (
+              <button
+                onClick={() => setShowForm(true)}
+                className="flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-3 font-semibold text-white transition-all hover:bg-brand-gold hover:shadow-md"
+              >
+                <Plus className="h-5 w-5" />
+                Add Checkpoint
+              </button>
+            )}
+          </div>
         </div>
 
         <div className="mb-8">
@@ -392,5 +420,6 @@ export default function CheckpointAdminPage() {
         )}
       </div>
     </div>
+    </AdminAuth>
   );
 }
