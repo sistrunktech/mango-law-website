@@ -115,15 +115,6 @@ export default function PageHero({
           </div>
         )}
 
-        {/* Faded mango icon decoration - tilted, off-center right */}
-        <div className="pointer-events-none absolute right-[10%] top-1/2 -translate-y-1/2 opacity-[0.03] rotate-12">
-          <img
-            src="/images/brand/mango-icon-white.svg"
-            alt=""
-            className="h-[500px] w-[500px]"
-          />
-        </div>
-
         {/* Gradient orbs - emerald + mango for brand energy */}
         <div className="pointer-events-none absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-brand-leaf/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-brand-mango/6 blur-[100px]" />

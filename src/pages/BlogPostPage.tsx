@@ -1,5 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, User, ArrowLeft, Clock } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { blogPosts } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
 import AuthorBio from '../components/AuthorBio';
@@ -22,73 +24,6 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3) {
     .slice(0, limit);
 }
 
-function parseMarkdownText(text: string): JSX.Element[] {
-  const parts: JSX.Element[] = [];
-  let currentIndex = 0;
-  let key = 0;
-
-  const boldRegex = /\*\*(.+?)\*\*/g;
-  const italicRegex = /\*(.+?)\*/g;
-  const linkRegex = /\[(.+?)\]\((.+?)\)/g;
-  const codeRegex = /`(.+?)`/g;
-
-  const patterns = [
-    { regex: boldRegex, type: 'bold' as const },
-    { regex: linkRegex, type: 'link' as const },
-    { regex: codeRegex, type: 'code' as const },
-    { regex: italicRegex, type: 'italic' as const },
-  ];
-
-  const matches: Array<{ index: number; length: number; type: string; match: RegExpExecArray }> = [];
-
-  patterns.forEach(({ regex, type }) => {
-    let match;
-    const r = new RegExp(regex);
-    while ((match = r.exec(text)) !== null) {
-      matches.push({ index: match.index, length: match[0].length, type, match });
-    }
-  });
-
-  matches.sort((a, b) => a.index - b.index);
-
-  matches.forEach((m) => {
-    if (m.index > currentIndex) {
-      parts.push(<span key={key++}>{text.slice(currentIndex, m.index)}</span>);
-    }
-
-    if (m.type === 'bold') {
-      parts.push(<strong key={key++} className="font-semibold text-brand-black">{m.match[1]}</strong>);
-    } else if (m.type === 'link') {
-      parts.push(
-        <a
-          key={key++}
-          href={m.match[2]}
-          className="text-brand-mango underline hover:text-brand-leaf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {m.match[1]}
-        </a>
-      );
-    } else if (m.type === 'code') {
-      parts.push(
-        <code key={key++} className="rounded bg-brand-black/5 px-1.5 py-0.5 font-mono text-sm">
-          {m.match[1]}
-        </code>
-      );
-    } else if (m.type === 'italic') {
-      parts.push(<em key={key++}>{m.match[1]}</em>);
-    }
-
-    currentIndex = m.index + m.length;
-  });
-
-  if (currentIndex < text.length) {
-    parts.push(<span key={key++}>{text.slice(currentIndex)}</span>);
-  }
-
-  return parts;
-}
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -171,10 +106,10 @@ export default function BlogPostPage() {
             situation.
           </div>
 
-          <div className="prose prose-lg mt-8 max-w-none">
-            {post.content.split('\n\n').map((paragraph, index) => {
-              if (paragraph.startsWith('[VISUAL:')) {
-                const visualType = paragraph.match(/\[VISUAL:(\w+)\]/)?.[1];
+          <div className="prose prose-lg mt-8 max-w-none prose-headings:font-bold prose-headings:text-brand-black prose-h2:mt-8 prose-h2:text-2xl prose-h3:mt-6 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-brand-black/80 prose-a:text-brand-mango prose-a:underline hover:prose-a:text-brand-leaf prose-strong:font-semibold prose-strong:text-brand-black prose-code:rounded prose-code:bg-brand-black/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-ul:my-4 prose-ul:space-y-2 prose-li:text-brand-black/80">
+            {post.content.split('\n\n').map((section, index) => {
+              if (section.startsWith('[VISUAL:')) {
+                const visualType = section.match(/\[VISUAL:(\w+)\]/)?.[1];
 
                 if (visualType === 'OVI_PENALTIES') {
                   return (
@@ -232,37 +167,48 @@ export default function BlogPostPage() {
                 return null;
               }
 
-              if (paragraph.startsWith('## ')) {
-                return (
-                  <h2 key={index} className="mt-8 text-2xl font-bold text-brand-black">
-                    {paragraph.replace('## ', '')}
-                  </h2>
-                );
-              }
-              if (paragraph.startsWith('### ')) {
-                return (
-                  <h3 key={index} className="mt-6 text-xl font-bold text-brand-black">
-                    {paragraph.replace('### ', '')}
-                  </h3>
-                );
-              }
-              if (paragraph.startsWith('- ')) {
-                const items = paragraph.split('\n').filter((line) => line.startsWith('- '));
-                return (
-                  <ul key={index} className="my-4 space-y-2">
-                    {items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-mango" />
-                        <span className="text-brand-black/80">{item.replace('- ', '')}</span>
-                      </li>
-                    ))}
-                  </ul>
-                );
-              }
               return (
-                <p key={index} className="leading-relaxed text-brand-black/80">
-                  {parseMarkdownText(paragraph)}
-                </p>
+                <ReactMarkdown
+                  key={index}
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    a: ({ node, ...props }) => {
+                      const isExternal = props.href?.startsWith('http');
+                      const isInternal = props.href?.startsWith('/');
+
+                      if (isInternal) {
+                        return (
+                          <Link
+                            to={props.href || '#'}
+                            className="text-brand-mango underline hover:text-brand-leaf"
+                          >
+                            {props.children}
+                          </Link>
+                        );
+                      }
+
+                      return (
+                        <a
+                          {...props}
+                          className="text-brand-mango underline hover:text-brand-leaf"
+                          target={isExternal ? '_blank' : undefined}
+                          rel={isExternal ? 'noopener noreferrer' : undefined}
+                        />
+                      );
+                    },
+                    ul: ({ node, ...props }) => (
+                      <ul {...props} className="my-4 space-y-2" />
+                    ),
+                    li: ({ node, ...props }) => (
+                      <li className="flex items-start gap-3">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-mango" />
+                        <span className="text-brand-black/80">{props.children}</span>
+                      </li>
+                    ),
+                  }}
+                >
+                  {section}
+                </ReactMarkdown>
               );
             })}
           </div>
