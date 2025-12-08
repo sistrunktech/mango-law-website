@@ -137,7 +137,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <TestimonialsList />
+      <section className="section bg-white">
+        <div className="container">
+          <TestimonialsList />
+        </div>
+      </section>
+
       <LocationBlock />
 
       {/* Contact Section */}
