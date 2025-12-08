@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import ContactForm from './ContactForm';
 
 const practiceAreas = [
-  { name: 'OVI/DUI Defense', href: '/practice-areas/ovi-dui' },
-  { name: 'Criminal Defense', href: '/practice-areas/criminal-defense' },
-  { name: 'Drug Crimes', href: '/practice-areas/drug-crimes' },
-  { name: 'Protection Orders', href: '/practice-areas/protection-orders' },
-  { name: 'Sex Crimes', href: '/practice-areas/sex-crimes' },
-  { name: 'White Collar', href: '/practice-areas/white-collar' },
+  { name: 'OVI/DUI Defense', href: '/ovi-dui-defense-delaware-oh' },
+  { name: 'Criminal Defense', href: '/criminal-defense-delaware-oh' },
+  { name: 'Drug Crimes', href: '/drug-crime-lawyer-delaware-oh' },
+  { name: 'Protection Orders', href: '/protection-order-lawyer-delaware-oh' },
+  { name: 'Sex Crimes', href: '/sex-crime-defense-lawyer-delaware-oh' },
+  { name: 'White Collar', href: '/white-collar-crimes-attorney-delaware-oh' },
 ];
 
 const relatedResources = [
-  { title: 'Know Your Rights', href: '/blog/field-sobriety-refusal', description: 'Understanding field sobriety tests' },
-  { title: 'OVI Defense Guide', href: '/practice-areas/ovi-dui', description: 'Complete OVI defense overview' },
+  { title: 'Know Your Rights', href: '/blog/refuse-field-sobriety-test-ohio', description: 'Understanding field sobriety tests' },
+  { title: 'OVI Defense Guide', href: '/ovi-dui-defense-delaware-oh', description: 'Complete OVI defense overview' },
   { title: 'Client Success Stories', href: '/reviews', description: 'Read more testimonials' },
 ];
 

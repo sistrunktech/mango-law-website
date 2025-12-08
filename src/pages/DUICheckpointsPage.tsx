@@ -58,7 +58,7 @@ export default function DUICheckpointsPage() {
         title="Ohio DUI Checkpoint Map"
         description="Real-time information about sobriety checkpoints across Ohio. Know your rights and plan accordingly."
         ctaLabel="Know Your Rights"
-        ctaHref="/practice-areas/ovi-dui"
+        ctaHref="/ovi-dui-defense-delaware-oh"
         variant="light"
       />
 
@@ -79,14 +79,14 @@ export default function DUICheckpointsPage() {
                 </p>
                 <div className="flex flex-wrap gap-4 text-sm">
                   <a
-                    href="/practice-areas/ovi-dui"
+                    href="/ovi-dui-defense-delaware-oh"
                     className="inline-flex items-center gap-2 font-semibold text-brand-mango transition-colors hover:text-brand-leaf"
                   >
                     <Shield className="h-4 w-4" />
                     Know Your Rights
                   </a>
                   <a
-                    href="/blog/field-sobriety-refusal"
+                    href="/blog/refuse-field-sobriety-test-ohio"
                     className="inline-flex items-center gap-2 font-semibold text-brand-mango transition-colors hover:text-brand-leaf"
                   >
                     <Info className="h-4 w-4" />

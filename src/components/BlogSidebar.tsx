@@ -13,12 +13,12 @@ const glossaryTerms = [
 ];
 
 const quickPracticeAreas = [
-  { name: 'OVI/DUI Defense', href: '/practice-areas/ovi-dui' },
-  { name: 'Criminal Defense', href: '/practice-areas/criminal-defense' },
-  { name: 'Drug Crimes', href: '/practice-areas/drug-crimes' },
-  { name: 'Protection Orders', href: '/practice-areas/protection-orders' },
-  { name: 'Sex Crimes', href: '/practice-areas/sex-crimes' },
-  { name: 'White Collar', href: '/practice-areas/white-collar' },
+  { name: 'OVI/DUI Defense', href: '/ovi-dui-defense-delaware-oh' },
+  { name: 'Criminal Defense', href: '/criminal-defense-delaware-oh' },
+  { name: 'Drug Crimes', href: '/drug-crime-lawyer-delaware-oh' },
+  { name: 'Protection Orders', href: '/protection-order-lawyer-delaware-oh' },
+  { name: 'Sex Crimes', href: '/sex-crime-defense-lawyer-delaware-oh' },
+  { name: 'White Collar', href: '/white-collar-crimes-attorney-delaware-oh' },
 ];
 
 export default function BlogSidebar() {
