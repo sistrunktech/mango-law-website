@@ -268,6 +268,27 @@ export default function BlogPostPage() {
                       key={`markdown-${index}`}
                       remarkPlugins={[remarkGfm]}
                       components={{
+                        h1: ({ node, ...props }) => (
+                          <h1 className="mb-6 mt-12 font-display text-4xl font-bold text-brand-black" {...props} />
+                        ),
+                        h2: ({ node, ...props }) => (
+                          <h2 className="mb-4 mt-12 font-display text-3xl font-bold text-brand-black" {...props} />
+                        ),
+                        h3: ({ node, ...props }) => (
+                          <h3 className="mb-3 mt-10 font-display text-2xl font-bold text-brand-black" {...props} />
+                        ),
+                        h4: ({ node, ...props }) => (
+                          <h4 className="mb-2 mt-8 text-xl font-semibold text-brand-black" {...props} />
+                        ),
+                        h5: ({ node, ...props }) => (
+                          <h5 className="mb-2 mt-6 text-lg font-semibold text-brand-black" {...props} />
+                        ),
+                        h6: ({ node, ...props }) => (
+                          <h6 className="mb-2 mt-6 text-base font-semibold text-brand-black" {...props} />
+                        ),
+                        p: ({ node, ...props }) => (
+                          <p className="mb-6 mt-0 leading-relaxed text-brand-black/80" {...props} />
+                        ),
                         a: ({ node, ...props }) => {
                           const isExternal = props.href?.startsWith('http');
                           const isInternal = props.href?.startsWith('/');
@@ -276,7 +297,7 @@ export default function BlogPostPage() {
                             return (
                               <Link
                                 to={props.href || '#'}
-                                className="text-brand-mango underline hover:text-brand-leaf"
+                                className="font-medium text-brand-mango no-underline hover:text-brand-leaf hover:underline"
                               >
                                 {props.children}
                               </Link>
@@ -286,20 +307,26 @@ export default function BlogPostPage() {
                           return (
                             <a
                               {...props}
-                              className="text-brand-mango underline hover:text-brand-leaf"
+                              className="font-medium text-brand-mango no-underline hover:text-brand-leaf hover:underline"
                               target={isExternal ? '_blank' : undefined}
                               rel={isExternal ? 'noopener noreferrer' : undefined}
                             />
                           );
                         },
                         ul: ({ node, ...props }) => (
-                          <ul {...props} className="my-4 space-y-2" />
+                          <ul {...props} className="my-6 space-y-3" />
                         ),
                         li: ({ node, ...props }) => (
-                          <li className="flex items-start gap-3">
+                          <li className="flex items-start gap-3 leading-relaxed text-brand-black/80">
                             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-mango" />
-                            <span className="text-brand-black/80">{props.children}</span>
+                            <span>{props.children}</span>
                           </li>
+                        ),
+                        strong: ({ node, ...props }) => (
+                          <strong className="font-semibold text-brand-black" {...props} />
+                        ),
+                        blockquote: ({ node, ...props }) => (
+                          <blockquote className="my-6 border-l-4 border-brand-mango pl-6 italic text-brand-black/70" {...props} />
                         ),
                       }}
                     >
