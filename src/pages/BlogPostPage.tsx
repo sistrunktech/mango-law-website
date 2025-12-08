@@ -106,111 +106,114 @@ export default function BlogPostPage() {
             situation.
           </div>
 
-          <div className="prose prose-lg mt-8 max-w-none prose-headings:font-bold prose-headings:text-brand-black prose-h2:mt-8 prose-h2:text-2xl prose-h3:mt-6 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-brand-black/80 prose-a:text-brand-mango prose-a:underline hover:prose-a:text-brand-leaf prose-strong:font-semibold prose-strong:text-brand-black prose-code:rounded prose-code:bg-brand-black/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-ul:my-4 prose-ul:space-y-2 prose-li:text-brand-black/80">
-            {post.content.split('\n\n').map((section, index) => {
-              if (section.startsWith('[VISUAL:')) {
-                const visualType = section.match(/\[VISUAL:(\w+)\]/)?.[1];
+          <div className="prose prose-lg mt-8 max-w-none prose-headings:font-bold prose-headings:text-brand-black prose-h2:mt-8 prose-h2:text-2xl prose-h3:mt-6 prose-h3:text-xl prose-h4:mt-4 prose-h4:text-lg prose-p:leading-relaxed prose-p:text-brand-black/80 prose-a:text-brand-mango prose-a:underline hover:prose-a:text-brand-leaf prose-strong:font-semibold prose-strong:text-brand-black prose-code:rounded prose-code:bg-brand-black/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-ul:my-4 prose-ul:space-y-2 prose-li:text-brand-black/80 prose-ol:my-4 prose-ol:space-y-2">
+            {(() => {
+              const sections: JSX.Element[] = [];
+              const parts = post.content.split(/(\[VISUAL:\w+\])/g);
 
-                if (visualType === 'OVI_PENALTIES') {
-                  return (
-                    <PenaltyGrid
-                      key={index}
-                      title="First-Time OVI Penalties in Ohio"
-                      columns={[
-                        { key: 'offense', label: 'Offense Type' },
-                        { key: 'jail', label: 'Jail Time' },
-                        { key: 'fine', label: 'Fine Range' },
-                        { key: 'license', label: 'License Suspension' }
-                      ]}
-                      rows={[
-                        {
-                          offense: 'Standard OVI',
-                          jail: '3 days - 6 months',
-                          fine: '$375 - $1,075',
-                          license: '6 months - 3 years'
+              parts.forEach((part, index) => {
+                if (part.match(/\[VISUAL:(\w+)\]/)) {
+                  const visualType = part.match(/\[VISUAL:(\w+)\]/)?.[1];
+
+                  if (visualType === 'OVI_PENALTIES') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="First-Time OVI Penalties in Ohio"
+                        columns={[
+                          { key: 'offense', label: 'Offense Type' },
+                          { key: 'jail', label: 'Jail Time' },
+                          { key: 'fine', label: 'Fine Range' },
+                          { key: 'license', label: 'License Suspension' }
+                        ]}
+                        rows={[
+                          {
+                            offense: 'Standard OVI',
+                            jail: '3 days - 6 months',
+                            fine: '$375 - $1,075',
+                            license: '6 months - 3 years'
+                          },
+                          {
+                            offense: 'High BAC (.17+)',
+                            jail: '6 days minimum',
+                            fine: '$375 - $1,075',
+                            license: '1 year minimum'
+                          },
+                          {
+                            offense: 'Refusal',
+                            jail: '3 days - 6 months',
+                            fine: '$375 - $1,075',
+                            license: '1 year minimum'
+                          }
+                        ]}
+                      />
+                    );
+                  } else if (visualType === 'OVI_COSTS') {
+                    sections.push(
+                      <CostBreakdown
+                        key={`visual-${index}`}
+                        title="Total Cost of First OVI Conviction"
+                        items={[
+                          { label: 'Court Fines', amount: '$375-$1,075', description: 'Mandatory court-imposed fines' },
+                          { label: 'License Reinstatement', amount: '$475', description: 'BMV fees to restore driving privileges' },
+                          { label: 'Alcohol Education', amount: '$200-$500', description: 'Required intervention program' },
+                          { label: 'SR-22 Insurance', amount: '$1,500-$3,000', description: 'Increased insurance costs over 3 years' },
+                          { label: 'Ignition Interlock', amount: '$800-$1,500', description: 'Device installation and monitoring' },
+                          { label: 'Attorney Fees', amount: '$2,500-$7,500', description: 'Legal representation' },
+                          { label: 'Total Estimated Cost', amount: '$5,850-$14,050', isTotal: true }
+                        ]}
+                      />
+                    );
+                  }
+                } else if (part.trim()) {
+                  sections.push(
+                    <ReactMarkdown
+                      key={`markdown-${index}`}
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        a: ({ node, ...props }) => {
+                          const isExternal = props.href?.startsWith('http');
+                          const isInternal = props.href?.startsWith('/');
+
+                          if (isInternal) {
+                            return (
+                              <Link
+                                to={props.href || '#'}
+                                className="text-brand-mango underline hover:text-brand-leaf"
+                              >
+                                {props.children}
+                              </Link>
+                            );
+                          }
+
+                          return (
+                            <a
+                              {...props}
+                              className="text-brand-mango underline hover:text-brand-leaf"
+                              target={isExternal ? '_blank' : undefined}
+                              rel={isExternal ? 'noopener noreferrer' : undefined}
+                            />
+                          );
                         },
-                        {
-                          offense: 'High BAC (.17+)',
-                          jail: '6 days minimum',
-                          fine: '$375 - $1,075',
-                          license: '1 year minimum'
-                        },
-                        {
-                          offense: 'Refusal',
-                          jail: '3 days - 6 months',
-                          fine: '$375 - $1,075',
-                          license: '1 year minimum'
-                        }
-                      ]}
-                    />
+                        ul: ({ node, ...props }) => (
+                          <ul {...props} className="my-4 space-y-2" />
+                        ),
+                        li: ({ node, ...props }) => (
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-mango" />
+                            <span className="text-brand-black/80">{props.children}</span>
+                          </li>
+                        ),
+                      }}
+                    >
+                      {part}
+                    </ReactMarkdown>
                   );
                 }
+              });
 
-                if (visualType === 'OVI_COSTS') {
-                  return (
-                    <CostBreakdown
-                      key={index}
-                      title="Total Cost of First OVI Conviction"
-                      items={[
-                        { label: 'Court Fines', amount: '$375-$1,075', description: 'Mandatory court-imposed fines' },
-                        { label: 'License Reinstatement', amount: '$475', description: 'BMV fees to restore driving privileges' },
-                        { label: 'Alcohol Education', amount: '$200-$500', description: 'Required intervention program' },
-                        { label: 'SR-22 Insurance', amount: '$1,500-$3,000', description: 'Increased insurance costs over 3 years' },
-                        { label: 'Ignition Interlock', amount: '$800-$1,500', description: 'Device installation and monitoring' },
-                        { label: 'Attorney Fees', amount: '$2,500-$7,500', description: 'Legal representation' },
-                        { label: 'Total Estimated Cost', amount: '$5,850-$14,050', isTotal: true }
-                      ]}
-                    />
-                  );
-                }
-
-                return null;
-              }
-
-              return (
-                <ReactMarkdown
-                  key={index}
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    a: ({ node, ...props }) => {
-                      const isExternal = props.href?.startsWith('http');
-                      const isInternal = props.href?.startsWith('/');
-
-                      if (isInternal) {
-                        return (
-                          <Link
-                            to={props.href || '#'}
-                            className="text-brand-mango underline hover:text-brand-leaf"
-                          >
-                            {props.children}
-                          </Link>
-                        );
-                      }
-
-                      return (
-                        <a
-                          {...props}
-                          className="text-brand-mango underline hover:text-brand-leaf"
-                          target={isExternal ? '_blank' : undefined}
-                          rel={isExternal ? 'noopener noreferrer' : undefined}
-                        />
-                      );
-                    },
-                    ul: ({ node, ...props }) => (
-                      <ul {...props} className="my-4 space-y-2" />
-                    ),
-                    li: ({ node, ...props }) => (
-                      <li className="flex items-start gap-3">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-mango" />
-                        <span className="text-brand-black/80">{props.children}</span>
-                      </li>
-                    ),
-                  }}
-                >
-                  {section}
-                </ReactMarkdown>
-              );
-            })}
+              return sections;
+            })()}
           </div>
 
           <AuthorBio
