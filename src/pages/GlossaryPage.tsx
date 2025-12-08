@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { Search, BookOpen, Filter } from 'lucide-react';
-import Layout from '../components/Layout';
 import PageHero from '../components/PageHero';
 import GlossaryEntry from '../components/GlossaryEntry';
 import { getAllStatutes } from '../data/statutes';
@@ -47,7 +46,7 @@ export default function GlossaryPage() {
   }, [allStatutes, searchQuery, selectedFilter]);
 
   return (
-    <Layout>
+    <>
       <PageHero
         eyebrow="Legal Reference"
         title="Ohio Revised Code Glossary"
@@ -188,6 +187,6 @@ export default function GlossaryPage() {
           </div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }

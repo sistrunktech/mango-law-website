@@ -106,7 +106,24 @@ export default function BlogPostPage() {
             situation.
           </div>
 
-          <div className="prose prose-lg mt-8 max-w-none prose-headings:font-bold prose-headings:text-brand-black prose-h2:mt-8 prose-h2:text-2xl prose-h3:mt-6 prose-h3:text-xl prose-h4:mt-4 prose-h4:text-lg prose-p:leading-relaxed prose-p:text-brand-black/80 prose-a:text-brand-mango prose-a:underline hover:prose-a:text-brand-leaf prose-strong:font-semibold prose-strong:text-brand-black prose-code:rounded prose-code:bg-brand-black/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-ul:my-4 prose-ul:space-y-2 prose-li:text-brand-black/80 prose-ol:my-4 prose-ol:space-y-2">
+          <div className="prose prose-lg mt-8 max-w-none
+            prose-headings:font-bold prose-headings:text-brand-black
+            prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-3xl
+            prose-h3:mt-10 prose-h3:mb-3 prose-h3:text-2xl
+            prose-h4:mt-8 prose-h4:mb-2 prose-h4:text-xl
+            prose-p:mb-6 prose-p:mt-0 prose-p:leading-relaxed prose-p:text-brand-black/80
+            prose-a:font-medium prose-a:text-brand-mango prose-a:no-underline hover:prose-a:text-brand-leaf hover:prose-a:underline
+            prose-strong:font-semibold prose-strong:text-brand-black
+            prose-ul:my-6 prose-ul:space-y-3
+            prose-ol:my-6 prose-ol:space-y-3
+            prose-li:text-brand-black/80 prose-li:leading-relaxed
+            prose-blockquote:border-l-4 prose-blockquote:border-brand-mango prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-brand-black/70
+            prose-code:rounded prose-code:bg-brand-black/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm
+            prose-code:before:content-none prose-code:after:content-none
+            prose-pre:rounded-xl prose-pre:bg-brand-black/5 prose-pre:p-4
+            prose-hr:my-10 prose-hr:border-brand-black/10
+            prose-table:my-8
+            prose-img:rounded-xl prose-img:shadow-md">
             {(() => {
               const sections: JSX.Element[] = [];
               const parts = post.content.split(/(\[VISUAL:\w+\])/g);

@@ -105,80 +105,40 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Areas Served column */}
+          {/* Resources column */}
           <div>
-            <h4 className="eyebrow text-brand-gold">Areas Served</h4>
+            <h4 className="eyebrow text-brand-gold">Resources</h4>
             <ul className="mt-5 space-y-3">
               <li>
                 <Link
-                  to="/locations#delaware"
+                  to="/resources/dui-checkpoints"
                   className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
                 >
-                  Delaware
+                  DUI Checkpoint Map
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/locations#columbus"
+                  to="/glossary"
                   className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
                 >
-                  Columbus
+                  Legal Glossary
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/locations#dublin"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Dublin
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/locations#westerville"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Westerville
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/locations#marysville"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Marysville
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/locations#gahanna"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Gahanna
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/locations#upper-arlington"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Upper Arlington
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/locations#hilliard"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Hilliard
-                </Link>
-              </li>
-              <li className="pt-2">
                 <Link
                   to="/locations"
-                  className="text-sm font-semibold text-brand-mango transition-colors hover:text-brand-gold"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
                 >
-                  View all locations →
+                  Service Areas
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blog"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Legal Articles
                 </Link>
               </li>
             </ul>

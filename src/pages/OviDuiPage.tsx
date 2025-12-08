@@ -7,6 +7,8 @@ import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import { SEO } from '../lib/seo';
+import { Link } from 'react-router-dom';
+import { MapPinned, AlertTriangle } from 'lucide-react';
 
 const faqs = [
   {
@@ -208,6 +210,39 @@ export default function OviDuiPage() {
               <p className="text-brand-black/70 leading-relaxed">
                 Don't wait. Contact Mango Law immediately to protect your rights, your license, and your future.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mx-auto max-w-4xl">
+            <div className="rounded-2xl border-2 border-brand-mango/20 bg-gradient-to-br from-brand-mango/5 to-brand-leaf/5 p-8 md:p-12 shadow-soft-lg">
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:gap-8">
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-brand-mango/20">
+                  <MapPinned className="h-10 w-10 text-brand-mango" />
+                </div>
+                <div className="flex-1">
+                  <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-brand-mango/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-mango">
+                    <AlertTriangle className="h-3 w-3" />
+                    Free Resource
+                  </div>
+                  <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-black mb-3">
+                    Ohio DUI Checkpoint Map
+                  </h2>
+                  <p className="text-brand-black/70 leading-relaxed mb-4">
+                    View real-time locations of sobriety checkpoints across Ohio. Know your rights, plan your route, and stay informed about upcoming checkpoints in your area.
+                  </p>
+                  <Link
+                    to="/resources/dui-checkpoints"
+                    className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-bold text-brand-black transition-all hover:bg-brand-gold shadow-sm hover:shadow-md"
+                  >
+                    <MapPinned className="h-5 w-5" />
+                    View Checkpoint Map
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
