@@ -269,3 +269,158 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* ============================================
+   Accessibility Styles
+   ============================================ */
+
+html[data-font-size="default"] {
+  font-size: 16px;
+}
+
+html[data-font-size="medium"] {
+  font-size: 18px;
+}
+
+html[data-font-size="large"] {
+  font-size: 20px;
+}
+
+html[data-font-size="x-large"] {
+  font-size: 24px;
+}
+
+.high-contrast-mode {
+  --color-black: #000000;
+  --color-off-white: #FFFFFF;
+  --color-mango: #FFA500;
+  --color-leaf: #006400;
+}
+
+.high-contrast-mode body {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+.high-contrast-mode a {
+  color: #0000EE;
+  text-decoration: underline;
+}
+
+.high-contrast-mode button {
+  border: 2px solid #000000;
+}
+
+.high-contrast-mode .border {
+  border-color: #000000 !important;
+}
+
+.high-contrast-mode .shadow-soft,
+.high-contrast-mode .shadow-md,
+.high-contrast-mode .shadow-lg {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.reduce-motion,
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+.underline-links a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.underline-links .btn,
+.underline-links button {
+  text-decoration: none;
+}
+
+.enhanced-focus :focus-visible {
+  outline: 4px solid var(--color-mango);
+  outline-offset: 4px;
+}
+
+.dyslexia-font,
+.dyslexia-font * {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', cursive, sans-serif !important;
+}
+
+.dyslexia-font h1,
+.dyslexia-font h2,
+.dyslexia-font h3,
+.dyslexia-font h4,
+.dyslexia-font h5,
+.dyslexia-font h6 {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', cursive, sans-serif !important;
+}
+
+.increased-spacing {
+  line-height: 1.75;
+  letter-spacing: 0.03em;
+  word-spacing: 0.15em;
+}
+
+.increased-spacing p {
+  line-height: 1.85;
+}
+
+.increased-spacing h1,
+.increased-spacing h2,
+.increased-spacing h3,
+.increased-spacing h4,
+.increased-spacing h5,
+.increased-spacing h6 {
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.large-cursor {
+  cursor: none !important;
+}
+
+.large-cursor * {
+  cursor: none !important;
+}
+
+.large-cursor::after {
+  content: '';
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-mango);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+  background-color: rgba(232, 163, 60, 0.2);
+  animation: cursor-pulse 2s infinite;
+}
+
+@keyframes cursor-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

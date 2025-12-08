@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import SiteHeader from './SiteHeader';
 import Footer from './Footer';
 import ChatIntakeLauncher from './ChatIntakeLauncher';
+import AccessibilityLauncher from './AccessibilityLauncher';
 import ScrollToTop from './ScrollToTop';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -17,6 +18,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <SiteHeader />
       <main id="main-content">{children}</main>
       <Footer />
+      <AccessibilityLauncher />
       <ChatIntakeLauncher />
     </div>
   );
