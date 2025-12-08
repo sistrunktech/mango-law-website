@@ -3,6 +3,8 @@ import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
 import { getCheckpoints, createCheckpoint, updateCheckpoint, deleteCheckpoint } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
 import { ohioCounties, getStatusLabel, formatCheckpointDateRange } from '../data/checkpoints';
+import GeocodingPreview from '../components/GeocodingPreview';
+import ScraperLogsViewer from '../components/ScraperLogsViewer';
 
 export default function CheckpointAdminPage() {
   const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
@@ -101,7 +103,7 @@ export default function CheckpointAdminPage() {
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-brand-black">Checkpoint Management</h1>
-            <p className="mt-2 text-brand-black/70">Manage DUI checkpoint data</p>
+            <p className="mt-2 text-brand-black/70">Manage DUI checkpoint data and scraper activity</p>
           </div>
           {!showForm && (
             <button
@@ -112,6 +114,10 @@ export default function CheckpointAdminPage() {
               Add Checkpoint
             </button>
           )}
+        </div>
+
+        <div className="mb-8">
+          <ScraperLogsViewer />
         </div>
 
         {showForm && (
@@ -268,6 +274,17 @@ export default function CheckpointAdminPage() {
                   />
                 </div>
               </div>
+
+              {formData.location_address && formData.location_city && (
+                <GeocodingPreview
+                  address={formData.location_address}
+                  city={formData.location_city}
+                  county={formData.location_county || 'Delaware'}
+                  onCoordinatesFound={(lat, lng) => {
+                    setFormData({ ...formData, latitude: lat, longitude: lng });
+                  }}
+                />
+              )}
 
               <div>
                 <label className="mb-1 block text-sm font-semibold text-brand-black">

@@ -10,9 +10,10 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - Optional OG/hero pipeline: fal.ai generation + Supabase Storage upload via `plugins/vite-og-plugin.ts` (runs only when env is present).
 
 ## Environment Variables
-- Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
-- Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`).
+- Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
+- Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback).
 - Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `APP_ENV`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`.
+- SMS Notifications (email-to-SMS gateways): `OFFICE_SMS_EMAIL` (Verizon), `NICK_SMS_EMAIL` (Verizon), `TEST_SMS_EMAIL` (AT&T test).
 - Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `VITE_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
 - See `.env.example` for the full list; update it whenever variables change.
 - Current allowlist should include staging/Bolt hosts: `https://mango.law`, `https://staging.mango.law`, and `https://sistrunktech-mango-l-lqhi.bolt.host` (add/remove as environments change).
@@ -24,7 +25,9 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 
 ## Edge Functions (deployed)
 - **submit-contact**: Validates payload with honeypot protection, inserts into `contact_leads`, sends notification via Resend. Includes CORS validation against `ORIGIN_ALLOWLIST`, rate limiting (10 req/min per IP), comprehensive security headers, and structured JSON logging.
-- **chat-intake**: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP.
+- **chat-intake**: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. **NEW**: Now includes SMS notifications via email-to-SMS gateways (Verizon/AT&T) for instant mobile alerts. Sends to office, attorney, and test numbers configured in environment variables.
+- **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, and upserts checkpoints to database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
+- **send-review-invitation**: (Existing) Sends review invitations with JWT authentication required.
 
 ### Security Features
 - **Security Headers**: All responses include CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers.
@@ -51,10 +54,18 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 
 ## Database (deployed)
 - **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).
-- **chat_leads**: Captures chat intake submissions (id, name, email, phone, initial_message, conversation_context, ip_address, user_agent, created_at).
+- **chat_leads**: Captures chat intake submissions (id, name, email, message, conversation_context, source, meta, created_at). **UPDATED**: Simplified schema with generic `meta` field for flexible metadata storage.
 - **rate_limit_requests**: Tracks API requests for rate limiting (id, ip_address, endpoint, created_at). Auto-cleanup removes records older than 1 hour.
-- **RLS Enabled**: All tables use Row Level Security. Service role can INSERT/SELECT, all other operations denied by default.
-- **Indexes**: Added on email and created_at for performance; composite index on (ip_address, endpoint, created_at) for rate limiting.
+- **dui_checkpoints**: Stores DUI checkpoint locations and schedules (id, title, location_address, location_city, location_county, latitude, longitude, start_date, end_date, status, source_url, source_name, description, is_verified, views_count, created_at, updated_at). Indexed on county, status, and date fields for efficient filtering.
+- **geocoding_cache**: Caches Mapbox geocoding results to minimize API calls (id, address, latitude, longitude, formatted_address, confidence, provider, metadata, hit_count, created_at, updated_at). Unique index on address for fast lookups.
+- **scraper_logs**: Tracks checkpoint scraper execution for monitoring (id, scraper_name, status, started_at, completed_at, duration_ms, checkpoints_found, checkpoints_new, checkpoints_updated, errors, metadata, created_at). Indexed on scraper_name and created_at.
+- **brand_assets**: Brand asset management table (id, file_path, variant_type, color_variant, file_format, dimensions, usage_notes, is_active, created_at, updated_at).
+- **reviews**, **review_invitations**, **review_analytics**: Review management tables for tracking client reviews and competitive analysis.
+- **RLS Enabled**: All tables use Row Level Security. Public read access to checkpoints and geocoding cache; service role has full access; rate limiting enforces IP-based restrictions.
+- **Indexes**: Comprehensive indexes on frequently queried columns including composite indexes for date range queries, location searches, and rate limiting.
+- **Functions**: Helper functions for `increment_geocoding_cache_hit()`, `cleanup_old_scraper_logs()`, `invoke_checkpoint_scraper()`, `trigger_checkpoint_scraper_now()`.
+- **pg_cron Extension**: Enabled for scheduled jobs. Daily scraper runs at 2:00 AM EST (7:00 AM UTC).
+- **pg_net Extension**: Enabled for async HTTP requests from database functions to Edge Functions.
 - **Backups/PITR**: Via Supabase defaults; add monitoring alerts when available.
 
 ## CI/CD
@@ -69,7 +80,41 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
   - ACME TXT records managed by Bolt for SSL issuance.
 - Ensure `ORIGIN_ALLOWLIST` includes `https://mango.law` and `https://staging.mango.law` when staging is live.
 
+## DUI Checkpoint Map System
+- **Interactive Map**: Mapbox GL map (`CheckpointMap.tsx`) displays checkpoint locations with status-based colored markers (active=red, upcoming=orange, completed=green, cancelled=gray).
+- **Features**: Auto-fit bounds, user location with "Find Me" button, interactive popups, smooth animations, status legend, loading/error states.
+- **Filters**: County, date range, and status filtering on `/dui-checkpoints` page.
+- **Data Source**: Automated scraper fetches from OVICheckpoint.com, geocodes addresses, and stores in `dui_checkpoints` table.
+- **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
+- **Scraper Schedule**: Runs daily at 2:00 AM EST via pg_cron. Manual trigger available in admin dashboard.
+
+## Admin Dashboard
+- **Location**: `/admin/checkpoints` page (CheckpointAdminPage.tsx).
+- **Features**:
+  - **Scraper Logs Viewer**: Real-time view of scraper execution history with success/failure stats, error details, and manual trigger button.
+  - **Checkpoint CRUD**: Create, edit, and delete checkpoints with geocoding preview.
+  - **Geocoding Preview**: Real-time address validation and coordinate lookup as you type. Shows confidence level (high/medium/low) and formatted address.
+  - **Manual Entry**: Full form with all checkpoint fields including source tracking and verification status.
+- **Security**: Admin routes should be protected (currently open for development).
+
+## Blog System
+- **Visual Components**: 31+ blog-specific components for rich content display including:
+  - `PenaltyGrid`: Flexible penalty display with dynamic column support
+  - `TimelineBar`, `ProgressBar`: Visual progress indicators
+  - `ComparisonCard`, `StatCard`, `IconStat`: Data visualization
+  - `HighlightBox`, `CostBreakdown`: Content emphasis
+- **Content**: 11 comprehensive blog posts covering OVI/DUI defense, drug crimes, sex crimes, white collar defense, personal injury, and protection orders.
+- **SEO**: Each post includes metadata, structured content, author bios, related posts, and call-to-action sections.
+
+## Chat System
+- **UI**: Conversational chat interface (`ChatIntakeLauncher.tsx`, `ConversationWindow.tsx`) with bot/user message styling and typing indicators.
+- **Flow**: Multi-step conversation (name → phone → message → confirmation) with localStorage persistence and 30-minute session timeout.
+- **Phone Validation**: Real-time formatting and validation with (XXX) XXX-XXXX format.
+- **SMS Notifications**: Instant mobile alerts via email-to-SMS gateways (Verizon/AT&T). Sends to office, attorney, and test numbers. Zero additional cost (no Twilio subscription).
+- **Delayed Follow-up**: Automated follow-up message 20-30 seconds after confirmation to re-engage users.
+
 ## Agent/PR Expectations
 - When adding/updating env vars or infra, update `.env.example`, this `docs/OPERATIONS.md`, and `CHANGELOG.md`.
 - Keep PR descriptions clear and include any new secrets/variables that must be set in GitHub and Supabase.
 - Preserve brand tokens and Inter typography; avoid introducing new deps without discussion.
+- For checkpoint system: Mapbox token required, Supabase configured with all migrations, pg_cron and pg_net extensions enabled.

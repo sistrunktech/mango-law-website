@@ -2,9 +2,92 @@
 
 ## 2025-12-08
 
+### Major Feature Releases
+
+#### DUI Checkpoint Map System (Phase 3 & 4)
+- **Interactive Mapbox GL Map**: Full-featured checkpoint visualization with status-based markers
+  - Active checkpoints: Red markers
+  - Upcoming checkpoints: Orange markers
+  - Completed checkpoints: Green markers
+  - Cancelled checkpoints: Gray markers
+- **Map Features**:
+  - Auto-fit bounds to show all checkpoints
+  - User location with animated "Find Me" button and pulsing marker
+  - Interactive popups with full checkpoint details
+  - Smooth fly-to animations on checkpoint selection
+  - Navigation and scale controls
+  - Status legend overlay
+  - Loading states and error handling
+  - Empty state messaging
+- **Database Tables**:
+  - `dui_checkpoints`: Stores checkpoint locations, schedules, and metadata with indexed fields for efficient querying
+  - `geocoding_cache`: Caches Mapbox geocoding results with hit tracking to minimize API calls
+  - `scraper_logs`: Tracks all scraper execution for monitoring and debugging
+- **Checkpoint Scraper Edge Function**:
+  - Automated OVICheckpoint.com scraper with HTML parsing
+  - Mapbox geocoding integration with aggressive caching strategy
+  - Intelligent deduplication and update logic
+  - Comprehensive error handling and logging
+  - Rate limited to 5 requests per hour
+- **Scheduled Automation**:
+  - pg_cron extension enabled for scheduled jobs
+  - pg_net extension for async HTTP requests
+  - Daily scraper runs at 2:00 AM EST (7:00 AM UTC)
+  - Helper functions for manual triggers and log cleanup
+- **Geocoding Service**:
+  - Mapbox Geocoding API integration
+  - Address normalization and validation
+  - Confidence scoring (high/medium/low)
+  - Cache hit tracking and metadata storage
+  - Fallback handling for failed geocoding
+
+#### Admin Dashboard (Phase 5)
+- **Checkpoint Management Page** (`/admin/checkpoints`):
+  - Full CRUD operations for checkpoint data
+  - Real-time geocoding preview as you type addresses
+  - Confidence level indicators and formatted address display
+  - Manual checkpoint entry form with all fields
+  - Edit and delete functionality with confirmation dialogs
+- **Scraper Logs Viewer**:
+  - Real-time view of scraper execution history
+  - Success/failure stats with color-coded status badges
+  - Detailed error reporting with checkpoint-level granularity
+  - Manual scraper trigger button
+  - Duration tracking and performance metrics
+  - Pagination and refresh controls
+- **Geocoding Preview Component**:
+  - Debounced real-time address validation
+  - Automatic coordinate population
+  - Confidence level visualization
+  - Formatted address display from geocoding service
+
+#### Conversational Chat System (Phase 2)
+- **Chat Interface**:
+  - Conversational UI with bot and user message styling
+  - Typing indicators with animated dots
+  - Step-by-step flow: name → phone → message → confirmation
+  - localStorage persistence with 30-minute session timeout
+  - Delayed follow-up messages (20-30 seconds after confirmation)
+- **Phone Number Handling**:
+  - Real-time formatting: (XXX) XXX-XXXX
+  - Input validation and error messaging
+  - Automatic formatting as user types
+- **SMS Notifications** (Zero Additional Cost):
+  - Email-to-SMS gateway integration (Verizon/AT&T)
+  - Instant mobile alerts to office, attorney, and test numbers
+  - No Twilio subscription required
+  - Configured via environment variables:
+    - `OFFICE_SMS_EMAIL`: 7406022155@vtext.com
+    - `NICK_SMS_EMAIL`: 7404176191@vtext.com
+    - `TEST_SMS_EMAIL`: 6149000604@vtext.com
+- **Enhanced chat-intake Edge Function**:
+  - Full SMS notification support
+  - Conversation context tracking
+  - Rate limited to 20 requests per minute
+
 ### Frontend Enhancements
 
-#### Visual Statistics Components for Blog Posts
+#### Visual Statistics Components for Blog Posts (Phase 1)
 - Created comprehensive library of visual statistics components in `src/components/blog/`:
   - `StatCard`: Large number displays with icons for key statistics
   - `ComparisonCard`: Side-by-side comparison cards for contrasting data
@@ -40,6 +123,43 @@
 - Maintained brand consistency with mango/gold/leaf color palette across all new components
 - Ensured full responsiveness for mobile and desktop layouts
 - Added accessibility features including proper alt text for images
+
+### Dependencies Added
+- `mapbox-gl` and `@types/mapbox-gl`: Interactive map functionality
+- All dependencies properly configured with TypeScript support
+
+### Environment Variables Added
+- `VITE_MAPBOX_PUBLIC_TOKEN`: Mapbox API access token (client-side)
+- `MAPBOX_PUBLIC_TOKEN`: Fallback token for server-side usage
+- `VITE_MAPBOX_STYLE_URL`: Optional custom Mapbox style URL
+- `OFFICE_SMS_EMAIL`: Email-to-SMS gateway for office notifications
+- `NICK_SMS_EMAIL`: Email-to-SMS gateway for attorney notifications
+- `TEST_SMS_EMAIL`: Email-to-SMS gateway for test notifications
+
+### Database Migrations
+- `20251208022003_add_dui_checkpoints_table.sql`: Core checkpoint storage
+- `20251208023600_fix_security_issues.sql`: RLS policy fixes
+- `20251208174018_add_checkpoint_support_tables.sql`: Geocoding cache and scraper logs
+- `add_checkpoint_support_tables.sql`: Helper functions and indexes
+- `setup_checkpoint_scheduler.sql`: pg_cron configuration
+- `improve_checkpoint_scheduler.sql`: pg_net integration
+
+### Edge Functions Deployed
+- `checkpoint-scraper`: Automated checkpoint data collection with geocoding
+  - `index.ts`: Main scraper orchestration
+  - `ovicheckpoint-scraper.ts`: OVICheckpoint.com HTML parser
+  - `geocoding.ts`: Mapbox geocoding service with caching
+
+### Documentation Updates (Phase 6)
+- Comprehensive `docs/OPERATIONS.md` updates:
+  - DUI Checkpoint Map System section
+  - Admin Dashboard section
+  - Blog System section
+  - Chat System section
+  - Updated environment variables list
+  - Updated database schema documentation
+  - Updated Edge Functions list
+- `CHANGELOG.md` updated with all Phase 1-6 features
 
 ## 2025-12-06
 
