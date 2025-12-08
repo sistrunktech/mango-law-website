@@ -26,6 +26,7 @@ import AdminGuidePage from './pages/AdminGuidePage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import BrandGuidelinesPage from './pages/BrandGuidelinesPage';
+import HandoffSharePage from './pages/HandoffSharePage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         <Route path="/docs/admin-guide" element={<AdminGuidePage />} />
+        <Route path="/handoff/:token" element={<HandoffSharePage />} />
         <Route
           path="*"
           element={

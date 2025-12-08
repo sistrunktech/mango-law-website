@@ -13,6 +13,7 @@ import {
 import BlogManager from '../components/admin/BlogManager';
 import ContactManager from '../components/admin/ContactManager';
 import CheckpointManager from '../components/admin/CheckpointManager';
+import HandoffDocManager from '../components/admin/HandoffDocManager';
 
 type Tab = 'blog' | 'contacts' | 'checkpoints' | 'docs';
 
@@ -48,7 +49,7 @@ export default function AdminDashboardPage() {
     { id: 'blog' as Tab, label: 'Blog Posts', icon: FileText },
     { id: 'contacts' as Tab, label: 'Contact Leads', icon: Mail },
     { id: 'checkpoints' as Tab, label: 'DUI Checkpoints', icon: MapPin },
-    { id: 'docs' as Tab, label: 'Documentation', icon: BookOpen },
+    { id: 'docs' as Tab, label: 'Handoff Docs', icon: BookOpen },
   ];
 
   return (
@@ -119,39 +120,8 @@ export default function AdminDashboardPage() {
         {activeTab === 'blog' && <BlogManager />}
         {activeTab === 'contacts' && <ContactManager />}
         {activeTab === 'checkpoints' && <CheckpointManager />}
-        {activeTab === 'docs' && <DocsViewer />}
+        {activeTab === 'docs' && <HandoffDocManager />}
       </main>
-    </div>
-  );
-}
-
-function DocsViewer() {
-  return (
-    <div className="bg-slate-800 rounded-xl p-8 border border-slate-700">
-      <h2 className="text-2xl font-bold text-white mb-4">Documentation</h2>
-      <div className="prose prose-invert max-w-none">
-        <p className="text-slate-300">
-          Welcome to the Mango Law CMS documentation. Here you'll find guides and tutorials
-          for managing your website content.
-        </p>
-
-        <div className="grid gap-4 mt-6">
-          <a
-            href="/docs/admin-guide"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-4 bg-slate-700 hover:bg-slate-600 rounded-lg transition no-underline"
-          >
-            <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-amber-400" />
-              Complete Admin Guide
-            </h3>
-            <p className="text-slate-400 text-sm">
-              Comprehensive guide covering all CMS features with screenshots and examples
-            </p>
-          </a>
-        </div>
-      </div>
     </div>
   );
 }
