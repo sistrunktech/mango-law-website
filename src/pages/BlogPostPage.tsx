@@ -5,6 +5,10 @@ import CTASection from '../components/CTASection';
 import AuthorBio from '../components/AuthorBio';
 import RelatedPosts from '../components/RelatedPosts';
 import { SEO } from '../lib/seo';
+import {
+  PenaltyGrid,
+  CostBreakdown,
+} from '../components/blog';
 
 function estimateReadingTime(content: string): number {
   const wordsPerMinute = 200;
@@ -169,6 +173,65 @@ export default function BlogPostPage() {
 
           <div className="prose prose-lg mt-8 max-w-none">
             {post.content.split('\n\n').map((paragraph, index) => {
+              if (paragraph.startsWith('[VISUAL:')) {
+                const visualType = paragraph.match(/\[VISUAL:(\w+)\]/)?.[1];
+
+                if (visualType === 'OVI_PENALTIES') {
+                  return (
+                    <PenaltyGrid
+                      key={index}
+                      title="First-Time OVI Penalties in Ohio"
+                      columns={[
+                        { key: 'offense', label: 'Offense Type' },
+                        { key: 'jail', label: 'Jail Time' },
+                        { key: 'fine', label: 'Fine Range' },
+                        { key: 'license', label: 'License Suspension' }
+                      ]}
+                      rows={[
+                        {
+                          offense: 'Standard OVI',
+                          jail: '3 days - 6 months',
+                          fine: '$375 - $1,075',
+                          license: '6 months - 3 years'
+                        },
+                        {
+                          offense: 'High BAC (.17+)',
+                          jail: '6 days minimum',
+                          fine: '$375 - $1,075',
+                          license: '1 year minimum'
+                        },
+                        {
+                          offense: 'Refusal',
+                          jail: '3 days - 6 months',
+                          fine: '$375 - $1,075',
+                          license: '1 year minimum'
+                        }
+                      ]}
+                    />
+                  );
+                }
+
+                if (visualType === 'OVI_COSTS') {
+                  return (
+                    <CostBreakdown
+                      key={index}
+                      title="Total Cost of First OVI Conviction"
+                      items={[
+                        { label: 'Court Fines', amount: '$375-$1,075', description: 'Mandatory court-imposed fines' },
+                        { label: 'License Reinstatement', amount: '$475', description: 'BMV fees to restore driving privileges' },
+                        { label: 'Alcohol Education', amount: '$200-$500', description: 'Required intervention program' },
+                        { label: 'SR-22 Insurance', amount: '$1,500-$3,000', description: 'Increased insurance costs over 3 years' },
+                        { label: 'Ignition Interlock', amount: '$800-$1,500', description: 'Device installation and monitoring' },
+                        { label: 'Attorney Fees', amount: '$2,500-$7,500', description: 'Legal representation' },
+                        { label: 'Total Estimated Cost', amount: '$5,850-$14,050', isTotal: true }
+                      ]}
+                    />
+                  );
+                }
+
+                return null;
+              }
+
               if (paragraph.startsWith('## ')) {
                 return (
                   <h2 key={index} className="mt-8 text-2xl font-bold text-brand-black">

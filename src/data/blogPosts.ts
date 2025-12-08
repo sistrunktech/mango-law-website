@@ -47,6 +47,8 @@ Prosecutors often charge both types simultaneously, giving them multiple paths t
 
 First-time OVI offenses under [ORC § 4511.19(G)(1)(a)](https://codes.ohio.gov/ohio-revised-code/section-4511.19) carry serious consequences:
 
+[VISUAL:OVI_PENALTIES]
+
 **Criminal Penalties:**
 - Jail time: 3 days minimum to 6 months maximum
 - Fines: $375 to $1,075
@@ -64,6 +66,8 @@ First-time OVI offenses under [ORC § 4511.19(G)(1)(a)](https://codes.ohio.gov/o
 - SR-22 high-risk insurance: Often 2-3x normal rates for 3+ years
 - BMV reinstatement fees: $475+
 - Total costs often exceed $10,000 including attorney fees, fines, insurance increases
+
+[VISUAL:OVI_COSTS]
 
 ### Enhanced Penalties for High BAC
 

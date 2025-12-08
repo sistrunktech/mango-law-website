@@ -7,6 +7,8 @@ export type PracticeArea = {
   summary: string;
   category?: string;
   icon?: LucideIcon;
+  imageUrl?: string;
+  imageAlt?: string;
   orcSection?: string;
   orcTitle?: string;
   orcDefinition?: string;
@@ -26,6 +28,8 @@ export const practiceAreas: PracticeArea[] = [
     href: '/criminal-defense-delaware-oh',
     summary: 'Comprehensive defense strategies for felony and misdemeanor charges across Delaware County.',
     icon: Scale,
+    imageUrl: '/images/generated/criminal-defense-hero.png',
+    imageAlt: 'Criminal Defense representation in Delaware County Ohio',
     practiceAreaKey: 'criminal-defense',
     orcSection: '2903.13',
     orcTitle: 'Assault',
@@ -63,6 +67,8 @@ export const practiceAreas: PracticeArea[] = [
     href: '/ovi-dui-defense-delaware-oh',
     summary: 'High-test, felony OVI, underage DUI, refusals, and roadside suppression strategies.',
     icon: Car,
+    imageUrl: '/images/generated/ovi-dui-defense-hero.png',
+    imageAlt: 'OVI DUI Defense lawyer in Delaware Ohio',
     practiceAreaKey: 'ovi-dui',
     orcSection: '4511.19',
     orcTitle: 'Operating Vehicle Under the Influence',
@@ -100,6 +106,8 @@ export const practiceAreas: PracticeArea[] = [
     href: '/drug-crime-lawyer-delaware-oh',
     summary: 'Possession, trafficking, paraphernalia, and diversion issues with an eye on treatment options.',
     icon: Pill,
+    imageUrl: '/images/generated/drug-crimes-defense-hero.png',
+    imageAlt: 'Drug crimes defense attorney in Delaware Ohio',
     practiceAreaKey: 'drug-crimes',
     orcSection: '2925.11',
     orcTitle: 'Possession of Controlled Substances',
@@ -125,6 +133,8 @@ export const practiceAreas: PracticeArea[] = [
     href: '/sex-crime-defense-lawyer-delaware-oh',
     summary: 'Discreet, aggressive defense with attention to privacy, investigation gaps, and expert testimony.',
     icon: ShieldAlert,
+    imageUrl: '/images/generated/sex-crimes-defense-hero.png',
+    imageAlt: 'Sex crimes defense lawyer in Delaware Ohio',
     practiceAreaKey: 'sex-crimes',
     orcSection: '2907.03',
     orcTitle: 'Sexual Battery',
@@ -156,6 +166,8 @@ export const practiceAreas: PracticeArea[] = [
     href: '/white-collar-crimes-attorney-delaware-oh',
     summary: 'Fraud, embezzlement, securities issues, and investigations with early-motion practice.',
     icon: Briefcase,
+    imageUrl: '/images/generated/white-collar-defense-hero.png',
+    imageAlt: 'White collar crimes attorney in Delaware Ohio',
     practiceAreaKey: 'white-collar',
     orcSection: '2913.42',
     orcTitle: 'Theft in Office (Embezzlement)',
@@ -181,6 +193,8 @@ export const practiceAreas: PracticeArea[] = [
     href: '/protection-order-lawyer-delaware-oh',
     summary: 'Defense in civil protection order matters with focus on evidence, procedure, and collateral risks.',
     icon: FileWarning,
+    imageUrl: '/images/generated/protection-order-defense-hero.png',
+    imageAlt: 'Protection order defense lawyer in Delaware Ohio',
     practiceAreaKey: 'protection-orders',
     orcSection: '3113.31',
     orcTitle: 'Civil Protection Orders',
@@ -212,6 +226,8 @@ export const practiceAreas: PracticeArea[] = [
     href: '/personal-injury-lawyer-delaware-oh',
     summary: 'Limited-scope PI; evaluate liability, coverage, and negotiation posture for select matters.',
     icon: Stethoscope,
+    imageUrl: '/images/generated/personal-injury-hero.png',
+    imageAlt: 'Personal injury lawyer in Delaware Ohio',
     practiceAreaKey: 'personal-injury',
     orcSection: '2315.33',
     orcTitle: 'Comparative Negligence',

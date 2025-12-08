@@ -42,8 +42,20 @@ export default function PracticeAreaCardGrid() {
           {oviArea && (
             <Link
               to={oviArea.href}
-              className="group relative overflow-hidden rounded-2xl border-2 border-brand-mango/20 bg-gradient-to-br from-brand-mango/5 via-white to-brand-gold/5 p-8 shadow-lift transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-brand-mango/40 md:col-span-2 lg:col-span-2"
+              className="group relative overflow-hidden rounded-2xl border-2 border-brand-mango/20 bg-gradient-to-br from-brand-mango/5 via-white to-brand-gold/5 shadow-lift transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-brand-mango/40 md:col-span-2 lg:col-span-2"
             >
+              {/* Background Image */}
+              {oviArea.imageUrl && (
+                <div className="absolute right-0 top-0 h-full w-full opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.12] lg:w-1/2">
+                  <img
+                    src={oviArea.imageUrl}
+                    alt={oviArea.imageAlt || ''}
+                    className="h-full w-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/50 to-white" />
+                </div>
+              )}
+
               {/* Featured Badge */}
               <div className="absolute right-6 top-6 z-20">
                 <div className="flex items-center gap-1.5 rounded-full bg-brand-mango px-3 py-1 shadow-md">
@@ -52,7 +64,7 @@ export default function PracticeAreaCardGrid() {
                 </div>
               </div>
 
-              <div className="relative z-10">
+              <div className="relative z-10 p-8">
                 {/* Large icon with enhanced styling */}
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-mango/20 to-brand-gold/20 shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:from-brand-mango/30 group-hover:to-brand-gold/30 group-hover:scale-110">
                   {oviArea.icon && <oviArea.icon className="h-10 w-10 text-brand-mango" />}
@@ -108,9 +120,21 @@ export default function PracticeAreaCardGrid() {
           {criminalArea && (
             <Link
               to={criminalArea.href}
-              className="group relative rounded-2xl border border-brand-black/10 bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20"
+              className="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20"
             >
-              <div className="relative z-10">
+              {/* Background Image */}
+              {criminalArea.imageUrl && (
+                <div className="absolute inset-0 opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1]">
+                  <img
+                    src={criminalArea.imageUrl}
+                    alt={criminalArea.imageAlt || ''}
+                    className="h-full w-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/60" />
+                </div>
+              )}
+
+              <div className="relative z-10 p-7">
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-brand-mango/10 to-brand-gold/10 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:from-brand-mango/20 group-hover:to-brand-gold/20 group-hover:scale-110">
                   {criminalArea.icon && <criminalArea.icon className="h-8 w-8 text-brand-mango transition-colors" />}
                 </div>
@@ -148,10 +172,22 @@ export default function PracticeAreaCardGrid() {
             <Link
               to={area.href}
               key={area.href}
-              className="group relative rounded-2xl border border-brand-black/10 bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20"
+              className="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20"
               style={{ animationDelay: `${(index + 2) * 50}ms` }}
             >
-              <div className="relative z-10">
+              {/* Background Image */}
+              {area.imageUrl && (
+                <div className="absolute inset-0 opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1]">
+                  <img
+                    src={area.imageUrl}
+                    alt={area.imageAlt || ''}
+                    className="h-full w-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/60" />
+                </div>
+              )}
+
+              <div className="relative z-10 p-7">
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-brand-mango/10 to-brand-gold/10 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:from-brand-mango/20 group-hover:to-brand-gold/20 group-hover:scale-110">
                   {area.icon ? (
                     <area.icon className="h-8 w-8 text-brand-mango transition-colors" />

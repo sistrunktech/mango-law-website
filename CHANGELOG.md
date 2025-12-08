@@ -1,5 +1,46 @@
 # Changelog
 
+## 2025-12-08
+
+### Frontend Enhancements
+
+#### Visual Statistics Components for Blog Posts
+- Created comprehensive library of visual statistics components in `src/components/blog/`:
+  - `StatCard`: Large number displays with icons for key statistics
+  - `ComparisonCard`: Side-by-side comparison cards for contrasting data
+  - `TimelineBar`: Visual timeline displays for durations and periods
+  - `CostBreakdown`: Itemized cost displays with visual hierarchy
+  - `PenaltyGrid`: Responsive penalty tables for legal consequences
+  - `ProgressBar`: Percentage displays with animated bars
+  - `IconStat`: Compact inline statistics with icons
+  - `HighlightBox`: Color-coded callout boxes for important information
+- Updated `BlogPostPage` to support visual component markers in blog content using `[VISUAL:COMPONENT_NAME]` syntax
+- Enhanced OVI/DUI blog post with penalty grid and cost breakdown visualizations
+- Improved blog post readability with better spacing, typography, and visual breaks
+
+#### Practice Areas Page Enhancements
+- Added featured images to all practice area cards using existing generated hero images
+- Updated `PracticeArea` type to include `imageUrl` and `imageAlt` fields
+- Enhanced card styling with subtle background images and overlay effects:
+  - Featured OVI/DUI card: Full-width background image with gradient overlay (right side on desktop)
+  - Standard cards: Subtle background images with gradient overlays for depth
+  - Increased opacity on hover for enhanced interactivity
+- Improved visual hierarchy and engagement with layered design approach
+- All practice area images properly referenced from `/images/generated/` directory:
+  - Criminal Defense: `criminal-defense-hero.png`
+  - OVI/DUI Defense: `ovi-dui-defense-hero.png`
+  - Drug Crimes: `drug-crimes-defense-hero.png`
+  - Sex Crimes: `sex-crimes-defense-hero.png`
+  - White Collar: `white-collar-defense-hero.png`
+  - Protection Orders: `protection-order-defense-hero.png`
+  - Personal Injury: `personal-injury-hero.png`
+
+### Developer Experience
+- Created modular component exports in `src/components/blog/index.ts` for easy importing
+- Maintained brand consistency with mango/gold/leaf color palette across all new components
+- Ensured full responsiveness for mobile and desktop layouts
+- Added accessibility features including proper alt text for images
+
 ## 2025-12-06
 
 ### Frontend & Content
