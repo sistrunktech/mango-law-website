@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { Calendar, User, ArrowLeft, Clock } from 'lucide-react';
+import { Calendar, User, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { blogPosts } from '../data/blogPosts';
@@ -10,6 +10,9 @@ import { SEO } from '../lib/seo';
 import {
   PenaltyGrid,
   CostBreakdown,
+  ComparisonCard,
+  IconStat,
+  TimelineBar,
 } from '../components/blog';
 
 function estimateReadingTime(content: string): number {
@@ -132,35 +135,63 @@ export default function BlogPostPage() {
                 if (part.match(/\[VISUAL:(\w+)\]/)) {
                   const visualType = part.match(/\[VISUAL:(\w+)\]/)?.[1];
 
-                  if (visualType === 'OVI_PENALTIES') {
+                  if (visualType === 'BAC_LIMITS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 flex flex-wrap gap-4">
+                        <IconStat icon={Scale} value="0.08%" label="Standard Adult Limit" color="mango" />
+                        <IconStat icon={AlertTriangle} value="0.17%" label="High-Test Threshold" color="red" />
+                        <IconStat icon={Scale} value="0.02%" label="Under 21 Limit" color="gold" />
+                        <IconStat icon={Scale} value="0.04%" label="Commercial Driver" color="blue" />
+                      </div>
+                    );
+                  } else if (visualType === 'HB37_COMPARISON') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="House Bill 37 Changes (Effective April 9, 2025)"
+                        leftItem={{
+                          label: 'Before H.B. 37',
+                          value: '$375 min',
+                          description: 'Minimum fine: $375 | Reinstatement: $475'
+                        }}
+                        rightItem={{
+                          label: 'After H.B. 37',
+                          value: '$565 min',
+                          description: 'Minimum fine: $565 (+$190) | Reinstatement: $315 (-$160)'
+                        }}
+                        leftColor="gold"
+                        rightColor="mango"
+                      />
+                    );
+                  } else if (visualType === 'FIRST_OFFENSE_PENALTIES') {
                     sections.push(
                       <PenaltyGrid
                         key={`visual-${index}`}
                         title="First-Time OVI Penalties in Ohio"
                         columns={[
-                          { key: 'offense', label: 'Offense Type' },
-                          { key: 'jail', label: 'Jail Time' },
-                          { key: 'fine', label: 'Fine Range' },
-                          { key: 'license', label: 'License Suspension' }
+                          { key: 'offense', label: 'Penalty Type' },
+                          { key: 'jail', label: 'Details' }
                         ]}
                         rows={[
                           {
-                            offense: 'Standard OVI',
-                            jail: '3 days - 6 months',
-                            fine: '$375 - $1,075',
-                            license: '6 months - 3 years'
+                            offense: 'Jail or Driver-Intervention Program',
+                            jail: 'Mandatory 3-day program or 3 days jail (up to 6 months possible)'
                           },
                           {
-                            offense: 'High BAC (.17+)',
-                            jail: '6 days minimum',
-                            fine: '$375 - $1,075',
-                            license: '1 year minimum'
+                            offense: 'Fines',
+                            jail: '$565 - $1,075 (minimum increased by H.B. 37 from $375)'
                           },
                           {
-                            offense: 'Refusal',
-                            jail: '3 days - 6 months',
-                            fine: '$375 - $1,075',
-                            license: '1 year minimum'
+                            offense: 'License Suspension',
+                            jail: '1-3 years (unlimited privileges available with ignition interlock)'
+                          },
+                          {
+                            offense: 'Points & Insurance',
+                            jail: '6 points on license, dramatically higher insurance premiums'
+                          },
+                          {
+                            offense: 'Reinstatement Fee',
+                            jail: '$315 (reduced from $475 by H.B. 37)'
                           }
                         ]}
                       />
@@ -171,13 +202,62 @@ export default function BlogPostPage() {
                         key={`visual-${index}`}
                         title="Total Cost of First OVI Conviction"
                         items={[
-                          { label: 'Court Fines', amount: '$375-$1,075', description: 'Mandatory court-imposed fines' },
-                          { label: 'License Reinstatement', amount: '$475', description: 'BMV fees to restore driving privileges' },
+                          { label: 'Court Fines', amount: '$565-$1,075', description: 'Mandatory court-imposed fines (updated by H.B. 37)' },
+                          { label: 'License Reinstatement', amount: '$315', description: 'BMV fees to restore driving privileges (reduced by H.B. 37)' },
                           { label: 'Alcohol Education', amount: '$200-$500', description: 'Required intervention program' },
                           { label: 'SR-22 Insurance', amount: '$1,500-$3,000', description: 'Increased insurance costs over 3 years' },
                           { label: 'Ignition Interlock', amount: '$800-$1,500', description: 'Device installation and monitoring' },
                           { label: 'Attorney Fees', amount: '$2,500-$7,500', description: 'Legal representation' },
-                          { label: 'Total Estimated Cost', amount: '$5,850-$14,050', isTotal: true }
+                          { label: 'Total Estimated Cost', amount: '$5,880-$13,890', isTotal: true }
+                        ]}
+                      />
+                    );
+                  } else if (visualType === 'REPEAT_OFFENSE_PENALTIES') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="Repeat OVI Offenses (Within 10 Years)"
+                        columns={[
+                          { key: 'offense', label: 'Offense' },
+                          { key: 'jail', label: 'Jail Time' },
+                          { key: 'fine', label: 'Fines' },
+                          { key: 'license', label: 'License Suspension' },
+                          { key: 'other', label: 'Additional Consequences' }
+                        ]}
+                        rows={[
+                          {
+                            offense: 'Second Offense (Low Test)',
+                            jail: 'Min 10 days (up to 6 months)',
+                            fine: '$715-$1,625',
+                            license: '1-7 years',
+                            other: '90-day vehicle immobilization, mandatory treatment'
+                          },
+                          {
+                            offense: 'Second Offense (High Test/Refusal)',
+                            jail: 'Min 20 days (up to 6 months)',
+                            fine: '$715-$1,625',
+                            license: '1-7 years',
+                            other: 'Same as above + ignition interlock required'
+                          },
+                          {
+                            offense: 'Third Offense',
+                            jail: 'Min 30 days (low) / 60 days (high)',
+                            fine: '$1,040-$2,750',
+                            license: '2-12 years',
+                            other: 'Vehicle forfeiture, yellow plates, mandatory assessment'
+                          }
+                        ]}
+                      />
+                    );
+                  } else if (visualType === 'ALS_TIMELINE') {
+                    sections.push(
+                      <TimelineBar
+                        key={`visual-${index}`}
+                        title="Administrative License Suspension (ALS) Durations"
+                        items={[
+                          { label: 'Test Failure (0.08-0.17 BAC)', duration: '90 days', color: 'gold', width: '30%' },
+                          { label: 'High-Test Failure (0.17+ BAC)', duration: '1 year', color: 'red', width: '60%' },
+                          { label: 'Chemical Test Refusal', duration: '1 year', color: 'red', width: '60%' }
                         ]}
                       />
                     );

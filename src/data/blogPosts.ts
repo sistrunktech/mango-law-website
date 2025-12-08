@@ -23,17 +23,17 @@ Operating a vehicle while impaired (OVI) – known in many states as driving und
 
 Under the [Ohio Revised Code (ORC) § 4511.19](https://codes.ohio.gov/ohio-revised-code/section-4511.19), it is illegal to operate any vehicle if your blood-alcohol concentration (BAC) is 0.08 percent or higher or if you are appreciably impaired by alcohol, a drug of abuse or a combination of both. There are also "per se" limits for breath, blood and urine for alcohol and various drugs. A high-test OVI occurs when your BAC is 0.17 percent or higher, which triggers enhanced penalties. Ohio's implied consent law requires drivers to submit to chemical testing; refusal results in an administrative license suspension.
 
+[VISUAL:BAC_LIMITS]
+
 ## Criminal Penalties for a First OVI
 
-The penalties for a first-time OVI are found in [ORC § 4511.19(G)(1)(a)](https://codes.ohio.gov/ohio-revised-code/section-4511.19). Courts may impose or suspend portions of the sentence based on completion of a driver-intervention program and use of ignition-interlock devices. [House Bill 37](https://www.ohiojudges.org/Document.ashx?DocGuid=2c83ec05-54f8-4ec4-9e43-f24c44c3cd39) (effective April 9, 2025) increased minimum fines by $190 and reduced reinstatement fees. Penalties now include:
+The penalties for a first-time OVI are found in [ORC § 4511.19(G)(1)(a)](https://codes.ohio.gov/ohio-revised-code/section-4511.19). Courts may impose or suspend portions of the sentence based on completion of a driver-intervention program and use of ignition-interlock devices. [House Bill 37](https://www.ohiojudges.org/Document.ashx?DocGuid=2c83ec05-54f8-4ec4-9e43-f24c44c3cd39) (effective April 9, 2025) increased minimum fines by $190 and reduced reinstatement fees.
 
-| Penalty | Summary |
-|---------|---------|
-| **Jail or Driver-Intervention Program** | Mandatory three-day driver-intervention program or 3 days in jail. The court may add up to six months of jail time. |
-| **Fines** | Mandatory fine of $565 – $1,075. House Bill 37 raised the minimum fine (previously $375). |
-| **License Suspension** | Suspension of 1 – 3 years. Courts may grant unlimited driving privileges with ignition-interlock devices. |
-| **Points & Insurance** | Six points on your license and dramatically higher insurance premiums. |
-| **Reinstatement Fee** | Reduced from $475 to $315 by H.B. 37. |
+[VISUAL:HB37_COMPARISON]
+
+[VISUAL:FIRST_OFFENSE_PENALTIES]
+
+[VISUAL:OVI_COSTS]
 
 ## High-Test (≥ 0.17 BAC) OVI
 
@@ -41,17 +41,15 @@ If your BAC is 0.17 percent or higher, the penalties increase. The mandatory jai
 
 ## Repeat Offenses: Annie's Law and Look-Back Period
 
-Under Annie's Law, enacted in 2017 and updated by H.B. 37, Ohio uses a 10-year look-back period. A second offense within 10 years triggers tougher penalties. Key penalties include:
+Under Annie's Law, enacted in 2017 and updated by H.B. 37, Ohio uses a 10-year look-back period. A second offense within 10 years triggers tougher penalties.
 
-| Offense (within 10 years) | Jail Time | Fines | License Suspension | Additional Consequences |
-|---------------------------|-----------|-------|-------------------|------------------------|
-| **Second Offense (Low Test)** | Minimum 10 days in jail, up to six months. The court may convert part of the jail term to house arrest with transdermal alcohol monitoring. | $715 – $1,625 | Suspension of 1 – 7 years | 90-day vehicle immobilization and mandatory treatment. |
-| **Second Offense (High Test or Refusal)** | Minimum 20 days in jail. Courts may increase to six months. | $715 – $1,625 | 1 – 7 years suspension | Same as above, plus ignition-interlock device required. |
-| **Third Offense** | Minimum 30 days in jail for low test or 60 days for high test. | $1,040 – $2,750 | 2 – 12 years suspension | Vehicle forfeiture, yellow plates, mandatory assessment and treatment. |
+[VISUAL:REPEAT_OFFENSE_PENALTIES]
 
 ## Administrative License Suspension (ALS)
 
 When arrested for OVI, your license may be immediately suspended through an ALS. For a first offense, refusing a chemical test causes a one-year suspension; a test failure of 0.08–0.17 results in a 90-day ALS, and a high-test failure results in a 1-year ALS. Judges can grant limited occupational privileges but often require an ignition-interlock device.
+
+[VISUAL:ALS_TIMELINE]
 
 ## Real-World Case Examples
 
