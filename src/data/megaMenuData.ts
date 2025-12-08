@@ -1,4 +1,4 @@
-import { Shield, Scale, Pill, Users, Briefcase, FileWarning, HeartPulse, MapPin } from 'lucide-react';
+import { Shield, Scale, Pill, Users, Briefcase, FileWarning, HeartPulse, MapPin, MapPinned, BookOpen, MessageSquare } from 'lucide-react';
 
 export const megaMenuSections = {
   practiceAreas: {
@@ -86,6 +86,35 @@ export const megaMenuSections = {
         href: '/locations#franklin-county',
         description: 'Columbus metro area',
         icon: MapPin,
+      },
+    ],
+  },
+  resources: {
+    title: 'Resources',
+    items: [
+      {
+        title: 'DUI Checkpoint Map',
+        href: '/resources/dui-checkpoints',
+        description: 'Real-time Ohio DUI checkpoint locations',
+        icon: MapPinned,
+      },
+      {
+        title: 'Legal Blog',
+        href: '/blog',
+        description: 'Insights and updates on Ohio law',
+        icon: BookOpen,
+      },
+      {
+        title: 'Client Reviews',
+        href: '/reviews',
+        description: 'What our clients say about us',
+        icon: MessageSquare,
+      },
+      {
+        title: 'Legal Glossary',
+        href: '/glossary',
+        description: 'Common legal terms explained',
+        icon: BookOpen,
       },
     ],
   },

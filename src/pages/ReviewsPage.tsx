@@ -1,5 +1,7 @@
 import TestimonialsList from '../components/TestimonialsList';
 import PageHero from '../components/PageHero';
+import ReviewsSidebar from '../components/ReviewsSidebar';
+import CTASection from '../components/CTASection';
 
 export default function ReviewsPage() {
   return (
@@ -12,16 +14,32 @@ export default function ReviewsPage() {
         ctaHref="/contact"
         variant="light"
       />
-      <TestimonialsList />
-      <section className="container py-12">
-        <div className="rounded-2xl border border-brand-black/10 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-brand-black">Disclaimer</h2>
-          <p className="mt-2 text-sm text-brand-black/80">
-            Testimonials describe individual experiences and do not guarantee results. Outcomes depend on facts, law,
-            and procedure unique to each matter.
-          </p>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="grid gap-8 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <TestimonialsList />
+            </div>
+
+            <div className="lg:col-span-1">
+              <div className="lg:sticky lg:top-8">
+                <ReviewsSidebar />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
+      <CTASection
+        eyebrow="Ready for Experienced Representation?"
+        title="Let's discuss your case"
+        body="Join the clients who trusted Mango Law with their defense. Schedule a free consultation today."
+        primaryLabel="Get Free Consultation"
+        primaryHref="/contact"
+        secondaryLabel="Call (740) 417-6191"
+        secondaryHref="tel:7404176191"
+      />
     </>
   );
 }

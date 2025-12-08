@@ -21,9 +21,9 @@ export default function MegaMenu() {
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full z-50 mt-2 w-screen max-w-4xl -translate-x-1/4">
+        <div className="absolute left-0 top-full z-50 mt-2 w-screen max-w-6xl -translate-x-1/4">
           <div className="rounded-2xl border border-brand-offWhite/10 bg-brand-black/95 p-8 shadow-2xl backdrop-blur-sm">
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid gap-8 md:grid-cols-3">
               {/* Practice Areas */}
               <div>
                 <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
@@ -51,13 +51,40 @@ export default function MegaMenu() {
                 </div>
               </div>
 
+              {/* Resources */}
+              <div>
+                <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
+                  {megaMenuSections.resources.title}
+                </h3>
+                <div className="space-y-1">
+                  {megaMenuSections.resources.items.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      className="group flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-brand-mango/10"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-mango/10">
+                        <item.icon className="h-5 w-5 text-brand-mango" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-semibold text-brand-offWhite transition-colors group-hover:text-brand-mango">
+                          {item.title}
+                        </div>
+                        <div className="text-xs text-brand-offWhite/60">{item.description}</div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               {/* Locations */}
               <div>
                 <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
                   {megaMenuSections.locations.title}
                 </h3>
                 <div className="space-y-1">
-                  {megaMenuSections.locations.items.map((item) => (
+                  {megaMenuSections.locations.items.slice(0, 4).map((item) => (
                     <Link
                       key={item.href}
                       to={item.href}

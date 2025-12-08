@@ -17,6 +17,8 @@ import BlogPostPage from './pages/BlogPostPage';
 import GlossaryPage from './pages/GlossaryPage';
 import OfCounselPage from './pages/OfCounselPage';
 import ServiceAreasPage from './pages/ServiceAreasPage';
+import DUICheckpointsPage from './pages/DUICheckpointsPage';
+import CheckpointAdminPage from './pages/CheckpointAdminPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import BrandGuidelinesPage from './pages/BrandGuidelinesPage';
@@ -42,6 +44,8 @@ function App() {
         <Route path="/glossary" element={<GlossaryPage />} />
         <Route path="/of-counsel" element={<OfCounselPage />} />
         <Route path="/locations" element={<ServiceAreasPage />} />
+        <Route path="/resources/dui-checkpoints" element={<DUICheckpointsPage />} />
+        <Route path="/admin/checkpoints" element={<CheckpointAdminPage />} />
         <Route path="/brand-guide" element={<BrandGuidelinesPage />} />
         <Route path="/brand-guidelines" element={<BrandGuidelinesPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
