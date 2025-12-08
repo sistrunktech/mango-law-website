@@ -41,7 +41,7 @@ If your BAC is 0.17 percent or higher, the penalties increase. The mandatory jai
 
 ## Repeat Offenses: Annie's Law and Look-Back Period
 
-Under Annie's Law, enacted in 2017 and updated by H.B. 37, Ohio uses a 10-year look-back period. A second offense within 10 years triggers tougher penalties.
+Under Annie's Law, enacted in 2017 and updated by H.B. 37, Ohio uses a 10-year look-back period. A second offense within 10 years triggers tougher penalties. For detailed information about how prior convictions affect your case, see our comprehensive guide on [Ohio's DUI Lookback Period](/blog/ohio-dui-lookback-period).
 
 [VISUAL:REPEAT_OFFENSE_PENALTIES]
 
@@ -157,7 +157,7 @@ Under the **Fourth Amendment** and [Ohio Crim. R. 12(C)(3)](https://www.supremec
 
 Police must have **reasonable suspicion** to stop your vehicle under [Terry v. Ohio, 392 U.S. 1 (1968)](https://supreme.justia.com/cases/federal/us/392/1/). If they lacked reasonable suspicion, all evidence from the stop—breathalyzer results, field sobriety tests, drug discoveries—must be suppressed.
 
-**Case example:** In State v. Brown (Franklin County, 2022), we successfully argued that an officer lacked reasonable suspicion to stop our client for "driving suspiciously slowly" at 2am. The court suppressed all evidence, and OVI charges were dismissed.
+**Case example:** In State v. Brown (Franklin County, 2022), we successfully argued that an officer lacked reasonable suspicion to stop our client for "driving suspiciously slowly" at 2am. The court suppressed all evidence, and [OVI charges](/blog/understanding-ovi-dui-charges-ohio) were dismissed.
 
 #### Illegal Searches and Seizures
 
@@ -167,7 +167,7 @@ The Fourth Amendment protects against unreasonable searches. Common suppression 
 - **Invalid search warrant affidavits** (false statements, stale information, insufficient probable cause)
 - **Searches incident to arrest that exceed lawful scope**
 
-**Case example:** In State v. Martinez (Delaware County, 2023), police searched our client's vehicle after a traffic stop, finding drugs in a locked glovebox. We argued the search exceeded the scope of the traffic stop and the officer lacked probable cause. The court suppressed the evidence, and felony drug charges were dismissed.
+**Case example:** In State v. Martinez (Delaware County, 2023), police searched our client's vehicle after a traffic stop, finding [drugs](/blog/drug-possession-vs-trafficking-ohio) in a locked glovebox. We argued the search exceeded the scope of the traffic stop and the officer lacked probable cause. The court suppressed the evidence, and felony drug charges were dismissed.
 
 #### Miranda Violations
 
@@ -332,7 +332,9 @@ If the trial court denies your motion incorrectly, it creates an **appealable is
 
 **Search and seizure:** Many local cases involve vehicle searches during traffic stops. Knowing Ohio case law on consent searches, plain view doctrine, and search incident to arrest is critical.
 
-**OVI motions:** Breathalyzer and field sobriety test challenges are routine. Judges expect attorneys to understand NHTSA standards, breathalyzer calibration requirements under [Ohio Admin. Code § 3701-53-05](https://codes.ohio.gov/ohio-administrative-code/rule-3701-53-05), and rising BAC defenses.
+**OVI motions:** Breathalyzer and [field sobriety test](/blog/refuse-field-sobriety-test-ohio) challenges are routine. Judges expect attorneys to understand NHTSA standards, breathalyzer calibration requirements under [Ohio Admin. Code § 3701-53-05](https://codes.ohio.gov/ohio-administrative-code/rule-3701-53-05), and rising BAC defenses.
+
+[VISUAL:MOTION_TYPES]
 
 ## How Mango Law Approaches Motion Practice
 
@@ -403,6 +405,8 @@ Possession charges apply when you're found with controlled substances for person
 
 Trafficking involves the sale, distribution, or intent to distribute controlled substances. Unlike many states, Ohio doesn't require proof of actual sale—possession of certain quantities creates a presumption of trafficking.
 
+[VISUAL:POSSESSION_VS_TRAFFICKING]
+
 ## Key Factors in Trafficking Charges
 
 ### Amount Matters
@@ -410,6 +414,8 @@ Ohio has specific weight thresholds called "bulk amounts" that trigger trafficki
 - 5 grams or more of cocaine
 - 1 gram or more of heroin
 - 200 grams or more of marijuana
+
+[VISUAL:BULK_AMOUNT_THRESHOLDS]
 
 ### Circumstantial Evidence
 Prosecutors often rely on:
@@ -421,24 +427,28 @@ Prosecutors often rely on:
 ## Defense Strategies
 
 ### For Possession Cases
-- Challenge the legality of the search
-- Question chain of custody
+- [Challenge the legality of the search](/blog/motion-practice-criminal-defense) through suppression motions
+- Question chain of custody of evidence
 - Explore diversion programs
 - Negotiate for treatment instead of jail
 
 ### For Trafficking Cases
 - Argue against trafficking presumptions
-- Challenge quantity measurements
+- [Challenge quantity measurements](/blog/motion-practice-criminal-defense) and lab procedures
 - Dispute intent to distribute
 - Examine confidential informant reliability
+
+[VISUAL:DEFENSE_STRATEGIES]
 
 ## Treatment Alternatives
 
 Ohio offers intervention in lieu of conviction for eligible defendants. This can result in charges being dismissed after completing a treatment program.
 
+[VISUAL:DIVERSION_OPTIONS]
+
 ## Why You Need Experienced Defense
 
-Drug charges carry mandatory penalties in many cases, and prosecutors aggressively pursue convictions. At Mango Law, we've successfully defended hundreds of drug cases by challenging search procedures, questioning lab results, and negotiating favorable outcomes.
+Drug charges carry mandatory penalties in many cases, and prosecutors aggressively pursue convictions. At Mango Law, we've successfully defended hundreds of drug cases by challenging search procedures through strategic [motion practice](/blog/motion-practice-criminal-defense), questioning lab results, and negotiating favorable outcomes.
 
 Contact us for a confidential consultation if you're facing drug charges in Delaware or Franklin County.`,
     category: 'Drug Crimes',
@@ -502,8 +512,10 @@ We often get involved before charges are filed, helping clients navigate:
 ### Challenging the Case
 - Demonstrating lack of intent
 - Exposing accounting errors
-- Questioning expert analyses
+- Questioning expert analyses through [motion practice](/blog/motion-practice-criminal-defense)
 - Establishing good faith
+
+[VISUAL:WHITE_COLLAR_DEFENSE_STRATEGIES]
 
 ### Mitigation
 When appropriate, we work to:
@@ -512,9 +524,11 @@ When appropriate, we work to:
 - Show rehabilitation
 - Negotiate favorable pleas
 
+[VISUAL:WHITE_COLLAR_PENALTIES]
+
 ## Protecting Your Future
 
-White collar charges require immediate, sophisticated legal representation. At Mango Law, we understand the business context, can analyze complex financial records, and know how to challenge the prosecution's case.
+White collar charges require immediate, sophisticated legal representation. At Mango Law, we understand the business context, can analyze complex financial records, and know how to challenge the prosecution's case through strategic [motion practice](/blog/motion-practice-criminal-defense) and expert analysis.
 
 If you're under investigation or have been charged with a white collar offense, contact us immediately. Every day matters in these cases.`,
     category: 'White Collar Crimes',
@@ -553,6 +567,8 @@ Field sobriety tests (FSTs) are physical and cognitive exercises that officers u
 
 Ohio's implied consent law (ORC 4511.191) applies only to chemical tests—not field sobriety tests. You are under no legal obligation to perform physical roadside exercises.
 
+[VISUAL:RIGHTS_HIGHLIGHT]
+
 ## Why Officers Want You to Perform FSTs
 
 Field sobriety tests serve one primary purpose: building evidence for prosecution. Officers use FST results to:
@@ -580,6 +596,8 @@ Field sobriety tests serve one primary purpose: building evidence for prosecutio
 - Video footage can be used against you
 - May still be arrested regardless of performance
 
+[VISUAL:FST_REFUSAL_COMPARISON]
+
 ## How Refusal Affects Your Defense
 
 Refusal often benefits your defense by:
@@ -597,7 +615,11 @@ Refusal often benefits your defense by:
 - Refusal can be mentioned at trial
 - Separate administrative penalties
 
-Many attorneys advise performing chemical tests even if you've refused FSTs.
+[VISUAL:CHEMICAL_VS_FST_COMPARISON]
+
+[VISUAL:REFUSAL_STATS]
+
+Many attorneys advise performing chemical tests even if you've refused FSTs. For comprehensive information about [OVI/DUI charges and penalties in Ohio](/blog/understanding-ovi-dui-charges-ohio), including how refusals affect your case, visit our detailed guide.
 
 ## Delaware and Franklin County Considerations
 
@@ -611,7 +633,7 @@ If you've been arrested for OVI in Delaware or Franklin County:
 - Don't represent yourself—OVI law is complex
 - Don't assume conviction is inevitable—many defenses exist
 
-At Mango Law, we challenge every aspect of OVI cases: traffic stop legality, FST administration, chemical test accuracy, and constitutional violations.
+At Mango Law, we challenge every aspect of OVI cases through strategic [motion practice](/blog/motion-practice-criminal-defense): traffic stop legality, FST administration, chemical test accuracy, and constitutional violations. If you have prior OVI convictions, understanding [Ohio's lookback period](/blog/ohio-dui-lookback-period) is critical to your defense strategy.
 
 Contact us at **(740) 602-2155** for a confidential case evaluation.`,
     category: 'OVI/DUI Defense',
@@ -630,6 +652,8 @@ Contact us at **(740) 602-2155** for a confidential case evaluation.`,
 The lookback period (also called the "washout period") is the timeframe during which prior OVI convictions count toward enhanced penalties for subsequent offenses.
 
 **In Ohio, the lookback period is 10 years** (previously it was 6 years until 2017).
+
+[VISUAL:LOOKBACK_TIMELINE]
 
 ### How It Works
 
@@ -677,6 +701,10 @@ Fourth and subsequent OVI offenses within 10 years are typically charged as **fe
 - Permanent license revocation
 - Significant fines and costs
 - Felony record affecting employment, housing, voting rights
+
+[VISUAL:REPEAT_OFFENSE_GRID]
+
+For detailed information about first-offense penalties and OVI charges generally, see our comprehensive guide on [Understanding OVI/DUI Charges in Ohio](/blog/understanding-ovi-dui-charges-ohio).
 
 ## High-Test OVI and Enhanced Penalties
 
@@ -726,6 +754,8 @@ For lookback purposes, Ohio counts:
 - Significantly more defendants face enhanced penalties
 - Prior convictions from 6-10 years ago now count
 
+[VISUAL:LAW_CHANGE_COMPARISON]
+
 ### Why It Changed
 
 Legislators argued that the 6-year window was too short to deter repeat offenders and that extending it would improve public safety. Critics note it increases mass incarceration and disproportionately affects people who've been sober for years.
@@ -748,13 +778,13 @@ Excluding a prior conviction can mean the difference between first-offense and s
 Even with priors, you can fight the current charge:
 
 - Illegal traffic stop
-- Improper field sobriety tests
+- [Improper field sobriety tests](/blog/refuse-field-sobriety-test-ohio)
 - Breathalyzer calibration issues
 - Blood draw procedural violations
 - Rising BAC defense
 - Mouth alcohol contamination
 
-**Winning the current case eliminates the enhanced penalty risk.**
+**Winning the current case eliminates the enhanced penalty risk.** Learn more about defense strategies through effective [motion practice in criminal defense](/blog/motion-practice-criminal-defense), which can challenge prior convictions and suppress evidence in your current case.
 
 ### Negotiate Strategic Pleas
 
@@ -803,6 +833,8 @@ Remember, the ALS suspension runs separately and immediately:
 - First refusal: 1 year
 - Second refusal: 2 years
 - High-test first offense: 90 days
+
+[VISUAL:SUSPENSION_COMPARISON]
 
 These suspensions run concurrently with criminal suspensions in some cases but not always. Understanding the interaction requires experienced counsel.
 
@@ -853,6 +885,8 @@ Ohio participates in the Interstate Driver's License Compact, meaning:
 **Pennsylvania DUI + Pennsylvania DUI + Ohio OVI**: Third offense penalties apply
 
 **California DUI 11 years ago + Ohio OVI today**: First offense treatment
+
+[VISUAL:LOOKBACK_SCENARIOS]
 
 ## Felony OVI Threshold
 
@@ -1029,6 +1063,8 @@ Even if conviction is likely:
 **Total cost of second OVI**: Often $15,000-$30,000
 **Total cost of third OVI**: Often $25,000-$50,000+
 
+[VISUAL:COST_BREAKDOWN]
+
 ## Conclusion
 
 Ohio's 10-year OVI lookback period means prior convictions significantly impact your current case. The difference between first-offense and repeat-offense penalties is dramatic—enhanced jail time, longer suspensions, mandatory ignition interlock, yellow plates, and potential vehicle forfeiture.
@@ -1080,6 +1116,8 @@ Even though it's temporary, an ex parte CPO can:
 
 These restrictions take effect immediately upon service. Violating any term—even accidentally—is a separate criminal offense under ORC § 2919.27 and can result in arrest and jail time.
 
+[VISUAL:EX_PARTE_RESTRICTIONS]
+
 ## Why Ex Parte Orders Feel So Unfair
 
 ### The Judge Only Heard One Side
@@ -1109,6 +1147,10 @@ Protection orders exist for a reason: genuine victims of domestic violence need 
 CPOs are sometimes filed right before or during divorce proceedings to gain an advantage. If you're ordered out of the marital home and prohibited from seeing your children, the petitioner has de facto control over living arrangements and custody while the family law case is pending.
 
 By the time the divorce is final, the other side has established a status quo that family courts are reluctant to disturb.
+
+[VISUAL:CPO_MISUSE_SCENARIOS]
+
+For more information about domestic violence charges that often accompany protection orders, see our guide on [Assault and Domestic Violence Defense in Ohio](/blog/assault-domestic-violence-defense-ohio).
 
 ### Getting Someone Out of Shared Housing
 
@@ -1155,7 +1197,9 @@ The more evidence you preserve now, the stronger your defense at the full hearin
 
 If the order requires you to surrender firearms, do so right away. Failing to comply is a federal crime under 18 U.S.C. § 922(g)(8) and can result in federal charges on top of state CPO violations.
 
-Surrender your firearms to law enforcement or a federally licensed dealer as directed by the order. Keep documentation showing you complied.
+Surrender your firearms to law enforcement or a federally licensed dealer as directed by the order. Keep documentation showing you complied. Learn more about [Ohio weapons charges and firearm rights](/blog/ohio-weapons-charges-ccw-defense).
+
+[VISUAL:CPO_DOS_DONTS]
 
 ### Do Bring All of This to an Attorney
 
@@ -1170,6 +1214,8 @@ The full hearing is your opportunity to contest the protection order. Unlike the
 At the full hearing, the petitioner must prove their case by a **preponderance of the evidence**—meaning it's more likely than not that you committed the acts alleged in the petition. This is a civil standard, lower than the "beyond a reasonable doubt" standard in criminal cases.
 
 If the petitioner meets this burden, the court can issue a civil protection order that lasts up to five years. If they don't, the order is dismissed.
+
+[VISUAL:HEARING_TIMELINE]
 
 ### What Happens at the Hearing
 
@@ -1264,9 +1310,9 @@ Cross-examination isn't about being aggressive or hostile. It's about methodical
 
 ### Coordination with Related Criminal Cases
 
-If the petitioner has also filed criminal charges (assault, domestic violence, menacing), we coordinate your CPO defense with your criminal defense strategy. What you say in the CPO hearing can be used against you in the criminal case, and vice versa.
+If the petitioner has also filed [criminal charges (assault, domestic violence, menacing)](/blog/assault-domestic-violence-defense-ohio), we coordinate your CPO defense with your criminal defense strategy. What you say in the CPO hearing can be used against you in the criminal case, and vice versa.
 
-We make sure your testimony is consistent, your defenses align, and you're not inadvertently creating problems in one case while defending the other.
+We make sure your testimony is consistent, your defenses align through strategic [motion practice](/blog/motion-practice-criminal-defense), and you're not inadvertently creating problems in one case while defending the other.
 
 ### Presenting Your Case
 
@@ -1735,6 +1781,8 @@ Ohio uses a three-tier system:
 - Registration every 90 days
 - Public database with address, photo, vehicle info
 
+[VISUAL:SORN_TIERS]
+
 #### Registration Requirements
 
 You must:
@@ -1762,6 +1810,8 @@ Ohio law and local ordinances restrict where registered sex offenders can live:
 - **Cannot live within 1,000 feet of schools, daycares, or parks** (many municipalities)
 - Cannot live in certain housing complexes or neighborhoods
 - Landlords can legally refuse to rent to registered offenders
+
+[VISUAL:COLLATERAL_CONSEQUENCES]
 
 Many people cannot find legal housing and end up homeless or in violation of residency requirements.
 
@@ -1832,11 +1882,13 @@ In cases involving strangers, mistaken identity is possible. DNA evidence, alibi
 ### Constitutional Violations
 
 Law enforcement must follow constitutional rules:
-- **Illegal searches and seizures**: Unlawfully obtained evidence (phones, computers, DNA) can be suppressed
+- **Illegal searches and seizures**: Unlawfully obtained evidence (phones, computers, DNA) can be suppressed through [motion practice](/blog/motion-practice-criminal-defense)
 - **Coerced confessions**: Statements obtained through threats, promises, or long interrogations can be excluded
 - **Miranda violations**: Statements made during custodial interrogation without proper warnings
 
 If your rights were violated, evidence can be suppressed and charges dismissed.
+
+[VISUAL:SEX_CRIMES_DEFENSES]
 
 ### Insufficient Evidence
 
@@ -2033,6 +2085,8 @@ You recover: $100,000 × 70% = **$70,000**
 
 But if the jury found you 51% at fault, you'd recover **nothing** under Ohio's 50% bar rule.
 
+[VISUAL:COMPARATIVE_FAULT_EXAMPLES]
+
 ### Why This Matters
 
 Insurance companies and defense attorneys will aggressively argue you were more than 50% at fault to bar your recovery entirely. They'll:
@@ -2049,6 +2103,8 @@ Protecting yourself from comparative fault arguments is critical.
 - **Personal injury claims**: 2 years from the date of injury
 - **Wrongful death claims**: 2 years from the date of death
 - **Medical malpractice**: 1 year from the date you discovered (or should have discovered) the injury, **or** 4 years from the date of the negligent act (whichever comes first)
+
+[VISUAL:STATUTE_LIMITATIONS]
 
 ### What Happens If You Miss the Deadline?
 
@@ -2105,9 +2161,13 @@ The cap does **not apply** if:
 
 If you meet one of these exceptions, there's no cap on noneconomic damages.
 
+[VISUAL:DAMAGE_CAPS]
+
 ### Why This Matters
 
 If your injuries are serious but don't meet the "catastrophic" exception, your noneconomic damages are capped even if a jury awards more. This is why **economic damages** (medical bills, lost wages) become so important—they drive the cap calculation.
+
+Note: Intentional torts like [assault and battery](/blog/assault-domestic-violence-defense-ohio) are not subject to these caps because they involve intentional conduct rather than negligence.
 
 ## Common Personal Injury Claims in Ohio
 
@@ -2331,6 +2391,8 @@ Penalties increase to a **fourth-degree felony** (6-18 months prison) if the vic
 - A healthcare provider at a hospital
 - A school employee on school grounds
 
+[VISUAL:ASSAULT_PENALTY_GRID]
+
 ### ORC § 2903.11: Felonious Assault
 
 **ORC § 2903.11** is the more serious version of assault. You violate it if you:
@@ -2404,6 +2466,8 @@ Penalties increase dramatically for repeat offenses:
 - **Second offense within 10 years**: Minimum 20 days jail (can't be suspended)
 - **Third or subsequent offense**: Fourth-degree felony (6-18 months prison)
 
+[VISUAL:DV_REPEAT_PENALTIES]
+
 ### Mandatory Arrest Policies
 
 Ohio law enforcement agencies follow **mandatory arrest policies** in domestic violence cases. This means:
@@ -2422,13 +2486,17 @@ Domestic violence cases often involve **civil protection orders (CPOs)** under *
 - **Ex parte orders**: Issued without you being present based solely on the petitioner's allegations (immediate and temporary)
 - **Full hearing orders**: Issued after a hearing where you can present evidence and cross-examine the petitioner (can last up to 5 years)
 
+[VISUAL:CPO_TIMELINE]
+
+For detailed information about challenging protection orders and understanding the ex parte process, see our comprehensive guide on [Protection Order Defense in Ohio](/blog/ex-parte-protection-orders-ohio-defense).
+
 ### What CPOs Can Do
 
 Protection orders can:
 - Prohibit all contact with the petitioner (no calls, texts, social media, third-party contact)
 - Order you out of your home (even if you own it)
 - Restrict your contact with your children
-- Require you to surrender all firearms immediately
+- [Require you to surrender all firearms immediately](/blog/ohio-weapons-charges-ccw-defense)
 - Order you to stay away from the petitioner's home, workplace, and school
 
 ### Violating a Protection Order: ORC § 2919.27
@@ -2493,7 +2561,9 @@ If law enforcement:
 - Conducted an illegal search
 - Coerced your statements or confession
 
-Evidence obtained in violation of your rights can be suppressed, weakening or destroying the prosecution's case.
+Evidence obtained in violation of your rights can be suppressed through strategic [motion practice](/blog/motion-practice-criminal-defense), weakening or destroying the prosecution's case.
+
+[VISUAL:DEFENSE_COMPARISON]
 
 ## Collateral Consequences of Convictions
 
@@ -2503,11 +2573,15 @@ Assault and domestic violence convictions carry long-term consequences:
 
 Federal law (18 U.S.C. § 922(g)(9)) prohibits anyone convicted of a "misdemeanor crime of domestic violence" from possessing firearms **for life**. Ohio law mirrors this.
 
+[VISUAL:FIREARM_CONSEQUENCES]
+
 This affects:
 - Gun owners
 - Hunters
 - Law enforcement and military personnel
 - Anyone who values Second Amendment rights
+
+Learn more about [Ohio weapons charges and firearm rights restoration](/blog/ohio-weapons-charges-ccw-defense).
 
 ### Employment Consequences
 
