@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
@@ -27,11 +27,13 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import BrandGuidelinesPage from './pages/BrandGuidelinesPage';
 import HandoffSharePage from './pages/HandoffSharePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
     <AuthProvider>
       <Routes>
+        <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         <Route path="/docs/admin-guide" element={<AdminGuidePage />} />
@@ -64,6 +66,7 @@ function App() {
                 <Route path="/brand-guidelines" element={<BrandGuidelinesPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/terms" element={<TermsPage />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Layout>
           }
