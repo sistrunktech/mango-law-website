@@ -1,8 +1,22 @@
 import { useParams, Link } from 'react-router-dom';
-import { Calendar, User, ArrowLeft } from 'lucide-react';
+import { Calendar, User, ArrowLeft, Clock } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
+import AuthorBio from '../components/AuthorBio';
+import RelatedPosts from '../components/RelatedPosts';
 import { SEO } from '../lib/seo';
+
+function estimateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const wordCount = content.split(/\s+/).length;
+  return Math.ceil(wordCount / wordsPerMinute);
+}
+
+function getRelatedPosts(currentSlug: string, category: string, limit = 3) {
+  return blogPosts
+    .filter((p) => p.slug !== currentSlug && p.category === category)
+    .slice(0, limit);
+}
 
 function parseMarkdownText(text: string): JSX.Element[] {
   const parts: JSX.Element[] = [];
@@ -117,7 +131,7 @@ export default function BlogPostPage() {
               {post.title}
             </h1>
 
-            <div className="mt-6 flex items-center gap-6 text-sm text-brand-black/60">
+            <div className="mt-6 flex flex-wrap items-center gap-6 text-sm text-brand-black/60">
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 {new Date(post.date).toLocaleDateString('en-US', {
@@ -129,6 +143,10 @@ export default function BlogPostPage() {
               <div className="flex items-center gap-2">
                 <User className="h-4 w-4" />
                 {post.author}
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                {estimateReadingTime(post.content)} min read
               </div>
             </div>
           </div>
@@ -142,7 +160,14 @@ export default function BlogPostPage() {
             />
           )}
 
-          <div className="prose prose-lg mt-12 max-w-none">
+          <div className="rounded-lg border-l-4 border-brand-mango bg-brand-mango/5 p-4 text-sm text-brand-black/70">
+            <strong>Legal Disclaimer:</strong> This article is for educational purposes only and
+            does not constitute legal advice. Criminal defense and personal injury law are complex
+            and fact-specific. Always consult with a qualified Ohio attorney about your specific
+            situation.
+          </div>
+
+          <div className="prose prose-lg mt-8 max-w-none">
             {post.content.split('\n\n').map((paragraph, index) => {
               if (paragraph.startsWith('## ')) {
                 return (
@@ -178,6 +203,16 @@ export default function BlogPostPage() {
               );
             })}
           </div>
+
+          <AuthorBio
+            name="Dominic Mango"
+            title="Criminal Defense Attorney"
+            credentials="Ohio Bar Member"
+            bio="Dominic Mango is a criminal defense and personal injury attorney serving Delaware and Franklin Counties in Ohio. With extensive courtroom experience and a client-focused approach, Dominic has successfully defended hundreds of clients facing OVI/DUI, drug crimes, assault, weapons charges, and other serious criminal allegations."
+            imageUrl="/images/headshots/nick-mango-01.jpg"
+          />
+
+          <RelatedPosts posts={getRelatedPosts(post.slug, post.category)} />
         </div>
       </section>
 
