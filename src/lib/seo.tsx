@@ -139,6 +139,46 @@ export const localBusinessSchema = {
       '@id': 'https://en.wikipedia.org/wiki/Columbus,_Ohio',
     },
     {
+      '@type': 'City',
+      name: 'Dublin',
+      '@id': 'https://en.wikipedia.org/wiki/Dublin,_Ohio',
+    },
+    {
+      '@type': 'City',
+      name: 'Westerville',
+      '@id': 'https://en.wikipedia.org/wiki/Westerville,_Ohio',
+    },
+    {
+      '@type': 'City',
+      name: 'Marysville',
+      '@id': 'https://en.wikipedia.org/wiki/Marysville,_Ohio',
+    },
+    {
+      '@type': 'City',
+      name: 'Gahanna',
+      '@id': 'https://en.wikipedia.org/wiki/Gahanna,_Ohio',
+    },
+    {
+      '@type': 'City',
+      name: 'Grove City',
+      '@id': 'https://en.wikipedia.org/wiki/Grove_City,_Ohio',
+    },
+    {
+      '@type': 'City',
+      name: 'Reynoldsburg',
+      '@id': 'https://en.wikipedia.org/wiki/Reynoldsburg,_Ohio',
+    },
+    {
+      '@type': 'City',
+      name: 'Upper Arlington',
+      '@id': 'https://en.wikipedia.org/wiki/Upper_Arlington,_Ohio',
+    },
+    {
+      '@type': 'City',
+      name: 'Hilliard',
+      '@id': 'https://en.wikipedia.org/wiki/Hilliard,_Ohio',
+    },
+    {
       '@type': 'AdministrativeArea',
       name: 'Delaware County',
     },

@@ -4,6 +4,7 @@ import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
+import ServiceAreasSection from '../components/ServiceAreasSection';
 
 const faqs = [
   {
@@ -199,6 +200,8 @@ export default function SexCrimePage() {
       </section>
 
       <FAQSection faqs={faqs} title="Sex Crime FAQs" />
+
+      <ServiceAreasSection practiceArea="Sex Crime Defense" />
 
       <CTASection
         title="Facing a sensitive allegation? Let's talk."

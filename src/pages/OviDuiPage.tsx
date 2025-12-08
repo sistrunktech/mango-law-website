@@ -5,6 +5,7 @@ import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
+import ServiceAreasSection from '../components/ServiceAreasSection';
 import { SEO } from '../lib/seo';
 
 const faqs = [
@@ -213,6 +214,8 @@ export default function OviDuiPage() {
       </section>
 
       <FAQSection faqs={faqs} title="OVI / DUI FAQs" />
+
+      <ServiceAreasSection practiceArea="OVI / DUI Defense" />
 
       <CTASection
         title="Facing an OVI charge? Let's move quickly."

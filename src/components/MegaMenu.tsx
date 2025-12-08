@@ -77,6 +77,17 @@ export default function MegaMenu() {
                   ))}
                 </div>
 
+                {/* View All Locations */}
+                <div className="mt-3">
+                  <Link
+                    to="/locations"
+                    className="block text-center text-sm font-semibold text-brand-mango transition-colors hover:text-brand-gold"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    View All Service Areas →
+                  </Link>
+                </div>
+
                 {/* CTA */}
                 <div className="mt-6 rounded-lg bg-brand-mango/10 p-4">
                   <p className="text-sm font-semibold text-brand-offWhite">Need immediate help?</p>

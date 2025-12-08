@@ -53,14 +53,38 @@ export const megaMenuSections = {
     items: [
       {
         title: 'Delaware, OH',
-        href: '/locations/delaware-oh',
+        href: '/locations#delaware',
         description: 'Primary office location',
         icon: MapPin,
       },
       {
+        title: 'Columbus, OH',
+        href: '/locations#columbus',
+        description: 'Franklin County seat',
+        icon: MapPin,
+      },
+      {
+        title: 'Dublin, OH',
+        href: '/locations#dublin',
+        description: 'Northwest Columbus suburbs',
+        icon: MapPin,
+      },
+      {
+        title: 'Westerville, OH',
+        href: '/locations#westerville',
+        description: 'Northeast Columbus area',
+        icon: MapPin,
+      },
+      {
+        title: 'Delaware County',
+        href: '/locations#delaware-county',
+        description: 'County-wide representation',
+        icon: MapPin,
+      },
+      {
         title: 'Franklin County',
-        href: '/locations/franklin-county-oh',
-        description: 'Serving Columbus metro',
+        href: '/locations#franklin-county',
+        description: 'Columbus metro area',
         icon: MapPin,
       },
     ],

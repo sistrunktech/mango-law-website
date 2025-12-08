@@ -4,6 +4,7 @@ import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
+import ServiceAreasSection from '../components/ServiceAreasSection';
 
 const faqs = [
   {
@@ -198,6 +199,8 @@ export default function WhiteCollarPage() {
       </section>
 
       <FAQSection faqs={faqs} title="White Collar Crime FAQs" />
+
+      <ServiceAreasSection practiceArea="White Collar Crime Defense" />
 
       <CTASection
         title="Need guidance on an investigation?"

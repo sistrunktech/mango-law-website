@@ -4,6 +4,7 @@ import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
+import ServiceAreasSection from '../components/ServiceAreasSection';
 
 const faqs = [
   {
@@ -152,6 +153,8 @@ export default function ProtectionOrderPage() {
       </section>
 
       <FAQSection faqs={faqs} title="Protection Order FAQs" />
+
+      <ServiceAreasSection practiceArea="Protection Order Defense" />
 
       <CTASection
         title="Need help with a protection order?"

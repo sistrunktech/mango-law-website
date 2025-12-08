@@ -4,6 +4,7 @@ import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
+import ServiceAreasSection from '../components/ServiceAreasSection';
 
 const faqs = [
   {
@@ -190,6 +191,8 @@ export default function PersonalInjuryPage() {
       </section>
 
       <FAQSection faqs={faqs} title="Personal Injury FAQs" />
+
+      <ServiceAreasSection practiceArea="Personal Injury" />
 
       <CTASection
         title="Discuss whether your matter is a fit."

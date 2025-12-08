@@ -4,6 +4,7 @@ import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
+import ServiceAreasSection from '../components/ServiceAreasSection';
 import { SEO } from '../lib/seo';
 
 const faqs = [
@@ -205,6 +206,8 @@ export default function CriminalDefensePage() {
       </section>
 
       <FAQSection faqs={faqs} title="Criminal Defense FAQs" />
+
+      <ServiceAreasSection practiceArea="Criminal Defense" />
 
       <CTASection
         title="Need a defense plan tailored to your case?"

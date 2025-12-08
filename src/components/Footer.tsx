@@ -13,7 +13,7 @@ export default function Footer() {
 
       {/* Main footer content */}
       <div className="container relative py-16 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
           {/* Brand column */}
           <div className="space-y-6">
             <Link to="/" className="group inline-flex items-center gap-3">
@@ -102,6 +102,85 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Areas Served column */}
+          <div>
+            <h4 className="eyebrow text-brand-gold">Areas Served</h4>
+            <ul className="mt-5 space-y-3">
+              <li>
+                <Link
+                  to="/locations#delaware"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Delaware
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/locations#columbus"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Columbus
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/locations#dublin"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Dublin
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/locations#westerville"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Westerville
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/locations#marysville"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Marysville
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/locations#gahanna"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Gahanna
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/locations#upper-arlington"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Upper Arlington
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/locations#hilliard"
+                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                >
+                  Hilliard
+                </Link>
+              </li>
+              <li className="pt-2">
+                <Link
+                  to="/locations"
+                  className="text-sm font-semibold text-brand-mango transition-colors hover:text-brand-gold"
+                >
+                  View all locations →
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -16,6 +16,7 @@ import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
 import GlossaryPage from './pages/GlossaryPage';
 import OfCounselPage from './pages/OfCounselPage';
+import ServiceAreasPage from './pages/ServiceAreasPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import BrandGuidelinesPage from './pages/BrandGuidelinesPage';
@@ -40,6 +41,7 @@ function App() {
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/glossary" element={<GlossaryPage />} />
         <Route path="/of-counsel" element={<OfCounselPage />} />
+        <Route path="/locations" element={<ServiceAreasPage />} />
         <Route path="/brand-guide" element={<BrandGuidelinesPage />} />
         <Route path="/brand-guidelines" element={<BrandGuidelinesPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />

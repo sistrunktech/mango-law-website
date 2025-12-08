@@ -4,6 +4,7 @@ import FAQSection from '../components/FAQSection';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
+import ServiceAreasSection from '../components/ServiceAreasSection';
 
 const faqs = [
   {
@@ -197,6 +198,8 @@ export default function DrugCrimePage() {
       </section>
 
       <FAQSection faqs={faqs} title="Drug Crime FAQs" />
+
+      <ServiceAreasSection practiceArea="Drug Crime Defense" />
 
       <CTASection
         title="Let's review your drug case quickly."
