@@ -50,30 +50,32 @@ export default function CheckpointCard({ checkpoint, onClick }: Props) {
         </p>
       )}
 
-      {checkpoint.source_name && (
-        <div className="mt-4 flex items-center gap-2 text-xs text-brand-black/60">
-          <AlertCircle className="h-3.5 w-3.5" />
-          <span>Source: {checkpoint.source_name}</span>
-          {checkpoint.is_verified && (
-            <span className="ml-auto rounded-full bg-brand-leaf/10 px-2 py-0.5 text-brand-leaf font-semibold">
-              Verified
-            </span>
-          )}
-        </div>
-      )}
+      <div className="mt-4 space-y-2">
+        {checkpoint.source_name && (
+          <div className="flex items-center gap-2 text-xs text-brand-black/60">
+            <AlertCircle className="h-3.5 w-3.5" />
+            <span>Source: {checkpoint.source_name}</span>
+            {checkpoint.is_verified && (
+              <span className="ml-auto rounded-full bg-brand-leaf/10 px-2 py-0.5 text-brand-leaf font-semibold">
+                Verified
+              </span>
+            )}
+          </div>
+        )}
 
-      {checkpoint.source_url && (
-        <a
-          href={checkpoint.source_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-mango transition-colors hover:text-brand-leaf"
-          onClick={(e) => e.stopPropagation()}
-        >
-          View official source
-          <ExternalLink className="h-3 w-3" />
-        </a>
-      )}
+        {checkpoint.source_url && (
+          <a
+            href={checkpoint.source_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-brand-mango/20 bg-brand-mango/5 px-4 py-2.5 text-sm font-semibold text-brand-mango transition-all hover:border-brand-mango/40 hover:bg-brand-mango/10 hover:text-brand-leaf"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ExternalLink className="h-4 w-4" />
+            View Official Citation
+          </a>
+        )}
+      </div>
     </div>
   );
 }
