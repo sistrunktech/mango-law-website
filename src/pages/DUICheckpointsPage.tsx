@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero';
 import CheckpointCard from '../components/CheckpointCard';
 import CheckpointMap from '../components/CheckpointMap';
 import CheckpointHotspots from '../components/CheckpointHotspots';
+import HotspotTeaser from '../components/HotspotTeaser';
 import CTASection from '../components/CTASection';
 import BlogSidebar from '../components/BlogSidebar';
 import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
@@ -18,9 +19,10 @@ export default function DUICheckpointsPage() {
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<DUICheckpoint | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [view, setView] = useState<'list' | 'map'>('list');
   const [viewMode, setViewMode] = useState<ViewMode>('upcoming');
   const [dateRange, setDateRange] = useState<DateRangeOption>('90d');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
   useEffect(() => {
     loadCheckpoints();
@@ -58,7 +60,14 @@ export default function DUICheckpointsPage() {
     }
 
     setFilteredCheckpoints(filtered);
+    setCurrentPage(1); // Reset to first page when filters change
   };
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredCheckpoints.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedCheckpoints = filteredCheckpoints.slice(startIndex, endIndex);
 
   const handleHotspotClick = (city: string, county: string) => {
     setSelectedCounty(county);
@@ -89,11 +98,10 @@ export default function DUICheckpointsPage() {
               </div>
               <div className="flex-1">
                 <h2 className="mb-2 text-lg font-bold text-brand-black">
-                  Important Information About DUI Checkpoints
+                  About Ohio DUI Checkpoint Data
                 </h2>
                 <p className="mb-3 text-sm text-brand-black/80">
-                  DUI checkpoints in Ohio are legal when properly conducted. Law enforcement must provide advance public
-                  notice, use a neutral selection method, and clearly mark the checkpoint location.
+                  This map shows publicly announced OVI checkpoints in Ohio. Data is compiled from law enforcement releases, news outlets, and other public sources over the selected time period. DUI checkpoints in Ohio are legal when properly conducted with advance notice, neutral selection methods, and clear markings.
                 </p>
                 <div className="flex flex-wrap gap-4 text-sm">
                   <a
@@ -110,12 +118,21 @@ export default function DUICheckpointsPage() {
                     <Info className="h-4 w-4" />
                     Field Sobriety Tests
                   </a>
+                  <a
+                    href="/blog/ohio-dui-checkpoint-hotspots"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mango transition-colors hover:text-brand-leaf"
+                  >
+                    <MapPinned className="h-4 w-4" />
+                    Common Checkpoint Hotspots
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
           <CheckpointHotspots onCityClick={handleHotspotClick} />
+
+          <HotspotTeaser />
 
           <div className="mb-4 flex flex-wrap items-center gap-2">
             <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
@@ -200,41 +217,25 @@ export default function DUICheckpointsPage() {
                 </select>
               </div>
             </div>
-
-            <div className="flex gap-2 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
-              <button
-                onClick={() => setView('list')}
-                className={`rounded-md px-4 py-2 text-sm font-semibold transition-all ${
-                  view === 'list'
-                    ? 'bg-white text-brand-mango shadow-sm'
-                    : 'text-brand-black/70 hover:text-brand-mango'
-                }`}
-              >
-                List View
-              </button>
-              <button
-                onClick={() => setView('map')}
-                className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-all ${
-                  view === 'map'
-                    ? 'bg-white text-brand-mango shadow-sm'
-                    : 'text-brand-black/70 hover:text-brand-mango'
-                }`}
-              >
-                <MapPinned className="h-4 w-4" />
-                Map View
-              </button>
+            <div className="text-sm text-brand-black/60">
+              Showing {filteredCheckpoints.length} checkpoint{filteredCheckpoints.length !== 1 ? 's' : ''}
             </div>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              {view === 'map' ? (
+              <div className="mb-6 h-[400px] lg:h-[400px]">
                 <CheckpointMap
                   checkpoints={filteredCheckpoints}
                   selectedCheckpoint={selectedCheckpoint}
                   onCheckpointSelect={setSelectedCheckpoint}
                 />
-              ) : (
+              </div>
+
+              <div className="mt-6">
+                <h3 className="mb-4 text-lg font-bold text-brand-black">
+                  {viewMode === 'upcoming' ? 'Upcoming Checkpoints' : 'All Checkpoints'}
+                </h3>
                 <div>
                   {loading ? (
                     <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-12 text-center">
@@ -260,15 +261,70 @@ export default function DUICheckpointsPage() {
                       </button>
                     </div>
                   ) : filteredCheckpoints.length > 0 ? (
-                    <div className="grid gap-6">
-                      {filteredCheckpoints.map((checkpoint) => (
-                        <CheckpointCard
-                          key={checkpoint.id}
-                          checkpoint={checkpoint}
-                          onClick={() => setSelectedCheckpoint(checkpoint)}
-                        />
-                      ))}
-                    </div>
+                    <>
+                      <div className="mb-4 text-sm text-brand-black/60">
+                        Showing {startIndex + 1}-{Math.min(endIndex, filteredCheckpoints.length)} of {filteredCheckpoints.length}
+                      </div>
+                      <div className="grid gap-6">
+                        {paginatedCheckpoints.map((checkpoint) => (
+                          <CheckpointCard
+                            key={checkpoint.id}
+                            checkpoint={checkpoint}
+                            onClick={() => setSelectedCheckpoint(checkpoint)}
+                          />
+                        ))}
+                      </div>
+                      {totalPages > 1 && (
+                        <div className="mt-8 flex items-center justify-center gap-2">
+                          <button
+                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                            disabled={currentPage === 1}
+                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
+                          >
+                            Previous
+                          </button>
+                          <div className="flex gap-1">
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                              // Show first page, last page, current page, and pages around current
+                              const showPage = page === 1 ||
+                                              page === totalPages ||
+                                              (page >= currentPage - 1 && page <= currentPage + 1);
+
+                              if (!showPage && page === 2) {
+                                return <span key={page} className="px-2 text-brand-black/40">...</span>;
+                              }
+                              if (!showPage && page === totalPages - 1) {
+                                return <span key={page} className="px-2 text-brand-black/40">...</span>;
+                              }
+                              if (!showPage) {
+                                return null;
+                              }
+
+                              return (
+                                <button
+                                  key={page}
+                                  onClick={() => setCurrentPage(page)}
+                                  className={`h-10 w-10 rounded-lg text-sm font-semibold transition-all ${
+                                    currentPage === page
+                                      ? 'bg-brand-mango text-white shadow-sm'
+                                      : 'border border-brand-black/10 bg-white text-brand-black hover:bg-brand-mango/10'
+                                  }`}
+                                >
+                                  {page}
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <button
+                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                            disabled={currentPage === totalPages}
+                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
+                          >
+                            Next
+                          </button>
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-12 text-center">
                       <div className="mb-4 flex justify-center">
@@ -295,7 +351,7 @@ export default function DUICheckpointsPage() {
                     </div>
                   )}
                 </div>
-              )}
+              </div>
             </div>
 
             <div className="lg:col-span-1">
