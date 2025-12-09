@@ -105,13 +105,22 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             </div>
             <h3 className="mb-2 text-xl font-bold text-brand-black">Thank You!</h3>
             <p className="mb-6 text-brand-black/70">We'll contact you within 24 hours. For immediate assistance:</p>
-            <a
-              href="tel:7404176191"
-              className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-white transition-all hover:bg-brand-leaf"
-            >
-              <Phone className="h-5 w-5" />
-              Call (740) 417-6191 Now
-            </a>
+            <div className="space-y-2">
+              <a
+                href="tel:7406022155"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-white transition-all hover:bg-brand-leaf"
+              >
+                <Phone className="h-5 w-5" />
+                Office: (740) 602-2155
+              </a>
+              <a
+                href="tel:7404176191"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-brand-mango px-6 py-3 font-semibold text-brand-mango transition-all hover:bg-brand-mango hover:text-white"
+              >
+                <Phone className="h-5 w-5" />
+                Emergency: (740) 417-6191
+              </a>
+            </div>
             <button
               onClick={onClose}
               className="mt-4 block w-full text-sm text-brand-black/60 hover:text-brand-black"

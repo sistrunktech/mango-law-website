@@ -207,6 +207,15 @@ const imageJobs: ImageJob[] = [
     bucket: 'mango-law-assets',
     filename: 'blog-assault-domestic-violence.png'
   },
+  {
+    id: 'blog-checkpoint-hotspots',
+    name: 'Blog: Ohio DUI Checkpoint Hotspots',
+    prompt: 'Ohio highway at night with distant police checkpoint lights, road warning signs, professional legal photography, no faces visible, clean composition with negative space',
+    width: 800,
+    height: 600,
+    bucket: 'mango-law-assets',
+    filename: 'blog-checkpoint-hotspots.png'
+  },
 ];
 
 interface GeneratedImage {

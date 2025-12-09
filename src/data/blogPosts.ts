@@ -2687,7 +2687,7 @@ If you're facing assault or domestic violence charges in Delaware or Franklin Co
 
 If you live in Ohio or travel across the state regularly, you've likely noticed that certain cities and roadways seem to host DUI checkpoints far more often than others. This isn't random. Law enforcement agencies strategically place sobriety checkpoints in areas with high traffic volume, frequent alcohol-related incidents, or major event corridors. Understanding where these "hotspots" are located can help you plan routes, stay informed, and know what to expect if you encounter a checkpoint.
 
-This guide identifies the Ohio cities and regions where DUI checkpoints occur most often, explains why these areas are targeted, and provides practical advice on navigating checkpoints legally and safely. [View real-time checkpoint data on our interactive Ohio DUI Checkpoint Map](/dui-checkpoint-map).
+This guide identifies the Ohio cities and regions where DUI checkpoints occur most often, explains why these areas are targeted, and provides practical advice on navigating checkpoints legally and safely. [View real-time checkpoint data on our interactive Ohio DUI Checkpoint Map](/dui-checkpoints).
 
 ## Why Certain Areas Become DUI Checkpoint Hotspots
 
@@ -2925,7 +2925,7 @@ While avoiding checkpoints by turning around can attract attention, you can redu
 ### Plan Ahead
 - **Check local news and social media**: Law enforcement often announces checkpoints in advance
 - **Use navigation apps**: Apps like Waze allow users to report checkpoint locations
-- **Monitor our [Ohio DUI Checkpoint Map](/dui-checkpoint-map)**: We track publicly announced checkpoints across Ohio
+- **Monitor our [Ohio DUI Checkpoint Map](/dui-checkpoints)**: We track publicly announced checkpoints across Ohio
 
 ### Use Alternate Transportation
 - **Designated driver**: Always have a sober driver if you plan to drink
