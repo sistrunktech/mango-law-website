@@ -90,22 +90,34 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       const isSelected = selectedCheckpoint?.id === checkpoint.id;
 
       const el = document.createElement('div');
-      el.style.width = isSelected ? '40px' : '32px';
-      el.style.height = isSelected ? '40px' : '32px';
+      const baseSize = isSelected ? 40 : 32;
+
+      el.style.width = `${baseSize}px`;
+      el.style.height = `${baseSize}px`;
       el.style.borderRadius = '50%';
       el.style.backgroundColor = color;
       el.style.border = isSelected ? '4px solid #FF6B18' : '3px solid white';
       el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
       el.style.cursor = 'pointer';
-      el.style.transition = 'all 0.2s';
+      el.style.transition = 'width 0.2s, height 0.2s, margin 0.2s, box-shadow 0.2s';
       el.style.zIndex = isSelected ? '1000' : '1';
 
       el.addEventListener('mouseenter', () => {
-        el.style.transform = 'scale(1.2)';
+        const hoverSize = baseSize + 8;
+        const offset = -4;
+        el.style.width = `${hoverSize}px`;
+        el.style.height = `${hoverSize}px`;
+        el.style.marginLeft = `${offset}px`;
+        el.style.marginTop = `${offset}px`;
+        el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)';
       });
 
       el.addEventListener('mouseleave', () => {
-        el.style.transform = 'scale(1)';
+        el.style.width = `${baseSize}px`;
+        el.style.height = `${baseSize}px`;
+        el.style.marginLeft = '0px';
+        el.style.marginTop = '0px';
+        el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
       });
 
       const startDate = new Date(checkpoint.start_date);
@@ -305,12 +317,27 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       )}
 
       {/* Empty state */}
-      {!isLoading && checkpoints.filter(c => c.latitude && c.longitude).length === 0 && (
+      {/* Truly empty - no checkpoints at all */}
+      {!isLoading && checkpoints.length === 0 && (
         <div className="absolute inset-0 flex items-center justify-center bg-white/95 rounded-2xl">
           <div className="text-center px-4">
             <MapPin className="mx-auto mb-3 h-12 w-12 text-brand-black/20" />
             <p className="text-lg font-semibold text-brand-black/70">No Checkpoints Found</p>
             <p className="mt-1 text-sm text-brand-black/50">Try adjusting your filters or check back later</p>
+          </div>
+        </div>
+      )}
+
+      {/* Checkpoints exist but none have coordinates yet */}
+      {!isLoading && checkpoints.length > 0 && checkpoints.filter(c => c.latitude && c.longitude).length === 0 && (
+        <div className="absolute top-4 left-4 right-4 z-10">
+          <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 shadow-sm">
+            <div className="flex items-center gap-3">
+              <MapPin className="h-5 w-5 text-amber-600 shrink-0" />
+              <p className="text-sm text-amber-800">
+                <span className="font-semibold">{checkpoints.length} checkpoint{checkpoints.length !== 1 ? 's' : ''} found</span> — map locations are being processed. Check the list below.
+              </p>
+            </div>
           </div>
         </div>
       )}

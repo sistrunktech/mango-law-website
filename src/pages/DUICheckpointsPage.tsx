@@ -9,6 +9,8 @@ import CTASection from '../components/CTASection';
 import BlogSidebar from '../components/BlogSidebar';
 import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
+import EmergencyBanner from '../components/EmergencyBanner';
+import LeadCaptureModal from '../components/LeadCaptureModal';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -22,6 +24,9 @@ export default function DUICheckpointsPage() {
   const [viewMode, setViewMode] = useState<ViewMode>('all');
   const [dateRange, setDateRange] = useState<DateRangeOption>('90d');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+  const [leadModalTrigger, setLeadModalTrigger] = useState<'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific'>('emergency_banner');
+  const [leadModalCheckpointId, setLeadModalCheckpointId] = useState<string | undefined>();
   const itemsPerPage = 15;
 
   useEffect(() => {
@@ -78,6 +83,12 @@ export default function DUICheckpointsPage() {
     new Set(checkpoints.map(c => c.location_county))
   ).sort();
 
+  const openLeadModal = (trigger: typeof leadModalTrigger, checkpointId?: string) => {
+    setLeadModalTrigger(trigger);
+    setLeadModalCheckpointId(checkpointId);
+    setIsLeadModalOpen(true);
+  };
+
   return (
     <>
       <PageHero
@@ -88,6 +99,8 @@ export default function DUICheckpointsPage() {
         ctaHref="/ovi-dui-defense-delaware-oh"
         variant="light"
       />
+
+      <EmergencyBanner onOpenLeadModal={() => openLeadModal('emergency_banner')} />
 
       <section className="section bg-white">
         <div className="container">
@@ -276,6 +289,7 @@ export default function DUICheckpointsPage() {
                             key={checkpoint.id}
                             checkpoint={checkpoint}
                             onClick={() => setSelectedCheckpoint(checkpoint)}
+                            onOpenLeadModal={openLeadModal}
                           />
                         ))}
                       </div>
@@ -376,6 +390,13 @@ export default function DUICheckpointsPage() {
         primaryHref="/contact"
         secondaryLabel="Call (740) 417-6191"
         secondaryHref="tel:7404176191"
+      />
+
+      <LeadCaptureModal
+        isOpen={isLeadModalOpen}
+        onClose={() => setIsLeadModalOpen(false)}
+        trigger={leadModalTrigger}
+        checkpointId={leadModalCheckpointId}
       />
     </>
   );

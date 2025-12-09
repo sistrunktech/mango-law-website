@@ -1,13 +1,14 @@
-import { MapPin, Clock, Calendar, AlertCircle, ExternalLink } from 'lucide-react';
+import { MapPin, Clock, Calendar, AlertCircle, ExternalLink, Shield } from 'lucide-react';
 import type { DUICheckpoint } from '../data/checkpoints';
 import { getStatusColor, getStatusLabel, formatCheckpointDateRange } from '../data/checkpoints';
 
 type Props = {
   checkpoint: DUICheckpoint;
   onClick?: () => void;
+  onOpenLeadModal?: (trigger: 'checkpoint_card' | 'emergency_banner' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific', checkpointId?: string) => void;
 };
 
-export default function CheckpointCard({ checkpoint, onClick }: Props) {
+export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal }: Props) {
   const statusColor = getStatusColor(checkpoint.status);
   const statusLabel = getStatusLabel(checkpoint.status);
 
@@ -76,6 +77,19 @@ export default function CheckpointCard({ checkpoint, onClick }: Props) {
           </a>
         )}
       </div>
+
+      {onOpenLeadModal && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenLeadModal('checkpoint_card', checkpoint.id);
+          }}
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-brand-leaf/10 px-4 py-3 text-sm font-semibold text-brand-leaf transition-all hover:bg-brand-leaf/20"
+        >
+          <Shield className="h-4 w-4" />
+          Know Your Rights at Checkpoints
+        </button>
+      )}
     </div>
   );
 }
