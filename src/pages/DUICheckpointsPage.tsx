@@ -17,6 +17,7 @@ export default function DUICheckpointsPage() {
   const [selectedCounty, setSelectedCounty] = useState<string>('all');
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<DUICheckpoint | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [view, setView] = useState<'list' | 'map'>('list');
   const [viewMode, setViewMode] = useState<ViewMode>('upcoming');
   const [dateRange, setDateRange] = useState<DateRangeOption>('90d');
@@ -32,6 +33,7 @@ export default function DUICheckpointsPage() {
   const loadCheckpoints = async () => {
     try {
       setLoading(true);
+      setError(null);
       if (viewMode === 'upcoming') {
         const data = await getUpcomingCheckpoints();
         setCheckpoints(data);
@@ -41,6 +43,8 @@ export default function DUICheckpointsPage() {
       }
     } catch (error) {
       console.error('Failed to load checkpoints:', error);
+      setError('Unable to load checkpoint data. Please try again later.');
+      setCheckpoints([]);
     } finally {
       setLoading(false);
     }
@@ -236,6 +240,24 @@ export default function DUICheckpointsPage() {
                     <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-12 text-center">
                       <div className="inline-flex h-12 w-12 animate-spin items-center justify-center rounded-full border-4 border-brand-mango/20 border-t-brand-mango" />
                       <p className="mt-4 text-sm text-brand-black/70">Loading checkpoints...</p>
+                    </div>
+                  ) : error ? (
+                    <div className="rounded-2xl border border-red-200 bg-red-50 p-12 text-center">
+                      <div className="mb-4 flex justify-center">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
+                          <AlertTriangle className="h-8 w-8 text-red-600" />
+                        </div>
+                      </div>
+                      <h3 className="mb-2 text-lg font-bold text-brand-black">
+                        Error Loading Checkpoints
+                      </h3>
+                      <p className="mb-4 text-sm text-brand-black/70">{error}</p>
+                      <button
+                        onClick={loadCheckpoints}
+                        className="rounded-lg bg-brand-mango px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-leaf"
+                      >
+                        Try Again
+                      </button>
                     </div>
                   ) : filteredCheckpoints.length > 0 ? (
                     <div className="grid gap-6">
