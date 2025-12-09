@@ -166,3 +166,79 @@ export async function updateCheckpointStatuses(): Promise<void> {
     throw new Error('Failed to update checkpoint statuses');
   }
 }
+
+export type DateRangeOption = '30d' | '90d' | 'all';
+
+export async function getRecentCheckpoints(
+  dateRange: DateRangeOption = '90d',
+  county?: string
+): Promise<DUICheckpoint[]> {
+  if (!supabase) {
+    throw new Error('Supabase client is not initialized');
+  }
+
+  let query = supabase
+    .from('dui_checkpoints')
+    .select('*')
+    .order('start_date', { ascending: false });
+
+  if (dateRange !== 'all') {
+    const days = dateRange === '30d' ? 30 : 90;
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - days);
+    query = query.gte('start_date', cutoffDate.toISOString());
+  }
+
+  if (county) {
+    query = query.eq('location_county', county);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error('Error fetching recent checkpoints:', error);
+    throw new Error('Failed to fetch recent checkpoints');
+  }
+
+  return data || [];
+}
+
+export interface CheckpointHotspot {
+  city: string;
+  county: string;
+  count: number;
+}
+
+export async function getCheckpointHotspots(limit: number = 10): Promise<CheckpointHotspot[]> {
+  if (!supabase) {
+    throw new Error('Supabase client is not initialized');
+  }
+
+  const { data, error } = await supabase
+    .from('dui_checkpoints')
+    .select('location_city, location_county');
+
+  if (error) {
+    console.error('Error fetching checkpoint hotspots:', error);
+    throw new Error('Failed to fetch checkpoint hotspots');
+  }
+
+  const hotspotMap = new Map<string, CheckpointHotspot>();
+
+  for (const checkpoint of data || []) {
+    const key = `${checkpoint.location_city}-${checkpoint.location_county}`;
+    if (hotspotMap.has(key)) {
+      hotspotMap.get(key)!.count++;
+    } else {
+      hotspotMap.set(key, {
+        city: checkpoint.location_city,
+        county: checkpoint.location_county,
+        count: 1
+      });
+    }
+  }
+
+  return Array.from(hotspotMap.values())
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit);
+}

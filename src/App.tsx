@@ -29,6 +29,7 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import BrandGuidelinesPage from './pages/BrandGuidelinesPage';
 import HandoffSharePage from './pages/HandoffSharePage';
+import ConnectionsPage from './pages/ConnectionsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="/admin/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/admin/reset-password" element={<ResetPasswordPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+        <Route path="/admin/connections" element={<ConnectionsPage />} />
         <Route path="/docs/admin-guide" element={<AdminGuidePage />} />
         <Route path="/handoff/:token" element={<HandoffSharePage />} />
         <Route

@@ -23,6 +23,61 @@ interface GoogleReview {
   };
 }
 
+interface GoogleIntegration {
+  id: string;
+  access_token: string;
+  refresh_token: string;
+  token_expires_at: string;
+  location_id: string;
+  is_active: boolean;
+}
+
+async function refreshAccessToken(
+  supabase: ReturnType<typeof createClient>,
+  integration: GoogleIntegration,
+  clientId: string,
+  clientSecret: string
+): Promise<string> {
+  const tokenExpiresAt = new Date(integration.token_expires_at);
+  const now = new Date();
+  const fiveMinutesFromNow = new Date(now.getTime() + 5 * 60 * 1000);
+
+  if (tokenExpiresAt > fiveMinutesFromNow) {
+    return integration.access_token;
+  }
+
+  console.log('Token expired or expiring soon, refreshing...');
+
+  const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      refresh_token: integration.refresh_token,
+      grant_type: 'refresh_token',
+    }),
+  });
+
+  if (!tokenResponse.ok) {
+    throw new Error(`Failed to refresh token: ${await tokenResponse.text()}`);
+  }
+
+  const { access_token, expires_in } = await tokenResponse.json();
+  const newExpiresAt = new Date(Date.now() + expires_in * 1000).toISOString();
+
+  await supabase
+    .from('google_integrations')
+    .update({
+      access_token,
+      token_expires_at: newExpiresAt,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', integration.id);
+
+  return access_token;
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, {
@@ -44,37 +99,44 @@ Deno.serve(async (req: Request) => {
       status: "running",
     });
 
-    const googleRefreshToken = Deno.env.get("GOOGLE_REFRESH_TOKEN");
+    const { data: integration, error: integrationError } = await supabase
+      .from('google_integrations')
+      .select('*')
+      .eq('integration_type', 'business_profile')
+      .eq('is_active', true)
+      .maybeSingle();
+
+    if (integrationError || !integration) {
+      throw new Error('Google Business Profile integration not found or inactive. Please connect your account.');
+    }
+
+    if (!integration.refresh_token) {
+      throw new Error('No refresh token found. Please reconnect your Google account.');
+    }
+
+    if (!integration.location_id) {
+      throw new Error('No location ID configured. Please set up your Google Business Profile location.');
+    }
+
     const googleClientId = Deno.env.get("GOOGLE_CLIENT_ID");
     const googleClientSecret = Deno.env.get("GOOGLE_CLIENT_SECRET");
-    const googleLocationId = Deno.env.get("GOOGLE_LOCATION_ID");
 
-    if (!googleRefreshToken || !googleClientId || !googleClientSecret || !googleLocationId) {
-      throw new Error("Missing required Google API credentials in environment variables");
+    if (!googleClientId || !googleClientSecret) {
+      throw new Error("Google OAuth credentials not configured");
     }
 
-    const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        client_id: googleClientId,
-        client_secret: googleClientSecret,
-        refresh_token: googleRefreshToken,
-        grant_type: "refresh_token",
-      }),
-    });
-
-    if (!tokenResponse.ok) {
-      throw new Error(`Failed to refresh Google access token: ${await tokenResponse.text()}`);
-    }
-
-    const { access_token } = await tokenResponse.json();
+    const accessToken = await refreshAccessToken(
+      supabase,
+      integration as GoogleIntegration,
+      googleClientId,
+      googleClientSecret
+    );
 
     const reviewsResponse = await fetch(
-      `https://mybusiness.googleapis.com/v4/${googleLocationId}/reviews`,
+      `https://mybusiness.googleapis.com/v4/${integration.location_id}/reviews`,
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -137,7 +199,7 @@ Deno.serve(async (req: Request) => {
     await supabase
       .from("google_integrations")
       .update({ last_synced_at: new Date().toISOString() })
-      .eq("integration_type", "business_profile");
+      .eq("id", integration.id);
 
     return new Response(
       JSON.stringify({

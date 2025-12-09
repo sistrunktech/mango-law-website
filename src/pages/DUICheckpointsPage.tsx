@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { AlertTriangle, Filter, MapPinned, Shield, Info } from 'lucide-react';
+import { AlertTriangle, Filter, MapPinned, Shield, Info, Calendar, Clock } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import CheckpointCard from '../components/CheckpointCard';
 import CheckpointMap from '../components/CheckpointMap';
+import CheckpointHotspots from '../components/CheckpointHotspots';
 import CTASection from '../components/CTASection';
 import BlogSidebar from '../components/BlogSidebar';
-import { getUpcomingCheckpoints } from '../lib/checkpointService';
+import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
-import { ohioCounties } from '../data/checkpoints';
+
+type ViewMode = 'upcoming' | 'all';
 
 export default function DUICheckpointsPage() {
   const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
@@ -16,10 +18,12 @@ export default function DUICheckpointsPage() {
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<DUICheckpoint | null>(null);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<'list' | 'map'>('list');
+  const [viewMode, setViewMode] = useState<ViewMode>('upcoming');
+  const [dateRange, setDateRange] = useState<DateRangeOption>('90d');
 
   useEffect(() => {
     loadCheckpoints();
-  }, []);
+  }, [viewMode, dateRange]);
 
   useEffect(() => {
     filterCheckpoints();
@@ -28,8 +32,13 @@ export default function DUICheckpointsPage() {
   const loadCheckpoints = async () => {
     try {
       setLoading(true);
-      const data = await getUpcomingCheckpoints();
-      setCheckpoints(data);
+      if (viewMode === 'upcoming') {
+        const data = await getUpcomingCheckpoints();
+        setCheckpoints(data);
+      } else {
+        const data = await getRecentCheckpoints(dateRange);
+        setCheckpoints(data);
+      }
     } catch (error) {
       console.error('Failed to load checkpoints:', error);
     } finally {
@@ -45,6 +54,11 @@ export default function DUICheckpointsPage() {
     }
 
     setFilteredCheckpoints(filtered);
+  };
+
+  const handleHotspotClick = (city: string, county: string) => {
+    setSelectedCounty(county);
+    setViewMode('all');
   };
 
   const countiesWithCheckpoints = Array.from(
@@ -95,6 +109,70 @@ export default function DUICheckpointsPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <CheckpointHotspots onCityClick={handleHotspotClick} />
+
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
+              <button
+                onClick={() => setViewMode('upcoming')}
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
+                  viewMode === 'upcoming'
+                    ? 'bg-white text-brand-mango shadow-sm'
+                    : 'text-brand-black/70 hover:text-brand-mango'
+                }`}
+              >
+                <Clock className="h-3.5 w-3.5" />
+                Upcoming
+              </button>
+              <button
+                onClick={() => setViewMode('all')}
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
+                  viewMode === 'all'
+                    ? 'bg-white text-brand-mango shadow-sm'
+                    : 'text-brand-black/70 hover:text-brand-mango'
+                }`}
+              >
+                <Calendar className="h-3.5 w-3.5" />
+                All Checkpoints
+              </button>
+            </div>
+
+            {viewMode === 'all' && (
+              <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
+                <button
+                  onClick={() => setDateRange('30d')}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                    dateRange === '30d'
+                      ? 'bg-white text-brand-mango shadow-sm'
+                      : 'text-brand-black/70 hover:text-brand-mango'
+                  }`}
+                >
+                  30 Days
+                </button>
+                <button
+                  onClick={() => setDateRange('90d')}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                    dateRange === '90d'
+                      ? 'bg-white text-brand-mango shadow-sm'
+                      : 'text-brand-black/70 hover:text-brand-mango'
+                  }`}
+                >
+                  90 Days
+                </button>
+                <button
+                  onClick={() => setDateRange('all')}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                    dateRange === 'all'
+                      ? 'bg-white text-brand-mango shadow-sm'
+                      : 'text-brand-black/70 hover:text-brand-mango'
+                  }`}
+                >
+                  All Time
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
