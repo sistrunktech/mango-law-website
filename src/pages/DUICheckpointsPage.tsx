@@ -19,7 +19,7 @@ export default function DUICheckpointsPage() {
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<DUICheckpoint | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<ViewMode>('upcoming');
+  const [viewMode, setViewMode] = useState<ViewMode>('all');
   const [dateRange, setDateRange] = useState<DateRangeOption>('90d');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;

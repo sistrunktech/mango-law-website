@@ -36,7 +36,7 @@ export default function MegaMenu() {
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full z-50 mt-2 w-screen max-w-6xl -translate-x-1/4">
+        <div className="absolute left-1/2 top-full z-50 mt-2 w-[90vw] max-w-5xl -translate-x-1/2">
           <div className="rounded-2xl border border-brand-offWhite/10 bg-brand-black/95 p-8 shadow-2xl backdrop-blur-sm">
             <div className="grid gap-8 md:grid-cols-3">
               {/* Practice Areas */}
