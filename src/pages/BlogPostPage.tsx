@@ -896,7 +896,7 @@ export default function BlogPostPage() {
             title="Criminal Defense Attorney"
             credentials="Ohio Bar Member"
             bio="Dominic Mango is a criminal defense and personal injury attorney serving Delaware and Franklin Counties in Ohio. With extensive courtroom experience and a client-focused approach, Dominic has successfully defended hundreds of clients facing OVI/DUI, drug crimes, assault, weapons charges, and other serious criminal allegations."
-            imageUrl="/images/headshots/nick-mango-01.jpg"
+            imageUrl="/images/nick_mango_profile_shot.jpg"
           />
 
           <RelatedPosts posts={getRelatedPosts(post.slug, post.category)} />

@@ -1,16 +1,31 @@
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { megaMenuSections } from '../data/megaMenuData';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function MegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const closeTimeoutRef = useRef<number | null>(null);
+
+  const handleMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeoutRef.current = window.setTimeout(() => {
+      setIsOpen(false);
+    }, 300);
+  };
 
   return (
     <div
       className="relative"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <button
         type="button"
