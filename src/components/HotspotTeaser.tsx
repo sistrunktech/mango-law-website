@@ -37,17 +37,17 @@ export default function HotspotTeaser() {
 
       {isExpanded && (
         <div className="border-t border-brand-mango/20 p-4">
-          <p className="mb-3 text-sm text-brand-black/80">
+          <p className="mb-4 text-sm text-brand-black/80">
             Law enforcement strategically places checkpoints in high-traffic areas, entertainment districts, and major corridors. Here are Ohio's most common checkpoint locations:
           </p>
-          <ul className="mb-4 space-y-2">
+          <div className="mb-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
             {hotspots.map((hotspot, index) => (
-              <li key={index} className="flex items-start gap-2 text-sm text-brand-black/70">
-                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-mango" />
-                <span>{hotspot}</span>
-              </li>
+              <div key={index} className="flex items-start gap-2 text-sm text-brand-black/70">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-mango" />
+                <span className="leading-relaxed">{hotspot}</span>
+              </div>
             ))}
-          </ul>
+          </div>
           <Link
             to="/blog/ohio-dui-checkpoint-hotspots"
             className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-brand-leaf hover:shadow-md"

@@ -803,6 +803,81 @@ export default function BlogPostPage() {
                     );
                   }
 
+                  // Checkpoint Hotspot Blog Visualizations
+                  else if (visualType === 'HOTSPOT_FACTORS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        <StatCard icon={TrendingUp} value="High" label="Traffic Volume" color="mango" description="Major highways and downtown corridors" />
+                        <StatCard icon={Users} value="Entertainment" label="Districts" color="gold" description="Bars, restaurants, nightlife areas" />
+                        <StatCard icon={Scale} value="Historical" label="DUI Data" color="leaf" description="Areas with recurring incidents" />
+                        <StatCard icon={Calendar} value="Event-Based" label="Targeting" color="blue" description="Sports, concerts, holidays" />
+                      </div>
+                    );
+                  }
+                  else if (visualType === 'CHECKPOINT_PATTERNS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 flex flex-wrap gap-4">
+                        <IconStat icon={Clock} value="10PM-2AM" label="Peak Hours" color="mango" />
+                        <IconStat icon={Calendar} value="Fri-Sat" label="Weekend Nights" color="gold" />
+                        <IconStat icon={Home} value="I-70/71/75" label="Major Interstates" color="leaf" />
+                        <IconStat icon={Users} value="College Towns" label="University Areas" color="blue" />
+                      </div>
+                    );
+                  }
+                  else if (visualType === 'REGIONAL_HOTSPOTS_MAP') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <StatCard value="Cleveland" label="Northeast Ohio" color="mango" description="W. 6th St, Detroit Ave, I-90/I-71 exits near entertainment districts" />
+                        <StatCard value="Columbus" label="Central Ohio" color="gold" description="High St, Short North, OSU campus, I-70/I-71 interchanges" />
+                        <StatCard value="Cincinnati" label="Southwest Ohio" color="leaf" description="Over-the-Rhine, downtown, I-75/I-71 convergence areas" />
+                        <StatCard value="Akron/Canton" label="Northeast Corridor" color="blue" description="SR-8, downtown areas, I-77 interchanges" />
+                      </div>
+                    );
+                  }
+                  else if (visualType === 'CHECKPOINT_PROCESS') {
+                    sections.push(
+                      <TimelineBar
+                        key={`visual-${index}`}
+                        title="DUI Checkpoint Process"
+                        items={[
+                          { label: 'Approach Checkpoint', duration: 'Slow down, follow officer instructions', color: 'blue', width: '25%' },
+                          { label: 'Initial Screening', duration: 'Provide license, brief questions', color: 'gold', width: '50%' },
+                          { label: 'Secondary Screening (if needed)', duration: 'Field sobriety tests, further questioning', color: 'mango', width: '75%' },
+                          { label: 'Arrest or Release', duration: 'Citation issued or free to go', color: 'leaf', width: '100%' }
+                        ]}
+                      />
+                    );
+                  }
+                  else if (visualType === 'CHECKPOINT_RIGHTS') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="Your Rights at DUI Checkpoints"
+                        leftItem={{
+                          label: 'MUST DO',
+                          value: 'Required',
+                          description: '• Stop at checkpoint\n• Provide license & registration\n• Identify yourself'
+                        }}
+                        rightItem={{
+                          label: 'DON\'T HAVE TO',
+                          value: 'Optional',
+                          description: '• Answer where you\'ve been\n• Admit to drinking\n• Perform field sobriety tests'
+                        }}
+                        leftColor="red"
+                        rightColor="leaf"
+                      />
+                    );
+                  }
+                  else if (visualType === 'AVOIDANCE_STRATEGIES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                        <StatCard icon={AlertTriangle} value="Plan" label="Ahead" color="mango" description="Check news, social media, and checkpoint maps before driving" />
+                        <StatCard icon={Users} value="Alternate" label="Transportation" color="gold" description="Use designated drivers, rideshare, or public transit" />
+                        <StatCard icon={Clock} value="Avoid" label="High-Risk Times" color="leaf" description="Weekend late nights (10PM-2AM) and holiday periods" />
+                      </div>
+                    );
+                  }
+
                   // Fallback for unknown visual types
                   else {
                     sections.push(
