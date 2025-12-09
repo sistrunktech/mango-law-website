@@ -71,6 +71,18 @@ export default function CheckpointManager() {
 
   const handleSave = async () => {
     if (!supabase) return;
+
+    // Validate required fields
+    if (!editForm.source_url || editForm.source_url.trim() === '') {
+      alert('Source URL is required. Please provide a link to the official announcement.');
+      return;
+    }
+
+    if (!editForm.title || !editForm.location_city || !editForm.start_date) {
+      alert('Please fill in all required fields (Title, City, Start Date, and Source URL).');
+      return;
+    }
+
     if (creating) {
       const { error } = await supabase
         .from('dui_checkpoints')
@@ -80,6 +92,8 @@ export default function CheckpointManager() {
         setCreating(false);
         setEditForm({});
         loadCheckpoints();
+      } else {
+        alert(`Error saving checkpoint: ${error.message}`);
       }
     } else if (editing) {
       const { error } = await supabase
@@ -91,6 +105,8 @@ export default function CheckpointManager() {
         setEditing(null);
         setEditForm({});
         loadCheckpoints();
+      } else {
+        alert(`Error updating checkpoint: ${error.message}`);
       }
     }
   };
@@ -138,6 +154,27 @@ export default function CheckpointManager() {
             {creating ? 'Create New Checkpoint' : 'Edit Checkpoint'}
           </h2>
         </div>
+
+        {creating && (
+          <div className="mb-6 p-4 bg-amber-900/30 border border-amber-600/50 rounded-lg">
+            <h3 className="text-amber-400 font-semibold mb-2 flex items-center gap-2">
+              <MapPin className="w-4 h-4" />
+              Important: Only Add Verified Checkpoints
+            </h3>
+            <p className="text-amber-200/90 text-sm mb-3">
+              Only add checkpoints that are publicly announced by official sources. Do not create fake or speculative checkpoint data.
+            </p>
+            <div className="text-xs text-amber-200/80 space-y-1">
+              <p className="font-medium">Trusted Sources:</p>
+              <ul className="list-disc list-inside ml-2 space-y-0.5">
+                <li>Official police department press releases and websites</li>
+                <li>Local news media reports</li>
+                <li>OVICheckpoint.com and similar verified tracking sites</li>
+                <li>Government social media accounts</li>
+              </ul>
+            </div>
+          </div>
+        )}
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
@@ -266,13 +303,17 @@ export default function CheckpointManager() {
           </div>
 
           <div className="md:col-span-2">
-            <label className="text-sm font-medium text-slate-200 mb-2 block">Source URL (Optional)</label>
+            <label className="flex items-center gap-2 text-sm font-medium text-slate-200 mb-2">
+              Source URL <span className="text-red-400">*</span>
+              <Tooltip content="Required: Link to the official announcement or news article about this checkpoint" />
+            </label>
             <input
               type="url"
               value={editForm.source_url || ''}
               onChange={(e) => setEditForm({ ...editForm, source_url: e.target.value })}
               className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
-              placeholder="https://..."
+              placeholder="https://... (Required)"
+              required
             />
           </div>
 

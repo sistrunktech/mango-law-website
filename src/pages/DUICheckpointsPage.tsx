@@ -101,8 +101,13 @@ export default function DUICheckpointsPage() {
                   About Ohio DUI Checkpoint Data
                 </h2>
                 <p className="mb-3 text-sm text-brand-black/80">
-                  This map shows publicly announced OVI checkpoints in Ohio. Data is compiled from law enforcement releases, news outlets, and other public sources over the selected time period. DUI checkpoints in Ohio are legal when properly conducted with advance notice, neutral selection methods, and clear markings.
+                  This map shows <strong>only publicly announced OVI checkpoints</strong> in Ohio from verified sources. Data is compiled from official law enforcement announcements, news outlets, and verified public sources. Not all checkpoints are announced in advance, and this map does not predict or speculate about unannounced locations.
                 </p>
+                <div className="mb-3 rounded-lg border border-amber-600/20 bg-amber-50 p-3">
+                  <p className="text-xs text-amber-900">
+                    <strong>Important:</strong> This information is for educational purposes only. DUI checkpoints in Ohio are legal when properly conducted with advance notice, neutral selection methods, and clear markings. Always drive sober and follow traffic laws.
+                  </p>
+                </div>
                 <div className="flex flex-wrap gap-4 text-sm">
                   <a
                     href="/ovi-dui-defense-delaware-oh"
