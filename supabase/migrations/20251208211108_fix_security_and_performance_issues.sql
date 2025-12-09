@@ -30,12 +30,21 @@
 CREATE INDEX IF NOT EXISTS idx_blog_posts_author_id 
   ON blog_posts(author_id);
 
--- checkpoint_duplicates foreign key indexes
-CREATE INDEX IF NOT EXISTS idx_checkpoint_duplicates_checkpoint_id 
-  ON checkpoint_duplicates(checkpoint_id);
+-- checkpoint_duplicates foreign key indexes (guarded)
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables 
+    WHERE table_schema = 'public' AND table_name = 'checkpoint_duplicates'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_checkpoint_duplicates_checkpoint_id 
+      ON checkpoint_duplicates(checkpoint_id);
 
-CREATE INDEX IF NOT EXISTS idx_checkpoint_duplicates_duplicate_of_id 
-  ON checkpoint_duplicates(duplicate_of_id);
+    CREATE INDEX IF NOT EXISTS idx_checkpoint_duplicates_duplicate_of_id 
+      ON checkpoint_duplicates(duplicate_of_id);
+  END IF;
+END;
+$$;
 
 -- contact_submissions foreign key indexes
 CREATE INDEX IF NOT EXISTS idx_contact_submissions_assigned_to 
@@ -53,9 +62,18 @@ CREATE INDEX IF NOT EXISTS idx_handoff_document_versions_created_by
 CREATE INDEX IF NOT EXISTS idx_handoff_documents_generated_by 
   ON handoff_documents(generated_by);
 
--- reviews foreign key indexes
-CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id 
-  ON reviews(invitation_id);
+-- reviews foreign key indexes (guarded)
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables 
+    WHERE table_schema = 'public' AND table_name = 'reviews'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id 
+      ON reviews(invitation_id);
+  END IF;
+END;
+$$;
 
 -- ============================================================================
 -- 2. OPTIMIZE RLS POLICIES - ADMIN USERS TABLE

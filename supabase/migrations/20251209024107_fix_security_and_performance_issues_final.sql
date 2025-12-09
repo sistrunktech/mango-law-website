@@ -50,9 +50,18 @@ CREATE INDEX IF NOT EXISTS idx_blog_posts_author_id ON blog_posts(author_id);
 CREATE INDEX IF NOT EXISTS idx_blog_posts_cms_author_id ON blog_posts_cms(author_id);
 CREATE INDEX IF NOT EXISTS idx_blog_posts_cms_created_by ON blog_posts_cms(created_by);
 
--- Add indexes for foreign keys in checkpoint_duplicates
-CREATE INDEX IF NOT EXISTS idx_checkpoint_duplicates_checkpoint_id ON checkpoint_duplicates(checkpoint_id);
-CREATE INDEX IF NOT EXISTS idx_checkpoint_duplicates_duplicate_of_id ON checkpoint_duplicates(duplicate_of_id);
+-- Add indexes for foreign keys in checkpoint_duplicates (guarded)
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables 
+    WHERE table_schema = 'public' AND table_name = 'checkpoint_duplicates'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_checkpoint_duplicates_checkpoint_id ON checkpoint_duplicates(checkpoint_id);
+    CREATE INDEX IF NOT EXISTS idx_checkpoint_duplicates_duplicate_of_id ON checkpoint_duplicates(duplicate_of_id);
+  END IF;
+END;
+$$;
 
 -- Add indexes for foreign keys in clients
 CREATE INDEX IF NOT EXISTS idx_clients_created_by ON clients(created_by);
@@ -91,8 +100,17 @@ CREATE INDEX IF NOT EXISTS idx_review_campaigns_created_by ON review_campaigns(c
 CREATE INDEX IF NOT EXISTS idx_review_responses_created_by ON review_responses(created_by);
 CREATE INDEX IF NOT EXISTS idx_review_responses_review_id ON review_responses(review_id);
 
--- Add indexes for foreign keys in reviews
-CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id ON reviews(invitation_id);
+-- Add indexes for foreign keys in reviews (guarded)
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables 
+    WHERE table_schema = 'public' AND table_name = 'reviews'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id ON reviews(invitation_id);
+  END IF;
+END;
+$$;
 
 -- Add indexes for foreign keys in social_posts
 CREATE INDEX IF NOT EXISTS idx_social_posts_blog_post_id ON social_posts(blog_post_id);

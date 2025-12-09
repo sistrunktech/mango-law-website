@@ -39,8 +39,17 @@
   - Functions now have secure search paths preventing injection attacks
 */
 
--- Add missing index for foreign key
-CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id ON public.reviews(invitation_id);
+-- Add missing index for foreign key (guarded if table exists)
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables 
+    WHERE table_schema = 'public' AND table_name = 'reviews'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id ON public.reviews(invitation_id);
+  END IF;
+END;
+$$;
 
 -- Drop unused indexes to improve write performance
 DROP INDEX IF EXISTS public.idx_brand_assets_variant_type;
