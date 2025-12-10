@@ -33,8 +33,8 @@ Deno.serve(async (req: Request) => {
 
   try {
     const googleClientId = Deno.env.get("GOOGLE_CLIENT_ID");
-    const redirectUri = Deno.env.get("GOOGLE_REDIRECT_URI") || 
-      `${Deno.env.get("SUPABASE_URL")}/functions/v1/google-oauth-callback`;
+    // Hardcode the edge callback to avoid any env/secret drift in production
+    const redirectUri = "https://rgucewewminsevbjgcad.supabase.co/functions/v1/google-oauth-callback";
 
     if (!googleClientId) {
       throw new Error("Google Client ID not configured");
