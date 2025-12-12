@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { MapPin, Plus, Edit2, Trash2, Eye, Calendar, Search } from 'lucide-react';
 import Tooltip from './Tooltip';
+import CheckpointAnnouncementsManager from './CheckpointAnnouncementsManager';
 
 interface Checkpoint {
   id: string;
@@ -23,6 +24,7 @@ interface Checkpoint {
 export default function CheckpointManager() {
   const [checkpoints, setCheckpoints] = useState<Checkpoint[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeView, setActiveView] = useState<'checkpoints' | 'announcements'>('checkpoints');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [editing, setEditing] = useState<string | null>(null);
@@ -131,6 +133,11 @@ export default function CheckpointManager() {
     setEditForm({});
   };
 
+  const switchToAnnouncements = () => {
+    handleCancel();
+    setActiveView('announcements');
+  };
+
   const filteredCheckpoints = checkpoints.filter((cp) => {
     const matchesSearch =
       cp.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -159,11 +166,23 @@ export default function CheckpointManager() {
           <div className="mb-6 p-4 bg-amber-900/30 border border-amber-600/50 rounded-lg">
             <h3 className="text-amber-400 font-semibold mb-2 flex items-center gap-2">
               <MapPin className="w-4 h-4" />
-              Important: Only Add Verified Checkpoints
+              Important: Pick the right entry type
             </h3>
-            <p className="text-amber-200/90 text-sm mb-3">
-              Only add checkpoints that are publicly announced by official sources. Do not create fake or speculative checkpoint data.
-            </p>
+            <div className="text-amber-200/90 text-sm mb-3 space-y-2">
+              <p>
+                Use <strong>Checkpoints</strong> only when the date/time and location are confirmed.
+              </p>
+              <p>
+                If you only have a <strong>date</strong> (time/location still TBD), add an <strong>Announcement</strong> instead — it will show publicly as “details to be announced” and won’t place a misleading map pin.
+              </p>
+              <button
+                type="button"
+                onClick={switchToAnnouncements}
+                className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-amber-400 transition"
+              >
+                Add an Announcement (date-only)
+              </button>
+            </div>
             <div className="text-xs text-amber-200/80 space-y-1">
               <p className="font-medium">Trusted Sources:</p>
               <ul className="list-disc list-inside ml-2 space-y-0.5">
@@ -265,6 +284,17 @@ export default function CheckpointManager() {
               onChange={(e) => setEditForm({ ...editForm, start_date: new Date(e.target.value).toISOString() })}
               className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
             />
+            <p className="mt-2 text-xs text-slate-400">
+              Only have a date? Use{' '}
+              <button
+                type="button"
+                onClick={switchToAnnouncements}
+                className="text-amber-400 hover:text-amber-300 underline underline-offset-2"
+              >
+                Announcements
+              </button>
+              .
+            </p>
           </div>
 
           <div>
@@ -355,17 +385,54 @@ export default function CheckpointManager() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white">DUI Checkpoints</h2>
-          <p className="text-slate-400 mt-1">Manage checkpoint locations and schedules</p>
+          <p className="text-slate-400 mt-1">Manage confirmed checkpoints and date-only announcements (details TBD)</p>
         </div>
-        <button
-          onClick={handleCreate}
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-lg hover:from-amber-600 hover:to-orange-700 transition"
-        >
-          <Plus className="w-4 h-4" />
-          New Checkpoint
-        </button>
+        <div className="flex items-center gap-3">
+          <div className="inline-flex rounded-lg border border-slate-700 bg-slate-900/40 p-1">
+            <button
+              type="button"
+              onClick={() => setActiveView('checkpoints')}
+              className={`rounded-md px-3 py-2 text-sm font-semibold transition ${
+                activeView === 'checkpoints'
+                  ? 'bg-slate-700 text-white'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
+              }`}
+            >
+              Checkpoints
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveView('announcements')}
+              className={`rounded-md px-3 py-2 text-sm font-semibold transition ${
+                activeView === 'announcements'
+                  ? 'bg-slate-700 text-white'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
+              }`}
+            >
+              Announcements
+            </button>
+          </div>
+          {activeView === 'checkpoints' && (
+            <button
+              onClick={handleCreate}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-lg hover:from-amber-600 hover:to-orange-700 transition"
+            >
+              <Plus className="w-4 h-4" />
+              New Checkpoint
+            </button>
+          )}
+        </div>
       </div>
 
+      {activeView === 'announcements' ? (
+        <div className="rounded-xl border border-slate-700 bg-slate-800 p-6">
+          <p className="mb-4 text-sm text-slate-300">
+            Announcements are for “date announced, details pending” items. They appear on the public page as list-only (no map pins).
+          </p>
+          <CheckpointAnnouncementsManager />
+        </div>
+      ) : (
+        <>
       <div className="flex gap-4">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -461,6 +528,8 @@ export default function CheckpointManager() {
           {searchTerm && <span> matching "{searchTerm}"</span>}
         </p>
       </div>
+        </>
+      )}
     </div>
   );
 }
