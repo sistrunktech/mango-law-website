@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
@@ -10,6 +10,8 @@ const CELL_PHONE = '(740) 602-2155';
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
@@ -22,7 +24,12 @@ export default function SiteHeader() {
     <header
       className={[
         'relative z-50 transition-all lg:sticky lg:top-0 lg:z-50',
-        isScrolled ? 'lg:shadow-lg lg:bg-brand-black/95 lg:backdrop-blur-sm' : '',
+        isScrolled
+          ? [
+              'lg:shadow-lg lg:backdrop-blur-sm',
+              isHome ? 'lg:bg-white/95' : 'lg:bg-brand-black/95',
+            ].join(' ')
+          : '',
       ].join(' ')}
       role="banner"
     >
@@ -65,16 +72,21 @@ export default function SiteHeader() {
       </div>
 
       {/* Main navigation bar */}
-      <div className="bg-brand-black">
+      <div
+        className={[
+          isHome ? 'bg-brand-offWhite' : 'bg-brand-black',
+          isHome ? 'border-b border-brand-black/10' : '',
+        ].join(' ')}
+      >
         <div
           className={`container flex items-center justify-between py-4 transition-all ${isScrolled ? 'lg:py-2' : ''}`}
         >
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3">
             <img
-              src="/images/brand/logo-horizontal-light.svg"
+              src="/images/brand/mango-logo-tagline-fullcolor.svg"
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
-              className={`h-12 w-auto transition-all hover:opacity-90 ${isScrolled ? 'lg:h-10' : ''}`}
+              className={`h-14 w-auto transition-all hover:opacity-90 ${isScrolled ? 'lg:h-12' : ''}`}
               loading="lazy"
             />
           </Link>
@@ -83,7 +95,7 @@ export default function SiteHeader() {
           <nav className="hidden items-center gap-1 lg:flex">
             {navLinks.map((link) => {
               if (link.label === 'Practice Areas') {
-                return <MegaMenu key="practice-areas-mega" />;
+                return <MegaMenu key="practice-areas-mega" variant={isHome ? 'light' : 'dark'} />;
               }
               return (
                 <NavLink
@@ -93,7 +105,9 @@ export default function SiteHeader() {
                     'px-4 py-2 text-sm font-medium transition-colors',
                     isActive
                       ? 'text-brand-mango'
-                      : 'text-brand-offWhite/80 hover:text-brand-mango',
+                      : isHome
+                        ? 'text-brand-black/70 hover:text-brand-mango'
+                        : 'text-brand-offWhite/80 hover:text-brand-mango',
                   ].join(' ')}
                 >
                   {link.label}
@@ -118,7 +132,12 @@ export default function SiteHeader() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className="inline-flex items-center justify-center rounded-lg p-2 text-brand-offWhite transition-colors hover:bg-brand-offWhite/10 lg:hidden"
+            className={[
+              'inline-flex items-center justify-center rounded-lg p-2 transition-colors lg:hidden',
+              isHome
+                ? 'text-brand-black hover:bg-brand-black/5'
+                : 'text-brand-offWhite hover:bg-brand-offWhite/10',
+            ].join(' ')}
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -131,7 +150,7 @@ export default function SiteHeader() {
             open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0',
           ].join(' ')}
         >
-          <div className="border-t border-brand-offWhite/10 pb-4">
+          <div className={`${isHome ? 'border-t border-brand-black/10' : 'border-t border-brand-offWhite/10'} pb-4`}>
             <div className="container flex flex-col gap-1 pt-2">
               {navLinks.map((link) => (
                 <NavLink
@@ -143,17 +162,19 @@ export default function SiteHeader() {
                       'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
                       isActive
                         ? 'bg-brand-mango/20 text-brand-mango'
-                        : 'text-brand-offWhite hover:bg-brand-offWhite/5',
+                        : isHome
+                          ? 'text-brand-black hover:bg-brand-black/5'
+                          : 'text-brand-offWhite hover:bg-brand-offWhite/5',
                     ].join(' ')
                   }
                 >
                   {link.label}
                 </NavLink>
               ))}
-              <div className="mt-4 flex flex-col gap-3 border-t border-brand-offWhite/10 pt-4">
+              <div className={`mt-4 flex flex-col gap-3 ${isHome ? 'border-t border-brand-black/10' : 'border-t border-brand-offWhite/10'} pt-4`}>
                 <a
                   href={`tel:${OFFICE_PHONE.replace(/\D/g, '')}`}
-                  className="flex items-center gap-2 px-4 text-sm font-medium text-brand-offWhite"
+                  className={`flex items-center gap-2 px-4 text-sm font-medium ${isHome ? 'text-brand-black' : 'text-brand-offWhite'}`}
                 >
                   <Phone className="h-4 w-4 text-brand-mango" />
                   <span className="text-xs opacity-70">Office:</span>
@@ -161,7 +182,7 @@ export default function SiteHeader() {
                 </a>
                 <a
                   href={`tel:${CELL_PHONE.replace(/\D/g, '')}`}
-                  className="flex items-center gap-2 px-4 text-sm font-medium text-brand-offWhite"
+                  className={`flex items-center gap-2 px-4 text-sm font-medium ${isHome ? 'text-brand-black' : 'text-brand-offWhite'}`}
                 >
                   <Phone className="h-4 w-4 text-brand-mango" />
                   <span className="text-xs opacity-70">Direct:</span>

@@ -18,7 +18,7 @@ export default function Footer() {
           <div className="space-y-6">
             <Link to="/" className="group inline-flex items-center gap-3">
               <img
-                src="/images/brand/mango-logo-vertical.svg"
+                src="/images/brand/mango-logo-vertical-fullcolor.svg"
                 alt="Mango Law LLC"
                 className="h-16 w-auto transition-opacity group-hover:opacity-90"
                 loading="lazy"

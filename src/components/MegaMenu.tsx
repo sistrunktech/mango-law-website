@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { megaMenuSections } from '../data/megaMenuData';
 import { useState, useRef } from 'react';
 
-export default function MegaMenu() {
+export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
   const [isOpen, setIsOpen] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
 
@@ -29,7 +29,10 @@ export default function MegaMenu() {
     >
       <button
         type="button"
-        className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-brand-offWhite/80 transition-colors hover:text-brand-mango"
+        className={[
+          'flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors hover:text-brand-mango',
+          variant === 'light' ? 'text-brand-black/70' : 'text-brand-offWhite/80',
+        ].join(' ')}
       >
         Practice Areas
         <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />

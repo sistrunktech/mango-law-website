@@ -214,7 +214,7 @@ export default function BrandGuidelinesPage() {
                   <div className="grid gap-6 md:grid-cols-2">
                     <div className="card bg-brand-offWhite p-8 text-center">
                       <img
-                        src="/images/brand/logo-horizontal.svg"
+                        src="/images/brand/mango-logo-tagline-fullcolor.svg"
                         alt="Mango Law Horizontal Logo"
                         className="w-full max-w-xs mx-auto mb-4"
                       />
@@ -224,7 +224,7 @@ export default function BrandGuidelinesPage() {
 
                     <div className="card bg-brand-offWhite p-8 text-center">
                       <img
-                        src="/images/brand/logo-stacked.svg"
+                        src="/images/brand/mango-logo-vertical-fullcolor.svg"
                         alt="Mango Law Vertical Logo"
                         className="w-full max-w-[200px] mx-auto mb-4"
                       />
@@ -239,7 +239,7 @@ export default function BrandGuidelinesPage() {
                   <div className="grid gap-6 md:grid-cols-3">
                     <div className="card bg-white p-6 text-center border-2 border-brand-black/10">
                       <img
-                        src="/images/brand/mango-icon.svg"
+                        src="/images/brand/mango-icon-fullcolor.svg"
                         alt="Full Color Icon"
                         className="w-24 h-24 mx-auto mb-3"
                       />

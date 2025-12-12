@@ -71,8 +71,8 @@ function markdownToHTML(markdown: string): string {
 
 function applyPDFStyles(html: string, title: string, options: PDFOptions): string {
   const header = options.includeHeader ? `
-	    <header style="text-align: center; border-bottom: 2px solid #f59e0b; padding-bottom: 20px; margin-bottom: 30px;">
-	      <img src="/images/brand/logo-horizontal.svg" alt="Mango Law" style="height: 60px; margin-bottom: 10px;" />
+    <header style="text-align: center; border-bottom: 2px solid #f59e0b; padding-bottom: 20px; margin-bottom: 30px;">
+	      <img src="/images/brand/mango-logo-primary-fullcolor.svg" alt="Mango Law" style="height: 60px; margin-bottom: 10px;" />
 	      <h1 style="color: #1e293b; margin: 0;">${title}</h1>
 	    </header>
 	  ` : '';
