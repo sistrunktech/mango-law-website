@@ -12,7 +12,7 @@
   - Office/main line: `(740) 602-2155`
   - Direct (Nick): `(740) 417-6191`
   - (`src/lib/contactInfo.ts`, `src/lib/seo.tsx`)
-- Fix Bolt publish failures by renaming brand asset filenames to ASCII-safe names (`public/images/brand/`).
+- Fix Bolt publish failures by renaming/removing files with unsupported filename characters (spaces/Unicode) (`public/images/brand/`, `mango-logo-options-1-new.zip`).
 - Documentation updates:
   - Add “Do Not Swap” phone mapping and CTA tracking notes (`docs/OPERATIONS.md`)
   - Close logo-generation and floating-chat tickets; keep favicon PNGs ticket open (`docs/TROUBLE-TICKETS.md`)
