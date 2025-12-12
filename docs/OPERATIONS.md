@@ -98,7 +98,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 ### RSS Source Config (CSV)
 - Master RSS source list: `supabase/functions/checkpoint-scraper/rss_sources_master.csv`
 - Seed/discovery mapping: `supabase/functions/checkpoint-scraper/checkpoint_rss_sources.csv`
-- To regenerate the TS-embedded CSV modules used by the Edge Function, run: `node scripts/compile-rss-config.mjs`
+- To regenerate the TS-embedded CSV modules used by the Edge Function, run: `node scripts/compile-rss-config.mjs` (or `node compile-rss-config.mjs`).
 
 ## Admin Dashboard
 - **Location**: `/admin/checkpoints` page (CheckpointAdminPage.tsx).
