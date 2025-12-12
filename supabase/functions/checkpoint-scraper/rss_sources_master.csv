@@ -1,0 +1,24 @@
+source_name,rss_url,source_type,tier,confidence,notes
+10TV WBNS Columbus,http://www.10tv.com/mobile/news/all.xml,media,supplementary,speculative,Legacy XML feed URL seen in search snippets; web tooling returned 403. Test from your environment.
+Cleveland.com,https://www.cleveland.com/arc/outboundfeeds/rss/?outputType=xml,media,supplementary,likely,Arc Publishing outbound RSS endpoint pattern; verify before production use.
+FOX19 Cincinnati,https://www.fox19.com/feeds/rss/,media,supplementary,likely,Gray TV sites often provide RSS under /feeds/rss/. Verify.
+FOX8 Cleveland,https://fox8.com/feed,media,core,verified,Nexstar WP feed (per Feedspot directory). Domain blocks some automated crawlers; test from your Edge Function.
+Local 12 Cincinnati,https://local12.com/resources/rss,media,supplementary,likely,Sinclair sites often provide RSS under /resources/rss. Verify.
+NBC4 Columbus,https://www.nbc4i.com/feed/,media,core,likely,Nexstar WP feed endpoint pattern. Verify.
+News 5 Cleveland,https://www.news5cleveland.com/index.rss,media,core,verified,Scripps front-page RSS (per EIN directory listing).
+Norwalk Reflector,https://norwalkreflector.com/feed/,media,supplementary,likely,Likely WordPress RSS endpoint. Verify.
+Sandusky Register,https://sanduskyregister.com/feed/,media,supplementary,likely,Likely WordPress RSS endpoint. Verify.
+The Courier Findlay,https://www.thecourier.com/feed/,media,supplementary,likely,Likely WordPress RSS endpoint. Verify.
+The Ohio Star,https://theohiostar.com/feed,media,supplementary,verified,Statewide political/news site RSS (per Feedspot directory).
+The Vindicator,https://www.vindy.com/feed/,media,supplementary,likely,Site appears WordPress-like; verify feed availability.
+Times Leader,https://www.timesleaderonline.com/feed/,media,supplementary,likely,Likely WordPress RSS endpoint. Verify.
+Toledo Blade,https://www.toledoblade.com/rss,media,supplementary,likely,Common RSS endpoint pattern. Verify.
+WCPO 9 Cincinnati,https://www.wcpo.com/news.rss,media,core,verified,Scripps news RSS (per Feedspot directory).
+WDTN Dayton,https://www.wdtn.com/feed,media,core,verified,Nexstar WP feed (per Feedspot directory).
+WFMJ 21 News,http://www.wfmj.com/category/229774/mobile-news-category?clienttype=rss,media,core,verified,Frankly/WorldNow RSS endpoint (clienttype=rss). May require http.
+WKBN 27 First News,https://www.wkbn.com/feed/,media,core,likely,Nexstar sites commonly expose WordPress RSS at /feed/. Verify.
+WKYC,https://rssfeeds.wkyc.com/wkyc/news,media,core,verified,TEGNA RSS feed (per Feedspot directory).
+WLWT Cincinnati,https://www.wlwt.com/-/9838586/9838828/-/format/rss_2.0/view/asFeed/-/68f33gz/-/index.xml,media,core,verified,Hearst RSS endpoint extracted from Feedspot link target.
+WSYX ABC6 Columbus,https://abc6onyourside.com/resources/rss,media,core,likely,Sinclair pattern for RSS. Verify.
+WTOL Toledo,https://feeds.feedblitz.com/wtol/news,media,core,verified,FeedBlitz feed for WTOL (per Feedspot directory).
+WTVG 13abc Toledo,https://www.13abc.com/feeds/rss/,media,supplementary,likely,Gray TV RSS path pattern. Verify.
