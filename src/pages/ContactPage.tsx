@@ -1,3 +1,4 @@
+import { CheckCircle, Shield, Clock, MapPin } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 import PageHero from '../components/PageHero';
 import LocationBlock from '../components/LocationBlock';
@@ -21,20 +22,80 @@ export default function ContactPage() {
       />
 
       <section className="bg-white">
-        <div className="container grid gap-8 py-12 lg:grid-cols-2">
-          <div className="space-y-3">
-            <h2 className="text-2xl font-bold text-brand-black">Send a message</h2>
-            <p className="text-sm text-brand-black/70">
-              We respect your time. You will receive a clear reply with next steps and what to expect.
-            </p>
+        <div className="container grid gap-10 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <h2 className="text-2xl font-bold text-brand-black">Send a message</h2>
+              <p className="text-sm text-brand-black/70">
+                Fast reply, clear next steps, and a plan you can understand.
+              </p>
+            </div>
+
+            <div className="card bg-brand-offWhite/60">
+              <p className="text-sm font-bold text-brand-black">What happens next</p>
+              <ol className="mt-4 space-y-3 text-sm text-brand-black/70">
+                <li className="flex gap-3">
+                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mango">1</span>
+                  <span>Submit the form (or call if urgent).</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mango">2</span>
+                  <span>We review and respond promptly with next steps.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mango">3</span>
+                  <span>We schedule a strategy call and outline your options.</span>
+                </li>
+              </ol>
+            </div>
+
+            <div className="space-y-3">
+              {[
+                { icon: MapPin, title: 'Local Delaware County representation', body: 'Focused on Delaware and nearby courts.' },
+                { icon: Clock, title: 'Responsive communication', body: 'Clear timelines and quick updates.' },
+                { icon: Shield, title: 'Trial-ready defense', body: 'Prepared for hearings and negotiations.' },
+                { icon: CheckCircle, title: 'Confidential consultations', body: 'Share details privately and securely.' },
+              ].map((item) => (
+                <div key={item.title} className="flex gap-4 rounded-2xl border border-brand-black/10 bg-brand-offWhite/40 p-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-mango/10">
+                    <item.icon className="h-5 w-5 text-brand-mango" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-brand-black">{item.title}</p>
+                    <p className="mt-1 text-xs text-brand-black/60">{item.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-gold">Prefer to call?</p>
+              <p className="mt-2 text-sm text-brand-black/70">If your situation is urgent, call the office now.</p>
+              <a
+                href={`tel:${OFFICE_PHONE_TEL}`}
+                className="btn btn-primary mt-4 w-full"
+                data-cta="contact_page_call_office"
+              >
+                Call {OFFICE_PHONE_DISPLAY}
+              </a>
+            </div>
           </div>
-          <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6 shadow-sm">
-            <ContactForm />
+
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-brand-mango/20 via-brand-offWhite to-brand-leaf/10 blur-xl" aria-hidden="true" />
+            <div className="relative rounded-3xl border border-brand-black/10 bg-gradient-to-b from-brand-offWhite to-white p-6 shadow-soft-lg">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>
 
-      <LocationBlock />
+      <LocationBlock
+        eyebrow="Serving Delaware County"
+        title="Serving Delaware County and nearby courts"
+        description="Located in Delaware, Ohio and serving clients across Delaware and Franklin Counties."
+        mapHeight={280}
+      />
     </>
   );
 }

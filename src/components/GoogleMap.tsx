@@ -5,13 +5,15 @@ interface GoogleMapProps {
   rating?: number;
   reviewCount?: number;
   placeId?: string;
+  height?: number;
 }
 
 export default function GoogleMap({
   businessName = "Mango Law LLC",
   rating = 4.9,
   reviewCount = 45,
-  placeId = "0x0:0x5c800d103881fc5c"
+  placeId = "0x0:0x5c800d103881fc5c",
+  height = 350,
 }: GoogleMapProps) {
   const mapUrl = `https://www.google.com/maps/place/Mango+Law+LLC/@40.2983,-83.0683,17z/data=!4m2!3m1!1s${placeId}`;
   const embedUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3055.5!2d-83.0683!3d40.2983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s${placeId}!2s${encodeURIComponent(businessName)}!5e0!3m2!1sen!2sus!4v1733544000000!5m2!1sen!2sus`;
@@ -44,7 +46,7 @@ export default function GoogleMap({
         <iframe
           src={embedUrl}
           width="100%"
-          height="350"
+          height={height}
           style={{ border: 0 }}
           allowFullScreen
           loading="lazy"

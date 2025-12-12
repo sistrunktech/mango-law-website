@@ -140,7 +140,7 @@ export default function HomePage() {
 
       <section className="section bg-white">
         <div className="container">
-          <TestimonialsList />
+          <TestimonialsList variant="featured" />
         </div>
       </section>
 

@@ -79,81 +79,91 @@ export default function ContactForm() {
 
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="name" className={labelClasses}>
-            Full Name <span className="text-brand-mango">*</span>
-          </label>
-          <input
-            id="name"
-            name="name"
-            required
-            className={inputClasses}
-            placeholder="Your full name"
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className={labelClasses}>
-            Email <span className="text-brand-mango">*</span>
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            className={inputClasses}
-            placeholder="you@example.com"
-          />
-        </div>
-      </div>
-
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="phone" className={labelClasses}>
-            Phone Number
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            className={inputClasses}
-            placeholder="(555) 000-0000"
-          />
-        </div>
-        <div>
-          <label htmlFor="how_heard" className={labelClasses}>
-            How did you find us?
-          </label>
-          <select
-            id="how_heard"
-            name="how_heard"
-            className={inputClasses}
-          >
-            <option value="">Select an option</option>
-            <option value="google">Google Search</option>
-            <option value="referral">Referral</option>
-            <option value="social">Social Media</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="message" className={labelClasses}>
-          How can we help? <span className="text-brand-mango">*</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          className={inputClasses}
-          rows={4}
-          placeholder="Briefly describe your situation and any upcoming court dates."
-        />
-        <p className="mt-2 text-xs text-brand-black/50">
-          Your information is confidential and protected by attorney-client privilege.
+      <div className="rounded-xl border border-brand-black/10 bg-white/70 p-4">
+        <p className="text-sm font-semibold text-brand-black">Free, confidential consultation. No obligation.</p>
+        <p className="mt-1 text-xs text-brand-black/60">
+          Share only what you’re comfortable sharing — we’ll respond promptly with next steps.
         </p>
       </div>
+
+      <fieldset className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
+        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-gold">Your Info</legend>
+        <div className="mt-3 grid gap-5 sm:grid-cols-2">
+          <div>
+            <label htmlFor="name" className={labelClasses}>
+              Full Name <span className="text-brand-mango">*</span>
+            </label>
+            <input
+              id="name"
+              name="name"
+              required
+              className={inputClasses}
+              placeholder="Your full name"
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className={labelClasses}>
+              Email <span className="text-brand-mango">*</span>
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className={inputClasses}
+              placeholder="you@example.com"
+            />
+          </div>
+          <div>
+            <label htmlFor="phone" className={labelClasses}>
+              Phone Number
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              className={inputClasses}
+              placeholder="(555) 000-0000"
+            />
+          </div>
+          <div>
+            <label htmlFor="how_heard" className={labelClasses}>
+              How did you find us?
+            </label>
+            <select
+              id="how_heard"
+              name="how_heard"
+              className={inputClasses}
+            >
+              <option value="">Select an option</option>
+              <option value="google">Google Search</option>
+              <option value="referral">Referral</option>
+              <option value="social">Social Media</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
+        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-gold">Your Situation</legend>
+        <div className="mt-3">
+          <label htmlFor="message" className={labelClasses}>
+            How can we help? <span className="text-brand-mango">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            className={inputClasses}
+            rows={4}
+            placeholder="Briefly describe your situation and any upcoming court dates."
+          />
+          <p className="mt-2 text-xs text-brand-black/50">
+            Your information is confidential and protected by attorney-client privilege.
+          </p>
+        </div>
+      </fieldset>
 
       {/* Honeypot */}
       <div className="hidden" aria-hidden="true">
@@ -175,7 +185,8 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="btn btn-primary w-full sm:w-auto"
+        className="btn btn-primary w-full py-4 text-base"
+        data-cta="contact_form_submit"
       >
         {status === 'submitting' ? (
           <>
