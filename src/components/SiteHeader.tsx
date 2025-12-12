@@ -72,7 +72,7 @@ export default function SiteHeader() {
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3">
             <img
-              src="/images/brand/mango-logo-horizontal-white.png"
+              src="/images/brand/logo-horizontal-light.svg"
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
               className={`h-12 w-auto transition-all hover:opacity-90 ${isScrolled ? 'lg:h-10' : ''}`}
               loading="lazy"

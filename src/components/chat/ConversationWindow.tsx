@@ -302,7 +302,7 @@ export default function ConversationWindow({ onClose }: ConversationWindowProps)
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-brand-black/10 p-2">
             <img
-              src="/images/brand/mango-mark-gold.png"
+              src="/images/brand/icon-gold.svg"
               alt="Mango Law"
               className="h-full w-full"
             />

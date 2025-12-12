@@ -16,7 +16,7 @@ const defaultSEO = {
   title: 'Mango Law LLC - Criminal Defense & OVI Attorney in Delaware, OH',
   description:
     'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. Over 20 years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
-  image: '/images/brand/mango-logo-horizontal-white.png',
+  image: '/images/brand/logo-horizontal.svg',
   type: 'website' as const,
 };
 
@@ -109,7 +109,7 @@ export const localBusinessSchema = {
   description:
     'Criminal defense and OVI/DUI attorney serving Delaware and Franklin Counties in Ohio.',
   url: 'https://mango.law',
-  logo: 'https://mango.law/images/brand/mango-logo-horizontal-white.png',
+  logo: 'https://mango.law/images/brand/logo-horizontal.svg',
   image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
   telephone: '+17404176191',
   email: 'office@mango.law',
