@@ -25,28 +25,32 @@ export default function EmergencyBanner({ onOpenLeadModal }: EmergencyBannerProp
   };
 
   return (
-    <div className="sticky top-0 z-40 bg-gradient-to-r from-red-600 to-orange-600 shadow-lg">
-      <div className="container py-3">
-        <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
-          <div className="flex items-center gap-3 text-white">
-            <AlertTriangle className="h-5 w-5 shrink-0 animate-pulse" />
-            <div>
-              <p className="font-semibold">Stopped at a checkpoint? Need legal help NOW?</p>
-              <p className="text-sm text-white/80">Available 24/7 for emergencies</p>
+    <div className="sticky top-0 z-40 bg-brand-black/95 shadow-lg backdrop-blur-sm sm:bg-gradient-to-r sm:from-red-600 sm:to-orange-600 sm:backdrop-blur-none">
+      <div className="container py-2 sm:py-3">
+        <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center sm:gap-3">
+          <div className="flex items-start gap-3 text-white">
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 animate-pulse sm:mt-0" />
+            <div className="leading-snug">
+              <p className="font-semibold text-sm sm:text-base">
+                Stopped at a checkpoint? Need legal help now?
+              </p>
+              <p className="hidden text-xs text-white/80 sm:block sm:text-sm">
+                Available 24/7 for emergencies
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:gap-3">
             <a
               href="tel:7404176191"
               onClick={handleCallClick}
-              className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 font-semibold text-red-600 transition-all hover:bg-red-50"
+              className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-white/95 px-3 py-1.5 text-sm font-semibold text-red-700 shadow-sm transition-all hover:bg-white sm:px-4 sm:py-2 sm:text-base"
             >
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">Call</span> (740) 417-6191
             </a>
             <button
               onClick={handleLeadClick}
-              className="rounded-lg border-2 border-white px-4 py-2 font-semibold text-white transition-all hover:bg-white/10"
+              className="whitespace-nowrap rounded-lg border-2 border-white px-3 py-1.5 text-sm font-semibold text-white transition-all hover:bg-white/10 sm:px-4 sm:py-2 sm:text-base"
             >
               Free Case Review
             </button>

@@ -296,13 +296,13 @@ export default function ConversationWindow({ onClose }: ConversationWindowProps)
   }, []);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex h-[600px] w-[400px] flex-col rounded-2xl border border-brand-black/10 bg-white shadow-2xl">
+    <div className="fixed inset-x-3 top-4 bottom-24 z-50 flex flex-col rounded-2xl border border-brand-black/10 bg-white shadow-2xl lg:left-auto lg:right-6 lg:top-auto lg:bottom-6 lg:h-[600px] lg:w-[400px]">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-brand-black/10 bg-gradient-to-r from-brand-mango to-brand-gold p-4">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-brand-black/10 p-2">
             <img
-              src="/images/brand/mango-icon-black.svg"
+              src="/images/brand/mango-mark-gold.png"
               alt="Mango Law"
               className="h-full w-full"
             />

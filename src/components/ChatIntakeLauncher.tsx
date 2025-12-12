@@ -12,7 +12,7 @@ export default function ChatIntakeLauncher() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full bg-brand-black px-5 py-4 text-sm font-semibold text-brand-offWhite shadow-lg transition-all hover:bg-brand-gold hover:text-brand-black hover:shadow-xl active:scale-95"
+        className="fixed bottom-24 right-6 z-40 inline-flex items-center gap-2 rounded-full bg-brand-black px-5 py-4 text-sm font-semibold text-brand-offWhite shadow-lg transition-all hover:bg-brand-gold hover:text-brand-black hover:shadow-xl active:scale-95 lg:bottom-6"
         aria-label={open ? 'Close chat' : 'Open chat'}
         aria-expanded={open}
       >

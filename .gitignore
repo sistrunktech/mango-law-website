@@ -16,3 +16,8 @@ vite.config.d.ts
 # Logs and coverage
 *.log
 coverage
+
+# Local generation / tooling artifacts
+temp-generated/
+supabase/.temp/
+*.code-workspace

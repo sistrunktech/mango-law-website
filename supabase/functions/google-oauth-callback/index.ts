@@ -117,8 +117,11 @@ Deno.serve(async (req: Request) => {
 
     const googleClientId = Deno.env.get('GOOGLE_CLIENT_ID');
     const googleClientSecret = Deno.env.get('GOOGLE_CLIENT_SECRET');
-    const redirectUri = Deno.env.get('GOOGLE_REDIRECT_URI') ||
-      `${Deno.env.get('SUPABASE_URL')}/functions/v1/google-oauth-callback`;
+    // Match google-oauth-connect redirectUri to avoid cross-project/env drift.
+    const supabaseUrlForRedirect = Deno.env.get('SUPABASE_URL')?.replace(/\/$/, '');
+    const redirectUri = supabaseUrlForRedirect
+      ? `${supabaseUrlForRedirect}/functions/v1/google-oauth-callback`
+      : 'https://rgucewewminsevbjgcad.supabase.co/functions/v1/google-oauth-callback';
 
     if (!googleClientId || !googleClientSecret) {
       throw new Error('Google OAuth credentials not configured');

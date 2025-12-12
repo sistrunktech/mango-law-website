@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { navLinks } from '../data/navigation';
@@ -9,12 +9,28 @@ const CELL_PHONE = '(740) 602-2155';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="relative z-50" role="banner">
+    <header
+      className={[
+        'relative z-50 transition-all lg:sticky lg:top-0 lg:z-50',
+        isScrolled ? 'lg:shadow-lg lg:bg-brand-black/95 lg:backdrop-blur-sm' : '',
+      ].join(' ')}
+      role="banner"
+    >
       {/* Top bar - Forest green accent */}
       <div className="bg-brand-leaf">
-        <div className="container flex items-center justify-between py-2">
+        <div
+          className={`container flex items-center justify-between py-2 transition-all ${isScrolled ? 'lg:py-1' : ''}`}
+        >
           {/* Phone numbers */}
           <div className="flex items-center gap-4 sm:gap-6">
             <a
@@ -50,13 +66,15 @@ export default function SiteHeader() {
 
       {/* Main navigation bar */}
       <div className="bg-brand-black">
-        <div className="container flex items-center justify-between py-4">
+        <div
+          className={`container flex items-center justify-between py-4 transition-all ${isScrolled ? 'lg:py-2' : ''}`}
+        >
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3">
             <img
-              src="/images/brand/mango-logo-horizontal.svg"
+              src="/images/brand/mango-logo-horizontal-white.png"
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
-              className="h-12 w-auto transition-opacity hover:opacity-90"
+              className={`h-12 w-auto transition-all hover:opacity-90 ${isScrolled ? 'lg:h-10' : ''}`}
               loading="lazy"
             />
           </Link>

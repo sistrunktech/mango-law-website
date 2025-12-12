@@ -70,12 +70,12 @@ function markdownToHTML(markdown: string): string {
 }
 
 function applyPDFStyles(html: string, title: string, options: PDFOptions): string {
-  const header = options.includeHeader ? `
-    <header style="text-align: center; border-bottom: 2px solid #f59e0b; padding-bottom: 20px; margin-bottom: 30px;">
-      <img src="/images/brand/logo-horizontal.svg" alt="Mango Law" style="height: 60px; margin-bottom: 10px;" />
-      <h1 style="color: #1e293b; margin: 0;">${title}</h1>
-    </header>
-  ` : '';
+	  const header = options.includeHeader ? `
+	    <header style="text-align: center; border-bottom: 2px solid #f59e0b; padding-bottom: 20px; margin-bottom: 30px;">
+	      <img src="/images/brand/mango-logo-horizontal-white.png" alt="Mango Law" style="height: 60px; margin-bottom: 10px;" />
+	      <h1 style="color: #1e293b; margin: 0;">${title}</h1>
+	    </header>
+	  ` : '';
 
   const footer = options.includeFooter ? `
     <footer style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 40px; color: #64748b; font-size: 12px;">

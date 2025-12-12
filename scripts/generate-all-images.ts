@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { generateImage } from './fal-client';
+import { generateImage } from './fal-client.ts';
 import { createClient } from '@supabase/supabase-js';
 import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
@@ -8,7 +8,11 @@ dotenv.config();
 
 // Create Supabase client for Node environment
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
+// Prefer service role for uploads to avoid RLS issues; fallback to anon if not provided
+const supabaseKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.VITE_SUPABASE_ANON_KEY ||
+  process.env.SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
   throw new Error('Missing Supabase credentials. Check .env file.');
@@ -210,7 +214,7 @@ const imageJobs: ImageJob[] = [
   {
     id: 'blog-checkpoint-hotspots',
     name: 'Blog: Ohio DUI Checkpoint Hotspots',
-    prompt: 'Ohio highway at night with distant police checkpoint lights, road warning signs, professional legal photography, no faces visible, clean composition with negative space',
+    prompt: 'Ohio highway at night with distant police checkpoint lights, road warning signs, professional legal photography, no faces visible, clean composition with negative space for text overlay',
     width: 800,
     height: 600,
     bucket: 'mango-law-assets',

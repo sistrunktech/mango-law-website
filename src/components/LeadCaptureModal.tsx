@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 
-type LeadSource = 'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific';
+type LeadSource = 'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific' | 'mobile_bottom_bar';
 
 interface LeadCaptureModalProps {
   isOpen: boolean;
