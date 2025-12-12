@@ -1,5 +1,21 @@
 # Changelog
 
+## 2025-12-12
+
+### UI Polish + Contact Number Hardening
+- Unify header sitewide (same homepage header on all routes) and fix broken logo references (`src/components/SiteHeader.tsx`).
+- Remove duplicate mobile bottom CTA bar and clean up mobile spacing (`src/components/Layout.tsx`).
+- Calm/compact the checkpoint “help now” sticky banner for mobile (prevents phone wrapping and avoids loud alert styling) (`src/components/EmergencyBanner.tsx`).
+- Fix mobile chat window overflow/cut-off and improve long-text wrapping (`src/components/chat/ConversationWindow.tsx`, `src/components/chat/ChatBubble.tsx`).
+- Correct office vs direct phone usage across UI + SEO and centralize constants:
+  - Office/main line: `(740) 602-2155`
+  - Direct (Nick): `(740) 417-6191`
+  - (`src/lib/contactInfo.ts`, `src/lib/seo.tsx`)
+- Documentation updates:
+  - Add “Do Not Swap” phone mapping and CTA tracking notes (`docs/OPERATIONS.md`)
+  - Close logo-generation ticket and add follow-up tickets for floating chat progressive disclosure + favicon PNGs (`docs/TROUBLE-TICKETS.md`)
+  - Remove stale Netlify/Vercel mention in generated handoff docs (`src/lib/handoff/documentGenerator.ts`)
+
 ## 2025-12-08 (Evening Update)
 
 ### CMS Transformation & AI Integration
@@ -249,7 +265,7 @@
 
 ### Frontend & Content
 - Replaced placeholder attorney photos with production headshots (`nick-mango-hero.jpg`, `nick-mango-01.jpg`, `geoff-spall-01.jpg`) and wired Nick’s hero/About images to avoid cropping issues.
-- Standardized logo usage: header uses `mango-logo-horizontal.svg`, footer uses `mango-logo-vertical.svg`; removed duplicate gold separator bar and kept gradient accent only.
+- Standardized logo usage (later superseded by 2025-12-12): header/footer wired to the current official brand assets under `public/images/brand/`.
 - Updated contact details to real numbers (office `740-602-2155`, direct `740-417-6191`) across header, CTA, and About.
 
 ### Image/OG Pipeline

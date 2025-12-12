@@ -7,7 +7,7 @@ This document tracks known issues and problems that require resolution.
 ## TICKET-001: Logo Generation Failure
 
 **Priority:** High
-**Status:** Open
+**Status:** Closed
 **Date Created:** 2025-12-05
 **Assigned To:** TBD
 
@@ -33,27 +33,16 @@ Generated logo assets do not match the required brand specifications provided in
 - Loss of scalability benefits of SVG format
 
 ### Current Workaround
-- Using original PNG logo (`/public/images/brand/fphht0w135ufwmj8gaogd_(1).png`) in header
-- Using custom inline SVG icon component in footer and other locations
-- Not using generated SVG assets from `/public/images/brand/generated/`
+- Resolved by replacing placeholder/generated assets with the official, designer-provided assets in `public/images/brand/`.
+- Header now uses the cropped tagline logo asset; footer uses the official vertical full-color logo.
 
 ### Files Affected
 ```
-/public/images/brand/generated/mango-icon-black.svg
-/public/images/brand/generated/mango-icon-gradient.svg
-/public/images/brand/generated/mango-icon-original.svg
-/public/images/brand/generated/mango-icon-white.svg
-/public/images/brand/generated/mango-logo-horizontal-black.svg
-/public/images/brand/generated/mango-logo-horizontal-gradient.svg
-/public/images/brand/generated/mango-logo-horizontal-original.svg
-/public/images/brand/generated/mango-logo-horizontal-white.svg
-/public/images/brand/generated/mango-logo-vertical-black.svg
-/public/images/brand/generated/mango-logo-vertical-gradient.svg
-/public/images/brand/generated/mango-logo-vertical-original.svg
-/public/images/brand/generated/mango-logo-vertical-white.svg
 /src/components/SiteHeader.tsx
 /src/components/Footer.tsx
-/src/components/MangoIcon.tsx
+/public/images/brand/mango-logo-tagline-cropped.png
+/public/images/brand/mango-logo-vertical-fullcolor.svg
+/public/images/brand/mango-icon-fullcolor.svg
 ```
 
 ### Required Resolution Options
@@ -95,11 +84,41 @@ Generated logo assets do not match the required brand specifications provided in
 - Consider this an investment in brand consistency and quality
 
 ### Next Steps
-1. Decision needed on which resolution option to pursue
-2. If Option 1: Research and contact logo design services
-3. If Option 2: Allocate time and resources for manual tracing
-4. If Option 3: Document acceptance of current workaround
-5. Update brand guidelines documentation once resolved
+1. Optional cleanup (low priority): remove/archival of older placeholder/generated assets once confirmed unused.
+2. Optional (recommended): add proper PNG favicons (16×16, 32×32, apple-touch-icon) and wire in `index.html`.
+
+---
+
+## TICKET-002: Floating Chat Progressive Disclosure + Chooser
+
+**Priority:** Medium
+**Status:** Open
+**Date Created:** 2025-12-12
+**Assigned To:** TBD
+
+### Issue Summary
+Floating chat launcher is currently always “expanded label” and does not implement the intended progressive disclosure / chooser (Chat / Call / Consult).
+
+### Desired Behavior
+- Expanded (icon + label) for first ~10 seconds or until scroll.
+- Collapsed (icon-only) after user has “seen it”.
+- Tap opens chooser with: Chat now, Call (office), Request consult (lead modal).
+- Must not overlap map controls on `/resources/dui-checkpoints` (add per-page offset override).
+
+### Files Likely Involved
+`src/components/ChatIntakeLauncher.tsx`, `src/components/Layout.tsx`, `src/components/chat/ConversationWindow.tsx`, `src/components/LeadCaptureModal.tsx`
+
+---
+
+## TICKET-003: Favicon Assets (16/32) Not Wired
+
+**Priority:** Low
+**Status:** Open
+**Date Created:** 2025-12-12
+**Assigned To:** TBD
+
+### Issue Summary
+Site currently uses `public/favicon.svg` only. We should add standard PNG favicon assets (`favicon-16x16.png`, `favicon-32x32.png`, optional `apple-touch-icon.png`) and update `index.html`.
 
 ---
 

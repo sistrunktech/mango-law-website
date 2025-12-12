@@ -266,7 +266,7 @@ export async function generateHandoffDocument(
     sections.push('Deployment & Hosting');
     content += `## Deployment & Hosting\n\n`;
     content += `### Current Hosting\n\n`;
-    content += `- **Platform:** Netlify / Vercel (or as configured)\n`;
+    content += `- **Platform:** Bolt.new hosted (bolt.host)\n`;
     content += `- **Build Command:** \`npm run build\`\n`;
     content += `- **Publish Directory:** \`dist\`\n`;
     content += `- **Node Version:** 18.x or higher\n\n`;

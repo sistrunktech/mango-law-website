@@ -18,6 +18,11 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - See `.env.example` for the full list; update it whenever variables change.
 - Current allowlist should include staging/Bolt hosts: `https://mango.law`, `https://staging.mango.law`, and `https://sistrunktech-mango-l-lqhi.bolt.host` (add/remove as environments change).
 
+## Contact Numbers (Do Not Swap)
+- **Office / Main line:** `(740) 602-2155` (`tel:7406022155`) — default for all “Call” CTAs.
+- **Direct (Nick):** `(740) 417-6191` (`tel:7404176191`) — use only when explicitly labeled as direct/emergency.
+- SMS gateway env vars must follow the same mapping: `SMS_GATEWAY_OFFICE` is the office/main line; `SMS_GATEWAY_NICK` is Nick’s direct.
+
 ## Secrets Placement
 - GitHub Actions: secrets and variables have been added via `gh secret set` / `gh variable set`. Replace placeholder Supabase values (`VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `VITE_SUPABASE_URL`) with real env-specific keys.
 - Supabase: mirror the same secrets per environment; do not expose `SERVICE_ROLE_KEY` or `SUPABASE_JWT_SECRET` to the client.
@@ -114,6 +119,11 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - **Phone Validation**: Real-time formatting and validation with (XXX) XXX-XXXX format.
 - **SMS Notifications**: Instant mobile alerts via email-to-SMS gateways (Verizon/AT&T). Sends to office, attorney, and test numbers. Zero additional cost (no Twilio subscription).
 - **Delayed Follow-up**: Automated follow-up message 20-30 seconds after confirmation to re-engage users.
+
+## CTA Tracking (GA4 / GTM)
+- Primary CTAs include stable `data-cta` attributes (e.g. `header_free_consult`, `header_call`, `checkpoint_banner_free_consult`).
+- Lead capture submissions also store `lead_source` (`LeadCaptureModal` `trigger`) in Supabase `leads.lead_source`.
+- Recommended GTM setup: add a click trigger for elements matching `[data-cta]` and send `data-cta` as the event label.
 
 ## Agent/PR Expectations
 - When adding/updating env vars or infra, update `.env.example`, this `docs/OPERATIONS.md`, and `CHANGELOG.md`.
