@@ -89,9 +89,16 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - **Interactive Map**: Mapbox GL map (`CheckpointMap.tsx`) displays checkpoint locations with status-based colored markers (active=red, upcoming=orange, completed=green, cancelled=gray).
 - **Features**: Auto-fit bounds, user location with "Find Me" button, interactive popups, smooth animations, status legend, loading/error states.
 - **Filters**: County, date range, and status filtering on `/dui-checkpoints` page.
-- **Data Source**: Automated scraper fetches from OVICheckpoint.com, geocodes addresses, and stores in `dui_checkpoints` table.
+- **Data Sources**:
+  - **Confirmed checkpoints**: Scraper pulls from OVICheckpoint.com, geocodes addresses, and stores in `dui_checkpoints`.
+  - **Pending announcements**: RSS ingestion stores “details pending” items in `dui_checkpoint_announcements` (list-only; no map pins).
 - **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
 - **Scraper Schedule**: Runs daily at 2:00 AM EST via pg_cron. Manual trigger available in admin dashboard.
+
+### RSS Source Config (CSV)
+- Master RSS source list: `supabase/functions/checkpoint-scraper/rss_sources_master.csv`
+- Seed/discovery mapping: `supabase/functions/checkpoint-scraper/checkpoint_rss_sources.csv`
+- To regenerate the TS-embedded CSV modules used by the Edge Function, run: `node scripts/compile-rss-config.mjs`
 
 ## Admin Dashboard
 - **Location**: `/admin/checkpoints` page (CheckpointAdminPage.tsx).
