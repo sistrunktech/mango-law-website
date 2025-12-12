@@ -12,6 +12,9 @@ export default function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const logoSrc = isHome
+    ? '/images/brand/mango-logo-tagline-cropped.png'
+    : '/images/brand/mango-logo-white-cropped.png';
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
@@ -84,7 +87,7 @@ export default function SiteHeader() {
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3">
             <img
-              src="/images/brand/mango-logo-tagline-fullcolor.svg"
+              src={logoSrc}
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
               className={`h-14 w-auto transition-all hover:opacity-90 ${isScrolled ? 'lg:h-12' : ''}`}
               loading="lazy"
