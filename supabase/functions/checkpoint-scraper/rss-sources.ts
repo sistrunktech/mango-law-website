@@ -1,4 +1,6 @@
 import { parseCsv } from './csv.ts';
+import { RSS_SOURCES_MASTER_CSV } from './rss-sources-master.csv.ts';
+import { CHECKPOINT_RSS_SOURCES_CSV } from './checkpoint-rss-sources.csv.ts';
 
 export interface RssSource {
   sourceName: string;
@@ -22,23 +24,8 @@ export interface SeedSource {
   notes: string;
 }
 
-async function fetchCsv(url: string): Promise<string> {
-  const res = await fetch(url, {
-    headers: {
-      'user-agent': 'MangoLawCheckpointBot/1.0 (+https://mango.law/resources/dui-checkpoints)',
-      accept: 'text/csv, text/plain, */*',
-    },
-  });
-  if (!res.ok) throw new Error(`CSV fetch failed (${res.status}): ${url}`);
-  return await res.text();
-}
-
 export async function loadMasterRssSources(): Promise<RssSource[]> {
-  const url =
-    Deno.env.get('RSS_SOURCES_MASTER_URL') ||
-    'https://raw.githubusercontent.com/sistrunktech/mango-law-website/main/supabase/functions/checkpoint-scraper/rss_sources_master.csv';
-  const text = await fetchCsv(url);
-  const rows = parseCsv(text);
+  const rows = parseCsv(RSS_SOURCES_MASTER_CSV);
   const [header, ...dataRows] = rows;
   if (!header || header.length < 2) return [];
 
@@ -63,11 +50,7 @@ export async function loadMasterRssSources(): Promise<RssSource[]> {
 }
 
 export async function loadSeedSources(seedRow?: number): Promise<SeedSource[]> {
-  const url =
-    Deno.env.get('CHECKPOINT_RSS_SOURCES_URL') ||
-    'https://raw.githubusercontent.com/sistrunktech/mango-law-website/main/supabase/functions/checkpoint-scraper/checkpoint_rss_sources.csv';
-  const text = await fetchCsv(url);
-  const rows = parseCsv(text);
+  const rows = parseCsv(CHECKPOINT_RSS_SOURCES_CSV);
   const [header, ...dataRows] = rows;
   if (!header || header.length < 2) return [];
 
