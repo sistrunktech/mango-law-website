@@ -53,18 +53,68 @@ function stripHtml(input: string): string {
   return input.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
-function extractLink(el: Element): string | null {
-  const linkEl = el.querySelector('link');
-  if (!linkEl) return null;
-  const href = linkEl.getAttribute('href');
-  if (href) return href.trim();
-  const txt = linkEl.textContent?.trim();
-  return txt || null;
+function decodeCdata(input: string): string {
+  const cdata = input.match(/^<!\[CDATA\[([\s\S]*)\]\]>$/);
+  return cdata ? cdata[1] : input;
 }
 
-function extractText(el: Element, selector: string): string | null {
-  const t = el.querySelector(selector)?.textContent?.trim();
-  return t ? t : null;
+function extractTag(block: string, tagName: string): string | null {
+  const re = new RegExp(`<${tagName}\\b[^>]*>([\\s\\S]*?)<\\/${tagName}>`, 'i');
+  const m = block.match(re);
+  if (!m) return null;
+  return decodeCdata(m[1].trim());
+}
+
+function extractAtomLink(block: string): string | null {
+  const mHref = block.match(/<link\b[^>]*\bhref="([^"]+)"[^>]*\/?>/i);
+  if (mHref?.[1]) return mHref[1].trim();
+  const mText = block.match(/<link\b[^>]*>([\s\S]*?)<\/link>/i);
+  return mText?.[1] ? decodeCdata(mText[1].trim()) : null;
+}
+
+function extractRssLink(block: string): string | null {
+  const link = extractTag(block, 'link');
+  return link ? link.trim() : null;
+}
+
+function parseBlocks(xml: string, tagName: 'item' | 'entry'): string[] {
+  const re = new RegExp(`<${tagName}\\b[^>]*>([\\s\\S]*?)<\\/${tagName}>`, 'gi');
+  const blocks: string[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(xml)) !== null) blocks.push(m[0]);
+  return blocks;
+}
+
+function parseRssOrAtom(xml: string): Array<{ title: string; url: string; pubDate: string | null; summary: string | null }> {
+  const isRss = /<item\b/i.test(xml);
+  const blocks = isRss ? parseBlocks(xml, 'item') : parseBlocks(xml, 'entry');
+
+  return blocks
+    .map((block) => {
+      const titleRaw = extractTag(block, 'title');
+      const urlRaw = isRss ? extractRssLink(block) : extractAtomLink(block);
+      const pubDateRaw =
+        extractTag(block, 'pubDate') ||
+        extractTag(block, 'published') ||
+        extractTag(block, 'updated');
+      const summaryRaw =
+        extractTag(block, 'description') ||
+        extractTag(block, 'summary') ||
+        extractTag(block, 'content') ||
+        extractTag(block, 'content:encoded');
+
+      const title = titleRaw ? stripHtml(titleRaw) : null;
+      const url = urlRaw ? urlRaw.trim() : null;
+      if (!title || !url) return null;
+
+      return {
+        title,
+        url,
+        pubDate: pubDateRaw ? pubDateRaw.trim() : null,
+        summary: summaryRaw ? stripHtml(summaryRaw) : null,
+      };
+    })
+    .filter((x): x is { title: string; url: string; pubDate: string | null; summary: string | null } => Boolean(x));
 }
 
 async function fetchRss(url: string): Promise<string> {
@@ -89,38 +139,17 @@ export async function scrapeRssSources(
   for (const source of sources.slice(0, maxSources)) {
     try {
       const xml = await fetchRss(source.rssUrl);
-      const doc = new DOMParser().parseFromString(xml, 'text/xml');
-      if (!doc) throw new Error('XML parse failed');
-
-      const rssItems = [...doc.querySelectorAll('item')];
-      const atomEntries = rssItems.length === 0 ? [...doc.querySelectorAll('entry')] : [];
-      const els = rssItems.length > 0 ? rssItems : atomEntries;
-
       const items: RssItemCandidate[] = [];
-      for (const el of els) {
-        const title = extractText(el, 'title');
-        const url = extractLink(el);
-        if (!title || !url) continue;
-
-        const pubDate =
-          extractText(el, 'pubDate') ||
-          extractText(el, 'published') ||
-          extractText(el, 'updated');
-        const summary =
-          extractText(el, 'description') ||
-          extractText(el, 'summary') ||
-          extractText(el, 'content') ||
-          extractText(el, 'content\\:encoded');
-
-        const combined = `${title}\n${summary || ''}`;
+      for (const parsed of parseRssOrAtom(xml)) {
+        const combined = `${parsed.title}\n${parsed.summary || ''}`;
         if (!textIncludesAny(combined, keywords)) continue;
 
-        const normalizedUrl = canonicalizeUrl(url);
+        const normalizedUrl = canonicalizeUrl(parsed.url);
         items.push({
-          title: stripHtml(title),
+          title: parsed.title,
           url: normalizedUrl,
-          publishedAt: pubDate ? new Date(pubDate).toISOString() : null,
-          summary: summary ? stripHtml(summary) : null,
+          publishedAt: parsed.pubDate ? new Date(parsed.pubDate).toISOString() : null,
+          summary: parsed.summary,
         });
       }
 
@@ -168,37 +197,16 @@ export async function scrapeSeedSources(
 
     try {
       const xml = await fetchRss(rssUrl);
-      const doc = new DOMParser().parseFromString(xml, 'text/xml');
-      if (!doc) throw new Error('XML parse failed');
-
-      const rssItems = [...doc.querySelectorAll('item')];
-      const atomEntries = rssItems.length === 0 ? [...doc.querySelectorAll('entry')] : [];
-      const els = rssItems.length > 0 ? rssItems : atomEntries;
-
       const candidates: RssItemCandidate[] = [];
-      for (const el of els) {
-        const title = extractText(el, 'title');
-        const url = extractLink(el);
-        if (!title || !url) continue;
-
-        const pubDate =
-          extractText(el, 'pubDate') ||
-          extractText(el, 'published') ||
-          extractText(el, 'updated');
-        const summary =
-          extractText(el, 'description') ||
-          extractText(el, 'summary') ||
-          extractText(el, 'content') ||
-          extractText(el, 'content\\:encoded');
-
-        const combined = `${title}\n${summary || ''}`;
+      for (const parsed of parseRssOrAtom(xml)) {
+        const combined = `${parsed.title}\n${parsed.summary || ''}`;
         if (!textIncludesAny(combined, keywords)) continue;
 
         candidates.push({
-          title: stripHtml(title),
-          url: canonicalizeUrl(url),
-          publishedAt: pubDate ? new Date(pubDate).toISOString() : null,
-          summary: summary ? stripHtml(summary) : null,
+          title: parsed.title,
+          url: canonicalizeUrl(parsed.url),
+          publishedAt: parsed.pubDate ? new Date(parsed.pubDate).toISOString() : null,
+          summary: parsed.summary,
         });
       }
 
@@ -221,4 +229,3 @@ export async function scrapeSeedSources(
 
   return out;
 }
-
