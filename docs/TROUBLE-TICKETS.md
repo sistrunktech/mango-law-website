@@ -12,7 +12,7 @@ This document tracks known issues and problems that require resolution.
 **Assigned To:** TBD
 
 ### Issue Summary
-Generated logo assets do not match the required brand specifications provided in the original design file (`fphht0w135ufwmj8gaogd_(1).png`).
+Generated logo assets did not match the required brand specifications provided in the original design file.
 
 ### Problem Details
 - Attempted to generate SVG versions of the Mango Law LLC logo using AI/automated tools
