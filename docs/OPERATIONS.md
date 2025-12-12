@@ -131,6 +131,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - Primary CTAs include stable `data-cta` attributes (e.g. `header_free_consult`, `header_call`, `checkpoint_banner_free_consult`).
 - Lead capture submissions also store `lead_source` (`LeadCaptureModal` `trigger`) in Supabase `leads.lead_source`.
 - Recommended GTM setup: add a click trigger for elements matching `[data-cta]` and send `data-cta` as the event label.
+- Additionally, app code can push `cta_click` events to `window.dataLayer` via `src/lib/analytics.ts`.
 
 ## Agent/PR Expectations
 - When adding/updating env vars or infra, update `.env.example`, this `docs/OPERATIONS.md`, and `CHANGELOG.md`.

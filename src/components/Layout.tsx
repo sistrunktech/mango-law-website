@@ -1,18 +1,22 @@
 import { ReactNode, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import SiteHeader from './SiteHeader';
 import Footer from './Footer';
 import ChatIntakeLauncher from './ChatIntakeLauncher';
 import AccessibilityLauncher from './AccessibilityLauncher';
 import ScrollToTop from './ScrollToTop';
 import LeadCaptureModal, { type LeadSource } from './LeadCaptureModal';
+import { trackLeadModalOpen } from '../lib/analytics';
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const location = useLocation();
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
 
   const openLeadModal = (trigger: LeadSource) => {
     setLeadModalTrigger(trigger);
     setIsLeadModalOpen(true);
+    trackLeadModalOpen(trigger);
   };
 
   return (
@@ -31,7 +35,10 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Footer />
 
       <AccessibilityLauncher />
-      <ChatIntakeLauncher />
+      <ChatIntakeLauncher
+        onOpenLeadModal={() => openLeadModal('floating_chooser')}
+        bottomOffsetClass={location.pathname.startsWith('/resources/dui-checkpoints') ? 'bottom-24' : 'bottom-6'}
+      />
 
       <LeadCaptureModal
         isOpen={isLeadModalOpen}

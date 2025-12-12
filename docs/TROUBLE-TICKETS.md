@@ -92,7 +92,7 @@ Generated logo assets do not match the required brand specifications provided in
 ## TICKET-002: Floating Chat Progressive Disclosure + Chooser
 
 **Priority:** Medium
-**Status:** Open
+**Status:** Closed
 **Date Created:** 2025-12-12
 **Assigned To:** TBD
 

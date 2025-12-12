@@ -15,9 +15,10 @@ interface ConversationStep {
 
 interface ConversationWindowProps {
   onClose: () => void;
+  bottomOffsetClass?: string;
 }
 
-export default function ConversationWindow({ onClose }: ConversationWindowProps) {
+export default function ConversationWindow({ onClose, bottomOffsetClass = 'bottom-6' }: ConversationWindowProps) {
   const [currentStep, setCurrentStep] = useState<'name' | 'phone' | 'message' | 'confirmation' | 'followup'>('name');
   const [isTyping, setIsTyping] = useState(true);
   const [conversation, setConversation] = useState<ConversationStep[]>([]);
@@ -297,7 +298,13 @@ export default function ConversationWindow({ onClose }: ConversationWindowProps)
   }, []);
 
   return (
-    <div className="fixed inset-x-3 top-4 bottom-24 z-50 flex max-w-full flex-col rounded-2xl border border-brand-black/10 bg-white shadow-2xl lg:left-auto lg:right-6 lg:top-auto lg:bottom-6 lg:h-[600px] lg:w-[400px]">
+    <div
+      className={[
+        'fixed inset-x-3 top-4 z-50 flex max-w-full flex-col rounded-2xl border border-brand-black/10 bg-white shadow-2xl',
+        bottomOffsetClass,
+        'lg:left-auto lg:right-6 lg:top-auto lg:bottom-6 lg:h-[600px] lg:w-[400px]',
+      ].join(' ')}
+    >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-brand-black/10 bg-gradient-to-r from-brand-mango to-brand-gold p-4">
         <div className="flex items-center gap-3">

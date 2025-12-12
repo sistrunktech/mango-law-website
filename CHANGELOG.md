@@ -7,13 +7,15 @@
 - Remove duplicate mobile bottom CTA bar and clean up mobile spacing (`src/components/Layout.tsx`).
 - Calm/compact the checkpoint “help now” sticky banner for mobile (prevents phone wrapping and avoids loud alert styling) (`src/components/EmergencyBanner.tsx`).
 - Fix mobile chat window overflow/cut-off and improve long-text wrapping (`src/components/chat/ConversationWindow.tsx`, `src/components/chat/ChatBubble.tsx`).
+- Add floating chat progressive disclosure + chooser (Chat / Call / Consult) and wire lead modal open tracking (`src/components/ChatIntakeLauncher.tsx`, `src/lib/analytics.ts`).
 - Correct office vs direct phone usage across UI + SEO and centralize constants:
   - Office/main line: `(740) 602-2155`
   - Direct (Nick): `(740) 417-6191`
   - (`src/lib/contactInfo.ts`, `src/lib/seo.tsx`)
+- Fix Bolt publish failures by renaming brand asset filenames to ASCII-safe names (`public/images/brand/`).
 - Documentation updates:
   - Add “Do Not Swap” phone mapping and CTA tracking notes (`docs/OPERATIONS.md`)
-  - Close logo-generation ticket and add follow-up tickets for floating chat progressive disclosure + favicon PNGs (`docs/TROUBLE-TICKETS.md`)
+  - Close logo-generation and floating-chat tickets; keep favicon PNGs ticket open (`docs/TROUBLE-TICKETS.md`)
   - Remove stale Netlify/Vercel mention in generated handoff docs (`src/lib/handoff/documentGenerator.ts`)
 
 ## 2025-12-08 (Evening Update)
