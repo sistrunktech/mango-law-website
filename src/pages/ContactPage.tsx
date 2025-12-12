@@ -2,20 +2,21 @@ import ContactForm from '../components/ContactForm';
 import PageHero from '../components/PageHero';
 import LocationBlock from '../components/LocationBlock';
 import { SEO } from '../lib/seo';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function ContactPage() {
   return (
     <>
       <SEO
         title="Contact Mango Law LLC | Delaware, OH Criminal Defense Attorney"
-        description="Schedule a consultation with experienced criminal defense attorney Dominic Mango. Located at 46 W. Winter Street, Delaware, OH. Call (740) 417-6191 or email office@mango.law."
+        description={`Schedule a consultation with experienced criminal defense attorney Dominic Mango. Located at 46 W. Winter Street, Delaware, OH. Call ${OFFICE_PHONE_DISPLAY} or email office@mango.law.`}
       />
       <PageHero
         eyebrow="Contact"
         title="Schedule a consult with Mango Law."
         description="Share a few details and we’ll respond promptly. For urgent matters, call the office."
         ctaLabel="Call the office"
-        ctaHref="tel:7404176191"
+        ctaHref={`tel:${OFFICE_PHONE_TEL}`}
         variant="light"
       />
 

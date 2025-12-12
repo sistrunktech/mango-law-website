@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Home, Search, Phone, ArrowLeft } from 'lucide-react';
 import MangoIcon from '../components/MangoIcon';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function NotFoundPage() {
   return (
@@ -103,7 +104,15 @@ export default function NotFoundPage() {
 
         <div className="flex items-center justify-center gap-2 text-slate-300 text-sm">
           <Search className="w-4 h-4" />
-          <p>Need immediate help? Call us at <a href="tel:740-201-1444" className="text-[#E8A33C] hover:text-[#FFB84D] font-semibold">(740) 201-1444</a></p>
+          <p>
+            Need immediate help? Call the office at{' '}
+            <a
+              href={`tel:${OFFICE_PHONE_TEL}`}
+              className="text-[#E8A33C] hover:text-[#FFB84D] font-semibold"
+            >
+              {OFFICE_PHONE_DISPLAY}
+            </a>
+          </p>
         </div>
       </div>
     </div>

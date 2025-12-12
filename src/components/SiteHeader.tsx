@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, MessageCircle } from 'lucide-react';
+import { Link, NavLink } from 'react-router-dom';
+import { Menu, X, Phone } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import type { LeadSource } from './LeadCaptureModal';
 
-const OFFICE_PHONE = '(740) 417-6191';
-const CELL_PHONE = '(740) 602-2155';
+interface SiteHeaderProps {
+  onOpenLeadModal?: (trigger: LeadSource) => void;
+}
 
-export default function SiteHeader() {
+export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const isHome = location.pathname === '/';
-  const logoSrc = isHome
-    ? '/images/brand/mango-logo-tagline-cropped.png'
-    : '/images/brand/mango-logo-white-cropped.png';
+  const logoSrc = '/images/brand/mango-logo-tagline-cropped.png';
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
@@ -29,58 +28,15 @@ export default function SiteHeader() {
         'relative z-50 transition-all lg:sticky lg:top-0 lg:z-50',
         isScrolled
           ? [
-              'lg:shadow-lg lg:backdrop-blur-sm',
-              isHome ? 'lg:bg-white/95' : 'lg:bg-brand-black/95',
+              'lg:border-b lg:shadow-sm lg:backdrop-blur-sm',
+              'lg:bg-white/95 lg:border-brand-black/10',
             ].join(' ')
           : '',
       ].join(' ')}
       role="banner"
     >
-      {/* Top bar - Forest green accent */}
-      <div className="bg-brand-leaf">
-        <div
-          className={`container flex items-center justify-between py-2 transition-all ${isScrolled ? 'lg:py-1' : ''}`}
-        >
-          {/* Phone numbers */}
-          <div className="flex items-center gap-4 sm:gap-6">
-            <a
-              href={`tel:${OFFICE_PHONE.replace(/\D/g, '')}`}
-              className="flex items-center gap-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
-            >
-              <Phone className="h-4 w-4" />
-              <span className="hidden xs:inline text-xs opacity-80">Office:</span>
-              <span>{OFFICE_PHONE}</span>
-            </a>
-            <div className="h-4 w-px bg-white/30 hidden sm:block" />
-            <a
-              href={`tel:${CELL_PHONE.replace(/\D/g, '')}`}
-              className="flex items-center gap-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
-            >
-              <Phone className="h-4 w-4" />
-              <span className="hidden xs:inline text-xs opacity-80">Direct:</span>
-              <span>{CELL_PHONE}</span>
-            </a>
-          </div>
-
-          {/* Right side - chat button */}
-          <button
-            type="button"
-            className="flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-sm font-medium text-white transition-all hover:bg-white/30"
-            aria-label="Open chat"
-          >
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            <span className="hidden sm:inline">Chat with us</span>
-          </button>
-        </div>
-      </div>
-
       {/* Main navigation bar */}
-      <div
-        className={[
-          isHome ? 'bg-brand-offWhite' : 'bg-brand-black',
-          isHome ? 'border-b border-brand-black/10' : '',
-        ].join(' ')}
-      >
+      <div className="bg-brand-offWhite border-b border-brand-black/10">
         <div
           className={`container flex items-center justify-between py-4 transition-all ${isScrolled ? 'lg:py-2' : ''}`}
         >
@@ -90,7 +46,7 @@ export default function SiteHeader() {
               src={logoSrc}
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
               className={`h-14 w-auto transition-all hover:opacity-90 ${isScrolled ? 'lg:h-12' : ''}`}
-              loading="lazy"
+              loading="eager"
             />
           </Link>
 
@@ -98,7 +54,7 @@ export default function SiteHeader() {
           <nav className="hidden items-center gap-1 lg:flex">
             {navLinks.map((link) => {
               if (link.label === 'Practice Areas') {
-                return <MegaMenu key="practice-areas-mega" variant={isHome ? 'light' : 'dark'} />;
+                return <MegaMenu key="practice-areas-mega" variant="light" />;
               }
               return (
                 <NavLink
@@ -108,9 +64,7 @@ export default function SiteHeader() {
                     'px-4 py-2 text-sm font-medium transition-colors',
                     isActive
                       ? 'text-brand-mango'
-                      : isHome
-                        ? 'text-brand-black/70 hover:text-brand-mango'
-                        : 'text-brand-offWhite/80 hover:text-brand-mango',
+                      : 'text-brand-black/70 hover:text-brand-mango',
                   ].join(' ')}
                 >
                   {link.label}
@@ -120,13 +74,43 @@ export default function SiteHeader() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden items-center gap-4 lg:flex">
-            <Link
-              to="/contact"
+          <div className="hidden items-center gap-5 lg:flex">
+            <a
+              href={`tel:${OFFICE_PHONE_TEL}`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black/80 hover:text-brand-mango"
+              data-cta="header_call"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              {OFFICE_PHONE_DISPLAY}
+            </a>
+            <button
+              type="button"
               className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black transition-all hover:bg-brand-gold"
+              data-cta="header_free_consult"
+              onClick={() => onOpenLeadModal?.('header_cta')}
             >
               Free Consultation
-            </Link>
+            </button>
+          </div>
+
+          {/* Mobile phone + consult */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <a
+              href={`tel:${OFFICE_PHONE_TEL}`}
+              className="inline-flex items-center justify-center rounded-lg border border-brand-black/10 bg-white px-3 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
+              aria-label="Call the office"
+              data-cta="mobile_header_call"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-2 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
+              onClick={() => onOpenLeadModal?.('header_cta')}
+              data-cta="mobile_header_free_consult"
+            >
+              Consult
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -135,12 +119,7 @@ export default function SiteHeader() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className={[
-              'inline-flex items-center justify-center rounded-lg p-2 transition-colors lg:hidden',
-              isHome
-                ? 'text-brand-black hover:bg-brand-black/5'
-                : 'text-brand-offWhite hover:bg-brand-offWhite/10',
-            ].join(' ')}
+            className="inline-flex items-center justify-center rounded-lg p-2 text-brand-black transition-colors hover:bg-brand-black/5 lg:hidden"
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -153,7 +132,7 @@ export default function SiteHeader() {
             open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0',
           ].join(' ')}
         >
-          <div className={`${isHome ? 'border-t border-brand-black/10' : 'border-t border-brand-offWhite/10'} pb-4`}>
+          <div className="border-t border-brand-black/10 pb-4">
             <div className="container flex flex-col gap-1 pt-2">
               {navLinks.map((link) => (
                 <NavLink
@@ -165,39 +144,35 @@ export default function SiteHeader() {
                       'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
                       isActive
                         ? 'bg-brand-mango/20 text-brand-mango'
-                        : isHome
-                          ? 'text-brand-black hover:bg-brand-black/5'
-                          : 'text-brand-offWhite hover:bg-brand-offWhite/5',
+                        : 'text-brand-black hover:bg-brand-black/5',
                     ].join(' ')
                   }
                 >
                   {link.label}
                 </NavLink>
               ))}
-              <div className={`mt-4 flex flex-col gap-3 ${isHome ? 'border-t border-brand-black/10' : 'border-t border-brand-offWhite/10'} pt-4`}>
+              <div className="mt-4 flex flex-col gap-3 border-t border-brand-black/10 pt-4">
                 <a
-                  href={`tel:${OFFICE_PHONE.replace(/\D/g, '')}`}
-                  className={`flex items-center gap-2 px-4 text-sm font-medium ${isHome ? 'text-brand-black' : 'text-brand-offWhite'}`}
+                  href={`tel:${OFFICE_PHONE_TEL}`}
+                  className="flex items-center gap-2 px-4 text-sm font-medium text-brand-black"
+                  data-cta="mobile_menu_call"
                 >
                   <Phone className="h-4 w-4 text-brand-mango" />
-                  <span className="text-xs opacity-70">Office:</span>
-                  {OFFICE_PHONE}
+                  <span className="text-xs opacity-70">Call:</span>
+                  {OFFICE_PHONE_DISPLAY}
                 </a>
-                <a
-                  href={`tel:${CELL_PHONE.replace(/\D/g, '')}`}
-                  className={`flex items-center gap-2 px-4 text-sm font-medium ${isHome ? 'text-brand-black' : 'text-brand-offWhite'}`}
-                >
-                  <Phone className="h-4 w-4 text-brand-mango" />
-                  <span className="text-xs opacity-70">Direct:</span>
-                  {CELL_PHONE}
-                </a>
-                <Link
-                  to="/contact"
-                  onClick={() => setOpen(false)}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    onOpenLeadModal?.('mobile_menu');
+                  }}
                   className="mx-4 rounded-lg bg-brand-mango px-5 py-3 text-center text-sm font-bold text-brand-black"
+                  data-cta="mobile_menu_free_consult"
+                  aria-label="Open free consultation form"
                 >
                   Free Consultation
-                </Link>
+                </button>
               </div>
             </div>
           </div>

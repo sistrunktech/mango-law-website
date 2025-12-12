@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import { SEO, attorneySchema } from '../lib/seo';
+import { DIRECT_PHONE_DISPLAY, DIRECT_PHONE_TEL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function AboutPage() {
   return (
@@ -40,18 +41,18 @@ export default function AboutPage() {
                   <p className="text-brand-black/70 font-medium">Criminal Defense Attorney</p>
                   <div className="flex flex-col gap-3 pt-3 border-t border-brand-black/10">
                     <a
-                      href="tel:7404176191"
+                      href={`tel:${OFFICE_PHONE_TEL}`}
                       className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
                     >
                       <span className="text-lg">📞</span>
-                      <span className="font-semibold">(740) 417-6191 (Office)</span>
+                      <span className="font-semibold">{OFFICE_PHONE_DISPLAY} (Office)</span>
                     </a>
                     <a
-                      href="tel:7406022155"
+                      href={`tel:${DIRECT_PHONE_TEL}`}
                       className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
                     >
                       <span className="text-lg">📞</span>
-                      <span className="font-semibold">(740) 602-2155</span>
+                      <span className="font-semibold">{DIRECT_PHONE_DISPLAY} (Direct)</span>
                     </a>
                     <a
                       href="mailto:office@mango.law"
@@ -173,7 +174,7 @@ export default function AboutPage() {
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
         secondaryLabel="Call the office"
-        secondaryHref="tel:7404176191"
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );

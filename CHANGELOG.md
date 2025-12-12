@@ -250,7 +250,7 @@
 ### Frontend & Content
 - Replaced placeholder attorney photos with production headshots (`nick-mango-hero.jpg`, `nick-mango-01.jpg`, `geoff-spall-01.jpg`) and wired Nick’s hero/About images to avoid cropping issues.
 - Standardized logo usage: header uses `mango-logo-horizontal.svg`, footer uses `mango-logo-vertical.svg`; removed duplicate gold separator bar and kept gradient accent only.
-- Updated contact details to real numbers (office `740-417-6191`, cell `740-602-2155`) across header, CTA, and About.
+- Updated contact details to real numbers (office `740-602-2155`, direct `740-417-6191`) across header, CTA, and About.
 
 ### Image/OG Pipeline
 - Added fal.ai + Supabase OG pipeline (`plugins/vite-og-plugin.ts`) that generates route-specific OG images at build time when `FAL_KEY` and Supabase service-role envs are present.

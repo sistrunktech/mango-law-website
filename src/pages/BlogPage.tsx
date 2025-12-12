@@ -5,6 +5,7 @@ import PageHero from '../components/PageHero';
 import BlogSidebar from '../components/BlogSidebar';
 import CTASection from '../components/CTASection';
 import { blogPosts } from '../data/blogPosts';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 const categories = [
   'All Posts',
@@ -154,8 +155,8 @@ export default function BlogPage() {
         body="Don't wait to protect your rights. Contact us today for a confidential consultation about your case."
         primaryLabel="Schedule Consultation"
         primaryHref="/contact"
-        secondaryLabel="Call (740) 417-6191"
-        secondaryHref="tel:7404176191"
+        secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );

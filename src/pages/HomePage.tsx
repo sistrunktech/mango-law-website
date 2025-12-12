@@ -8,6 +8,7 @@ import CTASection from '../components/CTASection';
 import LocationBlock from '../components/LocationBlock';
 import ContactForm from '../components/ContactForm';
 import { SEO, localBusinessSchema } from '../lib/seo';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 const whyChooseUs = [
   {
@@ -47,7 +48,7 @@ export default function HomePage() {
         description="DUI/OVI & Criminal Defense Attorney serving Delaware & Franklin Counties, OH"
         ctaLabel="Schedule a Case Review"
         ctaHref="/contact"
-        phoneNumber="(740) 417-6191"
+        phoneNumber={OFFICE_PHONE_DISPLAY}
       />
 
       {/* Why Choose Us Section */}
@@ -166,7 +167,7 @@ export default function HomePage() {
               {/* Contact info cards */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <a
-                  href="tel:7404176191"
+                  href={`tel:${OFFICE_PHONE_TEL}`}
                   className="group card card-interactive flex items-center gap-4 p-5"
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-mango/10 transition-all group-hover:bg-brand-mango/20 group-hover:scale-110">
@@ -174,7 +175,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-brand-black/60">Call us</p>
-                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mango">(740) 417-6191</p>
+                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mango">{OFFICE_PHONE_DISPLAY}</p>
                   </div>
                 </a>
                 <a
@@ -205,8 +206,8 @@ export default function HomePage() {
         body="Fast-moving situations deserve prompt, informed action. Schedule a consult or call to discuss your options."
         primaryLabel="Free Consultation"
         primaryHref="/contact"
-        secondaryLabel="(740) 417-6191"
-        secondaryHref="tel:7404176191"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );

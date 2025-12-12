@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { navLinks, practiceAreaLinks } from '../data/navigation';
+import { DIRECT_PHONE_DISPLAY, DIRECT_PHONE_TEL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function Footer() {
   return (
@@ -30,7 +31,7 @@ export default function Footer() {
             {/* Contact info */}
             <div className="space-y-3 pt-2">
               <a
-                href="tel:7404176191"
+                href={`tel:${OFFICE_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
@@ -38,11 +39,11 @@ export default function Footer() {
                 </div>
                 <div>
                   <div className="text-xs text-brand-offWhite/60">Office</div>
-                  <div>(740) 417-6191</div>
+                  <div>{OFFICE_PHONE_DISPLAY}</div>
                 </div>
               </a>
               <a
-                href="tel:7406022155"
+                href={`tel:${DIRECT_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
@@ -50,7 +51,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <div className="text-xs text-brand-offWhite/60">Direct</div>
-                  <div>(740) 602-2155</div>
+                  <div>{DIRECT_PHONE_DISPLAY}</div>
                 </div>
               </a>
               <a

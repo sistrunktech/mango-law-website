@@ -117,7 +117,7 @@ The information provided in this post is for general guidance only and does not 
 
 If you've been charged with OVI in Delaware or Franklin County, the stakes are too high to face alone. At Mango Law, we've successfully defended numerous OVI cases and understand local courts, prosecutors, and procedures.
 
-**Call (740) 417-6191** today for a free consultation.`,
+**Call (740) 602-2155** today for a free consultation.`,
     category: 'OVI/DUI Defense',
     date: '2024-12-01',
     author: 'Dominic Mango',
@@ -2943,7 +2943,7 @@ Ohio DUI checkpoints are concentrated in predictable hotspots: downtown entertai
 
 Understanding where checkpoints occur and your legal rights when encountering them is essential. Always plan for safe transportation if you've been drinking, and if you're arrested at a checkpoint, contact an experienced OVI defense attorney immediately.
 
-If you've been charged with OVI at a checkpoint or need legal guidance, Mango Law provides aggressive defense representation in Delaware and Franklin County. Contact us at **(740) 417-6191** for a free case evaluation.
+If you've been charged with OVI at a checkpoint or need legal guidance, Mango Law provides aggressive defense representation in Delaware and Franklin County. Contact us at **(740) 602-2155** for a free case evaluation.
 
 ---
 

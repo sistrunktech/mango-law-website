@@ -111,7 +111,7 @@ export const localBusinessSchema = {
   url: 'https://mango.law',
   logo: 'https://mango.law/images/brand/mango-logo-primary-fullcolor.svg',
   image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
-  telephone: '+17404176191',
+  telephone: '+17406022155',
   email: 'office@mango.law',
   priceRange: '$$',
   address: {
@@ -255,7 +255,7 @@ export const attorneySchema = {
   url: 'https://mango.law/about',
   image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
   email: 'office@mango.law',
-  telephone: '+17404176191',
+  telephone: '+17406022155',
   alumniOf: {
     '@type': 'EducationalOrganization',
     name: 'The Ohio State University Moritz College of Law',

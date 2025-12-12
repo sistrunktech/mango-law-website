@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Phone, Calendar, Star } from 'lucide-react';
 import { practiceAreas } from '../data/practiceAreas';
 import ORCLabel from './ORCLabel';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function PracticeAreaCardGrid() {
   const oviArea = practiceAreas.find(area => area.practiceAreaKey === 'ovi-dui');
@@ -249,11 +250,11 @@ export default function PracticeAreaCardGrid() {
                   Request Consultation
                 </Link>
                 <a
-                  href="tel:7404176191"
+                  href={`tel:${OFFICE_PHONE_TEL}`}
                   className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
                 >
                   <Phone className="h-4 w-4" />
-                  (740) 417-6191
+                  {OFFICE_PHONE_DISPLAY}
                 </a>
               </div>
             </div>

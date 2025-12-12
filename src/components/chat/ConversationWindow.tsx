@@ -4,6 +4,7 @@ import ChatBubble from './ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import TextInput from './TextInput';
 import PhoneInput from './PhoneInput';
+import { DIRECT_PHONE_DISPLAY, OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 
 interface ConversationStep {
   id: string;
@@ -234,11 +235,11 @@ export default function ConversationWindow({ onClose }: ConversationWindowProps)
             <p className="font-semibold">Need immediate help?</p>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>(740) 602-2155 — Office</span>
+              <span>{OFFICE_PHONE_DISPLAY} — Office</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>(740) 417-6191 — Emergency</span>
+              <span>{DIRECT_PHONE_DISPLAY} — Direct (Nick)</span>
             </div>
           </div>
         </div>
@@ -264,7 +265,7 @@ export default function ConversationWindow({ onClose }: ConversationWindowProps)
       console.error('Chat submission error:', error);
       setIsTyping(false);
       setIsSubmitting(false);
-      setSubmissionError('We had trouble sending your message. Please call us directly at (740) 602-2155.');
+      setSubmissionError(`We had trouble sending your message. Please call us directly at ${OFFICE_PHONE_DISPLAY}.`);
 
       const errorMessage = (
         <div>
@@ -272,11 +273,11 @@ export default function ConversationWindow({ onClose }: ConversationWindowProps)
           <div className="space-y-2 text-xs">
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>(740) 602-2155 — Office</span>
+              <span>{OFFICE_PHONE_DISPLAY} — Office</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>(740) 417-6191 — Emergency</span>
+              <span>{DIRECT_PHONE_DISPLAY} — Direct (Nick)</span>
             </div>
           </div>
         </div>
@@ -296,7 +297,7 @@ export default function ConversationWindow({ onClose }: ConversationWindowProps)
   }, []);
 
   return (
-    <div className="fixed inset-x-3 top-4 bottom-24 z-50 flex flex-col rounded-2xl border border-brand-black/10 bg-white shadow-2xl lg:left-auto lg:right-6 lg:top-auto lg:bottom-6 lg:h-[600px] lg:w-[400px]">
+    <div className="fixed inset-x-3 top-4 bottom-24 z-50 flex max-w-full flex-col rounded-2xl border border-brand-black/10 bg-white shadow-2xl lg:left-auto lg:right-6 lg:top-auto lg:bottom-6 lg:h-[600px] lg:w-[400px]">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-brand-black/10 bg-gradient-to-r from-brand-mango to-brand-gold p-4">
         <div className="flex items-center gap-3">

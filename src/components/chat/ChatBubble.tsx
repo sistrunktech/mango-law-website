@@ -32,7 +32,7 @@ export default function ChatBubble({ message, sender, timestamp }: ChatBubblePro
           }`}
         >
           {typeof message === 'string' ? (
-            <p className="text-sm leading-relaxed">{message}</p>
+            <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">{message}</p>
           ) : (
             message
           )}

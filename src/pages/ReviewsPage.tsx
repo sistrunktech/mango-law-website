@@ -2,6 +2,7 @@ import TestimonialsList from '../components/TestimonialsList';
 import PageHero from '../components/PageHero';
 import ReviewsSidebar from '../components/ReviewsSidebar';
 import CTASection from '../components/CTASection';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function ReviewsPage() {
   return (
@@ -37,8 +38,8 @@ export default function ReviewsPage() {
         body="Join the clients who trusted Mango Law with their defense. Schedule a free consultation today."
         primaryLabel="Get Free Consultation"
         primaryHref="/contact"
-        secondaryLabel="Call (740) 417-6191"
-        secondaryHref="tel:7404176191"
+        secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );

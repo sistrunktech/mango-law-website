@@ -12,6 +12,7 @@ import type { DUICheckpoint } from '../data/checkpoints';
 import EmergencyBanner from '../components/EmergencyBanner';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -443,8 +444,8 @@ export default function DUICheckpointsPage() {
         body="If you've been charged with OVI/DUI, don't face it alone. Contact Mango Law for experienced defense representation."
         primaryLabel="Free Case Evaluation"
         primaryHref="/contact"
-        secondaryLabel="Call (740) 417-6191"
-        secondaryHref="tel:7404176191"
+        secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
 
       <LeadCaptureModal

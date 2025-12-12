@@ -1,8 +1,17 @@
 import { useState } from 'react';
 import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
+import { DIRECT_PHONE_DISPLAY, DIRECT_PHONE_TEL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
-type LeadSource = 'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific' | 'mobile_bottom_bar';
+export type LeadSource =
+  | 'emergency_banner'
+  | 'checkpoint_card'
+  | 'lead_magnet'
+  | 'exit_intent'
+  | 'hotspot_specific'
+  | 'header_cta'
+  | 'floating_chooser'
+  | 'mobile_menu';
 
 interface LeadCaptureModalProps {
   isOpen: boolean;
@@ -107,18 +116,20 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             <p className="mb-6 text-brand-black/70">We'll contact you within 24 hours. For immediate assistance:</p>
             <div className="space-y-2">
               <a
-                href="tel:7406022155"
+                href={`tel:${OFFICE_PHONE_TEL}`}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-white transition-all hover:bg-brand-leaf"
+                data-cta="lead_success_call_office"
               >
                 <Phone className="h-5 w-5" />
-                Office: (740) 602-2155
+                Office: {OFFICE_PHONE_DISPLAY}
               </a>
               <a
-                href="tel:7404176191"
+                href={`tel:${DIRECT_PHONE_TEL}`}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-brand-mango px-6 py-3 font-semibold text-brand-mango transition-all hover:bg-brand-mango hover:text-white"
+                data-cta="lead_success_call_direct"
               >
                 <Phone className="h-5 w-5" />
-                Emergency: (740) 417-6191
+                Direct (Nick): {DIRECT_PHONE_DISPLAY}
               </a>
             </div>
             <button
