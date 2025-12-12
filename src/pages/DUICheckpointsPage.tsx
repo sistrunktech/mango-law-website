@@ -11,11 +11,13 @@ import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } fr
 import type { DUICheckpoint } from '../data/checkpoints';
 import EmergencyBanner from '../components/EmergencyBanner';
 import LeadCaptureModal from '../components/LeadCaptureModal';
+import { getCheckpointAnnouncements, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 
 type ViewMode = 'upcoming' | 'all';
 
 export default function DUICheckpointsPage() {
   const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
+  const [announcements, setAnnouncements] = useState<CheckpointAnnouncement[]>([]);
   const [filteredCheckpoints, setFilteredCheckpoints] = useState<DUICheckpoint[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('all');
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<DUICheckpoint | null>(null);
@@ -41,6 +43,13 @@ export default function DUICheckpointsPage() {
     try {
       setLoading(true);
       setError(null);
+      try {
+        const announcementsData = await getCheckpointAnnouncements();
+        setAnnouncements(announcementsData);
+      } catch (e) {
+        console.warn('Unable to load checkpoint announcements (continuing):', e);
+        setAnnouncements([]);
+      }
       if (viewMode === 'upcoming') {
         const data = await getUpcomingCheckpoints();
         setCheckpoints(data);
@@ -52,6 +61,7 @@ export default function DUICheckpointsPage() {
       console.error('Failed to load checkpoints:', error);
       setError('Unable to load checkpoint data. Please try again later.');
       setCheckpoints([]);
+      setAnnouncements([]);
     } finally {
       setLoading(false);
     }
@@ -88,6 +98,8 @@ export default function DUICheckpointsPage() {
     setLeadModalCheckpointId(checkpointId);
     setIsLeadModalOpen(true);
   };
+
+  const pendingAnnouncements = announcements.filter((a) => a.status === 'pending_details');
 
   return (
     <>
@@ -237,8 +249,51 @@ export default function DUICheckpointsPage() {
             </div>
             <div className="text-sm text-brand-black/60">
               Showing {filteredCheckpoints.length} checkpoint{filteredCheckpoints.length !== 1 ? 's' : ''}
+              {pendingAnnouncements.length > 0
+                ? ` • ${pendingAnnouncements.length} pending announcement${pendingAnnouncements.length !== 1 ? 's' : ''}`
+                : ''}
             </div>
           </div>
+
+          {pendingAnnouncements.length > 0 && (
+            <div className="mb-8 rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
+              <div className="mb-3 text-sm font-semibold text-brand-black">
+                Pending checkpoint announcements (details to be announced)
+              </div>
+              <div className="space-y-3">
+                {pendingAnnouncements.slice(0, 8).map((a) => (
+                  <div key={a.id} className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="font-semibold text-brand-black">{a.title}</div>
+                      <span className="rounded-full bg-brand-mango/15 px-2.5 py-1 text-xs font-semibold text-brand-mango">
+                        Pending details
+                      </span>
+                    </div>
+                    <div className="mt-1 text-xs text-brand-black/60">
+                      {a.event_date ? `Event date: ${new Date(a.event_date).toLocaleDateString()}` : 'Event date: TBD'}
+                      {a.location_county ? ` • ${a.location_county} County` : ''}
+                      {a.location_city ? ` • ${a.location_city}` : ''}
+                    </div>
+                    {a.source_url && (
+                      <a
+                        href={a.source_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-2 inline-flex text-xs font-semibold text-brand-mango hover:text-brand-leaf"
+                      >
+                        View source →
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {pendingAnnouncements.length > 8 && (
+                <div className="mt-3 text-xs text-brand-black/60">
+                  Showing 8 of {pendingAnnouncements.length}. More will appear as details are confirmed.
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">

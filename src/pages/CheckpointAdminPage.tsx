@@ -6,6 +6,7 @@ import { ohioCounties, getStatusLabel, formatCheckpointDateRange } from '../data
 import GeocodingPreview from '../components/GeocodingPreview';
 import ScraperLogsViewer from '../components/ScraperLogsViewer';
 import AdminAuth from '../components/AdminAuth';
+import CheckpointAnnouncementsManager from '../components/admin/CheckpointAnnouncementsManager';
 
 export default function CheckpointAdminPage() {
   const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
@@ -146,6 +147,10 @@ export default function CheckpointAdminPage() {
 
         <div className="mb-8">
           <ScraperLogsViewer />
+        </div>
+
+        <div className="mb-8">
+          <CheckpointAnnouncementsManager />
         </div>
 
         {showForm && (

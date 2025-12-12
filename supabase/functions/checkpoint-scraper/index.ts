@@ -1,6 +1,8 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { scrapeOVICheckpoint } from './ovicheckpoint-scraper.ts';
 import { geocodeAddress, parseAddress } from './geocoding.ts';
+import { loadMasterRssSources, loadSeedSources } from './rss-sources.ts';
+import { scrapeRssSources, scrapeSeedSources } from './rss-scraper.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -13,6 +15,8 @@ interface ScraperStats {
   checkpointsNew: number;
   checkpointsUpdated: number;
   checkpointsSkipped: number;
+  announcementsFound: number;
+  announcementsUpserted: number;
   errors: Array<{ checkpoint: string; error: string }>;
 }
 
@@ -27,6 +31,8 @@ Deno.serve(async (req: Request) => {
     checkpointsNew: 0,
     checkpointsUpdated: 0,
     checkpointsSkipped: 0,
+    announcementsFound: 0,
+    announcementsUpserted: 0,
     errors: [],
   };
 
@@ -41,6 +47,10 @@ Deno.serve(async (req: Request) => {
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+    const requestBody = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
+    const mode = requestBody?.mode === 'discovery' ? 'discovery' : 'core';
+    const seedRow = typeof requestBody?.seedRow === 'number' ? requestBody.seedRow : undefined;
+
     const logId = crypto.randomUUID();
     const logStartTime = new Date().toISOString();
 
@@ -49,7 +59,7 @@ Deno.serve(async (req: Request) => {
       scraper_name: 'ovicheckpoint',
       status: 'partial',
       started_at: logStartTime,
-      metadata: { trigger: 'manual' },
+      metadata: { trigger: 'manual', mode, seedRow },
     });
 
     console.log('Starting OVICheckpoint.com scraper...');
@@ -66,13 +76,7 @@ Deno.serve(async (req: Request) => {
         const geocoded = await geocodeAddress(fullAddress, supabase, mapboxToken);
 
         if (!geocoded) {
-          console.warn(`Skipping checkpoint (no geocode): ${raw.title}`);
-          stats.checkpointsSkipped++;
-          stats.errors.push({
-            checkpoint: raw.title,
-            error: 'Geocoding failed',
-          });
-          continue;
+          console.warn(`Checkpoint has no geocode (still saving): ${raw.title}`);
         }
 
         const checkpointData = {
@@ -80,8 +84,8 @@ Deno.serve(async (req: Request) => {
           location_address: address,
           location_city: city,
           location_county: county,
-          latitude: geocoded.latitude,
-          longitude: geocoded.longitude,
+          latitude: geocoded?.latitude ?? null,
+          longitude: geocoded?.longitude ?? null,
           start_date: raw.startDate,
           end_date: raw.endDate,
           status: determineStatus(raw.startDate, raw.endDate),
@@ -120,6 +124,14 @@ Deno.serve(async (req: Request) => {
           stats.checkpointsNew++;
           console.log(`Inserted: ${raw.title}`);
         }
+
+        if (!geocoded) {
+          stats.checkpointsSkipped++;
+          stats.errors.push({
+            checkpoint: raw.title,
+            error: 'Geocoding failed (saved without coordinates)',
+          });
+        }
       } catch (error) {
         console.error(`Error processing checkpoint: ${raw.title}`, error);
         stats.errors.push({
@@ -129,9 +141,94 @@ Deno.serve(async (req: Request) => {
       }
     }
 
+    // RSS ingestion (announcements)
+    try {
+      if (mode === 'core') {
+        const sources = await loadMasterRssSources();
+        const results = await scrapeRssSources(sources, { maxSources: 25 });
+
+        for (const r of results) {
+          if (r.error) {
+            stats.errors.push({ checkpoint: `RSS: ${r.source.sourceName}`, error: r.error });
+            continue;
+          }
+          stats.announcementsFound += r.items.length;
+
+          for (const item of r.items.slice(0, 25)) {
+            const payload = {
+              title: item.title,
+              source_url: item.url,
+              source_name: r.source.sourceName,
+              announcement_date: item.publishedAt,
+              status: 'pending_details',
+              last_checked_at: new Date().toISOString(),
+              raw_text: item.summary,
+            };
+
+            const { error: upsertError } = await supabase
+              .from('dui_checkpoint_announcements')
+              .upsert(payload, { onConflict: 'source_url' });
+
+            if (upsertError) {
+              stats.errors.push({
+                checkpoint: `Announcement upsert: ${item.title}`,
+                error: upsertError.message,
+              });
+            } else {
+              stats.announcementsUpserted++;
+            }
+          }
+        }
+      } else {
+        const seeds = await loadSeedSources(seedRow);
+        const seedResults = await scrapeSeedSources(seeds, { maxUniqueUrls: 12 });
+
+        for (const r of seedResults) {
+          if (r.error) {
+            stats.errors.push({ checkpoint: `RSS seed ${r.seed.seedRow}: ${r.seed.sourceName}`, error: r.error });
+            continue;
+          }
+          stats.announcementsFound += r.items.length;
+
+          for (const item of r.items.slice(0, 10)) {
+            const payload = {
+              title: item.title,
+              source_url: item.url,
+              source_name: r.seed.sourceName,
+              announcement_date: item.publishedAt,
+              event_date: null,
+              location_city: r.seed.city,
+              location_county: r.seed.county,
+              status: 'pending_details',
+              last_checked_at: new Date().toISOString(),
+              raw_text: item.summary,
+            };
+
+            const { error: upsertError } = await supabase
+              .from('dui_checkpoint_announcements')
+              .upsert(payload, { onConflict: 'source_url' });
+
+            if (upsertError) {
+              stats.errors.push({
+                checkpoint: `Announcement upsert: ${item.title}`,
+                error: upsertError.message,
+              });
+            } else {
+              stats.announcementsUpserted++;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      stats.errors.push({
+        checkpoint: 'RSS ingestion',
+        error: e instanceof Error ? e.message : String(e),
+      });
+    }
+
     const duration = Date.now() - startTime;
-    const finalStatus = stats.errors.length === 0 ? 'success' :
-                       stats.checkpointsNew + stats.checkpointsUpdated > 0 ? 'partial' : 'failed';
+    const didWork = stats.checkpointsNew + stats.checkpointsUpdated + stats.announcementsUpserted > 0;
+    const finalStatus = stats.errors.length === 0 ? 'success' : didWork ? 'partial' : 'failed';
 
     await supabase
       .from('scraper_logs')
@@ -146,6 +243,10 @@ Deno.serve(async (req: Request) => {
         metadata: {
           trigger: 'manual',
           skipped: stats.checkpointsSkipped,
+          announcements_found: stats.announcementsFound,
+          announcements_upserted: stats.announcementsUpserted,
+          mode,
+          seedRow,
         },
       })
       .eq('id', logId);
