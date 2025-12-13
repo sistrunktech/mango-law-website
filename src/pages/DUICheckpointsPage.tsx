@@ -11,7 +11,7 @@ import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } fr
 import type { DUICheckpoint } from '../data/checkpoints';
 import EmergencyBanner from '../components/EmergencyBanner';
 import LeadCaptureModal from '../components/LeadCaptureModal';
-import { getCheckpointAnnouncements, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
+import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 type ViewMode = 'upcoming' | 'all';
@@ -106,7 +106,9 @@ export default function DUICheckpointsPage() {
     setIsLeadModalOpen(true);
   };
 
-  const pendingAnnouncements = announcements.filter((a) => a.status === 'pending_details');
+  const pendingAnnouncements = announcements.filter(
+    (a) => a.status === 'pending_details' && isAnnouncementFreshForPublic(a)
+  );
 
   return (
     <>

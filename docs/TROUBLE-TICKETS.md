@@ -270,7 +270,7 @@ Schema.org Validator reports errors on the homepage structured data (`LegalServi
 ## TICKET-009: Stale Pending DUI Checkpoint Announcements (Outdated Links)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
@@ -287,7 +287,7 @@ The public DUI checkpoints page (`/resources/dui-checkpoints`) shows "Pending ch
     - `event_date` (>= today - 1 day)
     - `start_date` (>= now - 24h)
     - `announcement_date` (>= now - 14 days)
-    - fallback: `created_at` (>= now - 14 days)
+    - fallback (only if `announcement_date` is missing): `created_at` (>= now - 14 days)
 
 #### Phase 1 (Durable)
 - Add explicit expiry semantics:
@@ -356,3 +356,18 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 ---
 
 *Add additional trouble tickets below using the same format*
+
+---
+
+## Collaboration Notes (Codex / Agents)
+
+**Goal:** keep the repo moving without requiring the site owner to use terminal or GitHub UI for routine work.
+
+**Rules**
+- One branch per ticket/intent (e.g., `codex/fix-schema-legalservice`).
+- One agent per branch at a time.
+- If a PR hits merge conflicts, the agent that owns the branch resolves and re-pushes (owner should not be required to do conflict resolution).
+
+**Before pushing**
+- Run the project checks (lint/test/build as applicable per `AGENTS.md`).
+- Include PR notes: Summary, Changes, Testing, Risk & rollback.
