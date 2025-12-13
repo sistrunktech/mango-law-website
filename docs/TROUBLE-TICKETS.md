@@ -150,7 +150,7 @@ Admin cannot sign in at `/admin/login`. Password reset is requested at `/admin/f
 ## TICKET-005: Public DUI Checkpoints Page Shows Seed/Demo Rows
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
@@ -163,6 +163,10 @@ Seed/demo rows exist in the production `dui_checkpoints` table.
 ### Fix
 - Clean production data by deleting seed rows from `dui_checkpoints` (preferred).
 - Keep the public page conservative: show only rows with a real `source_url` (mitigation).
+
+### Resolution notes
+- Deleted the seed batch created on `2025-12-09` (UTC) from production.
+- Verified scraper repopulates real rows from OVICheckpoint and geocoding populates `latitude/longitude` when Mapbox token is valid.
 
 ---
 

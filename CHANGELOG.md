@@ -9,6 +9,7 @@
 - Update OVICheckpoint scraper to ingest the authoritative WordPress JSON page and parse the TablePress checkpoint table (`supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts`).
 - Make the public checkpoints page hide seed/demo rows by requiring a non-null `source_url` (mitigation while production DB is cleaned) (`src/lib/checkpointService.ts`, `src/pages/DUICheckpointsPage.tsx`).
 - Document current operational blockers and mitigations (`docs/OPERATIONS.md`, `docs/TROUBLE-TICKETS.md`, `docs/HANDOFF_GLOSSARY.md`).
+- Ops: ensure Supabase Edge Function secrets include a valid `MAPBOX_PUBLIC_TOKEN` so the scraper can geocode and map markers appear (no code change).
 
 ## 2025-12-12
 

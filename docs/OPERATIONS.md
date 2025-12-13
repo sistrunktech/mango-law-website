@@ -97,6 +97,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
   - **Confirmed checkpoints**: Scraper pulls from OVICheckpoint.com, geocodes addresses, and stores in `dui_checkpoints`.
   - **Pending announcements**: RSS ingestion stores “details pending” items in `dui_checkpoint_announcements` (list-only; no map pins).
 - **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
+- **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `VITE_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints will be inserted without `latitude/longitude` and the map will show few/no markers.
 - **Scraper Schedule**: Runs daily at 2:00 AM EST via pg_cron. Manual trigger available in admin dashboard.
 
 ### RSS Source Config (CSV)
