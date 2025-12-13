@@ -22,6 +22,41 @@ export interface CheckpointAnnouncement {
   updated_at: string;
 }
 
+function parseIsoDate(value: unknown): Date | null {
+  if (typeof value !== 'string' || !value.trim()) return null;
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+function parseDateOnlyToUtc(value: unknown): Date | null {
+  if (typeof value !== 'string' || !value.trim()) return null;
+  // Expect YYYY-MM-DD
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+  const d = new Date(`${value}T00:00:00.000Z`);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+export function isAnnouncementFreshForPublic(announcement: CheckpointAnnouncement, now: Date = new Date()): boolean {
+  if (announcement.status !== 'pending_details') return true;
+
+  const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+
+  const eventDate = parseDateOnlyToUtc(announcement.event_date);
+  const startDate = parseIsoDate(announcement.start_date);
+  const announcementDate = parseIsoDate(announcement.announcement_date);
+  const createdAt = parseIsoDate(announcement.created_at);
+
+  if (eventDate && eventDate >= oneDayAgo) return true;
+  if (startDate && startDate >= oneDayAgo) return true;
+  if (announcementDate && announcementDate >= fourteenDaysAgo) return true;
+
+  // Only fall back to created_at when we don't have an upstream announcement date.
+  if (!announcementDate && createdAt && createdAt >= fourteenDaysAgo) return true;
+
+  return false;
+}
+
 function normalizeString(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   const trimmed = value.trim();
