@@ -314,7 +314,7 @@ The public DUI checkpoints page (`/resources/dui-checkpoints`) shows "Pending ch
 ## TICKET-010: Faster Crawl / "Instant Indexing" for SPA (Vite + React)
 
 **Priority:** Medium  
-**Status:** Open  
+**Status:** Mitigated  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
@@ -352,6 +352,11 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 ### Verification
 - Sitemap submitted in GSC and contains all canonical blog URLs.
 - "URL inspection" in GSC reflects faster discovery for new posts compared to current baseline.
+
+### Current MVP implementation
+- `robots.txt` already references `https://mango.law/sitemap.xml`.
+- `npm run build` now generates `dist/sitemap.xml` via `scripts/generate-sitemap.mjs` (runs in `postbuild`).
+- The sitemap includes all static marketing routes plus `/blog/:slug` entries sourced from `src/data/blogPosts.ts`.
 
 ---
 
