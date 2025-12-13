@@ -245,6 +245,7 @@ export const localBusinessSchema = {
       jobTitle: 'Criminal Defense Attorney',
       url: 'https://mango.law/about',
       image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
+      worksFor: { '@id': 'https://mango.law/#legalservice' },
       hasOccupation: {
         '@type': 'Occupation',
         name: 'Attorney',
@@ -276,6 +277,7 @@ export const attorneySchema = {
   image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
   email: 'office@mango.law',
   telephone: '+17406022155',
+  worksFor: { '@id': 'https://mango.law/#legalservice' },
   hasOccupation: {
     '@type': 'Occupation',
     name: 'Attorney',
