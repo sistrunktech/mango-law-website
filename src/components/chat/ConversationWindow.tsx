@@ -5,6 +5,7 @@ import TypingIndicator from './TypingIndicator';
 import TextInput from './TextInput';
 import PhoneInput from './PhoneInput';
 import { DIRECT_PHONE_DISPLAY, OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
+import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
 
 interface ConversationStep {
   id: string;
@@ -206,11 +207,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
     // Submit to backend
     try {
-      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat-intake`;
+      const apiUrl = `${supabaseUrl}/functions/v1/chat-intake`;
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer ${supabaseAnonKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({

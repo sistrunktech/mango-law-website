@@ -1,7 +1,19 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const PROD_HOSTS = new Set(['mango.law', 'www.mango.law']);
+const PROD_SUPABASE_URL = 'https://rgucewewminsevbjgcad.supabase.co';
+// NOTE: Supabase anon keys are public (shipped to the browser by design). This fallback prevents prod breakage if Bolt env vars drift.
+const PROD_SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJndWNld2V3bWluc2V2YmpnY2FkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ4Nzg0NjksImV4cCI6MjA4MDQ1NDQ2OX0.M3-pUdV9RpDTlaimO0AGHpPED0xf8Nxgl4L0VoUHpXw';
+
+const envSupabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const envSupabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+
+const isProdHost =
+  typeof window !== 'undefined' && PROD_HOSTS.has(window.location.hostname);
+
+export const supabaseUrl = isProdHost ? PROD_SUPABASE_URL : envSupabaseUrl;
+export const supabaseAnonKey = isProdHost ? PROD_SUPABASE_ANON_KEY : envSupabaseAnonKey;
 
 if (!supabaseUrl || !supabaseAnonKey) {
   // Fail fast in dev if env is missing.

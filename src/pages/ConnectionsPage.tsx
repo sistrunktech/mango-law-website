@@ -16,7 +16,7 @@ import {
   ShieldCheck,
   ShieldAlert
 } from 'lucide-react';
-import { supabase } from '../lib/supabaseClient';
+import { supabase, supabaseUrl } from '../lib/supabaseClient';
 
 interface GoogleIntegration {
   id: string;
@@ -205,7 +205,7 @@ export default function ConnectionsPage() {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/google-oauth-connect`,
+        `${supabaseUrl}/functions/v1/google-oauth-connect`,
         {
           method: 'POST',
           headers: {
@@ -243,7 +243,7 @@ export default function ConnectionsPage() {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/google-access-check`,
+        `${supabaseUrl}/functions/v1/google-access-check`,
         {
           method: 'POST',
           headers: {
@@ -338,7 +338,7 @@ export default function ConnectionsPage() {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sync-google-reviews`,
+        `${supabaseUrl}/functions/v1/sync-google-reviews`,
         {
           method: 'POST',
           headers: {
@@ -429,6 +429,9 @@ export default function ConnectionsPage() {
           <h2 className="text-2xl font-bold text-white mb-2">Google Integrations</h2>
           <p className="text-slate-400">
             Connect your Google accounts to enable review syncing, analytics, and more.
+          </p>
+          <p className="mt-2 text-xs text-slate-500">
+            Supabase project: <span className="font-mono text-slate-300">{supabaseUrl}</span>
           </p>
         </div>
 

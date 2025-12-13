@@ -117,11 +117,13 @@ Deno.serve(async (req: Request) => {
 
     const googleClientId = Deno.env.get('GOOGLE_CLIENT_ID');
     const googleClientSecret = Deno.env.get('GOOGLE_CLIENT_SECRET');
-    // Match google-oauth-connect redirectUri to avoid cross-project/env drift.
-    const supabaseUrlForRedirect = Deno.env.get('SUPABASE_URL')?.replace(/\/$/, '');
-    const redirectUri = supabaseUrlForRedirect
-      ? `${supabaseUrlForRedirect}/functions/v1/google-oauth-callback`
-      : 'https://rgucewewminsevbjgcad.supabase.co/functions/v1/google-oauth-callback';
+    // Derive from request origin to prevent cross-project/env drift.
+    // Supabase edge runtime may report `http://` internally; always use `https://` for Google OAuth.
+    const requestOrigin = new URL(req.url).origin;
+    const origin = requestOrigin.startsWith('http://')
+      ? requestOrigin.replace('http://', 'https://')
+      : requestOrigin;
+    const redirectUri = `${origin}/functions/v1/google-oauth-callback`;
 
     if (!googleClientId || !googleClientSecret) {
       throw new Error('Google OAuth credentials not configured');

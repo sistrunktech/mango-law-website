@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Activity, RefreshCw, CheckCircle, AlertTriangle, XCircle, Loader2 } from 'lucide-react';
-import { supabase } from '../lib/supabaseClient';
+import { supabase, supabaseAnonKey, supabaseUrl } from '../lib/supabaseClient';
 
 interface ScraperLog {
   id: string;
@@ -57,11 +57,11 @@ export default function ScraperLogsViewer() {
 
     setTriggering(true);
     try {
-      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/checkpoint-scraper`;
+      const functionUrl = `${supabaseUrl}/functions/v1/checkpoint-scraper`;
       const response = await fetch(functionUrl, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer ${supabaseAnonKey}`,
           'Content-Type': 'application/json',
         },
       });
