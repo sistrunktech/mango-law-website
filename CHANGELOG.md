@@ -15,6 +15,7 @@
   - Direct (Nick): `(740) 417-6191`
   - (`src/lib/contactInfo.ts`, `src/lib/seo.tsx`)
 - Fix Bolt publish failures by renaming/removing files with unsupported filename characters (spaces/Unicode) (`public/images/brand/`, `mango-logo-options-1-new.zip`).
+- Fix production `mango.law` pointing at the wrong Supabase project by forcing runtime to use the correct prod project (`rgucewewminsevbjgcad`) for Supabase client + function calls (`src/lib/supabaseClient.ts`, `src/pages/ConnectionsPage.tsx`, `src/components/ScraperLogsViewer.tsx`, `src/components/chat/ConversationWindow.tsx`).
 - Documentation updates:
   - Add “Do Not Swap” phone mapping and CTA tracking notes (`docs/OPERATIONS.md`)
   - Close logo-generation and floating-chat tickets; keep favicon PNGs ticket open (`docs/TROUBLE-TICKETS.md`)
