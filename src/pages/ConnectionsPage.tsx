@@ -9,7 +9,12 @@ import {
   RefreshCw,
   ExternalLink,
   Clock,
-  AlertCircle
+  AlertCircle,
+  ChevronDown,
+  ChevronUp,
+  Copy,
+  ShieldCheck,
+  ShieldAlert
 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 
@@ -55,6 +60,71 @@ const INTEGRATION_INFO = {
 
 type IntegrationType = keyof typeof INTEGRATION_INFO;
 
+type IntegrationStatus = 'not_connected' | 'needs_setup' | 'healthy' | 'error';
+
+type AccessCheckState =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; checkedAt: string; data: Record<string, unknown> }
+  | { status: 'error'; checkedAt: string; message: string };
+
+const ACCESS_ROLE_COPY: Record<IntegrationType, { product: string; role: string; link: string }> = {
+  business_profile: {
+    product: 'Google Business Profile',
+    role: 'Manager',
+    link: 'https://business.google.com/',
+  },
+  analytics: {
+    product: 'Google Analytics (GA4)',
+    role: 'Viewer (minimum) or Editor (recommended)',
+    link: 'https://analytics.google.com/',
+  },
+  search_console: {
+    product: 'Google Search Console',
+    role: 'Full user',
+    link: 'https://search.google.com/search-console',
+  },
+  tag_manager: {
+    product: 'Google Tag Manager',
+    role: 'Read (minimum) or Publish (recommended)',
+    link: 'https://tagmanager.google.com/',
+  },
+};
+
+function getIntegrationStatus(type: IntegrationType, integration?: GoogleIntegration): IntegrationStatus {
+  if (!integration || !integration.is_active) return 'not_connected';
+
+  const tokenExpiresAt = integration.token_expires_at ? new Date(integration.token_expires_at) : null;
+  if (tokenExpiresAt && tokenExpiresAt.getTime() <= Date.now()) return 'error';
+
+  if (type === 'business_profile') {
+    if (!integration.location_id) return 'needs_setup';
+    return 'healthy';
+  }
+
+  const metadata = integration.metadata || {};
+  const hasKnownId =
+    Boolean((metadata as any).propertyId) ||
+    Boolean((metadata as any).siteUrl) ||
+    Boolean((metadata as any).containerId);
+
+  return hasKnownId ? 'healthy' : 'needs_setup';
+}
+
+function statusPill(status: IntegrationStatus) {
+  switch (status) {
+    case 'healthy':
+      return { label: 'Connected (healthy)', icon: ShieldCheck, className: 'bg-green-900/30 text-green-300' };
+    case 'needs_setup':
+      return { label: 'Connected (needs setup)', icon: AlertCircle, className: 'bg-amber-900/30 text-amber-300' };
+    case 'error':
+      return { label: 'Error (reconnect)', icon: ShieldAlert, className: 'bg-red-900/30 text-red-300' };
+    case 'not_connected':
+    default:
+      return { label: 'Not connected', icon: XCircle, className: 'bg-slate-800 text-slate-400' };
+  }
+}
+
 export default function ConnectionsPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -63,6 +133,18 @@ export default function ConnectionsPage() {
   const [loadingIntegrations, setLoadingIntegrations] = useState(true);
   const [connecting, setConnecting] = useState<string | null>(null);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [guideOpen, setGuideOpen] = useState<Record<IntegrationType, boolean>>({
+    business_profile: false,
+    analytics: false,
+    search_console: false,
+    tag_manager: false,
+  });
+  const [accessChecks, setAccessChecks] = useState<Record<IntegrationType, AccessCheckState>>({
+    business_profile: { status: 'idle' },
+    analytics: { status: 'idle' },
+    search_console: { status: 'idle' },
+    tag_manager: { status: 'idle' },
+  });
 
   useEffect(() => {
     if (!loading && !user) {
@@ -145,6 +227,79 @@ export default function ConnectionsPage() {
       setMessage({ type: 'error', text: 'Failed to initiate connection. Please try again.' });
     } finally {
       setConnecting(null);
+    }
+  };
+
+  const handleCheckAccess = async (integrationType: IntegrationType) => {
+    if (!supabase) return;
+
+    try {
+      setAccessChecks((prev) => ({ ...prev, [integrationType]: { status: 'loading' } }));
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate('/admin/login');
+        return;
+      }
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/google-access-check`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${session.access_token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ integrationType }),
+        }
+      );
+
+      const checkedAt = new Date().toISOString();
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        const errorMessage = result?.error || result?.message || 'Access check failed';
+        setAccessChecks((prev) => ({
+          ...prev,
+          [integrationType]: { status: 'error', checkedAt, message: errorMessage },
+        }));
+        return;
+      }
+
+      setAccessChecks((prev) => ({
+        ...prev,
+        [integrationType]: { status: 'success', checkedAt, data: result },
+      }));
+    } catch (error) {
+      console.error('Access check error:', error);
+      const checkedAt = new Date().toISOString();
+      setAccessChecks((prev) => ({
+        ...prev,
+        [integrationType]: { status: 'error', checkedAt, message: 'Access check failed' },
+      }));
+    }
+  };
+
+  const handleCopyAccessEmail = async (integrationType: IntegrationType) => {
+    const { product, role } = ACCESS_ROLE_COPY[integrationType];
+    const body = [
+      `Hi — can you please grant access for Mango Law’s ${product}?`,
+      '',
+      `Domain: mango.law`,
+      `Requested role: ${role}`,
+      '',
+      `Access needed for: connection + verification (no billing changes).`,
+      '',
+      `Thanks!`,
+    ].join('\n');
+
+    try {
+      await navigator.clipboard.writeText(body);
+      setMessage({ type: 'success', text: 'Copied access request email to clipboard.' });
+      setTimeout(() => setMessage(null), 2500);
+    } catch {
+      setMessage({ type: 'error', text: 'Failed to copy. Your browser may block clipboard access.' });
+      setTimeout(() => setMessage(null), 3500);
     }
   };
 
@@ -281,14 +436,24 @@ export default function ConnectionsPage() {
           {(Object.keys(INTEGRATION_INFO) as IntegrationType[]).map((type) => {
             const info = INTEGRATION_INFO[type];
             const integration = getIntegration(type);
-            const isConnected = !!integration;
+            const status = getIntegrationStatus(type, integration);
+            const isConnected = status !== 'not_connected';
             const isLoading = connecting === type;
+            const pill = statusPill(status);
+            const PillIcon = pill.icon;
+            const accessCheck = accessChecks[type];
 
             return (
               <div
                 key={type}
                 className={`bg-[#1A1A1A] rounded-xl border ${
-                  isConnected ? 'border-green-700/50' : 'border-[#2A2A2A]'
+                  status === 'healthy'
+                    ? 'border-green-700/40'
+                    : status === 'needs_setup'
+                    ? 'border-amber-700/40'
+                    : status === 'error'
+                    ? 'border-red-700/40'
+                    : 'border-[#2A2A2A]'
                 } overflow-hidden`}
               >
                 <div className="p-6">
@@ -298,17 +463,10 @@ export default function ConnectionsPage() {
                       <div>
                         <div className="flex items-center gap-3">
                           <h3 className="text-lg font-semibold text-white">{info.name}</h3>
-                          {isConnected ? (
-                            <span className="flex items-center gap-1 px-2 py-0.5 bg-green-900/30 text-green-400 text-xs font-medium rounded-full">
-                              <CheckCircle2 className="w-3 h-3" />
-                              Connected
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-1 px-2 py-0.5 bg-slate-800 text-slate-400 text-xs font-medium rounded-full">
-                              <XCircle className="w-3 h-3" />
-                              Not Connected
-                            </span>
-                          )}
+                          <span className={`flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full ${pill.className}`}>
+                            <PillIcon className="w-3 h-3" />
+                            {pill.label}
+                          </span>
                         </div>
                         <p className="text-sm text-slate-400 mt-1">{info.description}</p>
                         <div className="flex flex-wrap gap-2 mt-3">
@@ -324,36 +482,12 @@ export default function ConnectionsPage() {
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                      {isConnected ? (
-                        <>
-                          {type === 'business_profile' && (
-                            <button
-                              onClick={() => handleSync(type)}
-                              disabled={isLoading}
-                              className="flex items-center gap-2 px-4 py-2 bg-[#E8A33C] hover:bg-[#d4922e] text-black font-medium rounded-lg transition disabled:opacity-50"
-                            >
-                              {isLoading ? (
-                                <RefreshCw className="w-4 h-4 animate-spin" />
-                              ) : (
-                                <RefreshCw className="w-4 h-4" />
-                              )}
-                              Sync Now
-                            </button>
-                          )}
-                          <button
-                            onClick={() => handleDisconnect(integration.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-red-900/30 hover:bg-red-900/50 text-red-400 font-medium rounded-lg transition"
-                          >
-                            <XCircle className="w-4 h-4" />
-                            Disconnect
-                          </button>
-                        </>
-                      ) : (
+                    <div className="flex flex-col gap-2 min-w-[170px]">
+                      {status === 'not_connected' && (
                         <button
                           onClick={() => handleConnect(type)}
                           disabled={isLoading}
-                          className="flex items-center gap-2 px-4 py-2 bg-[#E8A33C] hover:bg-[#d4922e] text-black font-medium rounded-lg transition disabled:opacity-50"
+                          className="flex items-center justify-center gap-2 px-4 py-2 bg-[#E8A33C] hover:bg-[#d4922e] text-black font-medium rounded-lg transition disabled:opacity-50"
                         >
                           {isLoading ? (
                             <RefreshCw className="w-4 h-4 animate-spin" />
@@ -363,10 +497,75 @@ export default function ConnectionsPage() {
                           Connect
                         </button>
                       )}
+
+                      {status === 'error' && (
+                        <button
+                          onClick={() => handleConnect(type)}
+                          disabled={isLoading}
+                          className="flex items-center justify-center gap-2 px-4 py-2 bg-[#E8A33C] hover:bg-[#d4922e] text-black font-medium rounded-lg transition disabled:opacity-50"
+                        >
+                          {isLoading ? (
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <RefreshCw className="w-4 h-4" />
+                          )}
+                          Reconnect
+                        </button>
+                      )}
+
+                      {status === 'needs_setup' && (
+                        <button
+                          onClick={() => setGuideOpen((prev) => ({ ...prev, [type]: !prev[type] }))}
+                          className="flex items-center justify-center gap-2 px-4 py-2 bg-[#232323] hover:bg-[#2A2A2A] text-white font-medium rounded-lg transition"
+                        >
+                          {guideOpen[type] ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                          Setup guide
+                        </button>
+                      )}
+
+                      {status === 'healthy' && type === 'business_profile' && (
+                        <button
+                          onClick={() => handleSync(type)}
+                          disabled={isLoading}
+                          className="flex items-center justify-center gap-2 px-4 py-2 bg-[#E8A33C] hover:bg-[#d4922e] text-black font-medium rounded-lg transition disabled:opacity-50"
+                        >
+                          {isLoading ? (
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <RefreshCw className="w-4 h-4" />
+                          )}
+                          Sync reviews
+                        </button>
+                      )}
+
+                      {isConnected && (
+                        <button
+                          onClick={() => handleCheckAccess(type)}
+                          disabled={accessCheck.status === 'loading'}
+                          className="flex items-center justify-center gap-2 px-4 py-2 bg-[#232323] hover:bg-[#2A2A2A] text-white font-medium rounded-lg transition disabled:opacity-50"
+                        >
+                          {accessCheck.status === 'loading' ? (
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <CheckCircle2 className="w-4 h-4" />
+                          )}
+                          Check status
+                        </button>
+                      )}
+
+                      {isConnected && integration && (
+                        <button
+                          onClick={() => handleDisconnect(integration.id)}
+                          className="flex items-center justify-center gap-2 px-4 py-2 bg-red-900/20 hover:bg-red-900/35 text-red-300 font-medium rounded-lg transition"
+                        >
+                          <XCircle className="w-4 h-4" />
+                          Disconnect
+                        </button>
+                      )}
                     </div>
                   </div>
 
-                  {isConnected && (
+                  {integration && (
                     <div className="mt-4 pt-4 border-t border-[#2A2A2A]">
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
                         {integration.location_id && (
@@ -393,6 +592,79 @@ export default function ConnectionsPage() {
                       </div>
                     </div>
                   )}
+
+                  {isConnected && guideOpen[type] && (
+                    <div className="mt-4 p-4 bg-[#151515] border border-[#2A2A2A] rounded-lg">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h4 className="text-sm font-semibold text-white">Setup guide</h4>
+                          <p className="text-sm text-slate-400 mt-1">
+                            “Connect” stores tokens. “Setup” verifies we can see the right resources for <span className="text-slate-200">mango.law</span>.
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => setGuideOpen((prev) => ({ ...prev, [type]: false }))}
+                          className="text-slate-400 hover:text-white transition"
+                          aria-label="Close setup guide"
+                        >
+                          <ChevronUp className="w-5 h-5" />
+                        </button>
+                      </div>
+
+                      <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <a
+                          className="inline-flex items-center gap-2 px-3 py-2 bg-[#232323] hover:bg-[#2A2A2A] text-white rounded-lg text-sm transition"
+                          href={ACCESS_ROLE_COPY[type].link}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Open {ACCESS_ROLE_COPY[type].product}
+                        </a>
+                        <button
+                          onClick={() => handleCopyAccessEmail(type)}
+                          className="inline-flex items-center gap-2 px-3 py-2 bg-[#232323] hover:bg-[#2A2A2A] text-white rounded-lg text-sm transition"
+                        >
+                          <Copy className="w-4 h-4" />
+                          Copy access request
+                        </button>
+                      </div>
+
+                      <div className="mt-3 text-sm text-slate-300">
+                        <div className="font-medium text-slate-200">Common missing pieces</div>
+                        <ul className="mt-2 space-y-1 list-disc pl-5">
+                          <li>Wrong Google account (switch accounts and reconnect).</li>
+                          <li>Insufficient permissions (request role: {ACCESS_ROLE_COPY[type].role}).</li>
+                          <li>Resource not created yet (create it in Google, then run “Check status”).</li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  {isConnected && accessCheck.status === 'success' && (
+                    <div className="mt-4 p-4 bg-[#151515] border border-[#2A2A2A] rounded-lg">
+                      <div className="flex items-center justify-between gap-4">
+                        <h4 className="text-sm font-semibold text-white">Latest status check</h4>
+                        <span className="text-xs text-slate-500">{formatDate(accessCheck.checkedAt)}</span>
+                      </div>
+                      <pre className="mt-2 text-xs text-slate-300 overflow-auto max-h-56 bg-black/25 p-3 rounded">
+                        {JSON.stringify(accessCheck.data, null, 2)}
+                      </pre>
+                    </div>
+                  )}
+
+                  {isConnected && accessCheck.status === 'error' && (
+                    <div className="mt-4 p-4 bg-[#151515] border border-[#2A2A2A] rounded-lg">
+                      <div className="flex items-center justify-between gap-4">
+                        <h4 className="text-sm font-semibold text-white">Latest status check</h4>
+                        <span className="text-xs text-slate-500">{formatDate(accessCheck.checkedAt)}</span>
+                      </div>
+                      <p className="mt-2 text-sm text-red-300">{accessCheck.message}</p>
+                      <div className="mt-3 text-sm text-slate-400">
+                        If access is missing, use “Copy access request”, grant permissions, then re-run “Check status”.
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -402,8 +674,8 @@ export default function ConnectionsPage() {
         <div className="mt-8 p-4 bg-[#1A1A1A] rounded-lg border border-[#2A2A2A]">
           <h3 className="text-sm font-medium text-slate-300 mb-2">Need Help?</h3>
           <p className="text-sm text-slate-500">
-            To set up Google integrations, you need to configure your Google OAuth credentials.
-            Contact your administrator if you need assistance with the initial setup.
+            “Connect” stores tokens; “Setup” verifies the right account/property for <span className="text-slate-300">mango.law</span>.
+            Use “Check status” after granting access or creating the missing Google resource.
           </p>
         </div>
       </main>

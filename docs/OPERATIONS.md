@@ -33,6 +33,8 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - **chat-intake**: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. **NEW**: Now includes SMS notifications via email-to-SMS gateways (Verizon/AT&T) for instant mobile alerts. Sends to office, attorney, and test numbers configured in environment variables.
 - **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, and upserts checkpoints to database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
 - **send-review-invitation**: (Existing) Sends review invitations with JWT authentication required.
+- **google-oauth-connect / google-oauth-callback**: OAuth connect + callback endpoints for GBP/GA/GSC/GTM token storage. Callback must allow unauthenticated Google redirects (no Supabase `Authorization` header).
+- **google-access-check**: Admin-only “Check status” endpoint for `/admin/connections` that lists accessible resources per integration (accounts/properties/containers/sites) and writes an `admin_activity_log` entry.
 
 ### Security Features
 - **Security Headers**: All responses include CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers.
@@ -102,6 +104,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 
 ## Admin Dashboard
 - **Location**: `/admin/checkpoints` page (CheckpointAdminPage.tsx).
+- **Connections hub**: `/admin/connections` provides a BrightLocal-like view of Google integrations (Connect/Reconnect + Check status + Setup guide).
 - **Authentication**: Protected with password authentication (password: `mango2024admin`). Session expires after 24 hours. Change password in `src/components/AdminAuth.tsx`.
 - **Features**:
   - **Status Update Button**: Manually trigger checkpoint status updates based on current time (upcoming → active → completed).

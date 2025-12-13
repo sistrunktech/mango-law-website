@@ -8,6 +8,8 @@
 - Calm/compact the checkpoint “help now” sticky banner for mobile (prevents phone wrapping and avoids loud alert styling) (`src/components/EmergencyBanner.tsx`).
 - Fix mobile chat window overflow/cut-off and improve long-text wrapping (`src/components/chat/ConversationWindow.tsx`, `src/components/chat/ChatBubble.tsx`).
 - Add floating chat progressive disclosure + chooser (Chat / Call / Consult) and wire lead modal open tracking (`src/components/ChatIntakeLauncher.tsx`, `src/lib/analytics.ts`).
+- Upgrade `/admin/connections` to separate Connect vs Configure: status pills (not connected / needs setup / healthy / reconnect), setup guide, and admin “Check status” action (`src/pages/ConnectionsPage.tsx`).
+- Add admin-only Edge Function to power “Check status” and audit log events (`supabase/functions/google-access-check/index.ts`).
 - Correct office vs direct phone usage across UI + SEO and centralize constants:
   - Office/main line: `(740) 602-2155`
   - Direct (Nick): `(740) 417-6191`
