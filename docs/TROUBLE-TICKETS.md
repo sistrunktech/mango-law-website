@@ -192,6 +192,12 @@ Google OAuth still errors with `redirect_uri_mismatch`, showing a stale Supabase
    - `https://rgucewewminsevbjgcad.supabase.co/functions/v1/google-oauth-callback`
 3. Remove stale redirect URIs after verification (including `creshr…`).
 
+### Also check: google_integrations integration type constraint
+If OAuth redirects back with a brief “success” toast but no persistent “Connected” status, the callback may be failing to save.
+The original DB constraint only allowed `business_profile`, `sheets`, `calendar`, `oauth`, but the current connectors use
+`analytics`, `search_console`, and `tag_manager`. Apply migration
+`supabase/migrations/20251213050000_fix_google_integrations_integration_type_check.sql`.
+
 ---
 
 ## TICKET-007: Bolt Publish Failure — Unsupported Filename Character

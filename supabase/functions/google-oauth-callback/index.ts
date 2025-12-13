@@ -171,14 +171,19 @@ Deno.serve(async (req: Request) => {
 
     const tokenExpiresAt = new Date(Date.now() + tokens.expires_in * 1000).toISOString();
 
-    const { data: existing } = await supabase
+    const { data: existing, error: existingError } = await supabase
       .from('google_integrations')
       .select('id')
       .eq('integration_type', integrationType)
       .maybeSingle();
 
+    if (existingError) {
+      console.error('Failed to check existing integration:', existingError);
+      return Response.redirect(`${frontendUrl}/admin/connections?error=db_read_failed`, 302);
+    }
+
     if (existing) {
-      await supabase
+      const { error: updateError } = await supabase
         .from('google_integrations')
         .update({
           access_token: tokens.access_token,
@@ -191,8 +196,13 @@ Deno.serve(async (req: Request) => {
           updated_at: new Date().toISOString(),
         })
         .eq('id', existing.id);
+
+      if (updateError) {
+        console.error('Failed to update integration row:', updateError);
+        return Response.redirect(`${frontendUrl}/admin/connections?error=db_write_failed`, 302);
+      }
     } else {
-      await supabase
+      const { error: insertError } = await supabase
         .from('google_integrations')
         .insert({
           integration_type: integrationType,
@@ -204,6 +214,11 @@ Deno.serve(async (req: Request) => {
           metadata,
           is_active: true,
         });
+
+      if (insertError) {
+        console.error('Failed to insert integration row:', insertError);
+        return Response.redirect(`${frontendUrl}/admin/connections?error=db_write_failed`, 302);
+      }
     }
 
     return Response.redirect(`${frontendUrl}/admin/connections?success=${integrationType}`, 302);
