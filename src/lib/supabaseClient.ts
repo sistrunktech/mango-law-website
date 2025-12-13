@@ -15,6 +15,22 @@ const isProdHost =
 export const supabaseUrl = isProdHost ? PROD_SUPABASE_URL : envSupabaseUrl;
 export const supabaseAnonKey = isProdHost ? PROD_SUPABASE_ANON_KEY : envSupabaseAnonKey;
 
+export const supabaseProjectRef = (() => {
+  if (!supabaseUrl) return null;
+  try {
+    return new URL(supabaseUrl).hostname.split('.')[0] ?? null;
+  } catch {
+    return null;
+  }
+})();
+
+if (isProdHost && envSupabaseUrl && envSupabaseUrl !== PROD_SUPABASE_URL) {
+  console.warn(
+    'Supabase env drift detected on prod host; overriding VITE_SUPABASE_URL.',
+    { envSupabaseUrl, forced: PROD_SUPABASE_URL }
+  );
+}
+
 if (!supabaseUrl || !supabaseAnonKey) {
   // Fail fast in dev if env is missing.
   console.warn('Supabase environment variables are not set. Contact form submissions will be disabled.');

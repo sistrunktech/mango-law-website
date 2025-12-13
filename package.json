@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/check-filenames.mjs",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "generate:image": "node scripts/generateImage.js"

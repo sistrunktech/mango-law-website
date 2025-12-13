@@ -77,6 +77,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 
 ## CI/CD
 - Build-only workflow in `.github/workflows/ci.yml` (Node 20, npm ci, npm run build).
+- `npm run build` runs a preflight filename check (`scripts/check-filenames.mjs`) to prevent publish failures caused by unsupported filename characters.
 - TODO: add staging/prod deploy jobs with env-specific secrets, run migrations, and smoke tests before cutover. Target hosts today: Bolt staging `https://sistrunktech-mango-l-lqhi.bolt.host`, production `https://mango.law` (and `https://staging.mango.law` when live).
 
 ## Domains/DNS

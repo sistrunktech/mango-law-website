@@ -1,5 +1,6 @@
 import { AlertTriangle, Phone } from 'lucide-react';
 import { DIRECT_PHONE_DISPLAY, DIRECT_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick } from '../lib/analytics';
 
 interface EmergencyBannerProps {
   onOpenLeadModal: () => void;
@@ -7,21 +8,11 @@ interface EmergencyBannerProps {
 
 export default function EmergencyBanner({ onOpenLeadModal }: EmergencyBannerProps) {
   const handleCallClick = () => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'click', {
-        event_category: 'CTA',
-        event_label: 'emergency_banner_call',
-      });
-    }
+    trackCtaClick('checkpoint_banner_call_direct');
   };
 
   const handleLeadClick = () => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'lead_capture_initiated', {
-        event_category: 'Lead',
-        event_label: 'emergency_banner',
-      });
-    }
+    trackCtaClick('checkpoint_banner_free_consult');
     onOpenLeadModal();
   };
 

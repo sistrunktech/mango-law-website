@@ -4,6 +4,7 @@ import { Menu, X, Phone } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick } from '../lib/analytics';
 import type { LeadSource } from './LeadCaptureModal';
 
 interface SiteHeaderProps {
@@ -79,6 +80,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               href={`tel:${OFFICE_PHONE_TEL}`}
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black/80 hover:text-brand-mango"
               data-cta="header_call"
+              onClick={() => trackCtaClick('header_call')}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               {OFFICE_PHONE_DISPLAY}
@@ -87,7 +89,10 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               type="button"
               className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black transition-all hover:bg-brand-gold"
               data-cta="header_free_consult"
-              onClick={() => onOpenLeadModal?.('header_cta')}
+              onClick={() => {
+                trackCtaClick('header_free_consult');
+                onOpenLeadModal?.('header_cta');
+              }}
             >
               Free Consultation
             </button>
@@ -100,13 +105,17 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               className="inline-flex items-center justify-center rounded-lg border border-brand-black/10 bg-white px-3 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
               aria-label="Call the office"
               data-cta="mobile_header_call"
+              onClick={() => trackCtaClick('mobile_header_call')}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
             </a>
             <button
               type="button"
               className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-2 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
-              onClick={() => onOpenLeadModal?.('header_cta')}
+              onClick={() => {
+                trackCtaClick('mobile_header_free_consult');
+                onOpenLeadModal?.('header_cta');
+              }}
               data-cta="mobile_header_free_consult"
             >
               Consult
@@ -156,6 +165,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   href={`tel:${OFFICE_PHONE_TEL}`}
                   className="flex items-center gap-2 px-4 text-sm font-medium text-brand-black"
                   data-cta="mobile_menu_call"
+                  onClick={() => trackCtaClick('mobile_menu_call')}
                 >
                   <Phone className="h-4 w-4 text-brand-mango" />
                   <span className="text-xs opacity-70">Call:</span>
@@ -165,6 +175,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   type="button"
                   onClick={() => {
                     setOpen(false);
+                    trackCtaClick('mobile_menu_free_consult');
                     onOpenLeadModal?.('mobile_menu');
                   }}
                   className="mx-4 rounded-lg bg-brand-mango px-5 py-3 text-center text-sm font-bold text-brand-black"

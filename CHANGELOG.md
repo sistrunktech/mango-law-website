@@ -8,6 +8,8 @@
 - Calm/compact the checkpoint “help now” sticky banner for mobile (prevents phone wrapping and avoids loud alert styling) (`src/components/EmergencyBanner.tsx`).
 - Fix mobile chat window overflow/cut-off and improve long-text wrapping (`src/components/chat/ConversationWindow.tsx`, `src/components/chat/ChatBubble.tsx`).
 - Add floating chat progressive disclosure + chooser (Chat / Call / Consult) and wire lead modal open tracking (`src/components/ChatIntakeLauncher.tsx`, `src/lib/analytics.ts`).
+- Add explicit GA4/GTM `dataLayer` events for header call/consult and checkpoint banner CTAs (`src/components/SiteHeader.tsx`, `src/components/EmergencyBanner.tsx`).
+- Tighten floating chat placement on small screens to avoid edge clipping (`src/components/ChatIntakeLauncher.tsx`).
 - Upgrade `/admin/connections` to separate Connect vs Configure: status pills (not connected / needs setup / healthy / reconnect), setup guide, and admin “Check status” action (`src/pages/ConnectionsPage.tsx`).
 - Add admin-only Edge Function to power “Check status” and audit log events (`supabase/functions/google-access-check/index.ts`).
 - Correct office vs direct phone usage across UI + SEO and centralize constants:
@@ -15,6 +17,7 @@
   - Direct (Nick): `(740) 417-6191`
   - (`src/lib/contactInfo.ts`, `src/lib/seo.tsx`)
 - Fix Bolt publish failures by renaming/removing files with unsupported filename characters (spaces/Unicode) (`public/images/brand/`, `mango-logo-options-1-new.zip`).
+- Add a `prebuild` filename safety check to prevent publish failures from slipping in (`scripts/check-filenames.mjs`, `package.json`).
 - Fix production `mango.law` pointing at the wrong Supabase project by forcing runtime to use the correct prod project (`rgucewewminsevbjgcad`) for Supabase client + function calls (`src/lib/supabaseClient.ts`, `src/pages/ConnectionsPage.tsx`, `src/components/ScraperLogsViewer.tsx`, `src/components/chat/ConversationWindow.tsx`).
 - Documentation updates:
   - Add “Do Not Swap” phone mapping and CTA tracking notes (`docs/OPERATIONS.md`)

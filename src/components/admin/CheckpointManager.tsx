@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import { supabase, supabaseProjectRef, supabaseUrl } from '../../lib/supabaseClient';
 import { MapPin, Plus, Edit2, Trash2, Eye, Calendar, Search } from 'lucide-react';
 import Tooltip from './Tooltip';
 import CheckpointAnnouncementsManager from './CheckpointAnnouncementsManager';
@@ -386,6 +386,9 @@ export default function CheckpointManager() {
         <div>
           <h2 className="text-2xl font-bold text-white">DUI Checkpoints</h2>
           <p className="text-slate-400 mt-1">Manage confirmed checkpoints and date-only announcements (details TBD)</p>
+          <p className="mt-1 text-xs text-slate-500">
+            Backend: <span className="font-mono text-slate-300">{supabaseProjectRef ?? supabaseUrl ?? 'unknown'}</span>
+          </p>
         </div>
         <div className="flex items-center gap-3">
           <div className="inline-flex rounded-lg border border-slate-700 bg-slate-900/40 p-1">
