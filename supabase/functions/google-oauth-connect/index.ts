@@ -44,7 +44,16 @@ Deno.serve(async (req: Request) => {
       throw new Error("Google Client ID not configured");
     }
 
-    const { integrationType = 'business_profile' } = await req.json() as { integrationType?: IntegrationType };
+    // Support both POST JSON and simple GET query usage.
+    const url = new URL(req.url);
+    let integrationType: IntegrationType = 'business_profile';
+    if (req.method === 'POST') {
+      const body = await req.json().catch(() => ({}));
+      if (body?.integrationType) integrationType = body.integrationType;
+    } else {
+      const fromQuery = url.searchParams.get('integrationType');
+      if (fromQuery) integrationType = fromQuery as IntegrationType;
+    }
 
     if (!SCOPES[integrationType]) {
       throw new Error(`Invalid integration type: ${integrationType}`);
