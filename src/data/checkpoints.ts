@@ -63,6 +63,21 @@ export function getStatusLabel(status: CheckpointStatus): string {
   }
 }
 
+export function getDisplayStatus(checkpoint: Pick<DUICheckpoint, 'start_date' | 'end_date' | 'status'>, now = new Date()): CheckpointStatus {
+  if (checkpoint.status === 'cancelled') return 'cancelled';
+
+  const start = new Date(checkpoint.start_date);
+  const end = new Date(checkpoint.end_date);
+
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+    return checkpoint.status;
+  }
+
+  if (now < start) return 'upcoming';
+  if (now <= end) return 'active';
+  return 'completed';
+}
+
 export function formatCheckpointDate(dateString: string): string {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {

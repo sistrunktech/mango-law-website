@@ -1,6 +1,5 @@
 import { MapPin, Clock, Calendar, AlertCircle, ExternalLink, Shield } from 'lucide-react';
-import type { DUICheckpoint } from '../data/checkpoints';
-import { getStatusColor, getStatusLabel, formatCheckpointDateRange } from '../data/checkpoints';
+import { formatCheckpointDateRange, getDisplayStatus, getStatusColor, getStatusLabel, type DUICheckpoint } from '../data/checkpoints';
 
 type Props = {
   checkpoint: DUICheckpoint;
@@ -9,8 +8,9 @@ type Props = {
 };
 
 export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal }: Props) {
-  const statusColor = getStatusColor(checkpoint.status);
-  const statusLabel = getStatusLabel(checkpoint.status);
+  const displayStatus = getDisplayStatus(checkpoint);
+  const statusColor = getStatusColor(displayStatus);
+  const statusLabel = getStatusLabel(displayStatus);
 
   return (
     <div
@@ -28,7 +28,7 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal }:
           </div>
         </div>
         <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${statusColor}`}>
-          {checkpoint.status === 'active' && <span className="h-2 w-2 animate-pulse rounded-full bg-current" />}
+          {displayStatus === 'active' && <span className="h-2 w-2 animate-pulse rounded-full bg-current" />}
           {statusLabel}
         </span>
       </div>
