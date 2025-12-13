@@ -18,6 +18,8 @@
   - (`src/lib/contactInfo.ts`, `src/lib/seo.tsx`)
 - Fix Bolt publish failures by renaming/removing files with unsupported filename characters (spaces/Unicode) (`public/images/brand/`, `mango-logo-options-1-new.zip`).
 - Add a `prebuild` filename safety check to prevent publish failures from slipping in (`scripts/check-filenames.mjs`, `package.json`).
+- Treat `mangolaw.com` as production to prevent Supabase project drift on alternate live domains (`src/lib/supabaseClient.ts`).
+- Add ClickMinded-style “Copy naming” recommendations to Google integration setup guides (`src/pages/ConnectionsPage.tsx`).
 - Fix production `mango.law` pointing at the wrong Supabase project by forcing runtime to use the correct prod project (`rgucewewminsevbjgcad`) for Supabase client + function calls (`src/lib/supabaseClient.ts`, `src/pages/ConnectionsPage.tsx`, `src/components/ScraperLogsViewer.tsx`, `src/components/chat/ConversationWindow.tsx`).
 - Documentation updates:
   - Add “Do Not Swap” phone mapping and CTA tracking notes (`docs/OPERATIONS.md`)

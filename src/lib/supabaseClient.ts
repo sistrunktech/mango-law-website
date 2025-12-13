@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-const PROD_HOSTS = new Set(['mango.law', 'www.mango.law']);
+// Treat all live production domains as "prod" so we don't accidentally hit a stale Supabase project via env drift.
+const PROD_HOSTS = new Set(['mango.law', 'www.mango.law', 'mangolaw.com', 'www.mangolaw.com']);
 const PROD_SUPABASE_URL = 'https://rgucewewminsevbjgcad.supabase.co';
 // NOTE: Supabase anon keys are public (shipped to the browser by design). This fallback prevents prod breakage if Bolt env vars drift.
 const PROD_SUPABASE_ANON_KEY =

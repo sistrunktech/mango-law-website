@@ -91,6 +91,43 @@ const ACCESS_ROLE_COPY: Record<IntegrationType, { product: string; role: string;
   },
 };
 
+const NAMING_RECOMMENDATIONS: Record<IntegrationType, { title: string; lines: string[] }> = {
+  business_profile: {
+    title: 'Recommended naming',
+    lines: [
+      'Account: Mango Law LLC',
+      'Location: Mango Law LLC — Delaware, OH',
+      'Website: https://mango.law',
+    ],
+  },
+  analytics: {
+    title: 'Recommended naming',
+    lines: [
+      'Account: Mango Law',
+      'GA4 Property: Mango Law | Website | Prod',
+      'Web Data Stream: mango.law | Web | Prod',
+      'Key events (GA4): generate_lead, click_to_call, chat_open, cta_click',
+    ],
+  },
+  search_console: {
+    title: 'Recommended naming',
+    lines: [
+      'Preferred: Domain property (DNS): sc-domain:mango.law',
+      'Fallback: URL-prefix property: https://mango.law/',
+    ],
+  },
+  tag_manager: {
+    title: 'Recommended naming',
+    lines: [
+      'Account: Mango Law',
+      'Container: Mango Law | mango.law | Web | Prod',
+      'Workspace: Main',
+      'Tags: GA4 | Config | mango.law | Prod; GA4 | Event | cta_click; GA4 | Event | generate_lead; GA4 | Event | click_to_call; GA4 | Event | chat_open',
+      'Triggers: Click | CTA | [data-cta]; Click | Phone | tel:; Form | Lead | submit; Page View | All Pages',
+    ],
+  },
+};
+
 function getIntegrationStatus(type: IntegrationType, integration?: GoogleIntegration): IntegrationStatus {
   if (!integration || !integration.is_active) return 'not_connected';
 
@@ -296,6 +333,19 @@ export default function ConnectionsPage() {
     try {
       await navigator.clipboard.writeText(body);
       setMessage({ type: 'success', text: 'Copied access request email to clipboard.' });
+      setTimeout(() => setMessage(null), 2500);
+    } catch {
+      setMessage({ type: 'error', text: 'Failed to copy. Your browser may block clipboard access.' });
+      setTimeout(() => setMessage(null), 3500);
+    }
+  };
+
+  const handleCopyNaming = async (integrationType: IntegrationType) => {
+    const rec = NAMING_RECOMMENDATIONS[integrationType];
+    const body = [`${rec.title} (${integrationType})`, ...rec.lines].join('\n');
+    try {
+      await navigator.clipboard.writeText(body);
+      setMessage({ type: 'success', text: 'Copied naming recommendations to clipboard.' });
       setTimeout(() => setMessage(null), 2500);
     } catch {
       setMessage({ type: 'error', text: 'Failed to copy. Your browser may block clipboard access.' });
@@ -631,6 +681,13 @@ export default function ConnectionsPage() {
                           <Copy className="w-4 h-4" />
                           Copy access request
                         </button>
+                        <button
+                          onClick={() => handleCopyNaming(type)}
+                          className="inline-flex items-center gap-2 px-3 py-2 bg-[#232323] hover:bg-[#2A2A2A] text-white rounded-lg text-sm transition"
+                        >
+                          <Copy className="w-4 h-4" />
+                          Copy naming
+                        </button>
                       </div>
 
                       <div className="mt-3 text-sm text-slate-300">
@@ -639,6 +696,15 @@ export default function ConnectionsPage() {
                           <li>Wrong Google account (switch accounts and reconnect).</li>
                           <li>Insufficient permissions (request role: {ACCESS_ROLE_COPY[type].role}).</li>
                           <li>Resource not created yet (create it in Google, then run “Check status”).</li>
+                        </ul>
+                      </div>
+
+                      <div className="mt-4 text-sm text-slate-300">
+                        <div className="font-medium text-slate-200">{NAMING_RECOMMENDATIONS[type].title}</div>
+                        <ul className="mt-2 space-y-1 list-disc pl-5">
+                          {NAMING_RECOMMENDATIONS[type].lines.map((line) => (
+                            <li key={line}>{line}</li>
+                          ))}
                         </ul>
                       </div>
                     </div>
