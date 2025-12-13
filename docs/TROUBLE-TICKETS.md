@@ -228,4 +228,131 @@ Local publishing tools sometimes include `node_modules/` (which contains scoped 
 
 ---
 
+## TICKET-008: Schema.org Validator Errors — LegalService Structured Data
+
+**Priority:** High  
+**Status:** Closed  
+**Date Created:** 2025-12-13  
+**Assigned To:** TBD
+
+### Issue Summary
+Schema.org Validator reports errors on the homepage structured data (`LegalService`) and/or the attorney schema. This reduces trust in structured data and may prevent eligible rich results.
+
+### Root cause (likely)
+- Invalid or nonstandard properties on `LegalService` (e.g., `attorney` is not a canonical Schema.org property for `LegalService` / `LocalBusiness`).
+- `@type: "Attorney"` can be inconsistently supported by validators; safer to represent the attorney as `Person` with `hasOccupation`.
+- `OpeningHoursSpecification.dayOfWeek` format may not match enum expectations.
+
+### Fix (recommended)
+1. Refactor the homepage structured data to a single `@graph` containing:
+   - `LegalService` node (firm)
+   - `Person` node (attorney)
+   - Link via `founder` or `employee` using `@id` references.
+2. Remove invalid properties (e.g., `attorney`) from the `LegalService` node.
+3. Change attorney schema to `@type: 'Person'` and include `hasOccupation` = `Attorney`.
+4. Normalize `OpeningHoursSpecification.dayOfWeek` to Schema.org enum URLs:
+   - `https://schema.org/Monday`, etc.
+
+### Files Likely Involved
+`src/lib/seo.tsx`, `src/pages/HomePage.tsx`, `src/pages/AboutPage.tsx`
+
+### Resolution notes
+- Refactored homepage schema to a single `@graph` (`LegalService` + `Person`) linked via `founder`.
+- Removed nonstandard `attorney` property from the `LegalService` node.
+- Converted About page schema to `Person` + `hasOccupation` (instead of `@type: Attorney`).
+- Normalized `OpeningHoursSpecification.dayOfWeek` to Schema.org enum URLs.
+
+### Verification
+- Validate the rendered JSON-LD on https://validator.schema.org/ and the Rich Results Test.
+
+---
+
+## TICKET-009: Stale Pending DUI Checkpoint Announcements (Outdated Links)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-13  
+**Assigned To:** TBD
+
+### Issue Summary
+The public DUI checkpoints page (`/resources/dui-checkpoints`) shows "Pending checkpoint announcements" that are no longer relevant (e.g., old 2019 articles). These reduce credibility and create a poor UX.
+
+### Root cause
+`dui_checkpoint_announcements` rows with `status='pending_details'` have no expiration rules or cleanup job, so stale announcements remain publicly visible indefinitely.
+
+### Fix (phased)
+#### Phase 0 (Immediate)
+- Apply a frontend filter to exclude stale pending announcements based on age.
+  - Keep `pending_details` only when any of these are recent:
+    - `event_date` (>= today - 1 day)
+    - `start_date` (>= now - 24h)
+    - `announcement_date` (>= now - 14 days)
+    - fallback: `created_at` (>= now - 14 days)
+
+#### Phase 1 (Durable)
+- Add explicit expiry semantics:
+  - Option A: add `expires_at` + optional `expired` status.
+  - Option B (simpler): mark stale pending rows as `cancelled`.
+- Update public read behavior to hide expired/cancelled pending rows.
+- Add daily pg_cron cleanup to expire old `pending_details` rows.
+
+#### Phase 2 (Admin UX)
+- Add admin actions to:
+  - expire/cancel
+  - convert pending announcement into a fully specified checkpoint (`linked_checkpoint_id`)
+  - view age/expires date
+
+### Files Likely Involved
+`src/pages/DUICheckpointsPage.tsx`, `src/lib/checkpointAnnouncementsService.ts`, new supabase migration(s), optional cron SQL.
+
+### Verification
+- Public page no longer shows old "planned this weekend" items.
+- Admin can still see/correct old items.
+
+---
+
+## TICKET-010: Faster Crawl / "Instant Indexing" for SPA (Vite + React)
+
+**Priority:** Medium  
+**Status:** Open  
+**Date Created:** 2025-12-13  
+**Assigned To:** TBD
+
+### Issue Summary
+SPA pages can be crawled slower and updates can take longer to surface in Search results. We want the fastest practical indexing behavior for new/updated pages (especially blog posts and new resources) without a full rewrite.
+
+### Recommended approach (phased)
+#### Phase 1 (MVP, minimal architecture change)
+1. Pre-render critical routes (static HTML output at build time):
+   - Home, About, Practice Areas, Blog index, Blog posts, key landing pages.
+2. Generate/serve sitemap + robots:
+   - Build-time sitemap generation that includes all blog routes.
+   - Ensure canonical URLs and structured data are valid.
+3. Hook on publish:
+   - When a new blog post is published in the CMS/admin, trigger:
+     - sitemap regeneration (or ensure it is already dynamic)
+     - ping mechanisms (see below)
+
+#### Phase 2 (Optional)
+- Add SSR (framework migration) if the site grows into highly dynamic content needs.
+  - Consider moving to an SSR-capable framework (e.g., Next.js or Remix).
+
+#### Phase 3 (Optional, with policy caveats)
+- Integrate Google Indexing API for specific content types.
+  - Note: Officially intended for `JobPosting` / `BroadcastEvent` content. If used more broadly, implement guardrails and allowlist which routes are submitted.
+
+### Required Deliverables
+- A documented SEO crawl strategy:
+  - which routes are pre-rendered
+  - how sitemaps are generated/updated
+  - how URL submissions are triggered (if any)
+- A lightweight publish hook:
+  - on new/updated blog post, automatically submit or ping.
+
+### Verification
+- Sitemap submitted in GSC and contains all canonical blog URLs.
+- "URL inspection" in GSC reflects faster discovery for new posts compared to current baseline.
+
+---
+
 *Add additional trouble tickets below using the same format*

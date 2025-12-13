@@ -103,151 +103,171 @@ export function SEO({
 
 export const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LegalService',
-  name: 'Mango Law LLC',
-  alternateName: 'Mango Law',
-  description:
-    'Criminal defense and OVI/DUI attorney serving Delaware and Franklin Counties in Ohio.',
-  url: 'https://mango.law',
-  logo: 'https://mango.law/images/brand/mango-logo-primary-fullcolor.svg',
-  image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
-  telephone: '+17406022155',
-  email: 'office@mango.law',
-  priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '46 W. Winter Street',
-    addressLocality: 'Delaware',
-    addressRegion: 'OH',
-    postalCode: '43015',
-    addressCountry: 'US',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 40.2987,
-    longitude: -83.0680,
-  },
-  areaServed: [
+  '@graph': [
     {
-      '@type': 'City',
-      name: 'Delaware',
-      '@id': 'https://en.wikipedia.org/wiki/Delaware,_Ohio',
+      '@type': 'LegalService',
+      '@id': 'https://mango.law/#legalservice',
+      name: 'Mango Law LLC',
+      alternateName: 'Mango Law',
+      description:
+        'Criminal defense and OVI/DUI attorney serving Delaware and Franklin Counties in Ohio.',
+      url: 'https://mango.law',
+      logo: 'https://mango.law/images/brand/mango-logo-primary-fullcolor.svg',
+      image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
+      telephone: '+17406022155',
+      email: 'office@mango.law',
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '46 W. Winter Street',
+        addressLocality: 'Delaware',
+        addressRegion: 'OH',
+        postalCode: '43015',
+        addressCountry: 'US',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 40.2987,
+        longitude: -83.068,
+      },
+      areaServed: [
+        {
+          '@type': 'City',
+          name: 'Delaware',
+          '@id': 'https://en.wikipedia.org/wiki/Delaware,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Columbus',
+          '@id': 'https://en.wikipedia.org/wiki/Columbus,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Dublin',
+          '@id': 'https://en.wikipedia.org/wiki/Dublin,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Westerville',
+          '@id': 'https://en.wikipedia.org/wiki/Westerville,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Marysville',
+          '@id': 'https://en.wikipedia.org/wiki/Marysville,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Gahanna',
+          '@id': 'https://en.wikipedia.org/wiki/Gahanna,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Grove City',
+          '@id': 'https://en.wikipedia.org/wiki/Grove_City,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Reynoldsburg',
+          '@id': 'https://en.wikipedia.org/wiki/Reynoldsburg,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Upper Arlington',
+          '@id': 'https://en.wikipedia.org/wiki/Upper_Arlington,_Ohio',
+        },
+        {
+          '@type': 'City',
+          name: 'Hilliard',
+          '@id': 'https://en.wikipedia.org/wiki/Hilliard,_Ohio',
+        },
+        {
+          '@type': 'AdministrativeArea',
+          name: 'Delaware County',
+        },
+        {
+          '@type': 'AdministrativeArea',
+          name: 'Franklin County',
+        },
+      ],
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: [
+            'https://schema.org/Monday',
+            'https://schema.org/Tuesday',
+            'https://schema.org/Wednesday',
+            'https://schema.org/Thursday',
+            'https://schema.org/Friday',
+          ],
+          opens: '09:00',
+          closes: '17:00',
+        },
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Legal Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'OVI/DUI Defense',
+              description: 'Defense representation for OVI and DUI charges in Ohio.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Criminal Defense',
+              description:
+                'Defense for drug crimes, assault, theft, weapons charges, and other criminal matters.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Protection Order Defense',
+              description: 'Defense against civil protection orders and domestic violence allegations.',
+            },
+          },
+        ],
+      },
+      founder: { '@id': 'https://mango.law/#dominic-mango' },
     },
     {
-      '@type': 'City',
-      name: 'Columbus',
-      '@id': 'https://en.wikipedia.org/wiki/Columbus,_Ohio',
-    },
-    {
-      '@type': 'City',
-      name: 'Dublin',
-      '@id': 'https://en.wikipedia.org/wiki/Dublin,_Ohio',
-    },
-    {
-      '@type': 'City',
-      name: 'Westerville',
-      '@id': 'https://en.wikipedia.org/wiki/Westerville,_Ohio',
-    },
-    {
-      '@type': 'City',
-      name: 'Marysville',
-      '@id': 'https://en.wikipedia.org/wiki/Marysville,_Ohio',
-    },
-    {
-      '@type': 'City',
-      name: 'Gahanna',
-      '@id': 'https://en.wikipedia.org/wiki/Gahanna,_Ohio',
-    },
-    {
-      '@type': 'City',
-      name: 'Grove City',
-      '@id': 'https://en.wikipedia.org/wiki/Grove_City,_Ohio',
-    },
-    {
-      '@type': 'City',
-      name: 'Reynoldsburg',
-      '@id': 'https://en.wikipedia.org/wiki/Reynoldsburg,_Ohio',
-    },
-    {
-      '@type': 'City',
-      name: 'Upper Arlington',
-      '@id': 'https://en.wikipedia.org/wiki/Upper_Arlington,_Ohio',
-    },
-    {
-      '@type': 'City',
-      name: 'Hilliard',
-      '@id': 'https://en.wikipedia.org/wiki/Hilliard,_Ohio',
-    },
-    {
-      '@type': 'AdministrativeArea',
-      name: 'Delaware County',
-    },
-    {
-      '@type': 'AdministrativeArea',
-      name: 'Franklin County',
+      '@type': 'Person',
+      '@id': 'https://mango.law/#dominic-mango',
+      name: 'Dominic Mango',
+      alternateName: 'Nick Mango',
+      jobTitle: 'Criminal Defense Attorney',
+      url: 'https://mango.law/about',
+      image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
+      hasOccupation: {
+        '@type': 'Occupation',
+        name: 'Attorney',
+      },
+      alumniOf: {
+        '@type': 'EducationalOrganization',
+        name: 'The Ohio State University Moritz College of Law',
+      },
+      knowsAbout: [
+        'Criminal Defense',
+        'OVI Defense',
+        'DUI Defense',
+        'Drug Crime Defense',
+        'White Collar Defense',
+      ],
     },
   ],
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '17:00',
-    },
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Legal Services',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'OVI/DUI Defense',
-          description: 'Defense representation for OVI and DUI charges in Ohio.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Criminal Defense',
-          description:
-            'Defense for drug crimes, assault, theft, weapons charges, and other criminal matters.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Protection Order Defense',
-          description: 'Defense against civil protection orders and domestic violence allegations.',
-        },
-      },
-    ],
-  },
-  attorney: {
-    '@type': 'Person',
-    name: 'Dominic Mango',
-    alternateName: 'Nick Mango',
-    jobTitle: 'Criminal Defense Attorney',
-    alumniOf: {
-      '@type': 'EducationalOrganization',
-      name: 'The Ohio State University Moritz College of Law',
-    },
-    knowsAbout: [
-      'Criminal Defense',
-      'OVI Defense',
-      'DUI Defense',
-      'Drug Crime Defense',
-      'White Collar Defense',
-    ],
-  },
 };
 
 export const attorneySchema = {
   '@context': 'https://schema.org',
-  '@type': 'Attorney',
+  '@type': 'Person',
+  '@id': 'https://mango.law/#dominic-mango',
   name: 'Dominic Mango',
   alternateName: 'Nick Mango',
   description:
@@ -256,6 +276,10 @@ export const attorneySchema = {
   image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
   email: 'office@mango.law',
   telephone: '+17406022155',
+  hasOccupation: {
+    '@type': 'Occupation',
+    name: 'Attorney',
+  },
   alumniOf: {
     '@type': 'EducationalOrganization',
     name: 'The Ohio State University Moritz College of Law',

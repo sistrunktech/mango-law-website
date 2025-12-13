@@ -21,6 +21,8 @@ export default function Footer() {
               <img
                 src="/images/brand/mango-logo-vertical-fullcolor.svg"
                 alt="Mango Law LLC"
+                width={2000}
+                height={2000}
                 className="h-16 w-auto transition-opacity group-hover:opacity-90"
                 loading="lazy"
               />

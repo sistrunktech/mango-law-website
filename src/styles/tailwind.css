@@ -1,11 +1,9 @@
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
-@import '@fontsource/lora/400.css';
-@import '@fontsource/lora/500.css';
-@import '@fontsource/lora/600.css';
-@import '@fontsource/lora/700.css';
+/* Latin subsets only (fewer font files on the critical path). */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-700.css';
+@import '@fontsource/lora/latin-400.css';
+@import '@fontsource/lora/latin-700.css';
 
 @tailwind base;
 @tailwind components;

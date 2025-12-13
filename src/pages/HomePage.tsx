@@ -1,9 +1,10 @@
+import { Suspense, lazy } from 'react';
 import { CheckCircle, FileText, Users, Clock, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
-import BlogSection from '../components/BlogSection';
-import TestimonialsList from '../components/TestimonialsList';
+const BlogSection = lazy(() => import('../components/BlogSection'));
+const TestimonialsList = lazy(() => import('../components/TestimonialsList'));
 import CTASection from '../components/CTASection';
 import LocationBlock from '../components/LocationBlock';
 import ContactForm from '../components/ContactForm';
@@ -94,6 +95,10 @@ export default function HomePage() {
                     <img
                       src="/images/headshots/nick-mango-hero.jpg"
                       alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
+                      width={700}
+                      height={900}
+                      fetchPriority="high"
+                      decoding="async"
                       className="mx-auto h-auto max-h-[520px] w-full object-contain transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
@@ -111,7 +116,9 @@ export default function HomePage() {
 
       <PracticeAreaCardGrid />
 
-      <BlogSection />
+      <Suspense fallback={null}>
+        <BlogSection />
+      </Suspense>
 
       {/* Stats/Trust Section */}
       <section className="relative overflow-hidden py-20">
@@ -140,7 +147,9 @@ export default function HomePage() {
 
       <section className="section bg-white">
         <div className="container">
-          <TestimonialsList variant="featured" />
+          <Suspense fallback={null}>
+            <TestimonialsList variant="featured" />
+          </Suspense>
         </div>
       </section>
 

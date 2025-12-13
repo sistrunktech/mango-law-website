@@ -46,6 +46,8 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             <img
               src={logoSrc}
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
+              width={1706}
+              height={584}
               className={`h-14 w-auto transition-all hover:opacity-90 ${isScrolled ? 'lg:h-12' : ''}`}
               loading="eager"
             />

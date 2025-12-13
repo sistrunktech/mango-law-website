@@ -162,6 +162,74 @@ function statusPill(status: IntegrationStatus) {
   }
 }
 
+type ResourceSelectionState = { value: string; saving: boolean };
+
+function getCurrentResourceValue(type: IntegrationType, integration?: GoogleIntegration): string {
+  if (!integration) return '';
+  if (type === 'business_profile') return integration.location_id || '';
+  const metadata = integration.metadata || {};
+  if (type === 'search_console') return String((metadata as any).siteUrl ?? '');
+  if (type === 'analytics') return String((metadata as any).propertyId ?? '');
+  if (type === 'tag_manager') return String((metadata as any).containerId ?? '');
+  return '';
+}
+
+function extractResourceOptions(type: IntegrationType, accessData: any): Array<{ value: string; label: string }> {
+  if (!accessData) return [];
+
+  if (type === 'search_console') {
+    const sites: any[] = accessData?.sites?.sample ?? [];
+    return sites
+      .map((s) => ({ value: String(s?.siteUrl ?? ''), label: String(s?.siteUrl ?? '') }))
+      .filter((o) => Boolean(o.value));
+  }
+
+  if (type === 'analytics') {
+    const properties: any[] = accessData?.properties?.sample ?? [];
+    return properties
+      .map((p) => ({
+        value: String(p?.name ?? ''),
+        label: String(p?.displayName ?? p?.name ?? ''),
+      }))
+      .filter((o) => Boolean(o.value));
+  }
+
+  if (type === 'tag_manager') {
+    const containers: any[] = accessData?.containers?.sample ?? [];
+    return containers
+      .map((c) => ({
+        value: String(c?.containerId ?? ''),
+        label: String(c?.name ?? c?.publicId ?? c?.containerId ?? ''),
+      }))
+      .filter((o) => Boolean(o.value));
+  }
+
+  if (type === 'business_profile') {
+    const locations: any[] = accessData?.locations?.sample ?? [];
+    return locations
+      .map((l) => ({
+        value: String(l?.name ?? ''),
+        label: String(l?.title ?? l?.storefrontAddress?.addressLines?.join(', ') ?? l?.name ?? ''),
+      }))
+      .filter((o) => Boolean(o.value));
+  }
+
+  return [];
+}
+
+function inferPreferredResource(type: IntegrationType, options: Array<{ value: string; label: string }>): string {
+  if (options.length === 0) return '';
+
+  if (type === 'search_console') {
+    const domain = options.find((o) => o.value === 'sc-domain:mango.law');
+    if (domain) return domain.value;
+    const prefix = options.find((o) => o.value === 'https://mango.law/');
+    if (prefix) return prefix.value;
+  }
+
+  return options[0].value;
+}
+
 export default function ConnectionsPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -181,6 +249,12 @@ export default function ConnectionsPage() {
     analytics: { status: 'idle' },
     search_console: { status: 'idle' },
     tag_manager: { status: 'idle' },
+  });
+  const [resourceSelections, setResourceSelections] = useState<Record<IntegrationType, ResourceSelectionState>>({
+    business_profile: { value: '', saving: false },
+    analytics: { value: '', saving: false },
+    search_console: { value: '', saving: false },
+    tag_manager: { value: '', saving: false },
   });
 
   useEffect(() => {
@@ -289,6 +363,16 @@ export default function ConnectionsPage() {
         ...prev,
         [integrationType]: { status: 'success', checkedAt, data: result },
       }));
+
+      // Prime selection UI with an existing saved selection, or a sensible default.
+      const integration = getIntegration(integrationType);
+      const existing = getCurrentResourceValue(integrationType, integration);
+      const options = extractResourceOptions(integrationType, result);
+      const preferred = existing || inferPreferredResource(integrationType, options);
+      setResourceSelections((prev) => ({
+        ...prev,
+        [integrationType]: { ...prev[integrationType], value: preferred || prev[integrationType].value || '' },
+      }));
     } catch (error) {
       console.error('Access check error:', error);
       const checkedAt = new Date().toISOString();
@@ -296,6 +380,54 @@ export default function ConnectionsPage() {
         ...prev,
         [integrationType]: { status: 'error', checkedAt, message: 'Access check failed' },
       }));
+    }
+  };
+
+  const handleSaveSelectedResource = async (integrationType: IntegrationType) => {
+    if (!supabase) return;
+
+    const integration = getIntegration(integrationType);
+    if (!integration) return;
+
+    const value = (resourceSelections[integrationType]?.value || '').trim();
+    if (!value) {
+      setMessage({ type: 'error', text: 'Select a resource first, then click Save.' });
+      setTimeout(() => setMessage(null), 3500);
+      return;
+    }
+
+    try {
+      setResourceSelections((prev) => ({ ...prev, [integrationType]: { ...prev[integrationType], saving: true } }));
+
+      if (integrationType === 'business_profile') {
+        const { error } = await supabase
+          .from('google_integrations')
+          .update({ location_id: value, updated_at: new Date().toISOString() })
+          .eq('id', integration.id);
+        if (error) throw error;
+      } else {
+        const existingMeta = integration.metadata || {};
+        const nextMeta = { ...existingMeta } as Record<string, unknown>;
+        if (integrationType === 'search_console') nextMeta.siteUrl = value;
+        if (integrationType === 'analytics') nextMeta.propertyId = value;
+        if (integrationType === 'tag_manager') nextMeta.containerId = value;
+
+        const { error } = await supabase
+          .from('google_integrations')
+          .update({ metadata: nextMeta, updated_at: new Date().toISOString() })
+          .eq('id', integration.id);
+        if (error) throw error;
+      }
+
+      setMessage({ type: 'success', text: 'Saved selection. Re-check status if needed.' });
+      setTimeout(() => setMessage(null), 2500);
+      await loadIntegrations();
+    } catch (e) {
+      console.error('Failed to save selection:', e);
+      setMessage({ type: 'error', text: 'Failed to save selection. Check RLS/admin permissions.' });
+      setTimeout(() => setMessage(null), 3500);
+    } finally {
+      setResourceSelections((prev) => ({ ...prev, [integrationType]: { ...prev[integrationType], saving: false } }));
     }
   };
 
@@ -477,6 +609,11 @@ export default function ConnectionsPage() {
             const pill = statusPill(status);
             const PillIcon = pill.icon;
             const accessCheck = accessChecks[type];
+            const selection = resourceSelections[type];
+            const selectionOptions =
+              isConnected && accessCheck.status === 'success'
+                ? extractResourceOptions(type, accessCheck.data)
+                : [];
 
             return (
               <div
@@ -698,6 +835,43 @@ export default function ConnectionsPage() {
                         <h4 className="text-sm font-semibold text-white">Latest status check</h4>
                         <span className="text-xs text-slate-500">{formatDate(accessCheck.checkedAt)}</span>
                       </div>
+                      {selectionOptions.length > 0 && (
+                        <div className="mt-3 rounded-lg border border-[#2A2A2A] bg-black/20 p-3">
+                          <div className="flex flex-wrap items-end justify-between gap-3">
+                            <div className="min-w-[240px] flex-1">
+                              <div className="text-xs font-semibold text-slate-300">Select resource (required for “healthy”)</div>
+                              <select
+                                value={selection.value}
+                                onChange={(e) =>
+                                  setResourceSelections((prev) => ({
+                                    ...prev,
+                                    [type]: { ...prev[type], value: e.target.value },
+                                  }))
+                                }
+                                className="mt-2 w-full rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#E8A33C]/40"
+                              >
+                                <option value="">Choose…</option>
+                                {selectionOptions.map((o) => (
+                                  <option key={o.value} value={o.value}>
+                                    {o.label}
+                                  </option>
+                                ))}
+                              </select>
+                              <div className="mt-2 text-xs text-slate-500">
+                                Saved selection: <span className="font-mono text-slate-300">{getCurrentResourceValue(type, integration) || '—'}</span>
+                              </div>
+                            </div>
+                            <button
+                              onClick={() => handleSaveSelectedResource(type)}
+                              disabled={!selection.value || selection.saving}
+                              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#232323] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2A2A2A] disabled:opacity-50"
+                            >
+                              {selection.saving ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Link2 className="h-4 w-4" />}
+                              Save
+                            </button>
+                          </div>
+                        </div>
+                      )}
                       <pre className="mt-2 text-xs text-slate-300 overflow-auto max-h-56 bg-black/25 p-3 rounded">
                         {JSON.stringify(accessCheck.data, null, 2)}
                       </pre>

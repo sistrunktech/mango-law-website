@@ -6,11 +6,17 @@
 - Add `mango-law-website/.boltignore` to prevent local publish tools from uploading `node_modules/` (scoped `@...` paths can trigger “unsupported filename character” errors).
 - Make `/admin/connections` call Edge Functions via `supabase.functions.invoke(...)` to reduce Supabase project drift and fix OAuth URL generation inconsistencies (`src/pages/ConnectionsPage.tsx`).
 - Pin the frontend Supabase client to the production project to eliminate cross-project drift (fixes “demo/seed checkpoints showing up” and OAuth redirect URIs pointing at stale projects) (`src/lib/supabaseClient.ts`).
+- Add “Select resource” persistence (GSC property / GA4 property / GTM container / GBP location) so integrations can become `Connected (healthy)` and future sync has an explicit target (`src/pages/ConnectionsPage.tsx`).
 - Harden manual announcement saves against schema drift by adding an upsert fallback when `source_url` uniqueness constraints are missing (`src/lib/checkpointAnnouncementsService.ts`).
 - Update OVICheckpoint scraper to ingest the authoritative WordPress JSON page and parse the TablePress checkpoint table (`supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts`).
 - Make the public checkpoints page hide seed/demo rows by requiring a non-null `source_url` (mitigation while production DB is cleaned) (`src/lib/checkpointService.ts`, `src/pages/DUICheckpointsPage.tsx`).
 - Document current operational blockers and mitigations (`docs/OPERATIONS.md`, `docs/TROUBLE-TICKETS.md`, `docs/HANDOFF_GLOSSARY.md`).
 - Ops: ensure Supabase Edge Function secrets include a valid `MAPBOX_PUBLIC_TOKEN` so the scraper can geocode and map markers appear (no code change).
+
+### Performance + SEO
+- Split heavy routes into separate chunks (notably `/resources/dui-checkpoints` + admin pages) to reduce initial JS on the homepage (`src/App.tsx`, `src/pages/HomePage.tsx`).
+- Reduce font downloads by switching @fontsource imports to latin subsets only (`src/styles/tailwind.css`).
+- Fix Schema.org validator errors by using a single JSON-LD graph for LegalService + founder Person, and by switching the About page schema to `Person` + `hasOccupation` (`src/lib/seo.tsx`).
 
 ## 2025-12-12
 
