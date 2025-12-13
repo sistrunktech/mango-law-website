@@ -9,10 +9,12 @@ The statute dataset will be supplied later (start with a small placeholder datas
 
 ## Dataset status (now available)
 
-Initial v1 datasets are now in the repo root:
+ORC datasets are now in the repo root:
 
 - `mango_orc_statutes_v1.json` (103 statutes)
 - `mango_orc_statutes_v1.csv` (same content in CSV form)
+- `mango_orc_statutes_full_v2.json` / `mango_orc_statutes_full_v2.csv` (expanded dataset)
+- `mango_orc_statutes_minimal_v2.csv` (minimal CSV slice used for quick iteration)
 
 These can be used as the first implementation dataset, or moved/normalized into `src/data/statutes.json` once the UI scaffolding is in place.
 

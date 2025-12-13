@@ -125,7 +125,7 @@ Site currently uses `public/favicon.svg` only. We should add standard PNG favico
 ## TICKET-004: Admin Login / Password Reset Email Not Arriving
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Mitigated  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
@@ -144,6 +144,9 @@ Admin cannot sign in at `/admin/login`. Password reset is requested at `/admin/f
    - Ensure redirect URLs include `https://mango.law/admin/reset-password` (and any staging/preview host you actively use).
 3. Supabase Dashboard → Authentication → Email (or SMTP):
    - Confirm email sending is enabled and review deliverability logs/suppression.
+
+### Mitigation / current state
+- Admin access is tied to **Supabase Auth** (not “Bolt user accounts”). If an admin can’t log in, first confirm the user exists in Supabase Auth for `rgucewewminsevbjgcad`.
 
 ---
 
@@ -173,7 +176,7 @@ Seed/demo rows exist in the production `dui_checkpoints` table.
 ## TICKET-006: Google OAuth redirect_uri_mismatch (creshr… vs rguce…)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Mitigated  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
@@ -198,12 +201,17 @@ The original DB constraint only allowed `business_profile`, `sheets`, `calendar`
 `analytics`, `search_console`, and `tag_manager`. Apply migration
 `supabase/migrations/20251213050000_fix_google_integrations_integration_type_check.sql`.
 
+### Mitigation / current state
+- The frontend Supabase client is pinned to the production project (prevents calling stale projects even if Bolt env vars drift).
+- `google-oauth-connect` currently returns `redirectUri=https://rgucewewminsevbjgcad.supabase.co/functions/v1/google-oauth-callback`.
+- Remaining requirement is Google Cloud Console: ensure that exact redirect URI is present on the correct OAuth client.
+
 ---
 
 ## TICKET-007: Bolt Publish Failure — Unsupported Filename Character
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Mitigated  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 

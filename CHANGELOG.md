@@ -5,6 +5,7 @@
 ### Checkpoints + Admin Reliability
 - Add `mango-law-website/.boltignore` to prevent local publish tools from uploading `node_modules/` (scoped `@...` paths can trigger “unsupported filename character” errors).
 - Make `/admin/connections` call Edge Functions via `supabase.functions.invoke(...)` to reduce Supabase project drift and fix OAuth URL generation inconsistencies (`src/pages/ConnectionsPage.tsx`).
+- Pin the frontend Supabase client to the production project to eliminate cross-project drift (fixes “demo/seed checkpoints showing up” and OAuth redirect URIs pointing at stale projects) (`src/lib/supabaseClient.ts`).
 - Harden manual announcement saves against schema drift by adding an upsert fallback when `source_url` uniqueness constraints are missing (`src/lib/checkpointAnnouncementsService.ts`).
 - Update OVICheckpoint scraper to ingest the authoritative WordPress JSON page and parse the TablePress checkpoint table (`supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts`).
 - Make the public checkpoints page hide seed/demo rows by requiring a non-null `source_url` (mitigation while production DB is cleaned) (`src/lib/checkpointService.ts`, `src/pages/DUICheckpointsPage.tsx`).

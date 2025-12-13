@@ -5,7 +5,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 ## Stack
 - React 18 + Vite + TypeScript, Tailwind with Mango brand tokens.
 - React Router v6 routes for all pages in the sitemap.
-- Supabase client initialized in `src/lib/supabaseClient.ts` for the contact form.
+- Supabase client initialized in `src/lib/supabaseClient.ts` for admin auth + CMS + checkpoints + forms.
 - CI: GitHub Actions build workflow (`.github/workflows/ci.yml`).
 - Optional OG/hero pipeline: fal.ai generation + Supabase Storage upload via `plugins/vite-og-plugin.ts` (runs only when env is present).
 
@@ -16,8 +16,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
 - Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `VITE_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
 - See `.env.example` for the full list; update it whenever variables change.
-- Current allowlist should include staging/Bolt hosts: `https://mango.law`, `https://staging.mango.law`, and `https://sistrunktech-mango-l-lqhi.bolt.host` (add/remove as environments change).
-- For the current rollout, `mango.law` + staging/preview hosts use the same Supabase project (`rgucewewminsevbjgcad`) to prevent “split brain” data and OAuth redirect drift.
+- **Supabase project pinning:** the frontend is currently pinned to the production Supabase project in `src/lib/supabaseClient.ts` to prevent “split brain” data and OAuth redirect drift. If you truly need multiple environments later, reintroduce host/env-based switching carefully and update Google OAuth redirect URIs accordingly.
 
 ## Contact Numbers (Do Not Swap)
 - **Office / Main line:** `(740) 602-2155` (`tel:7406022155`) — default for all “Call” CTAs.
