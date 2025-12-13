@@ -105,9 +105,9 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - To regenerate the TS-embedded CSV modules used by the Edge Function, run: `node scripts/compile-rss-config.mjs` (or `node compile-rss-config.mjs`).
 
 ## Admin Dashboard
-- **Location**: `/admin/checkpoints` page (CheckpointAdminPage.tsx).
+- **Primary UI**: `/admin/dashboard` (tabbed CMS). Uses Supabase Auth (email/password) via `src/contexts/AuthContext.tsx`.
 - **Connections hub**: `/admin/connections` provides a BrightLocal-like view of Google integrations (Connect/Reconnect + Check status + Setup guide).
-- **Authentication**: Protected with password authentication (password: `mango2024admin`). Session expires after 24 hours. Change password in `src/components/AdminAuth.tsx`.
+- **Legacy checkpoint UI**: `/admin/checkpoints` is an older page gated by a local password (`src/components/AdminAuth.tsx`). Prefer using the dashboard tab.
 - **Features**:
   - **Status Update Button**: Manually trigger checkpoint status updates based on current time (upcoming → active → completed).
   - **Scraper Logs Viewer**: Real-time view of scraper execution history with success/failure stats, error details, and manual trigger button. Logs are publicly viewable for transparency.

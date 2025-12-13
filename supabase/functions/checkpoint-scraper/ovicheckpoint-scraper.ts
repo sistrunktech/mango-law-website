@@ -7,11 +7,188 @@ interface RawCheckpoint {
   sourceUrl: string;
 }
 
+function stripHtml(input: string): string {
+  return input.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function decodeHtmlEntities(input: string): string {
+  return input
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#(\d+);/g, (_m, n) => String.fromCharCode(Number(n)))
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function parseDateTime(timeStr: string): { start: string; end: string } {
+  const s = timeStr.trim();
+
+  const monthMap: Record<string, number> = {
+    january: 0,
+    february: 1,
+    march: 2,
+    april: 3,
+    may: 4,
+    june: 5,
+    july: 6,
+    august: 7,
+    september: 8,
+    october: 9,
+    november: 10,
+    december: 11,
+  };
+
+  const patterns: Array<{
+    re: RegExp;
+    kind:
+      | 'full'
+      | 'full_dash'
+      | 'from_to'
+      | 'no_day_full'
+      | 'late_night'
+      | 'date_only'
+      | 'date_only_no_day';
+  }> = [
+    // "Friday, December 5, 2025 | 10 PM to 2 AM"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+\|\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'full',
+    },
+    // "Friday, August 29, 2025 | 8:00 PM – 11:00 PM"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+\|\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s*[–—-]\s*(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'full_dash',
+    },
+    // "Saturday, September 13, 2025, From 7 PM to 11 PM"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+),\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'from_to',
+    },
+    // "Friday, August 22, 2025 From 10 PM to 2 AM"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'from_to',
+    },
+    // "August 9, 2025 – 6:00 PM to 8:30 PM"
+    {
+      re: /(\w+)\s+(\d+),\s+(\d+)\s+[–—-]\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'no_day_full',
+    },
+    // "August 8, 2025 From 9 PM to 11 PM"
+    {
+      re: /(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'no_day_full',
+    },
+    // "Wednesday, November 26, 2025 | Late Night"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+\|\s+Late Night/i,
+      kind: 'late_night',
+    },
+    // "Friday, September 19, 2025"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s*$/i,
+      kind: 'date_only',
+    },
+    // "August 8, 2025"
+    {
+      re: /(\w+)\s+(\d+),\s+(\d+)\s*$/i,
+      kind: 'date_only_no_day',
+    },
+  ];
+
+  function parseTime(time: string, period: string): { hour: number; minute: number } {
+    let hour = 0;
+    let minute = 0;
+    if (time.includes(':')) {
+      const [h, m] = time.split(':');
+      hour = Number(h);
+      minute = Number(m);
+    } else {
+      hour = Number(time);
+      minute = 0;
+    }
+    const p = period.toUpperCase();
+    if (p === 'PM' && hour !== 12) hour += 12;
+    if (p === 'AM' && hour === 12) hour = 0;
+    return { hour, minute };
+  }
+
+  for (const { re, kind } of patterns) {
+    const match = s.match(re);
+    if (!match) continue;
+
+    let monthName: string;
+    let day: number;
+    let year: number;
+    let startHour = 20;
+    let startMinute = 0;
+    let endHour = 23;
+    let endMinute = 0;
+
+    if (
+      kind === 'full' ||
+      kind === 'full_dash' ||
+      kind === 'from_to' ||
+      kind === 'late_night' ||
+      kind === 'date_only'
+    ) {
+      monthName = match[2]!;
+      day = Number(match[3]!);
+      year = Number(match[4]!);
+    } else {
+      monthName = match[1]!;
+      day = Number(match[2]!);
+      year = Number(match[3]!);
+    }
+
+    if (kind === 'late_night') {
+      startHour = 22;
+      endHour = 2;
+    } else if (kind === 'full' || kind === 'full_dash' || kind === 'from_to') {
+      const start = parseTime(match[5]!, match[6]!);
+      const end = parseTime(match[7]!, match[8]!);
+      startHour = start.hour;
+      startMinute = start.minute;
+      endHour = end.hour;
+      endMinute = end.minute;
+    } else if (kind === 'no_day_full') {
+      const start = parseTime(match[4]!, match[5]!);
+      const end = parseTime(match[6]!, match[7]!);
+      startHour = start.hour;
+      startMinute = start.minute;
+      endHour = end.hour;
+      endMinute = end.minute;
+    }
+
+    const month = monthMap[monthName.toLowerCase()];
+    if (month === undefined) break;
+
+    const startDate = new Date(year, month, day, startHour, startMinute);
+    let endDate = new Date(year, month, day, endHour, endMinute);
+    if (endDate <= startDate) {
+      endDate = new Date(year, month, day + 1, endHour, endMinute);
+    }
+
+    return { start: startDate.toISOString(), end: endDate.toISOString() };
+  }
+
+  console.warn(`Could not parse checkpoint time/date: ${timeStr}`);
+  const startDate = new Date();
+  startDate.setHours(20, 0, 0, 0);
+  const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000);
+  return { start: startDate.toISOString(), end: endDate.toISOString() };
+}
+
 export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
-  const url = 'https://ovicheckpoint.com/';
+  const url = 'https://www.ovicheckpoint.com/';
+  const wpJsonUrl = 'https://www.ovicheckpoint.com/wp-json/wp/v2/pages/1078';
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(wpJsonUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
@@ -21,81 +198,49 @@ export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
-    const html = await response.text();
-
+    const page = await response.json().catch(() => null);
+    const html = typeof page?.content?.rendered === 'string' ? page.content.rendered : '';
     const checkpoints: RawCheckpoint[] = [];
 
-    const checkpointPattern = /<div[^>]*class="[^"]*checkpoint[^"]*"[^>]*>([\s\S]*?)<\/div>/gi;
-    const matches = html.matchAll(checkpointPattern);
-
-    for (const match of matches) {
-      const blockHtml = match[1];
-
-      const titleMatch = blockHtml.match(/<h[23][^>]*>(.*?)<\/h[23]>/i);
-      const locationMatch = blockHtml.match(/location[^>]*>(.*?)</i) ||
-                           blockHtml.match(/address[^>]*>(.*?)</i);
-      const dateMatch = blockHtml.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);
-      const timeMatch = blockHtml.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))/i);
-
-      if (titleMatch && locationMatch && dateMatch) {
-        const title = titleMatch[1].replace(/<[^>]*>/g, '').trim();
-        const location = locationMatch[1].replace(/<[^>]*>/g, '').trim();
-        const dateStr = dateMatch[1];
-        const timeStr = timeMatch ? timeMatch[1] : '6:00 PM';
-
-        const startDate = new Date(`${dateStr} ${timeStr}`).toISOString();
-        const endDateObj = new Date(startDate);
-        endDateObj.setHours(endDateObj.getHours() + 4);
-        const endDate = endDateObj.toISOString();
-
-        checkpoints.push({
-          title,
-          location,
-          startDate,
-          endDate,
-          sourceUrl: url,
-        });
-      }
+    const tableMatch = html.match(/<table[^>]*id="tablepress-1"[\s\S]*?<\/table>/i);
+    if (!tableMatch) {
+      console.warn('OVICheckpoint: Could not find checkpoint table; falling back to homepage scrape');
+      return await scrapeOVICheckpointHomepage(url);
     }
 
-    if (checkpoints.length === 0) {
-      const fallbackPattern = /<article[^>]*>([\s\S]*?)<\/article>/gi;
-      const articleMatches = html.matchAll(fallbackPattern);
+    const tableHtml = tableMatch[0];
+    const tbodyMatch = tableHtml.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
+    const rowsHtml = tbodyMatch ? tbodyMatch[1] : tableHtml;
 
-      for (const match of articleMatches) {
-        const article = match[1];
+    const rowPattern = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+    for (const rowMatch of rowsHtml.matchAll(rowPattern)) {
+      const row = rowMatch[1];
+      const cells = [...row.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) =>
+        decodeHtmlEntities(stripHtml(m[1] ?? ''))
+      );
 
-        const titleMatch = article.match(/<h[1-4][^>]*>(.*?)<\/h[1-4]>/i);
-        const textContent = article.replace(/<[^>]*>/g, ' ').trim();
+      if (cells.length < 4) continue;
+      const [countyRaw, cityRaw, locationRaw, timeRaw] = cells;
+      if (!countyRaw || /^county$/i.test(countyRaw)) continue;
+      if (!timeRaw) continue;
 
-        const locationPattern = /(?:at|location|address):\s*([^,\n]+(?:,\s*[^,\n]+){0,2})/i;
-        const datePattern = /(\d{1,2}\/\d{1,2}\/\d{4})/;
-        const timePattern = /(\d{1,2}:\d{2}\s*(?:AM|PM))/i;
+      const county = countyRaw.replace(/\s+County$/i, '').trim();
+      const city = cityRaw?.trim() || '';
+      const locationText = locationRaw?.trim() || '';
+      const { start, end } = parseDateTime(timeRaw);
 
-        const locationMatch = textContent.match(locationPattern);
-        const dateMatch = textContent.match(datePattern);
-        const timeMatch = textContent.match(timePattern);
+      const cityPart = city && city !== 'Check back for updates' ? `${city}, ` : '';
+      const title = `OVI Checkpoint - ${cityPart}${county} County`;
+      const location = `${locationText}, ${city || county}, ${county} County`;
 
-        if (titleMatch && locationMatch && dateMatch) {
-          const title = titleMatch[1].replace(/<[^>]*>/g, '').trim();
-          const location = locationMatch[1].trim();
-          const dateStr = dateMatch[1];
-          const timeStr = timeMatch ? timeMatch[1] : '6:00 PM';
-
-          const startDate = new Date(`${dateStr} ${timeStr}`).toISOString();
-          const endDateObj = new Date(startDate);
-          endDateObj.setHours(endDateObj.getHours() + 4);
-          const endDate = endDateObj.toISOString();
-
-          checkpoints.push({
-            title,
-            location,
-            startDate,
-            endDate,
-            sourceUrl: url,
-          });
-        }
-      }
+      checkpoints.push({
+        title,
+        location,
+        startDate: start,
+        endDate: end,
+        description: locationText,
+        sourceUrl: url,
+      });
     }
 
     console.log(`Scraped ${checkpoints.length} checkpoints from OVICheckpoint.com`);
@@ -104,4 +249,58 @@ export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
     console.error('OVICheckpoint scraper error:', error);
     throw error;
   }
+}
+
+async function scrapeOVICheckpointHomepage(url: string): Promise<RawCheckpoint[]> {
+  const response = await fetch(url, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  }
+
+  const html = await response.text();
+  const checkpoints: RawCheckpoint[] = [];
+
+  const tableMatch = html.match(/<table[^>]*id=\"tablepress-1\"[\s\S]*?<\/table>/i);
+  if (!tableMatch) return checkpoints;
+
+  const tableHtml = tableMatch[0];
+  const tbodyMatch = tableHtml.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
+  const rowsHtml = tbodyMatch ? tbodyMatch[1] : tableHtml;
+
+  const rowPattern = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+  for (const rowMatch of rowsHtml.matchAll(rowPattern)) {
+    const row = rowMatch[1];
+    const cells = [...row.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) =>
+      decodeHtmlEntities(stripHtml(m[1] ?? ''))
+    );
+    if (cells.length < 4) continue;
+    const [countyRaw, cityRaw, locationRaw, timeRaw] = cells;
+    if (!countyRaw || /^county$/i.test(countyRaw)) continue;
+    if (!timeRaw) continue;
+
+    const county = countyRaw.replace(/\s+County$/i, '').trim();
+    const city = cityRaw?.trim() || '';
+    const locationText = locationRaw?.trim() || '';
+    const { start, end } = parseDateTime(timeRaw);
+
+    const cityPart = city && city !== 'Check back for updates' ? `${city}, ` : '';
+    const title = `OVI Checkpoint - ${cityPart}${county} County`;
+    const location = `${locationText}, ${city || county}, ${county} County`;
+
+    checkpoints.push({
+      title,
+      location,
+      startDate: start,
+      endDate: end,
+      description: locationText,
+      sourceUrl: url,
+    });
+  }
+
+  return checkpoints;
 }

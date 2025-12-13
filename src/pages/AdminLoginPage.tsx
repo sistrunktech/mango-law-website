@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Shield, AlertCircle } from 'lucide-react';
+import { supabaseProjectRef } from '../lib/supabaseClient';
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
@@ -98,6 +99,9 @@ export default function AdminLoginPage() {
           <div className="mt-6 text-center">
             <p className="text-slate-300 text-sm">
               Authorized personnel only
+            </p>
+            <p className="mt-2 text-xs text-slate-400">
+              Auth backend: <span className="font-mono text-slate-200">{supabaseProjectRef ?? 'unconfigured'}</span>
             </p>
           </div>
         </div>

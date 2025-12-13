@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, ArrowLeft, CheckCircle } from 'lucide-react';
-import { supabase } from '../lib/supabaseClient';
+import { supabase, supabaseProjectRef } from '../lib/supabaseClient';
 import MangoIcon from '../components/MangoIcon';
 
 export default function ForgotPasswordPage() {
@@ -64,6 +64,11 @@ export default function ForgotPasswordPage() {
                 <li>Click the reset link in the email</li>
                 <li>Enter your new password</li>
               </ol>
+              <p className="mt-3 text-xs text-slate-300">
+                If no email arrives within a couple minutes, your admin user may not exist in this auth backend (
+                <span className="font-mono text-slate-100">{supabaseProjectRef ?? 'unconfigured'}</span>). Create/invite
+                the user in Supabase Dashboard → Authentication → Users.
+              </p>
             </div>
 
             <div className="space-y-3">
@@ -149,6 +154,9 @@ export default function ForgotPasswordPage() {
 
         <div className="mt-6 text-center text-sm text-slate-300">
           <p>Only admin users can reset their password</p>
+          <p className="mt-2 text-xs text-slate-400">
+            Auth backend: <span className="font-mono text-slate-200">{supabaseProjectRef ?? 'unconfigured'}</span>
+          </p>
         </div>
       </div>
     </div>

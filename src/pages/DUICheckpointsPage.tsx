@@ -40,6 +40,12 @@ export default function DUICheckpointsPage() {
     filterCheckpoints();
   }, [checkpoints, selectedCounty]);
 
+  const filterPublicCheckpoints = (data: DUICheckpoint[]) => {
+    // Public page should only show checkpoints with a real upstream source URL.
+    // This prevents demo/seed rows from appearing as “real” checkpoints.
+    return data.filter((c) => Boolean(c.source_url));
+  };
+
   const loadCheckpoints = async () => {
     try {
       setLoading(true);
@@ -53,10 +59,10 @@ export default function DUICheckpointsPage() {
       }
       if (viewMode === 'upcoming') {
         const data = await getUpcomingCheckpoints();
-        setCheckpoints(data);
+        setCheckpoints(filterPublicCheckpoints(data));
       } else {
         const data = await getRecentCheckpoints(dateRange);
-        setCheckpoints(data);
+        setCheckpoints(filterPublicCheckpoints(data));
       }
     } catch (error) {
       console.error('Failed to load checkpoints:', error);

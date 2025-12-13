@@ -211,8 +211,8 @@ export default function HandoffSharePage() {
           </div>
           <p>© {new Date().getFullYear()} Mango Law LLC. All rights reserved.</p>
           <p className="mt-2">
-            <a href="https://mangolaw.com" className="text-amber-600 hover:text-amber-700">
-              Visit mangolaw.com
+            <a href="https://mango.law" className="text-amber-600 hover:text-amber-700">
+              Visit mango.law
             </a>
           </p>
         </footer>

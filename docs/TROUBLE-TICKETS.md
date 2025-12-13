@@ -122,4 +122,92 @@ Site currently uses `public/favicon.svg` only. We should add standard PNG favico
 
 ---
 
+## TICKET-004: Admin Login / Password Reset Email Not Arriving
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-13  
+**Assigned To:** TBD
+
+### Issue Summary
+Admin cannot sign in at `/admin/login`. Password reset is requested at `/admin/forgot-password`, UI reports success, but the email does not arrive.
+
+### Most likely root causes
+- Admin user was created in a different Supabase project earlier (project drift), so the user does not exist in the current auth backend.
+- Supabase Auth email deliverability is failing (SMTP not configured, suppressed, or landing in spam).
+- Redirect URL allowlist in Supabase Auth does not include the current site origin.
+
+### Required checks / fix
+1. In Supabase Dashboard (project `rgucewewminsevbjgcad`) → Authentication → Users:
+   - Confirm the admin email exists (create/invite it if missing).
+2. Supabase Dashboard → Authentication → URL Configuration:
+   - Ensure redirect URLs include `https://mango.law/admin/reset-password` (and any staging/preview host you actively use).
+3. Supabase Dashboard → Authentication → Email (or SMTP):
+   - Confirm email sending is enabled and review deliverability logs/suppression.
+
+---
+
+## TICKET-005: Public DUI Checkpoints Page Shows Seed/Demo Rows
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-13  
+**Assigned To:** TBD
+
+### Issue Summary
+`/resources/dui-checkpoints` shows “fake”/seed checkpoints (e.g., Delaware County “today”) and other legacy placeholder rows.
+
+### Root cause
+Seed/demo rows exist in the production `dui_checkpoints` table.
+
+### Fix
+- Clean production data by deleting seed rows from `dui_checkpoints` (preferred).
+- Keep the public page conservative: show only rows with a real `source_url` (mitigation).
+
+---
+
+## TICKET-006: Google OAuth redirect_uri_mismatch (creshr… vs rguce…)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-13  
+**Assigned To:** TBD
+
+### Issue Summary
+Google OAuth still errors with `redirect_uri_mismatch`, showing a stale Supabase project callback:
+`https://creshrkavuyjzutatjfh.supabase.co/functions/v1/google-oauth-callback`
+
+### Likely root causes
+- Frontend is still calling the wrong Supabase project for `google-oauth-connect` (env drift or an older build).
+- Google Cloud Console OAuth client is missing the production callback URL, or still includes stale ones.
+
+### Required checks / fix
+1. Confirm the site is calling:
+   - `https://rgucewewminsevbjgcad.supabase.co/functions/v1/google-oauth-connect`
+2. Google Cloud Console → OAuth Client → Authorized redirect URIs must include:
+   - `https://rgucewewminsevbjgcad.supabase.co/functions/v1/google-oauth-callback`
+3. Remove stale redirect URIs after verification (including `creshr…`).
+
+---
+
+## TICKET-007: Bolt Publish Failure — Unsupported Filename Character
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-13  
+**Assigned To:** TBD
+
+### Issue Summary
+Publishing fails with: “Publication failed due to a filename with an unsupported character.”
+
+### Most common trigger
+Local publishing tools sometimes include `node_modules/` (which contains scoped packages like `@scope/...`) even though it is not required for deploy.
+
+### Fix
+- Ensure publishes exclude install artifacts:
+  - `node_modules/`, `dist/`, local output folders, and large binary bundles.
+- Repo includes `mango-law-website/.boltignore` and a `prebuild` filename safety check (`scripts/check-filenames.mjs`) to prevent regressions.
+
+---
+
 *Add additional trouble tickets below using the same format*

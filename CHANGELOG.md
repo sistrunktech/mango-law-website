@@ -1,5 +1,15 @@
 # Changelog
 
+## 2025-12-13
+
+### Checkpoints + Admin Reliability
+- Add `mango-law-website/.boltignore` to prevent local publish tools from uploading `node_modules/` (scoped `@...` paths can trigger “unsupported filename character” errors).
+- Make `/admin/connections` call Edge Functions via `supabase.functions.invoke(...)` to reduce Supabase project drift and fix OAuth URL generation inconsistencies (`src/pages/ConnectionsPage.tsx`).
+- Harden manual announcement saves against schema drift by adding an upsert fallback when `source_url` uniqueness constraints are missing (`src/lib/checkpointAnnouncementsService.ts`).
+- Update OVICheckpoint scraper to ingest the authoritative WordPress JSON page and parse the TablePress checkpoint table (`supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts`).
+- Make the public checkpoints page hide seed/demo rows by requiring a non-null `source_url` (mitigation while production DB is cleaned) (`src/lib/checkpointService.ts`, `src/pages/DUICheckpointsPage.tsx`).
+- Document current operational blockers and mitigations (`docs/OPERATIONS.md`, `docs/TROUBLE-TICKETS.md`, `docs/HANDOFF_GLOSSARY.md`).
+
 ## 2025-12-12
 
 ### UI Polish + Contact Number Hardening
@@ -18,7 +28,7 @@
   - (`src/lib/contactInfo.ts`, `src/lib/seo.tsx`)
 - Fix Bolt publish failures by renaming/removing files with unsupported filename characters (spaces/Unicode) (`public/images/brand/`, `mango-logo-options-1-new.zip`).
 - Add a `prebuild` filename safety check to prevent publish failures from slipping in (`scripts/check-filenames.mjs`, `package.json`).
-- Treat `mangolaw.com` as production to prevent Supabase project drift on alternate live domains (`src/lib/supabaseClient.ts`).
+- Treat staging/preview hosts as production to prevent Supabase project drift (`src/lib/supabaseClient.ts`).
 - Add ClickMinded-style “Copy naming” recommendations to Google integration setup guides (`src/pages/ConnectionsPage.tsx`).
 - Fix production `mango.law` pointing at the wrong Supabase project by forcing runtime to use the correct prod project (`rgucewewminsevbjgcad`) for Supabase client + function calls (`src/lib/supabaseClient.ts`, `src/pages/ConnectionsPage.tsx`, `src/components/ScraperLogsViewer.tsx`, `src/components/chat/ConversationWindow.tsx`).
 - Documentation updates:

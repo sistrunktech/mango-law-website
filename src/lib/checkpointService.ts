@@ -52,6 +52,7 @@ export async function getUpcomingCheckpoints(): Promise<DUICheckpoint[]> {
   const { data, error } = await supabase
     .from('dui_checkpoints')
     .select('*')
+    .not('source_url', 'is', null)
     .in('status', ['upcoming', 'active'])
     .gte('end_date', new Date().toISOString())
     .order('start_date', { ascending: true });
@@ -180,6 +181,7 @@ export async function getRecentCheckpoints(
   let query = supabase
     .from('dui_checkpoints')
     .select('*')
+    .not('source_url', 'is', null)
     .order('start_date', { ascending: false });
 
   if (dateRange !== 'all') {

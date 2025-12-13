@@ -241,23 +241,14 @@ export default function ConnectionsPage() {
         return;
       }
 
-      const response = await fetch(
-        `${supabaseUrl}/functions/v1/google-oauth-connect`,
-        {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${session.access_token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ integrationType }),
-        }
-      );
+      const { data, error } = await supabase.functions.invoke('google-oauth-connect', {
+        body: { integrationType },
+      });
 
-      if (!response.ok) {
-        throw new Error('Failed to generate OAuth URL');
-      }
+      if (error) throw error;
+      const authUrl = data?.authUrl as string | undefined;
+      if (!authUrl) throw new Error('Failed to generate OAuth URL');
 
-      const { authUrl } = await response.json();
       window.location.href = authUrl;
     } catch (error) {
       console.error('Connect error:', error);
@@ -279,23 +270,14 @@ export default function ConnectionsPage() {
         return;
       }
 
-      const response = await fetch(
-        `${supabaseUrl}/functions/v1/google-access-check`,
-        {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${session.access_token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ integrationType }),
-        }
-      );
-
       const checkedAt = new Date().toISOString();
-      const result = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
-        const errorMessage = result?.error || result?.message || 'Access check failed';
+      const { data: result, error } = await supabase.functions.invoke('google-access-check', {
+        body: { integrationType },
+      });
+
+      if (error) {
+        const errorMessage = error.message || 'Access check failed';
         setAccessChecks((prev) => ({
           ...prev,
           [integrationType]: { status: 'error', checkedAt, message: errorMessage },

@@ -20,6 +20,51 @@ interface ScraperStats {
   errors: Array<{ checkpoint: string; error: string }>;
 }
 
+async function upsertAnnouncement(
+  supabase: ReturnType<typeof createClient>,
+  payload: Record<string, unknown>
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const sourceUrl = typeof payload.source_url === 'string' ? payload.source_url : null;
+
+  if (!sourceUrl) {
+    const { error } = await supabase.from('dui_checkpoint_announcements').insert(payload);
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  }
+
+  const { error: upsertError } = await supabase
+    .from('dui_checkpoint_announcements')
+    .upsert(payload, { onConflict: 'source_url' });
+
+  if (!upsertError) return { ok: true };
+
+  // Fallback when the unique constraint is missing (common in drifted environments).
+  if (!/unique|conflict|exclusion/i.test(upsertError.message)) {
+    return { ok: false, error: upsertError.message };
+  }
+
+  const { data: existing, error: selectError } = await supabase
+    .from('dui_checkpoint_announcements')
+    .select('id')
+    .eq('source_url', sourceUrl)
+    .maybeSingle();
+
+  if (selectError) return { ok: false, error: selectError.message };
+
+  if (existing?.id) {
+    const { error: updateError } = await supabase
+      .from('dui_checkpoint_announcements')
+      .update(payload)
+      .eq('id', existing.id);
+    if (updateError) return { ok: false, error: updateError.message };
+    return { ok: true };
+  }
+
+  const { error: insertError } = await supabase.from('dui_checkpoint_announcements').insert(payload);
+  if (insertError) return { ok: false, error: insertError.message };
+  return { ok: true };
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { status: 200, headers: corsHeaders });
@@ -165,14 +210,11 @@ Deno.serve(async (req: Request) => {
               raw_text: item.summary,
             };
 
-            const { error: upsertError } = await supabase
-              .from('dui_checkpoint_announcements')
-              .upsert(payload, { onConflict: 'source_url' });
-
-            if (upsertError) {
+            const res = await upsertAnnouncement(supabase, payload);
+            if (!res.ok) {
               stats.errors.push({
                 checkpoint: `Announcement upsert: ${item.title}`,
-                error: upsertError.message,
+                error: res.error,
               });
             } else {
               stats.announcementsUpserted++;
@@ -204,14 +246,11 @@ Deno.serve(async (req: Request) => {
               raw_text: item.summary,
             };
 
-            const { error: upsertError } = await supabase
-              .from('dui_checkpoint_announcements')
-              .upsert(payload, { onConflict: 'source_url' });
-
-            if (upsertError) {
+            const res = await upsertAnnouncement(supabase, payload);
+            if (!res.ok) {
               stats.errors.push({
                 checkpoint: `Announcement upsert: ${item.title}`,
-                error: upsertError.message,
+                error: res.error,
               });
             } else {
               stats.announcementsUpserted++;

@@ -7,6 +7,15 @@ Goal: build a single “statute library” UI that works as both:
 
 The statute dataset will be supplied later (start with a small placeholder dataset).
 
+## Dataset status (now available)
+
+Initial v1 datasets are now in the repo root:
+
+- `mango_orc_statutes_v1.json` (103 statutes)
+- `mango_orc_statutes_v1.csv` (same content in CSV form)
+
+These can be used as the first implementation dataset, or moved/normalized into `src/data/statutes.json` once the UI scaffolding is in place.
+
 ## Critical constraint
 
 Do **not** build or run an automated crawler against `codes.ohio.gov` without explicit permission or an approved feed. Build the framework assuming the dataset is provided at build time (JSON).
@@ -191,4 +200,3 @@ Optional scaffolding:
 
 - `scripts/diff-statutes.ts` to report changes between dataset versions
 - `aliases[]` + `status` for renumbered/repealed handling
-

@@ -93,17 +93,61 @@ export async function createCheckpointAnnouncement(
   const payload = buildAnnouncementPayload(announcement, { defaultAnnouncementDate: true });
   const sourceUrl = payload.source_url;
 
-  const builder = sourceUrl
-    ? supabase
-        .from('dui_checkpoint_announcements')
-        .upsert([payload], { onConflict: 'source_url' })
-    : supabase.from('dui_checkpoint_announcements').insert([payload]);
+  // Prefer upsert when a URL is present (dedupe), but tolerate environments where
+  // the unique constraint may be missing (schema drift) by falling back.
+  if (sourceUrl) {
+    const { data, error } = await supabase
+      .from('dui_checkpoint_announcements')
+      .upsert([payload], { onConflict: 'source_url' })
+      .select()
+      .single();
 
-  const { data, error } = await builder.select().single();
+    if (!error) return data;
+
+    console.error('Error upserting announcement:', error);
+
+    // Schema drift: upsert requires a unique constraint on source_url.
+    if (/conflict|unique|exclusion/i.test(error.message)) {
+      const { data: existing, error: selectError } = await supabase
+        .from('dui_checkpoint_announcements')
+        .select('*')
+        .eq('source_url', sourceUrl)
+        .maybeSingle();
+
+      if (selectError) {
+        console.error('Error selecting announcement for fallback:', selectError);
+        throw new Error(`Failed to create announcement: ${selectError.message}`);
+      }
+
+      if (existing?.id) {
+        const { data: updated, error: updateError } = await supabase
+          .from('dui_checkpoint_announcements')
+          .update(payload)
+          .eq('id', existing.id)
+          .select()
+          .single();
+
+        if (updateError) {
+          console.error('Error updating announcement for fallback:', updateError);
+          throw new Error(`Failed to create announcement: ${updateError.message}`);
+        }
+
+        return updated;
+      }
+    }
+
+    throw new Error(`Failed to create announcement: ${error.message}`);
+  }
+
+  const { data, error } = await supabase
+    .from('dui_checkpoint_announcements')
+    .insert([payload])
+    .select()
+    .single();
 
   if (error) {
     console.error('Error creating announcement:', error);
-    throw new Error(error.message || 'Failed to create announcement');
+    throw new Error(`Failed to create announcement: ${error.message}`);
   }
 
   return data;

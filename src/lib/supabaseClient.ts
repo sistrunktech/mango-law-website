@@ -7,8 +7,6 @@ const PROD_HOSTS = new Set([
   'www.mango.law',
   'staging.mango.law',
   'sistrunktech-mango-l-lqhi.bolt.host',
-  'mangolaw.com',
-  'www.mangolaw.com',
 ]);
 const PROD_SUPABASE_URL = 'https://rgucewewminsevbjgcad.supabase.co';
 // NOTE: Supabase anon keys are public (shipped to the browser by design). This fallback prevents prod breakage if Bolt env vars drift.
