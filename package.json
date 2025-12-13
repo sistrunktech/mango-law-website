@@ -9,6 +9,7 @@
     "prebuild": "node scripts/check-filenames.mjs",
     "build": "tsc --noEmit && vite build",
     "postbuild": "node scripts/generate-sitemap.mjs",
+    "test": "ts-node --esm --transpile-only test/checkpointStatus.test.ts",
     "preview": "vite preview",
     "generate:image": "node scripts/generateImage.js"
   },

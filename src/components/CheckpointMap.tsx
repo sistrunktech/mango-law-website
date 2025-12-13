@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Navigation } from 'lucide-react';
-import type { DUICheckpoint } from '../data/checkpoints';
+import { getDisplayStatus, type DUICheckpoint } from '../data/checkpoints';
 
 type Props = {
   checkpoints: DUICheckpoint[];
@@ -109,7 +109,8 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         cancelled: '#8E8E93',
       };
 
-      const color = statusColors[checkpoint.status] || statusColors.upcoming;
+      const displayStatus = getDisplayStatus(checkpoint);
+      const color = statusColors[displayStatus] || statusColors.upcoming;
       const isSelected = selectedCheckpoint?.id === checkpoint.id;
 
       const el = document.createElement('div');
@@ -164,7 +165,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
                 <strong>End:</strong> ${endDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
               </p>
               <p style="margin: 0; font-size: 13px; color: #666;">
-                <strong>Status:</strong> <span style="color: ${color}; font-weight: 600; text-transform: capitalize;">${checkpoint.status}</span>
+                <strong>Status:</strong> <span style="color: ${color}; font-weight: 600; text-transform: capitalize;">${displayStatus}</span>
               </p>
             </div>
             ${checkpoint.description ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #888; line-height: 1.4;">${checkpoint.description}</p>` : ''}

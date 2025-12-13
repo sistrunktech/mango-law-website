@@ -115,6 +115,9 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
   - **Geocoding Preview**: Real-time address validation and coordinate lookup as you type. Shows confidence level (high/medium/low) and formatted address.
   - **Manual Entry**: Full form with all checkpoint fields including source tracking and verification status.
 - **Automated Updates**: pg_cron job runs hourly to automatically update checkpoint statuses. Manual refresh available via "Update Statuses" button.
+  - **Cron health check (Supabase SQL editor):**
+    - `SELECT * FROM cron.job WHERE jobname = 'update_checkpoint_statuses_hourly';`
+    - `SELECT * FROM cron.job_run_details WHERE jobid = (SELECT jobid FROM cron.job WHERE jobname = 'update_checkpoint_statuses_hourly') ORDER BY start_time DESC LIMIT 20;`
 
 ## Blog System
 - **Visual Components**: 31+ blog-specific components for rich content display including:
