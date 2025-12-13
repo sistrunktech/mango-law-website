@@ -10,6 +10,28 @@ type Props = {
   onCheckpointSelect?: (checkpoint: DUICheckpoint) => void;
 };
 
+const OHIO_BOUNDS = {
+  minLatitude: 38.4032,
+  maxLatitude: 41.9773,
+  minLongitude: -84.8203,
+  maxLongitude: -80.5189,
+};
+
+function isOhioCoordinate(latitude: number, longitude: number): boolean {
+  return (
+    latitude >= OHIO_BOUNDS.minLatitude &&
+    latitude <= OHIO_BOUNDS.maxLatitude &&
+    longitude >= OHIO_BOUNDS.minLongitude &&
+    longitude <= OHIO_BOUNDS.maxLongitude
+  );
+}
+
+function hasCoordinates(
+  checkpoint: DUICheckpoint
+): checkpoint is DUICheckpoint & { latitude: number; longitude: number } {
+  return typeof checkpoint.latitude === 'number' && typeof checkpoint.longitude === 'number';
+}
+
 export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheckpointSelect }: Props) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -75,10 +97,11 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
     markers.current.forEach((marker) => marker.remove());
     markers.current = [];
 
-    const validCheckpoints = checkpoints.filter((c) => c.latitude && c.longitude);
+    const validCheckpoints = checkpoints.filter(hasCoordinates);
+    const ohioCheckpoints = validCheckpoints.filter((c) => isOhioCoordinate(c.latitude, c.longitude));
 
     // Add new markers
-    validCheckpoints.forEach((checkpoint) => {
+    ohioCheckpoints.forEach((checkpoint) => {
       const statusColors = {
         upcoming: '#FF9500',
         active: '#FF3B30',
@@ -164,9 +187,9 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
     });
 
     // Fit bounds to markers if checkpoints exist
-    if (validCheckpoints.length > 0 && map.current) {
+    if (ohioCheckpoints.length > 0 && map.current) {
       const bounds = new mapboxgl.LngLatBounds();
-      validCheckpoints.forEach((checkpoint) => {
+      ohioCheckpoints.forEach((checkpoint) => {
         bounds.extend([checkpoint.longitude!, checkpoint.latitude!]);
       });
 
@@ -180,7 +203,9 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
 
   // Center on selected checkpoint
   useEffect(() => {
-    if (!map.current || !selectedCheckpoint || !selectedCheckpoint.latitude || !selectedCheckpoint.longitude) return;
+    if (!map.current || !selectedCheckpoint) return;
+    if (typeof selectedCheckpoint.latitude !== 'number' || typeof selectedCheckpoint.longitude !== 'number') return;
+    if (!isOhioCoordinate(selectedCheckpoint.latitude, selectedCheckpoint.longitude)) return;
 
     map.current.flyTo({
       center: [selectedCheckpoint.longitude, selectedCheckpoint.latitude],
