@@ -1,0 +1,1984 @@
+[
+  {
+    "section": "4511.19",
+    "title": "OVI / DUI (Operating a vehicle under the influence)",
+    "practice_areas": [
+      "OVI/DUI",
+      "Criminal Defense",
+      "Traffic"
+    ],
+    "keywords": [
+      "ovi",
+      "dui",
+      "drunk driving",
+      "operating a vehicle under the influence",
+      "ohio ovi law"
+    ],
+    "priority": "P1",
+    "orc_dash": "4511-19",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.19",
+    "url_slug": "ovi-dui-operating-a-vehicle-under-the-influence-orc-4511-19",
+    "ui_label": "ORC 4511.19: OVI / DUI (Operating a vehicle under the influence)",
+    "practice_areas_pipe": "OVI/DUI | Criminal Defense | Traffic",
+    "keywords_pipe": "ovi | dui | drunk driving | operating a vehicle under the influence | ohio ovi law"
+  },
+  {
+    "section": "4511.191",
+    "title": "Implied consent (chemical tests; administrative license suspension)",
+    "practice_areas": [
+      "OVI/DUI",
+      "Traffic"
+    ],
+    "keywords": [
+      "implied consent ohio",
+      "breath test refusal",
+      "administrative license suspension",
+      "als"
+    ],
+    "priority": "P1",
+    "orc_dash": "4511-191",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.191",
+    "url_slug": "implied-consent-chemical-tests-administrative-license-suspension-orc-4511-191",
+    "ui_label": "ORC 4511.191: Implied consent (chemical tests; administrative license suspension)",
+    "practice_areas_pipe": "OVI/DUI | Traffic",
+    "keywords_pipe": "implied consent ohio | breath test refusal | administrative license suspension | als"
+  },
+  {
+    "section": "4511.192",
+    "title": "Advice to driver about test / refusal consequences",
+    "practice_areas": [
+      "OVI/DUI",
+      "Traffic"
+    ],
+    "keywords": [
+      "ovi refusal advice",
+      "bmv 2255",
+      "refusal consequences ohio"
+    ],
+    "priority": "P1",
+    "orc_dash": "4511-192",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.192",
+    "url_slug": "advice-to-driver-about-test-refusal-consequences-orc-4511-192",
+    "ui_label": "ORC 4511.192: Advice to driver about test / refusal consequences",
+    "practice_areas_pipe": "OVI/DUI | Traffic",
+    "keywords_pipe": "ovi refusal advice | bmv 2255 | refusal consequences ohio"
+  },
+  {
+    "section": "4511.194",
+    "title": "Physical control (in vehicle, not operating)",
+    "practice_areas": [
+      "OVI/DUI",
+      "Traffic"
+    ],
+    "keywords": [
+      "physical control ohio",
+      "sleeping in car ovi",
+      "keys in ignition ohio"
+    ],
+    "priority": "P1",
+    "orc_dash": "4511-194",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.194",
+    "url_slug": "physical-control-in-vehicle-not-operating-orc-4511-194",
+    "ui_label": "ORC 4511.194: Physical control (in vehicle, not operating)",
+    "practice_areas_pipe": "OVI/DUI | Traffic",
+    "keywords_pipe": "physical control ohio | sleeping in car ovi | keys in ignition ohio"
+  },
+  {
+    "section": "4511.196",
+    "title": "Initial appearance; court-ordered suspension related to OVI/ALS",
+    "practice_areas": [
+      "OVI/DUI",
+      "Traffic"
+    ],
+    "keywords": [
+      "initial appearance ovi ohio",
+      "court-ordered suspension",
+      "als hearing ohio"
+    ],
+    "priority": "P2",
+    "orc_dash": "4511-196",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.196",
+    "url_slug": "initial-appearance-court-ordered-suspension-related-to-ovials-orc-4511-196",
+    "ui_label": "ORC 4511.196: Initial appearance; court-ordered suspension related to OVI/ALS",
+    "practice_areas_pipe": "OVI/DUI | Traffic",
+    "keywords_pipe": "initial appearance ovi ohio | court-ordered suspension | als hearing ohio"
+  },
+  {
+    "section": "4511.197",
+    "title": "Appeal of implied consent suspension (ALS appeal)",
+    "practice_areas": [
+      "OVI/DUI",
+      "Traffic"
+    ],
+    "keywords": [
+      "als appeal ohio",
+      "implied consent suspension appeal"
+    ],
+    "priority": "P1",
+    "orc_dash": "4511-197",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.197",
+    "url_slug": "appeal-of-implied-consent-suspension-als-appeal-orc-4511-197",
+    "ui_label": "ORC 4511.197: Appeal of implied consent suspension (ALS appeal)",
+    "practice_areas_pipe": "OVI/DUI | Traffic",
+    "keywords_pipe": "als appeal ohio | implied consent suspension appeal"
+  },
+  {
+    "section": "4511.198",
+    "title": "Limited driving privileges; remote alcohol monitor",
+    "practice_areas": [
+      "OVI/DUI",
+      "Traffic"
+    ],
+    "keywords": [
+      "limited driving privileges ohio",
+      "remote alcohol monitor",
+      "scram ohio ovi"
+    ],
+    "priority": "P2",
+    "orc_dash": "4511-198",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.198",
+    "url_slug": "limited-driving-privileges-remote-alcohol-monitor-orc-4511-198",
+    "ui_label": "ORC 4511.198: Limited driving privileges; remote alcohol monitor",
+    "practice_areas_pipe": "OVI/DUI | Traffic",
+    "keywords_pipe": "limited driving privileges ohio | remote alcohol monitor | scram ohio ovi"
+  },
+  {
+    "section": "4510.11",
+    "title": "Driving under suspension / in violation of restriction",
+    "practice_areas": [
+      "Traffic",
+      "Criminal Defense",
+      "OVI/DUI"
+    ],
+    "keywords": [
+      "driving under suspension ohio",
+      "dus ohio",
+      "license suspension violation"
+    ],
+    "priority": "P1",
+    "orc_dash": "4510-11",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4510.11",
+    "url_slug": "driving-under-suspension-in-violation-of-restriction-orc-4510-11",
+    "ui_label": "ORC 4510.11: Driving under suspension / in violation of restriction",
+    "practice_areas_pipe": "Traffic | Criminal Defense | OVI/DUI",
+    "keywords_pipe": "driving under suspension ohio | dus ohio | license suspension violation"
+  },
+  {
+    "section": "4510.12",
+    "title": "Operating a motor vehicle without a valid license",
+    "practice_areas": [
+      "Traffic"
+    ],
+    "keywords": [
+      "no valid license ohio",
+      "driving without license ohio"
+    ],
+    "priority": "P2",
+    "orc_dash": "4510-12",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4510.12",
+    "url_slug": "operating-a-motor-vehicle-without-a-valid-license-orc-4510-12",
+    "ui_label": "ORC 4510.12: Operating a motor vehicle without a valid license",
+    "practice_areas_pipe": "Traffic",
+    "keywords_pipe": "no valid license ohio | driving without license ohio"
+  },
+  {
+    "section": "4510.14",
+    "title": "Driving under OVI suspension",
+    "practice_areas": [
+      "OVI/DUI",
+      "Traffic"
+    ],
+    "keywords": [
+      "driving under ovi suspension",
+      "ovi suspension ohio"
+    ],
+    "priority": "P1",
+    "orc_dash": "4510-14",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4510.14",
+    "url_slug": "driving-under-ovi-suspension-orc-4510-14",
+    "ui_label": "ORC 4510.14: Driving under OVI suspension",
+    "practice_areas_pipe": "OVI/DUI | Traffic",
+    "keywords_pipe": "driving under ovi suspension | ovi suspension ohio"
+  },
+  {
+    "section": "4511.203",
+    "title": "Wrongful entrustment (letting an unqualified person drive)",
+    "practice_areas": [
+      "Traffic",
+      "OVI/DUI",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "wrongful entrustment ohio",
+      "entrust vehicle to intoxicated driver"
+    ],
+    "priority": "P2",
+    "orc_dash": "4511-203",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.203",
+    "url_slug": "wrongful-entrustment-letting-an-unqualified-person-drive-orc-4511-203",
+    "ui_label": "ORC 4511.203: Wrongful entrustment (letting an unqualified person drive)",
+    "practice_areas_pipe": "Traffic | OVI/DUI | Criminal Defense",
+    "keywords_pipe": "wrongful entrustment ohio | entrust vehicle to intoxicated driver"
+  },
+  {
+    "section": "4511.20",
+    "title": "Reckless operation (willful or wanton disregard)",
+    "practice_areas": [
+      "Traffic",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "reckless operation ohio",
+      "willful or wanton disregard"
+    ],
+    "priority": "P1",
+    "orc_dash": "4511-20",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.20",
+    "url_slug": "reckless-operation-willful-or-wanton-disregard-orc-4511-20",
+    "ui_label": "ORC 4511.20: Reckless operation (willful or wanton disregard)",
+    "practice_areas_pipe": "Traffic | Criminal Defense",
+    "keywords_pipe": "reckless operation ohio | willful or wanton disregard"
+  },
+  {
+    "section": "4511.204",
+    "title": "Using/holding an electronic wireless communications device while driving (distracted driving)",
+    "practice_areas": [
+      "Traffic"
+    ],
+    "keywords": [
+      "ohio distracted driving law",
+      "holding phone while driving ohio",
+      "texting while driving ohio"
+    ],
+    "priority": "P2",
+    "orc_dash": "4511-204",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.204",
+    "url_slug": "usingholding-an-electronic-wireless-communications-device-while-driving-distracted-driving-orc-4511-204",
+    "ui_label": "ORC 4511.204: Using/holding an electronic wireless communications device while driving (distracted driving)",
+    "practice_areas_pipe": "Traffic",
+    "keywords_pipe": "ohio distracted driving law | holding phone while driving ohio | texting while driving ohio"
+  },
+  {
+    "section": "4511.205",
+    "title": "Use of devices by persons under 18 (probationary license / TIP)",
+    "practice_areas": [
+      "Traffic"
+    ],
+    "keywords": [
+      "under 18 phone while driving ohio",
+      "probationary license phone law"
+    ],
+    "priority": "P3",
+    "orc_dash": "4511-205",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4511.205",
+    "url_slug": "use-of-devices-by-persons-under-18-probationary-license-tip-orc-4511-205",
+    "ui_label": "ORC 4511.205: Use of devices by persons under 18 (probationary license / TIP)",
+    "practice_areas_pipe": "Traffic",
+    "keywords_pipe": "under 18 phone while driving ohio | probationary license phone law"
+  },
+  {
+    "section": "4549.02",
+    "title": "Failure to stop after an accident (hit-skip)",
+    "practice_areas": [
+      "Traffic",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "hit and run ohio",
+      "failure to stop after accident ohio"
+    ],
+    "priority": "P1",
+    "orc_dash": "4549-02",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4549.02",
+    "url_slug": "failure-to-stop-after-an-accident-hit-skip-orc-4549-02",
+    "ui_label": "ORC 4549.02: Failure to stop after an accident (hit-skip)",
+    "practice_areas_pipe": "Traffic | Criminal Defense",
+    "keywords_pipe": "hit and run ohio | failure to stop after accident ohio"
+  },
+  {
+    "section": "4301.62",
+    "title": "Open container law (beer/intoxicating liquor)",
+    "practice_areas": [
+      "OVI/DUI",
+      "Traffic"
+    ],
+    "keywords": [
+      "open container ohio",
+      "open bottle law ohio"
+    ],
+    "priority": "P2",
+    "orc_dash": "4301-62",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-4301.62",
+    "url_slug": "open-container-law-beerintoxicating-liquor-orc-4301-62",
+    "ui_label": "ORC 4301.62: Open container law (beer/intoxicating liquor)",
+    "practice_areas_pipe": "OVI/DUI | Traffic",
+    "keywords_pipe": "open container ohio | open bottle law ohio"
+  },
+  {
+    "section": "2903.06",
+    "title": "Aggravated vehicular homicide / vehicular homicide",
+    "practice_areas": [
+      "Traffic",
+      "Criminal Defense",
+      "OVI/DUI"
+    ],
+    "keywords": [
+      "vehicular homicide ohio",
+      "aggravated vehicular homicide",
+      "ovi fatal crash ohio"
+    ],
+    "priority": "P1",
+    "orc_dash": "2903-06",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.06",
+    "url_slug": "aggravated-vehicular-homicide-vehicular-homicide-orc-2903-06",
+    "ui_label": "ORC 2903.06: Aggravated vehicular homicide / vehicular homicide",
+    "practice_areas_pipe": "Traffic | Criminal Defense | OVI/DUI",
+    "keywords_pipe": "vehicular homicide ohio | aggravated vehicular homicide | ovi fatal crash ohio"
+  },
+  {
+    "section": "2903.08",
+    "title": "Aggravated vehicular assault / vehicular assault",
+    "practice_areas": [
+      "Traffic",
+      "Criminal Defense",
+      "OVI/DUI"
+    ],
+    "keywords": [
+      "vehicular assault ohio",
+      "aggravated vehicular assault"
+    ],
+    "priority": "P1",
+    "orc_dash": "2903-08",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.08",
+    "url_slug": "aggravated-vehicular-assault-vehicular-assault-orc-2903-08",
+    "ui_label": "ORC 2903.08: Aggravated vehicular assault / vehicular assault",
+    "practice_areas_pipe": "Traffic | Criminal Defense | OVI/DUI",
+    "keywords_pipe": "vehicular assault ohio | aggravated vehicular assault"
+  },
+  {
+    "section": "2919.25",
+    "title": "Domestic violence",
+    "practice_areas": [
+      "Domestic Violence",
+      "Criminal Defense",
+      "Protection Orders"
+    ],
+    "keywords": [
+      "domestic violence ohio",
+      "orc 2919.25"
+    ],
+    "priority": "P1",
+    "orc_dash": "2919-25",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2919.25",
+    "url_slug": "domestic-violence-orc-2919-25",
+    "ui_label": "ORC 2919.25: Domestic violence",
+    "practice_areas_pipe": "Domestic Violence | Criminal Defense | Protection Orders",
+    "keywords_pipe": "domestic violence ohio | orc 2919.25"
+  },
+  {
+    "section": "2919.26",
+    "title": "Motion for and hearing on protection order (TPO as pretrial condition)",
+    "practice_areas": [
+      "Protection Orders",
+      "Domestic Violence",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "temporary protection order ohio",
+      "tpo ohio criminal case",
+      "pretrial protection order"
+    ],
+    "priority": "P1",
+    "orc_dash": "2919-26",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2919.26",
+    "url_slug": "motion-for-and-hearing-on-protection-order-tpo-as-pretrial-orc-2919-26",
+    "ui_label": "ORC 2919.26: Motion for and hearing on protection order (TPO as pretrial condition)",
+    "practice_areas_pipe": "Protection Orders | Domestic Violence | Criminal Defense",
+    "keywords_pipe": "temporary protection order ohio | tpo ohio criminal case | pretrial protection order"
+  },
+  {
+    "section": "2919.27",
+    "title": "Violating a protection order",
+    "practice_areas": [
+      "Protection Orders",
+      "Domestic Violence",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "violation of protection order ohio",
+      "orc 2919.27"
+    ],
+    "priority": "P1",
+    "orc_dash": "2919-27",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2919.27",
+    "url_slug": "violating-a-protection-order-orc-2919-27",
+    "ui_label": "ORC 2919.27: Violating a protection order",
+    "practice_areas_pipe": "Protection Orders | Domestic Violence | Criminal Defense",
+    "keywords_pipe": "violation of protection order ohio | orc 2919.27"
+  },
+  {
+    "section": "3113.31",
+    "title": "Domestic violence civil protection order (CPO)",
+    "practice_areas": [
+      "Protection Orders",
+      "Domestic Violence"
+    ],
+    "keywords": [
+      "civil protection order ohio",
+      "domestic violence cpo ohio",
+      "orc 3113.31"
+    ],
+    "priority": "P1",
+    "orc_dash": "3113-31",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-3113.31",
+    "url_slug": "domestic-violence-civil-protection-order-cpo-orc-3113-31",
+    "ui_label": "ORC 3113.31: Domestic violence civil protection order (CPO)",
+    "practice_areas_pipe": "Protection Orders | Domestic Violence",
+    "keywords_pipe": "civil protection order ohio | domestic violence cpo ohio | orc 3113.31"
+  },
+  {
+    "section": "2903.211",
+    "title": "Menacing by stalking",
+    "practice_areas": [
+      "Criminal Defense",
+      "Protection Orders"
+    ],
+    "keywords": [
+      "menacing by stalking ohio",
+      "stalking ohio law",
+      "orc 2903.211"
+    ],
+    "priority": "P1",
+    "orc_dash": "2903-211",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.211",
+    "url_slug": "menacing-by-stalking-orc-2903-211",
+    "ui_label": "ORC 2903.211: Menacing by stalking",
+    "practice_areas_pipe": "Criminal Defense | Protection Orders",
+    "keywords_pipe": "menacing by stalking ohio | stalking ohio law | orc 2903.211"
+  },
+  {
+    "section": "2903.214",
+    "title": "Petition for protection order in menacing by stalking cases (CSPO)",
+    "practice_areas": [
+      "Protection Orders"
+    ],
+    "keywords": [
+      "civil stalking protection order ohio",
+      "cspo ohio",
+      "orc 2903.214"
+    ],
+    "priority": "P1",
+    "orc_dash": "2903-214",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.214",
+    "url_slug": "petition-for-protection-order-in-menacing-by-stalking-cases-cspo-orc-2903-214",
+    "ui_label": "ORC 2903.214: Petition for protection order in menacing by stalking cases (CSPO)",
+    "practice_areas_pipe": "Protection Orders",
+    "keywords_pipe": "civil stalking protection order ohio | cspo ohio | orc 2903.214"
+  },
+  {
+    "section": "2903.213",
+    "title": "Motion for and hearing on protection order (criminal case protection order)",
+    "practice_areas": [
+      "Protection Orders",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "criminal protection order ohio",
+      "orc 2903.213"
+    ],
+    "priority": "P2",
+    "orc_dash": "2903-213",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.213",
+    "url_slug": "motion-for-and-hearing-on-protection-order-criminal-case-protection-orc-2903-213",
+    "ui_label": "ORC 2903.213: Motion for and hearing on protection order (criminal case protection order)",
+    "practice_areas_pipe": "Protection Orders | Criminal Defense",
+    "keywords_pipe": "criminal protection order ohio | orc 2903.213"
+  },
+  {
+    "section": "2903.13",
+    "title": "Assault",
+    "practice_areas": [
+      "Criminal Defense",
+      "Domestic Violence"
+    ],
+    "keywords": [
+      "assault ohio",
+      "orc 2903.13"
+    ],
+    "priority": "P1",
+    "orc_dash": "2903-13",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.13",
+    "url_slug": "assault-orc-2903-13",
+    "ui_label": "ORC 2903.13: Assault",
+    "practice_areas_pipe": "Criminal Defense | Domestic Violence",
+    "keywords_pipe": "assault ohio | orc 2903.13"
+  },
+  {
+    "section": "2903.11",
+    "title": "Felonious assault",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "felonious assault ohio",
+      "orc 2903.11"
+    ],
+    "priority": "P1",
+    "orc_dash": "2903-11",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.11",
+    "url_slug": "felonious-assault-orc-2903-11",
+    "ui_label": "ORC 2903.11: Felonious assault",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "felonious assault ohio | orc 2903.11"
+  },
+  {
+    "section": "2903.12",
+    "title": "Aggravated assault",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "aggravated assault ohio",
+      "orc 2903.12"
+    ],
+    "priority": "P2",
+    "orc_dash": "2903-12",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.12",
+    "url_slug": "aggravated-assault-orc-2903-12",
+    "ui_label": "ORC 2903.12: Aggravated assault",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "aggravated assault ohio | orc 2903.12"
+  },
+  {
+    "section": "2903.21",
+    "title": "Aggravated menacing",
+    "practice_areas": [
+      "Criminal Defense",
+      "Domestic Violence"
+    ],
+    "keywords": [
+      "aggravated menacing ohio",
+      "orc 2903.21"
+    ],
+    "priority": "P1",
+    "orc_dash": "2903-21",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.21",
+    "url_slug": "aggravated-menacing-orc-2903-21",
+    "ui_label": "ORC 2903.21: Aggravated menacing",
+    "practice_areas_pipe": "Criminal Defense | Domestic Violence",
+    "keywords_pipe": "aggravated menacing ohio | orc 2903.21"
+  },
+  {
+    "section": "2903.22",
+    "title": "Menacing",
+    "practice_areas": [
+      "Criminal Defense",
+      "Domestic Violence"
+    ],
+    "keywords": [
+      "menacing ohio",
+      "orc 2903.22"
+    ],
+    "priority": "P2",
+    "orc_dash": "2903-22",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2903.22",
+    "url_slug": "menacing-orc-2903-22",
+    "ui_label": "ORC 2903.22: Menacing",
+    "practice_areas_pipe": "Criminal Defense | Domestic Violence",
+    "keywords_pipe": "menacing ohio | orc 2903.22"
+  },
+  {
+    "section": "2917.11",
+    "title": "Disorderly conduct",
+    "practice_areas": [
+      "Criminal Defense",
+      "Domestic Violence"
+    ],
+    "keywords": [
+      "disorderly conduct ohio",
+      "orc 2917.11"
+    ],
+    "priority": "P2",
+    "orc_dash": "2917-11",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2917.11",
+    "url_slug": "disorderly-conduct-orc-2917-11",
+    "ui_label": "ORC 2917.11: Disorderly conduct",
+    "practice_areas_pipe": "Criminal Defense | Domestic Violence",
+    "keywords_pipe": "disorderly conduct ohio | orc 2917.11"
+  },
+  {
+    "section": "2917.21",
+    "title": "Telecommunications harassment",
+    "practice_areas": [
+      "Criminal Defense",
+      "Domestic Violence"
+    ],
+    "keywords": [
+      "telecommunications harassment ohio",
+      "orc 2917.21"
+    ],
+    "priority": "P2",
+    "orc_dash": "2917-21",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2917.21",
+    "url_slug": "telecommunications-harassment-orc-2917-21",
+    "ui_label": "ORC 2917.21: Telecommunications harassment",
+    "practice_areas_pipe": "Criminal Defense | Domestic Violence",
+    "keywords_pipe": "telecommunications harassment ohio | orc 2917.21"
+  },
+  {
+    "section": "2917.31",
+    "title": "Inducing panic",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "inducing panic ohio",
+      "orc 2917.31"
+    ],
+    "priority": "P3",
+    "orc_dash": "2917-31",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2917.31",
+    "url_slug": "inducing-panic-orc-2917-31",
+    "ui_label": "ORC 2917.31: Inducing panic",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "inducing panic ohio | orc 2917.31"
+  },
+  {
+    "section": "2909.06",
+    "title": "Criminal damaging or endangering",
+    "practice_areas": [
+      "Criminal Defense",
+      "Domestic Violence"
+    ],
+    "keywords": [
+      "criminal damaging ohio",
+      "orc 2909.06"
+    ],
+    "priority": "P2",
+    "orc_dash": "2909-06",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2909.06",
+    "url_slug": "criminal-damaging-or-endangering-orc-2909-06",
+    "ui_label": "ORC 2909.06: Criminal damaging or endangering",
+    "practice_areas_pipe": "Criminal Defense | Domestic Violence",
+    "keywords_pipe": "criminal damaging ohio | orc 2909.06"
+  },
+  {
+    "section": "2909.05",
+    "title": "Vandalism",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "vandalism ohio",
+      "orc 2909.05"
+    ],
+    "priority": "P3",
+    "orc_dash": "2909-05",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2909.05",
+    "url_slug": "vandalism-orc-2909-05",
+    "ui_label": "ORC 2909.05: Vandalism",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "vandalism ohio | orc 2909.05"
+  },
+  {
+    "section": "2921.31",
+    "title": "Obstructing official business",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "obstructing official business ohio",
+      "orc 2921.31"
+    ],
+    "priority": "P2",
+    "orc_dash": "2921-31",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2921.31",
+    "url_slug": "obstructing-official-business-orc-2921-31",
+    "ui_label": "ORC 2921.31: Obstructing official business",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "obstructing official business ohio | orc 2921.31"
+  },
+  {
+    "section": "2921.33",
+    "title": "Resisting arrest",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "resisting arrest ohio",
+      "orc 2921.33"
+    ],
+    "priority": "P2",
+    "orc_dash": "2921-33",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2921.33",
+    "url_slug": "resisting-arrest-orc-2921-33",
+    "ui_label": "ORC 2921.33: Resisting arrest",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "resisting arrest ohio | orc 2921.33"
+  },
+  {
+    "section": "2921.331",
+    "title": "Failure to comply with order or signal of police officer",
+    "practice_areas": [
+      "Criminal Defense",
+      "Traffic"
+    ],
+    "keywords": [
+      "failure to comply ohio",
+      "fleeing eluding ohio",
+      "orc 2921.331"
+    ],
+    "priority": "P1",
+    "orc_dash": "2921-331",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2921.331",
+    "url_slug": "failure-to-comply-with-order-or-signal-of-police-officer-orc-2921-331",
+    "ui_label": "ORC 2921.331: Failure to comply with order or signal of police officer",
+    "practice_areas_pipe": "Criminal Defense | Traffic",
+    "keywords_pipe": "failure to comply ohio | fleeing eluding ohio | orc 2921.331"
+  },
+  {
+    "section": "2921.12",
+    "title": "Tampering with evidence",
+    "practice_areas": [
+      "Criminal Defense",
+      "White Collar Crimes"
+    ],
+    "keywords": [
+      "tampering with evidence ohio",
+      "orc 2921.12"
+    ],
+    "priority": "P2",
+    "orc_dash": "2921-12",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2921.12",
+    "url_slug": "tampering-with-evidence-orc-2921-12",
+    "ui_label": "ORC 2921.12: Tampering with evidence",
+    "practice_areas_pipe": "Criminal Defense | White Collar Crimes",
+    "keywords_pipe": "tampering with evidence ohio | orc 2921.12"
+  },
+  {
+    "section": "2921.13",
+    "title": "Falsification",
+    "practice_areas": [
+      "Criminal Defense",
+      "White Collar Crimes"
+    ],
+    "keywords": [
+      "falsification ohio",
+      "false statement ohio",
+      "orc 2921.13"
+    ],
+    "priority": "P2",
+    "orc_dash": "2921-13",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2921.13",
+    "url_slug": "falsification-orc-2921-13",
+    "ui_label": "ORC 2921.13: Falsification",
+    "practice_areas_pipe": "Criminal Defense | White Collar Crimes",
+    "keywords_pipe": "falsification ohio | false statement ohio | orc 2921.13"
+  },
+  {
+    "section": "2901.13",
+    "title": "Criminal statute of limitations",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "ohio statute of limitations criminal",
+      "orc 2901.13"
+    ],
+    "priority": "P3",
+    "orc_dash": "2901-13",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2901.13",
+    "url_slug": "criminal-statute-of-limitations-orc-2901-13",
+    "ui_label": "ORC 2901.13: Criminal statute of limitations",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "ohio statute of limitations criminal | orc 2901.13"
+  },
+  {
+    "section": "2911.11",
+    "title": "Aggravated burglary",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "aggravated burglary ohio",
+      "orc 2911.11"
+    ],
+    "priority": "P1",
+    "orc_dash": "2911-11",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2911.11",
+    "url_slug": "aggravated-burglary-orc-2911-11",
+    "ui_label": "ORC 2911.11: Aggravated burglary",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "aggravated burglary ohio | orc 2911.11"
+  },
+  {
+    "section": "2911.12",
+    "title": "Burglary",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "burglary ohio",
+      "orc 2911.12"
+    ],
+    "priority": "P1",
+    "orc_dash": "2911-12",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2911.12",
+    "url_slug": "burglary-orc-2911-12",
+    "ui_label": "ORC 2911.12: Burglary",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "burglary ohio | orc 2911.12"
+  },
+  {
+    "section": "2911.13",
+    "title": "Breaking and entering",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "breaking and entering ohio",
+      "orc 2911.13"
+    ],
+    "priority": "P1",
+    "orc_dash": "2911-13",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2911.13",
+    "url_slug": "breaking-and-entering-orc-2911-13",
+    "ui_label": "ORC 2911.13: Breaking and entering",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "breaking and entering ohio | orc 2911.13"
+  },
+  {
+    "section": "2911.02",
+    "title": "Robbery",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "robbery ohio",
+      "orc 2911.02"
+    ],
+    "priority": "P1",
+    "orc_dash": "2911-02",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2911.02",
+    "url_slug": "robbery-orc-2911-02",
+    "ui_label": "ORC 2911.02: Robbery",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "robbery ohio | orc 2911.02"
+  },
+  {
+    "section": "2911.01",
+    "title": "Aggravated robbery",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "aggravated robbery ohio",
+      "orc 2911.01"
+    ],
+    "priority": "P1",
+    "orc_dash": "2911-01",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2911.01",
+    "url_slug": "aggravated-robbery-orc-2911-01",
+    "ui_label": "ORC 2911.01: Aggravated robbery",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "aggravated robbery ohio | orc 2911.01"
+  },
+  {
+    "section": "2911.21",
+    "title": "Criminal trespass",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "criminal trespass ohio",
+      "orc 2911.21"
+    ],
+    "priority": "P2",
+    "orc_dash": "2911-21",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2911.21",
+    "url_slug": "criminal-trespass-orc-2911-21",
+    "ui_label": "ORC 2911.21: Criminal trespass",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "criminal trespass ohio | orc 2911.21"
+  },
+  {
+    "section": "2913.02",
+    "title": "Theft",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "theft ohio",
+      "petty theft ohio",
+      "grand theft ohio",
+      "orc 2913.02"
+    ],
+    "priority": "P1",
+    "orc_dash": "2913-02",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.02",
+    "url_slug": "theft-orc-2913-02",
+    "ui_label": "ORC 2913.02: Theft",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "theft ohio | petty theft ohio | grand theft ohio | orc 2913.02"
+  },
+  {
+    "section": "2913.03",
+    "title": "Unauthorized use of property",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "unauthorized use ohio",
+      "orc 2913.03"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-03",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.03",
+    "url_slug": "unauthorized-use-of-property-orc-2913-03",
+    "ui_label": "ORC 2913.03: Unauthorized use of property",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "unauthorized use ohio | orc 2913.03"
+  },
+  {
+    "section": "2913.04",
+    "title": "Unauthorized use of a motor vehicle (joyriding)",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "joyriding ohio",
+      "unauthorized use motor vehicle ohio",
+      "orc 2913.04"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-04",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.04",
+    "url_slug": "unauthorized-use-of-a-motor-vehicle-joyriding-orc-2913-04",
+    "ui_label": "ORC 2913.04: Unauthorized use of a motor vehicle (joyriding)",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "joyriding ohio | unauthorized use motor vehicle ohio | orc 2913.04"
+  },
+  {
+    "section": "2913.05",
+    "title": "Telecommunications fraud",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "telecommunications fraud ohio",
+      "orc 2913.05"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-05",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.05",
+    "url_slug": "telecommunications-fraud-orc-2913-05",
+    "ui_label": "ORC 2913.05: Telecommunications fraud",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "telecommunications fraud ohio | orc 2913.05"
+  },
+  {
+    "section": "2913.06",
+    "title": "Unlawful use of telecommunications device",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "unlawful use telecommunications device ohio",
+      "orc 2913.06"
+    ],
+    "priority": "P3",
+    "orc_dash": "2913-06",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.06",
+    "url_slug": "unlawful-use-of-telecommunications-device-orc-2913-06",
+    "ui_label": "ORC 2913.06: Unlawful use of telecommunications device",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "unlawful use telecommunications device ohio | orc 2913.06"
+  },
+  {
+    "section": "2913.11",
+    "title": "Passing bad checks",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "passing bad checks ohio",
+      "bad check ohio",
+      "orc 2913.11"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-11",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.11",
+    "url_slug": "passing-bad-checks-orc-2913-11",
+    "ui_label": "ORC 2913.11: Passing bad checks",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "passing bad checks ohio | bad check ohio | orc 2913.11"
+  },
+  {
+    "section": "2913.21",
+    "title": "Misuse of credit cards",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "credit card misuse ohio",
+      "credit card fraud ohio",
+      "orc 2913.21"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-21",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.21",
+    "url_slug": "misuse-of-credit-cards-orc-2913-21",
+    "ui_label": "ORC 2913.21: Misuse of credit cards",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "credit card misuse ohio | credit card fraud ohio | orc 2913.21"
+  },
+  {
+    "section": "2913.30",
+    "title": "Counterfeiting",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "counterfeiting ohio",
+      "orc 2913.30"
+    ],
+    "priority": "P3",
+    "orc_dash": "2913-30",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.30",
+    "url_slug": "counterfeiting-orc-2913-30",
+    "ui_label": "ORC 2913.30: Counterfeiting",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "counterfeiting ohio | orc 2913.30"
+  },
+  {
+    "section": "2913.31",
+    "title": "Forgery",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "forgery ohio",
+      "orc 2913.31"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-31",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.31",
+    "url_slug": "forgery-orc-2913-31",
+    "ui_label": "ORC 2913.31: Forgery",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "forgery ohio | orc 2913.31"
+  },
+  {
+    "section": "2913.32",
+    "title": "Criminal simulation",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "criminal simulation ohio",
+      "fake documents ohio",
+      "orc 2913.32"
+    ],
+    "priority": "P3",
+    "orc_dash": "2913-32",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.32",
+    "url_slug": "criminal-simulation-orc-2913-32",
+    "ui_label": "ORC 2913.32: Criminal simulation",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "criminal simulation ohio | fake documents ohio | orc 2913.32"
+  },
+  {
+    "section": "2913.42",
+    "title": "Theft in office (embezzlement)",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "theft in office ohio",
+      "embezzlement ohio",
+      "orc 2913.42"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-42",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.42",
+    "url_slug": "theft-in-office-embezzlement-orc-2913-42",
+    "ui_label": "ORC 2913.42: Theft in office (embezzlement)",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "theft in office ohio | embezzlement ohio | orc 2913.42"
+  },
+  {
+    "section": "2913.49",
+    "title": "Identity fraud (identity theft)",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "identity fraud ohio",
+      "identity theft ohio",
+      "orc 2913.49"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-49",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.49",
+    "url_slug": "identity-fraud-identity-theft-orc-2913-49",
+    "ui_label": "ORC 2913.49: Identity fraud (identity theft)",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "identity fraud ohio | identity theft ohio | orc 2913.49"
+  },
+  {
+    "section": "2913.51",
+    "title": "Receiving stolen property",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "receiving stolen property ohio",
+      "orc 2913.51"
+    ],
+    "priority": "P2",
+    "orc_dash": "2913-51",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.51",
+    "url_slug": "receiving-stolen-property-orc-2913-51",
+    "ui_label": "ORC 2913.51: Receiving stolen property",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "receiving stolen property ohio | orc 2913.51"
+  },
+  {
+    "section": "2913.44",
+    "title": "Personating an officer",
+    "practice_areas": [
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "personating an officer ohio",
+      "orc 2913.44"
+    ],
+    "priority": "P3",
+    "orc_dash": "2913-44",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2913.44",
+    "url_slug": "personating-an-officer-orc-2913-44",
+    "ui_label": "ORC 2913.44: Personating an officer",
+    "practice_areas_pipe": "White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "personating an officer ohio | orc 2913.44"
+  },
+  {
+    "section": "2925.11",
+    "title": "Possession of controlled substances",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "drug possession ohio",
+      "possession of controlled substances",
+      "orc 2925.11"
+    ],
+    "priority": "P1",
+    "orc_dash": "2925-11",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.11",
+    "url_slug": "possession-of-controlled-substances-orc-2925-11",
+    "ui_label": "ORC 2925.11: Possession of controlled substances",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "drug possession ohio | possession of controlled substances | orc 2925.11"
+  },
+  {
+    "section": "2925.03",
+    "title": "Trafficking in drugs",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "drug trafficking ohio",
+      "orc 2925.03"
+    ],
+    "priority": "P1",
+    "orc_dash": "2925-03",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.03",
+    "url_slug": "trafficking-in-drugs-orc-2925-03",
+    "ui_label": "ORC 2925.03: Trafficking in drugs",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "drug trafficking ohio | orc 2925.03"
+  },
+  {
+    "section": "2925.02",
+    "title": "Corrupting another with drugs",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "corrupting another with drugs ohio",
+      "orc 2925.02"
+    ],
+    "priority": "P2",
+    "orc_dash": "2925-02",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.02",
+    "url_slug": "corrupting-another-with-drugs-orc-2925-02",
+    "ui_label": "ORC 2925.02: Corrupting another with drugs",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "corrupting another with drugs ohio | orc 2925.02"
+  },
+  {
+    "section": "2925.04",
+    "title": "Illegal manufacture of drugs",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "illegal manufacture drugs ohio",
+      "orc 2925.04"
+    ],
+    "priority": "P2",
+    "orc_dash": "2925-04",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.04",
+    "url_slug": "illegal-manufacture-of-drugs-orc-2925-04",
+    "ui_label": "ORC 2925.04: Illegal manufacture of drugs",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "illegal manufacture drugs ohio | orc 2925.04"
+  },
+  {
+    "section": "2925.041",
+    "title": "Illegal assembly or possession of chemicals for manufacture of drugs",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "illegal assembly chemicals ohio",
+      "meth lab ohio",
+      "orc 2925.041"
+    ],
+    "priority": "P2",
+    "orc_dash": "2925-041",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.041",
+    "url_slug": "illegal-assembly-or-possession-of-chemicals-for-manufacture-of-drugs-orc-2925-041",
+    "ui_label": "ORC 2925.041: Illegal assembly or possession of chemicals for manufacture of drugs",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "illegal assembly chemicals ohio | meth lab ohio | orc 2925.041"
+  },
+  {
+    "section": "2925.12",
+    "title": "Possessing drug abuse instruments",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "drug abuse instruments ohio",
+      "syringe possession ohio",
+      "orc 2925.12"
+    ],
+    "priority": "P2",
+    "orc_dash": "2925-12",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.12",
+    "url_slug": "possessing-drug-abuse-instruments-orc-2925-12",
+    "ui_label": "ORC 2925.12: Possessing drug abuse instruments",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "drug abuse instruments ohio | syringe possession ohio | orc 2925.12"
+  },
+  {
+    "section": "2925.13",
+    "title": "Permitting drug abuse",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "permitting drug abuse ohio",
+      "orc 2925.13"
+    ],
+    "priority": "P3",
+    "orc_dash": "2925-13",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.13",
+    "url_slug": "permitting-drug-abuse-orc-2925-13",
+    "ui_label": "ORC 2925.13: Permitting drug abuse",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "permitting drug abuse ohio | orc 2925.13"
+  },
+  {
+    "section": "2925.14",
+    "title": "Illegal use or possession of drug paraphernalia",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "drug paraphernalia ohio",
+      "orc 2925.14"
+    ],
+    "priority": "P2",
+    "orc_dash": "2925-14",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.14",
+    "url_slug": "illegal-use-or-possession-of-drug-paraphernalia-orc-2925-14",
+    "ui_label": "ORC 2925.14: Illegal use or possession of drug paraphernalia",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "drug paraphernalia ohio | orc 2925.14"
+  },
+  {
+    "section": "2925.141",
+    "title": "Illegal use or possession of marihuana drug paraphernalia",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "marijuana paraphernalia ohio",
+      "orc 2925.141"
+    ],
+    "priority": "P3",
+    "orc_dash": "2925-141",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.141",
+    "url_slug": "illegal-use-or-possession-of-marihuana-drug-paraphernalia-orc-2925-141",
+    "ui_label": "ORC 2925.141: Illegal use or possession of marihuana drug paraphernalia",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "marijuana paraphernalia ohio | orc 2925.141"
+  },
+  {
+    "section": "2925.22",
+    "title": "Deception to obtain a dangerous drug",
+    "practice_areas": [
+      "Drug Crimes",
+      "White Collar Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "deception to obtain dangerous drug ohio",
+      "prescription fraud ohio",
+      "orc 2925.22"
+    ],
+    "priority": "P2",
+    "orc_dash": "2925-22",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.22",
+    "url_slug": "deception-to-obtain-a-dangerous-drug-orc-2925-22",
+    "ui_label": "ORC 2925.22: Deception to obtain a dangerous drug",
+    "practice_areas_pipe": "Drug Crimes | White Collar Crimes | Criminal Defense",
+    "keywords_pipe": "deception to obtain dangerous drug ohio | prescription fraud ohio | orc 2925.22"
+  },
+  {
+    "section": "2925.24",
+    "title": "Tampering with drugs",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "tampering with drugs ohio",
+      "orc 2925.24"
+    ],
+    "priority": "P3",
+    "orc_dash": "2925-24",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.24",
+    "url_slug": "tampering-with-drugs-orc-2925-24",
+    "ui_label": "ORC 2925.24: Tampering with drugs",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "tampering with drugs ohio | orc 2925.24"
+  },
+  {
+    "section": "2925.31",
+    "title": "Abusing harmful intoxicants",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "abusing harmful intoxicants ohio",
+      "huffing ohio",
+      "orc 2925.31"
+    ],
+    "priority": "P3",
+    "orc_dash": "2925-31",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.31",
+    "url_slug": "abusing-harmful-intoxicants-orc-2925-31",
+    "ui_label": "ORC 2925.31: Abusing harmful intoxicants",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "abusing harmful intoxicants ohio | huffing ohio | orc 2925.31"
+  },
+  {
+    "section": "2925.37",
+    "title": "Counterfeit controlled substance offenses",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "counterfeit controlled substance ohio",
+      "fake pills ohio",
+      "orc 2925.37"
+    ],
+    "priority": "P3",
+    "orc_dash": "2925-37",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2925.37",
+    "url_slug": "counterfeit-controlled-substance-offenses-orc-2925-37",
+    "ui_label": "ORC 2925.37: Counterfeit controlled substance offenses",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "counterfeit controlled substance ohio | fake pills ohio | orc 2925.37"
+  },
+  {
+    "section": "2923.12",
+    "title": "Carrying concealed weapons (CCW charge)",
+    "practice_areas": [
+      "Weapons Charges",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "carrying concealed weapons ohio",
+      "ccw charge ohio",
+      "orc 2923.12"
+    ],
+    "priority": "P1",
+    "orc_dash": "2923-12",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2923.12",
+    "url_slug": "carrying-concealed-weapons-ccw-charge-orc-2923-12",
+    "ui_label": "ORC 2923.12: Carrying concealed weapons (CCW charge)",
+    "practice_areas_pipe": "Weapons Charges | Criminal Defense",
+    "keywords_pipe": "carrying concealed weapons ohio | ccw charge ohio | orc 2923.12"
+  },
+  {
+    "section": "2923.13",
+    "title": "Having weapons while under disability",
+    "practice_areas": [
+      "Weapons Charges",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "weapons under disability ohio",
+      "orc 2923.13"
+    ],
+    "priority": "P1",
+    "orc_dash": "2923-13",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2923.13",
+    "url_slug": "having-weapons-while-under-disability-orc-2923-13",
+    "ui_label": "ORC 2923.13: Having weapons while under disability",
+    "practice_areas_pipe": "Weapons Charges | Criminal Defense",
+    "keywords_pipe": "weapons under disability ohio | orc 2923.13"
+  },
+  {
+    "section": "2923.15",
+    "title": "Using weapons while intoxicated",
+    "practice_areas": [
+      "Weapons Charges",
+      "Criminal Defense",
+      "OVI/DUI"
+    ],
+    "keywords": [
+      "using weapons while intoxicated ohio",
+      "gun while intoxicated ohio",
+      "orc 2923.15"
+    ],
+    "priority": "P2",
+    "orc_dash": "2923-15",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2923.15",
+    "url_slug": "using-weapons-while-intoxicated-orc-2923-15",
+    "ui_label": "ORC 2923.15: Using weapons while intoxicated",
+    "practice_areas_pipe": "Weapons Charges | Criminal Defense | OVI/DUI",
+    "keywords_pipe": "using weapons while intoxicated ohio | gun while intoxicated ohio | orc 2923.15"
+  },
+  {
+    "section": "2923.16",
+    "title": "Improperly handling firearms in a motor vehicle",
+    "practice_areas": [
+      "Weapons Charges",
+      "Criminal Defense",
+      "Traffic"
+    ],
+    "keywords": [
+      "improper handling firearm motor vehicle ohio",
+      "orc 2923.16"
+    ],
+    "priority": "P2",
+    "orc_dash": "2923-16",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2923.16",
+    "url_slug": "improperly-handling-firearms-in-a-motor-vehicle-orc-2923-16",
+    "ui_label": "ORC 2923.16: Improperly handling firearms in a motor vehicle",
+    "practice_areas_pipe": "Weapons Charges | Criminal Defense | Traffic",
+    "keywords_pipe": "improper handling firearm motor vehicle ohio | orc 2923.16"
+  },
+  {
+    "section": "2923.23",
+    "title": "Illegal possession of dangerous ordnance",
+    "practice_areas": [
+      "Weapons Charges",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "dangerous ordnance ohio",
+      "orc 2923.23"
+    ],
+    "priority": "P3",
+    "orc_dash": "2923-23",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2923.23",
+    "url_slug": "illegal-possession-of-dangerous-ordnance-orc-2923-23",
+    "ui_label": "ORC 2923.23: Illegal possession of dangerous ordnance",
+    "practice_areas_pipe": "Weapons Charges | Criminal Defense",
+    "keywords_pipe": "dangerous ordnance ohio | orc 2923.23"
+  },
+  {
+    "section": "2923.24",
+    "title": "Possessing criminal tools",
+    "practice_areas": [
+      "Criminal Defense",
+      "White Collar Crimes"
+    ],
+    "keywords": [
+      "possessing criminal tools ohio",
+      "orc 2923.24"
+    ],
+    "priority": "P2",
+    "orc_dash": "2923-24",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2923.24",
+    "url_slug": "possessing-criminal-tools-orc-2923-24",
+    "ui_label": "ORC 2923.24: Possessing criminal tools",
+    "practice_areas_pipe": "Criminal Defense | White Collar Crimes",
+    "keywords_pipe": "possessing criminal tools ohio | orc 2923.24"
+  },
+  {
+    "section": "2923.125",
+    "title": "Concealed handgun license (CHL) application and issuance",
+    "practice_areas": [
+      "Weapons Charges"
+    ],
+    "keywords": [
+      "ohio chl law",
+      "concealed carry license ohio",
+      "orc 2923.125"
+    ],
+    "priority": "P3",
+    "orc_dash": "2923-125",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2923.125",
+    "url_slug": "concealed-handgun-license-chl-application-and-issuance-orc-2923-125",
+    "ui_label": "ORC 2923.125: Concealed handgun license (CHL) application and issuance",
+    "practice_areas_pipe": "Weapons Charges",
+    "keywords_pipe": "ohio chl law | concealed carry license ohio | orc 2923.125"
+  },
+  {
+    "section": "2923.126",
+    "title": "Duties of licensed individual (concealed carry)",
+    "practice_areas": [
+      "Weapons Charges"
+    ],
+    "keywords": [
+      "ohio concealed carry duties",
+      "duty to notify ohio",
+      "orc 2923.126"
+    ],
+    "priority": "P3",
+    "orc_dash": "2923-126",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2923.126",
+    "url_slug": "duties-of-licensed-individual-concealed-carry-orc-2923-126",
+    "ui_label": "ORC 2923.126: Duties of licensed individual (concealed carry)",
+    "practice_areas_pipe": "Weapons Charges",
+    "keywords_pipe": "ohio concealed carry duties | duty to notify ohio | orc 2923.126"
+  },
+  {
+    "section": "2907.02",
+    "title": "Rape",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "rape ohio",
+      "orc 2907.02"
+    ],
+    "priority": "P1",
+    "orc_dash": "2907-02",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.02",
+    "url_slug": "rape-orc-2907-02",
+    "ui_label": "ORC 2907.02: Rape",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "rape ohio | orc 2907.02"
+  },
+  {
+    "section": "2907.03",
+    "title": "Sexual battery",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "sexual battery ohio",
+      "orc 2907.03"
+    ],
+    "priority": "P1",
+    "orc_dash": "2907-03",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.03",
+    "url_slug": "sexual-battery-orc-2907-03",
+    "ui_label": "ORC 2907.03: Sexual battery",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "sexual battery ohio | orc 2907.03"
+  },
+  {
+    "section": "2907.04",
+    "title": "Unlawful sexual conduct with a minor",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "unlawful sexual conduct minor ohio",
+      "orc 2907.04"
+    ],
+    "priority": "P1",
+    "orc_dash": "2907-04",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.04",
+    "url_slug": "unlawful-sexual-conduct-with-a-minor-orc-2907-04",
+    "ui_label": "ORC 2907.04: Unlawful sexual conduct with a minor",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "unlawful sexual conduct minor ohio | orc 2907.04"
+  },
+  {
+    "section": "2907.05",
+    "title": "Gross sexual imposition (GSI)",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "gross sexual imposition ohio",
+      "gsi ohio",
+      "orc 2907.05"
+    ],
+    "priority": "P1",
+    "orc_dash": "2907-05",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.05",
+    "url_slug": "gross-sexual-imposition-gsi-orc-2907-05",
+    "ui_label": "ORC 2907.05: Gross sexual imposition (GSI)",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "gross sexual imposition ohio | gsi ohio | orc 2907.05"
+  },
+  {
+    "section": "2907.06",
+    "title": "Sexual imposition",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "sexual imposition ohio",
+      "orc 2907.06"
+    ],
+    "priority": "P2",
+    "orc_dash": "2907-06",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.06",
+    "url_slug": "sexual-imposition-orc-2907-06",
+    "ui_label": "ORC 2907.06: Sexual imposition",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "sexual imposition ohio | orc 2907.06"
+  },
+  {
+    "section": "2907.07",
+    "title": "Importuning",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "importuning ohio",
+      "orc 2907.07"
+    ],
+    "priority": "P2",
+    "orc_dash": "2907-07",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.07",
+    "url_slug": "importuning-orc-2907-07",
+    "ui_label": "ORC 2907.07: Importuning",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "importuning ohio | orc 2907.07"
+  },
+  {
+    "section": "2907.08",
+    "title": "Voyeurism",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "voyeurism ohio",
+      "orc 2907.08"
+    ],
+    "priority": "P3",
+    "orc_dash": "2907-08",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.08",
+    "url_slug": "voyeurism-orc-2907-08",
+    "ui_label": "ORC 2907.08: Voyeurism",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "voyeurism ohio | orc 2907.08"
+  },
+  {
+    "section": "2907.09",
+    "title": "Public indecency",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "public indecency ohio",
+      "orc 2907.09"
+    ],
+    "priority": "P3",
+    "orc_dash": "2907-09",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.09",
+    "url_slug": "public-indecency-orc-2907-09",
+    "ui_label": "ORC 2907.09: Public indecency",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "public indecency ohio | orc 2907.09"
+  },
+  {
+    "section": "2907.31",
+    "title": "Disseminating matter harmful to juveniles",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "harmful to juveniles ohio",
+      "orc 2907.31"
+    ],
+    "priority": "P3",
+    "orc_dash": "2907-31",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.31",
+    "url_slug": "disseminating-matter-harmful-to-juveniles-orc-2907-31",
+    "ui_label": "ORC 2907.31: Disseminating matter harmful to juveniles",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "harmful to juveniles ohio | orc 2907.31"
+  },
+  {
+    "section": "2907.322",
+    "title": "Pandering sexually oriented matter involving a minor",
+    "practice_areas": [
+      "Sex Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "pandering sexually oriented matter minor ohio",
+      "orc 2907.322"
+    ],
+    "priority": "P2",
+    "orc_dash": "2907-322",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2907.322",
+    "url_slug": "pandering-sexually-oriented-matter-involving-a-minor-orc-2907-322",
+    "ui_label": "ORC 2907.322: Pandering sexually oriented matter involving a minor",
+    "practice_areas_pipe": "Sex Crimes | Criminal Defense",
+    "keywords_pipe": "pandering sexually oriented matter minor ohio | orc 2907.322"
+  },
+  {
+    "section": "2953.31",
+    "title": "Sealing or expungement definitions (eligibility framework)",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "record sealing ohio",
+      "expungement ohio",
+      "orc 2953.31"
+    ],
+    "priority": "P2",
+    "orc_dash": "2953-31",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2953.31",
+    "url_slug": "sealing-or-expungement-definitions-eligibility-framework-orc-2953-31",
+    "ui_label": "ORC 2953.31: Sealing or expungement definitions (eligibility framework)",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "record sealing ohio | expungement ohio | orc 2953.31"
+  },
+  {
+    "section": "2953.32",
+    "title": "Sealing a conviction record (application + process)",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "seal conviction ohio",
+      "record sealing application ohio",
+      "orc 2953.32"
+    ],
+    "priority": "P1",
+    "orc_dash": "2953-32",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2953.32",
+    "url_slug": "sealing-a-conviction-record-application-process-orc-2953-32",
+    "ui_label": "ORC 2953.32: Sealing a conviction record (application + process)",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "seal conviction ohio | record sealing application ohio | orc 2953.32"
+  },
+  {
+    "section": "2953.33",
+    "title": "Sealing/expunging records after not guilty or dismissal (nonconviction)",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "seal dismissed case ohio",
+      "seal not guilty ohio",
+      "orc 2953.33"
+    ],
+    "priority": "P2",
+    "orc_dash": "2953-33",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2953.33",
+    "url_slug": "sealingexpunging-records-after-not-guilty-or-dismissal-nonconviction-orc-2953-33",
+    "ui_label": "ORC 2953.33: Sealing/expunging records after not guilty or dismissal (nonconviction)",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "seal dismissed case ohio | seal not guilty ohio | orc 2953.33"
+  },
+  {
+    "section": "2953.34",
+    "title": "Effect of sealing order (employment, licensing, disclosures)",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "effect of sealing ohio",
+      "sealed record disclosure ohio",
+      "orc 2953.34"
+    ],
+    "priority": "P3",
+    "orc_dash": "2953-34",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2953.34",
+    "url_slug": "effect-of-sealing-order-employment-licensing-disclosures-orc-2953-34",
+    "ui_label": "ORC 2953.34: Effect of sealing order (employment, licensing, disclosures)",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "effect of sealing ohio | sealed record disclosure ohio | orc 2953.34"
+  },
+  {
+    "section": "2953.36",
+    "title": "Convictions ineligible for sealing/expungement (exclusions)",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "ineligible for expungement ohio",
+      "orc 2953.36"
+    ],
+    "priority": "P2",
+    "orc_dash": "2953-36",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2953.36",
+    "url_slug": "convictions-ineligible-for-sealingexpungement-exclusions-orc-2953-36",
+    "ui_label": "ORC 2953.36: Convictions ineligible for sealing/expungement (exclusions)",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "ineligible for expungement ohio | orc 2953.36"
+  },
+  {
+    "section": "2953.37",
+    "title": "Violations of sealing/expungement provisions not basis to suppress certain evidence",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "orc 2953.37"
+    ],
+    "priority": "P3",
+    "orc_dash": "2953-37",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2953.37",
+    "url_slug": "violations-of-sealingexpungement-provisions-not-basis-to-suppress-certain-evidence-orc-2953-37",
+    "ui_label": "ORC 2953.37: Violations of sealing/expungement provisions not basis to suppress certain evidence",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "orc 2953.37"
+  },
+  {
+    "section": "2953.39",
+    "title": "Sealing a low-level controlled substance offense (specific pathway)",
+    "practice_areas": [
+      "Drug Crimes",
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "seal drug conviction ohio",
+      "low-level drug offense sealing ohio",
+      "orc 2953.39"
+    ],
+    "priority": "P2",
+    "orc_dash": "2953-39",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2953.39",
+    "url_slug": "sealing-a-low-level-controlled-substance-offense-specific-pathway-orc-2953-39",
+    "ui_label": "ORC 2953.39: Sealing a low-level controlled substance offense (specific pathway)",
+    "practice_areas_pipe": "Drug Crimes | Criminal Defense",
+    "keywords_pipe": "seal drug conviction ohio | low-level drug offense sealing ohio | orc 2953.39"
+  },
+  {
+    "section": "2953.61",
+    "title": "Multiple charges; sealing/expungement handling",
+    "practice_areas": [
+      "Criminal Defense"
+    ],
+    "keywords": [
+      "multiple charges sealing ohio",
+      "orc 2953.61"
+    ],
+    "priority": "P3",
+    "orc_dash": "2953-61",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2953.61",
+    "url_slug": "multiple-charges-sealingexpungement-handling-orc-2953-61",
+    "ui_label": "ORC 2953.61: Multiple charges; sealing/expungement handling",
+    "practice_areas_pipe": "Criminal Defense",
+    "keywords_pipe": "multiple charges sealing ohio | orc 2953.61"
+  },
+  {
+    "section": "2305.10",
+    "title": "Statute of limitations for personal injury (general)",
+    "practice_areas": [
+      "Personal Injury"
+    ],
+    "keywords": [
+      "ohio personal injury statute of limitations",
+      "orc 2305.10"
+    ],
+    "priority": "P1",
+    "orc_dash": "2305-10",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2305.10",
+    "url_slug": "statute-of-limitations-for-personal-injury-general-orc-2305-10",
+    "ui_label": "ORC 2305.10: Statute of limitations for personal injury (general)",
+    "practice_areas_pipe": "Personal Injury",
+    "keywords_pipe": "ohio personal injury statute of limitations | orc 2305.10"
+  },
+  {
+    "section": "2315.18",
+    "title": "Noneconomic damages caps and related limits",
+    "practice_areas": [
+      "Personal Injury"
+    ],
+    "keywords": [
+      "ohio pain and suffering cap",
+      "non-economic damages ohio",
+      "orc 2315.18"
+    ],
+    "priority": "P2",
+    "orc_dash": "2315-18",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2315.18",
+    "url_slug": "noneconomic-damages-caps-and-related-limits-orc-2315-18",
+    "ui_label": "ORC 2315.18: Noneconomic damages caps and related limits",
+    "practice_areas_pipe": "Personal Injury",
+    "keywords_pipe": "ohio pain and suffering cap | non-economic damages ohio | orc 2315.18"
+  },
+  {
+    "section": "2315.33",
+    "title": "Comparative fault / apportionment of liability",
+    "practice_areas": [
+      "Personal Injury"
+    ],
+    "keywords": [
+      "ohio comparative negligence",
+      "apportionment of liability ohio",
+      "orc 2315.33"
+    ],
+    "priority": "P2",
+    "orc_dash": "2315-33",
+    "official_url": "https://codes.ohio.gov/ohio-revised-code/section-2315.33",
+    "url_slug": "comparative-fault-apportionment-of-liability-orc-2315-33",
+    "ui_label": "ORC 2315.33: Comparative fault / apportionment of liability",
+    "practice_areas_pipe": "Personal Injury",
+    "keywords_pipe": "ohio comparative negligence | apportionment of liability ohio | orc 2315.33"
+  }
+]
