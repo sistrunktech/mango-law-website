@@ -364,7 +364,7 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 ## TICKET-011: sitemap.xml Serving SPA HTML (Not XML)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -385,7 +385,7 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 ## TICKET-012: DUI Checkpoint Map Shows Out-of-State Pins (NY/CA)
 
 **Priority:** High  
-**Status:** Mitigated  
+**Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -410,7 +410,7 @@ The public map on `/resources/dui-checkpoints` sometimes shows markers far outsi
 ## TICKET-013: Checkpoint Status Incorrect ("Active" After End Date)
 
 **Priority:** High  
-**Status:** Mitigated  
+**Status:** Open  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -418,13 +418,15 @@ The public map on `/resources/dui-checkpoints` sometimes shows markers far outsi
 Some checkpoints display `status='active'` even though the checkpoint ended days ago.
 
 ### Root cause
-Status is persisted and can become stale if pg_cron status updates are not running reliably in production.
+- The UI derives a `displayStatus` from `start_date/end_date`, but if you leave the page open across the end time, the UI may not re-render, so the badge/marker can appear stale until a refresh.
+- Separately, the persisted `status` column can also become stale if pg_cron status updates are not running reliably in production (but the public UI should not depend on it).
 
 ### Fix (implemented)
 - Frontend derives `displayStatus` from `start_date/end_date` (cancelled remains cancelled) and uses it for:
   - checkpoint card badge
   - map marker color
   - map popup label
+- Add a lightweight `now` tick in the DUI checkpoints page so badges/markers update without a full page refresh (pending deploy).
 - Added a small regression test for status derivation (`npm test`).
 - Documented pg_cron health-check queries in `docs/OPERATIONS.md`.
 
