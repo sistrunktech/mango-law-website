@@ -5,10 +5,11 @@ type Props = {
   checkpoint: DUICheckpoint;
   onClick?: () => void;
   onOpenLeadModal?: (trigger: 'checkpoint_card' | 'emergency_banner' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific', checkpointId?: string) => void;
+  now?: Date;
 };
 
-export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal }: Props) {
-  const displayStatus = getDisplayStatus(checkpoint);
+export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, now }: Props) {
+  const displayStatus = getDisplayStatus(checkpoint, now ?? new Date());
   const statusColor = getStatusColor(displayStatus);
   const statusLabel = getStatusLabel(displayStatus);
 
