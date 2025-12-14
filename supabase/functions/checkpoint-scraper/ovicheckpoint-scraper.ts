@@ -24,8 +24,18 @@ function decodeHtmlEntities(input: string): string {
     .trim();
 }
 
-function parseDateTime(timeStr: string): { start: string; end: string } {
-  const s = timeStr.trim();
+function normalizeTimeString(input: string): string {
+  return input
+    .replace(/\u00a0/g, ' ')
+    .replace(/[•·]/g, '|')
+    .replace(/[—–]/g, '-')
+    .replace(/\s+-\s+/g, ' - ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function parseDateTime(timeStr: string): { start: string; end: string } | null {
+  const s = normalizeTimeString(timeStr);
 
   const monthMap: Record<string, number> = {
     january: 0,
@@ -40,6 +50,18 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
     october: 9,
     november: 10,
     december: 11,
+    jan: 0,
+    feb: 1,
+    mar: 2,
+    apr: 3,
+    jun: 5,
+    jul: 6,
+    aug: 7,
+    sep: 8,
+    sept: 8,
+    oct: 9,
+    nov: 10,
+    dec: 11,
   };
 
   const patterns: Array<{
@@ -48,10 +70,14 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
       | 'full'
       | 'full_dash'
       | 'from_to'
+      | 'from_to_midnight'
+      | 'evening_midnight'
       | 'no_day_full'
       | 'late_night'
       | 'date_only'
-      | 'date_only_no_day';
+      | 'date_only_no_day'
+      | 'full_missing_year'
+      | 'date_only_missing_year';
   }> = [
     // "Friday, December 5, 2025 | 10 PM to 2 AM"
     {
@@ -62,6 +88,11 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
     {
       re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+\|\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s*[–—-]\s*(\d+(?:\:\d+)?)\s*(AM|PM)/i,
       kind: 'full_dash',
+    },
+    // "Friday, Aug 1, 2025 | 8 PM - 10 PM" (abbrev month + normalized separators)
+    {
+      re: /(\w+),\s+(\w+)\.?(?:\s+)(\d+),\s+(\d+)\s+\|\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s*(?:to|-)\s*(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'full',
     },
     // "Saturday, September 13, 2025, From 7 PM to 11 PM"
     {
@@ -78,10 +109,45 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
       re: /(\w+)\s+(\d+),\s+(\d+)\s+[–—-]\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
       kind: 'no_day_full',
     },
+    // "Aug 9, 2025 - 6:00 PM to 8:30 PM" (abbrev month)
+    {
+      re: /(\w+)\.?(?:\s+)(\d+),\s+(\d+)\s+-\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'no_day_full',
+    },
     // "August 8, 2025 From 9 PM to 11 PM"
     {
       re: /(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
       kind: 'no_day_full',
+    },
+    // "Friday, May 9, 2025 From 10 PM - 2 AM" (dash between times)
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s*(?:to|-)\s*(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'from_to',
+    },
+    // "Friday, November 8, 2024, From 12:30 AM until 3 AM"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+),\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+until\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'from_to',
+    },
+    // "Friday, June 6, 2025 From 6 PM to Midnight"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+Midnight\s*$/i,
+      kind: 'from_to_midnight',
+    },
+    // "Saturday, March 15, 2025 Evening to Midnight"
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+Evening\s+to\s+Midnight\s*$/i,
+      kind: 'evening_midnight',
+    },
+    // "Friday, May 17, From 8 PM to 2 AM" (missing year)
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'full_missing_year',
+    },
+    // "Friday, June 20, 2025 Tonight" (treat as date-only)
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+Tonight\s*$/i,
+      kind: 'date_only',
     },
     // "Wednesday, November 26, 2025 | Late Night"
     {
@@ -93,6 +159,11 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
       re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s*$/i,
       kind: 'date_only',
     },
+    // "Saturday, March 29" (missing year)
+    {
+      re: /(\w+),\s+(\w+)\s+(\d+)\s*$/i,
+      kind: 'date_only_missing_year',
+    },
     // "August 8, 2025"
     {
       re: /(\w+)\s+(\d+),\s+(\d+)\s*$/i,
@@ -103,6 +174,10 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
   function parseTime(time: string, period: string): { hour: number; minute: number } {
     let hour = 0;
     let minute = 0;
+    const lower = time.toLowerCase();
+    if (lower === 'midnight') {
+      return { hour: 0, minute: 0 };
+    }
     if (time.includes(':')) {
       const [h, m] = time.split(':');
       hour = Number(h);
@@ -139,15 +214,33 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
       monthName = match[2]!;
       day = Number(match[3]!);
       year = Number(match[4]!);
+    } else if (kind === 'full_missing_year') {
+      console.warn(`Skipping checkpoint time/date missing year: ${timeStr}`);
+      return null;
     } else {
       monthName = match[1]!;
       day = Number(match[2]!);
+      if (kind === 'date_only_missing_year') {
+        console.warn(`Skipping checkpoint time/date missing year: ${timeStr}`);
+        return null;
+      }
       year = Number(match[3]!);
     }
 
     if (kind === 'late_night') {
       startHour = 22;
       endHour = 2;
+    } else if (kind === 'evening_midnight') {
+      startHour = 20;
+      startMinute = 0;
+      endHour = 0;
+      endMinute = 0;
+    } else if (kind === 'from_to_midnight') {
+      const start = parseTime(match[5]!, match[6]!);
+      startHour = start.hour;
+      startMinute = start.minute;
+      endHour = 0;
+      endMinute = 0;
     } else if (kind === 'full' || kind === 'full_dash' || kind === 'from_to') {
       const start = parseTime(match[5]!, match[6]!);
       const end = parseTime(match[7]!, match[8]!);
@@ -164,8 +257,12 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
       endMinute = end.minute;
     }
 
-    const month = monthMap[monthName.toLowerCase()];
-    if (month === undefined) break;
+    const normalizedMonth = monthName.toLowerCase().replace(/\.$/, '');
+    const month = monthMap[normalizedMonth];
+    if (month === undefined) {
+      console.warn(`Could not parse checkpoint month: ${monthName} (${timeStr})`);
+      return null;
+    }
 
     const startDate = new Date(year, month, day, startHour, startMinute);
     let endDate = new Date(year, month, day, endHour, endMinute);
@@ -177,10 +274,7 @@ function parseDateTime(timeStr: string): { start: string; end: string } {
   }
 
   console.warn(`Could not parse checkpoint time/date: ${timeStr}`);
-  const startDate = new Date();
-  startDate.setHours(20, 0, 0, 0);
-  const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000);
-  return { start: startDate.toISOString(), end: endDate.toISOString() };
+  return null;
 }
 
 export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
@@ -227,7 +321,12 @@ export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
       const county = countyRaw.replace(/\s+County$/i, '').trim();
       const city = cityRaw?.trim() || '';
       const locationText = locationRaw?.trim() || '';
-      const { start, end } = parseDateTime(timeRaw);
+      const parsed = parseDateTime(timeRaw);
+      if (!parsed) {
+        console.warn(`Skipping OVICheckpoint row due to unparseable time/date: ${timeRaw}`);
+        continue;
+      }
+      const { start, end } = parsed;
 
       const cityPart = city && city !== 'Check back for updates' ? `${city}, ` : '';
       const title = `OVI Checkpoint - ${cityPart}${county} County`;
@@ -286,7 +385,12 @@ async function scrapeOVICheckpointHomepage(url: string): Promise<RawCheckpoint[]
     const county = countyRaw.replace(/\s+County$/i, '').trim();
     const city = cityRaw?.trim() || '';
     const locationText = locationRaw?.trim() || '';
-    const { start, end } = parseDateTime(timeRaw);
+    const parsed = parseDateTime(timeRaw);
+    if (!parsed) {
+      console.warn(`Skipping OVICheckpoint row due to unparseable time/date: ${timeRaw}`);
+      continue;
+    }
+    const { start, end } = parsed;
 
     const cityPart = city && city !== 'Check back for updates' ? `${city}, ` : '';
     const title = `OVI Checkpoint - ${cityPart}${county} County`;
