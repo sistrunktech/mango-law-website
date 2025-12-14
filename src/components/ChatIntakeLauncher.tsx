@@ -60,7 +60,8 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
           trackCtaClick('floating_action_toggle');
         }}
         className={[
-          'fixed right-4 z-40 inline-flex items-center gap-2 rounded-full bg-brand-black px-5 py-4 text-sm font-semibold text-brand-offWhite shadow-lg transition-all hover:bg-brand-gold hover:text-brand-black hover:shadow-xl active:scale-95 sm:right-6',
+          'fixed right-4 z-40 inline-flex items-center rounded-full bg-brand-black text-sm font-semibold text-brand-offWhite shadow-lg transition-all hover:bg-brand-gold hover:text-brand-black hover:shadow-xl active:scale-95 sm:right-6',
+          isCollapsed ? 'h-11 w-11 justify-center px-0 py-0' : 'gap-2 px-5 py-4',
           bottomOffsetClass,
         ].join(' ')}
         aria-label={isChatOpen ? 'Close chat' : 'Open contact options'}

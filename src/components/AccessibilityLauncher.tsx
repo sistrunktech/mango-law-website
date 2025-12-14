@@ -2,9 +2,16 @@ import { useState, useEffect } from 'react';
 import { Accessibility, X, RotateCcw, Type, Eye, MousePointer, Link, Focus, Brain, Space } from 'lucide-react';
 import { useAccessibility, type FontSize } from '../contexts/AccessibilityContext';
 
-export default function AccessibilityLauncher() {
+interface AccessibilityLauncherProps {
+  chatBottomOffsetClass?: string;
+}
+
+export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-6' }: AccessibilityLauncherProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const { preferences, updatePreference, resetPreferences } = useAccessibility();
+
+  const bottomClass = chatBottomOffsetClass === 'bottom-24' ? 'bottom-44' : 'bottom-24';
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -21,6 +28,20 @@ export default function AccessibilityLauncher() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 80) setIsCollapsed(true);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const timer = window.setTimeout(() => setIsCollapsed(true), 10_000);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.clearTimeout(timer);
+    };
+  }, []);
+
   const fontSizeOptions: { value: FontSize; label: string; scale: string }[] = [
     { value: 'default', label: 'Default', scale: '100%' },
     { value: 'medium', label: 'Medium', scale: '112%' },
@@ -33,9 +54,19 @@ export default function AccessibilityLauncher() {
       <button
         onClick={() => setIsOpen(true)}
         aria-label="Open accessibility options (Alt+A)"
-        className="group fixed bottom-24 left-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-brand-mango shadow-lg transition-all hover:scale-110 hover:bg-brand-leaf hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-mango/50 lg:bottom-6"
+        className={[
+          'group fixed left-auto right-4 z-50 flex items-center justify-center rounded-full bg-brand-mango shadow-lg transition-all hover:bg-brand-leaf hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-mango/50 sm:right-6',
+          bottomClass,
+          isCollapsed ? 'h-11 w-11' : 'h-14 w-14 hover:scale-110',
+          'lg:bottom-6 lg:left-6 lg:right-auto',
+        ].join(' ')}
       >
-        <Accessibility className="h-6 w-6 text-white transition-transform group-hover:rotate-12" />
+        <Accessibility
+          className={[
+            'text-white transition-transform group-hover:rotate-12',
+            isCollapsed ? 'h-5 w-5' : 'h-6 w-6',
+          ].join(' ')}
+        />
       </button>
 
       {isOpen && (

@@ -13,6 +13,8 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
 
+  const floatingBottomOffsetClass = location.pathname.startsWith('/resources/dui-checkpoints') ? 'bottom-24' : 'bottom-6';
+
   const openLeadModal = (trigger: LeadSource) => {
     setLeadModalTrigger(trigger);
     setIsLeadModalOpen(true);
@@ -34,10 +36,10 @@ export default function Layout({ children }: { children: ReactNode }) {
       </main>
       <Footer />
 
-      <AccessibilityLauncher />
+      <AccessibilityLauncher chatBottomOffsetClass={floatingBottomOffsetClass} />
       <ChatIntakeLauncher
         onOpenLeadModal={() => openLeadModal('floating_chooser')}
-        bottomOffsetClass={location.pathname.startsWith('/resources/dui-checkpoints') ? 'bottom-24' : 'bottom-6'}
+        bottomOffsetClass={floatingBottomOffsetClass}
       />
 
       <LeadCaptureModal
