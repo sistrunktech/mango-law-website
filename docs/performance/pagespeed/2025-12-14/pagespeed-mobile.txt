@@ -1,0 +1,556 @@
+
+
+--- PAGE 1 ---
+Report from Dec 14, 2025, 10:36:14 AM
+Discover what your real users are experiencing No Data
+Diagnose performance issues
+https://mango.law/ Analyze
+Performance
+8 5 
+Accessibility
+9 2 
+Best Practices
+1 0 0 
+SEO
+1 0 0 
+ Mobile  Desktop
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 2 ---
+Values are estimated and may vary. The performance score is
+calculated directly from these metrics.See calculator.
+0–49 50–89 90–100
+8 5 
+Performance
+METRICS Expand view
+First Contentful Paint
+2.3 s
+Largest Contentful Paint
+3.7 s
+Total Blocking Time
+0 ms
+Cumulative Layout Shift
+0
+Speed Index
+4.3 s
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 3 ---
+Show audits relevant to: All FCPLCP
+Captured at Dec 14, 2025, 10:36 AM EST
+ Emulated Moto G Power with Lighthouse
+13.0.1
+Single page session
+Initial page load
+ Slow 4G throttling
+ Using HeadlessChromium 137.0.7151.119 with
+lr
+INSIGHTS
+Render blocking requests—Est savings of 1,220 ms
+Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network requests out of the
+critical path.LCPFCPUnscored
+Improve image delivery—Est savings of 746 KiB
+Reducing the download time of images can improve the perceived load time of the page and LCP. Learn more about optimizing image
+sizeLCPFCPUnscored
+mango.law1st Party 14.2 KiB 180 ms
+/assets/index-NI3vwmVL.css 14.2 KiB 180 ms
+( m a n g o . la w )
+mango.law1st Party 937.4 KiB 745.6 KiB
+URL Transfer Size Duration
+URL Resource Size Est Savings
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 4 ---
+Personal injury lawyer in Delaware
+Ohio
+<img
+src="/images/generated/pers
+onal-injury-hero.png"
+alt="Personal injury lawyer in Delaware Ohio"
+class="h-full w-full object-cover object-
+center" loading="lazy" decoding="async">
+…generated/personal-injury-hero.png 140.4 KiB 121.2 KiB
+Using a modern image format (WebP, AVIF) or
+increasing the image compression could improve this
+image's download size.
+23.4 KiB
+This image file is larger than it needs to be (936x768)
+for its displayed dimensions (397x298). Use
+responsive images to reduce the image download
+size.
+117.3 KiB
+Dominic 'Nick' Mango, Criminal
+Defense Attorney
+<img
+src="/images/headshots/nick
+-mango-hero.jpg"
+alt="Dominic 'Nick' Mango, Criminal Defense
+Attorney" width="700" height="900"
+fetchpriority="high" decoding="async"
+class="mx-auto h-auto max-h-[520px] w-full
+object-contain transition-transform du…">
+…headshots/nick-mango-hero.jpg 122.9 KiB 99.8 KiB
+Using a modern image format (WebP, AVIF) or
+increasing the image compression could improve this
+image's download size.
+20.3 KiB
+This image file is larger than it needs to be (700x900)
+for its displayed dimensions (332x427). Use
+responsive images to reduce the image download
+size.
+95.2 KiB
+( m a n g o . la w )
+( m a n g o . la w )
+URL Resource Size Est Savings
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 5 ---
+White collar crimes attorney in
+Delaware Ohio
+<img
+src="/images/generated/whit
+e-collar-defense-hero.png"
+alt="White collar crimes attorney in Delaware
+Ohio" class="h-full w-full object-cover
+object-center" loading="lazy"
+decoding="async">
+…generated/white-collar-defense-
+hero.png 114.7 KiB 95.9 KiB
+This image file is larger than it needs to be (936x768)
+for its displayed dimensions (397x298). Use
+responsive images to reduce the image download
+size.
+95.9 KiB
+Protection order defense lawyer in
+Delaware Ohio
+<img
+src="/images/generated/prot
+ection-order-defense-
+hero.png" alt="Protection order defense
+lawyer in Delaware Ohio" class="h-full w-full
+object-cover object-center" loading="lazy"
+decoding="async">
+…generated/protection-order-defense-
+hero.png 111.1 KiB 88.8 KiB
+This image file is larger than it needs to be (868x768)
+for its displayed dimensions (427x320). Use
+responsive images to reduce the image download
+size.
+88.3 KiB
+Drug crimes defense attorney in
+Delaware Ohio
+<img
+src="/images/generated/drug
+-crimes-defense-hero.png"
+alt="Drug crimes defense attorney in Delaware
+Ohio" class="h-full w-full object-cover
+…generated/drug-crimes-defense-
+hero.png
+110.9 KiB 88.7 KiB
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+URL Resource Size Est Savings
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 6 ---
+object-center" loading="lazy"
+decoding="async">
+This image file is larger than it needs to be (868x768)
+for its displayed dimensions (427x320). Use
+responsive images to reduce the image download
+size.
+88.2 KiB
+Criminal Defense representation in
+Delaware County Ohio
+<img
+src="/images/generated/crim
+inal-defense-hero.png"
+alt="Criminal Defense representation in
+Delaware County Ohio" class="h-full w-full
+object-cover object-center" loading="lazy"
+decoding="async">
+…generated/criminal-defense-hero.png 108.8 KiB 86.6 KiB
+This image file is larger than it needs to be (868x768)
+for its displayed dimensions (427x320). Use
+responsive images to reduce the image download
+size.
+86.5 KiB
+Mango Law LLC - Criminal &
+OVI/DUI Defense
+<img
+src="/images/brand/man
+go-logo-tagline-
+cropped.png" alt="Mango Law LLC - Criminal
+&amp; OVI/DUI Defense" width="1706"
+height="584" class="h-14 w-auto transition-
+all hover:opacity-90 " loading="eager">
+…brand/mango-logo-tagline-
+cropped.png 56.2 KiB 55.7 KiB
+This image file is larger than it needs to be
+(1706x584) for its displayed dimensions (164x56).
+Use responsive images to reduce the image
+download size.
+55.7 KiB
+( m a n g o . la w )
+( m a n g o . la w )
+URL Resource Size Est Savings
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 7 ---
+Forced reflow
+A forced reflow occurs when JavaScript queries geometric properties (such as offsetWidth) after styles have been invalidated by a
+OVI DUI Defense lawyer in
+Delaware Ohio
+<img
+src="/images/generated/ovi-
+dui-defense-hero.png"
+alt="OVI DUI Defense lawyer in Delaware Ohio"
+class="h-full w-full object-cover object-
+center" loading="lazy" decoding="async">
+…generated/ovi-dui-defense-hero.png 105.1 KiB 55.5 KiB
+Using a modern image format (WebP, AVIF) or
+increasing the image compression could improve this
+image's download size.
+32.8 KiB
+This image file is larger than it needs to be (578x768)
+for its displayed dimensions (637x478). Use
+responsive images to reduce the image download
+size.
+32.9 KiB
+Sex crimes defense lawyer in
+Delaware Ohio
+<img
+src="/images/generated/sex-
+crimes-defense-hero.png"
+alt="Sex crimes defense lawyer in Delaware
+Ohio" class="h-full w-full object-cover
+object-center" loading="lazy"
+decoding="async">
+…generated/sex-crimes-defense-
+hero.png 67.4 KiB 53.6 KiB
+This image file is larger than it needs to be (868x768)
+for its displayed dimensions (427x320). Use
+responsive images to reduce the image download
+size.
+53.6 KiB
+( m a n g o . la w )
+( m a n g o . la w )
+URL Resource Size Est Savings
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 8 ---
+change to the DOM state. This can result in poor performance. Learn more about forced reflows and possible mitigations.Unscored
+Network dependency tree
+Avoid chaining critical requests by reducing the length of chains, reducing the download size of resources, or deferring the download of
+unnecessary resources to improve page load.LCPUnscored
+Maximum critical path latency:846 ms
+Initial Navigation
+https://mango.law - 164 ms, 1.23 KiB
+/assets/index-CEt8W_W6.js  - 326 ms, 115.25 KiB
+/assets/HomePage-EElYq5Nw.js  - 569 ms, 2.95 KiB
+/assets/BlogSecti….js  - 644 ms, 1.69 KiB
+/assets/blogPosts-C69uchHn.js  - 706 ms, 44.80 KiB
+/assets/TestimonialsList-BTSjLCIA.js  - 643 ms, 1.50 KiB
+/assets/testimoni….js  - 690 ms, 1.63 KiB
+/assets/quote-CvIy-X6Y.js  - 642 ms, 0.93 KiB
+/assets/PageHero-BJ-zv0Fy.js  - 570 ms, 6.78 KiB
+/assets/arrow-right-GvytKMcz.js  - 453 ms, 0.71 KiB
+/assets/clock-DOIGrqO9.js  - 568 ms, 0.73 KiB
+/assets/PracticeA….js  - 520 ms, 2.50 KiB
+/assets/practiceA….js  - 437 ms, 3.30 KiB
+/assets/index-CEt8W_W6.js:27:1921 60 ms
+( m a n g o . la w )
+/assets/index-CEt8W_W6.js:275:7399 60 ms
+/assets/index-CEt8W_W6.js:278:10665 0 ms
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+Top function call Total reflow time
+Source Total reflow time
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 9 ---
+/assets/shield-al….js  - 516 ms, 0.90 KiB
+/assets/star-CcAnTGx5.js  - 539 ms, 0.76 KiB
+/assets/calendar-DMmSYnH1.js  - 510 ms, 0.80 KiB
+/assets/CTASectio….js  - 447 ms, 1.30 KiB
+/assets/LocationB….js  - 436 ms, 1.77 KiB
+/assets/external-link-BNYIryEe.js  - 448 ms, 0.80 KiB
+/assets/ContactFo….js  - 435 ms, 2.10 KiB
+/assets/circle-alert-CiGhpInb.js  - 433 ms, 0.80 KiB
+/assets/seo-BAWwU1YZ.js  - 514 ms, 2.25 KiB
+/assets/index-NI3vwmVL.css  - 339 ms, 14.15 KiB
+/assets/inter-lat….woff2  - 820 ms, 24.24 KiB
+/assets/inter-lat….woff2  - 846 ms, 24.15 KiB
+/assets/lora-lati….woff2  - 829 ms, 20.92 KiB
+/assets/inter-lat….woff2  - 829 ms, 23.47 KiB
+Preconnected origins
+preconnect hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The
+following are the origins that the page preconnected to.
+no origins were preconnected
+Preconnect candidates
+Add preconnect hints to your most important origins, but try to use no more than 4.
+No additional origins are good candidates for preconnecting
+Use efficient cache lifetimes—Est savings of 1 KiB
+A long cache lifetime can speed up repeat visits to your page. Learn more about caching.LCPFCPUnscored
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 10 ---
+LCP breakdown
+Each subpart has specific improvement strategies. Ideally, most of the LCP time should be spent on loading the resources, not within
+delays.LCPUnscored
+Strategic Criminal Defense for Delaware, Ohio
+<h1 class="font-display font-black tracking-tight text-4xl md:text-5xl lg:text-6xl xl…">
+3rd parties
+3rd party code can significantly impact load performance. Reduce and defer loading of 3rd party code to prioritize your page's content.
+Unscored
+These insights are also available in the Chrome DevTools Performance Panel - record a trace to view more detailed information.
+bolt.new 1 KiB
+/badge.js?s=051933f0-ee87-4d60-9157-c0f9ab0cb9c6 1m 1 KiB
+( b o lt . n e w )
+Time to first byte 0 ms
+Element render delay 2,320 ms
+bolt.new 1 KiB 0 ms
+/badge.js?s=051933f0-ee87-4d60-9157-c0f9ab0cb9c6 1 KiB 0 ms
+( b o lt . n e w )
+Request Cache TTL Transfer Size
+Subpart Duration
+3rd party Transfer size Main thread time
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 11 ---
+These checks highlight opportunities to improve the accessibility of
+your web app. Automatic detection can only detect a subset of issues
+and does not guarantee the accessibility of your web app, so manual
+testing is also encouraged.
+DIAGNOSTICS
+Reduce unused JavaScript—Est savings of 60 KiB
+Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. Learn how
+to reduce unused JavaScript.LCPFCPUnscored
+More information about the performance of your application. These numbers don't directly affect the Performance score.
+mango.law1st Party 114.7 KiB 60.4 KiB
+/assets/index-CEt8W_W6.js 114.7 KiB 60.4 KiB
+( m a n g o . la w )
+PASSED AUDITS(19) Show
+Accessibility
+9 2 
+URL Transfer Size Est Savings
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 12 ---
+CONTRAST
+Background and foreground colors do not have a sufficient contrast ratio.
+Low-contrast text is difficult or impossible for many users to read. Learn how to provide sufficient color contrast.
+These are opportunities to improve the legibility of your content.
+FEATURED
+<span class="text-xs font-bold uppercase tracking-wide text-white">
+FEATURED
+<div class="flex items-center gap-1.5 rounded-full bg-brand-mango px-3 py-1 shadow-md">
+BEST PRACTICES
+Touch targets do not have sufficient size or spacing.
+Touch targets with sufficient size and spacing help users who may have difficulty targeting small controls to activate the targets. Learn
+more about touch targets.
+Failing Elements
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 13 ---
+§ 4511.19 — OVI/DUI
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#ovi-dui">
+FEATURED OVI / DUI Defense § 4511.19 — OVI/DUI High-test, felony OVI, underage…
+<a class="group relative overflow-hidden rounded-2xl border-2 border-brand-mango/20 …" href="/ovi-dui-
+defense-delaware-oh">
+§ 2903.13 — ASSAULT
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#assault">
+Criminal Defense § 2903.13 — ASSAULT Comprehensive defense strategies for felo…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/criminal-
+defense-delaware-oh">
+§ 2925.11 — DRUG POSSESSION
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#drug-possession">
+Drug Crimes § 2925.11 — DRUG POSSESSION Possession, trafficking, paraphernalia…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/drug-crime-
+lawyer-delaware-oh" style="animation-delay: 100ms;">
+§ 2907.03 — SEXUAL BATTERY
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#sexual-battery">
+Sex Crimes § 2907.03 — SEXUAL BATTERY Discreet, aggressive defense with attent…
+Failing Elements
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 14 ---
+These items highlight common accessibility best practices.
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/sex-crime-
+defense-lawyer-delaware-oh" style="animation-delay: 150ms;">
+§ 2913.42 — EMBEZZLEMENT
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#theft-office">
+White Collar Crimes § 2913.42 — EMBEZZLEMENT Fraud, embezzlement, securities i…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/white-
+collar-crimes-attorney-delaware-oh" style="animation-delay: 200ms;">
+§ 3113.31 — CIVIL PROTECTION ORDER
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#civil-protection-orders">
+Protection Orders § 3113.31 — CIVIL PROTECTION ORDER Defense in civil protecti…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/protection-
+order-lawyer-delaware-oh" style="animation-delay: 250ms;">
+§ 2315.33 — COMPARATIVE NEGLIGENCE
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#comparative-negligence">
+Personal Injury § 2315.33 — COMPARATIVE NEGLIGENCE Limited-scope PI; evaluate …
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/personal-
+injury-lawyer-delaware-oh" style="animation-delay: 300ms;">
+Failing Elements
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 15 ---
+NAVIGATION
+Heading elements are not in a sequentially-descending order
+Properly ordered headings that do not skip levels convey the semantic structure of the page, making it easier to navigate and
+understand when using assistive technologies. Learn more about heading order.
+These are opportunities to improve keyboard navigation in your application.
+Charged with a DUI / OVI?
+<h3 class="text-lg font-bold text-brand-black transition-colors group-hover:text-bran…">
+NAVIGATION
+<h4 class="eyebrow text-brand-gold">
+ADDITIONAL ITEMS TO MANUALLY CHECK(10) Hide
+Interactive controls are keyboard focusable
+Interactive elements indicate their purpose and state
+The page has a logical tab order
+Visual order on the page follows DOM order
+User focus is not accidentally trapped in a region
+Failing Elements
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 16 ---
+The user's focus is directed to new content added to the page
+HTML5 landmark elements are used to improve navigation
+Offscreen content is hidden from assistive technology
+Custom controls have associated labels
+Custom controls have ARIA roles
+These items address areas which an automated testing tool cannot cover. Learn more in our guide on conducting an accessibility review.
+PASSED AUDITS(25) Hide
+[aria-*] attributes match their roles
+[aria-hidden="true"] is not present on the document <body>
+[role]s have all required [aria-*] attributes
+[role] values are valid
+[aria-*] attributes have valid values
+[aria-*] attributes are valid and not misspelled
+Buttons have an accessible name
+Image elements have [alt] attributes
+Form elements have associated labels
+[user-scalable="no"] is not used in the <meta name="viewport"> element and the [maximum-scale] attribute is not less than 5.
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 17 ---
+Select elements have associated label elements.
+ARIA attributes are used as specified for the element's role
+[aria-hidden="true"] elements do not contain focusable descendents
+Elements use only permitted ARIA attributes
+Document has a <title> element
+<frame> or <iframe> elements have a title
+<html> element has a [lang] attribute
+<html> element has a valid value for its [lang] attribute
+Links are distinguishable without relying on color.
+Links have a discernible name
+Lists contain only <li> elements and script supporting elements (<script> and <template>).
+List items (<li>) are contained within <ul>, <ol> or <menu> parent elements
+Skip links are focusable.
+Document has a main landmark.
+Deprecated ARIA roles were not used
+NOT APPLICABLE(32) Show
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 18 ---
+Best Practices
+1 0 0 
+TRUST AND SAFETY
+Ensure CSP is effective against XSS attacks
+Use a strong HSTS policy
+Ensure proper origin isolation with COOP
+Mitigate clickjacking with XFO or CSP
+Mitigate DOM-based XSS with Trusted Types
+PASSED AUDITS(13) Show
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 19 ---
+These checks ensure that your page is following basic search engine
+optimization advice. There are many additional factors Lighthouse
+does not score here that may affect your search ranking, including
+performance on Core Web Vitals. Learn more about Google Search
+Essentials.
+NOT APPLICABLE(2) Show
+SEO
+1 0 0 
+ADDITIONAL ITEMS TO MANUALLY CHECK(1) Hide
+Structured data is valid
+Run the Structured Data Testing Tool to validate structured data. Learn more about Structured Data.Unscored
+Run these additional validators on your site to check additional SEO best practices.
+PASSED AUDITS(10) Show
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 20 ---
+More on PageSpeed Insights
+What's new
+Documentation
+Learn about Web Performance
+Ask questions on Stack Overflow
+Mailing list
+Related Content
+Updates
+Web Fundamentals
+Case Studies
+Podcasts
+Connect
+Twitter
+Youtube
+Chrome Firebase All products
+Terms and Privacy Policy
+For details, see the Google Developers Site Policies.
+PageSpeed Insights Copy Link Docs

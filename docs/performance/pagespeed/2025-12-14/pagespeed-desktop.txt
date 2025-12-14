@@ -1,0 +1,416 @@
+
+
+--- PAGE 1 ---
+Report from Dec 14, 2025, 10:36:14 AM
+Discover what your real users are experiencing No Data
+Diagnose performance issues
+https://mango.law/ Analyze
+Performance
+9 9 
+Accessibility
+9 2 
+Best Practices
+1 0 0 
+SEO
+1 0 0 
+ Mobile  Desktop
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 2 ---
+Values are estimated and may vary. The performance score is
+calculated directly from these metrics.See calculator.
+0–49 50–89 90–100
+9 9 
+Performance
+METRICS Expand view
+First Contentful Paint
+0.4 s
+Largest Contentful Paint
+0.7 s
+Total Blocking Time
+0 ms
+Cumulative Layout Shift
+0.048
+Speed Index
+0.7 s
+Captured at Dec 14, 2025, 10:36 AM EST
+ Emulated Desktop with Lighthouse 13.0.1
+ Single page session
+Initial page load
+ Custom throttling
+ Using HeadlessChromium 137.0.7151.119 with
+lr
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 3 ---
+Show audits relevant to: All FCPLCPTBTCLS
+INSIGHTS
+Render blocking requests—Est savings of 130 ms
+Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network requests out of the
+critical path.LCPFCPUnscored
+Network dependency tree
+Avoid chaining critical requests by reducing the length of chains, reducing the download size of resources, or deferring the download of
+unnecessary resources to improve page load.LCPUnscored
+Maximum critical path latency:900 ms
+Initial Navigation
+https://mango.law - 135 ms, 1.23 KiB
+/assets/index-CEt8W_W6.js  - 307 ms, 114.99 KiB
+/assets/HomePage-EElYq5Nw.js  - 663 ms, 2.95 KiB
+/assets/BlogSecti….js  - 733 ms, 1.69 KiB
+/assets/blogPosts-C69uchHn.js  - 768 ms, 44.75 KiB
+/assets/TestimonialsList-BTSjLCIA.js  - 744 ms, 1.50 KiB
+/assets/testimoni….js  - 737 ms, 1.63 KiB
+mango.law1st Party 14.2 KiB 70 ms
+/assets/index-NI3vwmVL.css 14.2 KiB 70 ms
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+URL Transfer Size Duration
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 4 ---
+/assets/quote-CvIy-X6Y.js  - 733 ms, 0.93 KiB
+/assets/PageHero-BJ-zv0Fy.js  - 419 ms, 6.70 KiB
+/assets/arrow-right-GvytKMcz.js  - 420 ms, 0.71 KiB
+/assets/clock-DOIGrqO9.js  - 434 ms, 0.73 KiB
+/assets/PracticeA….js  - 446 ms, 2.52 KiB
+/assets/practiceA….js  - 418 ms, 3.30 KiB
+/assets/shield-al….js  - 420 ms, 0.90 KiB
+/assets/star-CcAnTGx5.js  - 420 ms, 0.76 KiB
+/assets/calendar-DMmSYnH1.js  - 413 ms, 0.80 KiB
+/assets/CTASectio….js  - 657 ms, 1.30 KiB
+/assets/LocationB….js  - 400 ms, 1.78 KiB
+/assets/external-link-BNYIryEe.js  - 399 ms, 0.80 KiB
+/assets/ContactFo….js  - 438 ms, 2.10 KiB
+/assets/circle-alert-CiGhpInb.js  - 399 ms, 0.80 KiB
+/assets/seo-BAWwU1YZ.js  - 419 ms, 2.25 KiB
+/assets/index-NI3vwmVL.css  - 256 ms, 14.18 KiB
+/assets/inter-lat….woff2  - 900 ms, 24.24 KiB
+/assets/inter-lat….woff2  - 881 ms, 24.14 KiB
+/assets/lora-lati….woff2  - 898 ms, 20.91 KiB
+/assets/inter-lat….woff2  - 438 ms, 23.47 KiB
+Preconnected origins
+preconnect hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The
+following are the origins that the page preconnected to.
+no origins were preconnected
+Preconnect candidates
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+( m a n g o . la w )
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 5 ---
+Add preconnect hints to your most important origins, but try to use no more than 4.
+No additional origins are good candidates for preconnecting
+Use efficient cache lifetimes—Est savings of 1 KiB
+A long cache lifetime can speed up repeat visits to your page. Learn more about caching.LCPFCPUnscored
+Improve image delivery—Est savings of 1,001 KiB
+Layout shift culprits
+LCP breakdown
+3rd parties
+These insights are also available in the Chrome DevTools Performance Panel - record a trace to view more detailed information.
+bolt.new 1 KiB
+/badge.js?s=051933f0-ee87-4d60-9157-c0f9ab0cb9c6 1m 1 KiB
+( b o lt . n e w )
+DIAGNOSTICS
+Reduce unused JavaScript—Est savings of 60 KiB
+Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. Learn how
+to reduce unused JavaScript.LCPFCPUnscored
+mango.law1st Party 114.5 KiB 60.3 KiB
+Request Cache TTL Transfer Size
+URL Transfer Size Est Savings
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 6 ---
+Avoid long main-thread tasks—1 long task found
+Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. Learn how to avoid long main-thread
+tasksTBTUnscored
+More information about the performance of your application. These numbers don't directly affect the Performance score.
+/assets/index-CEt8W_W6.js 114.5 KiB 60.3 KiB
+( m a n g o . la w )
+Unattributable 299 ms 53 ms
+PASSED AUDITS(18) Hide
+Document request latency
+Optimize DOM size
+Duplicated JavaScript
+Font display
+Forced reflow
+INP breakdown
+Start investigating how to improve INP by looking at the longest subpart.Unscored
+URL Transfer Size Est Savings
+URL Start Time Duration
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 7 ---
+LCP request discovery
+Optimize LCP by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loadingUnscored
+Legacy JavaScript
+Optimize viewport for mobile
+Minify CSS
+Minify JavaScript
+Reduce unused CSS
+Avoids enormous network payloads—Total size was 1,573 KiB
+User Timing marks and measures
+Consider instrumenting your app with the User Timing API to measure your app's real-world performance during key user experiences.
+Learn more about User Timing marks.Unscored
+JavaScript execution time—0.2 s
+Minimizes main-thread work—0.4 s
+Avoid non-composited animations
+Animations which are not composited can be janky and increase CLS. Learn how to avoid non-composited animationsCLSUnscored
+Image elements have explicit width and height
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 8 ---
+These checks highlight opportunities to improve the accessibility of
+your web app. Automatic detection can only detect a subset of issues
+and does not guarantee the accessibility of your web app, so manual
+testing is also encouraged.
+Accessibility
+9 2 
+CONTRAST
+Background and foreground colors do not have a sufficient contrast ratio.
+Low-contrast text is difficult or impossible for many users to read. Learn how to provide sufficient color contrast.
+FEATURED
+<span class="text-xs font-bold uppercase tracking-wide text-white">
+FEATURED
+<div class="flex items-center gap-1.5 rounded-full bg-brand-mango px-3 py-1 shadow-md">
+Failing Elements
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 9 ---
+These are opportunities to improve the legibility of your content.
+BEST PRACTICES
+Touch targets do not have sufficient size or spacing.
+Touch targets with sufficient size and spacing help users who may have difficulty targeting small controls to activate the targets. Learn
+more about touch targets.
+§ 4511.19 — OVI/DUI
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#ovi-dui">
+FEATURED OVI / DUI Defense § 4511.19 — OVI/DUI High-test, felony OVI, underage…
+<a class="group relative overflow-hidden rounded-2xl border-2 border-brand-mango/20 …" href="/ovi-dui-
+defense-delaware-oh">
+§ 2903.13 — ASSAULT
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#assault">
+Criminal Defense § 2903.13 — ASSAULT Comprehensive defense strategies for felo…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/criminal-
+defense-delaware-oh">
+§ 2925.11 — DRUG POSSESSION
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#drug-possession">
+Failing Elements
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 10 ---
+Drug Crimes § 2925.11 — DRUG POSSESSION Possession, trafficking, paraphernalia…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/drug-
+crime-lawyer-delaware-oh" style="animation-delay: 100ms;">
+§ 2907.03 — SEXUAL BATTERY
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#sexual-battery">
+Sex Crimes § 2907.03 — SEXUAL BATTERY Discreet, aggressive defense with attent…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/sex-
+crime-defense-lawyer-delaware-oh" style="animation-delay: 150ms;">
+§ 2913.42 — EMBEZZLEMENT
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#theft-office">
+White Collar Crimes § 2913.42 — EMBEZZLEMENT Fraud, embezzlement, securities i…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/white-
+collar-crimes-attorney-delaware-oh" style="animation-delay: 200ms;">
+§ 3113.31 — CIVIL PROTECTION ORDER
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#civil-protection-orders">
+Protection Orders § 3113.31 — CIVIL PROTECTION ORDER Defense in civil protecti…
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…"
+href="/protection-order-lawyer-delaware-oh" style="animation-delay: 250ms;">
+§ 2315.33 — COMPARATIVE NEGLIGENCE
+<a class="inline-flex items-center gap-1 text-[10px] font-semibold uppercase trackin…"
+href="/glossary#comparative-negligence">
+Failing Elements
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 11 ---
+These items highlight common accessibility best practices.
+Personal Injury § 2315.33 — COMPARATIVE NEGLIGENCE Limited-scope PI; evaluate …
+<a class="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg…" href="/personal-
+injury-lawyer-delaware-oh" style="animation-delay: 300ms;">
+NAVIGATION
+Heading elements are not in a sequentially-descending order
+Properly ordered headings that do not skip levels convey the semantic structure of the page, making it easier to navigate and
+understand when using assistive technologies. Learn more about heading order.
+These are opportunities to improve keyboard navigation in your application.
+Charged with a DUI / OVI?
+<h3 class="text-lg font-bold text-brand-black transition-colors group-hover:text-bran…">
+NAVIGATION
+<h4 class="eyebrow text-brand-gold">
+ADDITIONAL ITEMS TO MANUALLY CHECK(10) Hide
+Failing Elements
+Failing Elements
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 12 ---
+Interactive controls are keyboard focusable
+Interactive elements indicate their purpose and state
+The page has a logical tab order
+Visual order on the page follows DOM order
+User focus is not accidentally trapped in a region
+The user's focus is directed to new content added to the page
+HTML5 landmark elements are used to improve navigation
+Offscreen content is hidden from assistive technology
+Custom controls have associated labels
+Custom controls have ARIA roles
+These items address areas which an automated testing tool cannot cover. Learn more in our guide on conducting an accessibility review.
+PASSED AUDITS(25) Hide
+[aria-*] attributes match their roles
+[aria-hidden="true"] is not present on the document <body>
+[role]s have all required [aria-*] attributes
+[role] values are valid
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 13 ---
+[aria-*] attributes have valid values
+[aria-*] attributes are valid and not misspelled
+Buttons have an accessible name
+Image elements have [alt] attributes
+Form elements have associated labels
+[user-scalable="no"] is not used in the <meta name="viewport"> element and the [maximum-scale] attribute is not less than 5.
+Select elements have associated label elements.
+ARIA attributes are used as specified for the element's role
+[aria-hidden="true"] elements do not contain focusable descendents
+Elements use only permitted ARIA attributes
+Document has a <title> element
+<frame> or <iframe> elements have a title
+<html> element has a [lang] attribute
+<html> element has a valid value for its [lang] attribute
+Links are distinguishable without relying on color.
+Links have a discernible name
+Lists contain only <li> elements and script supporting elements (<script> and <template>).
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 14 ---
+List items (<li>) are contained within <ul>, <ol> or <menu> parent elements
+Skip links are focusable.
+Document has a main landmark.
+Deprecated ARIA roles were not used
+NOT APPLICABLE(32) Hide
+[accesskey] values are unique
+button, link, and menuitem elements have accessible names
+Elements with role="dialog" or role="alertdialog" have accessible names.
+ARIA input fields have accessible names
+ARIA meter elements have accessible names
+ARIA progressbar elements have accessible names
+Elements with an ARIA [role] that require children to contain a specific [role] have all required children.
+[role]s are contained by their required parent element
+Elements with the role=text attribute do not have focusable descendents.
+ARIA toggle fields have accessible names
+ARIA tooltip elements have accessible names
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 15 ---
+ARIA treeitem elements have accessible names
+The page contains a heading, skip link, or landmark region
+<dl>'s contain only properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements.
+Definition list items are wrapped in <dl> elements
+ARIA IDs are unique
+No form fields have multiple labels
+<html> element has an [xml:lang] attribute with the same base language as the [lang] attribute.
+Input buttons have discernible text.
+<input type="image"> elements have [alt] text
+The document does not use <meta http-equiv="refresh">
+<object> elements have alternate text
+No element has a [tabindex] value greater than 0
+Cells in a <table> element that use the [headers] attribute refer to table cells within the same table.
+<th> elements and elements with [role="columnheader"/"rowheader"] have data cells they describe.
+[lang] attributes have a valid value
+<video> elements contain a <track> element with [kind="captions"]
+Tables have different content in the summary attribute and <caption>.
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 16 ---
+All heading elements contain content.
+Uses ARIA roles only on compatible elements
+Image elements do not have [alt] attributes that are redundant text.
+Identical links have the same purpose.
+Best Practices
+1 0 0 
+TRUST AND SAFETY
+Ensure CSP is effective against XSS attacks
+Use a strong HSTS policy
+Ensure proper origin isolation with COOP
+Mitigate clickjacking with XFO or CSP
+Mitigate DOM-based XSS with Trusted Types
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 17 ---
+These checks ensure that your page is following basic search engine
+optimization advice. There are many additional factors Lighthouse
+does not score here that may affect your search ranking, including
+performance on Core Web Vitals. Learn more about Google Search
+Essentials.
+PASSED AUDITS(13) Show
+NOT APPLICABLE(2) Show
+SEO
+1 0 0 
+ADDITIONAL ITEMS TO MANUALLY CHECK(1) Hide
+Structured data is valid
+Run these additional validators on your site to check additional SEO best practices.
+PASSED AUDITS(10) Show
+PageSpeed Insights Copy Link Docs
+
+
+--- PAGE 18 ---
+More on PageSpeed Insights
+What's new
+Documentation
+Learn about Web Performance
+Ask questions on Stack Overflow
+Mailing list
+Related Content
+Updates
+Web Fundamentals
+Case Studies
+Podcasts
+Connect
+Twitter
+Youtube
+Chrome Firebase All products
+Terms and Privacy Policy
+For details, see the Google Developers Site Policies.
+PageSpeed Insights Copy Link Docs
