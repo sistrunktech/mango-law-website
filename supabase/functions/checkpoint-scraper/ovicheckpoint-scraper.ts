@@ -34,7 +34,7 @@ function normalizeTimeString(input: string): string {
     .trim();
 }
 
-function parseDateTime(timeStr: string): { start: string; end: string } | null {
+export function parseDateTime(timeStr: string): { start: string; end: string } | null {
   const s = normalizeTimeString(timeStr);
 
   const monthMap: Record<string, number> = {
@@ -119,6 +119,11 @@ function parseDateTime(timeStr: string): { start: string; end: string } | null {
       re: /(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
       kind: 'no_day_full',
     },
+    // "June 13, 2025, From 11:00 PM to 3:00 AM" (comma before From)
+    {
+      re: /(\w+)\s+(\d+),\s+(\d+),\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      kind: 'no_day_full',
+    },
     // "Friday, May 9, 2025 From 10 PM - 2 AM" (dash between times)
     {
       re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s*(?:to|-)\s*(\d+(?:\:\d+)?)\s*(AM|PM)/i,
@@ -131,7 +136,7 @@ function parseDateTime(timeStr: string): { start: string; end: string } | null {
     },
     // "Friday, June 6, 2025 From 6 PM to Midnight"
     {
-      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+Midnight\s*$/i,
+      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s*,?\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+Midnight\s*$/i,
       kind: 'from_to_midnight',
     },
     // "Saturday, March 15, 2025 Evening to Midnight"
@@ -208,6 +213,8 @@ function parseDateTime(timeStr: string): { start: string; end: string } | null {
       kind === 'full' ||
       kind === 'full_dash' ||
       kind === 'from_to' ||
+      kind === 'from_to_midnight' ||
+      kind === 'evening_midnight' ||
       kind === 'late_night' ||
       kind === 'date_only'
     ) {

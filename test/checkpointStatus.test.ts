@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { getDisplayStatus, type DUICheckpoint } from '../src/data/checkpoints.ts';
+import { parseDateTime as parseOVICheckpointDateTime } from '../supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts';
 
 function run() {
   const checkpoint = {
@@ -28,6 +29,18 @@ function run() {
   } satisfies Pick<DUICheckpoint, 'start_date' | 'end_date' | 'status'>;
 
   assert.equal(getDisplayStatus(invalidDates, new Date()), 'active');
+
+  const midnightFrom = parseOVICheckpointDateTime('Friday, June 6, 2025 From 6 PM to Midnight');
+  assert.ok(midnightFrom);
+  assert.ok(new Date(midnightFrom.end).getTime() > new Date(midnightFrom.start).getTime());
+
+  const midnightEvening = parseOVICheckpointDateTime('Saturday, March 15, 2025 Evening to Midnight');
+  assert.ok(midnightEvening);
+  assert.ok(new Date(midnightEvening.end).getTime() > new Date(midnightEvening.start).getTime());
+
+  const commaBeforeFrom = parseOVICheckpointDateTime('June 13, 2025, From 11:00 PM to 3:00 AM');
+  assert.ok(commaBeforeFrom);
+  assert.ok(new Date(commaBeforeFrom.end).getTime() > new Date(commaBeforeFrom.start).getTime());
 }
 
 run();
