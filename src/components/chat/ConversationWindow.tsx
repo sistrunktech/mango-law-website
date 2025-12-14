@@ -4,7 +4,7 @@ import ChatBubble from './ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import TextInput from './TextInput';
 import PhoneInput from './PhoneInput';
-import { DIRECT_PHONE_DISPLAY, OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
+import { OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
 
 interface ConversationStep {
@@ -241,7 +241,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{DIRECT_PHONE_DISPLAY} — Direct (Nick)</span>
+              <span>{OFFICE_PHONE_DISPLAY}</span>
             </div>
           </div>
         </div>
@@ -279,7 +279,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{DIRECT_PHONE_DISPLAY} — Direct (Nick)</span>
+              <span>{OFFICE_PHONE_DISPLAY}</span>
             </div>
           </div>
         </div>

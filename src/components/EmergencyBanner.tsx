@@ -1,5 +1,5 @@
 import { AlertTriangle, Phone } from 'lucide-react';
-import { DIRECT_PHONE_DISPLAY, DIRECT_PHONE_TEL } from '../lib/contactInfo';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick } from '../lib/analytics';
 
 interface EmergencyBannerProps {
@@ -8,7 +8,7 @@ interface EmergencyBannerProps {
 
 export default function EmergencyBanner({ onOpenLeadModal }: EmergencyBannerProps) {
   const handleCallClick = () => {
-    trackCtaClick('checkpoint_banner_call_direct');
+    trackCtaClick('checkpoint_banner_call');
   };
 
   const handleLeadClick = () => {
@@ -29,16 +29,16 @@ export default function EmergencyBanner({ onOpenLeadModal }: EmergencyBannerProp
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <a
-              href={`tel:${DIRECT_PHONE_TEL}`}
+              href={`tel:${OFFICE_PHONE_TEL}`}
               onClick={handleCallClick}
               className="inline-flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-brand-black/10 bg-white px-3 py-1.5 text-[13px] font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 sm:flex-none"
-              data-cta="checkpoint_banner_call_direct"
-              aria-label={`Call direct: ${DIRECT_PHONE_DISPLAY}`}
+              data-cta="checkpoint_banner_call"
+              aria-label={`Call: ${OFFICE_PHONE_DISPLAY}`}
             >
               <Phone className="h-4 w-4 text-brand-mango" />
               <span className="sm:hidden">Call</span>
               <span className="hidden sm:inline">
-                Call (Direct) {DIRECT_PHONE_DISPLAY}
+                Call {OFFICE_PHONE_DISPLAY}
               </span>
             </a>
             <button

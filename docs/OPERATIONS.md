@@ -20,8 +20,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 
 ## Contact Numbers (Do Not Swap)
 - **Office / Main line:** `(740) 602-2155` (`tel:7406022155`) — default for all “Call” CTAs.
-- **Direct (Nick):** `(740) 417-6191` (`tel:7404176191`) — use only when explicitly labeled as direct/emergency.
-- SMS gateway env vars must follow the same mapping: `SMS_GATEWAY_OFFICE` is the office/main line; `SMS_GATEWAY_NICK` is Nick’s direct.
+- Do not use personal/direct numbers in public UI; keep anything like `SMS_GATEWAY_NICK` limited to internal SMS notifications only.
 
 ## Secrets Placement
 - GitHub Actions: secrets and variables have been added via `gh secret set` / `gh variable set`. Replace placeholder Supabase values (`VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `VITE_SUPABASE_URL`) with real env-specific keys.

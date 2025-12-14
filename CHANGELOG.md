@@ -30,10 +30,7 @@
 - Tighten floating chat placement on small screens to avoid edge clipping (`src/components/ChatIntakeLauncher.tsx`).
 - Upgrade `/admin/connections` to separate Connect vs Configure: status pills (not connected / needs setup / healthy / reconnect), setup guide, and admin “Check status” action (`src/pages/ConnectionsPage.tsx`).
 - Add admin-only Edge Function to power “Check status” and audit log events (`supabase/functions/google-access-check/index.ts`).
-- Correct office vs direct phone usage across UI + SEO and centralize constants:
-  - Office/main line: `(740) 602-2155`
-  - Direct (Nick): `(740) 417-6191`
-  - (`src/lib/contactInfo.ts`, `src/lib/seo.tsx`)
+- Canonicalize the office phone number sitewide as `(740) 602-2155` and avoid using personal/direct numbers in public UI (`src/lib/contactInfo.ts`).
 - Fix Bolt publish failures by renaming/removing files with unsupported filename characters (spaces/Unicode) (`public/images/brand/`, `mango-logo-options-1-new.zip`).
 - Add a `prebuild` filename safety check to prevent publish failures from slipping in (`scripts/check-filenames.mjs`, `package.json`).
 - Treat staging/preview hosts as production to prevent Supabase project drift (`src/lib/supabaseClient.ts`).
@@ -204,7 +201,7 @@
   - No Twilio subscription required
   - Configured via environment variables:
     - `SMS_GATEWAY_OFFICE`: 7406022155@vtext.com
-    - `SMS_GATEWAY_NICK`: 7404176191@vtext.com
+    - `SMS_GATEWAY_NICK`: <attorney_cell>@vtext.com (internal notifications only)
     - `SMS_GATEWAY_TEST`: 6149000604@vtext.com
     - `ENABLE_SMS_LEAD_ALERTS`: true/false to toggle SMS notifications
 - **Enhanced chat-intake Edge Function**:
@@ -260,7 +257,7 @@
 - `MAPBOX_PUBLIC_TOKEN`: Fallback token for server-side usage
 - `VITE_MAPBOX_STYLE_URL`: Optional custom Mapbox style URL
 - `SMS_GATEWAY_OFFICE`: Email-to-SMS gateway for office notifications (format: phone@carrier-gateway.com)
-- `SMS_GATEWAY_NICK`: Email-to-SMS gateway for attorney notifications
+- `SMS_GATEWAY_NICK`: Email-to-SMS gateway for attorney notifications (internal; not a public “call” number)
 - `SMS_GATEWAY_TEST`: Email-to-SMS gateway for test notifications
 - `ENABLE_SMS_LEAD_ALERTS`: Enable/disable SMS notifications via email-to-SMS gateways
 
@@ -294,7 +291,7 @@
 ### Frontend & Content
 - Replaced placeholder attorney photos with production headshots (`nick-mango-hero.jpg`, `nick-mango-01.jpg`, `geoff-spall-01.jpg`) and wired Nick’s hero/About images to avoid cropping issues.
 - Standardized logo usage (later superseded by 2025-12-12): header/footer wired to the current official brand assets under `public/images/brand/`.
-- Updated contact details to real numbers (office `740-602-2155`, direct `740-417-6191`) across header, CTA, and About.
+- Updated contact details to the canonical office/main line (`740-602-2155`) across header, CTA, and About.
 
 ### Image/OG Pipeline
 - Added fal.ai + Supabase OG pipeline (`plugins/vite-og-plugin.ts`) that generates route-specific OG images at build time when `FAL_KEY` and Supabase service-role envs are present.

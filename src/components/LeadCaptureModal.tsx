@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
-import { DIRECT_PHONE_DISPLAY, DIRECT_PHONE_TEL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export type LeadSource =
   | 'emergency_banner'
@@ -118,18 +118,10 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               <a
                 href={`tel:${OFFICE_PHONE_TEL}`}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-white transition-all hover:bg-brand-leaf"
-                data-cta="lead_success_call_office"
+                data-cta="lead_success_call"
               >
                 <Phone className="h-5 w-5" />
-                Office: {OFFICE_PHONE_DISPLAY}
-              </a>
-              <a
-                href={`tel:${DIRECT_PHONE_TEL}`}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-brand-mango px-6 py-3 font-semibold text-brand-mango transition-all hover:bg-brand-mango hover:text-white"
-                data-cta="lead_success_call_direct"
-              >
-                <Phone className="h-5 w-5" />
-                Direct (Nick): {DIRECT_PHONE_DISPLAY}
+                Call {OFFICE_PHONE_DISPLAY}
               </a>
             </div>
             <button
