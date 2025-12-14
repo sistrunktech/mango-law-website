@@ -1,10 +1,28 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Phone, Calendar, Star } from 'lucide-react';
 import { practiceAreas } from '../data/practiceAreas';
 import ORCLabel from './ORCLabel';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
+function useMinWidthQuery(minWidthPx: number): boolean {
+  const getMatches = () => (typeof window === 'undefined' ? true : window.matchMedia(`(min-width: ${minWidthPx}px)`).matches);
+  const [matches, setMatches] = useState(getMatches);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const media = window.matchMedia(`(min-width: ${minWidthPx}px)`);
+    const onChange = () => setMatches(media.matches);
+    onChange();
+    media.addEventListener('change', onChange);
+    return () => media.removeEventListener('change', onChange);
+  }, [minWidthPx]);
+
+  return matches;
+}
+
 export default function PracticeAreaCardGrid() {
+  const showDecorativeImages = useMinWidthQuery(768);
   const oviArea = practiceAreas.find(area => area.practiceAreaKey === 'ovi-dui');
   const criminalArea = practiceAreas.find(area => area.practiceAreaKey === 'criminal-defense');
   const otherAreas = practiceAreas.filter(
@@ -46,8 +64,8 @@ export default function PracticeAreaCardGrid() {
               className="group relative overflow-hidden rounded-2xl border-2 border-brand-mango/20 bg-gradient-to-br from-brand-mango/5 via-white to-brand-gold/5 shadow-lift transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-brand-mango/40 md:col-span-2 lg:col-span-2"
             >
               {/* Background Image */}
-              {oviArea.imageUrl && (
-                <div className="absolute right-0 top-0 hidden h-full w-full opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.12] md:block lg:w-1/2">
+              {showDecorativeImages && oviArea.imageUrl && (
+                <div className="absolute right-0 top-0 h-full w-full opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.12] lg:w-1/2">
                   <img
                     src={oviArea.imageUrl}
                     alt={oviArea.imageAlt || ''}
@@ -126,7 +144,7 @@ export default function PracticeAreaCardGrid() {
               className="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20"
             >
               {/* Background Image */}
-              {criminalArea.imageUrl && (
+              {showDecorativeImages && criminalArea.imageUrl && (
                 <div className="absolute inset-0 opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1]">
                   <img
                     src={criminalArea.imageUrl}
@@ -181,8 +199,8 @@ export default function PracticeAreaCardGrid() {
               style={{ animationDelay: `${(index + 2) * 50}ms` }}
             >
               {/* Background Image */}
-              {area.imageUrl && (
-                <div className="absolute inset-0 hidden opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1] md:block">
+              {showDecorativeImages && area.imageUrl && (
+                <div className="absolute inset-0 opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1]">
                   <img
                     src={area.imageUrl}
                     alt={area.imageAlt || ''}
