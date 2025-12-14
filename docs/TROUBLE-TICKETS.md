@@ -487,6 +487,22 @@ The desired attribution is to cite the underlying credible sources (local news o
 - Backfill: update existing checkpoint rows to point `source_name/source_url` at the researched official/news sources.
 - Long-term: support multiple sources per checkpoint (official + corroborating) without losing ingestion traceability.
 
+### Next-phase scope (track as follow-up PRs)
+**Goal:** treat OVICheckpoint/DUIBlock as ingestion leads, not public citations.
+
+1) **Data model: store ingestion lead separately from public citations**
+   - Add `ingestion_source_name` / `ingestion_source_url` fields (or similar) to `dui_checkpoints`, and/or
+   - Add a `dui_checkpoint_citations` table to support multiple credible citations per checkpoint.
+2) **Scraper/pipeline**
+   - Write ingestion lead fields for new rows.
+   - Never overwrite curated public citation fields on existing rows.
+3) **Backfill + normalization**
+   - Backfill credible citations for existing rows where available.
+   - Normalize `source_name` strings so aggregator detection is consistent.
+4) **UI semantics**
+   - Public pages show only “Verified by …” citations.
+   - Ingestion lead fields show only in admin (never public).
+
 ### Verification
 - Public DUI checkpoint page does not display `Source: OVICheckpoint.com` / `DUIBlock`.
 - Checkpoints with official sources display the correct source name/link.
