@@ -101,17 +101,20 @@ export default function BlogPostPage() {
           </div>
 
           {post.imageUrl && (
-            <img
-              src={post.imageUrl}
-              alt={post.title}
-              width={1200}
-              height={675}
-              className="mt-8 w-full rounded-2xl object-cover shadow-lg"
-              style={{ maxHeight: '500px' }}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-            />
+            <div className="mt-8 overflow-hidden rounded-2xl bg-brand-offWhite shadow-lg">
+              <div className="relative aspect-[16/9] max-h-[500px]">
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  width={1200}
+                  height={675}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </div>
+            </div>
           )}
 
           <div className="rounded-lg border-l-4 border-brand-mango bg-brand-mango/5 p-4 text-sm text-brand-black/70">
