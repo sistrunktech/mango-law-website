@@ -37,16 +37,20 @@ export default function BlogSection() {
               to={`/blog/${post.slug}`}
               className="group card card-hover p-0 overflow-hidden"
             >
-              {post.imageUrl && (
-                <div className="relative aspect-[16/9] overflow-hidden bg-brand-offWhite">
-                  <img
-                    src={post.imageUrl}
-                    alt={post.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                </div>
-              )}
+                {post.imageUrl && (
+                  <div className="relative aspect-[16/9] overflow-hidden bg-brand-offWhite">
+                    <img
+                      src={post.imageUrl}
+                      alt={post.title}
+                      width={800}
+                      height={450}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                  </div>
+                )}
               <div className="p-6">
                 <div className="mb-4 flex items-center gap-3 text-xs">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-leaf/10 px-3 py-1 font-semibold text-brand-leaf">

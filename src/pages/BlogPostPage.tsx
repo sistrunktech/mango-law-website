@@ -104,8 +104,13 @@ export default function BlogPostPage() {
             <img
               src={post.imageUrl}
               alt={post.title}
+              width={1200}
+              height={675}
               className="mt-8 w-full rounded-2xl object-cover shadow-lg"
               style={{ maxHeight: '500px' }}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
             />
           )}
 

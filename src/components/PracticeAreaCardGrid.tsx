@@ -52,6 +52,8 @@ export default function PracticeAreaCardGrid() {
                     src={oviArea.imageUrl}
                     alt={oviArea.imageAlt || ''}
                     className="h-full w-full object-cover object-center"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/50 to-white" />
                 </div>
@@ -130,6 +132,8 @@ export default function PracticeAreaCardGrid() {
                     src={criminalArea.imageUrl}
                     alt={criminalArea.imageAlt || ''}
                     className="h-full w-full object-cover object-center"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/60" />
                 </div>
@@ -183,6 +187,8 @@ export default function PracticeAreaCardGrid() {
                     src={area.imageUrl}
                     alt={area.imageAlt || ''}
                     className="h-full w-full object-cover object-center"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/60" />
                 </div>
