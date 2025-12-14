@@ -1,5 +1,13 @@
 import { MapPin, Clock, Calendar, AlertCircle, ExternalLink, Shield } from 'lucide-react';
-import { formatCheckpointDateRange, getDisplayStatus, getStatusColor, getStatusLabel, type DUICheckpoint } from '../data/checkpoints';
+import {
+  formatCheckpointDateRange,
+  getDisplayStatus,
+  getStatusColor,
+  getStatusLabel,
+  isAggregatorSourceName,
+  isAggregatorSourceUrl,
+  type DUICheckpoint,
+} from '../data/checkpoints';
 
 type Props = {
   checkpoint: DUICheckpoint;
@@ -12,6 +20,9 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
   const displayStatus = getDisplayStatus(checkpoint, now ?? new Date());
   const statusColor = getStatusColor(displayStatus);
   const statusLabel = getStatusLabel(displayStatus);
+
+  const showSourceName = Boolean(checkpoint.source_name) && !isAggregatorSourceName(checkpoint.source_name);
+  const showSourceUrl = Boolean(checkpoint.source_url) && !isAggregatorSourceUrl(checkpoint.source_url);
 
   return (
     <div
@@ -53,7 +64,7 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
       )}
 
       <div className="mt-4 space-y-2">
-        {checkpoint.source_name && (
+        {showSourceName && (
           <div className="flex items-center gap-2 text-xs text-brand-black/60">
             <AlertCircle className="h-3.5 w-3.5" />
             <span>Source: {checkpoint.source_name}</span>
@@ -65,9 +76,17 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
           </div>
         )}
 
-        {checkpoint.source_url && (
+        {!showSourceName && checkpoint.is_verified && (
+          <div className="flex items-center gap-2 text-xs text-brand-black/60">
+            <span className="ml-auto rounded-full bg-brand-leaf/10 px-2 py-0.5 text-brand-leaf font-semibold">
+              Verified
+            </span>
+          </div>
+        )}
+
+        {showSourceUrl && (
           <a
-            href={checkpoint.source_url}
+            href={checkpoint.source_url!}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg border border-brand-mango/20 bg-brand-mango/5 px-4 py-2.5 text-sm font-semibold text-brand-mango transition-all hover:border-brand-mango/40 hover:bg-brand-mango/10 hover:text-brand-leaf"

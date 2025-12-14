@@ -20,6 +20,24 @@ export interface DUICheckpoint {
   views_count: number;
 }
 
+export function isAggregatorSourceName(sourceName: string | null | undefined): boolean {
+  if (!sourceName) return false;
+  const normalized = sourceName.trim().toLowerCase();
+  return normalized === 'ovicheckpoint.com' || normalized === 'duiblock' || normalized === 'duiblock.com';
+}
+
+export function isAggregatorSourceUrl(sourceUrl: string | null | undefined): boolean {
+  if (!sourceUrl) return false;
+  const normalized = sourceUrl.trim().toLowerCase();
+  return normalized.includes('ovicheckpoint.com') || normalized.includes('duiblock');
+}
+
+export function shouldShowPublicCheckpointSource(
+  checkpoint: Pick<DUICheckpoint, 'source_name' | 'source_url'>
+): boolean {
+  return Boolean(checkpoint.source_name) && !isAggregatorSourceName(checkpoint.source_name);
+}
+
 export const ohioCounties = [
   'Adams', 'Allen', 'Ashland', 'Ashtabula', 'Athens', 'Auglaize', 'Belmont', 'Brown', 'Butler',
   'Carroll', 'Champaign', 'Clark', 'Clermont', 'Clinton', 'Columbiana', 'Coshocton', 'Crawford',

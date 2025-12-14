@@ -435,6 +435,65 @@ Some checkpoints display `status='active'` even though the checkpoint ended days
 
 ---
 
+## TICKET-014: Mobile Floating Buttons Misaligned + Header CTA Layout
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+On mobile, the accessibility widget button and the chat widget button appear misaligned (different sides/offsets) and can overlap content. The floating buttons should be visually aligned and reduce footprint after the user has started scrolling or after a short delay.
+
+Additionally, the mobile header CTA currently shows a phone icon next to the Consult button; the preferred layout is to show the phone number as click-to-call text with the Consult button, neatly aligned.
+
+### Root cause
+- Accessibility launcher and chat launcher were positioned independently with different anchors/offset logic.
+- Chat launcher only hid the label when “collapsed” but did not shrink its hitbox, so the footprint remained large.
+- Mobile header CTA used a phone icon button rather than click-to-call text, leading to cramped alignment.
+
+### Fix (implemented)
+- Mobile floating buttons are aligned on the bottom-right and respect shared bottom offsets (including DUI checkpoint pages).
+- Both floating buttons shrink after scroll/10s to reduce footprint while remaining accessible.
+- Mobile header CTA now shows the phone number as click-to-call text stacked with the Consult button.
+
+### Verification
+- On mobile, the accessibility and chat buttons remain aligned and do not overlap key content.
+- After ~10s or on scroll, both buttons shrink to compact circles.
+- Mobile header shows a tappable phone number and Consult button aligned cleanly.
+
+---
+
+## TICKET-015: Checkpoint Source Attribution Uses Aggregator Feeds (OVICheckpoint/DUIBlock)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+The public DUI checkpoint map/cards display `Source: OVICheckpoint.com` for many checkpoints. OVICheckpoint/DUIBlock are aggregator feeds and should not be publicly credited as the canonical source.
+
+The desired attribution is to cite the underlying credible sources (local news outlets and official LEA posts such as sheriff’s offices, OSHP, municipal PD social posts, etc.).
+
+### Root cause
+- The OVICheckpoint scraper persists `source_name='OVICheckpoint.com'` and `source_url='https://www.ovicheckpoint.com/'` into `dui_checkpoints` for new rows.
+- The public UI renders `dui_checkpoints.source_name/source_url` directly.
+- When a checkpoint is later manually corrected to an official source, subsequent scraper runs can overwrite the curated source fields.
+
+### Fix (scoped)
+- Immediate: hide aggregator attribution on public UI while keeping data internally for traceability.
+- Prevent future regression: scraper should not overwrite non-aggregator source fields on existing rows.
+- Backfill: update existing checkpoint rows to point `source_name/source_url` at the researched official/news sources.
+- Long-term: support multiple sources per checkpoint (official + corroborating) without losing ingestion traceability.
+
+### Verification
+- Public DUI checkpoint page does not display `Source: OVICheckpoint.com` / `DUIBlock`.
+- Checkpoints with official sources display the correct source name/link.
+- Curated source fields are not overwritten by scheduled scraper runs.
+
+---
+
 *Add additional trouble tickets below using the same format*
 
 ---

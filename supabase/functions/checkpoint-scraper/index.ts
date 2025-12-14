@@ -20,6 +20,18 @@ interface ScraperStats {
   errors: Array<{ checkpoint: string; error: string }>;
 }
 
+function isAggregatorSourceName(sourceName: unknown): boolean {
+  if (typeof sourceName !== 'string') return false;
+  const normalized = sourceName.trim().toLowerCase();
+  return normalized === 'ovicheckpoint.com' || normalized === 'duiblock' || normalized === 'duiblock.com';
+}
+
+function isAggregatorSourceUrl(sourceUrl: unknown): boolean {
+  if (typeof sourceUrl !== 'string') return false;
+  const normalized = sourceUrl.trim().toLowerCase();
+  return normalized.includes('ovicheckpoint.com') || normalized.includes('duiblock');
+}
+
 async function upsertAnnouncement(
   supabase: ReturnType<typeof createClient>,
   payload: Record<string, unknown>
@@ -142,7 +154,7 @@ Deno.serve(async (req: Request) => {
 
         const { data: existing, error: searchError } = await supabase
           .from('dui_checkpoints')
-          .select('id')
+          .select('id, source_name, source_url, is_verified')
           .eq('title', raw.title)
           .eq('start_date', raw.startDate)
           .maybeSingle();
@@ -152,9 +164,23 @@ Deno.serve(async (req: Request) => {
         }
 
         if (existing) {
+          const existingSourceName = (existing as any)?.source_name as unknown;
+          const existingSourceUrl = (existing as any)?.source_url as unknown;
+          const hasCuratedSourceName = typeof existingSourceName === 'string' && !isAggregatorSourceName(existingSourceName);
+          const hasCuratedSourceUrl = typeof existingSourceUrl === 'string' && !isAggregatorSourceUrl(existingSourceUrl);
+
+          const updatePayload =
+            hasCuratedSourceName || hasCuratedSourceUrl
+              ? {
+                  ...checkpointData,
+                  source_name: hasCuratedSourceName ? existingSourceName : checkpointData.source_name,
+                  source_url: hasCuratedSourceUrl ? existingSourceUrl : checkpointData.source_url,
+                }
+              : checkpointData;
+
           const { error: updateError } = await supabase
             .from('dui_checkpoints')
-            .update(checkpointData)
+            .update(updatePayload)
             .eq('id', existing.id);
 
           if (updateError) throw updateError;

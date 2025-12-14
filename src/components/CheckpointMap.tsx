@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Navigation } from 'lucide-react';
-import { getDisplayStatus, type DUICheckpoint } from '../data/checkpoints';
+import { getDisplayStatus, isAggregatorSourceName, type DUICheckpoint } from '../data/checkpoints';
 
 type Props = {
   checkpoints: DUICheckpoint[];
@@ -148,6 +148,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
 
       const startDate = new Date(checkpoint.start_date);
       const endDate = new Date(checkpoint.end_date);
+      const sourceNameForPopup = checkpoint.source_name && !isAggregatorSourceName(checkpoint.source_name) ? checkpoint.source_name : null;
 
       const popup = new mapboxgl.Popup({ offset: 25, closeButton: true })
         .setHTML(`
@@ -171,7 +172,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
               </p>
             </div>
             ${checkpoint.description ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #888; line-height: 1.4;">${checkpoint.description}</p>` : ''}
-            ${checkpoint.source_name ? `<p style="margin: 8px 0 0 0; font-size: 11px; color: #aaa;">Source: ${checkpoint.source_name}</p>` : ''}
+            ${sourceNameForPopup ? `<p style="margin: 8px 0 0 0; font-size: 11px; color: #aaa;">Source: ${sourceNameForPopup}</p>` : ''}
           </div>
         `);
 
