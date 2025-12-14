@@ -59,7 +59,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E8A33C] focus:border-transparent transition"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C] focus:border-transparent transition"
                 placeholder="admin@example.com"
               />
             </div>
@@ -82,7 +82,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E8A33C] focus:border-transparent transition"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C] focus:border-transparent transition"
                 placeholder="••••••••"
               />
             </div>
@@ -90,7 +90,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-[#E8A33C] to-[#FFB84D] text-white font-semibold rounded-lg hover:from-[#D9941A] hover:to-[#E8A33C] focus:outline-none focus:ring-2 focus:ring-[#E8A33C] focus:ring-offset-2 focus:ring-offset-[#1B4332] transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#E8A33C] to-[#FFB84D] text-white font-semibold rounded-lg hover:from-[#D9941A] hover:to-[#E8A33C] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1B4332] transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>

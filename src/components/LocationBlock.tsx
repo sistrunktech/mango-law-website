@@ -18,7 +18,7 @@ export default function LocationBlock({
     <section className="container py-12">
       <div className="grid gap-6 rounded-2xl border border-brand-black/10 bg-white p-6 shadow-sm md:grid-cols-2">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-goldText">{eyebrow}</p>
           <h2 className="mt-2 text-2xl font-bold text-brand-black">{title}</h2>
           <p className="mt-2 text-sm text-brand-black/70">{description}</p>
           <div className="mt-4 space-y-1 text-sm text-brand-black/80">

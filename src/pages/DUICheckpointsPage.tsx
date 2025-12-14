@@ -151,21 +151,21 @@ export default function DUICheckpointsPage() {
                 <div className="flex flex-wrap gap-4 text-sm">
                   <a
                     href="/ovi-dui-defense-delaware-oh"
-                    className="inline-flex items-center gap-2 font-semibold text-brand-mango transition-colors hover:text-brand-leaf"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
                   >
                     <Shield className="h-4 w-4" />
                     Know Your Rights
                   </a>
                   <a
                     href="/blog/refuse-field-sobriety-test-ohio"
-                    className="inline-flex items-center gap-2 font-semibold text-brand-mango transition-colors hover:text-brand-leaf"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
                   >
                     <Info className="h-4 w-4" />
                     Field Sobriety Tests
                   </a>
                   <a
                     href="/blog/ohio-dui-checkpoint-hotspots"
-                    className="inline-flex items-center gap-2 font-semibold text-brand-mango transition-colors hover:text-brand-leaf"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
                   >
                     <MapPinned className="h-4 w-4" />
                     Common Checkpoint Hotspots
@@ -185,8 +185,8 @@ export default function DUICheckpointsPage() {
                 onClick={() => setViewMode('upcoming')}
                 className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
                   viewMode === 'upcoming'
-                    ? 'bg-white text-brand-mango shadow-sm'
-                    : 'text-brand-black/70 hover:text-brand-mango'
+                    ? 'bg-white text-brand-mangoText shadow-sm'
+                    : 'text-brand-black/70 hover:text-brand-mangoText'
                 }`}
               >
                 <Clock className="h-3.5 w-3.5" />
@@ -196,8 +196,8 @@ export default function DUICheckpointsPage() {
                 onClick={() => setViewMode('all')}
                 className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
                   viewMode === 'all'
-                    ? 'bg-white text-brand-mango shadow-sm'
-                    : 'text-brand-black/70 hover:text-brand-mango'
+                    ? 'bg-white text-brand-mangoText shadow-sm'
+                    : 'text-brand-black/70 hover:text-brand-mangoText'
                 }`}
               >
                 <Calendar className="h-3.5 w-3.5" />
@@ -211,8 +211,8 @@ export default function DUICheckpointsPage() {
                   onClick={() => setDateRange('30d')}
                   className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
                     dateRange === '30d'
-                      ? 'bg-white text-brand-mango shadow-sm'
-                      : 'text-brand-black/70 hover:text-brand-mango'
+                      ? 'bg-white text-brand-mangoText shadow-sm'
+                      : 'text-brand-black/70 hover:text-brand-mangoText'
                   }`}
                 >
                   30 Days
@@ -221,8 +221,8 @@ export default function DUICheckpointsPage() {
                   onClick={() => setDateRange('90d')}
                   className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
                     dateRange === '90d'
-                      ? 'bg-white text-brand-mango shadow-sm'
-                      : 'text-brand-black/70 hover:text-brand-mango'
+                      ? 'bg-white text-brand-mangoText shadow-sm'
+                      : 'text-brand-black/70 hover:text-brand-mangoText'
                   }`}
                 >
                   90 Days
@@ -231,8 +231,8 @@ export default function DUICheckpointsPage() {
                   onClick={() => setDateRange('all')}
                   className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
                     dateRange === 'all'
-                      ? 'bg-white text-brand-mango shadow-sm'
-                      : 'text-brand-black/70 hover:text-brand-mango'
+                      ? 'bg-white text-brand-mangoText shadow-sm'
+                      : 'text-brand-black/70 hover:text-brand-mangoText'
                   }`}
                 >
                   All Time
@@ -280,7 +280,7 @@ export default function DUICheckpointsPage() {
                   <div key={a.id} className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="font-semibold text-brand-black">{a.title}</div>
-                      <span className="rounded-full bg-brand-mango/15 px-2.5 py-1 text-xs font-semibold text-brand-mango">
+                      <span className="rounded-full bg-brand-mango/15 px-2.5 py-1 text-xs font-semibold text-brand-mangoText">
                         Pending details
                       </span>
                     </div>
@@ -294,7 +294,7 @@ export default function DUICheckpointsPage() {
                         href={a.source_url}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-2 inline-flex text-xs font-semibold text-brand-mango hover:text-brand-leaf"
+                        className="mt-2 inline-flex text-xs font-semibold text-brand-mangoText hover:text-brand-leaf"
                       >
                         View source →
                       </a>

@@ -23,7 +23,7 @@ export default function ReviewsSidebar() {
       <div className="rounded-xl border border-brand-black/10 bg-white p-6 shadow-soft">
         <div className="mb-4 flex items-center gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-mango/10">
-            <Phone className="h-5 w-5 text-brand-mango" />
+            <Phone className="h-5 w-5 text-brand-mangoText" />
           </div>
           <h3 className="font-display text-lg font-bold text-brand-black">
             Get Legal Help
@@ -38,7 +38,7 @@ export default function ReviewsSidebar() {
       <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-6">
         <div className="mb-5 flex items-start gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-gold/10">
-            <Star className="h-5 w-5 text-brand-gold" />
+            <Star className="h-5 w-5 text-brand-goldText" />
           </div>
           <div>
             <h3 className="font-display text-lg font-bold text-brand-black">

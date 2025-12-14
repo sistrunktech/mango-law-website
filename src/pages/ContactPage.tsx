@@ -35,15 +35,15 @@ export default function ContactPage() {
               <p className="text-sm font-bold text-brand-black">What happens next</p>
               <ol className="mt-4 space-y-3 text-sm text-brand-black/70">
                 <li className="flex gap-3">
-                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mango">1</span>
+                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mangoText">1</span>
                   <span>Submit the form (or call if urgent).</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mango">2</span>
+                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mangoText">2</span>
                   <span>We review and respond promptly with next steps.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mango">3</span>
+                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mangoText">3</span>
                   <span>We schedule a strategy call and outline your options.</span>
                 </li>
               </ol>
@@ -58,7 +58,7 @@ export default function ContactPage() {
               ].map((item) => (
                 <div key={item.title} className="flex gap-4 rounded-2xl border border-brand-black/10 bg-brand-offWhite/40 p-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-mango/10">
-                    <item.icon className="h-5 w-5 text-brand-mango" />
+                    <item.icon className="h-5 w-5 text-brand-mangoText" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-brand-black">{item.title}</p>
@@ -69,7 +69,7 @@ export default function ContactPage() {
             </div>
 
             <div className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-gold">Prefer to call?</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Prefer to call?</p>
               <p className="mt-2 text-sm text-brand-black/70">If your situation is urgent, call the office now.</p>
               <a
                 href={`tel:${OFFICE_PHONE_TEL}`}

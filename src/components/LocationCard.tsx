@@ -41,12 +41,12 @@ export default function LocationCard({ location }: LocationCardProps) {
     >
       <div className="flex items-start gap-4">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-mango/10">
-          <Icon className="h-6 w-6 text-brand-mango" />
+          <Icon className="h-6 w-6 text-brand-mangoText" />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <h3 className="text-xl font-bold text-brand-black">{location.name}</h3>
-            <span className="rounded-full bg-brand-gold/10 px-2 py-0.5 text-xs font-semibold text-brand-gold">
+            <span className="rounded-full bg-brand-gold/10 px-2 py-0.5 text-xs font-semibold text-brand-goldText">
               {getTypeLabel()}
             </span>
           </div>

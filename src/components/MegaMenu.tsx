@@ -30,8 +30,9 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
       <button
         type="button"
         className={[
-          'flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors hover:text-brand-mango',
+          'flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors',
           variant === 'light' ? 'text-brand-black/70' : 'text-brand-offWhite/80',
+          variant === 'light' ? 'hover:text-brand-mangoText' : 'hover:text-brand-mango',
         ].join(' ')}
       >
         Practice Areas

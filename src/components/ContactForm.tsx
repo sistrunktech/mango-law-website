@@ -6,7 +6,7 @@ const inputClasses = [
   'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
   'placeholder:text-brand-black/40',
   'transition-all duration-200',
-  'focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20',
+  'focus:border-brand-teal focus-visible:ring-2 focus-visible:ring-brand-teal/20',
   'hover:border-brand-black/20',
 ].join(' ');
 
@@ -87,7 +87,7 @@ export default function ContactForm() {
       </div>
 
       <fieldset className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
-        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-gold">Your Info</legend>
+        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Your Info</legend>
         <div className="mt-3 grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="name" className={labelClasses}>
@@ -146,7 +146,7 @@ export default function ContactForm() {
       </fieldset>
 
       <fieldset className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
-        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-gold">Your Situation</legend>
+        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Your Situation</legend>
         <div className="mt-3">
           <label htmlFor="message" className={labelClasses}>
             How can we help? <span className="text-brand-mango">*</span>
@@ -159,7 +159,7 @@ export default function ContactForm() {
             rows={4}
             placeholder="Briefly describe your situation and any upcoming court dates."
           />
-          <p className="mt-2 text-xs text-brand-black/50">
+          <p className="mt-2 text-xs text-brand-black/60">
             Your information is confidential and protected by attorney-client privilege.
           </p>
         </div>

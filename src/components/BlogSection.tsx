@@ -10,9 +10,9 @@ export default function BlogSection() {
       <div className="container">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
               <div className="accent-line" />
-              <p className="eyebrow text-brand-gold">Legal Insights</p>
+              <p className="eyebrow text-brand-goldText">Legal Insights</p>
             </div>
             <h2 className="font-display text-display-sm md:text-display-md">
               Knowledge is power
@@ -23,7 +23,7 @@ export default function BlogSection() {
           </div>
           <Link
             to="/blog"
-            className="group hidden items-center gap-2 text-sm font-semibold text-brand-mango transition-colors hover:text-brand-leaf md:inline-flex"
+            className="group hidden items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf md:inline-flex"
           >
             View all articles
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -53,7 +53,7 @@ export default function BlogSection() {
                     <Tag className="h-3 w-3" />
                     {post.category}
                   </span>
-                  <span className="flex items-center gap-1.5 text-brand-black/50">
+                  <span className="flex items-center gap-1.5 text-brand-black/60">
                     <Calendar className="h-3 w-3" />
                     {new Date(post.date).toLocaleDateString('en-US', {
                       month: 'short',
@@ -63,7 +63,7 @@ export default function BlogSection() {
                   </span>
                 </div>
 
-                <h3 className="font-display text-xl font-bold text-brand-black transition-colors group-hover:text-brand-mango">
+                <h3 className="font-display text-xl font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
                   {post.title}
                 </h3>
 

@@ -67,7 +67,7 @@ export default function GlossaryPage() {
                   placeholder="Search by statute number, title, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-xl border border-brand-black/10 bg-white py-4 pl-12 pr-4 text-brand-black placeholder:text-brand-black/40 focus:border-brand-leaf focus:outline-none focus:ring-2 focus:ring-brand-leaf/20"
+                  className="w-full rounded-xl border border-brand-black/10 bg-white py-4 pl-12 pr-4 text-brand-black placeholder:text-brand-black/40 focus:border-brand-leaf focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-leaf/20"
                 />
               </div>
 
@@ -121,9 +121,9 @@ export default function GlossaryPage() {
             ) : (
               <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-12 text-center">
                 <BookOpen className="mx-auto mb-4 h-12 w-12 text-brand-black/20" />
-                <h3 className="mb-2 text-xl font-bold text-brand-black">
+                <h2 className="mb-2 text-xl font-bold text-brand-black">
                   No statutes found
-                </h3>
+                </h2>
                 <p className="mb-4 text-brand-black/60">
                   Try adjusting your search or filter criteria
                 </p>

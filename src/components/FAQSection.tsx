@@ -24,7 +24,7 @@ export default function FAQSection({ faqs, title = 'Frequently Asked Questions' 
         <div className="mb-12 text-center">
           <div className="mb-4 flex items-center justify-center gap-3">
             <div className="accent-line" />
-            <p className="eyebrow text-brand-gold">FAQ</p>
+            <p className="eyebrow text-brand-goldText">FAQ</p>
             <div className="accent-line" />
           </div>
           <h2 className="text-display-sm md:text-display-md">{title}</h2>
@@ -42,7 +42,7 @@ export default function FAQSection({ faqs, title = 'Frequently Asked Questions' 
               >
                 <h3 className="flex-1 font-semibold text-brand-black">{faq.question}</h3>
                 <ChevronDown
-                  className={`h-5 w-5 shrink-0 text-brand-mango transition-transform ${
+                  className={`h-5 w-5 shrink-0 text-brand-mangoText transition-transform ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
                 />

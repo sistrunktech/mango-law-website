@@ -848,7 +848,7 @@ export default function ConnectionsPage() {
                                     [type]: { ...prev[type], value: e.target.value },
                                   }))
                                 }
-                                className="mt-2 w-full rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#E8A33C]/40"
+                                className="mt-2 w-full rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C]/40"
                               >
                                 <option value="">Choose…</option>
                                 {selectionOptions.map((o) => (

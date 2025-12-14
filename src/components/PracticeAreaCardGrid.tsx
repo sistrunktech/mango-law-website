@@ -19,7 +19,7 @@ export default function PracticeAreaCardGrid() {
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <div className="accent-line" />
-              <p className="eyebrow text-brand-gold">Practice Areas</p>
+              <p className="eyebrow text-brand-goldText">Practice Areas</p>
             </div>
             <h2 className="text-display-sm md:text-display-md">
               Focused criminal defense
@@ -30,7 +30,7 @@ export default function PracticeAreaCardGrid() {
           </div>
           <Link
             to="/practice-areas"
-            className="group hidden items-center gap-2 text-sm font-semibold text-brand-mango transition-colors hover:text-brand-leaf md:inline-flex"
+            className="group hidden items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf md:inline-flex"
           >
             View all practice areas
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -68,10 +68,10 @@ export default function PracticeAreaCardGrid() {
               <div className="relative z-10 p-8">
                 {/* Large icon with enhanced styling */}
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-mango/20 to-brand-gold/20 shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:from-brand-mango/30 group-hover:to-brand-gold/30 group-hover:scale-110">
-                  {oviArea.icon && <oviArea.icon className="h-10 w-10 text-brand-mango" />}
+                  {oviArea.icon && <oviArea.icon className="h-10 w-10 text-brand-mangoText" />}
                 </div>
 
-                <h3 className="text-2xl font-bold text-brand-black transition-colors group-hover:text-brand-mango">
+                <h3 className="text-2xl font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
                   {oviArea.title}
                 </h3>
 
@@ -80,7 +80,7 @@ export default function PracticeAreaCardGrid() {
                     <ORCLabel
                       section={oviArea.orcSection}
                       variant="micro"
-                      className="text-brand-black/60 hover:text-brand-mango"
+                      className="text-brand-black/60 hover:text-brand-mangoText"
                     />
                   </div>
                 )}
@@ -106,7 +106,7 @@ export default function PracticeAreaCardGrid() {
                 </div>
 
                 {/* Prominent CTA */}
-                <div className="mt-6 flex items-center gap-2 text-base font-bold text-brand-mango opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
+                <div className="mt-6 flex items-center gap-2 text-base font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
                   Explore OVI Defense
                   <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
@@ -137,10 +137,10 @@ export default function PracticeAreaCardGrid() {
 
               <div className="relative z-10 p-7">
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-brand-mango/10 to-brand-gold/10 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:from-brand-mango/20 group-hover:to-brand-gold/20 group-hover:scale-110">
-                  {criminalArea.icon && <criminalArea.icon className="h-8 w-8 text-brand-mango transition-colors" />}
+                  {criminalArea.icon && <criminalArea.icon className="h-8 w-8 text-brand-mangoText transition-colors" />}
                 </div>
 
-                <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mango">
+                <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
                   {criminalArea.title}
                 </h3>
 
@@ -149,7 +149,7 @@ export default function PracticeAreaCardGrid() {
                     <ORCLabel
                       section={criminalArea.orcSection}
                       variant="micro"
-                      className="text-brand-black/50 hover:text-brand-mango"
+                      className="text-brand-black/60 hover:text-brand-mangoText"
                     />
                   </div>
                 )}
@@ -158,7 +158,7 @@ export default function PracticeAreaCardGrid() {
                   {criminalArea.summary}
                 </p>
 
-                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
+                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
                   Learn more
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
@@ -191,15 +191,15 @@ export default function PracticeAreaCardGrid() {
               <div className="relative z-10 p-7">
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-brand-mango/10 to-brand-gold/10 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:from-brand-mango/20 group-hover:to-brand-gold/20 group-hover:scale-110">
                   {area.icon ? (
-                    <area.icon className="h-8 w-8 text-brand-mango transition-colors" />
+                    <area.icon className="h-8 w-8 text-brand-mangoText transition-colors" />
                   ) : (
-                    <span className="text-2xl font-bold text-brand-mango transition-colors">
+                    <span className="text-2xl font-bold text-brand-mangoText transition-colors">
                       {area.title.charAt(0)}
                     </span>
                   )}
                 </div>
 
-                <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mango">
+                <h3 className="text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
                   {area.title}
                 </h3>
 
@@ -208,7 +208,7 @@ export default function PracticeAreaCardGrid() {
                     <ORCLabel
                       section={area.orcSection}
                       variant="micro"
-                      className="text-brand-black/50 hover:text-brand-mango"
+                      className="text-brand-black/60 hover:text-brand-mangoText"
                     />
                   </div>
                 )}
@@ -217,7 +217,7 @@ export default function PracticeAreaCardGrid() {
                   {area.summary}
                 </p>
 
-                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
+                <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
                   Learn more
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
@@ -251,7 +251,7 @@ export default function PracticeAreaCardGrid() {
                 </Link>
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}
-                  className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
+                  className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mangoText"
                 >
                   <Phone className="h-4 w-4" />
                   {OFFICE_PHONE_DISPLAY}

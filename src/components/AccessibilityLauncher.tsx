@@ -33,7 +33,7 @@ export default function AccessibilityLauncher() {
       <button
         onClick={() => setIsOpen(true)}
         aria-label="Open accessibility options (Alt+A)"
-        className="group fixed bottom-24 left-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-brand-mango shadow-lg transition-all hover:scale-110 hover:bg-brand-leaf hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-brand-mango/50 lg:bottom-6"
+        className="group fixed bottom-24 left-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-brand-mango shadow-lg transition-all hover:scale-110 hover:bg-brand-leaf hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-mango/50 lg:bottom-6"
       >
         <Accessibility className="h-6 w-6 text-white transition-transform group-hover:rotate-12" />
       </button>
@@ -55,7 +55,7 @@ export default function AccessibilityLauncher() {
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-brand-black/10 bg-white p-6">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-mango/10">
-                  <Accessibility className="h-5 w-5 text-brand-mango" />
+                  <Accessibility className="h-5 w-5 text-brand-mangoText" />
                 </div>
                 <div>
                   <h2 className="text-xl font-bold text-brand-black">Accessibility</h2>
@@ -64,7 +64,7 @@ export default function AccessibilityLauncher() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="flex h-10 w-10 items-center justify-center rounded-full text-brand-black/60 transition-colors hover:bg-brand-black/5 hover:text-brand-mango focus:outline-none focus:ring-2 focus:ring-brand-mango"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-brand-black/60 transition-colors hover:bg-brand-black/5 hover:text-brand-mangoText focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango"
                 aria-label="Close accessibility settings"
               >
                 <X className="h-5 w-5" />
@@ -74,7 +74,7 @@ export default function AccessibilityLauncher() {
             <div className="space-y-8 p-6">
               <div>
                 <div className="mb-4 flex items-center gap-2">
-                  <Type className="h-5 w-5 text-brand-mango" />
+                  <Type className="h-5 w-5 text-brand-mangoText" />
                   <h3 className="text-lg font-bold text-brand-black">Text Size</h3>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
@@ -84,7 +84,7 @@ export default function AccessibilityLauncher() {
                       onClick={() => updatePreference('fontSize', option.value)}
                       className={`rounded-lg border-2 px-4 py-3 text-center transition-all ${
                         preferences.fontSize === option.value
-                          ? 'border-brand-mango bg-brand-mango/5 text-brand-mango'
+                          ? 'border-brand-mango bg-brand-mango/5 text-brand-mangoText'
                           : 'border-brand-black/10 text-brand-black/70 hover:border-brand-mango/30 hover:bg-brand-black/5'
                       }`}
                     >
@@ -97,7 +97,7 @@ export default function AccessibilityLauncher() {
 
               <div className="space-y-4">
                 <div className="mb-4 flex items-center gap-2">
-                  <Eye className="h-5 w-5 text-brand-mango" />
+                  <Eye className="h-5 w-5 text-brand-mangoText" />
                   <h3 className="text-lg font-bold text-brand-black">Visual Options</h3>
                 </div>
 
@@ -125,7 +125,7 @@ export default function AccessibilityLauncher() {
 
               <div className="space-y-4">
                 <div className="mb-4 flex items-center gap-2">
-                  <Focus className="h-5 w-5 text-brand-mango" />
+                  <Focus className="h-5 w-5 text-brand-mangoText" />
                   <h3 className="text-lg font-bold text-brand-black">Navigation</h3>
                 </div>
 
@@ -171,7 +171,7 @@ export default function AccessibilityLauncher() {
                     resetPreferences();
                     setIsOpen(false);
                   }}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-brand-black/10 bg-white px-4 py-3 font-semibold text-brand-black/70 transition-all hover:border-brand-mango hover:bg-brand-mango/5 hover:text-brand-mango focus:outline-none focus:ring-2 focus:ring-brand-mango"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-brand-black/10 bg-white px-4 py-3 font-semibold text-brand-black/70 transition-all hover:border-brand-mango hover:bg-brand-mango/5 hover:text-brand-mangoText focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango"
                 >
                   <RotateCcw className="h-4 w-4" />
                   Reset to Defaults
@@ -207,7 +207,7 @@ function ToggleOption({ label, description, checked, onChange }: ToggleOptionPro
           onChange={(e) => onChange(e.target.checked)}
           className="peer sr-only"
         />
-        <div className="h-6 w-11 rounded-full bg-brand-black/20 transition-colors peer-checked:bg-brand-mango peer-focus:ring-2 peer-focus:ring-brand-mango/50" />
+        <div className="h-6 w-11 rounded-full bg-brand-black/20 transition-colors peer-checked:bg-brand-mango peer-focus-visible:ring-2 peer-focus-visible:ring-brand-mango/50" />
         <div className="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform peer-checked:translate-x-5" />
       </div>
       <div className="flex-1">

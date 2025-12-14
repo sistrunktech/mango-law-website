@@ -9,8 +9,8 @@ interface IconStatProps {
 
 export default function IconStat({ icon: Icon, value, label, color = 'mango' }: IconStatProps) {
   const colorClasses = {
-    mango: 'bg-brand-mango/10 text-brand-mango',
-    gold: 'bg-brand-gold/20 text-brand-gold',
+    mango: 'bg-brand-mango/10 text-brand-mangoText',
+    gold: 'bg-brand-gold/20 text-brand-goldText',
     leaf: 'bg-brand-leaf/10 text-brand-leaf',
     red: 'bg-red-100 text-red-700',
     blue: 'bg-blue-100 text-blue-700',
