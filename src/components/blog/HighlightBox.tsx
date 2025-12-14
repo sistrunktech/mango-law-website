@@ -30,7 +30,7 @@ export default function HighlightBox({ children, variant = 'info', title }: High
       bg: 'bg-brand-gold/10',
       border: 'border-brand-gold/30',
       iconBg: 'bg-brand-gold/20',
-      iconColor: 'text-brand-gold',
+      iconColor: 'text-brand-goldText',
       textColor: 'text-brand-black',
     },
     error: {

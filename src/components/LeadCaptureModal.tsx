@@ -157,7 +157,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-mango/50 ${
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
                 errors.name ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
               }`}
               placeholder="Your full name"
@@ -172,7 +172,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-mango/50 ${
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
                 errors.email ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
               }`}
               placeholder="you@example.com"
@@ -187,7 +187,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-mango/50 ${
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
                 errors.phone ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
               }`}
               placeholder="(740) 555-1234"
@@ -201,7 +201,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               name="county"
               value={formData.county}
               onChange={handleChange}
-              className="w-full rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-mango/50"
+              className="w-full rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
             >
               <option value="">Select county...</option>
               {COUNTIES.map((county) => (
@@ -216,7 +216,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               name="urgency"
               value={formData.urgency}
               onChange={handleChange}
-              className="w-full rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-mango/50"
+              className="w-full rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
             >
               {URGENCY_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -231,7 +231,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               value={formData.message}
               onChange={handleChange}
               rows={3}
-              className="w-full resize-none rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-mango/50"
+              className="w-full resize-none rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
               placeholder="Brief description of your situation..."
             />
           </div>
@@ -257,7 +257,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             )}
           </button>
 
-          <p className="text-center text-xs text-brand-black/50">Your information is confidential and protected by attorney-client privilege.</p>
+          <p className="text-center text-xs text-brand-black/60">Your information is confidential and protected by attorney-client privilege.</p>
         </form>
       </div>
     </div>

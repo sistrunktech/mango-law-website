@@ -59,9 +59,9 @@ export default function HomePage() {
             {/* Content */}
             <div className="space-y-8">
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3">
                   <div className="accent-line" />
-                  <p className="eyebrow text-brand-gold">Why Mango Law</p>
+                  <p className="eyebrow text-brand-goldText">Why Mango Law</p>
                 </div>
                 <h2 className="text-display-sm md:text-display-md">
                   Direct answers. Steady communication.
@@ -75,8 +75,8 @@ export default function HomePage() {
                 {whyChooseUs.map((item, i) => (
                   <div key={i} className="flex gap-4">
                     {/* Gold icons */}
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-mango/10">
-                      <item.icon className="h-5 w-5 text-brand-mango" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-mango/10">
+                      <item.icon className="h-5 w-5 text-brand-mangoText" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-brand-black">{item.title}</h3>
@@ -163,7 +163,7 @@ export default function HomePage() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="accent-line" />
-                  <p className="eyebrow text-brand-gold">Contact</p>
+                  <p className="eyebrow text-brand-goldText">Contact</p>
                 </div>
                 <h2 className="text-display-sm md:text-display-md">
                   Tell us what's going on
@@ -184,7 +184,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-brand-black/60">Call us</p>
-                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mango">{OFFICE_PHONE_DISPLAY}</p>
+                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">{OFFICE_PHONE_DISPLAY}</p>
                   </div>
                 </a>
                 <a

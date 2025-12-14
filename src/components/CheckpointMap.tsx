@@ -351,7 +351,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
           <div className="text-center px-4">
             <MapPin className="mx-auto mb-3 h-12 w-12 text-brand-black/20" />
             <p className="text-lg font-semibold text-brand-black/70">No Checkpoints Found</p>
-            <p className="mt-1 text-sm text-brand-black/50">Try adjusting your filters or check back later</p>
+            <p className="mt-1 text-sm text-brand-black/60">Try adjusting your filters or check back later</p>
           </div>
         </div>
       )}

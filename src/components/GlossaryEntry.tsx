@@ -32,10 +32,10 @@ export default function GlossaryEntry({
     >
       <div className="mb-6 flex items-start gap-4">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-mango/10">
-          <Scale className="h-6 w-6 text-brand-mango" />
+          <Scale className="h-6 w-6 text-brand-mangoText" />
         </div>
         <div className="flex-1">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand-mango">
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-mangoText">
             Ohio Revised Code
           </p>
           <h2 className="mt-1 font-display text-2xl font-bold text-brand-black">
@@ -82,7 +82,7 @@ export default function GlossaryEntry({
                 <Link
                   key={area}
                   to={practiceInfo.href}
-                  className="inline-flex items-center gap-2 rounded-full border border-brand-leaf/20 bg-brand-leaf/5 px-4 py-2 text-sm font-semibold text-brand-leaf transition-all hover:border-brand-leaf hover:bg-brand-leaf/10"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-brand-leaf/20 bg-brand-leaf/5 px-4 py-2 text-sm font-semibold text-brand-leaf transition-all hover:border-brand-leaf hover:bg-brand-leaf/10"
                 >
                   {practiceInfo.title}
                   <ArrowRight className="h-3 w-3" />

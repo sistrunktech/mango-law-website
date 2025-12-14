@@ -66,8 +66,8 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   className={({ isActive }) => [
                     'px-4 py-2 text-sm font-medium transition-colors',
                     isActive
-                      ? 'text-brand-mango'
-                      : 'text-brand-black/70 hover:text-brand-mango',
+                      ? 'text-brand-mangoText'
+                      : 'text-brand-black/70 hover:text-brand-mangoText',
                   ].join(' ')}
                 >
                   {link.label}
@@ -150,11 +150,11 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   key={link.href}
                   to={link.href}
                   onClick={() => setOpen(false)}
-                  className={({ isActive }) =>
+              className={({ isActive }) =>
                     [
                       'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
                       isActive
-                        ? 'bg-brand-mango/20 text-brand-mango'
+                        ? 'bg-brand-mango/20 text-brand-mangoText'
                         : 'text-brand-black hover:bg-brand-black/5',
                     ].join(' ')
                   }
@@ -169,7 +169,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   data-cta="mobile_menu_call"
                   onClick={() => trackCtaClick('mobile_menu_call')}
                 >
-                  <Phone className="h-4 w-4 text-brand-mango" />
+                  <Phone className="h-4 w-4 text-brand-mangoText" />
                   <span className="text-xs opacity-70">Call:</span>
                   {OFFICE_PHONE_DISPLAY}
                 </a>

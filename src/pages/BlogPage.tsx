@@ -108,7 +108,7 @@ export default function BlogPage() {
                         </div>
                       </div>
 
-                      <h2 className="mt-3 text-xl font-bold leading-tight text-brand-black transition-colors group-hover:text-brand-mango">
+                      <h2 className="mt-3 text-xl font-bold leading-tight text-brand-black transition-colors group-hover:text-brand-mangoText">
                         {post.title}
                       </h2>
 
@@ -116,7 +116,7 @@ export default function BlogPage() {
                         {post.excerpt}
                       </p>
 
-                      <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mango transition-colors group-hover:text-brand-leaf">
+                      <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mangoText transition-colors group-hover:text-brand-leaf">
                         Read article
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </div>
@@ -132,7 +132,7 @@ export default function BlogPage() {
                   </p>
                   <button
                     onClick={() => setSelectedCategory('All Posts')}
-                    className="mt-4 text-sm font-semibold text-brand-mango hover:text-brand-leaf"
+                    className="mt-4 text-sm font-semibold text-brand-mangoText hover:text-brand-leaf"
                   >
                     View all posts
                   </button>

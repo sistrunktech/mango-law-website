@@ -422,7 +422,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
       {/* Disclaimer */}
       <div className="border-t border-brand-black/10 bg-white p-3">
-        <p className="text-[10px] text-brand-black/50 text-center leading-tight">
+        <p className="text-[10px] text-brand-black/60 text-center leading-tight">
           This chat is not monitored 24/7. No attorney-client relationship is formed until formally engaged. For urgent matters, please call directly.
         </p>
       </div>

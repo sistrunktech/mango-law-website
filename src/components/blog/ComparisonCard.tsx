@@ -22,8 +22,8 @@ export default function ComparisonCard({
   rightColor = 'red',
 }: ComparisonCardProps) {
   const colorClasses = {
-    mango: 'bg-brand-mango/10 border-brand-mango/20 text-brand-mango',
-    gold: 'bg-brand-gold/20 border-brand-gold/30 text-brand-gold',
+    mango: 'bg-brand-mango/10 border-brand-mango/20 text-brand-mangoText',
+    gold: 'bg-brand-gold/20 border-brand-gold/30 text-brand-goldText',
     leaf: 'bg-brand-leaf/10 border-brand-leaf/20 text-brand-leaf',
     red: 'bg-red-50 border-red-200 text-red-700',
     blue: 'bg-blue-50 border-blue-200 text-blue-700',

@@ -61,7 +61,7 @@ export default function GoogleMap({
         href={mapUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 text-sm font-medium text-brand-gold hover:text-brand-gold/80 transition-colors"
+        className="inline-flex items-center gap-2 text-sm font-medium text-brand-goldText hover:text-brand-goldText/80 transition-colors"
       >
         <ExternalLink className="h-4 w-4" />
         View on Google Maps

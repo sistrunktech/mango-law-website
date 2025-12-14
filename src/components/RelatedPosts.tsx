@@ -35,14 +35,14 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
               </div>
             )}
             <div className="p-5">
-              <div className="mb-2 inline-block rounded-full bg-brand-mango/10 px-3 py-1 text-xs font-semibold text-brand-mango">
+              <div className="mb-2 inline-block rounded-full bg-brand-mango/10 px-3 py-1 text-xs font-semibold text-brand-mangoText">
                 {post.category}
               </div>
-              <h4 className="mb-2 text-lg font-bold leading-tight text-brand-black group-hover:text-brand-mango">
+              <h4 className="mb-2 text-lg font-bold leading-tight text-brand-black group-hover:text-brand-mangoText">
                 {post.title}
               </h4>
               <p className="mb-3 line-clamp-2 text-sm text-brand-black/60">{post.excerpt}</p>
-              <div className="flex items-center gap-4 text-xs text-brand-black/50">
+              <div className="flex items-center gap-4 text-xs text-brand-black/60">
                 <div className="flex items-center gap-1">
                   <Calendar className="h-3 w-3" />
                   {new Date(post.date).toLocaleDateString('en-US', {

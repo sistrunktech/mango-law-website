@@ -26,7 +26,7 @@ export default function ReviewsPage() {
               <div className="mb-10 rounded-3xl border border-brand-black/10 bg-gradient-to-br from-brand-offWhite to-white p-8 shadow-soft-lg">
                 <div className="flex items-start justify-between gap-6">
                   <div className="space-y-4">
-                    <p className="eyebrow text-brand-gold">Featured Review</p>
+                    <p className="eyebrow text-brand-goldText">Featured Review</p>
                     <p className="text-base leading-relaxed text-brand-black/80 md:text-lg">
                       “{featured.quote}”
                     </p>
@@ -36,7 +36,7 @@ export default function ReviewsPage() {
                   </div>
                 </div>
                 <div className="mt-6 border-t border-brand-black/10 pt-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-gold">{featured.name}</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-goldText">{featured.name}</p>
                   {'location' in featured && featured.location && (
                     <p className="mt-1 text-xs text-brand-black/60">{featured.location}</p>
                   )}
@@ -58,7 +58,7 @@ export default function ReviewsPage() {
                     </div>
                     <p className="mt-3 text-sm leading-relaxed text-brand-black/80">"{item.quote}"</p>
                     <div className="mt-5 border-t border-brand-black/10 pt-4">
-                      <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-gold">{item.name}</p>
+                      <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-goldText">{item.name}</p>
                       {'location' in item && item.location && (
                         <p className="mt-1 text-xs text-brand-black/60">{item.location}</p>
                       )}

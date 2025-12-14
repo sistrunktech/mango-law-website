@@ -23,7 +23,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-brand-offWhite text-brand-black">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-brand-mango focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-brand-leaf"
+        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-50 focus-visible:rounded focus-visible:bg-brand-mango focus-visible:px-4 focus-visible:py-2 focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-leaf"
       >
         Skip to main content
       </a>

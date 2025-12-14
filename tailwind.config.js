@@ -12,7 +12,9 @@ export default {
           mango: '#E8A33C',        // Warm mango gold - for CTAs and action
           mangoLight: '#F4B95A',   // Lighter mango
           mangoDark: '#C4872E',    // Deeper mango
+          mangoText: '#B45309',    // WCAG-safe mango for text on light backgrounds
           gold: '#D4A84B',         // Secondary warmth
+          goldText: '#8A6A18',     // WCAG-safe gold for text on light backgrounds
           offWhite: '#FAF9F7',
           cream: '#FFF8E7',
           // Sophisticated forest green - professional and authoritative

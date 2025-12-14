@@ -72,7 +72,7 @@ export default function ImagePlaceholder({
           <ImageIcon className="h-6 w-6 text-brand-black/30" />
         </div>
         <div className="space-y-1">
-          <p className="text-sm font-medium text-brand-black/50">{label}</p>
+          <p className="text-sm font-medium text-brand-black/60">{label}</p>
           {showPromptHint && promptHint && (
             <p className="max-w-xs text-xs text-brand-black/30">
               Prompt: {promptHint}

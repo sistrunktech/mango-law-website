@@ -76,7 +76,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Black</div>
                         <div className="text-brand-black/60">#0A0A0A</div>
-                        <div className="text-xs text-brand-black/50">brand-black</div>
+                        <div className="text-xs text-brand-black/60">brand-black</div>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -84,7 +84,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Charcoal</div>
                         <div className="text-brand-black/60">#0F0F0F</div>
-                        <div className="text-xs text-brand-black/50">brand-charcoal</div>
+                        <div className="text-xs text-brand-black/60">brand-charcoal</div>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -92,7 +92,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Forest Green</div>
                         <div className="text-brand-black/60">#2F5F4F</div>
-                        <div className="text-xs text-brand-black/50">brand-leaf</div>
+                        <div className="text-xs text-brand-black/60">brand-leaf</div>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -100,7 +100,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Mango Gold</div>
                         <div className="text-brand-black/60">#E8A33C</div>
-                        <div className="text-xs text-brand-black/50">brand-mango</div>
+                        <div className="text-xs text-brand-black/60">brand-mango</div>
                       </div>
                     </div>
                   </div>
@@ -114,7 +114,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Light Forest</div>
                         <div className="text-brand-black/60">#3D7360</div>
-                        <div className="text-xs text-brand-black/50">brand-leafLight</div>
+                        <div className="text-xs text-brand-black/60">brand-leafLight</div>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -122,7 +122,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Dark Forest</div>
                         <div className="text-brand-black/60">#1F3F2F</div>
-                        <div className="text-xs text-brand-black/50">brand-leafDark</div>
+                        <div className="text-xs text-brand-black/60">brand-leafDark</div>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -130,7 +130,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Deep Forest</div>
                         <div className="text-brand-black/60">#1B4332</div>
-                        <div className="text-xs text-brand-black/50">brand-forest</div>
+                        <div className="text-xs text-brand-black/60">brand-forest</div>
                       </div>
                     </div>
                   </div>
@@ -144,7 +144,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Light Mango</div>
                         <div className="text-brand-black/60">#F4B95A</div>
-                        <div className="text-xs text-brand-black/50">brand-mangoLight</div>
+                        <div className="text-xs text-brand-black/60">brand-mangoLight</div>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -152,7 +152,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Deep Mango</div>
                         <div className="text-brand-black/60">#C4872E</div>
-                        <div className="text-xs text-brand-black/50">brand-mangoDark</div>
+                        <div className="text-xs text-brand-black/60">brand-mangoDark</div>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -160,7 +160,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Gold</div>
                         <div className="text-brand-black/60">#D4A84B</div>
-                        <div className="text-xs text-brand-black/50">brand-gold</div>
+                        <div className="text-xs text-brand-black/60">brand-gold</div>
                       </div>
                     </div>
                   </div>
@@ -174,7 +174,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Off-White</div>
                         <div className="text-brand-black/60">#FAF9F7</div>
-                        <div className="text-xs text-brand-black/50">brand-offWhite</div>
+                        <div className="text-xs text-brand-black/60">brand-offWhite</div>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -182,7 +182,7 @@ export default function BrandGuidelinesPage() {
                       <div className="text-sm">
                         <div className="font-bold text-brand-black">Cream</div>
                         <div className="text-brand-black/60">#FFF8E7</div>
-                        <div className="text-xs text-brand-black/50">brand-cream</div>
+                        <div className="text-xs text-brand-black/60">brand-cream</div>
                       </div>
                     </div>
                   </div>
