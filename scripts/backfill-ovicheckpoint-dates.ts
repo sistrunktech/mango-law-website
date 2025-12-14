@@ -118,6 +118,24 @@ function checkpointKey(row: KeyRow): string {
   ].join('|');
 }
 
+type LocationKeyRow = {
+  location_county: string;
+  location_city: string;
+  location_address: string;
+};
+
+function checkpointLocationKey(row: LocationKeyRow): string {
+  return [normalizeKeyPart(row.location_county), normalizeKeyPart(row.location_city), normalizeKeyPart(row.location_address)].join(
+    '|'
+  );
+}
+
+function isOhioCoordinate(latitude: number, longitude: number): boolean {
+  // Rough sanity bounds for Ohio (inclusive).
+  // https://en.wikipedia.org/wiki/Ohio#Geography (approx)
+  return latitude >= 38.3 && latitude <= 42.4 && longitude >= -84.9 && longitude <= -80.3;
+}
+
 function determineStatus(startDate: string, endDate: string): 'upcoming' | 'active' | 'completed' | 'cancelled' {
   const now = new Date();
   const start = new Date(startDate);
@@ -192,6 +210,16 @@ async function main() {
   const existing = (existingRows ?? []) as ExistingCheckpointRow[];
   const existingByKey = new Map(existing.map((row) => [checkpointKey(row), row]));
 
+  const existingCoordsByLocationKey = new Map<string, { latitude: number; longitude: number }>();
+  for (const row of existing) {
+    if (row.latitude === null || row.longitude === null) continue;
+    if (!isOhioCoordinate(row.latitude, row.longitude)) continue;
+    const locKey = checkpointLocationKey(row);
+    if (!locKey) continue;
+    if (existingCoordsByLocationKey.has(locKey)) continue;
+    existingCoordsByLocationKey.set(locKey, { latitude: row.latitude, longitude: row.longitude });
+  }
+
   const now = new Date();
   const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
   const twoDaysAhead = new Date(now.getTime() + 48 * 60 * 60 * 1000);
@@ -224,6 +252,7 @@ async function main() {
     analysis: {
       planned_inserts: plannedInserts.length,
       corrupt_candidates_last_48h: corruptCandidates.length,
+      existing_ohio_coords_reuse_pool: existingCoordsByLocationKey.size,
     },
     corrupt_candidates_last_48h: corruptCandidates.map((r) => ({
       id: r.id,
@@ -265,6 +294,7 @@ async function main() {
   console.log(`[info] inserting ${plannedInserts.length} canonical rows... (geocode=${shouldGeocode})`);
 
   const batchSize = 50;
+  let reusedCoordinateCount = 0;
   for (let i = 0; i < plannedInserts.length; i += batchSize) {
     const batch = plannedInserts.slice(i, i + batchSize);
     const insertPayloads: any[] = [];
@@ -279,6 +309,14 @@ async function main() {
           coords = { latitude: geocoded.latitude, longitude: geocoded.longitude };
         }
         await sleep(175);
+      }
+
+      if (!coords) {
+        const preserved = existingCoordsByLocationKey.get(checkpointLocationKey(c));
+        if (preserved) {
+          coords = preserved;
+          reusedCoordinateCount++;
+        }
       }
 
       insertPayloads.push({
@@ -305,6 +343,7 @@ async function main() {
     console.log(`[info] inserted ${Math.min(i + batchSize, plannedInserts.length)}/${plannedInserts.length}`);
   }
 
+  report.analysis.reused_coordinates = reusedCoordinateCount;
   await writeReport(reportPath, report);
   console.log(`[done] wrote report: ${reportPath}`);
 }
