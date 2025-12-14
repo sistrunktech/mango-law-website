@@ -438,7 +438,7 @@ Some checkpoints display `status='active'` even though the checkpoint ended days
 ## TICKET-014: Mobile Floating Buttons Misaligned + Header CTA Layout
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Mitigated  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -467,7 +467,7 @@ Additionally, the mobile header CTA currently shows a phone icon next to the Con
 ## TICKET-015: Checkpoint Source Attribution Uses Aggregator Feeds (OVICheckpoint/DUIBlock)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Mitigated  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -506,8 +506,8 @@ The desired attribution is to cite the underlying credible sources (local news o
 - One branch per ticket/intent (e.g., `codex/fix-schema-legalservice`).
 - One agent per branch at a time.
 - If a PR hits merge conflicts, the agent that owns the branch resolves and re-pushes (owner should not be required to do conflict resolution).
-- Agents open PRs and merge on green CI; the owner should only need to click “Publish” in Bolt after confirmation.
+- Prefer branch → PR → merge-on-green CI. If PR automation is unavailable, agents may merge via git CLI (no GitHub UI) after tests pass; the owner should only need to click “Publish” in Bolt after confirmation.
 
 **Before pushing**
-- Run the project checks (lint/test/build as applicable per `AGENTS.md`).
+- Run the project checks (`npm ci`, `npm test`, `npm run build`; lint if/when available).
 - Include PR notes: Summary, Changes, Testing, Risk & rollback.

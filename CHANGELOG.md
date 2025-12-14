@@ -1,5 +1,20 @@
 # Changelog
 
+## 2025-12-14
+
+### Lighthouse: Accessibility + Performance (No Layout Changes)
+- Improve text contrast and focus-ring behavior sitewide (adds accessible brand text tokens and uses `:focus-visible`) (`tailwind.config.js`, `src/**`).
+- Reduce CLS and improve LCP on blog pages by reserving image dimensions, adding decode/loading hints, and stabilizing blog post hero aspect ratio (`src/pages/BlogPostPage.tsx`, `src/pages/BlogPage.tsx`, `src/components/BlogSection.tsx`, `src/components/RelatedPosts.tsx`).
+
+### Mobile UI: Floating Buttons + Header CTA
+- Align floating chat + accessibility buttons to a shared bottom-right offset and shrink footprint after scroll/timeout (`src/components/Layout.tsx`, `src/components/AccessibilityLauncher.tsx`, `src/components/ChatIntakeLauncher.tsx`).
+- Adjust mobile header CTA to show the office number as click-to-call text with Consult CTA aligned cleanly (`src/components/SiteHeader.tsx`).
+
+### DUI Checkpoints: Source Attribution
+- Hide aggregator attribution (OVICheckpoint/DUIBlock) in public checkpoint cards and map popups while preserving internal traceability (`src/components/CheckpointCard.tsx`, `src/components/CheckpointMap.tsx`, `src/data/checkpoints.ts`).
+- Prevent scraper runs from overwriting manually curated non-aggregator sources on existing rows (`supabase/functions/checkpoint-scraper/index.ts`).
+- Track follow-up work for “credible source” backfill and multi-source model (`docs/TROUBLE-TICKETS.md`).
+
 ## 2025-12-13
 
 ### Checkpoints + Admin Reliability
