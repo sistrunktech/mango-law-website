@@ -102,6 +102,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
   - Apply (safe insert only): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode upsert --apply`
   - Apply (clean rebuild of OVICheckpoint rows): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode replace-ovicheckpoint --apply`
   - The script writes a JSON audit report to `reports/` (gitignored).
+  - In replace mode, if `MAPBOX_PUBLIC_TOKEN` is not set, the script will still try to reuse existing in-Ohio coordinates by matching county/city/address to preserve map pins.
 
 ### RSS Source Config (CSV)
 - Master RSS source list: `supabase/functions/checkpoint-scraper/rss_sources_master.csv`
