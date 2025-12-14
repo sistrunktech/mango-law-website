@@ -8,6 +8,7 @@ type Props = {
   checkpoints: DUICheckpoint[];
   selectedCheckpoint?: DUICheckpoint | null;
   onCheckpointSelect?: (checkpoint: DUICheckpoint) => void;
+  now?: Date;
 };
 
 const OHIO_BOUNDS = {
@@ -32,13 +33,14 @@ function hasCoordinates(
   return typeof checkpoint.latitude === 'number' && typeof checkpoint.longitude === 'number';
 }
 
-export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheckpointSelect }: Props) {
+export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheckpointSelect, now }: Props) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState<string | null>(null);
+  const displayNow = now ?? new Date();
 
   // Initialize map
   useEffect(() => {
@@ -109,7 +111,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         cancelled: '#8E8E93',
       };
 
-      const displayStatus = getDisplayStatus(checkpoint);
+      const displayStatus = getDisplayStatus(checkpoint, displayNow);
       const color = statusColors[displayStatus] || statusColors.upcoming;
       const isSelected = selectedCheckpoint?.id === checkpoint.id;
 
@@ -200,7 +202,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         duration: 1000,
       });
     }
-  }, [checkpoints, selectedCheckpoint, onCheckpointSelect, isLoading]);
+  }, [checkpoints, selectedCheckpoint, onCheckpointSelect, isLoading, displayNow]);
 
   // Center on selected checkpoint
   useEffect(() => {

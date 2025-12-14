@@ -30,7 +30,13 @@ export default function DUICheckpointsPage() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific'>('emergency_banner');
   const [leadModalCheckpointId, setLeadModalCheckpointId] = useState<string | undefined>();
+  const [now, setNow] = useState(() => new Date());
   const itemsPerPage = 15;
+
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(new Date()), 60_000);
+    return () => window.clearInterval(id);
+  }, []);
 
   useEffect(() => {
     loadCheckpoints();
@@ -311,6 +317,7 @@ export default function DUICheckpointsPage() {
                   checkpoints={filteredCheckpoints}
                   selectedCheckpoint={selectedCheckpoint}
                   onCheckpointSelect={setSelectedCheckpoint}
+                  now={now}
                 />
               </div>
 
@@ -354,6 +361,7 @@ export default function DUICheckpointsPage() {
                             checkpoint={checkpoint}
                             onClick={() => setSelectedCheckpoint(checkpoint)}
                             onOpenLeadModal={openLeadModal}
+                            now={now}
                           />
                         ))}
                       </div>
