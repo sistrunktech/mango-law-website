@@ -418,20 +418,26 @@ The public map on `/resources/dui-checkpoints` sometimes shows markers far outsi
 Some checkpoints display `status='active'` even though the checkpoint ended days ago.
 
 ### Root cause
-- The UI derives a `displayStatus` from `start_date/end_date`, but if you leave the page open across the end time, the UI may not re-render, so the badge/marker can appear stale until a refresh.
-- Separately, the persisted `status` column can also become stale if pg_cron status updates are not running reliably in production (but the public UI should not depend on it).
+- **Primary:** corrupted `start_date/end_date` in `dui_checkpoints` (many rows were overwritten to “today” due to a historical scraper parsing fallback).
+- **Secondary:** the persisted `status` column can become stale if pg_cron status updates are not running reliably (but public UI should not depend on it).
 
-### Fix (implemented)
-- Frontend derives `displayStatus` from `start_date/end_date` (cancelled remains cancelled) and uses it for:
-  - checkpoint card badge
-  - map marker color
-  - map popup label
-- Add a lightweight `now` tick in the DUI checkpoints page so badges/markers update without a full page refresh (pending deploy).
-- Added a small regression test for status derivation (`npm test`).
-- Documented pg_cron health-check queries in `docs/OPERATIONS.md`.
+### Fix status
+- **UI mitigation exists:** the public page derives `displayStatus` from `start_date/end_date` (cancelled stays cancelled) and uses it for cards/markers/popups, with a regression test.
+- **Still required:** restore correct historical dates in Supabase and prevent overwrites going forward.
+
+### Required remediation (data)
+1. Run a report-only scan to identify corrupt rows and what would be repaired:
+   - `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode scan`
+2. Decide remediation path (prefer smallest blast radius):
+   - **Replace OVICheckpoint rows only (recommended):**
+     - `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode replace-ovicheckpoint --apply`
+   - or targeted updates only (slower; requires higher-confidence matching).
+3. Re-verify `/resources/dui-checkpoints`:
+   - past checkpoints show `completed`
+   - “Active” view contains only checkpoints whose end time is in the future.
 
 ### Verification
-- After publish, a checkpoint with `end_date < now()` displays as `completed` on the public page.
+- After backfill, a checkpoint with an `end_date` in the past displays as `completed` on the public page and is not shown in “Active”.
 
 ---
 
