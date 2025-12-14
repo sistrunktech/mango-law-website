@@ -1,6 +1,2 @@
 export const OFFICE_PHONE_DISPLAY = '(740) 602-2155';
 export const OFFICE_PHONE_TEL = '7406022155';
-
-export const DIRECT_PHONE_DISPLAY = '(740) 417-6191';
-export const DIRECT_PHONE_TEL = '7404176191';
-
