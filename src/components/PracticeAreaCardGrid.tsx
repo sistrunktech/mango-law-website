@@ -62,8 +62,8 @@ export default function PracticeAreaCardGrid() {
               {/* Featured Badge */}
               <div className="absolute right-6 top-6 z-20">
                 <div className="flex items-center gap-1.5 rounded-full bg-brand-mango px-3 py-1 shadow-md">
-                  <Star className="h-3.5 w-3.5 fill-white text-white" />
-                  <span className="text-xs font-bold uppercase tracking-wide text-white">Featured</span>
+                  <Star className="h-3.5 w-3.5 fill-brand-black text-brand-black" />
+                  <span className="text-xs font-bold uppercase tracking-wide text-brand-black">Featured</span>
                 </div>
               </div>
 

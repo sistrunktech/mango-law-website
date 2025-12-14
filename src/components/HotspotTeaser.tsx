@@ -50,7 +50,7 @@ export default function HotspotTeaser() {
           </div>
           <Link
             to="/blog/ohio-dui-checkpoint-hotspots"
-            className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-brand-leaf hover:shadow-md"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white hover:shadow-md"
           >
             Read the Full Hotspot Guide
             <ExternalLink className="h-4 w-4" />

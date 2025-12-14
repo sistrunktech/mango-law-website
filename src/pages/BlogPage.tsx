@@ -56,7 +56,7 @@ export default function BlogPage() {
                   onClick={() => setSelectedCategory(category)}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                     selectedCategory === category
-                      ? 'bg-brand-mango text-white shadow-soft'
+                      ? 'bg-brand-mango text-brand-black shadow-soft'
                       : 'bg-brand-offWhite text-brand-black hover:bg-brand-mango/10'
                   }`}
                 >
@@ -88,7 +88,7 @@ export default function BlogPage() {
                           decoding="async"
                         />
                         <div className="absolute left-4 top-4">
-                          <span className="inline-block rounded-full bg-brand-mango px-3 py-1 text-xs font-semibold text-white shadow-soft">
+                          <span className="inline-block rounded-full bg-brand-mango px-3 py-1 text-xs font-semibold text-brand-black shadow-soft">
                             {post.category}
                           </span>
                         </div>

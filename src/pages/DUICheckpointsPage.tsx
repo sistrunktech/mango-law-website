@@ -344,7 +344,7 @@ export default function DUICheckpointsPage() {
                       <p className="mb-4 text-sm text-brand-black/70">{error}</p>
                       <button
                         onClick={loadCheckpoints}
-                        className="rounded-lg bg-brand-mango px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-leaf"
+                        className="rounded-lg bg-brand-mango px-6 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-leaf hover:text-white"
                       >
                         Try Again
                       </button>
@@ -370,7 +370,7 @@ export default function DUICheckpointsPage() {
                           <button
                             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                             disabled={currentPage === 1}
-                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
+                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-brand-black disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
                           >
                             Previous
                           </button>
@@ -397,7 +397,7 @@ export default function DUICheckpointsPage() {
                                   onClick={() => setCurrentPage(page)}
                                   className={`h-10 w-10 rounded-lg text-sm font-semibold transition-all ${
                                     currentPage === page
-                                      ? 'bg-brand-mango text-white shadow-sm'
+                                      ? 'bg-brand-mango text-brand-black shadow-sm'
                                       : 'border border-brand-black/10 bg-white text-brand-black hover:bg-brand-mango/10'
                                   }`}
                                 >
@@ -409,7 +409,7 @@ export default function DUICheckpointsPage() {
                           <button
                             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                             disabled={currentPage === totalPages}
-                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
+                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-brand-black disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
                           >
                             Next
                           </button>

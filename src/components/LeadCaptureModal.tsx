@@ -117,7 +117,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             <div className="space-y-2">
               <a
                 href={`tel:${OFFICE_PHONE_TEL}`}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-white transition-all hover:bg-brand-leaf"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white"
                 data-cta="lead_success_call"
               >
                 <Phone className="h-5 w-5" />
@@ -245,7 +245,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-lg bg-brand-mango px-6 py-3 font-semibold text-white transition-all hover:bg-brand-leaf disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? (
               <span className="inline-flex items-center gap-2">

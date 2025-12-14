@@ -58,7 +58,7 @@ export default function ReviewsSidebar() {
           href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-3 text-sm font-bold text-white shadow-soft transition-all hover:bg-brand-gold hover:shadow-md hover:-translate-y-0.5"
+          className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-3 text-sm font-bold text-brand-black shadow-soft transition-all hover:bg-brand-gold hover:shadow-md hover:-translate-y-0.5"
         >
           <MessageSquare className="h-4 w-4" />
           Leave a Review
