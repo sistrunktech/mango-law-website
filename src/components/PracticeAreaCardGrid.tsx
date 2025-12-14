@@ -47,7 +47,7 @@ export default function PracticeAreaCardGrid() {
             >
               {/* Background Image */}
               {oviArea.imageUrl && (
-                <div className="absolute right-0 top-0 h-full w-full opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.12] lg:w-1/2">
+                <div className="absolute right-0 top-0 hidden h-full w-full opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.12] md:block lg:w-1/2">
                   <img
                     src={oviArea.imageUrl}
                     alt={oviArea.imageAlt || ''}
@@ -182,7 +182,7 @@ export default function PracticeAreaCardGrid() {
             >
               {/* Background Image */}
               {area.imageUrl && (
-                <div className="absolute inset-0 opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1]">
+                <div className="absolute inset-0 hidden opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1] md:block">
                   <img
                     src={area.imageUrl}
                     alt={area.imageAlt || ''}
