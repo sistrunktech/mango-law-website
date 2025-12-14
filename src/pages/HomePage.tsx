@@ -8,6 +8,7 @@ const TestimonialsList = lazy(() => import('../components/TestimonialsList'));
 import CTASection from '../components/CTASection';
 import LocationBlock from '../components/LocationBlock';
 import ContactForm from '../components/ContactForm';
+import DeferredSection from '../components/DeferredSection';
 import { SEO, localBusinessSchema } from '../lib/seo';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
@@ -116,9 +117,11 @@ export default function HomePage() {
 
       <PracticeAreaCardGrid />
 
-      <Suspense fallback={null}>
-        <BlogSection />
-      </Suspense>
+      <DeferredSection minHeight={520}>
+        <Suspense fallback={null}>
+          <BlogSection />
+        </Suspense>
+      </DeferredSection>
 
       {/* Stats/Trust Section */}
       <section className="relative overflow-hidden py-20">
@@ -147,9 +150,11 @@ export default function HomePage() {
 
       <section className="section bg-white">
         <div className="container">
-          <Suspense fallback={null}>
-            <TestimonialsList variant="featured" />
-          </Suspense>
+          <DeferredSection minHeight={420}>
+            <Suspense fallback={null}>
+              <TestimonialsList variant="featured" />
+            </Suspense>
+          </DeferredSection>
         </div>
       </section>
 
