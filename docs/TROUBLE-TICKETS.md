@@ -313,8 +313,8 @@ The public DUI checkpoints page (`/resources/dui-checkpoints`) shows "Pending ch
 
 ## TICKET-010: Faster Crawl / "Instant Indexing" for SPA (Vite + React)
 
-**Priority:** Medium  
-**Status:** Mitigated  
+**Priority:** High  
+**Status:** Open  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
@@ -355,8 +355,29 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 
 ### Current MVP implementation
 - `robots.txt` already references `https://mango.law/sitemap.xml`.
-- `npm run build` now generates `dist/sitemap.xml` via `scripts/generate-sitemap.mjs` (runs in `postbuild`).
+- `npm run build` generates `dist/sitemap.xml` via `scripts/generate-sitemap.mjs` (runs in `postbuild`).
 - The sitemap includes all static marketing routes plus `/blog/:slug` entries sourced from `src/data/blogPosts.ts`.
+
+---
+
+## TICKET-011: sitemap.xml Serving SPA HTML (Not XML)
+
+**Priority:** High  
+**Status:** Mitigated  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+`https://mango.law/sitemap.xml` is returning the SPA HTML (index.html) instead of XML. This prevents sitemap validation/submission and blocks the “instant indexing” MVP.
+
+### Root cause (likely)
+- The publish pipeline is not deploying `dist/sitemap.xml` reliably (or it is not being generated in the deployed build artifact).
+
+### Fix (implemented)
+- Added a Vite build plugin that writes `dist/sitemap.xml` during the build step (`closeBundle()`), so it works even if the host runs `vite build` directly.
+
+### Verification
+- After publish, `https://mango.law/sitemap.xml` starts with `<?xml` and has `Content-Type: application/xml` (or `text/xml`).
 
 ---
 
@@ -372,6 +393,7 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 - One branch per ticket/intent (e.g., `codex/fix-schema-legalservice`).
 - One agent per branch at a time.
 - If a PR hits merge conflicts, the agent that owns the branch resolves and re-pushes (owner should not be required to do conflict resolution).
+- Agents open PRs and merge on green CI; the owner should only need to click “Publish” in Bolt after confirmation.
 
 **Before pushing**
 - Run the project checks (lint/test/build as applicable per `AGENTS.md`).
