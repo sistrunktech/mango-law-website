@@ -65,7 +65,7 @@ export default function CheckpointHotspots({ onCityClick }: CheckpointHotspotsPr
               }}
             >
               {isTopHotspot && (
-                <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-mango text-xs font-bold text-white shadow-md">
+                <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-mango text-xs font-bold text-brand-black shadow-md">
                   {index + 1}
                 </div>
               )}
