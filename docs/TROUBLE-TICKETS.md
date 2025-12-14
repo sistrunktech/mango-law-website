@@ -270,7 +270,7 @@ Schema.org Validator reports errors on the homepage structured data (`LegalServi
 ## TICKET-009: Stale Pending DUI Checkpoint Announcements (Outdated Links)
 
 **Priority:** High  
-**Status:** Closed  
+**Status:** Mitigated  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
@@ -308,6 +308,7 @@ The public DUI checkpoints page (`/resources/dui-checkpoints`) shows "Pending ch
 ### Verification
 - Public page no longer shows old "planned this weekend" items.
 - Admin can still see/correct old items.
+- Confirm after publish: pending list hides 2019-era rows.
 
 ---
 
@@ -363,7 +364,7 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 ## TICKET-011: sitemap.xml Serving SPA HTML (Not XML)
 
 **Priority:** High  
-**Status:** Mitigated  
+**Status:** Open  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -378,6 +379,57 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 
 ### Verification
 - After publish, `https://mango.law/sitemap.xml` starts with `<?xml` and has `Content-Type: application/xml` (or `text/xml`).
+
+---
+
+## TICKET-012: DUI Checkpoint Map Shows Out-of-State Pins (NY/CA)
+
+**Priority:** High  
+**Status:** Mitigated  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+The public map on `/resources/dui-checkpoints` sometimes shows markers far outside Ohio (e.g., New York / California). This breaks trust and causes the map to auto-zoom out due to `fitBounds` including these outliers.
+
+### Root cause
+- Scraper geocoding accepted the first Mapbox result without validating it resolves to Ohio.
+- Bad results could be cached in `geocoding_cache`, making the issue persistent.
+- The map fit bounds to all coordinates that existed, amplifying outliers.
+
+### Fix (implemented)
+- Scraper geocoding now requests multiple candidates and selects the best Ohio-valid result; non-Ohio results are not cached.
+- Cache poisoning defense: cached geocodes outside Ohio are ignored and removed.
+- Frontend safety net: map ignores non-Ohio coordinates for marker creation and `fitBounds`.
+
+### Verification
+- After publish, public map shows no pins outside Ohio even if DB contains outlier coordinates.
+
+---
+
+## TICKET-013: Checkpoint Status Incorrect ("Active" After End Date)
+
+**Priority:** High  
+**Status:** Mitigated  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+Some checkpoints display `status='active'` even though the checkpoint ended days ago.
+
+### Root cause
+Status is persisted and can become stale if pg_cron status updates are not running reliably in production.
+
+### Fix (implemented)
+- Frontend derives `displayStatus` from `start_date/end_date` (cancelled remains cancelled) and uses it for:
+  - checkpoint card badge
+  - map marker color
+  - map popup label
+- Added a small regression test for status derivation (`npm test`).
+- Documented pg_cron health-check queries in `docs/OPERATIONS.md`.
+
+### Verification
+- After publish, a checkpoint with `end_date < now()` displays as `completed` on the public page.
 
 ---
 
