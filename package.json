@@ -11,6 +11,7 @@
     "postbuild": "node scripts/generate-sitemap.mjs",
     "test": "ts-node --esm --transpile-only test/checkpointStatus.test.ts",
     "preview": "vite preview",
+    "optimize:practice-images": "node scripts/optimize-practice-images.mjs",
     "generate:image": "node scripts/generateImage.js"
   },
   "dependencies": {
@@ -38,6 +39,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.15",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
