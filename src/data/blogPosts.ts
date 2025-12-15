@@ -21,14 +21,14 @@ export const blogPosts: BlogPost[] = [
     slug: 'understanding-ovi-dui-charges-ohio',
     title: 'Understanding OVI/DUI Charges in Ohio: What You Need to Know',
     excerpt: 'Complete guide to Ohio OVI charges including penalties, defense strategies, and how to protect your record. Learn about ORC § 4511.19 and what to do if arrested.',
-    imageUrl: '/images/generated/blog-ovi-charges.png',
-    content: `## Introduction
-
-Operating a vehicle while impaired (OVI) – known in many states as driving under the influence (DUI) – is a serious offense in Ohio. Ohio uses the term OVI to cover drunk-driving cases and those involving drugs or a combination of alcohol and drugs. This post explains the law, penalties and possible defenses so you can make informed decisions. It cites current Ohio statutes and real cases to ensure accuracy.
-
-## What Does OVI Mean?
-
-Under the [Ohio Revised Code (ORC) § 4511.19](https://codes.ohio.gov/ohio-revised-code/section-4511.19), it is illegal to operate any vehicle if your blood-alcohol concentration (BAC) is 0.08 percent or higher or if you are appreciably impaired by alcohol, a drug of abuse or a combination of both. There are also "per se" limits for breath, blood and urine for alcohol and various drugs. A high-test OVI occurs when your BAC is 0.17 percent or higher, which triggers enhanced penalties. Ohio's implied consent law requires drivers to submit to chemical testing; refusal results in an administrative license suspension.
+	    imageUrl: '/images/generated/blog-ovi-charges.png',
+	    content: `## Introduction
+	
+	Operating a vehicle while impaired (OVI) – known in many states as driving under the influence (DUI) – is a serious offense in Ohio. Ohio uses the term OVI to cover drunk-driving cases and those involving drugs or a combination of alcohol and drugs. This post explains the law, common penalties, and defense considerations so you can make informed decisions. Where possible, it links to Ohio statutes and published opinions so you can verify the underlying authority.
+	
+	## What Does OVI Mean?
+	
+	Under the [Ohio Revised Code (ORC) § 4511.19](https://codes.ohio.gov/ohio-revised-code/section-4511.19), it is illegal to operate any vehicle if you are impaired by alcohol, drugs, or a combination of both, and Ohio also defines prohibited concentrations for certain tests (often discussed as “per se” limits). For most adult drivers, the commonly cited alcohol threshold is **0.08% BAC**, and Ohio has separate thresholds that can affect charging and sentencing (including “high-test” cases). Ohio’s implied consent law ([ORC § 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191)) means refusing testing can trigger an administrative license suspension (ALS) and other consequences.
 
 [VISUAL:BAC_LIMITS]
 
@@ -42,27 +42,27 @@ The penalties for a first-time OVI are found in [ORC § 4511.19(G)(1)(a)](https:
 
 [VISUAL:OVI_COSTS]
 
-## High-Test (≥ 0.17 BAC) OVI
+	## High-Test (≥ 0.17 BAC) OVI
+	
+	If testing is at or above the “high-test” threshold, the penalties can increase and courts often impose additional conditions (for example: longer minimum jail or driver-intervention program time, ignition interlock, restricted plates, and alcohol monitoring). The exact requirements and eligibility/timing for limited driving privileges depend on the specific sentencing subsection and case history, so confirm the current rules against the statute and your attorney’s advice.
 
-If your BAC is 0.17 percent or higher, the penalties increase. The mandatory jail term becomes 6 days (or a 6-day driver-intervention program). The court must also order a yellow "party" plate, mandatory ignition-interlock device and alcohol monitoring. Fines remain the same, but courts often impose the maximum and will not grant limited driving privileges until after a 15-day "hard suspension."
-
-## Repeat Offenses: Annie's Law and Look-Back Period
-
-Under Annie's Law, enacted in 2017 and updated by H.B. 37, Ohio uses a 10-year look-back period. A second offense within 10 years triggers tougher penalties. For detailed information about how prior convictions affect your case, see our comprehensive guide on [Ohio's DUI Lookback Period](/blog/ohio-dui-lookback-period).
+	## Repeat Offenses: Annie's Law and Look-Back Period
+	
+	Under Annie's Law (enacted in 2017 and later updated), Ohio generally uses a 10-year look-back period for OVI sentencing. A second offense within that window can trigger significantly tougher penalties, and older priors can still matter in other ways (including how prosecutors evaluate a case). For detailed information about how prior convictions affect your case, see our guide on [Ohio's DUI Lookback Period](/blog/ohio-dui-lookback-period).
 
 [VISUAL:REPEAT_OFFENSE_PENALTIES]
 
-## Administrative License Suspension (ALS)
-
-When arrested for OVI, your license may be immediately suspended through an ALS. For a first offense, refusing a chemical test causes a one-year suspension; a test failure of 0.08–0.17 results in a 90-day ALS, and a high-test failure results in a 1-year ALS. Judges can grant limited occupational privileges but often require an ignition-interlock device.
+	## Administrative License Suspension (ALS)
+	
+	When arrested for OVI, your license may be immediately suspended through an ALS. The ALS duration and any “hard time” before privileges depend on factors like prior history and whether you refused or tested over a prohibited limit. The controlling categories and timelines are in [ORC § 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191) and related provisions. Courts may grant limited occupational driving privileges in some cases, often with conditions like an ignition-interlock device.
 
 [VISUAL:ALS_TIMELINE]
 
 ## Real-World Case Examples
 
-### 2019 McDonald's Drive-Thru Case
-
-In [State v. Chattoo](https://www.supremecourt.ohio.gov/rod/docs/pdf/10/2020/2020-Ohio-6893.pdf) (Delaware Cty. Ct. App. Dec. 18 2020), a McDonald's manager called 911 to report a car blocking the drive-thru lane with a sleeping driver. An officer arrived and arrested the driver for OVI. The Court of Appeals reversed the conviction, finding that the officer lacked reasonable suspicion because the driver's vehicle had already left the restaurant when stopped. This case shows that evidence obtained after an unlawful stop can be suppressed.
+	### “Drive-Thru” Reasonable Suspicion Case
+	
+	In [State v. Chattoo](https://www.supremecourt.ohio.gov/rod/docs/pdf/10/2020/2020-Ohio-6893.pdf) (2020-Ohio-6893), a restaurant manager called 911 to report a car blocking a drive-thru lane with a sleeping driver. An officer later stopped the vehicle and arrested the driver for OVI. The appellate court reversed, finding the stop lacked reasonable suspicion on the record presented. This case is a reminder that suppression arguments can turn on timing, what the officer observed, and how the stop was justified.
 
 ### Traffic-Stop Authority: State v. Mays
 
@@ -120,16 +120,16 @@ Ohio's OVI laws are complex and frequently updated. Penalties include mandatory 
 
 The information provided in this post is for general guidance only and does not constitute legal advice. Every case is unique, and outcomes depend on specific facts, applicable law, and procedure. If you are facing OVI charges, consult with a qualified attorney who can evaluate your individual circumstances.
 
-## Contact Mango Law for OVI Defense
+	## Contact Mango Law for OVI Defense
+	
+	If you've been charged with OVI in Delaware or Franklin County, the stakes can be high. Mango Law regularly handles OVI defense matters and can help you understand what’s likely to matter in your specific court and timeline.
 
-If you've been charged with OVI in Delaware or Franklin County, the stakes are too high to face alone. At Mango Law, we've successfully defended numerous OVI cases and understand local courts, prosecutors, and procedures.
-
-**Call (740) 602-2155** today for a free consultation.`,
+	**Call (740) 602-2155** today for a free consultation.`,
     category: 'OVI/DUI Defense',
     date: '2024-12-01',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-14',
-    sources: [
+	    lastVerified: '2025-12-15',
+	    sources: [
       {
         label: 'Ohio Revised Code § 4511.19 (OVI)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
