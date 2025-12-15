@@ -58,6 +58,7 @@ function usage(): string {
     '  --output <path>                              Report JSON path (default: ./reports/checkpoint-backfill-<ts>.json)',
     '  --no-geocode                                 Skip geocoding even if token present',
     '  --limit <n>                                  Limit canonical rows processed (debug only)',
+    '  --corrupt-window-hours <n>                   Scan window for corruption detection (default: 48)',
   ].join('\n');
 }
 
@@ -82,6 +83,9 @@ function parseArgs(argv: string[]) {
   const limitRaw = args.get('limit');
   const limit = typeof limitRaw === 'string' ? Number(limitRaw) : undefined;
   const output = typeof args.get('output') === 'string' ? String(args.get('output')) : undefined;
+  const corruptWindowHoursRaw = args.get('corrupt-window-hours');
+  const corruptWindowHours =
+    typeof corruptWindowHoursRaw === 'string' ? Number(corruptWindowHoursRaw) : 48;
 
   if (!['scan', 'upsert', 'replace-ovicheckpoint'].includes(mode)) {
     throw new Error(`Invalid --mode "${mode}".\n\n${usage()}`);
@@ -91,7 +95,11 @@ function parseArgs(argv: string[]) {
     throw new Error(`Invalid --limit "${limitRaw}".\n\n${usage()}`);
   }
 
-  return { mode, apply, noGeocode, limit, output };
+  if (!Number.isFinite(corruptWindowHours) || corruptWindowHours <= 0) {
+    throw new Error(`Invalid --corrupt-window-hours "${corruptWindowHoursRaw}".\n\n${usage()}`);
+  }
+
+  return { mode, apply, noGeocode, limit, output, corruptWindowHours };
 }
 
 function normalizeKeyPart(input: string): string {
@@ -130,6 +138,13 @@ function checkpointLocationKey(row: LocationKeyRow): string {
   );
 }
 
+function checkpointLocationDateKey(row: LocationKeyRow & { start_date: string }): string {
+  const start = new Date(row.start_date);
+  if (Number.isNaN(start.getTime())) return checkpointLocationKey(row);
+  const yyyyMmDd = start.toISOString().slice(0, 10);
+  return `${checkpointLocationKey(row)}|${yyyyMmDd}`;
+}
+
 function isOhioCoordinate(latitude: number, longitude: number): boolean {
   // Rough sanity bounds for Ohio (inclusive).
   // https://en.wikipedia.org/wiki/Ohio#Geography (approx)
@@ -158,7 +173,7 @@ async function writeReport(path: string, payload: unknown) {
 }
 
 async function main() {
-  const { mode, apply, noGeocode, limit, output } = parseArgs(process.argv.slice(2));
+  const { mode, apply, noGeocode, limit, output, corruptWindowHours } = parseArgs(process.argv.slice(2));
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -221,15 +236,50 @@ async function main() {
   }
 
   const now = new Date();
-  const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
-  const twoDaysAhead = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+  const windowMs = corruptWindowHours * 60 * 60 * 1000;
+  const windowStart = new Date(now.getTime() - windowMs);
+  const windowEnd = new Date(now.getTime() + windowMs);
 
   const corruptCandidates = existing.filter((row) => {
     const start = new Date(row.start_date);
     if (Number.isNaN(start.getTime())) return false;
-    if (start < twoDaysAgo || start > twoDaysAhead) return false;
+    if (start < windowStart || start > windowEnd) return false;
     return !canonicalKeys.has(checkpointKey(row));
   });
+
+  const invalidDateOrderRows = existing.filter((row) => {
+    const start = new Date(row.start_date);
+    const end = new Date(row.end_date);
+    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return false;
+    return end <= start;
+  });
+
+  const duplicateGroupsByLocationDate = new Map<string, ExistingCheckpointRow[]>();
+  for (const row of existing) {
+    const start = new Date(row.start_date);
+    if (Number.isNaN(start.getTime())) continue;
+    if (start < windowStart || start > windowEnd) continue;
+    const key = checkpointLocationDateKey(row);
+    const list = duplicateGroupsByLocationDate.get(key) ?? [];
+    list.push(row);
+    duplicateGroupsByLocationDate.set(key, list);
+  }
+
+  const duplicateGroupsWindow = [...duplicateGroupsByLocationDate.entries()]
+    .filter(([, rows]) => rows.length > 1)
+    .map(([key, rows]) => ({
+      key,
+      rows: rows
+        .slice()
+        .sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime())
+        .map((r) => ({
+          id: r.id,
+          title: r.title,
+          start_date: r.start_date,
+          end_date: r.end_date,
+          updated_at: r.updated_at,
+        })),
+    }));
 
   const plannedInserts =
     mode === 'replace-ovicheckpoint'
@@ -251,10 +301,12 @@ async function main() {
     },
     analysis: {
       planned_inserts: plannedInserts.length,
-      corrupt_candidates_last_48h: corruptCandidates.length,
+      corrupt_candidates_window: corruptCandidates.length,
+      invalid_date_order_rows: invalidDateOrderRows.length,
+      duplicate_location_date_groups_window: duplicateGroupsWindow.length,
       existing_ohio_coords_reuse_pool: existingCoordsByLocationKey.size,
     },
-    corrupt_candidates_last_48h: corruptCandidates.map((r) => ({
+    corrupt_candidates_window: corruptCandidates.map((r) => ({
       id: r.id,
       title: r.title,
       location_county: r.location_county,
@@ -264,6 +316,17 @@ async function main() {
       end_date: r.end_date,
       updated_at: r.updated_at,
     })),
+    invalid_date_order_rows: invalidDateOrderRows.map((r) => ({
+      id: r.id,
+      title: r.title,
+      location_county: r.location_county,
+      location_city: r.location_city,
+      location_address: r.location_address,
+      start_date: r.start_date,
+      end_date: r.end_date,
+      updated_at: r.updated_at,
+    })),
+    duplicate_location_date_groups_window: duplicateGroupsWindow,
     actions: [] as any[],
   };
 
