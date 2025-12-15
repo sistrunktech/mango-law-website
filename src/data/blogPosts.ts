@@ -1,3 +1,11 @@
+export type BlogSourceType = 'primary' | 'secondary' | 'guide';
+
+export type BlogSource = {
+  label: string;
+  url: string;
+  type?: BlogSourceType;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -6,6 +14,8 @@ export type BlogPost = {
   category: string;
   date: string;
   author: string;
+  lastVerified: string;
+  sources: BlogSource[];
   imageUrl?: string;
 };
 
@@ -121,6 +131,39 @@ If you've been charged with OVI in Delaware or Franklin County, the stakes are t
     category: 'OVI/DUI Defense',
     date: '2024-12-01',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.191 (Implied consent)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Administrative Code 3701-53-05 (Alcohol testing)',
+        url: 'https://codes.ohio.gov/ohio-administrative-code/rule-3701-53-05',
+        type: 'primary',
+      },
+      {
+        label: 'House Bill 37 summary (Ohio Judicial Conference)',
+        url: 'https://www.ohiojudges.org/Document.ashx?DocGuid=2c83ec05-54f8-4ec4-9e43-f24c44c3cd39',
+        type: 'guide',
+      },
+      {
+        label: 'State v. Mays, 2008-Ohio-3365 (Ohio Supreme Court)',
+        url: 'https://www.supremecourt.ohio.gov/rod/docs/pdf/0/2008/2008-Ohio-3365.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'State v. Chattoo, 2020-Ohio-6893 (10th Dist.)',
+        url: 'https://www.supremecourt.ohio.gov/rod/docs/pdf/10/2020/2020-Ohio-6893.pdf',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'motion-practice-criminal-defense',
@@ -385,6 +428,39 @@ If you're facing criminal charges in Delaware or Franklin County, don't wait. Ea
     category: 'Criminal Defense',
     date: '2024-11-28',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Rules of Criminal Procedure',
+        url: 'https://www.supremecourt.ohio.gov/LegalResources/Rules/criminal/CriminalProcedure.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Rules of Evidence',
+        url: 'https://www.supremecourt.ohio.gov/LegalResources/Rules/evidence/EvidenceRules.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2945.71 (Speedy trial)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2945.71',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2901.13 (Statute of limitations)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2901.13',
+        type: 'primary',
+      },
+      {
+        label: 'Terry v. Ohio, 392 U.S. 1 (1968)',
+        url: 'https://supreme.justia.com/cases/federal/us/392/1/',
+        type: 'primary',
+      },
+      {
+        label: 'Miranda v. Arizona, 384 U.S. 436 (1966)',
+        url: 'https://supreme.justia.com/cases/federal/us/384/436/',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'drug-possession-vs-trafficking-ohio',
@@ -454,6 +530,29 @@ Contact us for a confidential consultation if you're facing drug charges in Dela
     category: 'Drug Crimes',
     date: '2024-11-25',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 2925.11 (Drug possession)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.11',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2925.03 (Drug trafficking)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.03',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2925.01 (Definitions; bulk amount)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.01',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2951.041 (Intervention in lieu of conviction)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2951.041',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'white-collar-crime-defense-ohio',
@@ -534,6 +633,24 @@ If you're under investigation or have been charged with a white collar offense, 
     category: 'White Collar Crimes',
     date: '2024-11-20',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code Chapter 2913 (Theft and fraud offenses)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/chapter-2913',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2913.02 (Theft)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.02',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2913.49 (Identity fraud)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.49',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'refuse-field-sobriety-test-ohio',
@@ -639,89 +756,55 @@ Contact us at **(740) 602-2155** for a confidential case evaluation.`,
     category: 'OVI/DUI Defense',
     date: '2024-12-07',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.191 (Implied consent)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'ohio-dui-lookback-period',
-    title: 'Ohio DUI Lookback Period: How Past Convictions Affect Your Case',
-    excerpt: 'Understanding Ohio\'s 10-year lookback period for OVI offenses and how prior convictions impact penalties, license suspension, and sentencing.',
+    title: 'Ohio DUI Lookback Period: How Prior Convictions Can Affect Your Case',
+    excerpt: 'Understand how Ohio’s OVI lookback rules work, what can count as a prior, and what varies by county, court, and the facts of your case.',
     imageUrl: '/images/generated/blog-dui-lookback-period.png',
-    content: `If you're facing OVI/DUI charges in Ohio and have a prior conviction on your record, understanding the **lookback period** is critical. Ohio uses a 10-year window to determine whether your current offense counts as a repeat violation—and the difference in penalties is dramatic.
+    content: `If you're facing OVI/DUI charges in Ohio and have a prior conviction on your record, understanding the **lookback period** is important. Whether a prior counts can affect how the case is charged and sentenced.
 
 ## What Is the Lookback Period?
 
 The lookback period (also called the "washout period") is the timeframe during which prior OVI convictions count toward enhanced penalties for subsequent offenses.
 
-**In Ohio, the lookback period is 10 years** (previously it was 6 years until 2017).
+**In Ohio, many repeat-offense enhancements use a 10-year lookback window** under the current OVI statute. Because details can change over time, confirm the current rule against the statute and your specific record.
 
 [VISUAL:LOOKBACK_TIMELINE]
 
 ### How It Works
 
-Ohio counts prior OVI convictions that occurred within **10 years** of your current offense date. If your last conviction was more than 10 years ago, your new charge is treated as a first offense for sentencing purposes.
+Ohio generally looks at whether a prior OVI (or equivalent) falls within **10 years** of the current offense date when determining repeat-offense enhancements. In many situations, older priors do not enhance the current sentence—but the correct answer depends on your record and the specific statutory language.
 
-**Important**: The 10 years is calculated from the date of the prior offense to the date of the current offense—not from conviction date to conviction date.
+**Important**: In many cases the “10 years” analysis is offense-date to offense-date, not conviction-date to conviction-date. Your attorney should verify this against your certified driving record and the prior case paperwork.
 
 ## Why the Lookback Period Matters
 
-The number of prior convictions within the lookback period dramatically affects penalties:
+Repeat-offense enhancements can significantly increase the consequences compared to a first offense. Depending on the charge and your record, this can affect:
 
-### First Offense OVI (No Priors in 10 Years)
+- mandatory minimums and sentencing ranges
+- license-related consequences
+- vehicle-related sanctions (immobilization/forfeiture in some cases)
+- monitoring/treatment conditions (interlock, education, assessment)
 
-- **Jail**: 3 days minimum to 6 months maximum
-- **Fine**: $375 to $1,075
-- **License Suspension**: 6 months to 3 years
-- **Vehicle Immobilization**: Optional
-- **Ignition Interlock**: Possible but not mandatory
+For a broader overview of OVI charges and defense strategy, see [Understanding OVI/DUI Charges in Ohio](/blog/understanding-ovi-dui-charges-ohio).
 
-### Second Offense OVI (One Prior in 10 Years)
+## “High test” and refusal allegations (what to know)
 
-- **Jail**: 10 days minimum to 6 months maximum (mandatory consecutive days)
-- **Fine**: $525 to $1,625
-- **License Suspension**: 1 to 7 years
-- **Vehicle Immobilization**: 90 days (or forfeiture)
-- **Ignition Interlock**: Mandatory
-- **License Plates**: Immobilized or impounded
-- **Yellow "Party Plates"**: Likely required
-
-### Third Offense OVI (Two Priors in 10 Years)
-
-- **Jail**: 30 days minimum to 1 year maximum (mandatory consecutive days)
-- **Fine**: $850 to $2,750
-- **License Suspension**: 2 to 12 years
-- **Vehicle Forfeiture**: Mandatory (vehicle seized and sold)
-- **Ignition Interlock**: Mandatory for life
-- **Yellow Plates**: Required
-- **Possible Felony**: Certain circumstances elevate to felony
-
-### Fourth or More Offenses
-
-Fourth and subsequent OVI offenses within 10 years are typically charged as **felonies** with even harsher penalties including:
-
-- State prison time (6 months to several years)
-- Permanent license revocation
-- Significant fines and costs
-- Felony record affecting employment, housing, voting rights
-
-[VISUAL:REPEAT_OFFENSE_GRID]
-
-For detailed information about first-offense penalties and OVI charges generally, see our comprehensive guide on [Understanding OVI/DUI Charges in Ohio](/blog/understanding-ovi-dui-charges-ohio).
-
-## High-Test OVI and Enhanced Penalties
-
-Even within the lookback period, **high BAC results** trigger enhanced mandatory minimums:
-
-### First Offense High-Test (BAC .170+)
-
-- 3 additional mandatory jail days (6 days total minimum)
-- Mandatory yellow plates
-- Longer license suspension
-- Mandatory ignition interlock
-
-### Second Offense High-Test
-
-- 20 additional mandatory jail days (30 days total minimum)
-- Extended license suspension
-- Higher fines
+Some cases involve additional allegations related to test results or refusal. The impact of these issues can be highly fact-specific and depends on your history and what the state can prove. Confirm the current rules in ORC § 4511.19 and ORC § 4511.191.
 
 ## What Counts as a Prior Conviction?
 
@@ -737,26 +820,13 @@ For lookback purposes, Ohio counts:
 
 - Diversions that were successfully completed and dismissed
 - Charges that were reduced and never included an OVI conviction
-- Convictions more than 10 years old
+- Some older convictions that fall outside the applicable lookback window
 
-**Critical**: Prosecutors will pull your **Bureau of Motor Vehicles (BMV) certified driving record** to establish priors. Any conviction within 10 years will be used against you.
+**Tip**: Prosecutors often rely on a **Bureau of Motor Vehicles (BMV) certified driving record** and court records to argue what counts as a prior. Have counsel verify the record details and the correct statutory window for your situation.
 
-## The 2017 Law Change
+## Lookback rules can change over time
 
-### Old Law (Pre-2017)
-
-- Lookback period was **6 years**
-- Many defendants with older priors could qualify for first-offense treatment
-
-### New Law (2017-Present)
-
-- Lookback period extended to **10 years**
-- Significantly more defendants face enhanced penalties
-- Prior convictions from 6-10 years ago now count
-
-[VISUAL:LAW_CHANGE_COMPARISON]
-
-### Why It Changed
+OVI sentencing rules are amended periodically. For any case where priors matter, it’s important to confirm the current rule in the statute and to verify your record details rather than relying on older summaries.
 
 Legislators argued that the 6-year window was too short to deter repeat offenders and that extending it would improve public safety. Critics note it increases mass incarceration and disproportionately affects people who've been sober for years.
 
@@ -784,14 +854,14 @@ Even with priors, you can fight the current charge:
 - Rising BAC defense
 - Mouth alcohol contamination
 
-**Winning the current case eliminates the enhanced penalty risk.** Learn more about defense strategies through effective [motion practice in criminal defense](/blog/motion-practice-criminal-defense), which can challenge prior convictions and suppress evidence in your current case.
+A strong defense on the current charge can reduce or avoid the enhanced consequences that come with a repeat-offense conviction. Learn more about defense strategy through effective [motion practice in criminal defense](/blog/motion-practice-criminal-defense), which can help identify suppression issues and other leverage points.
 
 ### Negotiate Strategic Pleas
 
 Experienced OVI attorneys can negotiate outcomes that:
 
 - Avoid conviction (diversion, dismissal)
-- Reduce to reckless operation (doesn't count as OVI prior)
+- Reduce to an alternate offense where appropriate (how it counts later depends on the record and circumstances)
 - Minimize jail time and fines
 - Preserve driving privileges
 - Avoid ignition interlock
@@ -806,279 +876,24 @@ Some defendants with priors may still qualify for:
 
 These programs focus on rehabilitation rather than incarceration.
 
-## Impact on License Suspension
+## Other consequences to flag (varies)
 
-Prior convictions dramatically increase license suspension length:
+Repeat-offense cases can involve additional license/vehicle restrictions, monitoring requirements, and collateral consequences (employment, professional licensing, insurance). The details depend on the charge, your record, and local practice—so treat online summaries as a starting point and have an attorney confirm the current rule and how it applies to you.
 
-### First Offense
+## Common misunderstandings
 
-- 6 months to 3 years (depending on refusal, high-test, other factors)
+- Don’t assume a prior “falls off” without verifying the relevant offense dates and the record that proves them.
+- Out-of-state history and related offenses can matter; the safest approach is to have counsel review both your BMV record and the prior case documents.
 
-### Second Offense
+## Costs and practical impact (varies)
 
-- 1 year minimum to 7 years maximum
-
-### Third Offense
-
-- 2 years minimum to 12 years maximum
-
-### Fourth+ Offense
-
-- Permanent revocation possible
-
-### Administrative License Suspension (ALS)
-
-Remember, the ALS suspension runs separately and immediately:
-
-- First refusal: 1 year
-- Second refusal: 2 years
-- High-test first offense: 90 days
-
-[VISUAL:SUSPENSION_COMPARISON]
-
-These suspensions run concurrently with criminal suspensions in some cases but not always. Understanding the interaction requires experienced counsel.
-
-## Employment and Professional Consequences
-
-Multiple OVI convictions create compounding employment issues:
-
-### Commercial Driver's License (CDL)
-
-- First OVI: 1-year CDL disqualification
-- Second OVI: **Lifetime CDL disqualification**
-- No lookback period exception for CDL holders
-
-### Professional Licenses
-
-Multiple convictions may trigger:
-
-- Medical license discipline
-- Law license suspension
-- Teaching license revocation
-- Real estate license consequences
-- Financial services licensing issues
-
-### Background Checks
-
-Multiple convictions appearing on background checks create serious barriers to:
-
-- Employment
-- Housing
-- Professional opportunities
-- Volunteer positions
-- Educational opportunities
-
-## Out-of-State Convictions
-
-### Interstate Driver's License Compact
-
-Ohio participates in the Interstate Driver's License Compact, meaning:
-
-- Out-of-state DUI convictions **count toward Ohio's lookback**
-- Ohio will report your Ohio conviction to your home state
-- License suspensions are enforced across states
-
-### Common Scenarios
-
-**Michigan DUI + Ohio OVI**: Both count toward the lookback
-
-**Pennsylvania DUI + Pennsylvania DUI + Ohio OVI**: Third offense penalties apply
-
-**California DUI 11 years ago + Ohio OVI today**: First offense treatment
-
-[VISUAL:LOOKBACK_SCENARIOS]
-
-## Felony OVI Threshold
-
-### When Does OVI Become a Felony?
-
-OVI can be elevated to a felony in several scenarios:
-
-#### Fourth Offense Within 10 Years
-
-- Felony of the fourth degree
-- 6-30 months in prison
-- Permanent license consequences
-
-#### OVI with Certain Prior Felonies
-
-If you have prior felony OVI convictions, subsequent offenses may be enhanced:
-
-- Third-degree felony: 9-36 months prison
-- Significant fines
-
-#### OVI Causing Serious Physical Harm
-
-- Fourth-degree felony (first offense)
-- Third-degree felony (with priors)
-
-#### OVI Causing Death
-
-- Vehicular homicide
-- Second or first-degree felony
-- Mandatory prison time
-
-## Special Considerations for Multiple Priors
-
-### Ignition Interlock Device
-
-With multiple priors, ignition interlock becomes:
-
-- **Mandatory** (not optional)
-- **Longer duration** (often several years)
-- **More expensive** (monitoring fees add up)
-- **Monitoring requirements** (monthly calibration, photo verification)
-
-### Yellow "Party Plates"
-
-Second and subsequent offenses within 10 years require:
-
-- Yellow plates with red lettering
-- Registered in your name
-- Visible marker of OVI conviction
-- Social stigma and embarrassment
-
-### Vehicle Forfeiture
-
-Third offense within 10 years triggers **mandatory vehicle forfeiture**:
-
-- Police seize your vehicle
-- Vehicle is sold at auction
-- Proceeds go to law enforcement
-- **You lose the car permanently**
-
-**Critical**: This applies even if the vehicle belongs to a family member in some cases. Protecting your assets requires immediate legal intervention.
-
-## Delaware and Franklin County Specific Considerations
-
-### Local Court Practices
-
-**Delaware Municipal Court** and **Delaware County Court of Common Pleas** handle hundreds of repeat OVI cases. Local factors include:
-
-- Prosecutor policies on plea negotiations
-- Judicial tendencies on sentencing
-- Availability of diversion programs
-- Access to problem-solving courts
-
-### Highway Patrol Presence
-
-US-23 and SR-315 see heavy Ohio State Highway Patrol enforcement. Troopers:
-
-- Use advanced detection equipment
-- Follow standardized procedures
-- Have extensive OVI training
-- Create thorough documentation
-
-Multiple encounters with the same agency can hurt your credibility—experienced local counsel understands the landscape.
-
-## Protecting Your Future with Priors
-
-### Immediate Steps After Arrest
-
-1. **Don't discuss the case** with anyone except your attorney
-2. **Write down everything** you remember
-3. **Gather evidence**: receipts, witness info, location details
-4. **Contact an attorney immediately**—time matters
-5. **Preserve your BMV record**—request certified copy
-
-### Long-Term Strategies
-
-1. **Complete treatment proactively**—shows rehabilitation
-2. **Maintain sobriety**—monitored compliance helps
-3. **Address underlying issues**—counseling, mental health treatment
-4. **Build character evidence**—employment, community service
-5. **Stay out of trouble**—any new charges worsen your situation
-
-## Why You Need an Experienced OVI Attorney
-
-Repeat OVI offenses require sophisticated legal representation:
-
-### Technical Defenses
-
-- Constitutional challenges to prior convictions
-- Challenging stop legality
-- Attacking test reliability
-- Suppressing evidence
-- Expert witness testimony
-
-### Strategic Negotiation
-
-- Understanding prosecutor policies
-- Knowing judicial tendencies
-- Leveraging treatment completion
-- Timing negotiations strategically
-- Preserving appeal rights
-
-### Damage Control
-
-Even if conviction is likely:
-
-- Minimize jail time
-- Reduce fines and costs
-- Protect employment
-- Preserve limited driving privileges
-- Avoid vehicle forfeiture
-- Structure payment plans
-
-## Common Myths About the Lookback Period
-
-### Myth: "It resets after 10 years automatically"
-
-**Reality**: The lookback applies at the time of the new offense. A conviction from year 9 still counts. Only after 10 years plus one day does it fall outside the window.
-
-### Myth: "Out-of-state convictions don't count"
-
-**Reality**: Ohio absolutely counts out-of-state DUI convictions toward the lookback.
-
-### Myth: "Reckless op doesn't count"
-
-**Reality**: If you pled to reckless operation from an original OVI charge, prosecutors may still use it depending on circumstances.
-
-### Myth: "Diversion means no prior"
-
-**Reality**: Successfully completed diversions generally don't count, but failed diversions that result in conviction absolutely count.
-
-## The Cost of Multiple OVIs
-
-### Direct Costs
-
-- Fines: $525-$2,750+ per offense
-- Court costs: $200-$500
-- Attorney fees: $2,500-$10,000+
-- Ignition interlock: $75-$150/month (years of monitoring)
-- SR-22 insurance: 2-3x normal rates for 3-5 years
-- License reinstatement: $475+
-- Vehicle forfeiture: Entire vehicle value
-
-### Indirect Costs
-
-- Lost wages during jail time
-- Employment termination
-- Increased insurance (can exceed $10,000 over time)
-- Transportation alternatives (rideshare, taxi)
-- Treatment programs
-- Career setbacks
-- Professional license consequences
-
-**Total cost of second OVI**: Often $15,000-$30,000
-**Total cost of third OVI**: Often $25,000-$50,000+
+Repeat-offense cases can create costs beyond court fines, including monitoring requirements, programs/treatment, transportation alternatives, and missed work time.
 
 [VISUAL:COST_BREAKDOWN]
 
 ## Conclusion
 
-Ohio's 10-year OVI lookback period means prior convictions significantly impact your current case. The difference between first-offense and repeat-offense penalties is dramatic—enhanced jail time, longer suspensions, mandatory ignition interlock, yellow plates, and potential vehicle forfeiture.
-
-If you're facing OVI charges with priors in Delaware or Franklin County:
-
-- **Time is critical**—evidence preservation and deadlines matter
-- **Don't represent yourself**—the stakes are too high
-- **Challenge everything**—prior convictions, current evidence, procedures
-- **Explore all options**—diversion, plea negotiations, trial
-
-At Mango Law, we've handled hundreds of repeat OVI cases in Delaware and Franklin County. We know the courts, prosecutors, and judges. We understand the technical defenses and strategic options.
-
-**Contact us today at (740) 602-2155** for a confidential case evaluation. Early intervention can make the difference between enhanced penalties and a favorable outcome.
+If you have priors, getting the “lookback” analysis right is an early priority. The outcome often depends on record details and case facts—so don’t guess. Have an attorney confirm what counts, what doesn’t, and whether the stop/testing can be challenged.
 
 ---
 
@@ -1086,6 +901,24 @@ At Mango Law, we've handled hundreds of repeat OVI cases in Delaware and Frankli
     category: 'OVI/DUI Defense',
     date: '2024-12-07',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI sentencing; repeat offenses)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.194 (Physical control)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.194',
+        type: 'primary',
+      },
+      {
+        label: 'House Bill 37 summary (Ohio Judicial Conference)',
+        url: 'https://www.ohiojudges.org/Document.ashx?DocGuid=2c83ec05-54f8-4ec4-9e43-f24c44c3cd39',
+        type: 'guide',
+      },
+    ],
   },
   {
     slug: 'ex-parte-protection-orders-ohio-defense',
@@ -1360,6 +1193,29 @@ We've handled these cases. We know what works. We know how to prepare, how to qu
     category: 'Protection Orders',
     date: '2024-12-07',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 3113.31 (Domestic violence civil protection orders)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2903.214 (Menacing by stalking protection orders)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.214',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.27 (Violating a protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
+        type: 'primary',
+      },
+      {
+        label: '18 U.S.C. § 922 (Firearms prohibitions)',
+        url: 'https://www.law.cornell.edu/uscode/text/18/922',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'ohio-weapons-charges-ccw-defense',
@@ -1668,6 +1524,34 @@ If you're facing weapons charges under ORC §§ 2923.12, 2923.13, or 2923.16, co
     category: 'Criminal Defense',
     date: '2024-12-06',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code Chapter 2923 (Weapons control)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/chapter-2923',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2923.12 (Carrying concealed weapons)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.12',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2923.13 (Weapons under disability)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.13',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2923.16 (Improperly handling firearms in a motor vehicle)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.16',
+        type: 'primary',
+      },
+      {
+        label: '18 U.S.C. § 922 (Firearms prohibitions)',
+        url: 'https://www.law.cornell.edu/uscode/text/18/922',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
@@ -2019,6 +1903,34 @@ If you're facing sex crime charges or under investigation in Delaware or Frankli
     category: 'Sex Crimes',
     date: '2024-12-05',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 2907.03 (Sexual battery)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.03',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2907.04 (Unlawful sexual conduct with a minor)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.04',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2907.21 (Compelling prostitution)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.21',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2950.01 (Sex offender classification definitions)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.01',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2950.05 (Registration duties)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.05',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'personal-injury-claims-ohio-negligence-law',
@@ -2356,6 +2268,29 @@ If you've been injured due to someone else's negligence in Delaware or Franklin 
     category: 'Personal Injury',
     date: '2024-12-04',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 2315.33 (Comparative negligence)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2315.33',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2305.10 (Statute of limitations; bodily injury)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2305.10',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2315.18 (Noneconomic damages cap)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2315.18',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2125.01 (Wrongful death)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2125.01',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'assault-domestic-violence-defense-ohio',
@@ -2677,26 +2612,63 @@ If you're facing assault or domestic violence charges in Delaware or Franklin Co
     category: 'Criminal Defense',
     date: '2024-12-03',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 2903.13 (Assault)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.13',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2903.11 (Felonious assault)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.11',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2903.21 (Aggravated menacing)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.21',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.25 (Domestic violence)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 3113.31 (CPOs)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31',
+        type: 'primary',
+      },
+      {
+        label: '18 U.S.C. § 922 (Firearms prohibitions)',
+        url: 'https://www.law.cornell.edu/uscode/text/18/922',
+        type: 'primary',
+      },
+    ],
   },
   {
     slug: 'ohio-dui-checkpoint-hotspots',
-    title: 'Ohio DUI Checkpoint Hotspots: Where OVI Checks Happen Most Often',
-    excerpt: 'Discover which Ohio cities and corridors see the most DUI checkpoints. Learn where law enforcement conducts frequent sobriety stops and what to expect.',
+    title: 'Ohio DUI Checkpoints: Legality, What to Expect, and Your Rights',
+    excerpt: 'A conservative, rights-focused guide to sobriety checkpoints in Ohio: when they’re legal, what the process looks like, and how to protect yourself.',
     imageUrl: '/images/generated/blog-checkpoint-hotspots.png',
     content: `## Introduction
 
-If you live in Ohio or travel across the state regularly, you've likely noticed that certain cities and roadways seem to host DUI checkpoints far more often than others. This isn't random. Law enforcement agencies strategically place sobriety checkpoints in areas with high traffic volume, frequent alcohol-related incidents, or major event corridors. Understanding where these "hotspots" are located can help you plan routes, stay informed, and know what to expect if you encounter a checkpoint.
+Sobriety checkpoints (sometimes called DUI/OVI checkpoints) are planned stops where officers briefly screen drivers for impairment. Practices vary by agency, and not every checkpoint is announced in advance.
 
-This guide identifies the Ohio cities and regions where DUI checkpoints occur most often, explains why these areas are targeted, and provides practical advice on navigating checkpoints legally and safely. [View real-time checkpoint data on our interactive Ohio DUI Checkpoint Map](/dui-checkpoints).
+This guide focuses on what matters most: the legality standards, what typically happens at a checkpoint, and your rights. For publicly announced checkpoints we’ve collected, see our [Ohio DUI Checkpoint Map](/resources/dui-checkpoints).
 
-## Why Certain Areas Become DUI Checkpoint Hotspots
+## Are DUI checkpoints legal in Ohio?
 
-Several factors make specific locations ideal for DUI enforcement:
+Under U.S. Supreme Court case law, sobriety checkpoints can be constitutional when they are designed for roadway safety and run under a neutral, planned procedure (see *Sitz*). But checkpoints can’t be used as a general crime-control dragnet (see *Edmond*). Ohio-specific requirements and local practices can be nuanced, so treat online summaries as a starting point and confirm details for your case.
+
+## How checkpoints are planned (high-level)
+
+Agencies typically choose checkpoint locations and timing based on safety goals and operational constraints. Common considerations include traffic flow, staffing, safety of the stop location, and event/holiday scheduling.
 
 [VISUAL:HOTSPOT_FACTORS]
 
 ### High Traffic Volume
-Major highways, interstate exits, and downtown corridors carry thousands of vehicles daily. Checkpoints in high-traffic areas allow officers to screen more drivers efficiently.
+Major highways, interstate exits, and downtown corridors carry high traffic volume. Checkpoints in these areas can screen more drivers efficiently.
 
 ### Entertainment Districts
 Areas with concentrated bars, restaurants, and nightlife naturally see more impaired drivers. Cities place checkpoints near entertainment districts during peak hours.
@@ -2708,147 +2680,17 @@ Law enforcement analyzes crash reports, OVI arrests, and complaint data to ident
 Sporting events, concerts, festivals, and holiday weekends trigger temporary checkpoints. Cities anticipate increased impaired driving during these periods.
 
 ### State and Federal Grant Funding
-Ohio agencies receive federal grants (like the Ohio Traffic Safety Office grants) to conduct high-visibility enforcement campaigns. These grants fund checkpoint operations in designated "high-crash" corridors.
+Agencies may use grant funding or special campaign resources to support high-visibility enforcement. The specifics vary by agency and time of year.
 
-## Statewide Checkpoint Patterns
+## Where checkpoints happen (varies)
 
-Before diving into specific cities, here are general patterns observed across Ohio:
-
-[VISUAL:CHECKPOINT_PATTERNS]
-
-- **Friday and Saturday Nights**: Most checkpoints occur between 10 PM and 2 AM on weekends
-- **Holiday Periods**: Thanksgiving Eve, New Year's Eve, Fourth of July, and Labor Day weekends see increased enforcement
-- **Major Interstate Corridors**: I-71, I-75, I-70, I-77, and I-90 frequently host checkpoints at exit ramps
-- **College Towns**: Cities with major universities see regular checkpoints, especially during home games and spring breaks
-- **Suburban "Cut-Through" Roads**: Secondary roads connecting entertainment districts to residential areas are targeted
-
-## Top Ohio DUI Checkpoint Hotspots by Region
-
-[VISUAL:REGIONAL_HOTSPOTS_MAP]
-
-### Cleveland and Northeast Ohio
-
-**Cleveland** ranks among Ohio's most active checkpoint cities. Downtown Cleveland, particularly along **Euclid Avenue**, **Detroit Avenue**, and **West 6th Street** (near the Warehouse District), sees frequent sobriety stops. The convergence of entertainment venues, sports stadiums (Progressive Field, Rocket Mortgage FieldHouse), and major highways makes this area a prime enforcement zone.
-
-**Interstate Corridors**: Exits along **I-90** and **I-71** near downtown Cleveland are regularly monitored, especially after Browns, Cavaliers, or Guardians games.
-
-**Parma and Brook Park** in Cuyahoga County also see regular checkpoints on **State Road**, **Brookpark Road**, and near **Cleveland Hopkins International Airport** during holiday travel periods.
-
-**Additional Hotspots**:
-- **Lakewood**: Madison Avenue and Detroit Avenue near bar districts
-- **Cleveland Heights**: Mayfield Road and Cedar Road intersections
-- **Solon**: Harper Road and major suburban corridors
-
-### Columbus and Central Ohio
-
-**Columbus** leads the state in checkpoint frequency. The city's size, diverse entertainment districts, and multiple DUI task forces create a high-enforcement environment.
-
-**High Street** through the **Short North Arts District** and near **The Ohio State University campus** is a notorious checkpoint corridor. The concentration of bars, restaurants, and student housing makes this a year-round enforcement priority.
-
-**Downtown Columbus** checkpoints appear frequently on **East Broad Street**, **East Main Street**, and near **COSI** and **Arena District** venues. Post-Blue Jackets games and concert events trigger targeted enforcement.
-
-**Interstate Exits**: **I-70/I-71 interchange** exits (especially at Broad Street, Main Street, and Spring Street) are heavily monitored. Officers often position checkpoints on ramps leading into downtown or toward suburban corridors.
-
-**Suburban Hotspots**:
-- **Grove City**: US-62 and Parlin Drive
-- **Reynoldsburg**: East Main Street and Brice Road
-- **Dublin**: Bridge Street and Sawmill Road near entertainment districts
-- **Hilliard**: Cemetery Road and Scioto Darby Road
-- **Westerville**: State Street and Cleveland Avenue
-
-**Franklin County Sheriff** and **Columbus Police** coordinate multi-agency checkpoints, particularly during Ohio State University home football games and major holidays.
-
-### Cincinnati and Southwest Ohio
-
-**Cincinnati** and **Hamilton County** see concentrated checkpoint activity in entertainment-heavy areas. **Over-the-Rhine** (OTR), downtown's revitalized nightlife district, experiences regular enforcement on **Main Street**, **Vine Street**, and **12th Street**.
-
-**Interstate Monitoring**: The **I-75/I-71 convergence** near downtown Cincinnati is heavily patrolled. Exit ramps at **Hopple Street**, **Mitchell Avenue**, and river crossings (like the **Clay Wade Bailey Bridge**) are frequent checkpoint sites.
-
-**Suburban Hotspots**:
-- **Blue Ash**: Pfeiffer Road and Kenwood Road near shopping and dining areas
-- **Sharonville**: Lebanon Road (US-42)
-- **Norwood**: Ross Avenue and Montgomery Road
-- **Mariemont**: Wooster Pike (US-50)
-- **Colerain Township**: Blue Rock Road and Colerain Avenue
-
-**Butler County** (north of Cincinnati) also conducts frequent checkpoints:
-- **West Chester Township**: Princeton-Glendale Road (OH-747)
-- **Fairfield**: State Route 4 near Muhlhauser Road
-- **Hamilton**: S. Erie Boulevard (SR-4)
-- **Oxford**: S. Locust Street near Miami University campus
-
-**Butler County OVI Task Force** coordinates multi-jurisdictional operations, particularly during college weekends and summer festivals.
-
-### Akron, Canton, and Northeast Corridor
-
-**Akron** and **Summit County** conduct regular checkpoints in downtown Akron near entertainment districts and along **State Route 8** exits. The city's central location and multiple highway interchanges make it a strategic enforcement zone.
-
-**Canton** and **Stark County** see frequent checkpoints on:
-- **Mahoning Road NE** in Canton
-- **Louisville Street NE** in Nimishillen and Louisville
-- **Easton Street NE** and **Ravenna Avenue NE** in Nimishillen Township
-- **State Route 44** and **US-62** corridors
-
-**Alliance** also experiences regular checkpoint operations in downtown corridors like **S. Union Avenue** and **W. State Street**.
-
-### Toledo and Northwest Ohio
-
-**Toledo** and **Lucas County** place checkpoints along high-traffic corridors:
-- **N Holland Sylvania Road**: A major commercial and dining corridor
-- **Central Avenue**: High-traffic route connecting downtown to suburbs
-- **Detroit Avenue** and **Monroe Street**: Downtown entertainment areas
-- **I-75 exits** near downtown Toledo and suburban interchanges
-
-**Ottawa County** (including **Port Clinton**) sees increased enforcement during summer tourism season along **Perry Street** and near Lake Erie attractions.
-
-**Sandusky County** conducts checkpoints in **Fremont** on **Rawson Avenue** near downtown and US-6 corridors.
-
-### Dayton and Southwest Corridor
-
-**Dayton** and **Montgomery County** frequently conduct checkpoints on:
-- **Third Street** and **Main Street** in downtown Dayton
-- **Harshman Road** in Dayton
-- **Woodman Drive** in Riverside
-- **US-35** and **I-75** interchange areas
-
-**Greene County** and **Xenia** see periodic enforcement, especially during county fair season and holiday weekends.
-
-### Youngstown, Warren, and Mahoning Valley
-
-**Youngstown** and **Mahoning County** coordinate regular checkpoints through the **Mahoning County OVI Task Force**:
-- **Glenwood Avenue** and **Playhouse Lane**
-- **Market Street** and **Hilton Avenue**
-- **Boardman Canfield Road** in Boardman
-- **N Canfield Niles Road**
-- **State Route 7** in Boardman
-
-**Trumbull County** conducts checkpoints in **Champion Township** along **Mahoning Avenue** and other suburban corridors.
-
-### Smaller Cities and Suburban Corridors
-
-Beyond major metropolitan areas, several mid-sized cities see regular checkpoint activity:
-
-- **Zanesville (Muskingum County)**: West Main Street
-- **Lancaster (Fairfield County)**: East Main Street near Graceland Drive
-- **Chillicothe (Ross County)**: Western Avenue and downtown corridors
-- **Newark (Licking County)**: Downtown and SR-16/SR-37 corridors
-- **Marion (Marion County)**: Mount Vernon Avenue
-- **Norwalk (Huron County)**: Milan Avenue near Lais Road
-- **Fremont (Sandusky County)**: Rawson Avenue
-- **Mount Vernon (Knox County)**: State Route 13/South Main Street
-- **Bellefontaine (Logan County)**: South Main Street
-- **Findlay (Hancock County)**: Tiffin Avenue
-- **Mount Orab (Brown County)**: US-68 near SR-32
+Checkpoint locations and frequency can vary widely by agency and season. Our map includes only publicly announced checkpoints we’ve collected, and it is not a prediction tool.
 
 ## What to Expect at an Ohio DUI Checkpoint
 
 ### How Checkpoints Operate
 
-Ohio law requires checkpoints to be:
-- **Announced in advance**: Law enforcement must provide public notice (usually through press releases or social media)
-- **Neutral in vehicle selection**: Officers cannot arbitrarily choose which vehicles to stop; they must use a predetermined pattern (every car, every third car, etc.)
-- **Clearly marked**: Signs, lights, and visible officers must mark the checkpoint location
-- **Supervised**: A supervisory officer must oversee the operation
+To be lawful, checkpoints are generally run under a neutral plan and marked so drivers can safely navigate the stop. The precise rules and best defenses can be fact-specific, so if something about a checkpoint seemed unsafe or arbitrary, talk to an attorney about the details.
 
 [VISUAL:CHECKPOINT_PROCESS]
 
@@ -2857,8 +2699,8 @@ Ohio law requires checkpoints to be:
 When you approach a checkpoint:
 1. **Slow down** and follow officer instructions
 2. **Roll down your window** and provide license and registration when asked
-3. **Answer basic questions**: Officers typically ask where you're coming from and where you're going
-4. **Brief interaction**: Most drivers pass through in under a minute unless officers detect signs of impairment
+3. **Expect brief questions**: You may be asked where you're coming from or whether you've been drinking. You can keep responses minimal or choose not to answer.
+4. **Brief interaction**: The goal is typically a short screening unless officers believe further investigation is needed
 
 ### Signs Officers Look For
 
@@ -2869,7 +2711,7 @@ During the initial stop, officers observe:
 - Open containers or drug paraphernalia
 - Nervousness or erratic behavior
 
-If officers suspect impairment, they will direct you to a secondary screening area for field sobriety tests.
+If officers suspect impairment, they may direct you to a secondary screening area for additional questioning and possible field sobriety tests.
 
 ## Your Rights at a DUI Checkpoint
 
@@ -2881,7 +2723,7 @@ Ohio law requires drivers to stop at properly marked checkpoints. Attempting to 
 
 ### You Must Provide License and Registration
 
-You are legally required to provide your driver's license, vehicle registration, and proof of insurance when requested.
+You’re typically required to provide your driver's license, vehicle registration, and proof of insurance when requested.
 
 ### You Do Not Have to Answer Questions
 
@@ -2894,11 +2736,20 @@ Politely declining to answer is legal. Example: "Officer, I prefer not to answer
 
 ### You Can Refuse Field Sobriety Tests
 
-In Ohio, field sobriety tests (walk-and-turn, one-leg stand, horizontal gaze nystagmus) are **voluntary**. Refusing does not result in automatic license suspension, but officers may use refusal as a factor in deciding whether to arrest you. For more information, read our guide on [Refusing Field Sobriety Tests in Ohio](/blog/refuse-field-sobriety-test-ohio).
+In Ohio, field sobriety tests (walk-and-turn, one-leg stand, horizontal gaze nystagmus) are generally **voluntary**. Refusing a field sobriety test does not, by itself, trigger the same implied-consent administrative suspension as refusing a chemical test, but officers may consider refusal along with other observations. For more information, read our guide on [Refusing Field Sobriety Tests in Ohio](/blog/refuse-field-sobriety-test-ohio).
 
 ### Refusing Chemical Tests Has Consequences
 
-If arrested and asked to submit to a breath, blood, or urine test, refusal triggers an automatic **one-year license suspension** under Ohio's implied consent law. This suspension is separate from any criminal penalties.
+If arrested and asked to submit to a breath, blood, or urine test, refusal can trigger an administrative license suspension under Ohio's implied consent law. The length and consequences can depend on your history and the circumstances, and the administrative process is separate from the criminal case.
+
+## What varies by county and agency
+
+Checkpoint practices can vary, including:
+- How (and whether) the agency publicizes the checkpoint ahead of time
+- How the checkpoint plan is documented and supervised
+- What the initial screening questions look like
+- How secondary screening decisions are made and recorded
+- Local prosecutor policies and court practices
 
 ## What to Do If You're Arrested at a Checkpoint
 
@@ -2910,40 +2761,22 @@ If you are arrested for OVI at a checkpoint:
 4. **Document everything**: Note the checkpoint location, time, officer names, and any irregularities
 5. **Contact an experienced OVI attorney**: Early legal intervention can make a significant difference in your case
 
-At Mango Law, we have successfully defended clients arrested at DUI checkpoints by challenging:
-- Improper checkpoint setup and operation
-- Lack of reasonable suspicion for secondary screening
-- Unreliable field sobriety tests conducted on uneven surfaces
-- Improper administration of chemical tests
+In some checkpoint cases, defense strategy can include challenging:
+- Whether the checkpoint was operated under a neutral plan
+- Whether secondary screening escalated without sufficient grounds
+- The conditions and administration of field sobriety tests
+- The administration, documentation, and reliability of chemical testing
 
-## How to Avoid DUI Checkpoints Legally
+## Safer planning
 
-While avoiding checkpoints by turning around can attract attention, you can reduce your chances of encountering them:
-
-[VISUAL:AVOIDANCE_STRATEGIES]
-
-### Plan Ahead
-- **Check local news and social media**: Law enforcement often announces checkpoints in advance
-- **Use navigation apps**: Apps like Waze allow users to report checkpoint locations
-- **Monitor our [Ohio DUI Checkpoint Map](/dui-checkpoints)**: We track publicly announced checkpoints across Ohio
-
-### Use Alternate Transportation
-- **Designated driver**: Always have a sober driver if you plan to drink
-- **Rideshare services**: Uber, Lyft, and taxis are available in all major Ohio cities
-- **Public transportation**: COTA (Columbus), RTA (Cleveland), Metro (Cincinnati), and other systems operate late-night routes
-
-### Avoid High-Risk Times and Locations
-- **Weekend late nights**: Most checkpoints occur Friday and Saturday between 10 PM and 2 AM
-- **Holiday weekends**: Expect increased enforcement on Thanksgiving Eve, New Year's Eve, July 4th, and Labor Day
-- **Entertainment district exits**: Avoid routes directly from bar districts to residential areas during peak hours
+The safest way to handle checkpoints is to plan not to drive impaired:
+- Use a designated driver, rideshare, taxi, or public transit when drinking
+- If you’re unsure whether you’re safe to drive, err on the side of not driving
+- Treat checkpoint announcements as incomplete and non-predictive; our [Ohio DUI Checkpoint Map](/resources/dui-checkpoints) includes only publicly announced checkpoints we’ve collected
 
 ## Conclusion
 
-Ohio DUI checkpoints are concentrated in predictable hotspots: downtown entertainment districts, major interstate exits, college towns, and suburban corridors with high traffic volume. Cleveland, Columbus, Cincinnati, Akron, Canton, Toledo, Dayton, and Youngstown see the most frequent checkpoint activity, but smaller cities also conduct regular operations.
-
-Understanding where checkpoints occur and your legal rights when encountering them is essential. Always plan for safe transportation if you've been drinking, and if you're arrested at a checkpoint, contact an experienced OVI defense attorney immediately.
-
-If you've been charged with OVI at a checkpoint or need legal guidance, Mango Law provides aggressive defense representation in Delaware and Franklin County. Contact us at **(740) 602-2155** for a free case evaluation.
+Checkpoint practices change and vary by agency. Focus on safety, keep the interaction calm and brief, and protect your rights. If you were arrested at a checkpoint, get legal advice quickly—early review can matter.
 
 ---
 
@@ -2951,5 +2784,18 @@ If you've been charged with OVI at a checkpoint or need legal guidance, Mango La
     category: 'OVI/DUI Defense',
     date: '2024-12-08',
     author: 'Dominic Mango',
+    lastVerified: '2025-12-14',
+    sources: [
+      {
+        label: 'Michigan Dept. of State Police v. Sitz, 496 U.S. 444 (1990)',
+        url: 'https://supreme.justia.com/cases/federal/us/496/444/',
+        type: 'primary',
+      },
+      {
+        label: 'City of Indianapolis v. Edmond, 531 U.S. 32 (2000)',
+        url: 'https://supreme.justia.com/cases/federal/us/531/32/',
+        type: 'primary',
+      },
+    ],
   },
 ];
