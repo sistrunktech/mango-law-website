@@ -520,6 +520,166 @@ The desired attribution is to cite the underlying credible sources (local news o
 
 ---
 
+## TICKET-016: Blog System — Add `lastVerified` + `sources` Trust Metadata
+
+**Priority:** High  
+**Status:** Closed  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+Blog posts currently make legal/procedural and sometimes numeric claims without a consistent, structured way to show what was checked, when it was checked, and what sources support it.
+
+### Desired Outcome
+- Add a `lastVerified` date string and structured `sources` list to the BlogPost model.
+- Render “Last verified” and “Sources” on blog post pages (and optionally on blog cards).
+
+### Acceptance Criteria
+- TypeScript model updated and all posts include the required fields.
+- Blog post page renders trust metadata consistently without layout regressions.
+
+### Resolution notes
+- Implemented in PR #22 (trust metadata + rendering).
+
+---
+
+## TICKET-017: SOP — Penalty/Cost Language Style Guide (“No Drift” Rules)
+
+**Priority:** High  
+**Status:** Closed  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+Penalty ranges, costs, timelines, and “absolute” claims can drift over time and create accuracy risk unless governed by a clear SOP.
+
+### Desired Outcome
+Create a style guide defining:
+- How to write about penalties/costs conservatively (avoid absolutes; include “what varies”).
+- How to cite sources (primary where possible) and how to handle tables/visuals with numbers.
+- A “last verified” discipline for content maintenance.
+
+### Acceptance Criteria
+- `docs/PENALTY-LANGUAGE-STYLE-GUIDE.md` exists and is actionable.
+
+### Resolution notes
+- Added `docs/PENALTY-LANGUAGE-STYLE-GUIDE.md`.
+
+---
+
+## TICKET-018: Blog Visuals — De-risk `[VISUAL:*]` Components With Numeric Claims
+
+**Priority:** High  
+**Status:** Closed  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+Blog visuals referenced via `[VISUAL:*]` can embed hard-coded numeric claims (fines, thresholds, suspension durations). These can silently drift as laws change.
+
+### Risk
+Accuracy drift + credibility risk (numbers appear authoritative even when outdated).
+
+### Desired Outcome
+For each visual that includes hard numbers:
+- Either remove the numeric claim, or
+- Add explicit adjacent citations + “Last verified”, or
+- Ensure the numbers are sourced in the post’s `sources` and governed by the verification SOP.
+
+### Acceptance Criteria
+- No numeric visual remains without sources + last verified (or explicit removal).
+
+### Resolution notes
+- Implemented in PR #22 by removing hard-coded numeric claims from the riskiest visuals and adding per-post sources + last verified.
+
+---
+
+## TICKET-019: Content Tracking — P0 Batch 1 (5 Slugs)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Scope (slugs)
+- `understanding-ovi-dui-charges-ohio`
+- `refuse-field-sobriety-test-ohio`
+- `drug-possession-vs-trafficking-ohio`
+- `motion-practice-criminal-defense`
+- `assault-domestic-violence-defense-ohio`
+
+### Acceptance Criteria (per slug)
+- Remove absolutes and add “What varies…” section(s) where needed.
+- Add `lastVerified` + credible sources; reconcile any numeric claims to sources.
+
+---
+
+## TICKET-020: Content Tracking — P1 Batch 2 (5 Slugs)
+
+**Priority:** Medium  
+**Status:** Open  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Scope (slugs)
+- `ohio-dui-lookback-period`
+- `ohio-dui-checkpoint-hotspots`
+- `white-collar-crime-defense-ohio`
+- `ohio-weapons-charges-ccw-defense`
+- `sex-crimes-defense-ohio-what-you-need-to-know`
+
+### Acceptance Criteria (per slug)
+- Add `lastVerified` + credible sources; avoid unsourced numbers.
+- Add county/court variation notes where relevant.
+- Avoid “hotspot” framing; keep tone conservative and rights-focused.
+
+---
+
+## TICKET-021: Desktop UX — Mega Menu Panel Centering
+
+**Priority:** Medium  
+**Status:** Closed  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+On desktop, the mega menu dropdown panel is positioned relative to the trigger, causing it to feel visually off-center compared to the header container.
+
+### Desired Outcome
+Center the dropdown panel to the site header container (not viewport; not trigger) while keeping the internal columns left-aligned.
+
+### Acceptance Criteria
+- Desktop panel feels centered/balanced; mobile behavior unchanged.
+
+### Resolution notes
+- Implemented in PR #18 (center panel to header container).
+
+---
+
+## TICKET-022: Blog UX — Move Checkpoint CTA Bar Content Into “About Data” Card
+
+**Priority:** Medium  
+**Status:** Closed  
+**Date Created:** 2025-12-14  
+**Assigned To:** TBD
+
+### Issue Summary
+On the DUI checkpoint-related blog post layout, a thin top bar shows a checkpoint CTA (“Stopped at a checkpoint? Need help now?”) alongside the phone number and “Free consult” button. This is visually separated from (and competes with) the “About Ohio DUI Checkpoint Data” card immediately below.
+
+### Desired Outcome
+Move the CTA headline + phone number + consult button + any supporting copy currently shown in the top bar into the “About Ohio DUI Checkpoint Data” content card (just underneath it), so all checkpoint-specific context and calls-to-action are consolidated in one place.
+
+### Acceptance Criteria
+- The top bar no longer renders this checkpoint-specific CTA/phone/consult block for the affected layout.
+- The “About Ohio DUI Checkpoint Data” card includes the CTA headline + phone number + consult button content in a cohesive layout.
+- Mobile and desktop layout remain clean (no crowding; buttons remain tappable).
+- No CLS regression on initial render.
+
+### Resolution notes
+- Implemented in PR #19 for `/resources/dui-checkpoints` (moved call/consult CTAs into the “About Ohio DUI Checkpoint Data” card).
+
+---
+
 ## Collaboration Notes (Codex / Agents)
 
 **Goal:** keep the repo moving without requiring the site owner to use terminal or GitHub UI for routine work.
