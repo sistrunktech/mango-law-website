@@ -13,6 +13,7 @@ import EmergencyBanner from '../components/EmergencyBanner';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick } from '../lib/analytics';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -127,7 +128,7 @@ export default function DUICheckpointsPage() {
         variant="light"
       />
 
-      <EmergencyBanner onOpenLeadModal={() => openLeadModal('emergency_banner')} />
+      <EmergencyBanner />
 
       <section className="section bg-white">
         <div className="container">
@@ -147,6 +148,28 @@ export default function DUICheckpointsPage() {
                   <p className="text-xs text-amber-900">
                     <strong>Important:</strong> This information is for educational purposes only. DUI checkpoints in Ohio are legal when properly conducted with advance notice, neutral selection methods, and clear markings. Always drive sober and follow traffic laws.
                   </p>
+                </div>
+                <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+                  <a
+                    href={`tel:${OFFICE_PHONE_TEL}`}
+                    onClick={() => trackCtaClick('checkpoint_banner_call')}
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10"
+                    data-cta="checkpoint_banner_call"
+                    aria-label={`Call: ${OFFICE_PHONE_DISPLAY}`}
+                  >
+                    Call {OFFICE_PHONE_DISPLAY}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      trackCtaClick('checkpoint_banner_free_consult');
+                      openLeadModal('emergency_banner');
+                    }}
+                    className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-brand-mango px-4 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
+                    data-cta="checkpoint_banner_free_consult"
+                  >
+                    Free consult
+                  </button>
                 </div>
                 <div className="flex flex-wrap gap-4 text-sm">
                   <a
