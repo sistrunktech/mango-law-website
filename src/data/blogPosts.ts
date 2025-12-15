@@ -168,9 +168,9 @@ If you've been charged with OVI in Delaware or Franklin County, the stakes are t
   {
     slug: 'motion-practice-criminal-defense',
     title: 'The Power of Motion Practice in Criminal Defense',
-    excerpt: 'Discover how strategic pre-trial motions can suppress evidence, dismiss charges, or significantly improve your case outcome before trial even begins.',
+    excerpt: 'How strategic pre-trial motions can challenge evidence and shape outcomes—often before trial even begins.',
     imageUrl: '/images/generated/blog-motion-practice.png',
-    content: `Motion practice is one of the most powerful—and underutilized—tools in criminal defense. Many cases are won or significantly improved before trial ever begins through properly crafted and strategically argued pretrial motions. Understanding how motions work and why they matter can mean the difference between conviction and dismissal.
+    content: `Motion practice is one of the most powerful—and underutilized—tools in criminal defense. Many cases are improved before trial ever begins through properly crafted and strategically argued pretrial motions. Understanding how motions work and why they matter can be a major factor in how a case resolves.
 
 ## What Are Pre-Trial Motions?
 
@@ -179,14 +179,21 @@ Pre-trial motions are formal written requests filed with the court asking for sp
 ### Why Pre-Trial Motions Matter
 
 Effective motion practice can:
-- **Suppress illegally obtained evidence**, weakening or destroying the prosecution's case
-- **Dismiss charges entirely** when legal or procedural defects exist
-- **Exclude prejudicial evidence** from trial, improving your chances with the jury
+- **Suppress illegally obtained evidence**, weakening the prosecution's case
+- **Seek dismissal** when legal or procedural defects exist
+- **Exclude prejudicial evidence** from trial, improving the reliability of what the jury considers
 - **Establish favorable legal precedents** for trial
 - **Demonstrate preparation** to prosecutors, encouraging plea negotiations
 - **Save time, money, and stress** by resolving issues before expensive trials
 
-**Real-world impact:** In Delaware and Franklin Counties, we've seen dozens of cases resolved favorably through motion practice—charges dismissed, evidence suppressed, or prosecutors offering better plea deals once they realize their case has been weakened.
+### What Varies (And Why Motions Are Not “One-Size-Fits-All”)
+
+How strong a motion is (and what relief is realistically available) depends on:
+- the facts (video, witnesses, timelines, alleged statements)
+- the specific charge(s) and what the state must prove
+- local rules and deadlines for filings
+- the judge’s expectations for briefing and hearings
+- the prosecutor’s evidence and willingness to negotiate
 
 ## Common Defense Motions Under Ohio Law
 
@@ -198,9 +205,9 @@ Under the **Fourth Amendment** and [Ohio Crim. R. 12(C)(3)](https://www.supremec
 
 #### Illegal Traffic Stops
 
-Police must have **reasonable suspicion** to stop your vehicle under [Terry v. Ohio, 392 U.S. 1 (1968)](https://supreme.justia.com/cases/federal/us/392/1/). If they lacked reasonable suspicion, all evidence from the stop—breathalyzer results, field sobriety tests, drug discoveries—must be suppressed.
+Police must have **reasonable suspicion** to stop your vehicle under [Terry v. Ohio, 392 U.S. 1 (1968)](https://supreme.justia.com/cases/federal/us/392/1/). If they lacked reasonable suspicion, evidence from the stop—breathalyzer results, field sobriety tests, drug discoveries—may be subject to suppression depending on the facts and legal rulings.
 
-**Case example:** In State v. Brown (Franklin County, 2022), we successfully argued that an officer lacked reasonable suspicion to stop our client for "driving suspiciously slowly" at 2am. The court suppressed all evidence, and [OVI charges](/blog/understanding-ovi-dui-charges-ohio) were dismissed.
+If the stop was unlawful, evidence from the stop may be suppressed depending on the facts and how the court applies the law.
 
 #### Illegal Searches and Seizures
 
@@ -210,7 +217,7 @@ The Fourth Amendment protects against unreasonable searches. Common suppression 
 - **Invalid search warrant affidavits** (false statements, stale information, insufficient probable cause)
 - **Searches incident to arrest that exceed lawful scope**
 
-**Case example:** In State v. Martinez (Delaware County, 2023), police searched our client's vehicle after a traffic stop, finding [drugs](/blog/drug-possession-vs-trafficking-ohio) in a locked glovebox. We argued the search exceeded the scope of the traffic stop and the officer lacked probable cause. The court suppressed the evidence, and felony drug charges were dismissed.
+Illustrative scenario: a search that expands beyond the reason for the stop, without a lawful basis, can create suppression issues—especially when the state’s case relies heavily on what was found.
 
 #### Miranda Violations
 
@@ -222,18 +229,18 @@ Under [Miranda v. Arizona, 384 U.S. 436 (1966)](https://supreme.justia.com/cases
 - You invoked your right to an attorney, but police questioned you anyway
 - You were not truly "free to leave" even though police said it wasn't custodial
 
-**Case example:** In State v. Johnson (Franklin County, 2021), our client made incriminating statements during a traffic stop after being handcuffed and placed in a cruiser. We successfully argued he was in custody and should have been Mirandized. The court suppressed all statements, leading to charge reduction.
+Illustrative scenario: if someone is effectively in custody (even during a traffic stop) and is interrogated without Miranda warnings, those statements may be subject to suppression.
 
 #### Coerced Confessions
 
 Even with proper Miranda warnings, confessions obtained through coercion are inadmissible under the **Fifth Amendment**. Courts evaluate the "totality of circumstances" including:
-- Length of interrogation (8+ hour interrogations raise red flags)
-- Physical conditions (lack of food, water, bathroom breaks, sleep deprivation)
+- Length of interrogation
+- Physical conditions (access to food, water, bathroom breaks, sleep)
 - Threats or promises ("Tell us what happened and you can go home")
 - Defendant's age, mental capacity, education level
 - Use of deception beyond acceptable limits
 
-**Landmark Ohio case:** In State v. Edwards, the Ohio Supreme Court suppressed a confession obtained after 14 hours of interrogation where police repeatedly denied the defendant's requests for a lawyer and told him his family would be charged if he didn't confess.
+Courts weigh these factors carefully, and outcomes depend heavily on the record created (reports, video/audio, and testimony).
 
 ### Motion to Dismiss (Crim.R. 12)
 
@@ -248,12 +255,7 @@ The court doesn't have legal authority to hear the case because:
 
 #### Statute of Limitations
 
-Under [ORC § 2901.13](https://codes.ohio.gov/ohio-revised-code/section-2901.13), criminal charges must be filed within specific time limits:
-- **Misdemeanors:** 2 years from offense
-- **Felonies (3rd-5th degree):** 6 years from offense
-- **Major felonies (murder, rape):** No time limit
-
-If the prosecution filed charges after the statute expired, the case must be dismissed.
+Under [ORC § 2901.13](https://codes.ohio.gov/ohio-revised-code/section-2901.13), criminal charges must be filed within certain time limits that depend on the offense and can involve tolling/exceptions. If you believe a charge is time-barred, your attorney should verify the exact rule for your charge and the relevant dates.
 
 #### Insufficient Evidence (Preliminary Hearing Context)
 
@@ -404,20 +406,17 @@ Motion hearings are adversarial proceedings. We cross-examine officers, challeng
 
 ## When to File Motions
 
-Motion deadlines under [Ohio Crim. R. 12](https://www.supremecourt.ohio.gov/LegalResources/Rules/criminal/CriminalProcedure.pdf) are strict:
-- **Pretrial motions:** Must be filed within 35 days of arraignment (or as the court directs)
-- **Motions to suppress:** Must be filed before trial (but as early as possible)
-- **Motions in limine:** Typically filed shortly before trial
+Motion deadlines under [Ohio Crim. R. 12](https://www.supremecourt.ohio.gov/LegalResources/Rules/criminal/CriminalProcedure.pdf) and local court orders can be strict. Courts often set deadlines early in the case, and late filings can be denied or limited depending on the issue.
 
-**Critical:** Missing deadlines can waive issues forever. Hiring an attorney early ensures motions are filed timely.
+Missing deadlines can waive issues. If timing is a concern, talk to counsel early so deadlines can be identified and managed.
 
 ## The Bottom Line
 
-Motion practice is where many criminal cases are won. Suppressed evidence, dismissed charges, and favorable plea offers result from strategic, well-argued motions filed by experienced attorneys who know Ohio law and local court practices.
+Motion practice can shape outcomes. Suppressed evidence, dismissed charges, and improved plea offers can result from strategic, well-argued motions—depending on the facts, the evidence, and the court.
 
 If you're facing criminal charges in Delaware or Franklin County, don't wait. Early motion practice can change the trajectory of your case.
 
-**Contact Mango Law at (740) 602-2155** for a free consultation. We'll review your case, identify motion opportunities, and fight for the best possible outcome.
+**Contact Mango Law at (740) 602-2155** for a free consultation. We'll review your case, identify motion opportunities, and work toward the best available outcome for your situation.
 
 ## Additional Resources
 
@@ -428,7 +427,7 @@ If you're facing criminal charges in Delaware or Franklin County, don't wait. Ea
     category: 'Criminal Defense',
     date: '2024-11-28',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-14',
+    lastVerified: '2025-12-15',
     sources: [
       {
         label: 'Ohio Rules of Criminal Procedure',
