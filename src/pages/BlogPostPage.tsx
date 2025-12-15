@@ -97,6 +97,15 @@ export default function BlogPostPage() {
                 <Clock className="h-4 w-4" />
                 {estimateReadingTime(post.content)} min read
               </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4" />
+                Last verified{' '}
+                {new Date(post.lastVerified).toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                })}
+              </div>
             </div>
           </div>
 
@@ -123,6 +132,37 @@ export default function BlogPostPage() {
             and fact-specific. Always consult with a qualified Ohio attorney about your specific
             situation.
           </div>
+
+          {post.sources.length > 0 && (
+            <div className="mt-6 rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
+              <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
+                <FileText className="h-4 w-4 text-brand-mangoText" />
+                Sources
+              </div>
+              <p className="mt-2 text-xs text-brand-black/60">
+                Visual summaries and timelines are simplified. Use these sources to confirm current law and details.
+              </p>
+              <ul className="mt-3 space-y-2 text-sm text-brand-black/70">
+                {post.sources.map((source) => (
+                  <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-brand-mangoText underline-offset-2 hover:text-brand-leaf hover:underline"
+                    >
+                      {source.label}
+                    </a>
+                    {source.type && (
+                      <span className="rounded-full bg-brand-offWhite px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
+                        {source.type}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="prose prose-lg mt-8 max-w-none
             prose-headings:font-bold prose-headings:text-brand-black
@@ -216,15 +256,14 @@ export default function BlogPostPage() {
                     sections.push(
                       <CostBreakdown
                         key={`visual-${index}`}
-                        title="Total Cost of First OVI Conviction"
+                        title="Common OVI-Related Costs (Varies)"
                         items={[
-                          { label: 'Court Fines', amount: '$565-$1,075', description: 'Mandatory court-imposed fines (updated by H.B. 37)' },
-                          { label: 'License Reinstatement', amount: '$315', description: 'BMV fees to restore driving privileges (reduced by H.B. 37)' },
-                          { label: 'Alcohol Education', amount: '$200-$500', description: 'Required intervention program' },
-                          { label: 'SR-22 Insurance', amount: '$1,500-$3,000', description: 'Increased insurance costs over 3 years' },
-                          { label: 'Ignition Interlock', amount: '$800-$1,500', description: 'Device installation and monitoring' },
-                          { label: 'Attorney Fees', amount: '$2,500-$7,500', description: 'Legal representation' },
-                          { label: 'Total Estimated Cost', amount: '$5,880-$13,890', isTotal: true }
+                          { label: 'Court Fines', amount: 'Varies', description: 'Depends on offense level and court' },
+                          { label: 'License Reinstatement', amount: 'Varies', description: 'BMV fees and requirements depend on history' },
+                          { label: 'Programs / Treatment', amount: 'Varies', description: 'Driver intervention, education, or treatment' },
+                          { label: 'Insurance Impact', amount: 'Varies', description: 'Premium changes depend on insurer and coverage' },
+                          { label: 'Ignition Interlock', amount: 'Varies', description: 'Only if ordered; costs vary by provider and duration' },
+                          { label: 'Attorney Fees', amount: 'Varies', description: 'Depends on complexity, court, and posture of the case' },
                         ]}
                       />
                     );
@@ -377,17 +416,17 @@ export default function BlogPostPage() {
                     sections.push(
                       <PenaltyGrid
                         key={`visual-${index}`}
-                        title="White Collar Crime Penalties in Ohio"
+                        title="White Collar Charges: Penalty Drivers (Overview)"
                         columns={[
-                          { key: 'offense', label: 'Offense' },
-                          { key: 'level', label: 'Felony Level' },
-                          { key: 'penalty', label: 'Potential Penalty' }
+                          { key: 'charge', label: 'Charge Type' },
+                          { key: 'severity', label: 'Severity' },
+                          { key: 'drivers', label: 'What Often Drives Penalties' }
                         ]}
                         rows={[
-                          { offense: 'Theft ($1,000-$7,500)', level: 'F5', penalty: '6-12 months, $2,500 fine' },
-                          { offense: 'Theft ($7,500-$150,000)', level: 'F4', penalty: '6-18 months, $5,000 fine' },
-                          { offense: 'Identity Fraud', level: 'F5-F1', penalty: 'Up to 11 years based on value' },
-                          { offense: 'Forgery', level: 'F5', penalty: '6-12 months, $2,500 fine' }
+                          { charge: 'Theft / Fraud', severity: 'Varies', drivers: 'Value involved, intent, prior record, restitution' },
+                          { charge: 'Identity Fraud', severity: 'Varies', drivers: 'Number of victims, losses, and alleged scheme scope' },
+                          { charge: 'Forgery', severity: 'Varies', drivers: 'Document type, losses, and alleged intent' },
+                          { charge: 'Federal exposure', severity: 'Sometimes', drivers: 'Interstate conduct and federal charging decisions' }
                         ]}
                       />
                     );
@@ -433,12 +472,12 @@ export default function BlogPostPage() {
                         leftItem={{
                           label: 'Chemical Tests',
                           value: 'Mandatory',
-                          description: 'Breath/blood/urine - Refusal triggers 1-year license suspension'
+                          description: 'Breath/blood/urine - refusal can trigger an administrative suspension (length depends on history)'
                         }}
                         rightItem={{
                           label: 'Field Sobriety',
                           value: 'Voluntary',
-                          description: 'Walk-and-turn, one-leg stand - No penalty for refusal'
+                          description: 'Roadside coordination tests - generally voluntary; refusal may still be noted'
                         }}
                         leftColor="red"
                         rightColor="gold"
@@ -450,9 +489,9 @@ export default function BlogPostPage() {
                   else if (visualType === 'REFUSAL_STATS') {
                     sections.push(
                       <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
-                        <StatCard icon={AlertTriangle} value="65-77%" label="FST Failure Rate" color="red" description="Even sober drivers struggle" />
-                        <StatCard icon={Ban} value="No Penalty" label="FST Refusal" color="leaf" description="Legal to decline FSTs" />
-                        <StatCard icon={Timer} value="1 Year" label="Chemical Refusal" color="gold" description="License suspension" />
+                        <StatCard icon={AlertTriangle} value="Subjective" label="FST Results" color="red" description="Conditions and interpretation can matter a lot" />
+                        <StatCard icon={Ban} value="Voluntary" label="FST Refusal" color="leaf" description="Generally no separate criminal charge for refusing" />
+                        <StatCard icon={Timer} value="ALS" label="Chemical Refusal" color="gold" description="Can trigger an administrative license suspension" />
                       </div>
                     );
                   }
@@ -555,12 +594,12 @@ export default function BlogPostPage() {
                     sections.push(
                       <CostBreakdown
                         key={`visual-${index}`}
-                        title="Estimated Legal Costs"
+                        title="Cost Categories (Varies)"
                         items={[
-                          { label: 'Court Fines', amount: '$500-$1,500', description: 'Mandatory court-imposed penalties' },
-                          { label: 'Attorney Fees', amount: '$2,500-$10,000', description: 'Legal representation costs' },
-                          { label: 'Court Costs', amount: '$200-$500', description: 'Filing and administrative fees' },
-                          { label: 'Total Estimated', amount: '$3,200-$12,000', isTotal: true }
+                          { label: 'Court fines & fees', amount: 'Varies', description: 'Depends on the specific charge(s) and court' },
+                          { label: 'Attorney fees', amount: 'Varies', description: 'Depends on complexity and stage of the case' },
+                          { label: 'Programs / treatment', amount: 'Varies', description: 'If ordered or recommended' },
+                          { label: 'Other costs', amount: 'Varies', description: 'Insurance impacts, monitoring, travel, and time off work' },
                         ]}
                       />
                     );
@@ -700,16 +739,16 @@ export default function BlogPostPage() {
                     sections.push(
                       <PenaltyGrid
                         key={`visual-${index}`}
-                        title="Ohio Personal Injury Statute of Limitations"
+                        title="Timing: Filing Deadlines Can Be Strict"
                         columns={[
                           { key: 'type', label: 'Claim Type' },
                           { key: 'deadline', label: 'Filing Deadline' }
                         ]}
                         rows={[
-                          { type: 'Personal Injury (general)', deadline: '2 years from injury' },
-                          { type: 'Medical Malpractice', deadline: '1 year from discovery or 4 years max' },
-                          { type: 'Wrongful Death', deadline: '2 years from death' },
-                          { type: 'Product Liability', deadline: '2 years from injury' }
+                          { type: 'Personal injury (many cases)', deadline: 'Often 2 years (exceptions apply)' },
+                          { type: 'Wrongful death', deadline: 'Often 2 years (exceptions apply)' },
+                          { type: 'Medical malpractice', deadline: 'Often shorter; get advice quickly' },
+                          { type: 'Other claims', deadline: 'Varies by claim type and facts' }
                         ]}
                       />
                     );
@@ -719,8 +758,8 @@ export default function BlogPostPage() {
                   else if (visualType === 'DAMAGE_CAPS') {
                     sections.push(
                       <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
-                        <StatCard icon={DollarSign} value="$250K-$500K" label="Non-Economic Cap" color="mango" description="Pain & suffering limits" />
-                        <StatCard icon={AlertTriangle} value="No Cap" label="Economic Damages" color="leaf" description="Medical bills, lost wages" />
+                        <StatCard icon={DollarSign} value="May apply" label="Non-Economic Cap" color="mango" description="Depends on injury type and case facts" />
+                        <StatCard icon={AlertTriangle} value="Often uncapped" label="Economic Damages" color="leaf" description="Medical bills, lost wages, and other out-of-pocket losses" />
                       </div>
                     );
                   }
@@ -737,10 +776,10 @@ export default function BlogPostPage() {
                           { key: 'penalty', label: 'Penalty' }
                         ]}
                         rows={[
-                          { offense: 'Simple Assault', level: 'M1', penalty: 'Up to 180 days jail' },
-                          { offense: 'Felonious Assault', level: 'F2', penalty: '2-8 years prison' },
-                          { offense: 'Aggravated Assault', level: 'F4', penalty: '6-18 months prison' },
-                          { offense: 'Assault on Police', level: 'F4', penalty: '6-18 months prison' }
+                          { offense: 'Simple Assault', level: 'Misdemeanor (often)', penalty: 'Jail and fines possible' },
+                          { offense: 'Felonious Assault', level: 'Felony', penalty: 'Prison possible' },
+                          { offense: 'Aggravated Assault', level: 'Felony (often)', penalty: 'Prison possible' },
+                          { offense: 'Assault on Police', level: 'Felony (often)', penalty: 'Prison possible' }
                         ]}
                       />
                     );
