@@ -219,6 +219,7 @@ export default function PageHero({
       {showQuickActions && !compact && (
         <div className="relative z-10 -mt-20 pb-12">
           <div className="container">
+            <h2 className="sr-only">Quick actions</h2>
             <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
               {quickActions.map((action, i) => (
                 <Link
