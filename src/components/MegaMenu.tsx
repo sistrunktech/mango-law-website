@@ -1,11 +1,40 @@
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { megaMenuSections } from '../data/megaMenuData';
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
   const [isOpen, setIsOpen] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
+
+  const updatePanelPosition = () => {
+    const triggerEl = triggerRef.current;
+    if (!triggerEl) return;
+
+    const triggerRect = triggerEl.getBoundingClientRect();
+    const containerEl = triggerEl.closest('.container') as HTMLElement | null;
+    const anchorRect = containerEl?.getBoundingClientRect() ?? triggerRect;
+
+    setPanelPosition({
+      top: triggerRect.bottom + 8,
+      left: anchorRect.left + anchorRect.width / 2,
+    });
+  };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    updatePanelPosition();
+
+    const onReposition = () => updatePanelPosition();
+    window.addEventListener('resize', onReposition);
+    window.addEventListener('scroll', onReposition, true);
+    return () => {
+      window.removeEventListener('resize', onReposition);
+      window.removeEventListener('scroll', onReposition, true);
+    };
+  }, [isOpen]);
 
   const handleMouseEnter = () => {
     if (closeTimeoutRef.current) {
@@ -13,6 +42,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
       closeTimeoutRef.current = null;
     }
     setIsOpen(true);
+    updatePanelPosition();
   };
 
   const handleMouseLeave = () => {
@@ -29,6 +59,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
     >
       <button
         type="button"
+        ref={triggerRef}
         className={[
           'flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors',
           variant === 'light' ? 'text-brand-black/70' : 'text-brand-offWhite/80',
@@ -39,8 +70,14 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
         <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
-      {isOpen && (
-        <div className="absolute left-1/2 top-full z-50 mt-2 w-[90vw] max-w-5xl -translate-x-1/2">
+      {isOpen && panelPosition && (
+        <div
+          className="fixed z-50 w-[90vw] max-w-5xl -translate-x-1/2"
+          style={{
+            top: panelPosition.top,
+            left: panelPosition.left,
+          }}
+        >
           <div className="rounded-2xl border border-brand-offWhite/10 bg-brand-black/95 p-8 shadow-2xl backdrop-blur-sm">
             <div className="grid gap-8 md:grid-cols-3">
               {/* Practice Areas */}
