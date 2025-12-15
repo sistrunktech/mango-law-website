@@ -1,3 +1,5 @@
+import type { TrustSource } from './trust';
+
 export type OhioStatute = {
   id: string;
   section: string;
@@ -7,6 +9,8 @@ export type OhioStatute = {
   orcLink: string;
   practiceAreas: string[];
   relatedStatutes?: string[];
+  lastVerified: string;
+  sources: TrustSource[];
 };
 
 export const ohioStatutes: Record<string, OhioStatute> = {
@@ -19,6 +23,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
     practiceAreas: ['ovi-dui', 'criminal-defense'],
     relatedStatutes: ['4511.191', '4511.194', '4510.14', '4511.203'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 4511.19', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19', type: 'primary' },
+    ],
   },
   '4511.191': {
     id: 'implied-consent',
@@ -29,6 +37,24 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
     practiceAreas: ['ovi-dui'],
     relatedStatutes: ['4511.19', '4511.192'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 4511.191', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191', type: 'primary' },
+    ],
+  },
+  '4511.192': {
+    id: 'ovi-advice-to-arrestee',
+    section: '4511.192',
+    title: 'Advice to OVI Arrestee',
+    shortTitle: 'OVI Advice',
+    definition: 'Requires specific advisements in an OVI arrest context, including information tied to chemical test decisions and related consequences.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.192',
+    practiceAreas: ['ovi-dui'],
+    relatedStatutes: ['4511.19', '4511.191'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 4511.192', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.192', type: 'primary' },
+    ],
   },
   '4511.194': {
     id: 'physical-control',
@@ -39,6 +65,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.194',
     practiceAreas: ['ovi-dui'],
     relatedStatutes: ['4511.19'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 4511.194', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.194', type: 'primary' },
+    ],
   },
   '4510.14': {
     id: 'ovi-suspension',
@@ -49,6 +79,24 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4510.14',
     practiceAreas: ['ovi-dui', 'criminal-defense'],
     relatedStatutes: ['4511.19', '4510.11'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 4510.14', url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.14', type: 'primary' },
+    ],
+  },
+  '4510.11': {
+    id: 'driving-under-suspension',
+    section: '4510.11',
+    title: 'Driving Under Suspension or in Violation of License Restriction',
+    shortTitle: 'Driving Under Suspension',
+    definition: 'Prohibits driving when your license is suspended or when you are violating a license restriction. This can be charged alongside other traffic or criminal offenses.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4510.11',
+    practiceAreas: ['ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['4510.14'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 4510.11', url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.11', type: 'primary' },
+    ],
   },
   '4511.203': {
     id: 'wrongful-entrustment',
@@ -59,6 +107,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.203',
     practiceAreas: ['ovi-dui', 'criminal-defense'],
     relatedStatutes: ['4511.19'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 4511.203', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.203', type: 'primary' },
+    ],
   },
   '3113.31': {
     id: 'civil-protection-orders',
@@ -69,6 +121,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31',
     practiceAreas: ['protection-orders', 'criminal-defense', 'domestic-violence'],
     relatedStatutes: ['2919.27', '2919.25', '2903.214'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 3113.31', url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31', type: 'primary' },
+    ],
   },
   '2919.27': {
     id: 'violating-protection-order',
@@ -79,6 +135,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
     practiceAreas: ['protection-orders', 'criminal-defense'],
     relatedStatutes: ['3113.31', '2903.211'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2919.27', url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27', type: 'primary' },
+    ],
   },
   '2903.214': {
     id: 'menacing-stalking',
@@ -89,6 +149,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2903.214',
     practiceAreas: ['protection-orders', 'criminal-defense', 'sex-crimes'],
     relatedStatutes: ['3113.31', '2903.211'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2903.214', url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.214', type: 'primary' },
+    ],
   },
   '2903.211': {
     id: 'menacing',
@@ -99,6 +163,36 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2903.211',
     practiceAreas: ['criminal-defense', 'protection-orders'],
     relatedStatutes: ['2903.214', '2903.13'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2903.211', url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.211', type: 'primary' },
+    ],
+  },
+  '2901.09': {
+    id: 'no-duty-to-retreat',
+    section: '2901.09',
+    title: 'No Duty to Retreat in Residence or Vehicle',
+    shortTitle: 'No Duty to Retreat',
+    definition: 'Addresses Ohio\'s no-duty-to-retreat rules in certain locations, which can be relevant in self-defense and weapons-related cases.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2901.09',
+    practiceAreas: ['criminal-defense', 'weapons'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2901.09', url: 'https://codes.ohio.gov/ohio-revised-code/section-2901.09', type: 'primary' },
+    ],
+  },
+  '2901.13': {
+    id: 'criminal-statute-of-limitations',
+    section: '2901.13',
+    title: 'Statute of Limitations for Criminal Offenses',
+    shortTitle: 'Criminal Limitations',
+    definition: 'Sets time limits for when criminal charges must be brought in Ohio. The applicable limitation can depend on the offense and specific circumstances.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2901.13',
+    practiceAreas: ['criminal-defense'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2901.13', url: 'https://codes.ohio.gov/ohio-revised-code/section-2901.13', type: 'primary' },
+    ],
   },
   '2919.25': {
     id: 'domestic-violence',
@@ -109,6 +203,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25',
     practiceAreas: ['criminal-defense', 'protection-orders', 'domestic-violence'],
     relatedStatutes: ['3113.31', '2903.13', '2903.11'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2919.25', url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25', type: 'primary' },
+    ],
   },
   '2903.13': {
     id: 'assault',
@@ -119,6 +217,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2903.13',
     practiceAreas: ['criminal-defense', 'domestic-violence'],
     relatedStatutes: ['2919.25', '2903.11', '2903.21'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2903.13', url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.13', type: 'primary' },
+    ],
   },
   '2903.11': {
     id: 'felonious-assault',
@@ -129,6 +231,24 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2903.11',
     practiceAreas: ['criminal-defense', 'domestic-violence'],
     relatedStatutes: ['2903.13', '2903.12'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2903.11', url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.11', type: 'primary' },
+    ],
+  },
+  '2903.12': {
+    id: 'aggravated-assault',
+    section: '2903.12',
+    title: 'Aggravated Assault',
+    shortTitle: 'Aggravated Assault',
+    definition: 'Covers causing serious physical harm (or harm with a deadly weapon) under circumstances that can reduce a felonious assault charge when specific statutory conditions are met.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2903.12',
+    practiceAreas: ['criminal-defense', 'domestic-violence'],
+    relatedStatutes: ['2903.11', '2903.13'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2903.12', url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.12', type: 'primary' },
+    ],
   },
   '2903.21': {
     id: 'aggravated-menacing',
@@ -139,6 +259,24 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2903.21',
     practiceAreas: ['criminal-defense', 'protection-orders'],
     relatedStatutes: ['2903.211', '2903.13'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2903.21', url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.21', type: 'primary' },
+    ],
+  },
+  '2907.02': {
+    id: 'rape',
+    section: '2907.02',
+    title: 'Rape',
+    shortTitle: 'Rape',
+    definition: 'Prohibits sexual conduct under circumstances such as force, coercion, or when the other person cannot legally consent. Charging decisions and defenses depend heavily on the specific facts alleged.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2907.02',
+    practiceAreas: ['sex-crimes', 'criminal-defense'],
+    relatedStatutes: ['2907.03', '2907.04', '2950.01'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2907.02', url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.02', type: 'primary' },
+    ],
   },
   '2907.03': {
     id: 'sexual-battery',
@@ -149,6 +287,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2907.03',
     practiceAreas: ['sex-crimes', 'criminal-defense'],
     relatedStatutes: ['2907.04', '2907.21', '2950.01'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2907.03', url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.03', type: 'primary' },
+    ],
   },
   '2907.04': {
     id: 'unlawful-sexual-conduct-minor',
@@ -159,6 +301,80 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2907.04',
     practiceAreas: ['sex-crimes', 'criminal-defense'],
     relatedStatutes: ['2907.02', '2907.03'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2907.04', url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.04', type: 'primary' },
+    ],
+  },
+  '2907.05': {
+    id: 'gross-sexual-imposition',
+    section: '2907.05',
+    title: 'Gross Sexual Imposition',
+    shortTitle: 'Gross Sexual Imposition',
+    definition: 'Prohibits certain sexual contact offenses under specified circumstances. Charging decisions and defenses are highly fact-specific and depend on the alleged conduct and statutory elements.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2907.05',
+    practiceAreas: ['sex-crimes', 'criminal-defense'],
+    relatedStatutes: ['2907.02', '2907.03', '2907.04', '2950.01'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2907.05', url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.05', type: 'primary' },
+    ],
+  },
+  '2907.21': {
+    id: 'compelling-prostitution',
+    section: '2907.21',
+    title: 'Compelling Prostitution',
+    shortTitle: 'Compelling Prostitution',
+    definition: 'Prohibits compelling another person to engage in prostitution or related conduct. Penalties and enhancements can depend on factors such as age and alleged coercion.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2907.21',
+    practiceAreas: ['sex-crimes', 'criminal-defense'],
+    relatedStatutes: ['2907.02', '2907.03', '2907.04', '2950.01'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2907.21', url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.21', type: 'primary' },
+    ],
+  },
+  '2950.01': {
+    id: 'sex-offender-registration-definitions',
+    section: '2950.01',
+    title: 'Sex Offender Registration Definitions',
+    shortTitle: 'Registration Definitions',
+    definition: 'Defines key terms used in Ohio\'s sex offender registration laws. This is often relevant when evaluating registration consequences for certain offenses.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2950.01',
+    practiceAreas: ['sex-crimes', 'criminal-defense'],
+    relatedStatutes: ['2907.02', '2907.03', '2907.04', '2907.21'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2950.01', url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.01', type: 'primary' },
+    ],
+  },
+  '2950.05': {
+    id: 'sex-offender-residence-change',
+    section: '2950.05',
+    title: 'Notice of Residence Address Change',
+    shortTitle: 'Residence Change Notice',
+    definition: 'Sets requirements for notice and updates when a person subject to sex offender registration changes their residence address.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2950.05',
+    practiceAreas: ['sex-crimes', 'criminal-defense'],
+    relatedStatutes: ['2950.01'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2950.05', url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.05', type: 'primary' },
+    ],
+  },
+  '2923.11': {
+    id: 'weapons-control-definitions',
+    section: '2923.11',
+    title: 'Weapons Control Definitions',
+    shortTitle: 'Weapons Definitions',
+    definition: 'Defines terms used across Ohio\'s weapons-control statutes. Definitions can affect charging decisions and defenses for weapons offenses.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2923.11',
+    practiceAreas: ['weapons', 'criminal-defense'],
+    relatedStatutes: ['2923.12', '2923.13', '2923.16'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2923.11', url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.11', type: 'primary' },
+    ],
   },
   '2923.12': {
     id: 'carrying-concealed-weapons',
@@ -169,6 +385,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2923.12',
     practiceAreas: ['criminal-defense', 'weapons'],
     relatedStatutes: ['2923.13', '2923.16', '2923.11'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2923.12', url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.12', type: 'primary' },
+    ],
   },
   '2923.13': {
     id: 'weapons-disability',
@@ -179,6 +399,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2923.13',
     practiceAreas: ['criminal-defense', 'weapons'],
     relatedStatutes: ['2923.12', '3113.31'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2923.13', url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.13', type: 'primary' },
+    ],
   },
   '2923.16': {
     id: 'improper-handling-firearm',
@@ -189,6 +413,36 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2923.16',
     practiceAreas: ['criminal-defense', 'weapons'],
     relatedStatutes: ['2923.12', '2923.13'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2923.16', url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.16', type: 'primary' },
+    ],
+  },
+  '2125.01': {
+    id: 'wrongful-death-action',
+    section: '2125.01',
+    title: 'Action for Wrongful Death',
+    shortTitle: 'Wrongful Death',
+    definition: 'Establishes the right to bring a wrongful death action in Ohio and identifies who may bring the claim. The details of eligibility and damages depend on the specific facts and related statutes.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2125.01',
+    practiceAreas: ['personal-injury'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2125.01', url: 'https://codes.ohio.gov/ohio-revised-code/section-2125.01', type: 'primary' },
+    ],
+  },
+  '2744.03': {
+    id: 'defenses-immunities',
+    section: '2744.03',
+    title: 'Defenses - Immunities',
+    shortTitle: 'Defenses / Immunities',
+    definition: 'Lists defenses and immunities that can apply in claims involving political subdivisions and related parties. Whether an immunity applies is fact-specific and often litigated early.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2744.03',
+    practiceAreas: ['personal-injury'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2744.03', url: 'https://codes.ohio.gov/ohio-revised-code/section-2744.03', type: 'primary' },
+    ],
   },
   '2315.33': {
     id: 'comparative-negligence',
@@ -199,6 +453,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2315.33',
     practiceAreas: ['personal-injury'],
     relatedStatutes: ['2315.18', '2305.10'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2315.33', url: 'https://codes.ohio.gov/ohio-revised-code/section-2315.33', type: 'primary' },
+    ],
   },
   '2305.10': {
     id: 'injury-statute-limitations',
@@ -209,6 +467,24 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2305.10',
     practiceAreas: ['personal-injury'],
     relatedStatutes: ['2305.11', '2315.33'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2305.10', url: 'https://codes.ohio.gov/ohio-revised-code/section-2305.10', type: 'primary' },
+    ],
+  },
+  '2305.11': {
+    id: 'time-limitations-certain-actions',
+    section: '2305.11',
+    title: 'Time Limitations for Bringing Certain Actions',
+    shortTitle: 'Time Limitations',
+    definition: 'Provides time limits for certain civil actions (including some professional or medical-related claims). Which limitation applies depends on claim type and facts.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2305.11',
+    practiceAreas: ['personal-injury'],
+    relatedStatutes: ['2305.10'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2305.11', url: 'https://codes.ohio.gov/ohio-revised-code/section-2305.11', type: 'primary' },
+    ],
   },
   '2315.18': {
     id: 'noneconomic-damages-cap',
@@ -219,6 +495,38 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2315.18',
     practiceAreas: ['personal-injury'],
     relatedStatutes: ['2315.33', '2315.19'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2315.18', url: 'https://codes.ohio.gov/ohio-revised-code/section-2315.18', type: 'primary' },
+    ],
+  },
+  '2315.19': {
+    id: 'review-of-evidence-noneconomic-loss',
+    section: '2315.19',
+    title: 'Review of Evidence Supporting Damages for Noneconomic Loss',
+    shortTitle: 'Noneconomic Evidence Review',
+    definition: 'Sets standards for how courts review evidence supporting noneconomic damages. The application can depend on the type of case and requested damages.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2315.19',
+    practiceAreas: ['personal-injury'],
+    relatedStatutes: ['2315.18', '2315.33'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2315.19', url: 'https://codes.ohio.gov/ohio-revised-code/section-2315.19', type: 'primary' },
+    ],
+  },
+  '2925.01': {
+    id: 'drug-offense-definitions',
+    section: '2925.01',
+    title: 'Drug Offense Definitions',
+    shortTitle: 'Drug Definitions',
+    definition: 'Defines terms used throughout Ohio drug laws, including controlled substances and related concepts. Definitions can materially impact how an offense is charged or enhanced.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2925.01',
+    practiceAreas: ['drug-crimes', 'criminal-defense'],
+    relatedStatutes: ['2925.03', '2925.11', '2925.14'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2925.01', url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.01', type: 'primary' },
+    ],
   },
   '2925.03': {
     id: 'trafficking-drugs',
@@ -229,6 +537,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2925.03',
     practiceAreas: ['drug-crimes', 'criminal-defense'],
     relatedStatutes: ['2925.11', '2925.14'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2925.03', url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.03', type: 'primary' },
+    ],
   },
   '2925.11': {
     id: 'drug-possession',
@@ -239,6 +551,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2925.11',
     practiceAreas: ['drug-crimes', 'criminal-defense'],
     relatedStatutes: ['2925.03', '2925.14'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2925.11', url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.11', type: 'primary' },
+    ],
   },
   '2925.14': {
     id: 'drug-paraphernalia',
@@ -249,6 +565,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2925.14',
     practiceAreas: ['drug-crimes', 'criminal-defense'],
     relatedStatutes: ['2925.11', '2925.03'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2925.14', url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.14', type: 'primary' },
+    ],
   },
   '2913.02': {
     id: 'theft',
@@ -259,6 +579,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2913.02',
     practiceAreas: ['criminal-defense', 'white-collar'],
     relatedStatutes: ['2913.03', '2913.04'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2913.02', url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.02', type: 'primary' },
+    ],
   },
   '2913.03': {
     id: 'unauthorized-use-property',
@@ -269,6 +593,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2913.03',
     practiceAreas: ['criminal-defense'],
     relatedStatutes: ['2913.02', '2913.04'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2913.03', url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.03', type: 'primary' },
+    ],
   },
   '2913.04': {
     id: 'unauthorized-use-vehicle',
@@ -279,6 +607,10 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2913.04',
     practiceAreas: ['criminal-defense'],
     relatedStatutes: ['2913.02', '2913.03'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2913.04', url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.04', type: 'primary' },
+    ],
   },
   '2913.42': {
     id: 'theft-office',
@@ -289,6 +621,65 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2913.42',
     practiceAreas: ['criminal-defense', 'white-collar'],
     relatedStatutes: ['2913.02', '2921.41'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2913.42', url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.42', type: 'primary' },
+    ],
+  },
+  '2913.43': {
+    id: 'securing-writings-by-deception',
+    section: '2913.43',
+    title: 'Securing Writings by Deception',
+    shortTitle: 'Writings by Deception',
+    definition: 'Addresses obtaining certain writings or instruments by deception. Fact patterns and charging decisions can vary, and related offenses may be charged in the same case.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2913.43',
+    practiceAreas: ['white-collar', 'criminal-defense'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2913.43', url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.43', type: 'primary' },
+    ],
+  },
+  '2913.49': {
+    id: 'identity-fraud',
+    section: '2913.49',
+    title: 'Identity Fraud',
+    shortTitle: 'Identity Fraud',
+    definition: 'Prohibits certain identity-related fraudulent conduct. The seriousness of the charge can depend on alleged intent, use, and resulting harm.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2913.49',
+    practiceAreas: ['white-collar', 'criminal-defense'],
+    relatedStatutes: ['2913.02', '2913.43'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2913.49', url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.49', type: 'primary' },
+    ],
+  },
+  '2921.11': {
+    id: 'perjury',
+    section: '2921.11',
+    title: 'Perjury',
+    shortTitle: 'Perjury',
+    definition: 'Prohibits knowingly making a false statement under oath (or affirmation) in an official proceeding when the statement is material. These cases often turn on intent, materiality, and the record of the proceeding.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2921.11',
+    practiceAreas: ['criminal-defense', 'white-collar'],
+    relatedStatutes: ['2921.12', '2921.13'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2921.11', url: 'https://codes.ohio.gov/ohio-revised-code/section-2921.11', type: 'primary' },
+    ],
+  },
+  '2921.12': {
+    id: 'tampering-with-evidence',
+    section: '2921.12',
+    title: 'Tampering with Evidence',
+    shortTitle: 'Tampering with Evidence',
+    definition: 'Prohibits destroying, concealing, removing, or altering evidence with purpose to impair its value or availability in an investigation or proceeding. Fact-specific and commonly charged in addition to an underlying offense.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2921.12',
+    practiceAreas: ['criminal-defense', 'white-collar'],
+    relatedStatutes: ['2921.11', '2921.13'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2921.12', url: 'https://codes.ohio.gov/ohio-revised-code/section-2921.12', type: 'primary' },
+    ],
   },
   '2921.13': {
     id: 'falsification',
@@ -299,6 +690,63 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2921.13',
     practiceAreas: ['criminal-defense'],
     relatedStatutes: ['2921.12', '2921.11'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2921.13', url: 'https://codes.ohio.gov/ohio-revised-code/section-2921.13', type: 'primary' },
+    ],
+  },
+  '2921.41': {
+    id: 'theft-in-office-public',
+    section: '2921.41',
+    title: 'Theft in Office',
+    shortTitle: 'Theft in Office',
+    definition: 'Addresses theft offenses tied to public office or employment. Which statute applies in a given case depends on the alleged conduct and the role involved.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2921.41',
+    practiceAreas: ['criminal-defense', 'white-collar'],
+    relatedStatutes: ['2913.42', '2913.02'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2921.41', url: 'https://codes.ohio.gov/ohio-revised-code/section-2921.41', type: 'primary' },
+    ],
+  },
+  '2945.71': {
+    id: 'time-for-trial',
+    section: '2945.71',
+    title: 'Time for Trial',
+    shortTitle: 'Speedy Trial',
+    definition: 'Sets Ohio\'s statutory time limits for bringing a criminal case to trial. Speedy trial calculations can be complex and depend on the charge, custody status, tolling events, and case history.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2945.71',
+    practiceAreas: ['criminal-defense'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2945.71', url: 'https://codes.ohio.gov/ohio-revised-code/section-2945.71', type: 'primary' },
+    ],
+  },
+  '2951.041': {
+    id: 'intervention-in-lieu',
+    section: '2951.041',
+    title: 'Intervention in Lieu of Conviction',
+    shortTitle: 'ILC',
+    definition: 'Provides for intervention in lieu of conviction (ILC) in eligible cases. Eligibility and terms can depend on offense type, prior history, and court discretion.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2951.041',
+    practiceAreas: ['criminal-defense', 'drug-crimes'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2951.041', url: 'https://codes.ohio.gov/ohio-revised-code/section-2951.041', type: 'primary' },
+    ],
+  },
+  '2953.32': {
+    id: 'sealing-expungement-record',
+    section: '2953.32',
+    title: 'Sealing or Expungement of Record of Conviction Record or Bail Forfeiture; Exceptions',
+    shortTitle: 'Record Sealing',
+    definition: 'Addresses record sealing/expungement for certain convictions and bail forfeitures, including exceptions. Eligibility depends on the offense, case history, and statutory requirements.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2953.32',
+    practiceAreas: ['criminal-defense'],
+    lastVerified: '2025-12-15',
+    sources: [
+      { label: 'Ohio Revised Code § 2953.32', url: 'https://codes.ohio.gov/ohio-revised-code/section-2953.32', type: 'primary' },
+    ],
   },
 };
 

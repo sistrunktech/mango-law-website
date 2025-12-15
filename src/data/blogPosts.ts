@@ -1,10 +1,7 @@
-export type BlogSourceType = 'primary' | 'secondary' | 'guide';
+import type { TrustSource, TrustSourceType } from './trust';
 
-export type BlogSource = {
-  label: string;
-  url: string;
-  type?: BlogSourceType;
-};
+export type BlogSourceType = TrustSourceType;
+export type BlogSource = TrustSource;
 
 export type BlogPost = {
   slug: string;
@@ -15,7 +12,7 @@ export type BlogPost = {
   date: string;
   author: string;
   lastVerified: string;
-  sources: BlogSource[];
+  sources: TrustSource[];
   imageUrl?: string;
 };
 

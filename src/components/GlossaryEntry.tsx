@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Scale, ExternalLink, ArrowRight, BookMarked } from 'lucide-react';
+import { Scale, ExternalLink, ArrowRight, BookMarked, CheckCircle, FileText } from 'lucide-react';
 import { getRelatedStatutes, type OhioStatute } from '../data/statutes';
 
 type GlossaryEntryProps = {
@@ -64,6 +64,48 @@ export default function GlossaryEntry({
           Read full statute
           <ExternalLink className="h-4 w-4" />
         </a>
+      </div>
+
+      <div className="mt-4 rounded-xl border border-brand-black/10 bg-brand-offWhite p-5">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-brand-black/70">
+          <span className="inline-flex items-center gap-2">
+            <CheckCircle className="h-4 w-4 text-brand-mangoText" />
+            Last verified{' '}
+            {new Date(statute.lastVerified).toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+            })}
+          </span>
+        </div>
+
+        {statute.sources.length > 0 && (
+          <div className="mt-4">
+            <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
+              <FileText className="h-4 w-4 text-brand-mangoText" />
+              Sources
+            </div>
+            <ul className="mt-3 space-y-2 text-sm text-brand-black/70">
+              {statute.sources.map((source) => (
+                <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-brand-mangoText underline-offset-2 hover:text-brand-leaf hover:underline"
+                  >
+                    {source.label}
+                  </a>
+                  {source.type && (
+                    <span className="rounded-full bg-white/70 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
+                      {source.type}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       {statute.practiceAreas.length > 0 && (
