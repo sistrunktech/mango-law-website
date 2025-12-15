@@ -6,7 +6,7 @@ dist
 
 # Local generation/output folders
 temp-generated
-og
+reports
 
 # Large binary bundles not required for deploy
 *.zip
