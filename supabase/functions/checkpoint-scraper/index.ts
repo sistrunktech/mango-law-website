@@ -15,6 +15,7 @@ interface ScraperStats {
   checkpointsNew: number;
   checkpointsUpdated: number;
   checkpointsSkipped: number;
+  checkpointsHeuristicMatched: number;
   announcementsFound: number;
   announcementsUpserted: number;
   errors: Array<{ checkpoint: string; error: string }>;
@@ -30,6 +31,77 @@ function isAggregatorSourceUrl(sourceUrl: unknown): boolean {
   if (typeof sourceUrl !== 'string') return false;
   const normalized = sourceUrl.trim().toLowerCase();
   return normalized.includes('ovicheckpoint.com') || normalized.includes('duiblock');
+}
+
+type ExistingCheckpointMatch = {
+  matchKind: 'exact' | 'heuristic';
+  row: {
+    id: string;
+    source_name: unknown;
+    source_url: unknown;
+    is_verified: unknown;
+  };
+};
+
+async function findExistingCheckpointMatch(
+  supabase: ReturnType<typeof createClient>,
+  input: {
+    title: string;
+    startDate: string;
+    locationCounty: string;
+    locationCity: string;
+  }
+): Promise<ExistingCheckpointMatch | null> {
+  const { data: exact, error: exactError } = await supabase
+    .from('dui_checkpoints')
+    .select('id, source_name, source_url, is_verified')
+    .eq('title', input.title)
+    .eq('start_date', input.startDate)
+    .maybeSingle();
+
+  if (exactError) throw exactError;
+  if (exact) return { matchKind: 'exact', row: exact };
+
+  const startTimeMs = new Date(input.startDate).getTime();
+  if (Number.isNaN(startTimeMs)) return null;
+
+  const windowHours = 48;
+  const windowStart = new Date(startTimeMs - windowHours * 60 * 60 * 1000).toISOString();
+  const windowEnd = new Date(startTimeMs + windowHours * 60 * 60 * 1000).toISOString();
+
+  const { data: candidates, error: candidateError } = await supabase
+    .from('dui_checkpoints')
+    .select('id, source_name, source_url, is_verified, start_date')
+    .eq('source_name', 'OVICheckpoint.com')
+    .eq('title', input.title)
+    .eq('location_county', input.locationCounty)
+    .eq('location_city', input.locationCity)
+    .gte('start_date', windowStart)
+    .lte('start_date', windowEnd)
+    .order('start_date', { ascending: true })
+    .limit(5);
+
+  if (candidateError) throw candidateError;
+  if (!candidates?.length) return null;
+
+  const best = candidates
+    .map((row) => ({
+      row,
+      distance: Math.abs(new Date((row as any).start_date as string).getTime() - startTimeMs),
+    }))
+    .sort((a, b) => a.distance - b.distance)[0];
+
+  if (!best) return null;
+
+  return {
+    matchKind: 'heuristic',
+    row: {
+      id: (best.row as any).id,
+      source_name: (best.row as any).source_name,
+      source_url: (best.row as any).source_url,
+      is_verified: (best.row as any).is_verified,
+    },
+  };
 }
 
 async function upsertAnnouncement(
@@ -88,6 +160,7 @@ Deno.serve(async (req: Request) => {
     checkpointsNew: 0,
     checkpointsUpdated: 0,
     checkpointsSkipped: 0,
+    checkpointsHeuristicMatched: 0,
     announcementsFound: 0,
     announcementsUpserted: 0,
     errors: [],
@@ -152,20 +225,18 @@ Deno.serve(async (req: Request) => {
           updated_at: new Date().toISOString(),
         };
 
-        const { data: existing, error: searchError } = await supabase
-          .from('dui_checkpoints')
-          .select('id, source_name, source_url, is_verified')
-          .eq('title', raw.title)
-          .eq('start_date', raw.startDate)
-          .maybeSingle();
+        const match = await findExistingCheckpointMatch(supabase, {
+          title: raw.title,
+          startDate: raw.startDate,
+          locationCounty: county,
+          locationCity: city,
+        });
 
-        if (searchError) {
-          throw searchError;
-        }
+        if (match) {
+          if (match.matchKind === 'heuristic') stats.checkpointsHeuristicMatched++;
 
-        if (existing) {
-          const existingSourceName = (existing as any)?.source_name as unknown;
-          const existingSourceUrl = (existing as any)?.source_url as unknown;
+          const existingSourceName = match.row?.source_name as unknown;
+          const existingSourceUrl = match.row?.source_url as unknown;
           const hasCuratedSourceName = typeof existingSourceName === 'string' && !isAggregatorSourceName(existingSourceName);
           const hasCuratedSourceUrl = typeof existingSourceUrl === 'string' && !isAggregatorSourceUrl(existingSourceUrl);
 
@@ -181,11 +252,11 @@ Deno.serve(async (req: Request) => {
           const { error: updateError } = await supabase
             .from('dui_checkpoints')
             .update(updatePayload)
-            .eq('id', existing.id);
+            .eq('id', match.row.id);
 
           if (updateError) throw updateError;
           stats.checkpointsUpdated++;
-          console.log(`Updated: ${raw.title}`);
+          console.log(`Updated (${match.matchKind}): ${raw.title}`);
         } else {
           const { error: insertError } = await supabase
             .from('dui_checkpoints')
