@@ -21,6 +21,40 @@ function useMinWidthQuery(minWidthPx: number): boolean {
   return matches;
 }
 
+function getGeneratedImageVariants(imageUrl: string | undefined) {
+  if (!imageUrl) return null;
+  if (!imageUrl.endsWith('.png')) return null;
+  const base = imageUrl.replace(/\.png$/, '');
+  return {
+    avifSrcSet: `${base}-480w.avif 480w, ${base}-960w.avif 960w`,
+    webpSrcSet: `${base}-480w.webp 480w, ${base}-960w.webp 960w`,
+    fallbackSrc: imageUrl,
+  };
+}
+
+function DecorativeGeneratedImage({
+  imageUrl,
+  alt,
+  sizes,
+}: {
+  imageUrl: string;
+  alt: string;
+  sizes: string;
+}) {
+  const variants = getGeneratedImageVariants(imageUrl);
+  if (!variants) {
+    return <img src={imageUrl} alt={alt} className="h-full w-full object-cover object-center" loading="lazy" decoding="async" />;
+  }
+
+  return (
+    <picture>
+      <source type="image/avif" srcSet={variants.avifSrcSet} sizes={sizes} />
+      <source type="image/webp" srcSet={variants.webpSrcSet} sizes={sizes} />
+      <img src={variants.fallbackSrc} alt={alt} className="h-full w-full object-cover object-center" loading="lazy" decoding="async" />
+    </picture>
+  );
+}
+
 export default function PracticeAreaCardGrid() {
   const showDecorativeImages = useMinWidthQuery(768);
   const oviArea = practiceAreas.find(area => area.practiceAreaKey === 'ovi-dui');
@@ -66,12 +100,10 @@ export default function PracticeAreaCardGrid() {
               {/* Background Image */}
               {showDecorativeImages && oviArea.imageUrl && (
                 <div className="absolute right-0 top-0 h-full w-full opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.12] lg:w-1/2">
-                  <img
-                    src={oviArea.imageUrl}
+                  <DecorativeGeneratedImage
+                    imageUrl={oviArea.imageUrl}
                     alt={oviArea.imageAlt || ''}
-                    className="h-full w-full object-cover object-center"
-                    loading="lazy"
-                    decoding="async"
+                    sizes="(min-width: 1024px) 33vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/50 to-white" />
                 </div>
@@ -146,12 +178,10 @@ export default function PracticeAreaCardGrid() {
               {/* Background Image */}
               {showDecorativeImages && criminalArea.imageUrl && (
                 <div className="absolute inset-0 opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1]">
-                  <img
-                    src={criminalArea.imageUrl}
+                  <DecorativeGeneratedImage
+                    imageUrl={criminalArea.imageUrl}
                     alt={criminalArea.imageAlt || ''}
-                    className="h-full w-full object-cover object-center"
-                    loading="lazy"
-                    decoding="async"
+                    sizes="(min-width: 1024px) 33vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/60" />
                 </div>
@@ -201,12 +231,10 @@ export default function PracticeAreaCardGrid() {
               {/* Background Image */}
               {showDecorativeImages && area.imageUrl && (
                 <div className="absolute inset-0 opacity-[0.06] transition-all duration-500 group-hover:opacity-[0.1]">
-                  <img
-                    src={area.imageUrl}
+                  <DecorativeGeneratedImage
+                    imageUrl={area.imageUrl}
                     alt={area.imageAlt || ''}
-                    className="h-full w-full object-cover object-center"
-                    loading="lazy"
-                    decoding="async"
+                    sizes="(min-width: 1024px) 33vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/60" />
                 </div>
