@@ -9,6 +9,14 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - CI: GitHub Actions build workflow (`.github/workflows/ci.yml`).
 - Optional OG/hero pipeline: fal.ai generation + Supabase Storage upload via `plugins/vite-og-plugin.ts` (runs only when env is present).
 
+## Hosting (Bolt)
+### Bolt badge (perf)
+Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js?...` into the served HTML.
+
+- Verify in DevTools → Network that there is no request to `bolt.new/badge.js` on first load.
+- If Bolt provides a project setting to disable the badge entirely, prefer disabling it at the hosting level as well.
+- If adding CSP later, prefer server-side headers and verify Mapbox still works (it may require `worker-src blob:` and other allowances).
+
 ## Environment Variables
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback).
