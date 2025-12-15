@@ -53,6 +53,8 @@ export default function BlogPostPage() {
     );
   }
 
+  const hasVisuals = post.content.includes('[VISUAL:');
+
   return (
     <>
       <SEO
@@ -133,8 +135,27 @@ export default function BlogPostPage() {
             situation.
           </div>
 
+          {hasVisuals && (
+            <div className="mt-4 rounded-lg border-l-4 border-brand-leaf bg-brand-leaf/5 p-4 text-sm text-brand-black/70">
+              <strong>Visual note:</strong> Visual summaries are simplified; confirm any legal details and numbers in{' '}
+              <a
+                href="#sources"
+                className="font-semibold text-brand-mangoText underline-offset-2 hover:text-brand-leaf hover:underline"
+              >
+                Sources
+              </a>
+              . Last verified{' '}
+              {new Date(post.lastVerified).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+              .
+            </div>
+          )}
+
           {post.sources.length > 0 && (
-            <div className="mt-6 rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
+            <div id="sources" className="mt-6 rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
               <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
                 <FileText className="h-4 w-4 text-brand-mangoText" />
                 Sources
