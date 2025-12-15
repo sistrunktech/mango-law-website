@@ -1,5 +1,15 @@
 # Changelog
 
+## 2025-12-15
+
+### Deploy / Publish Reliability (Bolt)
+- Prevent Bolt publish failures when dev-only tooling isn’t installed by dynamically importing `rollup-plugin-visualizer` only in `--mode analyze` (`vite.config.ts`).
+- Keep Bolt publish payload safe by ensuring `.boltignore` does not exclude required source folders (notably `og/`), while still excluding local output like `reports/` (`.boltignore`).
+
+### ORC Glossary Trust Metadata + Drift Controls
+- Add `lastVerified` + `sources` to ORC glossary entries and render them consistently (`src/data/statutes.ts`, `src/components/GlossaryEntry.tsx`).
+- Add a prebuild check that fails the build if the codebase references an ORC section that isn’t defined in the glossary (`scripts/check-orc-references.mjs`, `package.json`).
+
 ## 2025-12-14
 
 ### Lighthouse: Accessibility + Performance (No Layout Changes)

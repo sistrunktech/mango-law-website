@@ -225,6 +225,8 @@ Local publishing tools sometimes include `node_modules/` (which contains scoped 
 - Ensure publishes exclude install artifacts:
   - `node_modules/`, `dist/`, local output folders, and large binary bundles.
 - Repo includes `mango-law-website/.boltignore` and a `prebuild` filename safety check (`scripts/check-filenames.mjs`) to prevent regressions.
+- If Bolt publish/build fails with a missing module error for dev-only tooling (example: `rollup-plugin-visualizer`), ensure the Vite config only loads it in analyze mode via dynamic import (`vite.config.ts`).
+- Ensure `.boltignore` does not exclude required source folders (example: `og/`) even if OG generation is disabled at runtime.
 
 ---
 
