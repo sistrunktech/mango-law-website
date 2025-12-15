@@ -82,7 +82,7 @@ export default function PracticeAreaCardGrid() {
           </div>
           <Link
             to="/practice-areas"
-            className="group hidden items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf md:inline-flex"
+            className="group relative -m-2 hidden items-center gap-2 rounded p-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:inline-flex"
           >
             View all practice areas
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
