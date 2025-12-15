@@ -5,9 +5,9 @@ import PageHero from '../components/PageHero';
 import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
 const BlogSection = lazy(() => import('../components/BlogSection'));
 const TestimonialsList = lazy(() => import('../components/TestimonialsList'));
-import CTASection from '../components/CTASection';
-import LocationBlock from '../components/LocationBlock';
-import ContactForm from '../components/ContactForm';
+const CTASection = lazy(() => import('../components/CTASection'));
+const LocationBlock = lazy(() => import('../components/LocationBlock'));
+const ContactForm = lazy(() => import('../components/ContactForm'));
 import DeferredSection from '../components/DeferredSection';
 import { SEO, localBusinessSchema } from '../lib/seo';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
@@ -172,7 +172,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <LocationBlock />
+      <DeferredSection minHeight={420}>
+        <Suspense fallback={null}>
+          <LocationBlock />
+        </Suspense>
+      </DeferredSection>
 
       {/* Contact Section */}
       <section className="section bg-white">
@@ -223,20 +227,28 @@ export default function HomePage() {
 
             {/* Form */}
             <div className="card border-brand-black/5 bg-brand-offWhite p-8 shadow-soft-lg">
-              <ContactForm />
+              <DeferredSection minHeight={420}>
+                <Suspense fallback={null}>
+                  <ContactForm />
+                </Suspense>
+              </DeferredSection>
             </div>
           </div>
         </div>
       </section>
 
-      <CTASection
-        title="Need counsel now? Let's talk today."
-        body="Fast-moving situations deserve prompt, informed action. Schedule a consult or call to discuss your options."
-        primaryLabel="Free Consultation"
-        primaryHref="/contact"
-        secondaryLabel={OFFICE_PHONE_DISPLAY}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
-      />
+      <DeferredSection minHeight={260}>
+        <Suspense fallback={null}>
+          <CTASection
+            title="Need counsel now? Let's talk today."
+            body="Fast-moving situations deserve prompt, informed action. Schedule a consult or call to discuss your options."
+            primaryLabel="Free Consultation"
+            primaryHref="/contact"
+            secondaryLabel={OFFICE_PHONE_DISPLAY}
+            secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+          />
+        </Suspense>
+      </DeferredSection>
     </>
   );
 }
