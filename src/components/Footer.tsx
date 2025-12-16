@@ -19,10 +19,10 @@ export default function Footer() {
           <div className="space-y-6">
             <Link to="/" className="group inline-flex items-center gap-3">
               <img
-                src="/images/brand/mango-logo-vertical-fullcolor.svg"
+                src="/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png"
                 alt="Mango Law LLC"
-                width={2000}
-                height={2000}
+                width={1704}
+                height={555}
                 className="h-16 w-auto transition-opacity group-hover:opacity-90"
                 loading="lazy"
               />
