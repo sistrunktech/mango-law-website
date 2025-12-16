@@ -29,9 +29,13 @@ export default function AboutPage() {
                   <div className="p-4">
                     <div className="duotone-forest relative overflow-hidden rounded-xl">
                       <img
-                        src="/images/headshots/nick-mango-hero.jpg"
+                        src="/images/headshots/nick-mango-standing-profile-court-steps.png"
                         alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                        className="w-full max-h-[600px] object-contain transition-transform duration-500 group-hover:scale-105"
+                        width={496}
+                        height={984}
+                        className="h-[420px] w-full object-contain sm:h-[520px] lg:h-[600px]"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   </div>
