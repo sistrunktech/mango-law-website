@@ -44,7 +44,7 @@ All logo assets are located in `/public/images/brand/generated/` and are in SVG 
 
 ### Favicon
 - **File:** `public/favicon.svg`
-- **Source:** `mango-icon-original.svg`
+- **Source:** `public/images/brand/mango-logo-option1-16x16px.svg` (copied into `public/favicon.svg`)
 
 ### MangoIcon Component
 - **File:** `src/components/MangoIcon.tsx`
