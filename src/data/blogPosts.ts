@@ -674,11 +674,11 @@ Field sobriety tests (FSTs) are physical and cognitive exercises that officers u
 
 ## Your Right to Refuse
 
-**You can refuse field sobriety tests in Ohio without direct legal penalties.** There is no statute requiring you to perform these tests, and refusal cannot be used as the sole basis for arrest or license suspension.
+Field sobriety tests are generally **voluntary** in Ohio. There is no Ohio statute that requires you to perform these roadside coordination exercises, and refusing them does **not** trigger the implied-consent administrative suspension that applies to chemical testing.
 
 ### No Implied Consent for FSTs
 
-Ohio's implied consent law (ORC 4511.191) applies only to chemical tests—not field sobriety tests. You are under no legal obligation to perform physical roadside exercises.
+Ohio's implied consent law ([ORC § 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191)) applies to **chemical tests** (breath, blood, or urine) after an OVI arrest—not to field sobriety tests.
 
 [VISUAL:RIGHTS_HIGHLIGHT]
 
@@ -698,53 +698,60 @@ Field sobriety tests serve one primary purpose: building evidence for prosecutio
 ### If You Refuse
 
 - Officer notes refusal in report
-- May still be arrested based on other observations
-- Refusal cannot be mentioned at trial (in most circumstances)
-- No automatic license suspension or penalties
+- The officer may still continue the investigation and may still arrest based on other observations
+- You avoid creating performance-based FST “failure” evidence on camera
+- Refusal may become part of the narrative in a case depending on the circumstances and local practice
 
 ### If You Perform
 
 - Everything you do becomes evidence
-- Officer's interpretation becomes fact
-- Video footage can be used against you
-- May still be arrested regardless of performance
+- The officer’s interpretation of the clues is documented in the report
+- Video footage can be used in court
+- You may still be arrested regardless of performance
 
 [VISUAL:FST_REFUSAL_COMPARISON]
 
 ## How Refusal Affects Your Defense
 
-Refusal often benefits your defense by:
+Refusing field sobriety tests can sometimes help your defense by:
 
 - Eliminating video evidence of stumbling
 - Removing officer testimony about FST failure
-- Forcing prosecution to rely on weaker evidence
+- Forcing the prosecution to rely more heavily on other evidence
 - Limiting subjective interpretation
+
+## What Varies (And What to Confirm)
+
+Two drivers can face very different outcomes from the same roadside encounter. Factors that often vary include:
+
+- **The reason for the stop** (and whether the officer had legal grounds)
+- **Roadside conditions** (lighting, weather, uneven pavement, traffic, footwear, injuries, anxiety)
+- **Bodycam/dashcam clarity** and what it actually shows
+- **Local court expectations** and how a judge treats standardized vs. non-standardized tests
 
 ## What About Chemical Tests?
 
-**Chemical test refusal is different** and carries serious consequences:
+**Chemical test refusal is different** and can carry significant administrative consequences under Ohio’s implied-consent rules. The details depend on your record/history and the specific statutory provisions.
 
-- Automatic 1-year license suspension (first refusal)
-- Refusal can be mentioned at trial
-- Separate administrative penalties
+- Refusal can trigger an **administrative license suspension (ALS)**
+- Repeat refusals can increase consequences
+- There may be separate administrative steps and deadlines to challenge an ALS
 
 [VISUAL:CHEMICAL_VS_FST_COMPARISON]
-
-[VISUAL:REFUSAL_STATS]
 
 Many attorneys advise performing chemical tests even if you've refused FSTs. For comprehensive information about [OVI/DUI charges and penalties in Ohio](/blog/understanding-ovi-dui-charges-ohio), including how refusals affect your case, visit our detailed guide.
 
 ## Delaware and Franklin County Considerations
 
-Local law enforcement in Delaware County and Franklin County frequently patrol US-23 and SR-315. Understanding your rights before a stop is crucial. Delaware Municipal Court and Delaware County Court of Common Pleas hear hundreds of OVI cases annually, and experienced local counsel makes a significant difference.
+Law enforcement practices and court expectations can vary by county and by judge. If you were stopped in Delaware County or Franklin County, it’s especially important to review the stop, the officer’s observations, and any video carefully with counsel who regularly practices in those courts.
 
 ## When to Contact an Attorney
 
 If you've been arrested for OVI in Delaware or Franklin County:
 
-- Don't wait—evidence degrades and deadlines approach
-- Don't represent yourself—OVI law is complex
-- Don't assume conviction is inevitable—many defenses exist
+- Act promptly—deadlines can come quickly, and video/records are easier to preserve early
+- Get tailored advice—OVI cases are fact-specific and depend on the stop, testing, and your record
+- Avoid assumptions—defenses may exist depending on the evidence and procedures used
 
 At Mango Law, we challenge every aspect of OVI cases through strategic [motion practice](/blog/motion-practice-criminal-defense): traffic stop legality, FST administration, chemical test accuracy, and constitutional violations. If you have prior OVI convictions, understanding [Ohio's lookback period](/blog/ohio-dui-lookback-period) is critical to your defense strategy.
 
