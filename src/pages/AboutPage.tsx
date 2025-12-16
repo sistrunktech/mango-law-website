@@ -24,40 +24,82 @@ export default function AboutPage() {
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-3 lg:items-start">
             <div className="lg:col-span-1">
-              <div className="sticky top-24">
-                <div className="group relative overflow-hidden rounded-2xl shadow-soft-lg transition-all duration-300 hover:shadow-lift" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
-                  <div className="p-4">
-                    <div className="duotone-forest relative overflow-hidden rounded-xl">
+              {/* Mobile: single combined profile card */}
+              <div className="mx-auto max-w-sm lg:hidden">
+                <div className="overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-soft">
+                  <div className="bg-gradient-to-br from-brand-offWhite to-white p-3">
+                    <div className="relative overflow-hidden rounded-xl bg-white ring-1 ring-brand-black/5">
                       <img
                         src="/images/headshots/nick-mango-standing-profile-court-steps.png"
                         alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
                         width={496}
                         height={984}
-                        className="h-[420px] w-full object-contain sm:h-[520px] lg:h-[600px]"
+                        className="h-[340px] w-full object-contain sm:h-[420px]"
                         loading="lazy"
                         decoding="async"
                       />
                     </div>
                   </div>
+                  <div className="space-y-3 px-5 pb-6 pt-4">
+                    <h3 className="text-2xl font-bold text-brand-black">Dominic &quot;Nick&quot; Mango</h3>
+                    <p className="text-brand-black/70 font-medium">Criminal Defense Attorney</p>
+                    <div className="flex flex-col gap-3 border-t border-brand-black/10 pt-4">
+                      <a
+                        href={`tel:${OFFICE_PHONE_TEL}`}
+                        className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
+                      >
+                        <span className="text-lg">📞</span>
+                        <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                      </a>
+                      <a
+                        href="mailto:office@mango.law"
+                        className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                      >
+                        <span className="text-lg">✉️</span>
+                        <span className="font-semibold">office@mango.law</span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-6 space-y-3 bg-brand-offWhite rounded-xl p-6 shadow-soft">
-                  <h3 className="text-2xl font-bold text-brand-black">Dominic "Nick" Mango</h3>
-                  <p className="text-brand-black/70 font-medium">Criminal Defense Attorney</p>
-                  <div className="flex flex-col gap-3 pt-3 border-t border-brand-black/10">
-                    <a
-                      href={`tel:${OFFICE_PHONE_TEL}`}
-                      className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
-                    >
-                      <span className="text-lg">📞</span>
-                      <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
-                    </a>
-                    <a
-                      href="mailto:office@mango.law"
-                      className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
-                    >
-                      <span className="text-lg">✉️</span>
-                      <span className="font-semibold">office@mango.law</span>
-                    </a>
+              </div>
+
+              {/* Desktop: sticky photo + contact card */}
+              <div className="hidden lg:block">
+                <div className="sticky top-24 space-y-6">
+                  <div className="relative overflow-hidden rounded-2xl border border-brand-black/10 bg-gradient-to-br from-brand-offWhite to-white shadow-soft-lg">
+                    <div className="p-4">
+                      <div className="relative overflow-hidden rounded-xl bg-white ring-1 ring-brand-black/5">
+                        <img
+                          src="/images/headshots/nick-mango-standing-profile-court-steps.png"
+                          alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
+                          width={496}
+                          height={984}
+                          className="h-[560px] w-full object-contain"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3 rounded-xl border border-brand-black/10 bg-brand-offWhite p-6 shadow-soft">
+                    <h3 className="text-2xl font-bold text-brand-black">Dominic &quot;Nick&quot; Mango</h3>
+                    <p className="text-brand-black/70 font-medium">Criminal Defense Attorney</p>
+                    <div className="flex flex-col gap-3 border-t border-brand-black/10 pt-3">
+                      <a
+                        href={`tel:${OFFICE_PHONE_TEL}`}
+                        className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
+                      >
+                        <span className="text-lg">📞</span>
+                        <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                      </a>
+                      <a
+                        href="mailto:office@mango.law"
+                        className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                      >
+                        <span className="text-lg">✉️</span>
+                        <span className="font-semibold">office@mango.law</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
