@@ -42,10 +42,10 @@ function usage(): string {
     'Backfill OVICheckpoint dates (safe dry-run by default)',
     '',
     'Required env:',
-    '  SUPABASE_URL',
+    '  SUPABASE_URL (or VITE_SUPABASE_URL)',
     '  SUPABASE_SERVICE_ROLE_KEY',
     'Optional env:',
-    '  MAPBOX_PUBLIC_TOKEN (to geocode while inserting)',
+    '  MAPBOX_PUBLIC_TOKEN (or VITE_MAPBOX_PUBLIC_TOKEN) (to geocode while inserting)',
     '',
     'Examples:',
     '  npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts',
@@ -177,12 +177,12 @@ async function writeReport(path: string, payload: unknown) {
 async function main() {
   const { mode, apply, confirmReplace, noGeocode, limit, output, corruptWindowHours } = parseArgs(process.argv.slice(2));
 
-  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const mapboxToken = process.env.MAPBOX_PUBLIC_TOKEN;
+  const mapboxToken = process.env.MAPBOX_PUBLIC_TOKEN ?? process.env.VITE_MAPBOX_PUBLIC_TOKEN;
 
   if (!supabaseUrl || !supabaseServiceKey) {
-    throw new Error(`Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY.\n\n${usage()}`);
+    throw new Error(`Missing SUPABASE_URL (or VITE_SUPABASE_URL) or SUPABASE_SERVICE_ROLE_KEY.\n\n${usage()}`);
   }
 
   if (mode === 'replace-ovicheckpoint' && apply && !confirmReplace) {
