@@ -28,6 +28,12 @@ Note: These PNGs are legacy Wayback screenshots for visual/reference only. Do **
   - Icon: `public/images/brand/mango-icon.svg`
   - Vertical lockup: `public/images/brand/mango-logo-vertical.svg`
   - Horizontal lockup: `public/images/brand/mango-logo-horizontal.svg`
+- Favicons / PWA:
+  - `public/favicon.svg`
+  - `public/favicon-16x16.png`
+  - `public/favicon-32x32.png`
+  - `public/apple-touch-icon.png`
+  - `public/site.webmanifest`
 - Alternates already available (gold/white/black variants): `icon-*.svg`, `logo-stacked-*.svg`, `logo-horizontal*.svg` in `public/images/brand/`.
 - Headshots:
   - `public/images/headshots/nick-mango-hero.jpg` (hero-friendly, office setting)
