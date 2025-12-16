@@ -28,6 +28,7 @@ Note: These PNGs are legacy Wayback screenshots for visual/reference only. Do **
   - Icon: `public/images/brand/mango-icon.svg`
   - Vertical lockup: `public/images/brand/mango-logo-vertical.svg`
   - Horizontal lockup: `public/images/brand/mango-logo-horizontal.svg`
+- Updated logo variant (PNG, cropped-to-content):
 - Updated logo variant (PNG, cropped-to-content; currently used in footer):
   - Tagline lockup: `public/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png`
   - Square/icon variant: `public/images/brand/mango-logo-primary-1080x1080px-cropped-to-content.png`
