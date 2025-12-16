@@ -15,7 +15,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showDuiMapBanner, setShowDuiMapBanner] = useState(false);
-  const logoSrc = '/images/brand/logo-horizontal-light.svg';
+  const logoSrc = '/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png';
   const duiMapHref = '/resources/dui-checkpoints';
   const duiMapBannerStorageKey = 'mango_dui_map_banner_dismissed_v1';
 
@@ -91,11 +91,11 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             <img
               src={logoSrc}
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
-              width={320}
-              height={60}
+              width={1704}
+              height={555}
               className={[
-                'h-9 w-auto transition-all hover:opacity-90 sm:h-10 lg:h-12',
-                isScrolled ? 'lg:h-11' : '',
+                'h-11 w-auto transition-all hover:opacity-90 lg:h-14',
+                isScrolled ? 'lg:h-12' : '',
               ].join(' ')}
               loading="eager"
             />
