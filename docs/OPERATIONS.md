@@ -109,7 +109,7 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - **One-time data repair (OVICheckpoint history)**: If historical checkpoint dates were corrupted by an earlier scraper regression, use `scripts/backfill-ovicheckpoint-dates.ts`:
   - Dry-run: `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts`
   - Apply (safe insert only): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode upsert --apply`
-  - Apply (clean rebuild of OVICheckpoint rows): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode replace-ovicheckpoint --apply`
+  - Apply (clean rebuild of OVICheckpoint rows): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode replace-ovicheckpoint --apply --confirm-replace`
   - The script writes a JSON audit report to `reports/` (gitignored).
   - In replace mode, if `MAPBOX_PUBLIC_TOKEN` is not set, the script will still try to reuse existing in-Ohio coordinates by matching county/city/address to preserve map pins.
 

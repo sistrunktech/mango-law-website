@@ -412,7 +412,7 @@ The public map on `/resources/dui-checkpoints` sometimes shows markers far outsi
 ## TICKET-013: Checkpoint Status Incorrect ("Active" After End Date)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -437,6 +437,10 @@ Some checkpoints display `status='active'` even though the checkpoint ended days
 3. Re-verify `/resources/dui-checkpoints`:
    - past checkpoints show `completed`
    - “Active” view contains only checkpoints whose end time is in the future.
+
+### Resolution notes
+- Re-ran the backfill script in `scan` mode against production credentials; no corrupt candidates detected and no inserts/updates needed.
+- Hardened the script so it can load local `.env` automatically, supports `VITE_*` env fallbacks, and requires `--confirm-replace` before running `replace-ovicheckpoint` in `--apply` mode.
 
 ### Verification
 - After backfill, a checkpoint with an `end_date` in the past displays as `completed` on the public page and is not shown in “Active”.
