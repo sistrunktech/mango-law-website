@@ -14,7 +14,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js?...` into the served HTML.
 
 - Verify in DevTools → Network that there is no request to `bolt.new/badge.js` on first load.
-- If Bolt provides a project setting to disable the badge entirely, prefer disabling it at the hosting level as well.
+- Disable the badge in Bolt’s project settings (brand/badge/attribution). If the UI changes, search settings for “badge” or “bolt”.
 - If adding CSP later, prefer server-side headers and verify Mapbox still works (it may require `worker-src blob:` and other allowances).
 
 ## Environment Variables
