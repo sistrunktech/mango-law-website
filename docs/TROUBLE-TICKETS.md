@@ -113,12 +113,15 @@ Floating chat launcher is currently always “expanded label” and does not imp
 ## TICKET-003: Favicon Assets (16/32) Not Wired
 
 **Priority:** Low
-**Status:** Open
+**Status:** Closed
 **Date Created:** 2025-12-12
 **Assigned To:** TBD
 
 ### Issue Summary
 Site currently uses `public/favicon.svg` only. We should add standard PNG favicon assets (`favicon-16x16.png`, `favicon-32x32.png`, optional `apple-touch-icon.png`) and update `index.html`.
+
+### Resolution notes
+- Added PNG favicons + Apple touch icon + web manifest and wired them in `index.html`.
 
 ---
 
@@ -603,7 +606,7 @@ For each visual that includes hard numbers:
 ## TICKET-019: Content Tracking — P0 Batch 1 (5 Slugs)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -618,12 +621,16 @@ For each visual that includes hard numbers:
 - Remove absolutes and add “What varies…” section(s) where needed.
 - Add `lastVerified` + credible sources; reconcile any numeric claims to sources.
 
+### Resolution notes
+- Updated all batch slugs in `src/data/blogPosts.ts` with conservative, source-first language and refreshed `lastVerified`.
+- Removed numeric-heavy `[VISUAL:*]` markers from blog post content to reduce drift risk.
+
 ---
 
 ## TICKET-020: Content Tracking — P1 Batch 2 (5 Slugs)
 
 **Priority:** Medium  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -638,6 +645,10 @@ For each visual that includes hard numbers:
 - Add `lastVerified` + credible sources; avoid unsourced numbers.
 - Add county/court variation notes where relevant.
 - Avoid “hotspot” framing; keep tone conservative and rights-focused.
+
+### Resolution notes
+- Updated all batch slugs in `src/data/blogPosts.ts` with conservative, source-first language and refreshed `lastVerified`.
+- Added missing ORC glossary entry for `2907.07` and updated practice area mapping (`src/data/statutes.ts`).
 
 ---
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 2025-12-17
+
+### Blog Trust + Content
+- Rewrite blog posts to be source-first and reduce numeric drift risk (remove numeric-heavy `[VISUAL:*]` markers; refresh `lastVerified`) (`src/data/blogPosts.ts`).
+
+### Favicons
+- Add PNG favicons, Apple touch icon, and web manifest; wire in `index.html` (`public/*`, `index.html`).
+
+### ORC Glossary
+- Add missing glossary entry for ORC § 2907.07 (Importuning) (`src/data/statutes.ts`).
+
 ## 2025-12-15
 
 ### Deploy / Publish Reliability (Bolt)
