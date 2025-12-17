@@ -15,7 +15,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showDuiMapBanner, setShowDuiMapBanner] = useState(false);
-  const logoSrc = '/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png';
+  const logoFallbackSrc = '/images/brand/mango-logo-primary-fullcolor-tagline-480w.png';
   const duiMapHref = '/resources/dui-checkpoints';
   const duiMapBannerStorageKey = 'mango_dui_map_banner_dismissed_v1';
 
@@ -88,17 +88,37 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
         >
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3">
-            <img
-              src={logoSrc}
-              alt="Mango Law LLC - Criminal & OVI/DUI Defense"
-              width={1704}
-              height={555}
-              className={[
-                'h-11 w-auto transition-all hover:opacity-90 lg:h-14',
-                isScrolled ? 'lg:h-12' : '',
-              ].join(' ')}
-              loading="eager"
-            />
+            <picture>
+              <source
+                type="image/avif"
+                srcSet={[
+                  '/images/brand/mango-logo-primary-fullcolor-tagline-240w.avif 240w',
+                  '/images/brand/mango-logo-primary-fullcolor-tagline-480w.avif 480w',
+                ].join(', ')}
+                sizes="(min-width: 1024px) 220px, 170px"
+              />
+              <source
+                type="image/webp"
+                srcSet={[
+                  '/images/brand/mango-logo-primary-fullcolor-tagline-240w.webp 240w',
+                  '/images/brand/mango-logo-primary-fullcolor-tagline-480w.webp 480w',
+                ].join(', ')}
+                sizes="(min-width: 1024px) 220px, 170px"
+              />
+              <img
+                src={logoFallbackSrc}
+                alt="Mango Law LLC - Criminal & OVI/DUI Defense"
+                width={1704}
+                height={555}
+                className={[
+                  'h-11 w-auto transition-all hover:opacity-90 lg:h-14',
+                  isScrolled ? 'lg:h-12' : '',
+                ].join(' ')}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
           </Link>
 
           {/* Desktop Navigation */}

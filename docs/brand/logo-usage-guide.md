@@ -34,7 +34,7 @@ All logo assets are located in `/public/images/brand/generated/` and are in SVG 
 
 ### Site Header
 - **File:** `src/components/SiteHeader.tsx`
-- **Asset:** `public/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png`
+- **Asset:** `public/images/brand/mango-logo-primary-fullcolor-tagline-240w.avif` / `-480w.*` (with PNG fallback)
 - **Size:** `h-11 w-auto` (shrinks slightly on scroll)
 
 ### Footer
