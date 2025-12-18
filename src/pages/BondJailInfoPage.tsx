@@ -164,6 +164,22 @@ export default function BondJailInfoPage() {
                 <li>Costs are not refunded when using a surety bond (bondsman fee).</li>
                 <li>A recognizance bond saves money but depends on the judge’s assessment of risk.</li>
                 <li>Courts may impose release conditions (no-contact, monitoring, travel limits).</li>
+                <li>
+                  In limited situations, Ohio law permits detention without bail after required court findings.
+                  If you think that could apply, speak with an attorney immediately.
+                </li>
+                <li>
+                  If you need a surety agent, confirm the agent is properly registered/licensed for Delaware County.
+                  The Clerk of Courts provides local information:{' '}
+                  <a
+                    href="https://clerkofcourts.co.delaware.oh.us/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    clerkofcourts.co.delaware.oh.us
+                  </a>
+                  .
+                </li>
               </ul>
 
               <h2>Sources</h2>
