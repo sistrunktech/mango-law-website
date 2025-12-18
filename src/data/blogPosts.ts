@@ -18,6 +18,105 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'bond-jail-information-delaware-county-ohio',
+    title: 'Bond & Jail Information in Delaware County, Ohio',
+    excerpt: 'If someone is arrested for OVI or another charge in Delaware County, this guide explains how bail works in Ohio and how to post bond to secure a release.',
+    imageUrl: '/images/generated/criminal-defense-hero.png',
+    content: `Delaware County citizens regularly ask what happens if someone is arrested for an OVI or another criminal charge. This guide answers two practical questions: **how a judge decides release conditions (bail)** and **how to post bond in Delaware County to secure a loved one’s release**.
+
+## Bail vs. bond (what people mean)
+
+**Bail** is the set of release conditions the court orders to help ensure the accused returns to court and to address safety risks. Bail can involve money, but it can also include non-financial conditions.
+
+**Bond** is the mechanism used to satisfy the bail order (for example, signing a recognizance bond, posting a cash/deposit bond, or using a surety/bondsman).
+
+## How Ohio courts decide bail
+
+In Ohio, judges typically consider factors such as:
+
+- the seriousness of the charge(s)
+- community ties (work, family, housing)
+- criminal history and prior failures to appear
+- safety concerns and any alleged threats to victims or witnesses
+
+Ohio law allows release on recognizance in appropriate cases, and it also allows more restrictive conditions when necessary. In limited circumstances, courts may order detention without bail after making required findings under Ohio law.
+
+## Common bond types in Ohio
+
+### Recognizance bond (O.R./ROR)
+
+Often the least restrictive option. The person is released based on a written promise to appear (and any conditions the judge imposes). No cash deposit is required.
+
+### Cash / deposit (“10%”) bond
+
+In many courts, a judge may permit a **deposit bond** where a portion of the bail amount (commonly described as “10%”) is deposited with the clerk. Whether any part is refunded and whether costs/fees are deducted depends on court orders and local practice.
+
+### Surety bond (bail bondsman)
+
+A surety bond is posted through a licensed bonding company. The bondsman typically charges a **non-refundable fee**. If the defendant fails to appear, the bondsman can be required to pay the bond and may pursue the defendant under applicable law and contract terms.
+
+## How to post bond in Delaware County
+
+The Delaware County Sheriff’s Office publishes guidance for families on its **Inmates** page. In short: **bond is paid at the Delaware County Municipal Court building (not at the jail)**.
+
+- **Delaware County Municipal Court**: 70 N. Union St., Delaware, OH 43015
+
+After bond is paid and the court processes the release, the jail must receive the proper paperwork before release. The Sheriff’s Office notes the process can take **up to four hours**, depending on the court’s caseload.
+
+## Step-by-step: posting bond for a loved one
+
+1. **Confirm the bond amount and type.** Use the case number (if you have it) and call the clerk to confirm the amount and what kind of bond is required.
+2. **Decide how you’ll post bond.** Depending on the judge’s order, you may be able to post a cash/deposit bond, or you may need a surety agent.
+3. **Go to the court with ID and payment.** Call ahead to confirm accepted payment methods and hours.
+4. **Wait for release processing.** Release timing varies; it can take hours after the jail receives the court’s paperwork.
+
+## Important local contact information
+
+- **Delaware County Municipal Court Clerk**: 70 N. Union St., Delaware, OH 43015 • (740) 203-1550
+- **Delaware County Sheriff’s Office Jail**: 844 U.S. Rt. 42 N., Delaware, OH 43015 • (740) 833-2840
+
+## Additional notes
+
+- **Surety bond fees aren’t refundable.** Paying a bondsman is typically a fee-based service.
+- **Recognizance depends on the judge’s assessment.** It’s usually reserved for lower-risk situations.
+- **Release conditions can include restrictions.** Courts may impose conditions like no-contact orders, electronic monitoring, or travel restrictions.
+
+## Conclusion
+
+Understanding bail and bond can reduce stress and help your family move faster after an arrest. If you have questions about the bond order, court dates, or how to protect someone’s rights after an arrest, talk to a criminal defense attorney as early as possible.`,
+    category: 'Criminal Defense',
+    date: '2025-12-18',
+    author: 'Dominic Mango',
+    lastVerified: '2025-12-18',
+    sources: [
+      {
+        label: 'Ohio Crim.R. 46 (Bail)',
+        url: 'https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/criminal/criminalprocedure.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Constitution, Article I, Section 9 (Bail)',
+        url: 'https://codes.ohio.gov/ohio-constitution/section-1.9',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Sheriff’s Office: Inmates (bond + release processing notes)',
+        url: 'https://sheriff.co.delaware.oh.us/inmates/',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Municipal Court (online portal)',
+        url: 'https://connect.municipalcourt.org/AWC/court/',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Clerk of Courts (Bail bond agents)',
+        url: 'https://clerkofcourts.co.delaware.oh.us/',
+        type: 'primary',
+      },
+    ],
+  },
+  {
     slug: 'understanding-ovi-dui-charges-ohio',
     title: 'Understanding OVI/DUI Charges in Ohio: What You Need to Know',
     excerpt: 'Complete guide to Ohio OVI charges including penalties, defense strategies, and how to protect your record. Learn about ORC § 4511.19 and what to do if arrested.',
