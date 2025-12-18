@@ -27,17 +27,7 @@ export default function Footer() {
 
       <div className="container relative py-12 lg:py-16">
         <div className="lg:hidden">
-          <div className="order-1 mb-6 rounded-xl border border-brand-offWhite/10 bg-brand-offWhite/5 p-5">
-            <p className="eyebrow mb-3 text-brand-gold">Get Started</p>
-            <p className="mb-4 text-sm text-brand-offWhite/70">
-              Facing charges? Get clear answers about your situation today.
-            </p>
-            <Link to="/contact" className="btn btn-primary w-full text-center">
-              Free Consultation
-            </Link>
-          </div>
-
-          <div className="order-2 mb-6 space-y-3">
+          <div className="mb-6 space-y-3">
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
               className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"

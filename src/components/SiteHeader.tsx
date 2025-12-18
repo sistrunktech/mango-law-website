@@ -111,7 +111,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                 width={1704}
                 height={555}
                 className={[
-                  'h-11 w-auto transition-all hover:opacity-90 lg:h-14',
+                  'h-9 w-auto transition-all hover:opacity-90 lg:h-14',
                   isScrolled ? 'lg:h-12' : '',
                 ].join(' ')}
                 loading="eager"
@@ -168,11 +168,22 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             </button>
           </div>
 
-          {/* Mobile phone + consult */}
-          <div className="flex flex-col items-end gap-2 lg:hidden">
+          {/* Mobile menu button (center) */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            className="inline-flex items-center justify-center rounded-lg p-2 text-brand-black transition-colors hover:bg-brand-black/5 lg:hidden"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+
+          {/* Mobile phone + consult (right) */}
+          <div className="flex flex-col items-end gap-1 lg:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-2 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
+              className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-1.5 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
               onClick={() => {
                 trackCtaClick('mobile_header_free_consult');
                 onOpenLeadModal?.('header_cta');
@@ -191,17 +202,6 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               {OFFICE_PHONE_DISPLAY}
             </a>
           </div>
-
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            className="inline-flex items-center justify-center rounded-lg p-2 text-brand-black transition-colors hover:bg-brand-black/5 lg:hidden"
-          >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
         </div>
 
         {/* Mobile menu */}
