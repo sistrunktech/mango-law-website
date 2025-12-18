@@ -2,26 +2,222 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { navLinks, practiceAreaLinks } from '../data/navigation';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import FooterAccordion from './FooterAccordion';
+
+const resourceLinks = [
+  { href: '/resources/dui-checkpoints', label: 'DUI Checkpoint Map' },
+  { href: '/glossary', label: 'Legal Glossary' },
+  { href: '/resources/bond-jail-information', label: 'Bond and Jail Information' },
+  { href: '/resources/what-to-do-after-ovi-arrest', label: 'What to Do After an OVI Arrest' },
+  { href: '/locations', label: 'Service Areas' },
+];
+
+const localSeoLinks = [
+  { href: '/criminal-defense-delaware-oh', label: 'Delaware, OH Criminal Defense' },
+  { href: '/ovi-dui-defense-delaware-oh', label: 'Delaware, OH OVI Defense' },
+  { href: '/practice-areas', label: 'Central Ohio Criminal Defense' },
+  { href: '/locations', label: 'Service Areas' },
+];
 
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-brand-forest text-brand-offWhite" role="contentinfo">
-      {/* Top accent bar - gradient only */}
       <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-brand-leaf via-brand-mango to-brand-leaf" />
-
-      {/* Subtle decorative element */}
       <div className="pointer-events-none absolute -right-40 top-0 h-[400px] w-[400px] rounded-full bg-brand-mango/5 blur-3xl" />
 
-      {/* Main footer content */}
-      <div className="container relative py-16 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          {/* Brand column */}
-          <div className="space-y-6">
+      <div className="container relative py-12 lg:py-16">
+        <div className="lg:hidden">
+          <div className="order-1 mb-6 rounded-xl border border-brand-offWhite/10 bg-brand-offWhite/5 p-5">
+            <p className="eyebrow mb-3 text-brand-gold">Get Started</p>
+            <p className="mb-4 text-sm text-brand-offWhite/70">
+              Facing charges? Get clear answers about your situation today.
+            </p>
+            <Link to="/contact" className="btn btn-primary w-full text-center">
+              Free Consultation
+            </Link>
+          </div>
+
+          <div className="order-2 mb-6 space-y-3">
+            <a
+              href={`tel:${OFFICE_PHONE_TEL}`}
+              className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
+                <Phone className="h-4 w-4 text-brand-mango" />
+              </div>
+              <div>
+                <div className="text-xs text-brand-offWhite/60">Call</div>
+                <div>{OFFICE_PHONE_DISPLAY}</div>
+              </div>
+            </a>
+            <a
+              href="mailto:office@mango.law"
+              className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
+                <Mail className="h-4 w-4 text-brand-mango" />
+              </div>
+              office@mango.law
+            </a>
+            <div className="flex items-center gap-3 text-sm text-brand-offWhite/80">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-offWhite/5">
+                <MapPin className="h-4 w-4 text-brand-mango" />
+              </div>
+              Delaware, Ohio
+            </div>
+          </div>
+
+          <div className="order-3">
+            <FooterAccordion title="Navigation">
+              <ul className="space-y-3">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      to={link.href}
+                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </FooterAccordion>
+
+            <FooterAccordion title="Resources">
+              <ul className="space-y-3">
+                {resourceLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      to={link.href}
+                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </FooterAccordion>
+
+            <FooterAccordion title="Practice Areas">
+              <ul className="space-y-3">
+                {practiceAreaLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      to={link.href}
+                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    to="/practice-areas"
+                    className="text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
+                  >
+                    View all practice areas
+                  </Link>
+                </li>
+              </ul>
+            </FooterAccordion>
+          </div>
+
+          <div className="order-4 mt-6 border-t border-brand-offWhite/10 pt-6">
+            <Link to="/" className="mb-4 inline-block">
+              <img
+                src="/images/brand/mango-logo-white-cropped.png"
+                alt="Mango Law LLC"
+                width={48}
+                height={48}
+                className="h-12 w-auto"
+                loading="lazy"
+              />
+            </Link>
             <p className="max-w-xs text-sm leading-relaxed text-brand-offWhite/60">
               Criminal defense for Delaware, Ohio. Clear guidance, assertive advocacy, and steady communication when it matters most.
             </p>
-            {/* Contact info */}
-            <div className="space-y-3 pt-2">
+            <p className="mt-3 text-xs text-brand-offWhite/50">
+              Serving Delaware, Ohio and surrounding Central Ohio communities.
+            </p>
+          </div>
+        </div>
+
+        <div className="hidden lg:grid lg:grid-cols-[1.3fr_1fr_1fr_1.2fr_1.1fr] lg:gap-8">
+          <div className="space-y-5">
+            <Link to="/" className="inline-block">
+              <img
+                src="/images/brand/mango-logo-white-cropped.png"
+                alt="Mango Law LLC"
+                width={56}
+                height={56}
+                className="h-14 w-auto"
+                loading="lazy"
+              />
+            </Link>
+            <p className="max-w-[220px] text-sm leading-relaxed text-brand-offWhite/60">
+              Criminal defense for Delaware, Ohio. Clear guidance, assertive advocacy, and steady communication when it matters most.
+            </p>
+            <p className="text-xs text-brand-offWhite/50">
+              Serving Delaware, Ohio and surrounding Central Ohio communities.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="eyebrow text-brand-gold">Navigation</h4>
+            <ul className="mt-5 space-y-3">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="eyebrow text-brand-gold">Resources</h4>
+            <ul className="mt-5 space-y-3">
+              {resourceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="eyebrow text-brand-gold">Practice Areas</h4>
+            <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2">
+              {practiceAreaLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className="text-xs text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              to="/practice-areas"
+              className="mt-4 inline-block text-xs font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
+            >
+              View all practice areas
+            </Link>
+          </div>
+
+          <div className="space-y-5">
+            <div className="space-y-3">
               <a
                 href={`tel:${OFFICE_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
@@ -51,118 +247,57 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Get started CTA */}
-            <div>
-              <h4 className="eyebrow text-brand-gold">Get Started</h4>
-              <p className="mt-5 max-w-xs text-sm text-brand-offWhite/60">
-                Facing charges? Get clear answers about your situation today.
+            <div className="rounded-xl border border-brand-offWhite/10 bg-brand-offWhite/5 p-4">
+              <p className="eyebrow mb-2 text-brand-gold">Get Started</p>
+              <p className="mb-3 text-xs text-brand-offWhite/60">
+                Facing charges? Get clear answers today.
               </p>
-              <Link
-                to="/contact"
-                className="btn btn-primary mt-5"
-              >
+              <Link to="/contact" className="btn btn-primary w-full text-center text-sm">
                 Free Consultation
               </Link>
             </div>
-
-            <Link to="/" className="group inline-flex items-center gap-3">
-              <img
-                src="/images/brand/mango-logo-primary-1080x1080px-cropped-to-content.png"
-                alt="Mango Law LLC"
-                width={820}
-                height={1079}
-                className="h-16 w-auto transition-opacity group-hover:opacity-90"
-                loading="lazy"
-              />
-            </Link>
-          </div>
-
-          {/* Navigation column */}
-          <div>
-            <h4 className="eyebrow text-brand-gold">Navigation</h4>
-            <ul className="mt-5 space-y-3">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Practice Areas column */}
-          <div>
-            <h4 className="eyebrow text-brand-gold">Practice Areas</h4>
-            <ul className="mt-5 space-y-3">
-              {practiceAreaLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources column */}
-          <div>
-            <h4 className="eyebrow text-brand-gold">Resources</h4>
-            <ul className="mt-5 space-y-3">
-              <li>
-                <Link
-                  to="/resources/dui-checkpoints"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  DUI Checkpoint Map
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/glossary"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Legal Glossary
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/locations"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Service Areas
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/blog"
-                  className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                >
-                  Legal Articles
-                </Link>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
+      <div className="border-t border-brand-offWhite/10">
+        <div className="container py-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-brand-offWhite/40">
+            {localSeoLinks.map((link, index) => (
+              <span key={link.href} className="flex items-center">
+                <Link
+                  to={link.href}
+                  className="transition-colors hover:text-brand-leaf"
+                >
+                  {link.label}
+                </Link>
+                {index < localSeoLinks.length - 1 && (
+                  <span className="ml-2 text-brand-offWhite/20">•</span>
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="border-t border-brand-offWhite/10">
         <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-brand-offWhite/50 sm:flex-row">
           <span>© {new Date().getFullYear()} Mango Law LLC. All rights reserved.</span>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <Link to="/privacy" className="transition-colors hover:text-brand-leaf">
               Privacy Policy
             </Link>
             <Link to="/terms" className="transition-colors hover:text-brand-leaf">
               Terms of Service
             </Link>
+            <a
+              href="https://sistrunktech.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-brand-leaf"
+            >
+              Built and hosted by Sistrunk Tech in Columbus, Ohio.
+            </a>
           </div>
         </div>
       </div>
