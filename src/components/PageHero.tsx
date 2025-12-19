@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
 import ORCLabel from './ORCLabel';
+import { OFFICE_PHONE_DISPLAY } from '../lib/contactInfo';
 
 type Props = {
   eyebrow?: string;
@@ -56,7 +57,7 @@ export default function PageHero({
   ctaHref,
   secondaryCtaLabel,
   secondaryCtaHref,
-  phoneNumber = '(740) 602-2155',
+  phoneNumber = OFFICE_PHONE_DISPLAY,
   variant = 'dark',
   backgroundUrl,
   attorneyPhotoUrl,
@@ -188,7 +189,7 @@ export default function PageHero({
                 className="group inline-flex items-center gap-2 rounded-lg border-2 border-brand-offWhite/30 px-8 py-4 text-lg font-bold text-brand-offWhite transition-all hover:border-brand-mango hover:text-brand-mango"
               >
                 <Phone className="h-5 w-5" />
-                {phoneNumber}
+                <span>Call/Text {phoneNumber}</span>
               </a>
             </div>
 

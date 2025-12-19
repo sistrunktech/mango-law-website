@@ -4,8 +4,8 @@ import { navLinks, practiceAreaLinks } from '../data/navigation';
 import {
   OFFICE_PHONE_DISPLAY,
   OFFICE_PHONE_TEL,
-  NICK_DIRECT_PHONE_DISPLAY,
-  NICK_DIRECT_PHONE_TEL,
+  GENERAL_OFFICE_PHONE_DISPLAY,
+  GENERAL_OFFICE_PHONE_TEL,
   OFFICE_EMAIL,
   OFFICE_ADDRESS_STREET,
   OFFICE_ADDRESS_CITY_STATE_ZIP,
@@ -60,20 +60,20 @@ export default function Footer() {
                 <Phone className="h-4 w-4 text-brand-mango" />
               </div>
               <div>
-                <div className="text-xs text-brand-offWhite/50">Office</div>
+                <div className="text-xs text-brand-offWhite/50">Call/Text (Direct)</div>
                 <div className="font-medium">{OFFICE_PHONE_DISPLAY}</div>
               </div>
             </a>
             <a
-              href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+              href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
               className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-leaf/20">
                 <Phone className="h-4 w-4 text-brand-leaf" />
               </div>
               <div>
-                <div className="text-xs text-brand-offWhite/50">Nick Direct</div>
-                <div className="font-medium">{NICK_DIRECT_PHONE_DISPLAY}</div>
+                <div className="text-xs text-brand-offWhite/50">Office</div>
+                <div className="font-medium">{GENERAL_OFFICE_PHONE_DISPLAY}</div>
               </div>
             </a>
             <a
@@ -240,20 +240,20 @@ export default function Footer() {
                   <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/60">Office</div>
+                  <div className="text-xs text-brand-offWhite/60">Call/Text (Direct)</div>
                   <div>{OFFICE_PHONE_DISPLAY}</div>
                 </div>
               </a>
               <a
-                href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-leaf/20">
                   <Phone className="h-4 w-4 text-brand-leaf" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/60">Nick Direct</div>
-                  <div>{NICK_DIRECT_PHONE_DISPLAY}</div>
+                  <div className="text-xs text-brand-offWhite/60">Office</div>
+                  <div>{GENERAL_OFFICE_PHONE_DISPLAY}</div>
                 </div>
               </a>
               <a

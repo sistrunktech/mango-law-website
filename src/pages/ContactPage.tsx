@@ -6,8 +6,8 @@ import { SEO } from '../lib/seo';
 import {
   OFFICE_PHONE_DISPLAY,
   OFFICE_PHONE_TEL,
-  NICK_DIRECT_PHONE_DISPLAY,
-  NICK_DIRECT_PHONE_TEL,
+  GENERAL_OFFICE_PHONE_DISPLAY,
+  GENERAL_OFFICE_PHONE_TEL,
 } from '../lib/contactInfo';
 
 export default function ContactPage() {
@@ -15,13 +15,13 @@ export default function ContactPage() {
     <>
       <SEO
         title="Contact Mango Law LLC | Delaware, OH Criminal Defense Attorney"
-        description={`Schedule a consultation with experienced criminal defense attorney Dominic Mango. Located at 46 W. Winter Street, Delaware, OH. Call ${OFFICE_PHONE_DISPLAY} or email office@mango.law.`}
+        description={`Schedule a consultation with experienced criminal defense attorney Dominic "Nick" Mango. Located in Delaware, OH. Call or text ${OFFICE_PHONE_DISPLAY} or email office@mango.law.`}
       />
       <PageHero
         eyebrow="Contact"
         title="Schedule a consult with Mango Law."
-        description="Share a few details and we’ll respond promptly. For urgent matters, call the office."
-        ctaLabel="Call the office"
+        description="Share a few details and we’ll respond promptly. For urgent matters, call or text our direct line."
+        ctaLabel="Call/Text now"
         ctaHref={`tel:${OFFICE_PHONE_TEL}`}
         variant="light"
       />
@@ -75,21 +75,21 @@ export default function ContactPage() {
 
             <div className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Prefer to call?</p>
-              <p className="mt-2 text-sm text-brand-black/70">If your situation is urgent, call now.</p>
+              <p className="mt-2 text-sm text-brand-black/70">For the quickest response, call or text our direct line.</p>
               <div className="mt-4 space-y-2">
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}
                   className="btn btn-primary w-full"
                   data-cta="contact_page_call_office"
                 >
-                  Office {OFFICE_PHONE_DISPLAY}
+                  Call/Text {OFFICE_PHONE_DISPLAY}
                 </a>
                 <a
-                  href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                  href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
                   className="btn btn-secondary w-full"
-                  data-cta="contact_page_call_nick"
+                  data-cta="contact_page_call_secondary"
                 >
-                  Nick Direct {NICK_DIRECT_PHONE_DISPLAY}
+                  Office {GENERAL_OFFICE_PHONE_DISPLAY}
                 </a>
               </div>
             </div>

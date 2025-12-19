@@ -5,6 +5,7 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 const faqs = [
   {
@@ -207,8 +208,8 @@ export default function WhiteCollarPage() {
         body="White collar investigations move quickly. Contact us for strategic legal guidance and defense."
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel="(740) 602-2155"
-        secondaryHref="tel:7406022155"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );

@@ -11,6 +11,7 @@ import CTASection from '../components/CTASection';
 import AuthorBio from '../components/AuthorBio';
 import RelatedPosts from '../components/RelatedPosts';
 import { SEO } from '../lib/seo';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import {
   PenaltyGrid,
   CostBreakdown,
@@ -1051,8 +1052,8 @@ export default function BlogPostPage() {
         body="If you're facing criminal charges, contact Mango Law for experienced representation in Delaware and Franklin County."
         primaryLabel="Free Consultation"
         primaryHref="/contact"
-        secondaryLabel="(740) 602-2155"
-        secondaryHref="tel:7406022155"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );

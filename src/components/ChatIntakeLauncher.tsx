@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MessageCircle, Phone, FileText } from 'lucide-react';
 import ConversationWindow from './chat/ConversationWindow';
-import { OFFICE_PHONE_TEL, NICK_DIRECT_PHONE_TEL } from '../lib/contactInfo';
+import { OFFICE_PHONE_TEL, GENERAL_OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackChatOpen, trackCtaClick } from '../lib/analytics';
 
 interface ChatIntakeLauncherProps {
@@ -109,16 +109,16 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
                 data-cta="floating_chooser_call_office"
               >
                 <Phone className="h-4 w-4 text-brand-mango" aria-hidden="true" />
-                Call the office
+                Call/Text (fastest)
               </a>
               <a
-                href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
                 className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
-                onClick={() => trackCtaClick('floating_chooser_call_nick')}
-                data-cta="floating_chooser_call_nick"
+                onClick={() => trackCtaClick('floating_chooser_call_office_secondary')}
+                data-cta="floating_chooser_call_office_secondary"
               >
                 <Phone className="h-4 w-4 text-brand-leaf" aria-hidden="true" />
-                Call Nick Mango direct
+                Call office line
               </a>
               <button
                 type="button"

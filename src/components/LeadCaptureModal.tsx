@@ -92,7 +92,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
       setIsSuccess(true);
     } catch (error) {
       console.error('Failed to submit lead:', error);
-      setErrors({ submit: 'Failed to submit. Please call us directly.' });
+      setErrors({ submit: 'Failed to submit. Please call or text us directly.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -121,7 +121,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
                 data-cta="lead_success_call"
               >
                 <Phone className="h-5 w-5" />
-                Call {OFFICE_PHONE_DISPLAY}
+                Call/Text {OFFICE_PHONE_DISPLAY}
               </a>
             </div>
             <button

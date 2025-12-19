@@ -209,7 +209,7 @@ The information provided in this post is for general guidance only and does not 
 	
 	If you've been charged with OVI in Delaware or Franklin County, the stakes can be high. Mango Law regularly handles OVI defense matters and can help you understand what’s likely to matter in your specific court and timeline.
 
-		**Call (740) 602-2155** today for a confidential consultation.`,
+		**Call or text (740) 417-6191** today for a confidential consultation.`,
     category: 'OVI/DUI Defense',
     date: '2024-12-01',
     author: 'Dominic Mango',
@@ -491,7 +491,7 @@ Motion practice can shape outcomes. Suppressed evidence, dismissed charges, and 
 
 If you're facing criminal charges in Delaware or Franklin County, don't wait. Early motion practice can change the trajectory of your case.
 
-	**Contact Mango Law at (740) 602-2155** for a confidential consultation. We'll review your case, identify motion opportunities, and explain realistic options based on the record.
+	**Contact Mango Law at (740) 417-6191** for a confidential consultation. We'll review your case, identify motion opportunities, and explain realistic options based on the record.
 
 ## Additional Resources
 

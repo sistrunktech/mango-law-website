@@ -6,6 +6,7 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import { Link } from 'react-router-dom';
 import { MapPinned, AlertTriangle } from 'lucide-react';
@@ -256,8 +257,8 @@ export default function OviDuiPage() {
         title="Facing an OVI charge? Let's move quickly."
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel="(740) 602-2155"
-        secondaryHref="tel:7406022155"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );

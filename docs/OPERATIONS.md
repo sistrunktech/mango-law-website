@@ -27,8 +27,8 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - **Supabase project pinning:** the frontend is currently pinned to the production Supabase project in `src/lib/supabaseClient.ts` to prevent “split brain” data and OAuth redirect drift. If you truly need multiple environments later, reintroduce host/env-based switching carefully and update Google OAuth redirect URIs accordingly.
 
 ## Contact Numbers (Do Not Swap)
-- **Office / Main line:** `(740) 602-2155` (`tel:7406022155`) — default for all “Call” CTAs.
-- Do not use personal/direct numbers in public UI; keep anything like `SMS_GATEWAY_NICK` limited to internal SMS notifications only.
+- **Primary (Call/Text):** `(740) 417-6191` (`tel:7404176191`) — default for all “Call/Text” CTAs (fastest response).
+- **Secondary (Office line):** `(740) 602-2155` (`tel:7406022155`) — show only where a second number is helpful (footer/contact/about).
 
 ## Secrets Placement
 - GitHub Actions: secrets and variables have been added via `gh secret set` / `gh variable set`. Replace placeholder Supabase values (`VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `VITE_SUPABASE_URL`) with real env-specific keys.

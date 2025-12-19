@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { OFFICE_PHONE_TEL } from './contactInfo';
 
 export interface SEOProps {
   title?: string;
@@ -114,7 +115,7 @@ export const localBusinessSchema = {
       url: 'https://mango.law',
       logo: 'https://mango.law/images/brand/mango-logo-primary-fullcolor.svg',
       image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
-      telephone: '+17406022155',
+      telephone: `+1${OFFICE_PHONE_TEL}`,
       email: 'office@mango.law',
       priceRange: '$$',
       address: {
@@ -276,7 +277,7 @@ export const attorneySchema = {
   url: 'https://mango.law/about',
   image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
   email: 'office@mango.law',
-  telephone: '+17406022155',
+  telephone: `+1${OFFICE_PHONE_TEL}`,
   worksFor: { '@id': 'https://mango.law/#legalservice' },
   hasOccupation: {
     '@type': 'Occupation',

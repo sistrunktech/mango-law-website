@@ -44,10 +44,10 @@ export default function HomePage() {
         structuredData={localBusinessSchema}
       />
       <PageHero
-        eyebrow="Delaware County Criminal Defense"
-        subtitle="Protect your rights and future with experienced, assertive advocacy."
-        title="Strategic Criminal Defense for Delaware, Ohio"
-        description="DUI/OVI & Criminal Defense Attorney serving Delaware & Franklin Counties, OH"
+        eyebrow="Central Ohio Criminal Defense"
+        subtitle="Dominic “Nick” Mango — Criminal Defense & OVI/DUI Defense Attorney"
+        title="Strategic Criminal Defense for Central Ohio"
+        description="Serving Delaware, Franklin & surrounding counties throughout Central Ohio."
         ctaLabel="Schedule a Case Review"
         ctaHref="/contact"
         phoneNumber={OFFICE_PHONE_DISPLAY}
@@ -206,7 +206,7 @@ export default function HomePage() {
                     <span className="text-2xl">📞</span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-brand-black/60">Call us</p>
+                    <p className="text-sm font-medium text-brand-black/60">Call/Text</p>
                     <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">{OFFICE_PHONE_DISPLAY}</p>
                   </div>
                 </a>

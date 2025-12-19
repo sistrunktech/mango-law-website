@@ -58,7 +58,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             onClick={() => trackCtaClick('header_topbar_call')}
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
-            <span>{OFFICE_PHONE_DISPLAY}</span>
+            <span>Call/Text {OFFICE_PHONE_DISPLAY}</span>
           </a>
 
           <Link
@@ -178,7 +178,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               onClick={() => trackCtaClick('header_call')}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
-              {OFFICE_PHONE_DISPLAY}
+              Call/Text {OFFICE_PHONE_DISPLAY}
             </a>
             <button
               type="button"
@@ -220,7 +220,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
               className="text-xs font-semibold text-brand-black/80 transition-colors hover:text-brand-mango"
-              aria-label="Call the office"
+              aria-label="Call or text the office"
               data-cta="mobile_header_call"
               onClick={() => trackCtaClick('mobile_header_call')}
             >
@@ -288,7 +288,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   onClick={() => trackCtaClick('mobile_menu_call')}
                 >
                   <Phone className="h-4 w-4 text-brand-mangoText" />
-                  <span className="text-xs opacity-70">Call:</span>
+                  <span className="text-xs opacity-70">Call/Text:</span>
                   {OFFICE_PHONE_DISPLAY}
                 </a>
                 <button

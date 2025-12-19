@@ -1,5 +1,6 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function OfCounselPage() {
   return (
@@ -33,11 +34,11 @@ export default function OfCounselPage() {
                   <p className="text-brand-black/70 font-medium">Of Counsel</p>
                   <div className="flex flex-col gap-3 pt-3 border-t border-brand-black/10">
                     <a
-                      href="tel:7406022155"
+                      href={`tel:${OFFICE_PHONE_TEL}`}
                       className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
                     >
                       <span className="text-lg">📞</span>
-                      <span className="font-semibold">(740) 602-2155</span>
+                      <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
                     </a>
                     <a
                       href="mailto:office@mango.law"
@@ -110,7 +111,7 @@ export default function OfCounselPage() {
         primaryLabel="Schedule a consultation"
         primaryHref="/contact"
         secondaryLabel="Call the office"
-        secondaryHref="tel:7406022155"
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );

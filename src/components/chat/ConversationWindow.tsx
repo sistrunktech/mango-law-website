@@ -4,7 +4,7 @@ import ChatBubble from './ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import TextInput from './TextInput';
 import PhoneInput from './PhoneInput';
-import { OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
+import { OFFICE_PHONE_DISPLAY, GENERAL_OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
 
 interface ConversationStep {
@@ -237,11 +237,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
             <p className="font-semibold">Need immediate help?</p>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY} — Office</span>
+              <span>{OFFICE_PHONE_DISPLAY} — Call/Text (Direct)</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY}</span>
+              <span>{GENERAL_OFFICE_PHONE_DISPLAY} — Office</span>
             </div>
           </div>
         </div>
@@ -267,7 +267,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
       console.error('Chat submission error:', error);
       setIsTyping(false);
       setIsSubmitting(false);
-      setSubmissionError(`We had trouble sending your message. Please call us directly at ${OFFICE_PHONE_DISPLAY}.`);
+      setSubmissionError(`We had trouble sending your message. Please call or text us directly at ${OFFICE_PHONE_DISPLAY}.`);
 
       const errorMessage = (
         <div>
@@ -275,11 +275,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           <div className="space-y-2 text-xs">
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY} — Office</span>
+              <span>{OFFICE_PHONE_DISPLAY} — Call/Text (Direct)</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY}</span>
+              <span>{GENERAL_OFFICE_PHONE_DISPLAY} — Office</span>
             </div>
           </div>
         </div>

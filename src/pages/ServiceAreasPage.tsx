@@ -5,6 +5,7 @@ import CTASection from '../components/CTASection';
 import { SEO } from '../lib/seo';
 import { majorCities, surroundingCities, townships, counties } from '../data/serviceAreas';
 import { MapPin, Phone } from 'lucide-react';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function ServiceAreasPage() {
   return (
@@ -100,10 +101,10 @@ export default function ServiceAreasPage() {
                     Contact Us Today
                   </a>
                   <a
-                    href="tel:7406022155"
+                    href={`tel:${OFFICE_PHONE_TEL}`}
                     className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-black/20 bg-white px-6 py-3 font-bold text-brand-black transition-all hover:border-brand-mango hover:bg-brand-offWhite/50"
                   >
-                    (740) 602-2155
+                    {OFFICE_PHONE_DISPLAY}
                   </a>
                 </div>
               </section>
@@ -120,8 +121,8 @@ export default function ServiceAreasPage() {
         title="Need help in your area?"
         primaryLabel="Contact Us"
         primaryHref="/contact"
-        secondaryLabel="(740) 602-2155"
-        secondaryHref="tel:7406022155"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
       />
     </>
   );
