@@ -56,10 +56,10 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             className="inline-flex items-center gap-2 text-sm font-semibold text-white/95 transition-opacity hover:opacity-90"
             data-cta="header_topbar_call"
             onClick={() => trackCtaClick('header_topbar_call')}
-          >
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            <span>Call/Text {OFFICE_PHONE_DISPLAY}</span>
-          </a>
+	          >
+	            <Phone className="h-4 w-4" aria-hidden="true" />
+	            <span>Call/Text Nick direct {OFFICE_PHONE_DISPLAY}</span>
+	          </a>
 
           <Link
             to={duiMapHref}
@@ -176,10 +176,10 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black/80 hover:text-brand-mango"
               data-cta="header_call"
               onClick={() => trackCtaClick('header_call')}
-            >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              Call/Text {OFFICE_PHONE_DISPLAY}
-            </a>
+	            >
+	              <Phone className="h-4 w-4" aria-hidden="true" />
+	              Call/Text Nick direct {OFFICE_PHONE_DISPLAY}
+	            </a>
             <button
               type="button"
               className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black transition-all hover:bg-brand-gold"
@@ -287,10 +287,10 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   data-cta="mobile_menu_call"
                   onClick={() => trackCtaClick('mobile_menu_call')}
                 >
-                  <Phone className="h-4 w-4 text-brand-mangoText" />
-                  <span className="text-xs opacity-70">Call/Text:</span>
-                  {OFFICE_PHONE_DISPLAY}
-                </a>
+	                  <Phone className="h-4 w-4 text-brand-mangoText" />
+	                  <span className="text-xs opacity-70">Call/Text Nick direct:</span>
+	                  {OFFICE_PHONE_DISPLAY}
+	                </a>
                 <button
                   type="button"
                   onClick={() => {

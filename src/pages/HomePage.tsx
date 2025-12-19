@@ -59,18 +59,25 @@ export default function HomePage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             {/* Content */}
             <div className="space-y-8">
-              <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                  <div className="accent-line" />
-                  <p className="eyebrow text-brand-goldText">Why Mango Law</p>
-                </div>
-                <h2 className="text-display-sm md:text-display-md">
-                  Direct answers. Steady communication.
-                </h2>
-                <p className="text-lg text-brand-black/60">
-                  Defense that respects your time: precise updates, smart motions, and focus on outcomes that protect your record and future.
-                </p>
-              </div>
+	              <div className="space-y-4">
+	                  <div className="flex items-center gap-3">
+	                  <div className="accent-line" />
+	                  <p className="eyebrow text-brand-goldText">Why Mango Law</p>
+	                </div>
+	                <h2 className="text-display-sm md:text-display-md">
+	                  Direct answers. Steady communication.
+	                </h2>
+	                <p className="text-lg text-brand-black/60">
+	                  Nick Mango focuses on defense that respects your time: precise updates, smart motions, and outcomes that protect your record and future.
+	                </p>
+                  <Link
+                    to="/about"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                    aria-label="Meet Nick Mango"
+                  >
+                    Meet Nick →
+                  </Link>
+	              </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 {whyChooseUs.map((item, i) => (
@@ -89,11 +96,16 @@ export default function HomePage() {
             </div>
 
             {/* Attorney Photo */}
-            <div className="relative">
-              <div className="group relative overflow-hidden rounded-2xl shadow-soft-lg transition-all duration-300 hover:shadow-lift" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
-                <div className="p-4">
-                  <div className="duotone-forest relative overflow-hidden rounded-xl">
-                    <picture>
+	            <div className="relative">
+	              <Link
+                  to="/about"
+                  className="group relative block overflow-hidden rounded-2xl shadow-soft-lg transition-all duration-300 hover:shadow-lift focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-mango/30"
+                  style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}
+                  aria-label="Read about Dominic “Nick” Mango"
+                >
+	                <div className="p-4">
+	                  <div className="duotone-forest relative overflow-hidden rounded-xl">
+	                    <picture>
                       <source
                         type="image/avif"
                         srcSet="/images/headshots/nick-mango-hero-332w.avif 332w, /images/headshots/nick-mango-hero-664w.avif 664w"
@@ -117,17 +129,17 @@ export default function HomePage() {
                       />
                     </picture>
                   </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8 transition-all duration-300 group-hover:from-brand-black/95">
-                  <h3 className="text-2xl font-bold text-white">Dominic "Nick" Mango</h3>
-                  <p className="text-sm font-medium text-brand-gold">Criminal Defense Attorney</p>
-                  <p className="mt-2 text-xs text-brand-offWhite/90">Serving Delaware & Franklin Counties, OH</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+	                </div>
+	                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8 transition-all duration-300 group-hover:from-brand-black/95">
+	                  <h3 className="text-2xl font-bold text-white">Dominic "Nick" Mango</h3>
+	                  <p className="text-sm font-medium text-brand-gold">Criminal Defense Attorney</p>
+	                  <p className="mt-2 text-xs text-brand-offWhite/90">Serving Delaware, Franklin & surrounding counties throughout Central Ohio.</p>
+	                </div>
+	              </Link>
+	            </div>
+	          </div>
+	        </div>
+	      </section>
 
       <PracticeAreaCardGrid />
 
@@ -188,13 +200,13 @@ export default function HomePage() {
                   <div className="accent-line" />
                   <p className="eyebrow text-brand-goldText">Contact</p>
                 </div>
-                <h2 className="text-display-sm md:text-display-md">
-                  Tell us what's going on
-                </h2>
-                <p className="text-lg text-brand-black/60">
-                  Share a few details about the situation. We'll respond promptly with next steps and a clear path forward.
-                </p>
-              </div>
+	                <h2 className="text-display-sm md:text-display-md">
+	                  Tell us what's going on
+	                </h2>
+	                <p className="text-lg text-brand-black/60">
+	                  Share a few details about the situation. Nick and the team respond promptly with next steps and a clear path forward.
+	                </p>
+	              </div>
 
               {/* Contact info cards */}
               <div className="grid gap-4 sm:grid-cols-2">
@@ -206,10 +218,10 @@ export default function HomePage() {
                     <span className="text-2xl">📞</span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-brand-black/60">Call/Text</p>
-                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">{OFFICE_PHONE_DISPLAY}</p>
-                  </div>
-                </a>
+	                    <p className="text-sm font-medium text-brand-black/60">Call/Text Nick direct</p>
+	                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">{OFFICE_PHONE_DISPLAY}</p>
+	                  </div>
+	                </a>
                 <a
                   href="mailto:office@mango.law"
                   className="group card card-interactive flex items-center gap-4 p-5"
