@@ -1,5 +1,10 @@
 # Changelog
 
+## 2025-12-19
+
+### Header
+- Restore the desktop “top green bar” (phone + DUI checkpoint map link) above the main header (`src/components/SiteHeader.tsx`).
+
 ## 2025-12-17
 
 ### Blog Trust + Content

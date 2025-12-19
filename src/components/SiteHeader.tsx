@@ -48,6 +48,31 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
       ].join(' ')}
       role="banner"
     >
+      {/* Desktop top bar (restores the original "green bar" header accent) */}
+      <div className="hidden border-b border-brand-black/10 bg-brand-leaf text-white lg:block">
+        <div className={`container flex items-center justify-between gap-4 ${isScrolled ? 'py-1.5' : 'py-2'}`}>
+          <a
+            href={`tel:${OFFICE_PHONE_TEL}`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-white/95 transition-opacity hover:opacity-90"
+            data-cta="header_topbar_call"
+            onClick={() => trackCtaClick('header_topbar_call')}
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            <span>{OFFICE_PHONE_DISPLAY}</span>
+          </a>
+
+          <Link
+            to={duiMapHref}
+            className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+            data-cta="header_topbar_dui_map"
+            onClick={() => trackCtaClick('header_topbar_dui_map')}
+          >
+            <MapPinned className="h-4 w-4 text-brand-mango" aria-hidden="true" />
+            DUI Checkpoint Map
+          </Link>
+        </div>
+      </div>
+
       {showDuiMapBanner && (
         <div className="border-b border-brand-black/10 bg-brand-leaf/90 text-white lg:hidden">
           <div className="container flex items-center justify-between gap-2 py-1">
