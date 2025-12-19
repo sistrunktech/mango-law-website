@@ -38,7 +38,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
   return (
     <header
       className={[
-        'relative z-50 transition-all lg:sticky lg:top-0 lg:z-50',
+        'sticky top-0 z-50 transition-all',
         isScrolled
           ? [
               'lg:border-b lg:shadow-sm lg:backdrop-blur-sm',
