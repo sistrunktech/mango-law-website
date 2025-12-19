@@ -1,7 +1,12 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import { SEO, attorneySchema } from '../lib/seo';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import {
+  OFFICE_PHONE_DISPLAY,
+  OFFICE_PHONE_TEL,
+  NICK_DIRECT_PHONE_DISPLAY,
+  NICK_DIRECT_PHONE_TEL,
+} from '../lib/contactInfo';
 
 export default function AboutPage() {
   return (
@@ -37,11 +42,24 @@ export default function AboutPage() {
                           className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
                         >
                           <span className="text-lg">📞</span>
-                          <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                          <div className="flex flex-col">
+                            <span className="text-xs text-brand-black/60">Office</span>
+                            <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                          </div>
+                        </a>
+                        <a
+                          href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                          className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                        >
+                          <span className="text-lg">📱</span>
+                          <div className="flex flex-col">
+                            <span className="text-xs text-brand-black/60">Nick Direct</span>
+                            <span className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</span>
+                          </div>
                         </a>
                         <a
                           href="mailto:office@mango.law"
-                          className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                          className="inline-flex items-center gap-2 text-brand-teal hover:text-brand-teal/80 transition-colors"
                         >
                           <span className="text-lg">✉️</span>
                           <span className="font-semibold">office@mango.law</span>
@@ -93,11 +111,24 @@ export default function AboutPage() {
                         className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
                       >
                         <span className="text-lg">📞</span>
-                        <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                        <div className="flex flex-col">
+                          <span className="text-xs text-brand-black/60">Office</span>
+                          <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                        </div>
+                      </a>
+                      <a
+                        href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                        className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                      >
+                        <span className="text-lg">📱</span>
+                        <div className="flex flex-col">
+                          <span className="text-xs text-brand-black/60">Nick Direct</span>
+                          <span className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</span>
+                        </div>
                       </a>
                       <a
                         href="mailto:office@mango.law"
-                        className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                        className="inline-flex items-center gap-2 text-brand-teal hover:text-brand-teal/80 transition-colors"
                       >
                         <span className="text-lg">✉️</span>
                         <span className="font-semibold">office@mango.law</span>

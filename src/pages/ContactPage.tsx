@@ -3,7 +3,12 @@ import ContactForm from '../components/ContactForm';
 import PageHero from '../components/PageHero';
 import LocationBlock from '../components/LocationBlock';
 import { SEO } from '../lib/seo';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import {
+  OFFICE_PHONE_DISPLAY,
+  OFFICE_PHONE_TEL,
+  NICK_DIRECT_PHONE_DISPLAY,
+  NICK_DIRECT_PHONE_TEL,
+} from '../lib/contactInfo';
 
 export default function ContactPage() {
   return (
@@ -70,14 +75,23 @@ export default function ContactPage() {
 
             <div className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Prefer to call?</p>
-              <p className="mt-2 text-sm text-brand-black/70">If your situation is urgent, call the office now.</p>
-              <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
-                className="btn btn-primary mt-4 w-full"
-                data-cta="contact_page_call_office"
-              >
-                Call {OFFICE_PHONE_DISPLAY}
-              </a>
+              <p className="mt-2 text-sm text-brand-black/70">If your situation is urgent, call now.</p>
+              <div className="mt-4 space-y-2">
+                <a
+                  href={`tel:${OFFICE_PHONE_TEL}`}
+                  className="btn btn-primary w-full"
+                  data-cta="contact_page_call_office"
+                >
+                  Office {OFFICE_PHONE_DISPLAY}
+                </a>
+                <a
+                  href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                  className="btn btn-secondary w-full"
+                  data-cta="contact_page_call_nick"
+                >
+                  Nick Direct {NICK_DIRECT_PHONE_DISPLAY}
+                </a>
+              </div>
             </div>
           </div>
 
