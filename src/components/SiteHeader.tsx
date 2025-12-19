@@ -50,7 +50,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
     >
       {/* Desktop top bar (restores the original "green bar" header accent) */}
       <div className="hidden border-b border-brand-black/10 bg-brand-leaf text-white lg:block">
-        <div className={`container flex items-center justify-between gap-4 ${isScrolled ? 'py-1.5' : 'py-2'}`}>
+        <div className={`container flex flex-wrap items-center gap-4 ${isScrolled ? 'py-1.5' : 'py-2'}`}>
           <a
             href={`tel:${OFFICE_PHONE_TEL}`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-white/95 transition-opacity hover:opacity-90"

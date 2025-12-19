@@ -9,7 +9,6 @@ import CTASection from '../components/CTASection';
 import BlogSidebar from '../components/BlogSidebar';
 import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
-import EmergencyBanner from '../components/EmergencyBanner';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
@@ -127,8 +126,6 @@ export default function DUICheckpointsPage() {
         ctaHref="/ovi-dui-defense-delaware-oh"
         variant="light"
       />
-
-      <EmergencyBanner />
 
       <section className="section bg-white">
         <div className="container">

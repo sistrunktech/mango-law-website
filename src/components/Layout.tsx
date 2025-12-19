@@ -2,7 +2,6 @@ import { ReactNode, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import SiteHeader from './SiteHeader';
 import Footer from './Footer';
-import EmergencyBanner from './EmergencyBanner';
 import ChatIntakeLauncher from './ChatIntakeLauncher';
 import AccessibilityLauncher from './AccessibilityLauncher';
 import ScrollToTop from './ScrollToTop';
@@ -31,7 +30,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         Skip to main content
       </a>
       <ScrollToTop />
-      <EmergencyBanner />
       <SiteHeader onOpenLeadModal={openLeadModal} />
       <main id="main-content" className="pb-[env(safe-area-inset-bottom)] lg:pb-0">
         {children}
