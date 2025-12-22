@@ -2,25 +2,15 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { OFFICE_PHONE_TEL } from './contactInfo';
 
-const GA4_MEASUREMENT_ID = 'G-NJZD79GGFG';
-
 function trackPageView(pageTitle: string) {
   const page_location = window.location.href;
   const page_path = `${window.location.pathname}${window.location.search}${window.location.hash}`;
 
   const w = window as any;
-  if (typeof w.gtag === 'function') {
-    w.gtag('config', GA4_MEASUREMENT_ID, {
-      page_title: pageTitle,
-      page_location,
-      page_path,
-    });
-    return;
-  }
-
+  w.dataLayer = w.dataLayer || [];
   if (Array.isArray(w.dataLayer)) {
     w.dataLayer.push({
-      event: 'page_view',
+      event: 'mango_page_view',
       page_title: pageTitle,
       page_location,
       page_path,

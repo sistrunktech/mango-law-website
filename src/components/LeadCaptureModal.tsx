@@ -82,11 +82,16 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
       if (error) throw error;
 
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'lead_submitted', {
-          event_category: 'Lead',
-          event_label: trigger,
-        });
+      if (typeof window !== 'undefined') {
+        const w = window as any;
+        w.dataLayer = w.dataLayer || [];
+        if (Array.isArray(w.dataLayer)) {
+          w.dataLayer.push({
+            event: 'lead_submitted',
+            lead_source: trigger,
+            checkpoint_id: checkpointId || null,
+          });
+        }
       }
 
       setIsSuccess(true);

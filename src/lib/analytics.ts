@@ -16,14 +16,6 @@ export function trackCtaClick(cta: string, extra?: Record<string, unknown>) {
     cta,
     ...extra,
   });
-
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', 'cta_click', {
-      event_category: 'CTA',
-      event_label: cta,
-      ...extra,
-    });
-  }
 }
 
 export function trackLeadModalOpen(trigger: string) {
@@ -33,4 +25,3 @@ export function trackLeadModalOpen(trigger: string) {
 export function trackChatOpen(source: string) {
   trackCtaClick('chat_open', { source });
 }
-
