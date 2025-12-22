@@ -2,6 +2,32 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { OFFICE_PHONE_TEL } from './contactInfo';
 
+const GA4_MEASUREMENT_ID = 'G-NJZD79GGFG';
+
+function trackPageView(pageTitle: string) {
+  const page_location = window.location.href;
+  const page_path = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+  const w = window as any;
+  if (typeof w.gtag === 'function') {
+    w.gtag('config', GA4_MEASUREMENT_ID, {
+      page_title: pageTitle,
+      page_location,
+      page_path,
+    });
+    return;
+  }
+
+  if (Array.isArray(w.dataLayer)) {
+    w.dataLayer.push({
+      event: 'page_view',
+      page_title: pageTitle,
+      page_location,
+      page_path,
+    });
+  }
+}
+
 export interface SEOProps {
   title?: string;
   description?: string;
@@ -98,6 +124,10 @@ export function SEO({
       script.textContent = JSON.stringify(structuredData);
     }
   }, [fullTitle, fullDescription, fullImage, fullUrl, type, noindex, structuredData]);
+
+  useEffect(() => {
+    trackPageView(fullTitle);
+  }, [location.pathname, location.search, location.hash, fullTitle]);
 
   return null;
 }
