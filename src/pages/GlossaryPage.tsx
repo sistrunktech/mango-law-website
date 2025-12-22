@@ -54,6 +54,7 @@ export default function GlossaryPage() {
         compact
         alignLeft
         showQuickActions={false}
+        phoneCtaId="glossary_hero_call_office"
       />
 
       <section className="section bg-white">

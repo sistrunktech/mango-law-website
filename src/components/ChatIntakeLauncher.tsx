@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { MessageCircle, Phone, FileText } from 'lucide-react';
 import ConversationWindow from './chat/ConversationWindow';
 import { OFFICE_PHONE_TEL, GENERAL_OFFICE_PHONE_TEL } from '../lib/contactInfo';
-import { trackChatOpen, trackCtaClick } from '../lib/analytics';
+import { trackChatOpen, trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 interface ChatIntakeLauncherProps {
   onOpenLeadModal: () => void;
@@ -105,7 +105,12 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
               <a
                 href={`tel:${OFFICE_PHONE_TEL}`}
                 className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
-                onClick={() => trackCtaClick('floating_chooser_call_office')}
+                onClick={() => {
+                  trackCtaClick('floating_chooser_call_office');
+                  trackLeadSubmitted('phone', 'floating_chooser_call_office', {
+                    target_number: OFFICE_PHONE_TEL,
+                  });
+                }}
                 data-cta="floating_chooser_call_office"
               >
                 <Phone className="h-4 w-4 text-brand-mango" aria-hidden="true" />
@@ -114,7 +119,12 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
               <a
                 href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
                 className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
-                onClick={() => trackCtaClick('floating_chooser_call_office_secondary')}
+                onClick={() => {
+                  trackCtaClick('floating_chooser_call_office_secondary');
+                  trackLeadSubmitted('phone', 'floating_chooser_call_office_secondary', {
+                    target_number: GENERAL_OFFICE_PHONE_TEL,
+                  });
+                }}
                 data-cta="floating_chooser_call_office_secondary"
               >
                 <Phone className="h-4 w-4 text-brand-leaf" aria-hidden="true" />

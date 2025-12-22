@@ -63,6 +63,7 @@ export default function DrugCrimePage() {
         alignLeft={true}
         compact={true}
         orcSection="2925.11"
+        phoneCtaId="drug_crime_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -208,6 +209,7 @@ export default function DrugCrimePage() {
         primaryHref="/contact"
         secondaryLabel={OFFICE_PHONE_DISPLAY}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="drug_crime_cta_call_office"
       />
     </>
   );

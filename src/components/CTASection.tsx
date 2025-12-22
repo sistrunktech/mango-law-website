@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone } from 'lucide-react';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 type Props = {
   eyebrow?: string;
@@ -9,6 +10,7 @@ type Props = {
   primaryHref: string;
   secondaryLabel?: string;
   secondaryHref?: string;
+  secondaryCtaId?: string;
   /** Optional background image URL for FAL.ai generated assets */
   backgroundUrl?: string;
 };
@@ -21,6 +23,7 @@ export default function CTASection({
   primaryHref,
   secondaryLabel,
   secondaryHref,
+  secondaryCtaId,
   backgroundUrl,
 }: Props) {
   return (
@@ -73,6 +76,17 @@ export default function CTASection({
               <a
                 href={secondaryHref}
                 className="group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-offWhite/30 px-7 py-3.5 text-sm font-bold text-brand-offWhite transition-all hover:border-brand-leaf hover:bg-brand-leaf/20 hover:shadow-glow-leaf hover:-translate-y-1 active:translate-y-0"
+                data-cta={secondaryCtaId || 'cta_section_secondary'}
+                onClick={() => {
+                  const ctaId = secondaryCtaId || 'cta_section_secondary';
+                  trackCtaClick(ctaId);
+
+                  if (secondaryHref.startsWith('tel:')) {
+                    trackLeadSubmitted('phone', ctaId, {
+                      target_number: secondaryHref.replace(/^tel:/, ''),
+                    });
+                  }
+                }}
               >
                 <Phone className="h-4 w-4 transition-transform group-hover:rotate-12" />
                 {secondaryLabel}

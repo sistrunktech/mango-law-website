@@ -6,6 +6,7 @@ import TextInput from './TextInput';
 import PhoneInput from './PhoneInput';
 import { OFFICE_PHONE_DISPLAY, GENERAL_OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
+import { trackLeadSubmitted } from '../../lib/analytics';
 
 interface ConversationStep {
   id: string;
@@ -227,6 +228,10 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
       if (!response.ok) {
         throw new Error(`Submission failed: ${response.status}`);
       }
+
+      trackLeadSubmitted('chat', 'chat_widget', {
+        source: 'chat_widget',
+      });
 
       setIsTyping(false);
       setIsSubmitting(false);

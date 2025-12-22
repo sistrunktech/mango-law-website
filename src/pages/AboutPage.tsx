@@ -1,11 +1,13 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import { SEO, attorneySchema } from '../lib/seo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import {
   OFFICE_PHONE_DISPLAY,
   OFFICE_PHONE_TEL,
   GENERAL_OFFICE_PHONE_DISPLAY,
   GENERAL_OFFICE_PHONE_TEL,
+  OFFICE_EMAIL,
 } from '../lib/contactInfo';
 
 export default function AboutPage() {
@@ -23,6 +25,7 @@ export default function AboutPage() {
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         variant="light"
+        phoneCtaId="about_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -40,6 +43,13 @@ export default function AboutPage() {
                         <a
                           href={`tel:${OFFICE_PHONE_TEL}`}
                           className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
+                          data-cta="about_mobile_call_office"
+                          onClick={() => {
+                            trackCtaClick('about_mobile_call_office');
+                            trackLeadSubmitted('phone', 'about_mobile_call_office', {
+                              target_number: OFFICE_PHONE_TEL,
+                            });
+                          }}
                         >
                           <span className="text-lg">📞</span>
                           <div className="flex flex-col">
@@ -50,6 +60,13 @@ export default function AboutPage() {
                         <a
                           href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
                           className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                          data-cta="about_mobile_call_secondary"
+                          onClick={() => {
+                            trackCtaClick('about_mobile_call_secondary');
+                            trackLeadSubmitted('phone', 'about_mobile_call_secondary', {
+                              target_number: GENERAL_OFFICE_PHONE_TEL,
+                            });
+                          }}
                         >
                           <span className="text-lg">📱</span>
                           <div className="flex flex-col">
@@ -58,11 +75,18 @@ export default function AboutPage() {
                           </div>
                         </a>
                         <a
-                          href="mailto:office@mango.law"
+                          href={`mailto:${OFFICE_EMAIL}`}
                           className="inline-flex items-center gap-2 text-brand-teal hover:text-brand-teal/80 transition-colors"
+                          data-cta="about_mobile_email_office"
+                          onClick={() => {
+                            trackCtaClick('about_mobile_email_office');
+                            trackLeadSubmitted('email', 'about_mobile_email_office', {
+                              target_email: OFFICE_EMAIL,
+                            });
+                          }}
                         >
                           <span className="text-lg">✉️</span>
-                          <span className="font-semibold">office@mango.law</span>
+                          <span className="font-semibold">{OFFICE_EMAIL}</span>
                         </a>
                       </div>
                     </div>
@@ -109,6 +133,13 @@ export default function AboutPage() {
                       <a
                         href={`tel:${OFFICE_PHONE_TEL}`}
                         className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
+                        data-cta="about_call_office"
+                        onClick={() => {
+                          trackCtaClick('about_call_office');
+                          trackLeadSubmitted('phone', 'about_call_office', {
+                            target_number: OFFICE_PHONE_TEL,
+                          });
+                        }}
                       >
                         <span className="text-lg">📞</span>
                         <div className="flex flex-col">
@@ -119,6 +150,13 @@ export default function AboutPage() {
                       <a
                         href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
                         className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                        data-cta="about_call_secondary"
+                        onClick={() => {
+                          trackCtaClick('about_call_secondary');
+                          trackLeadSubmitted('phone', 'about_call_secondary', {
+                            target_number: GENERAL_OFFICE_PHONE_TEL,
+                          });
+                        }}
                       >
                         <span className="text-lg">📱</span>
                         <div className="flex flex-col">
@@ -127,11 +165,18 @@ export default function AboutPage() {
                         </div>
                       </a>
                       <a
-                        href="mailto:office@mango.law"
+                        href={`mailto:${OFFICE_EMAIL}`}
                         className="inline-flex items-center gap-2 text-brand-teal hover:text-brand-teal/80 transition-colors"
+                        data-cta="about_email_office"
+                        onClick={() => {
+                          trackCtaClick('about_email_office');
+                          trackLeadSubmitted('email', 'about_email_office', {
+                            target_email: OFFICE_EMAIL,
+                          });
+                        }}
                       >
                         <span className="text-lg">✉️</span>
-                        <span className="font-semibold">office@mango.law</span>
+                        <span className="font-semibold">{OFFICE_EMAIL}</span>
                       </a>
                     </div>
                   </div>
@@ -248,6 +293,7 @@ export default function AboutPage() {
         primaryHref="/contact"
         secondaryLabel="Call the office"
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="about_cta_call_office"
       />
     </>
   );

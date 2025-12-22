@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Phone, Calendar, Star } from 'lucide-react';
 import { practiceAreas } from '../data/practiceAreas';
 import ORCLabel from './ORCLabel';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 function useMinWidthQuery(minWidthPx: number): boolean {
   const getMatches = () => (typeof window === 'undefined' ? true : window.matchMedia(`(min-width: ${minWidthPx}px)`).matches);
@@ -304,6 +305,13 @@ export default function PracticeAreaCardGrid() {
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}
                   className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mangoText"
+                  data-cta="practice_area_grid_call_office"
+                  onClick={() => {
+                    trackCtaClick('practice_area_grid_call_office');
+                    trackLeadSubmitted('phone', 'practice_area_grid_call_office', {
+                      target_number: OFFICE_PHONE_TEL,
+                    });
+                  }}
                 >
                   <Phone className="h-4 w-4" />
                   {OFFICE_PHONE_DISPLAY}

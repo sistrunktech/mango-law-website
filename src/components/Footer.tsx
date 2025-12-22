@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { navLinks, practiceAreaLinks } from '../data/navigation';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import {
   OFFICE_PHONE_DISPLAY,
   OFFICE_PHONE_TEL,
@@ -55,6 +56,13 @@ export default function Footer() {
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
               className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+              data-cta="footer_mobile_call_office"
+              onClick={() => {
+                trackCtaClick('footer_mobile_call_office');
+                trackLeadSubmitted('phone', 'footer_mobile_call_office', {
+                  target_number: OFFICE_PHONE_TEL,
+                });
+              }}
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-mango/10">
                 <Phone className="h-4 w-4 text-brand-mango" />
@@ -67,6 +75,13 @@ export default function Footer() {
             <a
               href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
               className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+              data-cta="footer_mobile_call_secondary"
+              onClick={() => {
+                trackCtaClick('footer_mobile_call_secondary');
+                trackLeadSubmitted('phone', 'footer_mobile_call_secondary', {
+                  target_number: GENERAL_OFFICE_PHONE_TEL,
+                });
+              }}
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-leaf/20">
                 <Phone className="h-4 w-4 text-brand-leaf" />
@@ -79,6 +94,13 @@ export default function Footer() {
             <a
               href={`mailto:${OFFICE_EMAIL}`}
               className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+              data-cta="footer_mobile_email_office"
+              onClick={() => {
+                trackCtaClick('footer_mobile_email_office');
+                trackLeadSubmitted('email', 'footer_mobile_email_office', {
+                  target_email: OFFICE_EMAIL,
+                });
+              }}
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-mango/10">
                 <Mail className="h-4 w-4 text-brand-mango" />
@@ -235,6 +257,13 @@ export default function Footer() {
               <a
                 href={`tel:${OFFICE_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+                data-cta="footer_call_office"
+                onClick={() => {
+                  trackCtaClick('footer_call_office');
+                  trackLeadSubmitted('phone', 'footer_call_office', {
+                    target_number: OFFICE_PHONE_TEL,
+                  });
+                }}
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
                   <Phone className="h-4 w-4 text-brand-mango" />
@@ -247,6 +276,13 @@ export default function Footer() {
               <a
                 href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+                data-cta="footer_call_secondary"
+                onClick={() => {
+                  trackCtaClick('footer_call_secondary');
+                  trackLeadSubmitted('phone', 'footer_call_secondary', {
+                    target_number: GENERAL_OFFICE_PHONE_TEL,
+                  });
+                }}
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-leaf/20">
                   <Phone className="h-4 w-4 text-brand-leaf" />
@@ -259,6 +295,13 @@ export default function Footer() {
               <a
                 href={`mailto:${OFFICE_EMAIL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+                data-cta="footer_email_office"
+                onClick={() => {
+                  trackCtaClick('footer_email_office');
+                  trackLeadSubmitted('email', 'footer_email_office', {
+                    target_email: OFFICE_EMAIL,
+                  });
+                }}
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
                   <Mail className="h-4 w-4 text-brand-mango" />

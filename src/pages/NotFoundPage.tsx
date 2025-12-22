@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Home, Search, Phone, ArrowLeft } from 'lucide-react';
 import MangoIcon from '../components/MangoIcon';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 export default function NotFoundPage() {
   return (
@@ -109,6 +110,13 @@ export default function NotFoundPage() {
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
               className="text-[#E8A33C] hover:text-[#FFB84D] font-semibold"
+              data-cta="not_found_call_office"
+              onClick={() => {
+                trackCtaClick('not_found_call_office');
+                trackLeadSubmitted('phone', 'not_found_call_office', {
+                  target_number: OFFICE_PHONE_TEL,
+                });
+              }}
             >
               {OFFICE_PHONE_DISPLAY}
             </a>

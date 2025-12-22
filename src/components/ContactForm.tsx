@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
+import { trackLeadSubmitted } from '../lib/analytics';
 
 const inputClasses = [
   'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
@@ -48,6 +49,7 @@ export default function ContactForm() {
       if (fnError) {
         throw fnError;
       }
+      trackLeadSubmitted('form', 'contact_form_submit');
       setStatus('success');
       form.reset();
     } catch (err) {

@@ -11,6 +11,7 @@ export default function PracticeAreasPage() {
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         variant="light"
+        phoneCtaId="practice_areas_hero_call_office"
       />
       <PracticeAreaCardGrid />
     </>

@@ -40,6 +40,7 @@ export default function BlogPage() {
         ctaLabel="Free Consultation"
         ctaHref="/contact"
         variant="light"
+        phoneCtaId="blog_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -160,6 +161,7 @@ export default function BlogPage() {
         primaryHref="/contact"
         secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="blog_cta_call_office"
       />
     </>
   );

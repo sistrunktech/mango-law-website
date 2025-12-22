@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Phone, Clock, CheckCircle, AlertTriangle } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 export default function WhatToDoAfterOVIPage() {
   return (
@@ -13,6 +14,7 @@ export default function WhatToDoAfterOVIPage() {
         compact
         alignLeft
         showQuickActions={false}
+        phoneCtaId="what_to_do_ovi_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -33,6 +35,13 @@ export default function WhatToDoAfterOVIPage() {
                   <a
                     href={`tel:${OFFICE_PHONE_TEL}`}
                     className="btn btn-primary inline-flex items-center gap-2"
+                    data-cta="what_to_do_ovi_call_office"
+                    onClick={() => {
+                      trackCtaClick('what_to_do_ovi_call_office');
+                      trackLeadSubmitted('phone', 'what_to_do_ovi_call_office', {
+                        target_number: OFFICE_PHONE_TEL,
+                      });
+                    }}
                   >
                     <Phone className="h-4 w-4" />
                     Call {OFFICE_PHONE_DISPLAY}

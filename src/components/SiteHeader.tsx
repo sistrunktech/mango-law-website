@@ -4,7 +4,7 @@ import { Menu, X, Phone, MapPinned } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
-import { trackCtaClick } from '../lib/analytics';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import type { LeadSource } from './LeadCaptureModal';
 
 interface SiteHeaderProps {
@@ -55,7 +55,12 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             href={`tel:${OFFICE_PHONE_TEL}`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-white/95 transition-opacity hover:opacity-90"
             data-cta="header_topbar_call"
-            onClick={() => trackCtaClick('header_topbar_call')}
+            onClick={() => {
+              trackCtaClick('header_topbar_call');
+              trackLeadSubmitted('phone', 'header_topbar_call', {
+                target_number: OFFICE_PHONE_TEL,
+              });
+            }}
 	          >
 	            <Phone className="h-4 w-4" aria-hidden="true" />
 	            <span>Call/Text Nick direct {OFFICE_PHONE_DISPLAY}</span>
@@ -175,7 +180,12 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               href={`tel:${OFFICE_PHONE_TEL}`}
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black/80 hover:text-brand-mango"
               data-cta="header_call"
-              onClick={() => trackCtaClick('header_call')}
+              onClick={() => {
+                trackCtaClick('header_call');
+                trackLeadSubmitted('phone', 'header_call', {
+                  target_number: OFFICE_PHONE_TEL,
+                });
+              }}
 	            >
 	              <Phone className="h-4 w-4" aria-hidden="true" />
 	              Call/Text Nick direct {OFFICE_PHONE_DISPLAY}
@@ -222,7 +232,12 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               className="text-xs font-semibold text-brand-black/80 transition-colors hover:text-brand-mango"
               aria-label="Call or text the office"
               data-cta="mobile_header_call"
-              onClick={() => trackCtaClick('mobile_header_call')}
+              onClick={() => {
+                trackCtaClick('mobile_header_call');
+                trackLeadSubmitted('phone', 'mobile_header_call', {
+                  target_number: OFFICE_PHONE_TEL,
+                });
+              }}
             >
               {OFFICE_PHONE_DISPLAY}
             </a>
@@ -285,7 +300,12 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   href={`tel:${OFFICE_PHONE_TEL}`}
                   className="flex items-center gap-2 px-4 text-sm font-medium text-brand-black"
                   data-cta="mobile_menu_call"
-                  onClick={() => trackCtaClick('mobile_menu_call')}
+                  onClick={() => {
+                    trackCtaClick('mobile_menu_call');
+                    trackLeadSubmitted('phone', 'mobile_menu_call', {
+                      target_number: OFFICE_PHONE_TEL,
+                    });
+                  }}
                 >
 	                  <Phone className="h-4 w-4 text-brand-mangoText" />
 	                  <span className="text-xs opacity-70">Call/Text Nick direct:</span>

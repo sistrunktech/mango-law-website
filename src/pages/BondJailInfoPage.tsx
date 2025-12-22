@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Phone, FileText, AlertCircle } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 export default function BondJailInfoPage() {
   return (
@@ -13,6 +14,7 @@ export default function BondJailInfoPage() {
         compact
         alignLeft
         showQuickActions={false}
+        phoneCtaId="bond_jail_info_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -32,6 +34,13 @@ export default function BondJailInfoPage() {
                   <a
                     href={`tel:${OFFICE_PHONE_TEL}`}
                     className="btn btn-primary inline-flex items-center gap-2"
+                    data-cta="bond_jail_info_call_office"
+                    onClick={() => {
+                      trackCtaClick('bond_jail_info_call_office');
+                      trackLeadSubmitted('phone', 'bond_jail_info_call_office', {
+                        target_number: OFFICE_PHONE_TEL,
+                      });
+                    }}
                   >
                     <Phone className="h-4 w-4" />
                     Call {OFFICE_PHONE_DISPLAY}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 export type LeadSource =
   | 'emergency_banner'
@@ -82,17 +83,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
       if (error) throw error;
 
-      if (typeof window !== 'undefined') {
-        const w = window as any;
-        w.dataLayer = w.dataLayer || [];
-        if (Array.isArray(w.dataLayer)) {
-          w.dataLayer.push({
-            event: 'lead_submitted',
-            lead_source: trigger,
-            checkpoint_id: checkpointId || null,
-          });
-        }
-      }
+      trackLeadSubmitted('form', trigger);
 
       setIsSuccess(true);
     } catch (error) {
@@ -124,6 +115,12 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
                 href={`tel:${OFFICE_PHONE_TEL}`}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white"
                 data-cta="lead_success_call"
+                onClick={() => {
+                  trackCtaClick('lead_success_call');
+                  trackLeadSubmitted('phone', 'lead_success_call', {
+                    target_number: OFFICE_PHONE_TEL,
+                  });
+                }}
               >
                 <Phone className="h-5 w-5" />
                 Call/Text {OFFICE_PHONE_DISPLAY}

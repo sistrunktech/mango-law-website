@@ -12,7 +12,7 @@ import type { DUICheckpoint } from '../data/checkpoints';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
-import { trackCtaClick } from '../lib/analytics';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -125,6 +125,7 @@ export default function DUICheckpointsPage() {
         ctaLabel="Know Your Rights"
         ctaHref="/ovi-dui-defense-delaware-oh"
         variant="light"
+        phoneCtaId="dui_checkpoints_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -149,7 +150,12 @@ export default function DUICheckpointsPage() {
                 <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
                   <a
                     href={`tel:${OFFICE_PHONE_TEL}`}
-                    onClick={() => trackCtaClick('checkpoint_banner_call')}
+                    onClick={() => {
+                      trackCtaClick('checkpoint_banner_call');
+                      trackLeadSubmitted('phone', 'checkpoint_banner_call', {
+                        target_number: OFFICE_PHONE_TEL,
+                      });
+                    }}
                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10"
                     data-cta="checkpoint_banner_call"
                     aria-label={`Call: ${OFFICE_PHONE_DISPLAY}`}
@@ -482,6 +488,7 @@ export default function DUICheckpointsPage() {
         primaryHref="/contact"
         secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="dui_checkpoints_cta_call_office"
       />
 
       <LeadCaptureModal

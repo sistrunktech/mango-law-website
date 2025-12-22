@@ -10,6 +10,7 @@ const LocationBlock = lazy(() => import('../components/LocationBlock'));
 const ContactForm = lazy(() => import('../components/ContactForm'));
 import DeferredSection from '../components/DeferredSection';
 import { SEO, localBusinessSchema } from '../lib/seo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 const whyChooseUs = [
@@ -51,6 +52,7 @@ export default function HomePage() {
         ctaLabel="Schedule a Case Review"
         ctaHref="/contact"
         phoneNumber={OFFICE_PHONE_DISPLAY}
+        phoneCtaId="home_hero_call_office"
       />
 
       {/* Why Choose Us Section */}
@@ -213,6 +215,13 @@ export default function HomePage() {
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}
                   className="group card card-interactive flex items-center gap-4 p-5"
+                  data-cta="home_contact_call_office"
+                  onClick={() => {
+                    trackCtaClick('home_contact_call_office');
+                    trackLeadSubmitted('phone', 'home_contact_call_office', {
+                      target_number: OFFICE_PHONE_TEL,
+                    });
+                  }}
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-mango/10 transition-all group-hover:bg-brand-mango/20 group-hover:scale-110">
                     <span className="text-2xl">📞</span>
@@ -225,6 +234,13 @@ export default function HomePage() {
                 <a
                   href="mailto:office@mango.law"
                   className="group card card-interactive flex items-center gap-4 p-5"
+                  data-cta="home_contact_email_office"
+                  onClick={() => {
+                    trackCtaClick('home_contact_email_office');
+                    trackLeadSubmitted('email', 'home_contact_email_office', {
+                      target_email: 'office@mango.law',
+                    });
+                  }}
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-leaf/20 group-hover:scale-110">
                     <span className="text-2xl">✉️</span>
@@ -258,6 +274,7 @@ export default function HomePage() {
             primaryHref="/contact"
             secondaryLabel={OFFICE_PHONE_DISPLAY}
             secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+            secondaryCtaId="home_cta_call_office"
           />
         </Suspense>
       </DeferredSection>

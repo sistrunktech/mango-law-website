@@ -6,6 +6,7 @@ import { SEO } from '../lib/seo';
 import { majorCities, surroundingCities, townships, counties } from '../data/serviceAreas';
 import { MapPin, Phone } from 'lucide-react';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 export default function ServiceAreasPage() {
   return (
@@ -19,6 +20,7 @@ export default function ServiceAreasPage() {
         eyebrow="Service Locations"
         title="Areas We Serve in Central Ohio"
         description="Comprehensive criminal defense representation throughout Delaware County, Franklin County, and surrounding communities in Central Ohio."
+        phoneCtaId="service_areas_hero_call_office"
       />
 
       <div className="container py-12">
@@ -103,6 +105,13 @@ export default function ServiceAreasPage() {
                   <a
                     href={`tel:${OFFICE_PHONE_TEL}`}
                     className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-black/20 bg-white px-6 py-3 font-bold text-brand-black transition-all hover:border-brand-mango hover:bg-brand-offWhite/50"
+                    data-cta="service_areas_call_office"
+                    onClick={() => {
+                      trackCtaClick('service_areas_call_office');
+                      trackLeadSubmitted('phone', 'service_areas_call_office', {
+                        target_number: OFFICE_PHONE_TEL,
+                      });
+                    }}
                   >
                     {OFFICE_PHONE_DISPLAY}
                   </a>
@@ -123,6 +132,7 @@ export default function ServiceAreasPage() {
         primaryHref="/contact"
         secondaryLabel={OFFICE_PHONE_DISPLAY}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="service_areas_cta_call_office"
       />
     </>
   );

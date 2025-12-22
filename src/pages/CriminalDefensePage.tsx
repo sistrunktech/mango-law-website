@@ -68,6 +68,7 @@ export default function CriminalDefensePage() {
         showQuickActions={false}
         alignLeft={true}
         compact={true}
+        phoneCtaId="criminal_defense_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -216,6 +217,7 @@ export default function CriminalDefensePage() {
         primaryHref="/contact"
         secondaryLabel={OFFICE_PHONE_DISPLAY}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="criminal_defense_cta_call_office"
       />
     </>
   );

@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 export default function OfCounselPage() {
   return (
@@ -13,6 +14,7 @@ export default function OfCounselPage() {
         ctaHref="/contact"
         variant="light"
         compact={true}
+        phoneCtaId="of_counsel_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -36,16 +38,30 @@ export default function OfCounselPage() {
                     <a
                       href={`tel:${OFFICE_PHONE_TEL}`}
                       className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
+                      data-cta="of_counsel_call_office"
+                      onClick={() => {
+                        trackCtaClick('of_counsel_call_office');
+                        trackLeadSubmitted('phone', 'of_counsel_call_office', {
+                          target_number: OFFICE_PHONE_TEL,
+                        });
+                      }}
                     >
                       <span className="text-lg">📞</span>
                       <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
                     </a>
                     <a
-                      href="mailto:office@mango.law"
+                      href={`mailto:${OFFICE_EMAIL}`}
                       className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
+                      data-cta="of_counsel_email_office"
+                      onClick={() => {
+                        trackCtaClick('of_counsel_email_office');
+                        trackLeadSubmitted('email', 'of_counsel_email_office', {
+                          target_email: OFFICE_EMAIL,
+                        });
+                      }}
                     >
                       <span className="text-lg">✉️</span>
-                      <span className="font-semibold">office@mango.law</span>
+                      <span className="font-semibold">{OFFICE_EMAIL}</span>
                     </a>
                   </div>
                 </div>
@@ -112,6 +128,7 @@ export default function OfCounselPage() {
         primaryHref="/contact"
         secondaryLabel="Call the office"
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="of_counsel_cta_call_office"
       />
     </>
   );

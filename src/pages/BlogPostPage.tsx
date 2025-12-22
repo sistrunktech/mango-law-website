@@ -1054,6 +1054,7 @@ export default function BlogPostPage() {
         primaryHref="/contact"
         secondaryLabel={OFFICE_PHONE_DISPLAY}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="blog_post_cta_call_office"
       />
     </>
   );

@@ -62,6 +62,7 @@ export default function SexCrimePage() {
         showQuickActions={false}
         alignLeft={true}
         compact={true}
+        phoneCtaId="sex_crime_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -211,6 +212,7 @@ export default function SexCrimePage() {
         primaryHref="/contact"
         secondaryLabel={OFFICE_PHONE_DISPLAY}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="sex_crime_cta_call_office"
       />
     </>
   );

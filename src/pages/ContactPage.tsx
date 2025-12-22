@@ -3,6 +3,7 @@ import ContactForm from '../components/ContactForm';
 import PageHero from '../components/PageHero';
 import LocationBlock from '../components/LocationBlock';
 import { SEO } from '../lib/seo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import {
   OFFICE_PHONE_DISPLAY,
   OFFICE_PHONE_TEL,
@@ -24,6 +25,7 @@ export default function ContactPage() {
         ctaLabel="Call/Text now"
         ctaHref={`tel:${OFFICE_PHONE_TEL}`}
         variant="light"
+        phoneCtaId="contact_hero_call_office"
       />
 
       <section className="bg-white">
@@ -81,6 +83,12 @@ export default function ContactPage() {
                   href={`tel:${OFFICE_PHONE_TEL}`}
                   className="btn btn-primary w-full"
                   data-cta="contact_page_call_office"
+                  onClick={() => {
+                    trackCtaClick('contact_page_call_office');
+                    trackLeadSubmitted('phone', 'contact_page_call_office', {
+                      target_number: OFFICE_PHONE_TEL,
+                    });
+                  }}
                 >
                   Call/Text {OFFICE_PHONE_DISPLAY}
                 </a>
@@ -88,6 +96,12 @@ export default function ContactPage() {
                   href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
                   className="btn btn-secondary w-full"
                   data-cta="contact_page_call_secondary"
+                  onClick={() => {
+                    trackCtaClick('contact_page_call_secondary');
+                    trackLeadSubmitted('phone', 'contact_page_call_secondary', {
+                      target_number: GENERAL_OFFICE_PHONE_TEL,
+                    });
+                  }}
                 >
                   Office {GENERAL_OFFICE_PHONE_DISPLAY}
                 </a>

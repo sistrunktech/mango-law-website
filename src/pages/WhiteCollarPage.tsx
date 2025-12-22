@@ -62,6 +62,7 @@ export default function WhiteCollarPage() {
         showQuickActions={false}
         alignLeft={true}
         compact={true}
+        phoneCtaId="white_collar_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -210,6 +211,7 @@ export default function WhiteCollarPage() {
         primaryHref="/contact"
         secondaryLabel={OFFICE_PHONE_DISPLAY}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="white_collar_cta_call_office"
       />
     </>
   );

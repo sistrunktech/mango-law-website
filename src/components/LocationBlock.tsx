@@ -1,5 +1,6 @@
 import GoogleMap from './GoogleMap';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 type Props = {
   eyebrow?: string;
@@ -24,7 +25,15 @@ export default function LocationBlock({
           <div className="mt-4 space-y-1 text-sm text-brand-black/80">
             <p>43 S Franklin St</p>
             <p>Delaware, OH 43015</p>
-            <a href={`tel:${OFFICE_PHONE_TEL}`} className="underline decoration-brand-black/20 underline-offset-4 hover:decoration-brand-mango" data-cta="location_call_office">
+            <a
+              href={`tel:${OFFICE_PHONE_TEL}`}
+              className="underline decoration-brand-black/20 underline-offset-4 hover:decoration-brand-mango"
+              data-cta="location_call_office"
+              onClick={() => {
+                trackCtaClick('location_call_office');
+                trackLeadSubmitted('phone', 'location_call_office', { target_number: OFFICE_PHONE_TEL });
+              }}
+            >
               Phone: {OFFICE_PHONE_DISPLAY}
             </a>
           </div>

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
 import ORCLabel from './ORCLabel';
 import { OFFICE_PHONE_DISPLAY } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 type Props = {
   eyebrow?: string;
@@ -13,6 +14,7 @@ type Props = {
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
   phoneNumber?: string;
+  phoneCtaId?: string;
   variant?: 'dark' | 'light';
   /** Image URL for hero background - ready for FAL.ai generated assets */
   backgroundUrl?: string;
@@ -58,6 +60,7 @@ export default function PageHero({
   secondaryCtaLabel,
   secondaryCtaHref,
   phoneNumber = OFFICE_PHONE_DISPLAY,
+  phoneCtaId = 'page_hero_call',
   variant = 'dark',
   backgroundUrl,
   attorneyPhotoUrl,
@@ -187,6 +190,14 @@ export default function PageHero({
               <a
                 href={`tel:${phoneNumber.replace(/\D/g, '')}`}
                 className="group inline-flex items-center gap-2 rounded-lg border-2 border-brand-offWhite/30 px-8 py-4 text-lg font-bold text-brand-offWhite transition-all hover:border-brand-mango hover:text-brand-mango"
+                data-cta={phoneCtaId}
+                onClick={() => {
+                  const telNumber = phoneNumber.replace(/\D/g, '');
+                  trackCtaClick(phoneCtaId);
+                  trackLeadSubmitted('phone', phoneCtaId, {
+                    target_number: telNumber,
+                  });
+                }}
               >
                 <Phone className="h-5 w-5" />
                 <span>Call/Text {phoneNumber}</span>

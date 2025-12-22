@@ -63,6 +63,7 @@ export default function ProtectionOrderPage() {
         alignLeft={true}
         compact={true}
         orcSection="3113.31"
+        phoneCtaId="protection_order_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -164,6 +165,7 @@ export default function ProtectionOrderPage() {
         primaryHref="/contact"
         secondaryLabel={OFFICE_PHONE_DISPLAY}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="protection_order_cta_call_office"
       />
     </>
   );
