@@ -11,7 +11,7 @@ const ContactForm = lazy(() => import('../components/ContactForm'));
 import DeferredSection from '../components/DeferredSection';
 import { SEO, localBusinessSchema } from '../lib/seo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 const whyChooseUs = [
   {
@@ -232,13 +232,13 @@ export default function HomePage() {
 	                  </div>
 	                </a>
                 <a
-                  href="mailto:office@mango.law"
+                  href={`mailto:${OFFICE_EMAIL}`}
                   className="group card card-interactive flex items-center gap-4 p-5"
                   data-cta="home_contact_email_office"
                   onClick={() => {
                     trackCtaClick('home_contact_email_office');
                     trackLeadSubmitted('email', 'home_contact_email_office', {
-                      target_email: 'office@mango.law',
+                      target_email: OFFICE_EMAIL,
                     });
                   }}
                 >
@@ -247,7 +247,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-brand-black/60">Email us</p>
-                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-leaf">office@mango.law</p>
+                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-leaf">{OFFICE_EMAIL}</p>
                   </div>
                 </a>
               </div>

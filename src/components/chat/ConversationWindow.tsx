@@ -21,14 +21,18 @@ interface ConversationWindowProps {
 }
 
 export default function ConversationWindow({ onClose, bottomOffsetClass = 'bottom-6' }: ConversationWindowProps) {
-  const [currentStep, setCurrentStep] = useState<'name' | 'phone' | 'message' | 'confirmation' | 'followup'>('name');
+  const [currentStep, setCurrentStep] = useState<'name' | 'phone' | 'email' | 'message' | 'confirmation' | 'followup'>(
+    'name',
+  );
   const [isTyping, setIsTyping] = useState(true);
   const [conversation, setConversation] = useState<ConversationStep[]>([]);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [nameError, setNameError] = useState('');
   const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [messageError, setMessageError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
@@ -54,6 +58,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           setCurrentStep(data.currentStep || 'name');
           setName(data.name || '');
           setPhone(data.phone || '');
+          setEmail(data.email || '');
           setMessage(data.message || '');
         } else {
           localStorage.removeItem('mango-chat-session');
@@ -67,18 +72,19 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
   // Save conversation to localStorage
   useEffect(() => {
-    if (conversation.length > 0 || name || phone || message) {
+    if (conversation.length > 0 || name || phone || email || message) {
       const sessionData = {
         conversation,
         currentStep,
         name,
         phone,
+        email,
         message,
         lastActivity: new Date().toISOString(),
       };
       localStorage.setItem('mango-chat-session', JSON.stringify(sessionData));
     }
-  }, [conversation, currentStep, name, phone, message]);
+  }, [conversation, currentStep, name, phone, email, message]);
 
   // Reset inactivity timer
   useEffect(() => {
@@ -180,6 +186,29 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
     setTimeout(() => {
       setIsTyping(false);
+      addBotMessage("Thanks. What's the best email address to reach you?");
+      setCurrentStep('email');
+    }, 600);
+  };
+
+  const handleEmailSubmit = () => {
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!trimmedEmail) {
+      setEmailError('Please enter your email');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+
+    setEmailError('');
+    addUserMessage(trimmedEmail);
+    setIsTyping(true);
+
+    setTimeout(() => {
+      setIsTyping(false);
       addBotMessage("Got it. What's going on today? How can we help?");
       setCurrentStep('message');
     }, 600);
@@ -218,7 +247,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
         body: JSON.stringify({
           name: name.trim(),
           phone: phone.replace(/\D/g, ''),
-          email: null,
+          email: email.trim().toLowerCase(),
           initial_message: trimmedMessage,
           conversation_context: conversationContext,
           source: 'chat_widget',
@@ -382,6 +411,26 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
               <button
                 onClick={handlePhoneSubmit}
                 disabled={phone.replace(/\D/g, '').length < 10 || isTyping}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span>Continue</span>
+                <Send size={14} />
+              </button>
+            </div>
+          )}
+
+          {currentStep === 'email' && (
+            <div className="space-y-3">
+              <TextInput
+                value={email}
+                onChange={setEmail}
+                onSubmit={handleEmailSubmit}
+                placeholder="you@example.com"
+                error={emailError}
+              />
+              <button
+                onClick={handleEmailSubmit}
+                disabled={!email.trim() || isTyping}
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>Continue</span>

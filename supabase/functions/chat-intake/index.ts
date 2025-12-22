@@ -21,6 +21,112 @@ interface LogContext {
   [key: string]: unknown;
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function parseEmailList(value: string | undefined | null): string[] {
+  if (!value) return [];
+  return value
+    .split(",")
+    .map((v) => v.trim())
+    .filter(Boolean);
+}
+
+function formatFrom(fromEmail: string): string {
+  if (fromEmail.includes("<") && fromEmail.includes(">")) return fromEmail;
+  return `Mango Law LLC <${fromEmail}>`;
+}
+
+function buildAdminEmailHtml(args: {
+  sourceLabel: string;
+  name: string;
+  email: string;
+  phone?: string | null;
+  message: string;
+  conversationContext?: string | null;
+  ip: string;
+  userAgent: string;
+}): string {
+  const safeSource = escapeHtml(args.sourceLabel);
+  const safeName = escapeHtml(args.name);
+  const safeEmail = escapeHtml(args.email);
+  const safePhone = escapeHtml(args.phone || "Not provided");
+  const safeMsg = escapeHtml(args.message).replace(/\n/g, "<br>");
+  const safeContext = args.conversationContext
+    ? escapeHtml(args.conversationContext)
+    : null;
+  const safeIp = escapeHtml(args.ip);
+  const safeUa = escapeHtml(args.userAgent);
+
+  return `
+    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#F9F7F4; padding:24px;">
+      <div style="max-width:680px; margin:0 auto; background:#ffffff; border:1px solid #eee; border-radius:16px; overflow:hidden;">
+        <div style="padding:18px 22px; background:linear-gradient(135deg,#0F6E63 0%,#F4A300 100%); color:#0A0A0A;">
+          <div style="font-weight:800; letter-spacing:0.02em;">Mango Law LLC</div>
+          <div style="font-size:14px; opacity:0.9;">New ${safeSource} lead</div>
+        </div>
+        <div style="padding:22px;">
+          <table style="width:100%; border-collapse:collapse;">
+            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Name</td><td style="padding:8px 0; color:#111;">${safeName}</td></tr>
+            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Email</td><td style="padding:8px 0; color:#111;"><a href="mailto:${safeEmail}" style="color:#0F6E63; font-weight:700; text-decoration:none;">${safeEmail}</a></td></tr>
+            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Phone</td><td style="padding:8px 0; color:#111;">${safePhone}</td></tr>
+          </table>
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid #eee;">
+            <div style="font-weight:800; margin-bottom:8px;">Message</div>
+            <div style="font-size:14px; line-height:1.5; color:#111;">${safeMsg}</div>
+          </div>
+          ${safeContext ? `
+            <div style="margin-top:16px; padding-top:16px; border-top:1px solid #eee;">
+              <div style="font-weight:800; margin-bottom:8px;">Conversation context</div>
+              <pre style="white-space:pre-wrap; background:#f6f6f6; padding:12px; border-radius:12px; border:1px solid #eee; color:#111; font-size:12px; line-height:1.4;">${safeContext}</pre>
+            </div>
+          ` : ""}
+          <div style="margin-top:18px; padding-top:12px; border-top:1px solid #f0f0f0; font-size:12px; color:#666;">
+            IP: ${safeIp}<br>
+            UA: ${safeUa}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function buildLeadConfirmationHtml(args: { name: string }): string {
+  const safeName = escapeHtml(args.name);
+  return `
+    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#F9F7F4; padding:24px;">
+      <div style="max-width:680px; margin:0 auto; background:#ffffff; border:1px solid #eee; border-radius:16px; overflow:hidden;">
+        <div style="padding:18px 22px; background:linear-gradient(135deg,#0F6E63 0%,#F4A300 100%); color:#0A0A0A;">
+          <div style="font-weight:800; letter-spacing:0.02em;">Mango Law LLC</div>
+          <div style="font-size:14px; opacity:0.9;">We received your message</div>
+        </div>
+        <div style="padding:22px; color:#111;">
+          <p style="margin:0 0 12px;">Hi ${safeName},</p>
+          <p style="margin:0 0 12px; line-height:1.5;">
+            Thanks for reaching out. We received your message and will respond as soon as possible.
+          </p>
+          <div style="margin:16px 0; padding:14px 16px; border:1px solid #eee; border-radius:12px; background:#fff;">
+            <div style="font-weight:800; margin-bottom:6px;">Need a quicker response?</div>
+            <div style="font-size:14px; line-height:1.6;">
+              Call/Text: <a href="tel:7404176191" style="color:#0F6E63; font-weight:800; text-decoration:none;">(740) 417-6191</a><br>
+              Email: <a href="mailto:office@mango.law" style="color:#0F6E63; font-weight:800; text-decoration:none;">office@mango.law</a>
+            </div>
+          </div>
+          <p style="margin:0; font-size:12px; color:#666; line-height:1.5;">
+            This email confirms receipt only. No attorney-client relationship is formed until a written engagement agreement is signed.
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function log(level: string, message: string, context?: LogContext) {
   const timestamp = new Date().toISOString();
   const logEntry = {
@@ -162,7 +268,7 @@ Deno.serve(async (req: Request) => {
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseServiceKey = Deno.env.get("SERVICE_ROLE_KEY")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const rateLimit = await checkRateLimit(supabase, ip, "/chat-intake", 1, 20);
@@ -248,9 +354,10 @@ Deno.serve(async (req: Request) => {
     }
 
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
-    const fromEmail = Deno.env.get("FROM_EMAIL") || "noreply@example.com";
-    const chatNotifyTo = Deno.env.get("CHAT_LEAD_NOTIFY_TO") || Deno.env.get("CONTACT_NOTIFY_TO") || "admin@example.com";
-    const chatNotifyCC = Deno.env.get("CHAT_LEAD_NOTIFY_CC");
+    const fromEmail = formatFrom(Deno.env.get("FROM_EMAIL") || "noreply@example.com");
+    const chatNotifyTo = parseEmailList(Deno.env.get("CHAT_LEAD_NOTIFY_TO") || Deno.env.get("CONTACT_NOTIFY_TO")) ||
+      ["admin@example.com"];
+    const chatNotifyBcc = parseEmailList(Deno.env.get("CHAT_LEAD_NOTIFY_BCC") || Deno.env.get("CHAT_LEAD_NOTIFY_CC"));
     const sourceLabel = Deno.env.get("CHAT_LEAD_SOURCE_LABEL") || "Chat Widget";
     const enableSmsAlerts = Deno.env.get("ENABLE_SMS_LEAD_ALERTS") === "true";
     const smsGatewayOffice = Deno.env.get("SMS_GATEWAY_OFFICE");
@@ -268,23 +375,20 @@ Deno.serve(async (req: Request) => {
           },
           body: JSON.stringify({
             from: fromEmail,
-            to: [chatNotifyTo],
-            cc: chatNotifyCC ? [chatNotifyCC] : undefined,
+            to: chatNotifyTo.length ? chatNotifyTo : ["admin@example.com"],
+            bcc: chatNotifyBcc.length ? chatNotifyBcc : undefined,
+            reply_to: intakeData.email.trim().toLowerCase(),
             subject: `New ${sourceLabel} Lead from ${intakeData.name}`,
-            html: `
-              <h2>New ${sourceLabel} Lead</h2>
-              <p><strong>Name:</strong> ${intakeData.name}</p>
-              <p><strong>Email:</strong> ${intakeData.email || "Not provided"}</p>
-              <p><strong>Phone:</strong> ${intakeData.phone || "Not provided"}</p>
-              <p><strong>Initial Message:</strong></p>
-              <p>${intakeData.initial_message.replace(/\n/g, "<br>")}</p>
-              ${intakeData.conversation_context ? `
-              <p><strong>Conversation Context:</strong></p>
-              <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px;">${intakeData.conversation_context}</pre>
-              ` : ""}
-              <hr>
-              <p><small>IP: ${ip} | User Agent: ${userAgent}</small></p>
-            `,
+            html: buildAdminEmailHtml({
+              sourceLabel,
+              name: intakeData.name.trim(),
+              email: intakeData.email.trim().toLowerCase(),
+              phone: intakeData.phone?.trim() || null,
+              message: intakeData.initial_message.trim(),
+              conversationContext: intakeData.conversation_context || null,
+              ip,
+              userAgent,
+            }),
           }),
         });
 
@@ -293,6 +397,27 @@ Deno.serve(async (req: Request) => {
           log("error", "Email notification failed", { ...logContext, error: errorText });
         } else {
           log("info", "Email notification sent successfully", logContext);
+        }
+
+        const confirmationResponse = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${resendApiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: fromEmail,
+            to: [intakeData.email.trim().toLowerCase()],
+            subject: "We received your message — Mango Law LLC",
+            html: buildLeadConfirmationHtml({ name: intakeData.name.trim() }),
+          }),
+        });
+
+        if (!confirmationResponse.ok) {
+          const errorText = await confirmationResponse.text();
+          log("error", "Lead confirmation email failed", { ...logContext, error: errorText });
+        } else {
+          log("info", "Lead confirmation email sent successfully", logContext);
         }
 
         // Send SMS-style notifications via email-to-SMS gateways

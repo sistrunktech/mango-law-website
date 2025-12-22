@@ -7,6 +7,7 @@ interface ContactFormData {
   phone: string;
   message: string;
   honeypot?: string;
+  honey?: string;
 }
 
 interface LogContext {
@@ -18,6 +19,100 @@ interface LogContext {
   error?: string;
   duration?: number;
   [key: string]: unknown;
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function parseEmailList(value: string | undefined | null): string[] {
+  if (!value) return [];
+  return value
+    .split(",")
+    .map((v) => v.trim())
+    .filter(Boolean);
+}
+
+function formatFrom(fromEmail: string): string {
+  if (fromEmail.includes("<") && fromEmail.includes(">")) return fromEmail;
+  return `Mango Law LLC <${fromEmail}>`;
+}
+
+function buildAdminEmailHtml(args: {
+  name: string;
+  email: string;
+  phone?: string | null;
+  message: string;
+  ip: string;
+  userAgent: string;
+}): string {
+  const safeName = escapeHtml(args.name);
+  const safeEmail = escapeHtml(args.email);
+  const safePhone = escapeHtml(args.phone || "Not provided");
+  const safeMessage = escapeHtml(args.message).replace(/\n/g, "<br>");
+  const safeIp = escapeHtml(args.ip);
+  const safeUa = escapeHtml(args.userAgent);
+
+  return `
+    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#F9F7F4; padding:24px;">
+      <div style="max-width:680px; margin:0 auto; background:#ffffff; border:1px solid #eee; border-radius:16px; overflow:hidden;">
+        <div style="padding:18px 22px; background:linear-gradient(135deg,#0F6E63 0%,#F4A300 100%); color:#0A0A0A;">
+          <div style="font-weight:800; letter-spacing:0.02em;">Mango Law LLC</div>
+          <div style="font-size:14px; opacity:0.9;">New contact form submission</div>
+        </div>
+        <div style="padding:22px;">
+          <table style="width:100%; border-collapse:collapse;">
+            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Name</td><td style="padding:8px 0; color:#111;">${safeName}</td></tr>
+            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Email</td><td style="padding:8px 0; color:#111;"><a href="mailto:${safeEmail}" style="color:#0F6E63; font-weight:700; text-decoration:none;">${safeEmail}</a></td></tr>
+            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Phone</td><td style="padding:8px 0; color:#111;">${safePhone}</td></tr>
+          </table>
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid #eee;">
+            <div style="font-weight:800; margin-bottom:8px;">Message</div>
+            <div style="font-size:14px; line-height:1.5; color:#111;">${safeMessage}</div>
+          </div>
+          <div style="margin-top:18px; padding-top:12px; border-top:1px solid #f0f0f0; font-size:12px; color:#666;">
+            IP: ${safeIp}<br>
+            UA: ${safeUa}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function buildLeadConfirmationHtml(args: { name: string }): string {
+  const safeName = escapeHtml(args.name);
+  return `
+    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#F9F7F4; padding:24px;">
+      <div style="max-width:680px; margin:0 auto; background:#ffffff; border:1px solid #eee; border-radius:16px; overflow:hidden;">
+        <div style="padding:18px 22px; background:linear-gradient(135deg,#0F6E63 0%,#F4A300 100%); color:#0A0A0A;">
+          <div style="font-weight:800; letter-spacing:0.02em;">Mango Law LLC</div>
+          <div style="font-size:14px; opacity:0.9;">We received your message</div>
+        </div>
+        <div style="padding:22px; color:#111;">
+          <p style="margin:0 0 12px;">Hi ${safeName},</p>
+          <p style="margin:0 0 12px; line-height:1.5;">
+            Thanks for reaching out. We received your message and will respond as soon as possible.
+          </p>
+          <div style="margin:16px 0; padding:14px 16px; border:1px solid #eee; border-radius:12px; background:#fff;">
+            <div style="font-weight:800; margin-bottom:6px;">Need a quicker response?</div>
+            <div style="font-size:14px; line-height:1.6;">
+              Call/Text: <a href="tel:7404176191" style="color:#0F6E63; font-weight:800; text-decoration:none;">(740) 417-6191</a><br>
+              Email: <a href="mailto:office@mango.law" style="color:#0F6E63; font-weight:800; text-decoration:none;">office@mango.law</a>
+            </div>
+          </div>
+          <p style="margin:0; font-size:12px; color:#666; line-height:1.5;">
+            This email confirms receipt only. No attorney-client relationship is formed until a written engagement agreement is signed.
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function log(level: string, message: string, context?: LogContext) {
@@ -161,7 +256,7 @@ Deno.serve(async (req: Request) => {
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseServiceKey = Deno.env.get("SERVICE_ROLE_KEY")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const rateLimit = await checkRateLimit(supabase, ip, "/submit-contact", 1, 10);
@@ -196,7 +291,7 @@ Deno.serve(async (req: Request) => {
 
     const formData: ContactFormData = await req.json();
 
-    if (formData.honeypot) {
+    if (formData.honeypot || formData.honey) {
       log("warn", "Honeypot triggered (likely spam)", { ...logContext, status: 400 });
       return new Response(
         JSON.stringify({ error: "Invalid submission" }),
@@ -246,32 +341,37 @@ Deno.serve(async (req: Request) => {
     }
 
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
-    const fromEmail = Deno.env.get("FROM_EMAIL") || "noreply@example.com";
-    const notifyTo = Deno.env.get("CONTACT_NOTIFY_TO") || "admin@example.com";
+    const fromEmail = formatFrom(Deno.env.get("FROM_EMAIL") || "noreply@example.com");
+    const notifyTo = parseEmailList(Deno.env.get("CONTACT_NOTIFY_TO")) || ["admin@example.com"];
+    const notifyBcc = parseEmailList(
+      Deno.env.get("CONTACT_NOTIFY_BCC") || Deno.env.get("CHAT_LEAD_NOTIFY_CC"),
+    );
 
     if (resendApiKey) {
       try {
+        const adminEmailBody = {
+          from: fromEmail,
+          to: notifyTo.length ? notifyTo : ["admin@example.com"],
+          bcc: notifyBcc.length ? notifyBcc : undefined,
+          reply_to: formData.email.trim().toLowerCase(),
+          subject: `New contact request from ${formData.name.trim()}`,
+          html: buildAdminEmailHtml({
+            name: formData.name.trim(),
+            email: formData.email.trim().toLowerCase(),
+            phone: formData.phone?.trim() || null,
+            message: formData.message.trim(),
+            ip,
+            userAgent,
+          }),
+        };
+
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${resendApiKey}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            from: fromEmail,
-            to: [notifyTo],
-            subject: `New Contact Form Submission from ${formData.name}`,
-            html: `
-              <h2>New Contact Form Submission</h2>
-              <p><strong>Name:</strong> ${formData.name}</p>
-              <p><strong>Email:</strong> ${formData.email}</p>
-              <p><strong>Phone:</strong> ${formData.phone || "Not provided"}</p>
-              <p><strong>Message:</strong></p>
-              <p>${formData.message.replace(/\n/g, "<br>")}</p>
-              <hr>
-              <p><small>IP: ${ip} | User Agent: ${userAgent}</small></p>
-            `,
-          }),
+          body: JSON.stringify(adminEmailBody),
         });
 
         if (!emailResponse.ok) {
@@ -279,6 +379,27 @@ Deno.serve(async (req: Request) => {
           log("error", "Email notification failed", { ...logContext, error: errorText });
         } else {
           log("info", "Email notification sent successfully", logContext);
+        }
+
+        const confirmationResponse = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${resendApiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: fromEmail,
+            to: [formData.email.trim().toLowerCase()],
+            subject: "We received your message — Mango Law LLC",
+            html: buildLeadConfirmationHtml({ name: formData.name.trim() }),
+          }),
+        });
+
+        if (!confirmationResponse.ok) {
+          const errorText = await confirmationResponse.text();
+          log("error", "Lead confirmation email failed", { ...logContext, error: errorText });
+        } else {
+          log("info", "Lead confirmation email sent successfully", logContext);
         }
       } catch (emailError) {
         log("error", "Email sending exception", {

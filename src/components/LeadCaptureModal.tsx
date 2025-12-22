@@ -68,17 +68,17 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from('leads').insert({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        county: formData.county || null,
-        urgency: formData.urgency,
-        message: formData.message || null,
-        lead_source: trigger,
-        checkpoint_id: checkpointId || null,
-        user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : null,
-        referrer: typeof document !== 'undefined' ? document.referrer || null : null,
+      const { error } = await supabase.functions.invoke('submit-lead', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          county: formData.county || null,
+          urgency: formData.urgency,
+          message: formData.message || null,
+          lead_source: trigger,
+          checkpoint_id: checkpointId || null,
+        },
       });
 
       if (error) throw error;
