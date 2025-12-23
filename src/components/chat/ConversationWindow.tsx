@@ -7,6 +7,7 @@ import PhoneInput from './PhoneInput';
 import { OFFICE_PHONE_DISPLAY, GENERAL_OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
 import { trackLeadSubmitted } from '../../lib/analytics';
+import TurnstileWidget from '../TurnstileWidget';
 
 interface ConversationStep {
   id: string;
@@ -37,6 +38,8 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
   const [showFollowup, setShowFollowup] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileSiteKey = (import.meta as any).env?.VITE_TURNSTILE_SITE_KEY as string | undefined;
 
   const conversationRef = useRef<HTMLDivElement>(null);
   const followupTimerRef = useRef<number>();
@@ -230,6 +233,13 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
     setIsTyping(true);
     setIsSubmitting(true);
 
+    if (turnstileSiteKey && !turnstileToken) {
+      setIsTyping(false);
+      setIsSubmitting(false);
+      setSubmissionError('Please complete the verification step and try again.');
+      return;
+    }
+
     // Build conversation context
     const conversationContext = conversation
       .map((step) => `Bot: ${typeof step.botMessage === 'string' ? step.botMessage : ''}\nUser: ${step.userResponse || ''}`)
@@ -251,11 +261,19 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           initial_message: trimmedMessage,
           conversation_context: conversationContext,
           source: 'chat_widget',
+          turnstile_token: turnstileToken,
         }),
       });
 
       if (!response.ok) {
-        throw new Error(`Submission failed: ${response.status}`);
+        let details: string | undefined;
+        try {
+          const data = await response.json();
+          details = typeof data?.error === 'string' ? data.error : undefined;
+        } catch {
+          // ignore
+        }
+        throw new Error(details ? `Submission failed: ${details}` : `Submission failed: ${response.status}`);
       }
 
       trackLeadSubmitted('chat', 'chat_widget', {
@@ -301,7 +319,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
       console.error('Chat submission error:', error);
       setIsTyping(false);
       setIsSubmitting(false);
-      setSubmissionError(`We had trouble sending your message. Please call or text us directly at ${OFFICE_PHONE_DISPLAY}.`);
+      setSubmissionError(
+        error instanceof Error && error.message
+          ? error.message
+          : `We had trouble sending your message. Please call or text us directly at ${OFFICE_PHONE_DISPLAY}.`,
+      );
 
       const errorMessage = (
         <div>
@@ -363,6 +385,14 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           <X size={18} />
         </button>
       </div>
+      {turnstileSiteKey ? (
+        <div className="border-b border-brand-black/10 bg-white px-4 py-3">
+          <TurnstileWidget siteKey={turnstileSiteKey} onToken={setTurnstileToken} />
+          {submissionError ? (
+            <p className="mt-2 text-xs text-red-600">{submissionError}</p>
+          ) : null}
+        </div>
+      ) : null}
 
       {/* Conversation */}
       <div ref={conversationRef} className="flex-1 overflow-y-auto p-4 space-y-4">

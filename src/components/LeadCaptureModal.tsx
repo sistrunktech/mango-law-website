@@ -3,6 +3,8 @@ import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/phone';
+import TurnstileWidget from './TurnstileWidget';
 
 export type LeadSource =
   | 'emergency_banner'
@@ -37,10 +39,14 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
     county: '',
     urgency: 'exploring',
     message: '',
+    honeypot: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const turnstileSiteKey = (import.meta as any).env?.VITE_TURNSTILE_SITE_KEY as string | undefined;
 
   if (!isOpen) return null;
 
@@ -49,9 +55,13 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(formData.email)) newErrors.email = 'Invalid email format';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim().toLowerCase())) newErrors.email = 'Invalid email format';
     if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
-    else if (!/^[\\d\\s\\-\\(\\)]+$/.test(formData.phone)) newErrors.phone = 'Invalid phone format';
+    else if (!isLikelyValidPhone(formData.phone)) newErrors.phone = 'Invalid phone format';
+
+    if (turnstileSiteKey && !turnstileToken) {
+      newErrors.turnstile = 'Please complete the verification step';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -66,18 +76,22 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
       return;
     }
 
+    const normalizedPhone = normalizePhoneDigits(formData.phone);
+
     setIsSubmitting(true);
     try {
       const { error } = await supabase.functions.invoke('submit-lead', {
         body: {
           name: formData.name,
           email: formData.email,
-          phone: formData.phone,
+          phone: normalizedPhone,
           county: formData.county || null,
           urgency: formData.urgency,
           message: formData.message || null,
           lead_source: trigger,
           checkpoint_id: checkpointId || null,
+          honeypot: formData.honeypot,
+          turnstile_token: turnstileToken,
         },
       });
 
@@ -96,7 +110,13 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === 'phone') {
+      setFormData((prev) => ({ ...prev, phone: formatUsPhone(value) }));
+    } else if (name === 'email') {
+      setFormData((prev) => ({ ...prev, email: value }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
@@ -178,6 +198,8 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
                 errors.email ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
               }`}
               placeholder="you@example.com"
+              autoCapitalize="none"
+              autoCorrect="off"
             />
             {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
           </div>
@@ -196,6 +218,27 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             />
             {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
           </div>
+
+          {/* Honeypot */}
+          <div className="hidden" aria-hidden="true">
+            <label>
+              Do not fill this field
+              <input
+                name="honeypot"
+                tabIndex={-1}
+                autoComplete="off"
+                value={formData.honeypot}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          {turnstileSiteKey ? (
+            <div className="space-y-1">
+              <TurnstileWidget siteKey={turnstileSiteKey} onToken={setTurnstileToken} />
+              {errors.turnstile && <p className="text-xs text-red-600">{errors.turnstile}</p>}
+            </div>
+          ) : null}
 
           <div>
             <label className="mb-1 block text-sm font-medium text-brand-black">County</label>

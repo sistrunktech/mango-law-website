@@ -2,6 +2,8 @@ import { FormEvent, useState } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { trackLeadSubmitted } from '../lib/analytics';
+import { normalizePhoneDigits } from '../lib/phone';
+import TurnstileWidget from './TurnstileWidget';
 
 const inputClasses = [
   'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
@@ -16,6 +18,8 @@ const labelClasses = 'block text-sm font-semibold text-brand-black';
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileSiteKey = (import.meta as any).env?.VITE_TURNSTILE_SITE_KEY as string | undefined;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -24,15 +28,21 @@ export default function ContactForm() {
       return;
     }
 
+    if (turnstileSiteKey && !turnstileToken) {
+      setError('Please complete the verification step and try again.');
+      return;
+    }
+
     const form = event.currentTarget;
     const formData = new FormData(form);
     const payload = {
       name: formData.get('name'),
       email: formData.get('email'),
-      phone: formData.get('phone'),
+      phone: formData.get('phone') ? normalizePhoneDigits(String(formData.get('phone'))) : null,
       message: formData.get('message'),
       how_heard: formData.get('how_heard'),
       honey: formData.get('honey'),
+      turnstile_token: turnstileToken,
     };
 
     if (payload.honey) {
@@ -174,6 +184,12 @@ export default function ContactForm() {
           <input name="honey" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
+
+      {turnstileSiteKey ? (
+        <div className="rounded-xl border border-brand-black/10 bg-white p-4">
+          <TurnstileWidget siteKey={turnstileSiteKey} onToken={setTurnstileToken} />
+        </div>
+      ) : null}
 
       {/* Error message */}
       {error && (

@@ -11,6 +11,7 @@ interface LeadCaptureData {
   urgency?: string | null;
   message?: string | null;
   honeypot?: string;
+  turnstile_token?: string | null;
 }
 
 interface LogContext {
@@ -59,6 +60,38 @@ function validateEmail(email: string): boolean {
 function validatePhone(phone: string): boolean {
   const cleaned = phone.replace(/\D/g, "");
   return cleaned.length >= 10 && cleaned.length <= 15;
+}
+
+function normalizePhoneForStorage(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.length === 11 && digits.startsWith("1")) return digits.slice(1);
+  return digits;
+}
+
+function formatPhoneForDisplay(phone: string): string {
+  const digits = normalizePhoneForStorage(phone);
+  if (digits.length === 10) return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  return digits || phone;
+}
+
+async function verifyTurnstile(args: { token: string; ip: string }): Promise<boolean> {
+  const secret = Deno.env.get("TURNSTILE_SECRET_KEY");
+  if (!secret) return true;
+
+  const body = new URLSearchParams();
+  body.set("secret", secret);
+  body.set("response", args.token);
+  if (args.ip && args.ip !== "unknown") body.set("remoteip", args.ip);
+
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body,
+  });
+
+  if (!res.ok) return false;
+  const json = await res.json().catch(() => null);
+  return Boolean(json?.success);
 }
 
 function getClientIp(req: Request): string {
@@ -310,43 +343,64 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    if (!payload.name?.trim() || !payload.email?.trim() || !payload.phone?.trim() || !payload.lead_source?.trim()) {
-      log("warn", "Missing required fields", { ...logContext, status: 400 });
-      return new Response(
-        JSON.stringify({ error: "Missing required fields: name, email, phone, lead_source are required" }),
-        { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
-      );
-    }
+	    if (!payload.name?.trim() || !payload.email?.trim() || !payload.phone?.trim() || !payload.lead_source?.trim()) {
+	      log("warn", "Missing required fields", { ...logContext, status: 400 });
+	      return new Response(
+	        JSON.stringify({ error: "Missing required fields: name, email, phone, lead_source are required" }),
+	        { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+	      );
+	    }
 
-    const email = payload.email.trim().toLowerCase();
-    if (!validateEmail(email)) {
-      log("warn", "Invalid email format", { ...logContext, email, status: 400 });
-      return new Response(
-        JSON.stringify({ error: "Invalid email format" }),
-        { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
-      );
-    }
+	    const turnstileSecret = Deno.env.get("TURNSTILE_SECRET_KEY");
+	    if (turnstileSecret) {
+	      const token = String(payload.turnstile_token || "").trim();
+	      if (!token) {
+	        log("warn", "Missing Turnstile token", { ...logContext, status: 400 });
+	        return new Response(
+	          JSON.stringify({ error: "Verification required" }),
+	          { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+	        );
+	      }
+	      const ok = await verifyTurnstile({ token, ip });
+	      if (!ok) {
+	        log("warn", "Turnstile verification failed", { ...logContext, status: 400 });
+	        return new Response(
+	          JSON.stringify({ error: "Verification failed" }),
+	          { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+	        );
+	      }
+	    }
 
-    if (!validatePhone(payload.phone)) {
-      log("warn", "Invalid phone format", { ...logContext, status: 400 });
-      return new Response(
-        JSON.stringify({ error: "Invalid phone number format" }),
-        { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
-      );
-    }
+	    const email = payload.email.trim().toLowerCase();
+	    if (!validateEmail(email)) {
+	      log("warn", "Invalid email format", { ...logContext, email, status: 400 });
+	      return new Response(
+	        JSON.stringify({ error: "Invalid email format" }),
+	        { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+	      );
+	    }
+
+	    const normalizedPhone = normalizePhoneForStorage(payload.phone);
+	    if (!validatePhone(normalizedPhone)) {
+	      log("warn", "Invalid phone format", { ...logContext, status: 400 });
+	      return new Response(
+	        JSON.stringify({ error: "Invalid phone number format" }),
+	        { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+	      );
+	    }
 
     const checkpointId = payload.checkpoint_id && isUuid(payload.checkpoint_id) ? payload.checkpoint_id : null;
     const referrer = req.headers.get("referer") || null;
 
-    const { error: dbError } = await supabase.from("leads").insert({
-      name: payload.name.trim(),
-      email,
-      phone: payload.phone.trim(),
-      lead_source: payload.lead_source.trim(),
-      checkpoint_id: checkpointId,
-      county: payload.county?.trim() || null,
-      urgency: payload.urgency?.trim() || null,
-      message: payload.message?.trim() || null,
+	    const { error: dbError } = await supabase.from("leads").insert({
+	      name: payload.name.trim(),
+	      email,
+	      phone: normalizedPhone,
+	      lead_source: payload.lead_source.trim(),
+	      checkpoint_id: checkpointId,
+	      county: payload.county?.trim() || null,
+	      urgency: payload.urgency?.trim() || null,
+	      message: payload.message?.trim() || null,
       user_agent: userAgent,
       ip_address: ip,
       referrer,
@@ -380,15 +434,15 @@ Deno.serve(async (req: Request) => {
             to: notifyTo.length ? notifyTo : ["admin@example.com"],
             bcc: notifyBcc.length ? notifyBcc : undefined,
             reply_to: email,
-            subject: `New consultation request from ${payload.name.trim()}`,
-            html: buildAdminEmailHtml({
-              name: payload.name.trim(),
-              email,
-              phone: payload.phone.trim(),
-              leadSource: payload.lead_source.trim(),
-              urgency: payload.urgency?.trim() || null,
-              county: payload.county?.trim() || null,
-              message: payload.message?.trim() || null,
+	            subject: `New consultation request from ${payload.name.trim()}`,
+	            html: buildAdminEmailHtml({
+	              name: payload.name.trim(),
+	              email,
+	              phone: formatPhoneForDisplay(normalizedPhone),
+	              leadSource: payload.lead_source.trim(),
+	              urgency: payload.urgency?.trim() || null,
+	              county: payload.county?.trim() || null,
+	              message: payload.message?.trim() || null,
               checkpointId,
               ip,
               userAgent,
@@ -471,4 +525,3 @@ Deno.serve(async (req: Request) => {
     );
   }
 });
-

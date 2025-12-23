@@ -8,6 +8,7 @@ interface ChatIntakeData {
   initial_message: string;
   conversation_context?: string;
   honeypot?: string;
+  turnstile_token?: string | null;
 }
 
 interface LogContext {
@@ -181,6 +182,38 @@ function validatePhone(phone: string): boolean {
   return cleaned.length >= 10 && cleaned.length <= 15;
 }
 
+function normalizePhoneForStorage(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.length === 11 && digits.startsWith("1")) return digits.slice(1);
+  return digits;
+}
+
+function formatPhoneForDisplay(phone: string): string {
+  const digits = normalizePhoneForStorage(phone);
+  if (digits.length === 10) return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  return digits || phone;
+}
+
+async function verifyTurnstile(args: { token: string; ip: string }): Promise<boolean> {
+  const secret = Deno.env.get("TURNSTILE_SECRET_KEY");
+  if (!secret) return true;
+
+  const body = new URLSearchParams();
+  body.set("secret", secret);
+  body.set("response", args.token);
+  if (args.ip && args.ip !== "unknown") body.set("remoteip", args.ip);
+
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body,
+  });
+
+  if (!res.ok) return false;
+  const json = await res.json().catch(() => null);
+  return Boolean(json?.success);
+}
+
 function getClientIp(req: Request): string {
   return req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
     req.headers.get("x-real-ip") ||
@@ -319,6 +352,26 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    const turnstileSecret = Deno.env.get("TURNSTILE_SECRET_KEY");
+    if (turnstileSecret) {
+      const token = String(intakeData.turnstile_token || "").trim();
+      if (!token) {
+        log("warn", "Missing Turnstile token", { ...logContext, status: 400 });
+        return new Response(
+          JSON.stringify({ error: "Verification required" }),
+          { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+        );
+      }
+      const ok = await verifyTurnstile({ token, ip });
+      if (!ok) {
+        log("warn", "Turnstile verification failed", { ...logContext, status: 400 });
+        return new Response(
+          JSON.stringify({ error: "Verification failed" }),
+          { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+        );
+      }
+    }
+
     if (!validateEmail(intakeData.email)) {
       log("warn", "Invalid email format", { ...logContext, email: intakeData.email, status: 400 });
       return new Response(
@@ -327,7 +380,8 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    if (intakeData.phone && !validatePhone(intakeData.phone)) {
+    const normalizedPhone = intakeData.phone ? normalizePhoneForStorage(intakeData.phone) : null;
+    if (normalizedPhone && !validatePhone(normalizedPhone)) {
       log("warn", "Invalid phone format", { ...logContext, status: 400 });
       return new Response(
         JSON.stringify({ error: "Invalid phone number format" }),
@@ -338,7 +392,7 @@ Deno.serve(async (req: Request) => {
     const { error: dbError } = await supabase.from("chat_leads").insert({
       name: intakeData.name.trim(),
       email: intakeData.email.trim().toLowerCase(),
-      phone: intakeData.phone?.trim() || null,
+      phone: normalizedPhone,
       initial_message: intakeData.initial_message.trim(),
       conversation_context: intakeData.conversation_context || null,
       ip_address: ip,
@@ -383,7 +437,7 @@ Deno.serve(async (req: Request) => {
               sourceLabel,
               name: intakeData.name.trim(),
               email: intakeData.email.trim().toLowerCase(),
-              phone: intakeData.phone?.trim() || null,
+              phone: normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : null,
               message: intakeData.initial_message.trim(),
               conversationContext: intakeData.conversation_context || null,
               ip,
