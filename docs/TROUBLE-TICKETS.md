@@ -8,7 +8,8 @@ This document tracks known issues and problems that require resolution.
 
 ### Lead Intake Forms (Contact / Modal / Chat)
 - Forms rely on Supabase Edge Functions: `submit-contact`, `submit-lead`, `chat-intake`.
-- Common failure modes observed during launch testing:
+- Current status: submissions are working on production after Turnstile + deploy fixes; keep monitoring deliverability and template polish.
+- Common failure modes observed during launch testing (keep for future debugging):
   - Edge Functions not deployed (404) or DB tables missing (500).
   - Turnstile enforced server-side but missing client token (400 `Verification required`).
   - `ORIGIN_ALLOWLIST` missing the current host (403 `Origin not allowed`).
@@ -722,7 +723,7 @@ Move the CTA headline + phone number + consult button + any supporting copy curr
 ## TICKET-023: Lead Intake Forms Reliability + GA4 Conversion Verification
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-23  
 **Assigned To:** TBD
 
@@ -739,7 +740,7 @@ During launch testing, lead intake paths (lead-capture modal, contact form, chat
 1. Supabase deploy drift
    - Functions not deployed (404 `NOT_FOUND`) or migrations not applied / tables missing (500 DB insert failure).
 2. Turnstile misconfiguration
-   - `TURNSTILE_SECRET_KEY` set in Supabase (enforces verification) while Bolt is missing/misnaming `VITE_TURNSTILE_SITE_KEY` (client never sends token) → 400 `Verification required`.
+   - `TURNSTILE_SECRET_KEY` set in Supabase (enforces verification) while the frontend is missing a valid site key or serving an older bundle → requests submit with no token → 400 `Verification required`.
    - Turnstile widget not configured for the hostname being tested (staging/Bolt preview) → verification fails.
 3. Origin allowlist / CORS
    - Missing current host in `ORIGIN_ALLOWLIST` → 403 `Origin not allowed`.
@@ -785,6 +786,35 @@ Then reconcile:
 - DB row (lead/contact/chat table)
 - Resend email log + delivery time
 - GA4 DebugView / Realtime
+
+### Resolution notes
+- Implemented Turnstile widget in all lead flows (modal/contact/chat) + server-side verification in Supabase Edge Functions.
+- Made Supabase lead functions public (`verify_jwt=false`) and added missing lead tables via migration.
+- Added a Turnstile site key fallback (`src/lib/turnstile.ts`) to prevent hosting env injection issues from blocking submissions.
+- If the site regresses to `Verification required`, first verify the live site is serving the latest `/assets/index-*.js` bundle (a stale frontend deploy can omit newer Turnstile changes).
+
+---
+
+## TICKET-024: Email Templates Polish (Admin + Lead Confirmation)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-23  
+**Assigned To:** TBD
+
+### Issue Summary
+Lead/contact/chat emails are functional but need copy/layout polish so admin notifications are highly scannable and lead confirmations feel on-brand and professional.
+
+### Goals
+- Separate “admin notification” vs “lead confirmation” templates (content + tone + subject lines).
+- Ensure all templates clearly include: name, phone, email, source (contact/modal/chat), and timestamp.
+- Confirm admin routing stays: To `office@mango.law`, BCC `tim@sistrunktech.com` (until testing is done).
+- Keep required disclaimers (no attorney-client relationship, urgent matters call/text).
+
+### Acceptance Criteria
+- Emails render well in Gmail (desktop + mobile).
+- Subjects are consistent and searchable (e.g., `New consultation request — {Name}`).
+- Lead confirmation is concise, branded, and sets expectations (response window, what happens next).
 
 ---
 

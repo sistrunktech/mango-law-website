@@ -1,5 +1,7 @@
 # Mango Law CMS Setup Complete
 
+> Note: This document is partially historical. For current production operations (Supabase Edge Functions, lead tables, Turnstile, GTM/GA4), use `docs/OPERATIONS.md`.
+
 ## What Was Built
 
 A complete, production-ready Content Management System (CMS) for Mango Law LLC with authentication, blog management, contact lead tracking, and DUI checkpoint management.
@@ -28,7 +30,7 @@ A complete, production-ready Content Management System (CMS) for Mango Law LLC w
 - ✅ Contextual tooltips on every field
 
 ### 4. Contact Lead Management
-- ✅ View all contact form submissions
+- ✅ View all contact submissions captured in `contact_submissions` (legacy/admin-managed)
 - ✅ Filter by status (New, Contacted, Qualified, Closed)
 - ✅ Update lead status and add internal notes
 - ✅ One-click email/phone contact
@@ -55,9 +57,12 @@ A complete, production-ready Content Management System (CMS) for Mango Law LLC w
 - Full blog post management with publishing workflow
 - RLS policies: Public read for published posts, authenticated write access
 
-### `contact_submissions`
-- Contact form data with status tracking
-- RLS policies: Public insert, authenticated read/update
+### Lead intake tables (current)
+- `leads`: lead-capture modal submissions (consultation requests).
+- `contact_leads`: contact page submissions (Edge Function `submit-contact`).
+- `chat_leads`: chat widget submissions.
+- Intake is handled via Supabase Edge Functions (`submit-lead`, `submit-contact`, `chat-intake`). See `docs/OPERATIONS.md`.
+  - Note: the admin dashboard “Contact Leads” UI may still read from `contact_submissions`. If you need a unified admin inbox, scope a follow-up to consolidate/merge these tables.
 
 ### `dui_checkpoints` (Enhanced)
 - Already existed, now with 59 historical checkpoints imported
@@ -188,6 +193,5 @@ For questions or issues with the CMS:
 
 ---
 
-**Created**: December 2024
-**Version**: 1.0.0
-**Status**: Production Ready
+**Created**: December 2024 (initial CMS)
+**Status**: Production (see `docs/OPERATIONS.md` for current updates)

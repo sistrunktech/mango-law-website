@@ -21,6 +21,11 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - Bolt deploys the **frontend** (the Vite build output for `index.html` + `src/**`).
 - Bolt does **not** deploy Supabase Edge Functions or Supabase DB migrations. Those must be deployed separately via Supabase CLI or the Supabase Dashboard.
 
+### Deploy verification (important)
+- The live site may be served via a CDN edge layer; if you don’t see recent changes, assume the **frontend deploy is stale** until proven otherwise.
+- Quick check: View Source on `https://mango.law` and confirm the `/assets/index-*.js` filename changes after a publish.
+- If the asset filename doesn’t change, you’re still on an older build (and any “fix” in GitHub won’t show up yet).
+
 ## Environment Variables
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional).
@@ -45,6 +50,8 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
   - `submit-lead`: Handles lead-capture modal submissions, inserts into `leads`, sends admin notification + lead confirmation email via Resend. Rate limited to 10 req/min per IP.
   - `chat-intake`: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. Includes optional SMS notifications via email-to-SMS gateways.
 - **Bot protection** (optional): If `TURNSTILE_SECRET_KEY` is set, `submit-contact`, `submit-lead`, and `chat-intake` require a valid Turnstile token (`turnstile_token`).
+  - Client-side site key: the app uses `VITE_TURNSTILE_SITE_KEY` when present, otherwise falls back to the default site key in `src/lib/turnstile.ts`.
+  - If you rotate Turnstile keys, update both the Bolt env var (preferred) and the fallback constant (or remove/adjust the fallback).
 - **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, and upserts checkpoints to database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
 - **generate-review-response**: Generates draft responses for reviews using the configured AI provider/model.
 - **sync-google-reviews**: Syncs Google reviews into the DB (used by admin dashboard).
@@ -65,9 +72,11 @@ Project ref (prod): `rgucewewminsevbjgcad`
 
 ## Turnstile Setup (Recommended)
 - Create a Cloudflare Turnstile widget for the hostnames you will test on (at minimum `mango.law`; add `staging.mango.law` / Bolt preview hostnames as needed).
-- Bolt env (client): set `VITE_TURNSTILE_SITE_KEY`.
+- Bolt env (client): set `VITE_TURNSTILE_SITE_KEY` (preferred for rotation and multi-environment setups). If it’s missing, the app uses a default fallback site key from `src/lib/turnstile.ts`.
 - Supabase Edge Function secrets (server): set `TURNSTILE_SECRET_KEY`.
-- Common failure mode: if `TURNSTILE_SECRET_KEY` is set but `VITE_TURNSTILE_SITE_KEY` is missing/misnamed, the UI will submit with no token and Edge Functions will return `400` with `Verification required`.
+- Common failure modes:
+  - The live site is serving an older frontend bundle (missing recent Turnstile updates) → requests submit with no token → Edge Functions return `400` with `Verification required`.
+  - The Turnstile widget isn’t configured for the hostname being tested → verification fails.
 
 ### Security Features
 - **Security Headers**: All responses include CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers.

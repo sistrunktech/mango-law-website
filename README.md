@@ -62,6 +62,10 @@ mango-law-website/
 2. Bolt.new deploys the frontend from `main`
 3. Supabase Edge Functions + DB migrations are deployed separately (see `docs/OPERATIONS.md`)
 
+### Deploy Verification (important)
+- Confirm the live site is serving the latest build by checking View Source for the current `/assets/index-*.js` filename (it should change after a new deploy).
+- If the UI appears “stuck” on old behavior, it’s usually a stale/old frontend deploy rather than Supabase.
+
 ### Required Secrets
 
 | Variable | Description |
@@ -73,7 +77,7 @@ mango-law-website/
 | `CONTACT_NOTIFY_BCC` | Optional BCC for admin notifications |
 | `FROM_EMAIL` | Sender email address |
 | `ORIGIN_ALLOWLIST` | Comma-separated allowed origins for Edge Functions |
-| `VITE_TURNSTILE_SITE_KEY` | Optional Turnstile site key (client) |
+| `VITE_TURNSTILE_SITE_KEY` | Optional Turnstile site key (client). If omitted, the app falls back to the repo’s default site key in `src/lib/turnstile.ts`. |
 | `TURNSTILE_SECRET_KEY` | Optional Turnstile secret key (server) |
 
 ## Documentation

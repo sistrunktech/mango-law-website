@@ -5,7 +5,8 @@
 ### Lead Capture + Forms
 - Fix lead-capture modal validation and standardize phone normalization/formatting across forms (stores digits, displays `(XXX) XXX-XXXX`).
 - Surface Edge Function JSON error messages in the UI so “non-2xx” includes the actual server reason (e.g. `Verification required`, `Origin not allowed`).
-- Deploy/enable Cloudflare Turnstile (optional): client widget via `VITE_TURNSTILE_SITE_KEY` and server verification via `TURNSTILE_SECRET_KEY`.
+- Deploy/enable Cloudflare Turnstile (optional): client widget + server verification via `TURNSTILE_SECRET_KEY`.
+- Add a production-safe Turnstile site key fallback so the widget still renders if Bolt env injection fails (`src/lib/turnstile.ts`).
 
 ### Supabase (Required Operational Updates)
 - Add missing `contact_leads` + `chat_leads` tables via migration (`supabase/migrations/20251223000000_create_contact_and_chat_leads_tables.sql`).
