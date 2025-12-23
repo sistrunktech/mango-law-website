@@ -252,6 +252,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${supabaseAnonKey}`,
+          apikey: supabaseAnonKey,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
