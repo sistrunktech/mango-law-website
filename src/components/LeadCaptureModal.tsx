@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabaseClient';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/phone';
+import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import TurnstileWidget from './TurnstileWidget';
 
 export type LeadSource =
@@ -46,7 +47,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
   const [isSuccess, setIsSuccess] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
-  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+  const turnstileSiteKey = TURNSTILE_SITE_KEY;
 
   if (!isOpen) return null;
 

@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabaseClient';
 import { trackLeadSubmitted } from '../lib/analytics';
 import { normalizePhoneDigits } from '../lib/phone';
 import TurnstileWidget from './TurnstileWidget';
+import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 
 const inputClasses = [
   'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
@@ -19,7 +20,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+  const turnstileSiteKey = TURNSTILE_SITE_KEY;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

@@ -8,6 +8,7 @@ import { OFFICE_PHONE_DISPLAY, GENERAL_OFFICE_PHONE_DISPLAY } from '../../lib/co
 import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
 import { trackLeadSubmitted } from '../../lib/analytics';
 import TurnstileWidget from '../TurnstileWidget';
+import { TURNSTILE_SITE_KEY } from '../../lib/turnstile';
 
 interface ConversationStep {
   id: string;
@@ -39,7 +40,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
   const [submissionError, setSubmissionError] = useState('');
   const [showFollowup, setShowFollowup] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+  const turnstileSiteKey = TURNSTILE_SITE_KEY;
 
   const conversationRef = useRef<HTMLDivElement>(null);
   const followupTimerRef = useRef<number>();
