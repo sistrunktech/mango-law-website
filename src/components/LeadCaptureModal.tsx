@@ -95,7 +95,18 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        let serverMessage: string | undefined;
+        try {
+          const context = (error as any)?.context;
+          const response: Response | undefined = context?.clone ? context.clone() : context;
+          const json = response ? await response.json().catch(() => null) : null;
+          serverMessage = typeof json?.error === 'string' ? json.error : undefined;
+        } catch {
+          // ignore
+        }
+        throw new Error(serverMessage || error.message);
+      }
 
       trackLeadSubmitted('form', trigger);
 

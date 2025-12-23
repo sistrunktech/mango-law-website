@@ -57,7 +57,16 @@ export default function ContactForm() {
         body: payload,
       });
       if (fnError) {
-        throw fnError;
+        let serverMessage: string | undefined;
+        try {
+          const context = (fnError as any)?.context;
+          const response: Response | undefined = context?.clone ? context.clone() : context;
+          const json = response ? await response.json().catch(() => null) : null;
+          serverMessage = typeof json?.error === 'string' ? json.error : undefined;
+        } catch {
+          // ignore
+        }
+        throw new Error(serverMessage || fnError.message);
       }
       trackLeadSubmitted('form', 'contact_form_submit');
       setStatus('success');
