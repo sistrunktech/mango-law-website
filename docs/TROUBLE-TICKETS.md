@@ -626,6 +626,9 @@ For each visual that includes hard numbers:
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
+### Issue Summary
+Update the highest-risk blog posts to follow the “no drift” SOP: conservative language, explicit sources, and `lastVerified` metadata so content can be maintained confidently over time.
+
 ### Scope (slugs)
 - `understanding-ovi-dui-charges-ohio`
 - `refuse-field-sobriety-test-ohio`
@@ -649,6 +652,9 @@ For each visual that includes hard numbers:
 **Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
+
+### Issue Summary
+Apply the same trust/maintenance pass as P0 across the next set of blog posts (sources + last verified + reduced numeric drift risk).
 
 ### Scope (slugs)
 - `ohio-dui-lookback-period`
