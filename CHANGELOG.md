@@ -1,5 +1,19 @@
 # Changelog
 
+## 2025-12-23
+
+### Lead Capture + Forms
+- Fix lead-capture modal validation and standardize phone normalization/formatting across forms (stores digits, displays `(XXX) XXX-XXXX`).
+- Surface Edge Function JSON error messages in the UI so “non-2xx” includes the actual server reason (e.g. `Verification required`, `Origin not allowed`).
+- Deploy/enable Cloudflare Turnstile (optional): client widget via `VITE_TURNSTILE_SITE_KEY` and server verification via `TURNSTILE_SECRET_KEY`.
+
+### Supabase (Required Operational Updates)
+- Add missing `contact_leads` + `chat_leads` tables via migration (`supabase/migrations/20251223000000_create_contact_and_chat_leads_tables.sql`).
+- Ensure public lead Edge Functions are callable from the site by setting `verify_jwt = false` in:
+  - `supabase/functions/submit-contact/config.toml`
+  - `supabase/functions/submit-lead/config.toml`
+  - `supabase/functions/chat-intake/config.toml`
+
 ## 2025-12-19
 
 ### Header
@@ -230,7 +244,7 @@
 - **Chat Interface**:
   - Conversational UI with bot and user message styling
   - Typing indicators with animated dots
-  - Step-by-step flow: name → phone → message → confirmation
+- Step-by-step flow: name → phone → email → message → confirmation
   - localStorage persistence with 30-minute session timeout
   - Delayed follow-up messages (20-30 seconds after confirmation)
 - **Phone Number Handling**:
@@ -352,8 +366,7 @@
 - Expand `.env.example` with deployment-related variables and chat/email keys.
 
 ### Database Schema
-- Deploy `contact_leads` table with RLS policies (service_role INSERT/SELECT only).
-- Deploy `chat_leads` table with conversation context support and RLS policies.
+- Define lead intake tables (`contact_leads`, `chat_leads`) and RLS policies (implemented via migrations; see 2025-12-23).
 - Deploy `rate_limit_requests` table for API rate limiting with automatic cleanup.
 - Add performance indexes on email, created_at, and rate limiting lookup.
 

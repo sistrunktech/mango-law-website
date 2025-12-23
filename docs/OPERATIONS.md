@@ -17,6 +17,10 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - Disable the badge in Bolt’s project settings (brand/badge/attribution). If the UI changes, search settings for “badge” or “bolt”.
 - If adding CSP later, prefer server-side headers and verify Mapbox still works (it may require `worker-src blob:` and other allowances).
 
+### What Bolt Deploys (and what it doesn’t)
+- Bolt deploys the **frontend** (the Vite build output for `index.html` + `src/**`).
+- Bolt does **not** deploy Supabase Edge Functions or Supabase DB migrations. Those must be deployed separately via Supabase CLI or the Supabase Dashboard.
+
 ## Environment Variables
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional).
@@ -36,21 +40,41 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - Keep service-role keys server-side only; client should only see `VITE_*` and non-sensitive config.
 
 ## Edge Functions (deployed)
-- **submit-contact**: Validates payload with honeypot protection, inserts into `contact_leads`, sends admin notification + lead confirmation email via Resend. Includes CORS validation against `ORIGIN_ALLOWLIST`, rate limiting (10 req/min per IP), comprehensive security headers, and structured JSON logging.
+- **Public lead functions** (`verify_jwt=false` in `supabase/functions/*/config.toml`):
+  - `submit-contact`: Validates payload with honeypot protection, inserts into `contact_leads`, sends admin notification + lead confirmation email via Resend. Includes CORS validation against `ORIGIN_ALLOWLIST`, rate limiting (10 req/min per IP), comprehensive security headers, and structured JSON logging.
+  - `submit-lead`: Handles lead-capture modal submissions, inserts into `leads`, sends admin notification + lead confirmation email via Resend. Rate limited to 10 req/min per IP.
+  - `chat-intake`: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. Includes optional SMS notifications via email-to-SMS gateways.
 - **Bot protection** (optional): If `TURNSTILE_SECRET_KEY` is set, `submit-contact`, `submit-lead`, and `chat-intake` require a valid Turnstile token (`turnstile_token`).
-- **chat-intake**: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. **NEW**: Now includes SMS notifications via email-to-SMS gateways (Verizon/AT&T) for instant mobile alerts. Sends to office, attorney, and test numbers configured in environment variables.
-- **submit-lead**: Handles lead-capture modal submissions, inserts into `leads`, sends admin notification + lead confirmation email via Resend. Rate limited to 10 req/min per IP.
 - **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, and upserts checkpoints to database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
-- **send-review-invitation**: (Existing) Sends review invitations with JWT authentication required.
+- **generate-review-response**: Generates draft responses for reviews using the configured AI provider/model.
+- **sync-google-reviews**: Syncs Google reviews into the DB (used by admin dashboard).
 - **google-oauth-connect / google-oauth-callback**: OAuth connect + callback endpoints for GBP/GA/GSC/GTM token storage. Callback must allow unauthenticated Google redirects (no Supabase `Authorization` header).
 - **google-access-check**: Admin-only “Check status” endpoint for `/admin/connections` that lists accessible resources per integration (accounts/properties/containers/sites) and writes an `admin_activity_log` entry.
+
+## Supabase Deploy Checklist (Prod)
+Project ref (prod): `rgucewewminsevbjgcad`
+
+- Link the repo:
+  - `supabase link --project-ref rgucewewminsevbjgcad`
+- Deploy Edge Functions (frontend deploy does not cover this):
+  - `supabase functions deploy submit-contact`
+  - `supabase functions deploy submit-lead`
+  - `supabase functions deploy chat-intake`
+- Apply DB migrations:
+  - `supabase db push`
+
+## Turnstile Setup (Recommended)
+- Create a Cloudflare Turnstile widget for the hostnames you will test on (at minimum `mango.law`; add `staging.mango.law` / Bolt preview hostnames as needed).
+- Bolt env (client): set `VITE_TURNSTILE_SITE_KEY`.
+- Supabase Edge Function secrets (server): set `TURNSTILE_SECRET_KEY`.
+- Common failure mode: if `TURNSTILE_SECRET_KEY` is set but `VITE_TURNSTILE_SITE_KEY` is missing/misnamed, the UI will submit with no token and Edge Functions will return `400` with `Verification required`.
 
 ### Security Features
 - **Security Headers**: All responses include CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers.
 - **Rate Limiting**: Database-backed rate limiting tracks requests per IP/endpoint. Returns HTTP 429 with Retry-After header when limits exceeded. Limits: submit-contact (10/min), chat-intake (20/min).
 - **Structured Logging**: JSON-formatted logs include timestamp, level, message, endpoint, method, IP, user agent, status, duration, and error details.
 - **Input Validation**: Email format, phone format, required fields validated before processing.
-- **Spam Protection**: Honeypot field detection for bot submissions.
+- **Spam Protection**: Honeypot field detection for bot submissions; optional Turnstile server-side verification.
 
 ## Image generation workflow
 - Script: `npm run generate:image -- --prompt "your prompt here"`
@@ -70,7 +94,8 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 
 ## Database (deployed)
 - **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).
-- **chat_leads**: Captures chat intake submissions (id, name, email, message, conversation_context, source, meta, created_at). **UPDATED**: Simplified schema with generic `meta` field for flexible metadata storage.
+- **chat_leads**: Captures chat intake submissions (id, name, email, phone, initial_message, conversation_context, ip_address, user_agent, created_at).
+- **leads**: Captures lead-capture modal submissions (id, name, email, phone, lead_source, checkpoint_id, county, urgency, message, ip_address, user_agent, referrer, created_at, status).
 - **rate_limit_requests**: Tracks API requests for rate limiting (id, ip_address, endpoint, created_at). Auto-cleanup removes records older than 1 hour.
 - **dui_checkpoints**: Stores DUI checkpoint locations and schedules (id, title, location_address, location_city, location_county, latitude, longitude, start_date, end_date, status, source_url, source_name, description, is_verified, views_count, created_at, updated_at). Indexed on county, status, and date fields for efficient filtering.
 - **geocoding_cache**: Caches Mapbox geocoding results to minimize API calls (id, address, latitude, longitude, formatted_address, confidence, provider, metadata, hit_count, created_at, updated_at). Unique index on address for fast lookups.
@@ -146,16 +171,24 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 
 ## Chat System
 - **UI**: Conversational chat interface (`ChatIntakeLauncher.tsx`, `ConversationWindow.tsx`) with bot/user message styling and typing indicators.
-- **Flow**: Multi-step conversation (name → phone → message → confirmation) with localStorage persistence and 30-minute session timeout.
+- **Flow**: Multi-step conversation (name → phone → email → message → confirmation) with localStorage persistence and 30-minute session timeout.
 - **Phone Validation**: Real-time formatting and validation with (XXX) XXX-XXXX format.
 - **SMS Notifications**: Instant mobile alerts via email-to-SMS gateways (Verizon/AT&T). Sends to office, attorney, and test numbers. Zero additional cost (no Twilio subscription).
 - **Delayed Follow-up**: Automated follow-up message 20-30 seconds after confirmation to re-engage users.
 
 ## CTA Tracking (GA4 / GTM)
-- Primary CTAs include stable `data-cta` attributes (e.g. `header_free_consult`, `header_call`, `checkpoint_banner_free_consult`).
-- Lead capture submissions also store `lead_source` (`LeadCaptureModal` `trigger`) in Supabase `leads.lead_source`.
-- Recommended GTM setup: add a click trigger for elements matching `[data-cta]` and send `data-cta` as the event label.
-- Additionally, app code can push `cta_click` events to `window.dataLayer` via `src/lib/analytics.ts`.
+- This site is GTM-first: app code pushes explicit events to `window.dataLayer` (avoid GTM click selectors whenever possible).
+- Events emitted by the app:
+  - `mango_page_view` (from `src/lib/seo.tsx`)
+  - `cta_click` (from `src/lib/analytics.ts`)
+  - `lead_submitted` (from `src/lib/analytics.ts`)
+- `lead_submitted` payload includes `lead_source` (`form` | `phone` | `email` | `chat`) and `checkpoint_id` (location identifier like `contact_form_submit`), with optional `target_number` / `target_email`.
+- Recommended GTM setup:
+  - GA4 Config tag (Measurement ID) with `send_page_view=false`
+  - GA4 Event tags triggered by the Custom Events above:
+    - `mango_page_view` → send GA4 `page_view` with `page_location`, `page_path`, `page_title`
+    - `cta_click` → send GA4 event `cta_click` with param `cta`
+    - `lead_submitted` → send GA4 event `lead_submitted` with params `lead_source`, `checkpoint_id`, `target_number`, `target_email`
 
 ## Agent/PR Expectations
 - When adding/updating env vars or infra, update `.env.example`, this `docs/OPERATIONS.md`, and `CHANGELOG.md`.

@@ -8,11 +8,12 @@ Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on
 
 - **Modern React + Vite frontend** with TypeScript
 - **Sistech Law v1 component library** (PageHero, PracticeAreaCards, CTA sections, Testimonials, etc.)
-- **Supabase Edge Function integrations** (`submit-contact`, environment-guarded secrets)
+- **Supabase Edge Function integrations** (`submit-contact`, `submit-lead`, `chat-intake`)
+- **GTM-first analytics** via explicit `window.dataLayer` events (`mango_page_view`, `cta_click`, `lead_submitted`)
 - **Tailwind design tokens** for the Mango Law brand
 - **Bolt.new / Windsurf agent compatibility** (scaffolding, build, deploy)
 - **SEO-optimized** practice-area and location pages for Delaware, OH
-- **Staging → production deploy pipeline** with clean parity checks
+- **Optional bot protection** via Cloudflare Turnstile (client + server verification)
 
 ## Brand Tokens
 
@@ -57,11 +58,9 @@ mango-law-website/
 
 ## Deployment Workflow
 
-1. Windsurf / Codex scaffolds new components or pages
-2. Code merged into `staging` triggers Vite build + Supabase validation
-3. Bolt.new deploys staging for parity review
-4. PR from `staging` → `main` triggers full build + production deploy
-5. DNS routes mango.law → Bolt production environment
+1. Code merged into `main`
+2. Bolt.new deploys the frontend from `main`
+3. Supabase Edge Functions + DB migrations are deployed separately (see `docs/OPERATIONS.md`)
 
 ### Required Secrets
 
@@ -71,7 +70,11 @@ mango-law-website/
 | `VITE_SUPABASE_ANON_KEY` | Supabase anonymous key |
 | `RESEND_API_KEY` | Resend email API key |
 | `CONTACT_NOTIFY_TO` | Email for contact form notifications |
+| `CONTACT_NOTIFY_BCC` | Optional BCC for admin notifications |
 | `FROM_EMAIL` | Sender email address |
+| `ORIGIN_ALLOWLIST` | Comma-separated allowed origins for Edge Functions |
+| `VITE_TURNSTILE_SITE_KEY` | Optional Turnstile site key (client) |
+| `TURNSTILE_SECRET_KEY` | Optional Turnstile secret key (server) |
 
 ## Documentation
 
