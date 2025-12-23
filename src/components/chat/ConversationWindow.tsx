@@ -39,7 +39,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
   const [submissionError, setSubmissionError] = useState('');
   const [showFollowup, setShowFollowup] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileSiteKey = (import.meta as any).env?.VITE_TURNSTILE_SITE_KEY as string | undefined;
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
   const conversationRef = useRef<HTMLDivElement>(null);
   const followupTimerRef = useRef<number>();
