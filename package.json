@@ -10,7 +10,7 @@
     "build": "tsc --noEmit && vite build",
     "analyze": "tsc --noEmit && vite build --mode analyze",
     "postbuild": "node scripts/generate-sitemap.mjs",
-    "test": "ts-node --esm --transpile-only test/checkpointStatus.test.ts",
+    "test": "ts-node --esm --transpile-only test/checkpointStatus.test.ts && ts-node --esm --transpile-only test/emailTemplates.test.ts",
     "preview": "vite preview",
     "optimize:practice-images": "node scripts/optimize-practice-images.mjs",
     "generate:image": "node scripts/generateImage.js"

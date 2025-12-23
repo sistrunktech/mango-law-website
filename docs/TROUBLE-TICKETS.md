@@ -805,6 +805,10 @@ Then reconcile:
 ### Issue Summary
 Lead/contact/chat emails are functional but need copy/layout polish so admin notifications are highly scannable and lead confirmations feel on-brand and professional.
 
+### Current implementation status
+- Centralized email template system is implemented and shared across Edge Functions (`supabase/functions/_shared/email/*`).
+- This ticket recall is now specifically about copy/layout polish and any additional fields/links you want included.
+
 ### Goals
 - Separate “admin notification” vs “lead confirmation” templates (content + tone + subject lines).
 - Ensure all templates clearly include: name, phone, email, source (contact/modal/chat), and timestamp.

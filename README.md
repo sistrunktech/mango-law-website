@@ -76,6 +76,10 @@ mango-law-website/
 | `CONTACT_NOTIFY_TO` | Email for contact form notifications |
 | `CONTACT_NOTIFY_BCC` | Optional BCC for admin notifications |
 | `FROM_EMAIL` | Sender email address |
+| `FRONTEND_URL` | Base site URL for absolute links in emails (fallback: `VITE_SITE_URL`, then `https://mango.law`) |
+| `APP_THEME` | Email theme (`dark` or `light`) |
+| `APP_SEASON` | Email season (`spring`, `summer`, `fall`, `winter`) |
+| `APP_HOLIDAY` | Enable holiday accents (winter only) |
 | `ORIGIN_ALLOWLIST` | Comma-separated allowed origins for Edge Functions |
 | `VITE_TURNSTILE_SITE_KEY` | Optional Turnstile site key (client). If omitted, the app falls back to the repo’s default site key in `src/lib/turnstile.ts`. |
 | `TURNSTILE_SECRET_KEY` | Optional Turnstile secret key (server) |

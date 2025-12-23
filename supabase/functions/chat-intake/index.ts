@@ -1,5 +1,8 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.48.0";
+import { buildAdminEmailHtml, buildClientConfirmationHtml } from "../_shared/email/templates.ts";
+import { formatFrom, formatPhoneForDisplay, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
+import type { EmailSeason, EmailTheme } from "../_shared/email/tokens.ts";
 
 interface ChatIntakeData {
   name: string;
@@ -20,112 +23,6 @@ interface LogContext {
   error?: string;
   duration?: number;
   [key: string]: unknown;
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function parseEmailList(value: string | undefined | null): string[] {
-  if (!value) return [];
-  return value
-    .split(",")
-    .map((v) => v.trim())
-    .filter(Boolean);
-}
-
-function formatFrom(fromEmail: string): string {
-  if (fromEmail.includes("<") && fromEmail.includes(">")) return fromEmail;
-  return `Mango Law LLC <${fromEmail}>`;
-}
-
-function buildAdminEmailHtml(args: {
-  sourceLabel: string;
-  name: string;
-  email: string;
-  phone?: string | null;
-  message: string;
-  conversationContext?: string | null;
-  ip: string;
-  userAgent: string;
-}): string {
-  const safeSource = escapeHtml(args.sourceLabel);
-  const safeName = escapeHtml(args.name);
-  const safeEmail = escapeHtml(args.email);
-  const safePhone = escapeHtml(args.phone || "Not provided");
-  const safeMsg = escapeHtml(args.message).replace(/\n/g, "<br>");
-  const safeContext = args.conversationContext
-    ? escapeHtml(args.conversationContext)
-    : null;
-  const safeIp = escapeHtml(args.ip);
-  const safeUa = escapeHtml(args.userAgent);
-
-  return `
-    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#F9F7F4; padding:24px;">
-      <div style="max-width:680px; margin:0 auto; background:#ffffff; border:1px solid #eee; border-radius:16px; overflow:hidden;">
-        <div style="padding:18px 22px; background:linear-gradient(135deg,#0F6E63 0%,#F4A300 100%); color:#0A0A0A;">
-          <div style="font-weight:800; letter-spacing:0.02em;">Mango Law LLC</div>
-          <div style="font-size:14px; opacity:0.9;">New ${safeSource} lead</div>
-        </div>
-        <div style="padding:22px;">
-          <table style="width:100%; border-collapse:collapse;">
-            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Name</td><td style="padding:8px 0; color:#111;">${safeName}</td></tr>
-            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Email</td><td style="padding:8px 0; color:#111;"><a href="mailto:${safeEmail}" style="color:#0F6E63; font-weight:700; text-decoration:none;">${safeEmail}</a></td></tr>
-            <tr><td style="padding:8px 0; width:120px; color:#555; font-weight:700;">Phone</td><td style="padding:8px 0; color:#111;">${safePhone}</td></tr>
-          </table>
-          <div style="margin-top:16px; padding-top:16px; border-top:1px solid #eee;">
-            <div style="font-weight:800; margin-bottom:8px;">Message</div>
-            <div style="font-size:14px; line-height:1.5; color:#111;">${safeMsg}</div>
-          </div>
-          ${safeContext ? `
-            <div style="margin-top:16px; padding-top:16px; border-top:1px solid #eee;">
-              <div style="font-weight:800; margin-bottom:8px;">Conversation context</div>
-              <pre style="white-space:pre-wrap; background:#f6f6f6; padding:12px; border-radius:12px; border:1px solid #eee; color:#111; font-size:12px; line-height:1.4;">${safeContext}</pre>
-            </div>
-          ` : ""}
-          <div style="margin-top:18px; padding-top:12px; border-top:1px solid #f0f0f0; font-size:12px; color:#666;">
-            IP: ${safeIp}<br>
-            UA: ${safeUa}
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function buildLeadConfirmationHtml(args: { name: string }): string {
-  const safeName = escapeHtml(args.name);
-  return `
-    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#F9F7F4; padding:24px;">
-      <div style="max-width:680px; margin:0 auto; background:#ffffff; border:1px solid #eee; border-radius:16px; overflow:hidden;">
-        <div style="padding:18px 22px; background:linear-gradient(135deg,#0F6E63 0%,#F4A300 100%); color:#0A0A0A;">
-          <div style="font-weight:800; letter-spacing:0.02em;">Mango Law LLC</div>
-          <div style="font-size:14px; opacity:0.9;">We received your message</div>
-        </div>
-        <div style="padding:22px; color:#111;">
-          <p style="margin:0 0 12px;">Hi ${safeName},</p>
-          <p style="margin:0 0 12px; line-height:1.5;">
-            Thanks for reaching out. We received your message and will respond as soon as possible.
-          </p>
-          <div style="margin:16px 0; padding:14px 16px; border:1px solid #eee; border-radius:12px; background:#fff;">
-            <div style="font-weight:800; margin-bottom:6px;">Need a quicker response?</div>
-            <div style="font-size:14px; line-height:1.6;">
-              Call/Text: <a href="tel:7404176191" style="color:#0F6E63; font-weight:800; text-decoration:none;">(740) 417-6191</a><br>
-              Email: <a href="mailto:office@mango.law" style="color:#0F6E63; font-weight:800; text-decoration:none;">office@mango.law</a>
-            </div>
-          </div>
-          <p style="margin:0; font-size:12px; color:#666; line-height:1.5;">
-            This email confirms receipt only. No attorney-client relationship is formed until a written engagement agreement is signed.
-          </p>
-        </div>
-      </div>
-    </div>
-  `;
 }
 
 function log(level: string, message: string, context?: LogContext) {
@@ -180,18 +77,6 @@ function validateEmail(email: string): boolean {
 function validatePhone(phone: string): boolean {
   const cleaned = phone.replace(/\D/g, "");
   return cleaned.length >= 10 && cleaned.length <= 15;
-}
-
-function normalizePhoneForStorage(phone: string): string {
-  const digits = phone.replace(/\D/g, "");
-  if (digits.length === 11 && digits.startsWith("1")) return digits.slice(1);
-  return digits;
-}
-
-function formatPhoneForDisplay(phone: string): string {
-  const digits = normalizePhoneForStorage(phone);
-  if (digits.length === 10) return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-  return digits || phone;
 }
 
 async function verifyTurnstile(args: { token: string; ip: string }): Promise<boolean> {
@@ -420,6 +305,12 @@ Deno.serve(async (req: Request) => {
 
     if (resendApiKey) {
       try {
+        const siteUrl = Deno.env.get("FRONTEND_URL") || Deno.env.get("VITE_SITE_URL") || "https://mango.law";
+        const appEnv = Deno.env.get("APP_ENV") || "production";
+        const season = (Deno.env.get("APP_SEASON") || "winter") as EmailSeason;
+        const theme = (Deno.env.get("APP_THEME") || "dark") as EmailTheme;
+        const holiday = isTruthyEnv(Deno.env.get("APP_HOLIDAY"));
+
         // Send standard email notification
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
@@ -433,16 +324,30 @@ Deno.serve(async (req: Request) => {
             bcc: chatNotifyBcc.length ? chatNotifyBcc : undefined,
             reply_to: intakeData.email.trim().toLowerCase(),
             subject: `New ${sourceLabel} Lead from ${intakeData.name}`,
-            html: buildAdminEmailHtml({
-              sourceLabel,
-              name: intakeData.name.trim(),
-              email: intakeData.email.trim().toLowerCase(),
-              phone: normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : null,
-              message: intakeData.initial_message.trim(),
-              conversationContext: intakeData.conversation_context || null,
-              ip,
-              userAgent,
-            }),
+            html: buildAdminEmailHtml(
+              "chat",
+              {
+                title: `New ${sourceLabel} lead`,
+                summaryLine:
+                  `${intakeData.name.trim()} · ${normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : "No phone"}`,
+                fields: [
+                  { label: "Name", value: intakeData.name.trim() },
+                  { label: "Email", value: intakeData.email.trim().toLowerCase() },
+                  { label: "Phone", value: normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : "Not provided" },
+                ],
+                messageLabel: "Initial message",
+                message: intakeData.initial_message.trim(),
+                transcriptLabel: "Conversation context",
+                transcript: intakeData.conversation_context || null,
+                meta: [
+                  { label: "IP", value: ip },
+                  { label: "UA", value: userAgent },
+                ],
+                replyToEmail: intakeData.email.trim().toLowerCase(),
+                callToPhone: normalizedPhone,
+              },
+              { siteUrl, appEnv, season, theme, holiday },
+            ),
           }),
         });
 
@@ -463,7 +368,24 @@ Deno.serve(async (req: Request) => {
             from: fromEmail,
             to: [intakeData.email.trim().toLowerCase()],
             subject: "We received your message — Mango Law LLC",
-            html: buildLeadConfirmationHtml({ name: intakeData.name.trim() }),
+            html: buildClientConfirmationHtml(
+              "chat",
+              {
+                title: "We received your message",
+                greetingName: intakeData.name.trim(),
+                intro:
+                  "Thanks for reaching out. We received your message and will respond as soon as possible during business hours.",
+                details: [
+                  { label: "Name", value: intakeData.name.trim() },
+                  { label: "Email", value: intakeData.email.trim().toLowerCase() },
+                  ...(normalizedPhone ? [{ label: "Phone", value: formatPhoneForDisplay(normalizedPhone) }] : []),
+                ],
+                message: intakeData.initial_message.trim(),
+                leadSource: "chat",
+                includeHelpfulLinks: true,
+              },
+              { siteUrl, appEnv, season, theme, holiday },
+            ),
           }),
         });
 

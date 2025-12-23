@@ -8,6 +8,10 @@
 - Deploy/enable Cloudflare Turnstile (optional): client widget + server verification via `TURNSTILE_SECRET_KEY`.
 - Add a production-safe Turnstile site key fallback so the widget still renders if Bolt env injection fails (`src/lib/turnstile.ts`).
 
+### Email Templates (Supabase Edge Functions)
+- Replace per-function ad-hoc HTML with a shared email template generator (`supabase/functions/_shared/email/*`) used by `submit-contact`, `submit-lead`, and `chat-intake`.
+- Add environment-driven theme/season controls for email styling (`APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`) and a `FRONTEND_URL` base for helpful resource links.
+
 ### Supabase (Required Operational Updates)
 - Add missing `contact_leads` + `chat_leads` tables via migration (`supabase/migrations/20251223000000_create_contact_and_chat_leads_tables.sql`).
 - Ensure public lead Edge Functions are callable from the site by setting `verify_jwt = false` in:

@@ -29,7 +29,7 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 ## Environment Variables
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional).
-- Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `VITE_TURNSTILE_SITE_KEY` (optional).
+- Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `VITE_TURNSTILE_SITE_KEY` (optional).
 - SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
 - Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `VITE_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
 - See `.env.example` for the full list; update it whenever variables change.
@@ -52,6 +52,9 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - **Bot protection** (optional): If `TURNSTILE_SECRET_KEY` is set, `submit-contact`, `submit-lead`, and `chat-intake` require a valid Turnstile token (`turnstile_token`).
   - Client-side site key: the app uses `VITE_TURNSTILE_SITE_KEY` when present, otherwise falls back to the default site key in `src/lib/turnstile.ts`.
   - If you rotate Turnstile keys, update both the Bolt env var (preferred) and the fallback constant (or remove/adjust the fallback).
+- **Email templates** (shared): `submit-contact`, `submit-lead`, and `chat-intake` generate email HTML via `supabase/functions/_shared/email/*`.
+  - Theme/season toggles: `APP_THEME` (`dark|light`), `APP_SEASON` (`spring|summer|fall|winter`), `APP_HOLIDAY` (`true|false`).
+  - Host links: `FRONTEND_URL` (fallback: `VITE_SITE_URL`, then `https://mango.law`).
 - **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, and upserts checkpoints to database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
 - **generate-review-response**: Generates draft responses for reviews using the configured AI provider/model.
 - **sync-google-reviews**: Syncs Google reviews into the DB (used by admin dashboard).
@@ -192,12 +195,19 @@ Project ref (prod): `rgucewewminsevbjgcad`
   - `cta_click` (from `src/lib/analytics.ts`)
   - `lead_submitted` (from `src/lib/analytics.ts`)
 - `lead_submitted` payload includes `lead_source` (`form` | `phone` | `email` | `chat`) and `checkpoint_id` (location identifier like `contact_form_submit`), with optional `target_number` / `target_email`.
-- Recommended GTM setup:
+  - Recommended GTM setup:
   - GA4 Config tag (Measurement ID) with `send_page_view=false`
   - GA4 Event tags triggered by the Custom Events above:
     - `mango_page_view` → send GA4 `page_view` with `page_location`, `page_path`, `page_title`
     - `cta_click` → send GA4 event `cta_click` with param `cta`
     - `lead_submitted` → send GA4 event `lead_submitted` with params `lead_source`, `checkpoint_id`, `target_number`, `target_email`
+
+## Email Template System (Edge Functions)
+- Shared builders live in `supabase/functions/_shared/email/templates.ts`.
+- To add a new notification type:
+  - Build the email HTML with `buildAdminEmailHtml(...)` and/or `buildClientConfirmationHtml(...)`.
+  - Keep the Edge Function responsible for data validation, DB insert, and passing sanitized fields + metadata into the builder.
+  - Add any new “helpful resources” rules to `supabase/functions/_shared/email/recommendations.ts`.
 
 ## Agent/PR Expectations
 - When adding/updating env vars or infra, update `.env.example`, this `docs/OPERATIONS.md`, and `CHANGELOG.md`.
