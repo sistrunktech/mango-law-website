@@ -102,7 +102,13 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
       setIsSuccess(true);
     } catch (error) {
       console.error('Failed to submit lead:', error);
-      setErrors({ submit: 'Failed to submit. Please call or text us directly.' });
+      const message =
+        error instanceof Error
+          ? error.message
+          : typeof (error as any)?.message === 'string'
+            ? String((error as any).message)
+            : 'Failed to submit. Please call or text us directly.';
+      setErrors({ submit: message });
     } finally {
       setIsSubmitting(false);
     }
