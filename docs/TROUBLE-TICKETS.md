@@ -4,6 +4,22 @@ This document tracks known issues and problems that require resolution.
 
 ---
 
+## Launch Snapshot (P0)
+
+### Lead Intake Forms (Contact / Modal / Chat)
+- Forms rely on Supabase Edge Functions: `submit-contact`, `submit-lead`, `chat-intake`.
+- Common failure modes observed during launch testing:
+  - Edge Functions not deployed (404) or DB tables missing (500).
+  - Turnstile enforced server-side but missing client token (400 `Verification required`).
+  - `ORIGIN_ALLOWLIST` missing the current host (403 `Origin not allowed`).
+  - Admin/lead emails delivered with delays (investigate Resend logs + suppression/deliverability).
+- Testing recommendation: include a unique marker in message fields (timestamp + short ID) so you can correlate DB rows, Resend logs, and GA4 events.
+
+### GA4 / GTM Conversion Tracking Finalization
+- The site is GTM-first: GA4 should consume `mango_page_view`, `cta_click`, and `lead_submitted` from `window.dataLayer` (avoid click selectors).
+- GA4 conversions for “lead” should be based on the `lead_submitted` event (`lead_source`: `form|phone|email|chat`).
+- If forms fail, GA4 will not show form conversions even if other events fire correctly.
+
 ## TICKET-001: Logo Generation Failure
 
 **Priority:** High
@@ -694,6 +710,75 @@ Move the CTA headline + phone number + consult button + any supporting copy curr
 
 ### Resolution notes
 - Implemented in PR #19 for `/resources/dui-checkpoints` (moved call/consult CTAs into the “About Ohio DUI Checkpoint Data” card).
+
+---
+
+## TICKET-023: Lead Intake Forms Reliability + GA4 Conversion Verification
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-23  
+**Assigned To:** TBD
+
+### Issue Summary
+During launch testing, lead intake paths (lead-capture modal, contact form, chat intake) intermittently failed and/or produced delayed emails. This blocks confident GA4 conversion tracking for forms.
+
+### Symptoms observed
+- Modal submit fails with generic “Edge Function returned a non-2xx status code”.
+- Chat submit fails (non-2xx) and shows “We had trouble sending your message”.
+- Emails sometimes arrive later even after the UI showed an error (suggests intermittent failures, retries, or earlier deployments being fixed after the fact).
+- GA4 not registering form conversions because submits are not consistently completing.
+
+### Root cause categories (known from prior debugging)
+1. Supabase deploy drift
+   - Functions not deployed (404 `NOT_FOUND`) or migrations not applied / tables missing (500 DB insert failure).
+2. Turnstile misconfiguration
+   - `TURNSTILE_SECRET_KEY` set in Supabase (enforces verification) while Bolt is missing/misnaming `VITE_TURNSTILE_SITE_KEY` (client never sends token) → 400 `Verification required`.
+   - Turnstile widget not configured for the hostname being tested (staging/Bolt preview) → verification fails.
+3. Origin allowlist / CORS
+   - Missing current host in `ORIGIN_ALLOWLIST` → 403 `Origin not allowed`.
+4. Email deliverability
+   - Resend suppression, rate limits, or provider delays causing late delivery (even when the DB insert succeeded).
+
+### Affected paths
+- Lead-capture modal → Edge Function `submit-lead` → table `leads`
+- Contact page form → Edge Function `submit-contact` → table `contact_leads`
+- Chat widget → Edge Function `chat-intake` → table `chat_leads`
+
+### Required resolution / acceptance criteria
+1. Submits are reliable on production (`https://mango.law`)
+   - Modal, contact form, and chat submit successfully without retries.
+2. Turnstile is consistent
+   - Widget visible on all lead flows when enabled, and submissions include a token.
+3. Emails are timely
+   - Admin email (To: `office@mango.law`, BCC: `tim@sistrunktech.com`) + lead confirmation email arrive within a reasonable window (define target SLA; start with <2 minutes).
+4. GA4 conversions are measurable
+   - GA4 receives `lead_submitted` with `lead_source=form` after successful form submits.
+   - GA4 marks `lead_submitted` as a conversion and uses `lead_source` + `checkpoint_id` as reporting dimensions.
+
+### Debug checklist (fast)
+1. Verify Bolt env:
+   - `VITE_TURNSTILE_SITE_KEY` set for the deployed environment.
+2. Verify Supabase secrets:
+   - `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`.
+3. Verify Edge Functions deployed:
+   - `supabase functions deploy submit-contact`
+   - `supabase functions deploy submit-lead`
+   - `supabase functions deploy chat-intake`
+4. Verify migrations applied:
+   - `supabase db push`
+5. Verify Resend logs:
+   - Check for delivery failures/suppression and confirm the “from” identity is verified.
+
+### Testing protocol (recommended)
+When testing, include a unique marker in message fields:
+`[TEST 2025-12-23 23:58 ET | A1B2] please ignore`
+Then reconcile:
+- Browser Network (request + response)
+- Supabase Function Logs (same timestamp/IP)
+- DB row (lead/contact/chat table)
+- Resend email log + delivery time
+- GA4 DebugView / Realtime
 
 ---
 
