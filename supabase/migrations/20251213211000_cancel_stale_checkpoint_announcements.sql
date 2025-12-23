@@ -46,7 +46,7 @@ BEGIN
     PERFORM cron.schedule(
       'cancel_stale_checkpoint_announcements',
       '15 8 * * *',
-      $$SELECT cancel_stale_checkpoint_announcements();$$
+      'SELECT cancel_stale_checkpoint_announcements();'
     );
   END IF;
 END $$;
