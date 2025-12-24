@@ -924,72 +924,81 @@ export default function ConnectionsPage() {
                         <h4 className="text-sm font-semibold text-white">Latest status check</h4>
                         <span className="text-xs text-slate-500">{formatDate(accessCheck.checkedAt)}</span>
                       </div>
-                      {selectionOptions.length > 0 && (
-                        <div className="mt-3 rounded-lg border border-[#2A2A2A] bg-black/20 p-3">
-                          <div className="flex flex-wrap items-end justify-between gap-3">
-                            <div className="min-w-[240px] flex-1">
-                              <div className="text-xs font-semibold text-slate-300">Select resource (required for “healthy”)</div>
-                              {supportsAccountSelection(type) && accountOptions.length > 0 ? (
-                                <div className="mt-2">
-                                  <div className="text-[11px] font-semibold text-slate-400">Account</div>
-                                  <select
-                                    value={selection.accountValue}
-                                    onChange={(e) => {
-                                      const nextAccount = e.target.value;
-                                      const nextResourceOptions = extractResourceOptions(type, accessCheck.data, nextAccount);
-                                      const nextResource = inferPreferredResource(type, nextResourceOptions);
-                                      setResourceSelections((prev) => ({
-                                        ...prev,
-                                        [type]: { ...prev[type], accountValue: nextAccount, resourceValue: nextResource },
-                                      }));
-                                    }}
-                                    className="mt-2 w-full rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C]/40"
-                                  >
-                                    <option value="">Choose…</option>
-                                    {accountOptions.map((o) => (
-                                      <option key={o.value} value={o.value}>
-                                        {o.label}
-                                      </option>
-                                    ))}
-                                  </select>
-                                </div>
-                              ) : null}
-
-                              <div className="mt-3">
-                                <div className="text-[11px] font-semibold text-slate-400">Resource</div>
+                      <div className="mt-3 rounded-lg border border-[#2A2A2A] bg-black/20 p-3 relative z-10">
+                        <div className="flex flex-wrap items-end justify-between gap-3">
+                          <div className="min-w-[240px] flex-1">
+                            <div className="text-xs font-semibold text-slate-300">Select resource (required for “healthy”)</div>
+                            {supportsAccountSelection(type) && accountOptions.length > 0 ? (
+                              <div className="mt-2">
+                                <div className="text-[11px] font-semibold text-slate-400">Account</div>
                                 <select
-                                  value={selection.resourceValue}
-                                  onChange={(e) =>
+                                  value={selection.accountValue}
+                                  onChange={(e) => {
+                                    const nextAccount = e.target.value;
+                                    const nextResourceOptions = extractResourceOptions(type, accessCheck.data, nextAccount);
+                                    const nextResource = inferPreferredResource(type, nextResourceOptions);
                                     setResourceSelections((prev) => ({
                                       ...prev,
-                                      [type]: { ...prev[type], resourceValue: e.target.value },
-                                    }))
-                                  }
-                                  className="mt-2 w-full rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C]/40"
+                                      [type]: { ...prev[type], accountValue: nextAccount, resourceValue: nextResource },
+                                    }));
+                                  }}
+                                  className="mt-2 w-full cursor-pointer rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C]/40 pointer-events-auto"
                                 >
                                   <option value="">Choose…</option>
-                                  {selectionOptions.map((o) => (
+                                  {accountOptions.map((o) => (
                                     <option key={o.value} value={o.value}>
                                       {o.label}
                                     </option>
                                   ))}
                                 </select>
                               </div>
-                              <div className="mt-2 text-xs text-slate-500">
-                                Saved selection: <span className="font-mono text-slate-300">{getCurrentResourceValue(type, integration) || '—'}</span>
-                              </div>
+                            ) : null}
+
+                            <div className="mt-3">
+                              <div className="text-[11px] font-semibold text-slate-400">Resource</div>
+                              <select
+                                value={selection.resourceValue}
+                                onChange={(e) =>
+                                  setResourceSelections((prev) => ({
+                                    ...prev,
+                                    [type]: { ...prev[type], resourceValue: e.target.value },
+                                  }))
+                                }
+                                className="mt-2 w-full cursor-pointer rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C]/40 disabled:cursor-not-allowed disabled:opacity-60 pointer-events-auto"
+                                disabled={selectionOptions.length === 0}
+                              >
+                                <option value="">
+                                  {selectionOptions.length === 0 ? 'No resources found — check permissions' : 'Choose…'}
+                                </option>
+                                {selectionOptions.map((o) => (
+                                  <option key={o.value} value={o.value}>
+                                    {o.label}
+                                  </option>
+                                ))}
+                              </select>
                             </div>
-                            <button
-                              onClick={() => handleSaveSelectedResource(type)}
-                              disabled={!selection.resourceValue || selection.saving}
-                              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#232323] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2A2A2A] disabled:opacity-50"
-                            >
-                              {selection.saving ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Link2 className="h-4 w-4" />}
-                              Save
-                            </button>
+
+                            <div className="mt-2 text-xs text-slate-500">
+                              Saved selection:{' '}
+                              <span className="font-mono text-slate-300">{getCurrentResourceValue(type, integration) || '—'}</span>
+                            </div>
+                            {selectionOptions.length === 0 ? (
+                              <div className="mt-2 text-xs text-slate-400">
+                                If you have access but no resources appear, reconnect using the correct Google user and ensure the requested role is granted, then re-run “Check status”.
+                              </div>
+                            ) : null}
                           </div>
+
+                          <button
+                            onClick={() => handleSaveSelectedResource(type)}
+                            disabled={!selection.resourceValue || selection.saving}
+                            className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#232323] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2A2A2A] disabled:opacity-50"
+                          >
+                            {selection.saving ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Link2 className="h-4 w-4" />}
+                            Save
+                          </button>
                         </div>
-                      )}
+                      </div>
                       <details className="mt-3 rounded-lg border border-[#2A2A2A] bg-black/20 p-3">
                         <summary className="cursor-pointer select-none text-xs font-semibold text-slate-300">
                           Debug payload

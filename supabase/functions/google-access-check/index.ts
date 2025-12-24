@@ -175,6 +175,15 @@ async function fetchTagManagerContainersByAccount(args: { accountId: string; acc
   return { ok: res.ok, status: res.status, containers };
 }
 
+async function fetchAnalyticsPropertiesByAccount(args: { accountName: string; accessToken: string }) {
+  const url = new URL("https://analyticsadmin.googleapis.com/v1beta/properties");
+  url.searchParams.set("pageSize", "200");
+  url.searchParams.set("filter", `parent:${args.accountName}`);
+  const res = await fetchJson(url.toString(), args.accessToken);
+  const properties = Array.isArray(res.json?.properties) ? res.json.properties : [];
+  return { ok: res.ok, status: res.status, properties };
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 200, headers: corsHeaders });
@@ -330,20 +339,30 @@ Deno.serve(async (req: Request) => {
         maxPages: 10,
       });
 
-      // Fetch all accessible properties across all accounts; the UI filters by account if needed.
-      const properties = await fetchPagedItems({
-        url: "https://analyticsadmin.googleapis.com/v1beta/properties",
-        accessToken,
-        itemsKey: "properties",
-        pageSize: 200,
-        maxItems: 500,
-        maxPages: 10,
-      });
+      // Fetch properties per account (more reliable than unfiltered list for some GA4 setups).
+      const allProperties: any[] = [];
+      let propertiesOk = true;
+      let propertiesStatus = 0;
+      for (const account of accounts.all) {
+        const accountName = String(account?.name ?? "").trim();
+        if (!accountName) continue;
+        const propsRes = await fetchAnalyticsPropertiesByAccount({ accountName, accessToken });
+        propertiesOk = propertiesOk && propsRes.ok;
+        propertiesStatus = propsRes.status;
+        allProperties.push(...propsRes.properties);
+        if (allProperties.length >= 500) break;
+      }
 
       result = {
         ...result,
         accounts,
-        properties,
+        properties: {
+          ok: propertiesOk,
+          status: propertiesStatus,
+          count: allProperties.length,
+          sample: allProperties.slice(0, 25),
+          all: allProperties.slice(0, 500),
+        },
       };
     } else if (integrationType === "search_console") {
       const sites = await fetchJson("https://www.googleapis.com/webmasters/v3/sites", accessToken);
@@ -395,7 +414,7 @@ Deno.serve(async (req: Request) => {
             accountName: accountIdToName.get(accountId) || accountId,
           })),
         );
-        if (allContainers.length >= 250) break;
+        if (allContainers.length >= 500) break;
       }
 
       result = {
@@ -412,7 +431,7 @@ Deno.serve(async (req: Request) => {
           status: containersStatus,
           count: allContainers.length,
           sample: allContainers.slice(0, 25),
-          all: allContainers.slice(0, 250),
+          all: allContainers.slice(0, 500),
         },
       };
     }
