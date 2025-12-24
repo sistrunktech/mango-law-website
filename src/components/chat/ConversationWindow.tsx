@@ -484,6 +484,9 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
         'max-h-[85vh]',
         'lg:inset-x-auto lg:right-6 lg:bottom-6 lg:max-h-none lg:h-[640px] lg:w-[420px]',
       ].join(' ')}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Chat"
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-brand-black/10 bg-gradient-to-r from-brand-mango to-brand-gold p-4">

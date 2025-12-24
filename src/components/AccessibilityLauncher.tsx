@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Accessibility, X, RotateCcw, Type, Eye, MousePointer, Link, Focus, Brain, Space } from 'lucide-react';
 import { useAccessibility, type FontSize } from '../contexts/AccessibilityContext';
+import { useFocusTrap } from '../lib/useFocusTrap';
 
 interface AccessibilityLauncherProps {
   chatBottomOffsetClass?: string;
@@ -10,6 +11,10 @@ export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-
   const [isOpen, setIsOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { preferences, updatePreference, resetPreferences } = useAccessibility();
+
+  const launcherButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(panelRef, isOpen, launcherButtonRef);
 
   const bottomClass = chatBottomOffsetClass === 'bottom-24' ? 'bottom-44' : 'bottom-24';
 
@@ -52,6 +57,7 @@ export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-
   return (
     <>
       <button
+        ref={launcherButtonRef}
         onClick={() => setIsOpen(true)}
         aria-label="Open accessibility options (Alt+A)"
         className={[
@@ -82,6 +88,7 @@ export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-
             role="dialog"
             aria-label="Accessibility Settings"
             aria-modal="true"
+            ref={panelRef}
           >
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-brand-black/10 bg-white p-6">
               <div className="flex items-center gap-3">
