@@ -38,20 +38,34 @@ function loadTurnstileScript(): Promise<void> {
 interface TurnstileWidgetProps {
   siteKey: string;
   onToken: (token: string | null) => void;
+  theme?: 'light' | 'dark';
+  size?: 'normal' | 'compact' | 'invisible';
+  appearance?: 'always' | 'interaction-only' | 'execute';
+  className?: string;
 }
 
-export default function TurnstileWidget({ siteKey, onToken }: TurnstileWidgetProps) {
+export default function TurnstileWidget({
+  siteKey,
+  onToken,
+  theme = 'light',
+  size = 'compact',
+  appearance = 'always',
+  className,
+}: TurnstileWidgetProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<string | null>(null);
 
   const options = useMemo(
     () => ({
       sitekey: siteKey,
+      theme,
+      size,
+      appearance,
       callback: (token: string) => onToken(token),
       'expired-callback': () => onToken(null),
       'error-callback': () => onToken(null),
     }),
-    [siteKey, onToken],
+    [siteKey, theme, size, appearance, onToken],
   );
 
   useEffect(() => {
@@ -86,6 +100,5 @@ export default function TurnstileWidget({ siteKey, onToken }: TurnstileWidgetPro
     };
   }, [options, onToken]);
 
-  return <div ref={containerRef} />;
+  return <div ref={containerRef} className={className} />;
 }
-

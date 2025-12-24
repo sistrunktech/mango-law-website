@@ -264,7 +264,13 @@ export default function ContactForm() {
 
       {turnstileSiteKey ? (
         <div className="rounded-xl border border-brand-black/10 bg-white p-4">
-          <TurnstileWidget siteKey={turnstileSiteKey} onToken={setTurnstileToken} />
+          <TurnstileWidget
+            siteKey={turnstileSiteKey}
+            onToken={setTurnstileToken}
+            theme="light"
+            size="compact"
+            className="min-h-[65px]"
+          />
         </div>
       ) : null}
 

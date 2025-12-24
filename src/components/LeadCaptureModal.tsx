@@ -260,7 +260,13 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
           {turnstileSiteKey ? (
             <div className="space-y-1">
-              <TurnstileWidget siteKey={turnstileSiteKey} onToken={setTurnstileToken} />
+              <TurnstileWidget
+                siteKey={turnstileSiteKey}
+                onToken={setTurnstileToken}
+                theme="light"
+                size="compact"
+                className="min-h-[65px]"
+              />
               {errors.turnstile && <p className="text-xs text-red-600">{errors.turnstile}</p>}
             </div>
           ) : null}

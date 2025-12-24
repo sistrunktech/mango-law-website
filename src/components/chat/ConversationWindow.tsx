@@ -479,9 +479,10 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
   return (
     <div
       className={[
-        'fixed inset-x-3 top-4 z-50 flex max-w-full flex-col rounded-2xl border border-brand-black/10 bg-white shadow-2xl',
+        'fixed inset-x-3 bottom-4 z-50 flex max-w-full flex-col overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-2xl',
         bottomOffsetClass,
-        'lg:left-auto lg:right-6 lg:top-auto lg:bottom-6 lg:h-[600px] lg:w-[400px]',
+        'max-h-[85vh]',
+        'lg:inset-x-auto lg:right-6 lg:bottom-6 lg:max-h-none lg:h-[640px] lg:w-[420px]',
       ].join(' ')}
     >
       {/* Header */}
@@ -507,17 +508,9 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           <X size={18} />
         </button>
       </div>
-      {turnstileSiteKey ? (
-        <div className="border-b border-brand-black/10 bg-white px-4 py-3">
-          <TurnstileWidget siteKey={turnstileSiteKey} onToken={setTurnstileToken} />
-          {submissionError ? (
-            <p className="mt-2 text-xs text-red-600">{submissionError}</p>
-          ) : null}
-        </div>
-      ) : null}
 
       {/* Conversation */}
-      <div ref={conversationRef} className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div ref={conversationRef} className="flex-1 overflow-y-auto bg-brand-offWhite p-4 space-y-4">
         {conversation.map((step) => (
           <div key={step.id} className="space-y-3">
             <ChatBubble message={step.botMessage} sender="bot" timestamp={step.timestamp} />
@@ -531,7 +524,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
       {/* Input Area */}
       {currentStep !== 'confirmation' && currentStep !== 'followup' && (
-        <div className="border-t border-brand-black/10 bg-brand-black/5 p-4">
+        <div className="border-t border-brand-black/10 bg-white p-4">
           {currentStep === 'name' && (
             <div className="space-y-3">
               <TextInput
@@ -703,6 +696,22 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
                 multiline
                 error={messageError}
               />
+              {turnstileSiteKey ? (
+                <div className="rounded-xl border border-brand-black/10 bg-white p-3">
+                  <div className="flex justify-start">
+                    <TurnstileWidget
+                      siteKey={turnstileSiteKey}
+                      onToken={setTurnstileToken}
+                      theme="light"
+                      size="compact"
+                      className="min-h-[65px]"
+                    />
+                  </div>
+                  {submissionError ? (
+                    <p className="mt-2 text-xs text-red-600">{submissionError}</p>
+                  ) : null}
+                </div>
+              ) : null}
               <button
                 onClick={handleMessageSubmit}
                 disabled={!message.trim() || isSubmitting}
@@ -720,9 +729,6 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
                   </>
                 )}
               </button>
-              {submissionError && (
-                <p className="text-xs text-red-600">{submissionError}</p>
-              )}
             </div>
           )}
         </div>
