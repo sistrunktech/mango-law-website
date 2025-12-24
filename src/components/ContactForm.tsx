@@ -248,9 +248,6 @@ export default function ContactForm() {
             rows={4}
             placeholder="Briefly describe your situation and any upcoming court dates."
           />
-          <p className="mt-2 text-xs text-brand-black/60">
-            Your information is confidential and protected by attorney-client privilege.
-          </p>
         </div>
       </fieldset>
 
@@ -261,21 +258,6 @@ export default function ContactForm() {
           <input name="honey" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
-
-      {turnstileSiteKey ? (
-        <div className="flex items-end justify-between gap-3 rounded-xl border border-brand-black/10 bg-white px-3 py-2">
-          <p className="text-[10px] font-medium leading-tight text-brand-black/60">
-            Protected by Cloudflare Turnstile
-          </p>
-          <TurnstileWidget
-            siteKey={turnstileSiteKey}
-            onToken={setTurnstileToken}
-            theme="light"
-            size="compact"
-            className="turnstile-widget min-h-[60px] origin-bottom-right scale-[0.85]"
-          />
-        </div>
-      ) : null}
 
       {/* Error message */}
       {error && (
@@ -304,6 +286,26 @@ export default function ContactForm() {
           </>
         )}
       </button>
+
+      <div className="mt-3 flex flex-col gap-3 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
+        <p className="text-center text-xs text-brand-black/60 md:text-left">
+          Your information is confidential and protected by attorney-client privilege.
+        </p>
+        {turnstileSiteKey ? (
+          <div className="flex flex-col items-center gap-1 md:items-end">
+            <TurnstileWidget
+              siteKey={turnstileSiteKey}
+              onToken={setTurnstileToken}
+              theme="light"
+              size="compact"
+              className="turnstile-widget origin-top-right scale-[0.9]"
+            />
+            <p className="text-[10px] font-medium leading-tight text-brand-black/50">
+              Protected by Cloudflare Turnstile
+            </p>
+          </div>
+        ) : null}
+      </div>
     </form>
   );
 }

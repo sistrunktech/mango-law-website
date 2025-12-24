@@ -404,24 +404,6 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             </div>
           )}
 
-          {turnstileSiteKey ? (
-            <div className="space-y-1">
-              <div className="flex items-end justify-between gap-3 rounded-xl border border-brand-black/10 bg-white px-3 py-2">
-                <p className="text-[10px] font-medium leading-tight text-brand-black/60">
-                  Protected by Cloudflare Turnstile
-                </p>
-                <TurnstileWidget
-                  siteKey={turnstileSiteKey}
-                  onToken={setTurnstileToken}
-                  theme="light"
-                  size="compact"
-                  className="turnstile-widget min-h-[60px] origin-bottom-right scale-[0.85]"
-                />
-              </div>
-              {errors.turnstile ? <p className="text-xs text-red-600">{errors.turnstile}</p> : null}
-            </div>
-          ) : null}
-
           <button
             type="submit"
             disabled={isSubmitting || (turnstileSiteKey ? !turnstileToken : false)}
@@ -437,7 +419,26 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             )}
           </button>
 
-          <p className="text-center text-xs text-brand-black/60">Your information is confidential and protected by attorney-client privilege.</p>
+          <div className="mt-3 flex flex-col gap-3 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
+            <p className="text-center text-xs text-brand-black/60 md:text-left">
+              Your information is confidential and protected by attorney-client privilege.
+            </p>
+            {turnstileSiteKey ? (
+              <div className="flex flex-col items-center gap-1 md:items-end">
+                <TurnstileWidget
+                  siteKey={turnstileSiteKey}
+                  onToken={setTurnstileToken}
+                  theme="light"
+                  size="compact"
+                  className="turnstile-widget origin-top-right scale-[0.9]"
+                />
+                <p className="text-[10px] font-medium leading-tight text-brand-black/50">
+                  Protected by Cloudflare Turnstile
+                </p>
+                {errors.turnstile ? <p className="text-xs text-red-600">{errors.turnstile}</p> : null}
+              </div>
+            ) : null}
+          </div>
         </form>
       </div>
     </div>

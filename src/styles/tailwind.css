@@ -269,6 +269,11 @@
     display: block;
     max-width: 100% !important;
   }
+
+  /* Reduce “boxed” look for embedded CAPTCHA containers */
+  .turnstile-widget > div {
+    margin: 0 !important;
+  }
 }
 
 /* ============================================
