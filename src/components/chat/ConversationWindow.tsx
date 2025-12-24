@@ -714,16 +714,16 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
                 )}
               </button>
               {turnstileSiteKey ? (
-                <div className="flex items-end justify-between gap-3 rounded-xl bg-brand-black px-3 py-2">
-                  <p className="text-[10px] font-medium leading-tight text-white/80">
+                <div className="flex items-end justify-between gap-3 rounded-xl border border-brand-black/10 bg-white px-3 py-2">
+                  <p className="text-[10px] font-medium leading-tight text-brand-black/60">
                     Protected by Cloudflare Turnstile
                   </p>
                   <TurnstileWidget
                     siteKey={turnstileSiteKey}
                     onToken={setTurnstileToken}
-                    theme="dark"
+                    theme="light"
                     size="compact"
-                    className="turnstile-widget min-h-[60px] origin-right scale-[0.9]"
+                    className="turnstile-widget min-h-[60px] origin-bottom-right scale-[0.85]"
                   />
                 </div>
               ) : null}

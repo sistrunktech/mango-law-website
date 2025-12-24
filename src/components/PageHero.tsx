@@ -85,13 +85,13 @@ export default function PageHero({
         ].join(' ')}
       >
         {/* Deep black to forest green gradient - sophisticated, authoritative */}
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-[#0F1A14] to-brand-forest" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-black via-[#0F1A14] to-brand-forest" />
 
         {/* Subtle texture overlay for depth */}
-        <div className="absolute inset-0 texture-noise" />
+        <div className="pointer-events-none absolute inset-0 texture-noise" />
 
         {/* Subtle gradient overlay for visual interest */}
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-brand-leaf/5" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-brand-leaf/5" />
 
         {/* Diagonal emerald accent stripe */}
         <div
@@ -109,7 +109,7 @@ export default function PageHero({
 
         {/* Background image with overlay (if provided) */}
         {backgroundUrl && (
-          <div className="absolute inset-0">
+          <div className="pointer-events-none absolute inset-0">
             <img
               src={backgroundUrl}
               alt=""
