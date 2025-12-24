@@ -38,7 +38,7 @@ function loadTurnstileScript(): Promise<void> {
 interface TurnstileWidgetProps {
   siteKey: string;
   onToken: (token: string | null) => void;
-  theme?: 'light' | 'dark';
+  theme?: 'light' | 'dark' | 'auto';
   size?: 'normal' | 'compact' | 'invisible';
   appearance?: 'always' | 'interaction-only' | 'execute';
   className?: string;
@@ -47,7 +47,7 @@ interface TurnstileWidgetProps {
 export default function TurnstileWidget({
   siteKey,
   onToken,
-  theme = 'light',
+  theme = 'auto',
   size = 'compact',
   appearance = 'always',
   className,

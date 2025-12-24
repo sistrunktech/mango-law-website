@@ -42,10 +42,18 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
   return (
     <>
       {isChatOpen && (
-        <ConversationWindow
-          bottomOffsetClass={bottomOffsetClass}
-          onClose={() => setIsChatOpen(false)}
-        />
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-40 bg-brand-black/30 backdrop-blur-sm"
+            onClick={() => setIsChatOpen(false)}
+            aria-label="Close chat"
+          />
+          <ConversationWindow
+            bottomOffsetClass={bottomOffsetClass}
+            onClose={() => setIsChatOpen(false)}
+          />
+        </>
       )}
 
       <button

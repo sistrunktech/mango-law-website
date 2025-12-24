@@ -258,19 +258,6 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             </label>
           </div>
 
-          {turnstileSiteKey ? (
-            <div className="space-y-1">
-              <TurnstileWidget
-                siteKey={turnstileSiteKey}
-                onToken={setTurnstileToken}
-                theme="light"
-                size="compact"
-                className="min-h-[65px]"
-              />
-              {errors.turnstile && <p className="text-xs text-red-600">{errors.turnstile}</p>}
-            </div>
-          ) : null}
-
           <div>
             <label className="mb-1 block text-sm font-medium text-brand-black">What do you need help with? *</label>
             <select
@@ -377,9 +364,27 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             </div>
           )}
 
+          {turnstileSiteKey ? (
+            <div className="space-y-1">
+              <div className="flex items-end justify-between gap-3 rounded-xl bg-brand-black px-3 py-2">
+                <p className="text-[10px] font-medium leading-tight text-white/80">
+                  Protected by Cloudflare Turnstile
+                </p>
+                <TurnstileWidget
+                  siteKey={turnstileSiteKey}
+                  onToken={setTurnstileToken}
+                  theme="dark"
+                  size="compact"
+                  className="turnstile-widget min-h-[60px] origin-right scale-[0.9]"
+                />
+              </div>
+              {errors.turnstile ? <p className="text-xs text-red-600">{errors.turnstile}</p> : null}
+            </div>
+          ) : null}
+
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || (turnstileSiteKey ? !turnstileToken : false)}
             className="w-full rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? (

@@ -263,13 +263,16 @@ export default function ContactForm() {
       </div>
 
       {turnstileSiteKey ? (
-        <div className="rounded-xl border border-brand-black/10 bg-white p-4">
+        <div className="flex items-end justify-between gap-3 rounded-xl bg-brand-black px-3 py-2">
+          <p className="text-[10px] font-medium leading-tight text-white/80">
+            Protected by Cloudflare Turnstile
+          </p>
           <TurnstileWidget
             siteKey={turnstileSiteKey}
             onToken={setTurnstileToken}
-            theme="light"
+            theme="dark"
             size="compact"
-            className="min-h-[65px]"
+            className="turnstile-widget min-h-[60px] origin-right scale-[0.9]"
           />
         </div>
       ) : null}
@@ -285,7 +288,7 @@ export default function ContactForm() {
       {/* Submit button */}
       <button
         type="submit"
-        disabled={status === 'submitting'}
+        disabled={status === 'submitting' || (turnstileSiteKey ? !turnstileToken : false)}
         className="btn btn-primary w-full py-4 text-base"
         data-cta="contact_form_submit"
       >
