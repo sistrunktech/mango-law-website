@@ -822,6 +822,36 @@ Lead/contact/chat emails are functional but need copy/layout polish so admin not
 
 ---
 
+## TICKET-025: Admin Connections — GA4/GTM Wrong Account Selection + Missing Lists
+
+**Priority:** High  
+**Status:** Closed  
+**Date Created:** 2025-12-24  
+**Assigned To:** TBD
+
+### Issue Summary
+In `/admin/connections`, Google Analytics and Google Tag Manager appeared to “pick a random account” and did not show the full list of accessible accounts/resources, making it hard to select the correct GA4 Property / GTM Container for `mango.law`.
+
+### Root cause
+The `google-access-check` Edge Function only fetched **properties/containers from the first returned account** and only returned a small sample list to the UI.
+
+### Fix
+- `google-access-check` now returns **full account lists** and **properties/containers across accessible accounts** (with safe caps).
+- `/admin/connections` now shows an **Account** selector for GA4/GTM/GBP and filters the Resource selector accordingly; debug payload is collapsed by default.
+
+### Files touched
+- `supabase/functions/google-access-check/index.ts`
+- `src/pages/ConnectionsPage.tsx`
+
+### Verification steps
+1. Go to `/admin/connections`
+2. For Analytics and Tag Manager:
+   - Click `Check status`
+   - Select the correct **Account** and **Resource**, then click `Save`
+3. Re-run `Check status` and confirm the integration shows `Connected (healthy)`
+
+---
+
 ## Collaboration Notes (Codex / Agents)
 
 **Goal:** keep the repo moving without requiring the site owner to use terminal or GitHub UI for routine work.

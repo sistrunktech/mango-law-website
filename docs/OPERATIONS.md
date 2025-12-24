@@ -167,6 +167,16 @@ Project ref (prod): `rgucewewminsevbjgcad`
   - **Checkpoint CRUD**: Create, edit, and delete checkpoints with geocoding preview.
   - **Geocoding Preview**: Real-time address validation and coordinate lookup as you type. Shows confidence level (high/medium/low) and formatted address.
   - **Manual Entry**: Full form with all checkpoint fields including source tracking and verification status.
+
+### Google Integrations (Admin)
+Use `/admin/connections` to connect and *select the correct resources* for each tool (do not assume the first Google account returned is the right one).
+- **Step 1 — Connect**: Click `Connect` (or `Reconnect`) and complete the Google consent flow.
+- **Step 2 — Check status**: Click `Check status` to load the list of available accounts/resources.
+- **Step 3 — Select + Save**:
+  - **GA4 (Analytics)**: choose the correct **Account** and **GA4 Property**, then click `Save` (stored in `google_integrations.account_id` + `metadata.propertyId`).
+  - **Search Console**: choose `sc-domain:mango.law` when available (else `https://mango.law/`), then click `Save` (stored in `metadata.siteUrl`).
+  - **Tag Manager**: choose the correct **Account** and **Container**, then click `Save` (stored in `google_integrations.account_id` + `metadata.containerId`).
+- **Step 4 — Re-check**: run `Check status` again after changing permissions or creating resources in Google.
 - **Automated Updates**: pg_cron job runs hourly to automatically update checkpoint statuses. Manual refresh available via "Update Statuses" button.
   - **Cron health check (Supabase SQL editor):**
     - `SELECT * FROM cron.job WHERE jobname = 'update_checkpoint_statuses_hourly';`

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2025-12-24
+
+### Admin / Google Connectors
+- Fix `/admin/connections` resource selection for Google Analytics and Google Tag Manager by listing all accessible accounts/resources and adding an Account selector (prevents “random account” behavior).
+- Collapse the raw access-check debug payload behind a disclosure to keep the UI readable.
+
 ## 2025-12-23
 
 ### Lead Capture + Forms
