@@ -9,6 +9,7 @@ import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
 import { trackLeadSubmitted } from '../../lib/analytics';
 import TurnstileWidget from '../TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../../lib/turnstile';
+import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../../lib/intake';
 
 interface ConversationStep {
   id: string;
@@ -23,7 +24,19 @@ interface ConversationWindowProps {
 }
 
 export default function ConversationWindow({ onClose, bottomOffsetClass = 'bottom-6' }: ConversationWindowProps) {
-  const [currentStep, setCurrentStep] = useState<'name' | 'phone' | 'email' | 'message' | 'confirmation' | 'followup'>(
+  const [currentStep, setCurrentStep] = useState<
+    | 'name'
+    | 'phone'
+    | 'email'
+    | 'case_type'
+    | 'county'
+    | 'urgency'
+    | 'how_found'
+    | 'how_found_detail'
+    | 'message'
+    | 'confirmation'
+    | 'followup'
+  >(
     'name',
   );
   const [isTyping, setIsTyping] = useState(true);
@@ -31,10 +44,18 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [caseType, setCaseType] = useState('');
+  const [county, setCounty] = useState('');
+  const [urgency, setUrgency] = useState<'exploring' | 'soon' | 'urgent' | 'emergency'>('exploring');
+  const [howFound, setHowFound] = useState('');
+  const [howFoundDetail, setHowFoundDetail] = useState('');
   const [message, setMessage] = useState('');
   const [nameError, setNameError] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [caseTypeError, setCaseTypeError] = useState('');
+  const [howFoundError, setHowFoundError] = useState('');
+  const [howFoundDetailError, setHowFoundDetailError] = useState('');
   const [messageError, setMessageError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
@@ -63,6 +84,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           setName(data.name || '');
           setPhone(data.phone || '');
           setEmail(data.email || '');
+          setCaseType(data.caseType || '');
+          setCounty(data.county || '');
+          setUrgency(data.urgency || 'exploring');
+          setHowFound(data.howFound || '');
+          setHowFoundDetail(data.howFoundDetail || '');
           setMessage(data.message || '');
         } else {
           localStorage.removeItem('mango-chat-session');
@@ -76,19 +102,24 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
   // Save conversation to localStorage
   useEffect(() => {
-    if (conversation.length > 0 || name || phone || email || message) {
+    if (conversation.length > 0 || name || phone || email || caseType || county || howFound || howFoundDetail || message) {
       const sessionData = {
         conversation,
         currentStep,
         name,
         phone,
         email,
+        caseType,
+        county,
+        urgency,
+        howFound,
+        howFoundDetail,
         message,
         lastActivity: new Date().toISOString(),
       };
       localStorage.setItem('mango-chat-session', JSON.stringify(sessionData));
     }
-  }, [conversation, currentStep, name, phone, email, message]);
+  }, [conversation, currentStep, name, phone, email, caseType, county, urgency, howFound, howFoundDetail, message]);
 
   // Reset inactivity timer
   useEffect(() => {
@@ -213,9 +244,93 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
     setTimeout(() => {
       setIsTyping(false);
+      addBotMessage('What do you need help with?');
+      setCurrentStep('case_type');
+    }, 600);
+  };
+
+  const handleCaseTypeSelect = (value: string, label: string) => {
+    if (!value) {
+      setCaseTypeError('Please choose an option');
+      return;
+    }
+    setCaseTypeError('');
+    setCaseType(value);
+    addUserMessage(label);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage('Which county is this in? (optional)');
+      setCurrentStep('county');
+    }, 450);
+  };
+
+  const handleCountySelect = (value: string, label: string) => {
+    setCounty(value);
+    addUserMessage(label);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage('How urgent is your situation?');
+      setCurrentStep('urgency');
+    }, 450);
+  };
+
+  const handleUrgencySelect = (value: 'exploring' | 'soon' | 'urgent' | 'emergency', label: string) => {
+    setUrgency(value);
+    addUserMessage(label);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage('How did you find Nick/Mango Law?');
+      setCurrentStep('how_found');
+    }, 450);
+  };
+
+  const handleHowFoundSelect = (value: string, label: string) => {
+    if (!value) {
+      setHowFoundError('Please choose an option');
+      return;
+    }
+    setHowFoundError('');
+    setHowFound(value);
+    addUserMessage(label);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      if (value === 'referral') {
+        addBotMessage('Who can we thank for the referral?');
+        setCurrentStep('how_found_detail');
+        return;
+      }
+      if (value === 'other') {
+        addBotMessage('Can you share a quick note on how you found us?');
+        setCurrentStep('how_found_detail');
+        return;
+      }
       addBotMessage("Got it. What's going on today? How can we help?");
       setCurrentStep('message');
-    }, 600);
+    }, 450);
+  };
+
+  const handleHowFoundDetailSubmit = () => {
+    const trimmed = howFoundDetail.trim();
+    if (!trimmed) {
+      setHowFoundDetailError(howFound === 'referral' ? 'Please enter a name' : 'Please enter a quick note');
+      return;
+    }
+    if (trimmed.length < 2) {
+      setHowFoundDetailError('Please add a bit more detail');
+      return;
+    }
+    setHowFoundDetailError('');
+    addUserMessage(trimmed);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage("Thanks. What's going on today? How can we help?");
+      setCurrentStep('message');
+    }, 450);
   };
 
   const handleMessageSubmit = async () => {
@@ -260,6 +375,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           name: name.trim(),
           phone: phone.replace(/\D/g, ''),
           email: email.trim().toLowerCase(),
+          case_type: caseType || null,
+          county: county || null,
+          urgency: urgency || null,
+          how_found: howFound || null,
+          how_found_detail: howFoundDetail || null,
           initial_message: trimmedMessage,
           conversation_context: conversationContext,
           source: 'chat_widget',
@@ -463,6 +583,108 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
               <button
                 onClick={handleEmailSubmit}
                 disabled={!email.trim() || isTyping}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span>Continue</span>
+                <Send size={14} />
+              </button>
+            </div>
+          )}
+
+          {currentStep === 'case_type' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-1 gap-2">
+                {CASE_TYPE_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => handleCaseTypeSelect(opt.value, opt.label)}
+                    disabled={isTyping}
+                    className="w-full rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 disabled:opacity-50"
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              {caseTypeError ? <p className="text-xs text-red-600">{caseTypeError}</p> : null}
+            </div>
+          )}
+
+          {currentStep === 'county' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleCountySelect('', 'Skip')}
+                  disabled={isTyping}
+                  className="col-span-2 rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-sm font-semibold text-brand-black/70 transition-colors hover:bg-brand-black/5 disabled:opacity-50"
+                >
+                  Skip
+                </button>
+                {COUNTY_OPTIONS.map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => handleCountySelect(c, `${c} County`)}
+                    disabled={isTyping}
+                    className="rounded-xl border border-brand-black/10 bg-white px-3 py-2 text-xs font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 disabled:opacity-50"
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 'urgency' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-1 gap-2">
+                {URGENCY_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => handleUrgencySelect(opt.value, opt.label)}
+                    disabled={isTyping}
+                    className="w-full rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 disabled:opacity-50"
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 'how_found' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-1 gap-2">
+                {HOW_FOUND_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => handleHowFoundSelect(opt.value, opt.label)}
+                    disabled={isTyping}
+                    className="w-full rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 disabled:opacity-50"
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              {howFoundError ? <p className="text-xs text-red-600">{howFoundError}</p> : null}
+            </div>
+          )}
+
+          {currentStep === 'how_found_detail' && (
+            <div className="space-y-3">
+              <TextInput
+                value={howFoundDetail}
+                onChange={setHowFoundDetail}
+                onSubmit={handleHowFoundDetailSubmit}
+                placeholder={howFound === 'referral' ? 'Name of the person or business' : 'Tell us a little more'}
+                error={howFoundDetailError}
+              />
+              <button
+                onClick={handleHowFoundDetailSubmit}
+                disabled={!howFoundDetail.trim() || isTyping}
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>Continue</span>

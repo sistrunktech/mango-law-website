@@ -10,6 +10,9 @@ interface LeadCaptureData {
   phone: string;
   lead_source: string;
   checkpoint_id?: string | null;
+  case_type?: string | null;
+  how_found?: string | null;
+  how_found_detail?: string | null;
   county?: string | null;
   urgency?: string | null;
   message?: string | null;
@@ -278,6 +281,9 @@ Deno.serve(async (req: Request) => {
 	      phone: normalizedPhone,
 	      lead_source: payload.lead_source.trim(),
 	      checkpoint_id: checkpointId,
+        case_type: payload.case_type?.trim() || null,
+        how_found: payload.how_found?.trim() || null,
+        how_found_detail: payload.how_found_detail?.trim() || null,
 	      county: payload.county?.trim() || null,
 	      urgency: payload.urgency?.trim() || null,
 	      message: payload.message?.trim() || null,
@@ -326,15 +332,18 @@ Deno.serve(async (req: Request) => {
                 {
                   title: "New consultation request",
                   summaryLine:
-                    `${payload.name.trim()} · ${formatPhoneForDisplay(normalizedPhone)} · ${payload.lead_source.trim()}`,
+                    `${payload.name.trim()} · ${formatPhoneForDisplay(normalizedPhone)} · ${payload.case_type?.trim() || payload.lead_source.trim()}`,
                   fields: [
                     { label: "Name", value: payload.name.trim() },
                     { label: "Email", value: email },
                     { label: "Phone", value: formatPhoneForDisplay(normalizedPhone) },
+                    { label: "Help needed", value: payload.case_type?.trim() || "Not provided" },
                     { label: "Lead source", value: payload.lead_source.trim() },
                     { label: "Urgency", value: payload.urgency?.trim() || "Not provided" },
                     { label: "County", value: payload.county?.trim() || "Not provided" },
                     { label: "Checkpoint", value: checkpointId || "Not provided" },
+                    { label: "How found", value: payload.how_found?.trim() || "Not provided" },
+                    { label: "How found detail", value: payload.how_found_detail?.trim() || "Not provided" },
                   ],
                   messageLabel: "Message",
                   message: payload.message?.trim() || null,
@@ -385,6 +394,9 @@ Deno.serve(async (req: Request) => {
                   { label: "Name", value: payload.name.trim() },
                   { label: "Email", value: email },
                   { label: "Phone", value: formatPhoneForDisplay(normalizedPhone) },
+                  ...(payload.case_type?.trim()
+                    ? [{ label: "Help needed", value: payload.case_type.trim() }]
+                    : []),
                   ...(payload.county?.trim()
                     ? [{ label: "County", value: payload.county.trim() }]
                     : []),
@@ -395,6 +407,9 @@ Deno.serve(async (req: Request) => {
                 message: payload.message?.trim() || null,
                 leadSource: payload.lead_source.trim(),
                 checkpointId,
+                caseType: payload.case_type?.trim() || null,
+                urgency: payload.urgency?.trim() || null,
+                county: payload.county?.trim() || null,
                 includeHelpfulLinks: true,
               },
               { siteUrl, appEnv, season, theme, holiday },

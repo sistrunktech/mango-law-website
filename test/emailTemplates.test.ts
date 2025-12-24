@@ -38,6 +38,7 @@ function run() {
       details: [{ label: "Email", value: "tfsistrunk@gmail.com" }],
       message: "I was arrested for OVI last night.",
       leadSource: "modal",
+      caseType: "ovi_dui",
       includeHelpfulLinks: true,
     },
     { theme: "light", season: "spring", holiday: false, siteUrl: "https://mango.law" },
@@ -49,4 +50,3 @@ function run() {
 }
 
 run();
-

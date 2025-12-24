@@ -29,6 +29,9 @@ export type HelpfulLinkInput = {
   message?: string | null;
   leadSource?: string | null;
   checkpointId?: string | null;
+  caseType?: string | null;
+  urgency?: string | null;
+  county?: string | null;
 };
 
 export function recommendHelpfulLinks(input: HelpfulLinkInput): HelpfulLink[] {
@@ -37,10 +40,54 @@ export function recommendHelpfulLinks(input: HelpfulLinkInput): HelpfulLink[] {
       input.message ?? "",
       input.leadSource ?? "",
       input.checkpointId ?? "",
+      input.caseType ?? "",
+      input.urgency ?? "",
+      input.county ?? "",
     ].join(" "),
   );
 
   const links: HelpfulLink[] = [];
+
+  const caseType = (input.caseType || "").trim().toLowerCase();
+  if (caseType) {
+    switch (caseType) {
+      case "ovi_dui":
+      case "ovi":
+      case "dui":
+        links.push(
+          { label: "OVI / DUI defense", href: absolute(input.siteUrl, "/ovi-dui-defense-delaware-oh") },
+          { label: "What to do after an OVI arrest (guide)", href: absolute(input.siteUrl, "/resources/what-to-do-after-ovi-arrest") },
+          { label: "ORC § 4511.19 — OVI/DUI (official)", href: "https://codes.ohio.gov/ohio-revised-code/section-4511.19" },
+        );
+        break;
+      case "criminal_defense":
+        links.push({ label: "Criminal defense", href: absolute(input.siteUrl, "/criminal-defense-delaware-oh") });
+        break;
+      case "drug_crimes":
+        links.push({ label: "Drug crimes defense", href: absolute(input.siteUrl, "/drug-crime-lawyer-delaware-oh") });
+        break;
+      case "sex_crimes":
+        links.push({ label: "Sex crimes defense", href: absolute(input.siteUrl, "/sex-crime-defense-lawyer-delaware-oh") });
+        break;
+      case "protection_orders":
+        links.push(
+          { label: "Protection order defense", href: absolute(input.siteUrl, "/protection-order-lawyer-delaware-oh") },
+          { label: "ORC § 3113.31 — Civil protection orders (official)", href: "https://codes.ohio.gov/ohio-revised-code/section-3113.31" },
+        );
+        break;
+      case "white_collar":
+        links.push({ label: "White collar defense", href: absolute(input.siteUrl, "/white-collar-crimes-attorney-delaware-oh") });
+        break;
+      case "personal_injury":
+        links.push({ label: "Personal injury", href: absolute(input.siteUrl, "/personal-injury-lawyer-delaware-oh") });
+        break;
+      case "bond_jail":
+        links.push({ label: "Bond & jail information (Delaware County)", href: absolute(input.siteUrl, "/resources/bond-jail-information") });
+        break;
+      default:
+        break;
+    }
+  }
 
   if (
     text.includes("ovi") ||
@@ -87,4 +134,3 @@ export function recommendHelpfulLinks(input: HelpfulLinkInput): HelpfulLink[] {
   const unique = uniqByHref(links).slice(0, 4);
   return unique.map((l) => ({ label: escapeHtml(l.label), href: escapeHtml(l.href) }));
 }
-

@@ -9,6 +9,13 @@ interface ContactFormData {
   email: string;
   phone?: string | null;
   message: string;
+  case_type?: string | null;
+  county?: string | null;
+  urgency?: string | null;
+  how_found?: string | null;
+  how_found_detail?: string | null;
+  how_heard?: string | null;
+  how_heard_detail?: string | null;
   honeypot?: string;
   honey?: string;
   turnstile_token?: string | null;
@@ -279,6 +286,11 @@ Deno.serve(async (req: Request) => {
       email: formData.email.trim().toLowerCase(),
       phone: normalizedPhone,
       message: formData.message.trim(),
+      case_type: formData.case_type?.trim() || null,
+      county: formData.county?.trim() || null,
+      urgency: formData.urgency?.trim() || null,
+      how_found: (formData.how_found || formData.how_heard || "").trim() || null,
+      how_found_detail: (formData.how_found_detail || formData.how_heard_detail || "").trim() || null,
       ip_address: ip,
       user_agent: userAgent,
     });
@@ -321,6 +333,11 @@ Deno.serve(async (req: Request) => {
                 { label: "Name", value: formData.name.trim() },
                 { label: "Email", value: formData.email.trim().toLowerCase() },
                 { label: "Phone", value: normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : "Not provided" },
+                { label: "Help needed", value: formData.case_type?.trim() || "Not provided" },
+                { label: "Urgency", value: formData.urgency?.trim() || "Not provided" },
+                { label: "County", value: formData.county?.trim() || "Not provided" },
+                { label: "How found", value: (formData.how_found || formData.how_heard || "").trim() || "Not provided" },
+                { label: "How found detail", value: (formData.how_found_detail || formData.how_heard_detail || "").trim() || "Not provided" },
               ],
               messageLabel: "Message",
               message: formData.message.trim(),
@@ -371,8 +388,14 @@ Deno.serve(async (req: Request) => {
                   { label: "Name", value: formData.name.trim() },
                   { label: "Email", value: formData.email.trim().toLowerCase() },
                   ...(normalizedPhone ? [{ label: "Phone", value: formatPhoneForDisplay(normalizedPhone) }] : []),
+                  ...(formData.case_type?.trim() ? [{ label: "Help needed", value: formData.case_type.trim() }] : []),
+                  ...(formData.county?.trim() ? [{ label: "County", value: formData.county.trim() }] : []),
+                  ...(formData.urgency?.trim() ? [{ label: "Urgency", value: formData.urgency.trim() }] : []),
                 ],
                 message: formData.message.trim(),
+                caseType: formData.case_type?.trim() || null,
+                urgency: formData.urgency?.trim() || null,
+                county: formData.county?.trim() || null,
                 includeHelpfulLinks: true,
               },
               { siteUrl, appEnv, season, theme, holiday },

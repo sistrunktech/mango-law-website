@@ -6,6 +6,7 @@ import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/phone';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import TurnstileWidget from './TurnstileWidget';
+import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
 
 export type LeadSource =
   | 'emergency_banner'
@@ -24,21 +25,16 @@ interface LeadCaptureModalProps {
   checkpointId?: string;
 }
 
-const COUNTIES = ['Delaware', 'Franklin', 'Union', 'Marion', 'Morrow', 'Licking', 'Knox', 'Other'];
-const URGENCY_OPTIONS = [
-  { value: 'exploring', label: 'Just exploring options' },
-  { value: 'soon', label: 'Court date in next 2 weeks' },
-  { value: 'urgent', label: 'Court date this week' },
-  { value: 'emergency', label: 'Already arrested / need help now' },
-];
-
 export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointId }: LeadCaptureModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    case_type: '',
     county: '',
     urgency: 'exploring',
+    how_found: '',
+    how_found_detail: '',
     message: '',
     honeypot: '',
   });
@@ -59,6 +55,14 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim().toLowerCase())) newErrors.email = 'Invalid email format';
     if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
     else if (!isLikelyValidPhone(formData.phone)) newErrors.phone = 'Invalid phone format';
+    if (!formData.case_type.trim()) newErrors.case_type = 'Please select what you need help with';
+    if (!formData.how_found.trim()) newErrors.how_found = 'Please tell us how you found Nick/Mango Law';
+    if (formData.how_found === 'referral' && !formData.how_found_detail.trim()) {
+      newErrors.how_found_detail = 'Who can we thank for the referral?';
+    }
+    if (formData.how_found === 'other' && !formData.how_found_detail.trim()) {
+      newErrors.how_found_detail = 'Please share a quick note';
+    }
 
     if (turnstileSiteKey && !turnstileToken) {
       newErrors.turnstile = 'Please complete the verification step';
@@ -86,8 +90,11 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
           name: formData.name,
           email: formData.email,
           phone: normalizedPhone,
+          case_type: formData.case_type,
           county: formData.county || null,
           urgency: formData.urgency,
+          how_found: formData.how_found || null,
+          how_found_detail: formData.how_found_detail || null,
           message: formData.message || null,
           lead_source: trigger,
           checkpoint_id: checkpointId || null,
@@ -259,6 +266,26 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
           ) : null}
 
           <div>
+            <label className="mb-1 block text-sm font-medium text-brand-black">What do you need help with? *</label>
+            <select
+              name="case_type"
+              value={formData.case_type}
+              onChange={handleChange}
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
+                errors.case_type ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
+              }`}
+            >
+              <option value="">Select an option...</option>
+              {CASE_TYPE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            {errors.case_type && <p className="mt-1 text-xs text-red-600">{errors.case_type}</p>}
+          </div>
+
+          <div>
             <label className="mb-1 block text-sm font-medium text-brand-black">County</label>
             <select
               name="county"
@@ -267,7 +294,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               className="w-full rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
             >
               <option value="">Select county...</option>
-              {COUNTIES.map((county) => (
+              {COUNTY_OPTIONS.map((county) => (
                 <option key={county} value={county}>{county} County</option>
               ))}
             </select>
@@ -286,6 +313,45 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               ))}
             </select>
           </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-brand-black">How did you find Nick/Mango Law? *</label>
+            <select
+              name="how_found"
+              value={formData.how_found}
+              onChange={handleChange}
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
+                errors.how_found ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
+              }`}
+            >
+              <option value="">Select an option...</option>
+              {HOW_FOUND_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            {errors.how_found && <p className="mt-1 text-xs text-red-600">{errors.how_found}</p>}
+          </div>
+
+          {formData.how_found === 'referral' || formData.how_found === 'other' ? (
+            <div>
+              <label className="mb-1 block text-sm font-medium text-brand-black">
+                {formData.how_found === 'referral' ? 'Who can we thank?' : 'Quick note'} *
+              </label>
+              <input
+                type="text"
+                name="how_found_detail"
+                value={formData.how_found_detail}
+                onChange={handleChange}
+                className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
+                  errors.how_found_detail ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
+                }`}
+                placeholder={formData.how_found === 'referral' ? 'Name of the person or business' : 'Tell us a little more'}
+              />
+              {errors.how_found_detail && <p className="mt-1 text-xs text-red-600">{errors.how_found_detail}</p>}
+            </div>
+          ) : null}
 
           <div>
             <label className="mb-1 block text-sm font-medium text-brand-black">Message (optional)</label>

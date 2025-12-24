@@ -9,6 +9,11 @@ interface ChatIntakeData {
   email: string;
   phone?: string;
   initial_message: string;
+  case_type?: string | null;
+  county?: string | null;
+  urgency?: string | null;
+  how_found?: string | null;
+  how_found_detail?: string | null;
   conversation_context?: string;
   honeypot?: string;
   turnstile_token?: string | null;
@@ -279,6 +284,11 @@ Deno.serve(async (req: Request) => {
       email: intakeData.email.trim().toLowerCase(),
       phone: normalizedPhone,
       initial_message: intakeData.initial_message.trim(),
+      case_type: intakeData.case_type?.trim() || null,
+      county: intakeData.county?.trim() || null,
+      urgency: intakeData.urgency?.trim() || null,
+      how_found: intakeData.how_found?.trim() || null,
+      how_found_detail: intakeData.how_found_detail?.trim() || null,
       conversation_context: intakeData.conversation_context || null,
       ip_address: ip,
       user_agent: userAgent,
@@ -334,6 +344,11 @@ Deno.serve(async (req: Request) => {
                   { label: "Name", value: intakeData.name.trim() },
                   { label: "Email", value: intakeData.email.trim().toLowerCase() },
                   { label: "Phone", value: normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : "Not provided" },
+                  { label: "Help needed", value: intakeData.case_type?.trim() || "Not provided" },
+                  { label: "Urgency", value: intakeData.urgency?.trim() || "Not provided" },
+                  { label: "County", value: intakeData.county?.trim() || "Not provided" },
+                  { label: "How found", value: intakeData.how_found?.trim() || "Not provided" },
+                  { label: "How found detail", value: intakeData.how_found_detail?.trim() || "Not provided" },
                 ],
                 messageLabel: "Initial message",
                 message: intakeData.initial_message.trim(),
@@ -379,9 +394,15 @@ Deno.serve(async (req: Request) => {
                   { label: "Name", value: intakeData.name.trim() },
                   { label: "Email", value: intakeData.email.trim().toLowerCase() },
                   ...(normalizedPhone ? [{ label: "Phone", value: formatPhoneForDisplay(normalizedPhone) }] : []),
+                  ...(intakeData.case_type?.trim() ? [{ label: "Help needed", value: intakeData.case_type.trim() }] : []),
+                  ...(intakeData.county?.trim() ? [{ label: "County", value: intakeData.county.trim() }] : []),
+                  ...(intakeData.urgency?.trim() ? [{ label: "Urgency", value: intakeData.urgency.trim() }] : []),
                 ],
                 message: intakeData.initial_message.trim(),
                 leadSource: "chat",
+                caseType: intakeData.case_type?.trim() || null,
+                urgency: intakeData.urgency?.trim() || null,
+                county: intakeData.county?.trim() || null,
                 includeHelpfulLinks: true,
               },
               { siteUrl, appEnv, season, theme, holiday },

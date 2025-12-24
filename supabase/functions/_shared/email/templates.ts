@@ -34,6 +34,9 @@ export type ClientEmailData = {
   message?: string | null;
   leadSource?: string | null;
   checkpointId?: string | null;
+  caseType?: string | null;
+  urgency?: string | null;
+  county?: string | null;
   includeHelpfulLinks?: boolean;
 };
 
@@ -309,6 +312,9 @@ export function buildClientConfirmationHtml(
       message: data.message,
       leadSource: data.leadSource,
       checkpointId: data.checkpointId,
+      caseType: data.caseType,
+      urgency: data.urgency,
+      county: data.county,
     });
 
   const helpfulLinksHtml = helpfulLinks.length
