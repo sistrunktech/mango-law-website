@@ -7,6 +7,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
   const [isOpen, setIsOpen] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
 
   const updatePanelPosition = () => {
@@ -51,6 +52,33 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
     }, 300);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      setIsOpen(true);
+      updatePanelPosition();
+      setTimeout(() => {
+        const firstLink = menuRef.current?.querySelector('a');
+        firstLink?.focus();
+      }, 10);
+    }
+  };
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        setIsOpen(false);
+        triggerRef.current?.focus();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [isOpen]);
+
   return (
     <div
       className="relative"
@@ -60,6 +88,10 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
       <button
         type="button"
         ref={triggerRef}
+        onKeyDown={handleKeyDown}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        aria-controls="mega-menu-panel"
         className={[
           'flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors',
           variant === 'light' ? 'text-brand-black/70' : 'text-brand-offWhite/80',
@@ -72,6 +104,10 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
 
       {isOpen && panelPosition && (
         <div
+          ref={menuRef}
+          id="mega-menu-panel"
+          role="region"
+          aria-label="Practice Areas Menu"
           className="fixed z-50 w-[90vw] max-w-5xl -translate-x-1/2"
           style={{
             top: panelPosition.top,

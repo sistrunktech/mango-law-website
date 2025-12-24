@@ -18,6 +18,13 @@ export default function FAQSection({ faqs, title = 'Frequently Asked Questions' 
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleFAQ(index);
+    }
+  };
+
   return (
     <section className="section bg-brand-offWhite">
       <div className="container max-w-4xl">
@@ -38,6 +45,9 @@ export default function FAQSection({ faqs, title = 'Frequently Asked Questions' 
             >
               <button
                 onClick={() => toggleFAQ(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
                 className="flex w-full items-start justify-between gap-4 p-6 text-left transition-colors hover:bg-brand-black/5"
               >
                 <h3 className="flex-1 font-semibold text-brand-black">{faq.question}</h3>
@@ -45,9 +55,13 @@ export default function FAQSection({ faqs, title = 'Frequently Asked Questions' 
                   className={`h-5 w-5 shrink-0 text-brand-mangoText transition-transform ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
+                  aria-hidden="true"
                 />
               </button>
               <div
+                id={`faq-answer-${index}`}
+                role="region"
+                aria-labelledby={`faq-question-${index}`}
                 className={`overflow-hidden transition-all ${
                   openIndex === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                 }`}

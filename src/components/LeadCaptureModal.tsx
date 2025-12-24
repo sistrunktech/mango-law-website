@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
@@ -7,6 +7,7 @@ import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import TurnstileWidget from './TurnstileWidget';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
+import { useFocusTrap } from '../lib/useFocusTrap';
 
 export type LeadSource =
   | 'emergency_banner'
@@ -42,6 +43,28 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+
+  useFocusTrap(modalRef, isOpen);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = '';
+      };
+    }
+  }, [isOpen, onClose]);
 
   const turnstileSiteKey = TURNSTILE_SITE_KEY;
 
@@ -183,17 +206,34 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
     );
   }
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === backdropRef.current) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl">
+    <div
+      ref={backdropRef}
+      onClick={handleBackdropClick}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div
+        ref={modalRef}
+        className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl"
+      >
         <button
           onClick={onClose}
+          aria-label="Close modal"
           className="absolute right-4 top-4 rounded-full p-1 text-brand-black/40 transition-colors hover:bg-brand-black/5 hover:text-brand-black"
         >
           <X className="h-5 w-5" />
         </button>
 
-        <h2 className="mb-2 text-xl font-bold text-brand-black">Free Case Evaluation</h2>
+        <h2 id="modal-title" className="mb-2 text-xl font-bold text-brand-black">Free Case Evaluation</h2>
         <p className="mb-6 text-sm text-brand-black/70">Get confidential legal advice from an experienced DUI defense attorney.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
