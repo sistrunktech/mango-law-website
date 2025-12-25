@@ -1,9 +1,39 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
-import { blogPosts } from '../data/blogPosts';
+import { blogPosts, type BlogPost } from '../data/blogPosts';
+
+function getRecentDiversePosts(posts: BlogPost[], count: number): BlogPost[] {
+  const sorted = [...posts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  const selected: BlogPost[] = [];
+  const usedCategories = new Set<string>();
+
+  for (const post of sorted) {
+    if (selected.length >= count) break;
+    if (!usedCategories.has(post.category)) {
+      selected.push(post);
+      usedCategories.add(post.category);
+    }
+  }
+
+  if (selected.length < count) {
+    for (const post of sorted) {
+      if (selected.length >= count) break;
+      if (!selected.includes(post)) {
+        selected.push(post);
+      }
+    }
+  }
+
+  return selected.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
 
 export default function BlogSection() {
-  const recentPosts = blogPosts.slice(0, 3);
+  const recentPosts = getRecentDiversePosts(blogPosts, 3);
 
   return (
     <section className="section bg-brand-offWhite">

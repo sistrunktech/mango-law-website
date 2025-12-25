@@ -1408,7 +1408,7 @@ Checkpoint practices change and vary by agency. Focus on safety, keep the intera
     slug: 'holiday-ovi-enforcement-ohio-delaware-dublin-columbus',
     title: 'Holiday OVI Enforcement in Ohio: What Drivers in Delaware, Dublin, and Central Ohio Should Expect',
     excerpt: 'Ohio\'s holiday enforcement wave ramps up from mid-December through New Year\'s Day. Here\'s what\'s changing, what police are looking for, and what to do if a traffic stop turns into an OVI investigation.',
-    imageUrl: '/images/generated/ovi-dui-defense-hero.png',
+    imageUrl: '/images/generated/blog-ohio-holiday-ovi-enforcement.png',
     content: `Holiday travel in Central Ohio is not just more traffic. It is more enforcement.
 
 Between family get-togethers, work parties, winter weather, and late-night driving, law enforcement agencies across Ohio traditionally increase patrols and OVI enforcement during the Christmas and New Year window. If you are traveling through Delaware, Dublin, Powell, Lewis Center, Westerville, Worthington, or into Columbus, assume you will see more marked cruisers, more traffic stops, and less tolerance for "close enough" driving decisions.

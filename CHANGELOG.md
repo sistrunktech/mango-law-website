@@ -6,6 +6,10 @@
 - Add Ohio Supreme Court Registration No. 0071238 to attorney identity block (homepage photo overlay) and footer credibility line.
 - Standardize bar number format sitewide: "Ohio Supreme Court Registration No. 0071238" (avoid informal "OH Bar #" variants).
 
+### Blog / SEO
+- Homepage blog section now shows most recent posts sorted by date with category diversity (one post per category for better SEO coverage).
+- Fix holiday OVI enforcement blog post using duplicate hero image; now uses correct `blog-ohio-holiday-ovi-enforcement.png`.
+
 ### UX / CTAs
 - Replace passive "Explore / Learn more" CTAs on practice area cards with action-oriented, help-first language:
   - OVI/DUI: "Get help with OVI charges"
