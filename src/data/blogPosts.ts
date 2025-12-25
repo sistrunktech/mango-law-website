@@ -1405,11 +1405,257 @@ Checkpoint practices change and vary by agency. Focus on safety, keep the intera
     ],
   },
   {
+    slug: 'holiday-ovi-enforcement-ohio-delaware-dublin-columbus',
+    title: 'Holiday OVI Enforcement in Ohio: What Drivers in Delaware, Dublin, and Central Ohio Should Expect',
+    excerpt: 'Ohio\'s holiday enforcement wave ramps up from mid-December through New Year\'s Day. Here\'s what\'s changing, what police are looking for, and what to do if a traffic stop turns into an OVI investigation.',
+    imageUrl: '/images/generated/ovi-dui-defense-hero.png',
+    content: `Holiday travel in Central Ohio is not just more traffic. It is more enforcement.
+
+Between family get-togethers, work parties, winter weather, and late-night driving, law enforcement agencies across Ohio traditionally increase patrols and OVI enforcement during the Christmas and New Year window. If you are traveling through Delaware, Dublin, Powell, Lewis Center, Westerville, Worthington, or into Columbus, assume you will see more marked cruisers, more traffic stops, and less tolerance for "close enough" driving decisions.
+
+[VISUAL:HOLIDAY_KEY_TAKEAWAYS]
+
+This post covers what's actually happening during the 2025 holiday season, what officers are focused on, and what to do if a routine stop starts turning into an OVI investigation.
+
+**Quick links**
+- Mango Law's [DUI Checkpoint Map](/resources/dui-checkpoints) (updated when new checkpoint info is available)
+- Our deep guide to [OVI and DUI charges in Ohio](/blog/understanding-ovi-dui-charges-ohio) (penalties, license suspensions, court process)
+- A local, high-profile example: [OSU coach Kevin McGuff and physical control charges](/blog/physical-control-parked-car-ohio-kevin-mcguff)
+
+> **Important**: This article is general information, not legal advice. If you are facing an OVI, the details matter. Evidence, timelines, and the exact charge level can change outcomes.
+
+## Key takeaways
+
+If you only read one section, read this:
+
+- Expect heightened enforcement from mid-December through New Year's Day due to the national **Drive Sober or Get Pulled Over** push.
+- Ohio agencies commonly use grant-funded overtime for targeted OVI, distracted driving, and general traffic enforcement.
+- Winter conditions make "minor" driving errors look worse (and officers take them more seriously).
+- Ride-voucher programs exist in some counties during the holidays. Use them if you are even close to the line.
+- If you are stopped, your choices in the first 5 to 10 minutes can shape the entire case.
+
+## Why enforcement spikes during the holidays in Ohio
+
+The short version: more drivers + more parties + worse road conditions = higher crash risk, and agencies plan around that reality.
+
+Local reporting around Ohio has been consistent on the same points:
+- Holiday travel increases volume.
+- Winter weather adds a risk multiplier.
+- Alcohol and drug impairment are more common during holiday celebration windows.
+- Distracted driving increases with navigation, texting, and coordination.
+
+That combination is exactly why the national enforcement push exists, and why Ohio agencies stack overtime patrols and OVI task force activity during this period.
+
+## What is happening right now: the 2025 holiday enforcement window
+
+There are three overlapping layers to understand: national, statewide, and local.
+
+[VISUAL:HOLIDAY_ENFORCEMENT_STATS]
+
+### 1) National enforcement: Drive Sober or Get Pulled Over (Dec 12 through Jan 1)
+NHTSA's Drive Sober or Get Pulled Over campaign runs **December 12 through January 1** for the winter holiday season. The message is not subtle, and the point is deterrence: more patrols, more stops, more impaired-driving enforcement.
+
+### 2) Ohio grant and campaign alignment: OTSO enforcement participation
+Ohio's Traffic Safety Office programming ties directly into these national enforcement windows. OTSO grant guidance materials list the winter holiday Drive Sober or Get Pulled Over period as **December 12, 2025 through January 1, 2026**, and agencies using overtime enforcement funds are expected to participate in those campaign windows.
+
+### 3) Local agencies: targeted overtime patrols and local initiatives
+This is where it becomes real for drivers.
+
+For example, Dayton Police publicly announced increased traffic enforcement during the holiday season using grant-funded overtime for **OVI enforcement, distracted driving enforcement, and general traffic enforcement**. Their traffic supervisor specifically pointed to more enforcement not only on major highways, but across city streets as well.
+
+Even if you never drive near Dayton, the takeaway matters for Central Ohio: local agencies across the state commonly do the same thing during the same time window, and the increased patrol visibility is the point.
+
+## A simple table to plan your holiday driving
+
+[VISUAL:HOLIDAY_ENFORCEMENT_TABLE]
+
+## What officers are focused on during holiday enforcement
+
+During holiday enforcement pushes, the "stop reasons" tend to be basic traffic issues that are easy to observe and easy to justify in a report.
+
+[VISUAL:HOLIDAY_OFFICER_FOCUS]
+
+### Impaired driving indicators
+- Lane violations and weaving
+- Rolling stops
+- Wide turns
+- Speed variance (too fast or unusually slow)
+- Delayed reaction at lights or to braking traffic
+
+### Distracted driving
+Ohio's current distracted driving framework is stricter than many drivers assume. Local reporting has emphasized that Ohio law makes it illegal to **hold or support a phone while driving**, with limited exceptions. If you are glancing down at your phone in stop-and-go traffic on US-23, I-71, or I-270, you are giving an officer an easy reason to initiate contact.
+
+### Speed and basic compliance (seat belts, lights, plates)
+Holiday patrol periods often pair OVI enforcement with selective traffic enforcement: speeding, following too close, equipment issues, and seat belts.
+
+Those stops are not "OVI stops" at the beginning. They become OVI investigations if the officer thinks impairment is possible.
+
+## Local programs that can keep you out of an OVI case entirely
+
+Some counties use holiday ride programs to prevent impaired driving. If you have a safe option that costs $0 to $20 instead of an OVI arrest, use it.
+
+[VISUAL:HOLIDAY_RIDE_PROGRAMS]
+
+### Montgomery County: ArriveSafe
+Montgomery County's ArriveSafe program has been promoted as a holiday Uber voucher option for residents, with public reporting noting specific holiday windows and QR code redemption.
+
+### Summit County: Arrive Alive (Lyft codes)
+Summit County has also promoted an "Arrive Alive" holiday rides program with Lyft codes for Christmas and New Year's season windows. Programs like this change year to year, and codes can be time-limited, but they are worth checking if you are traveling to Northeast Ohio.
+
+**Bottom line**: search your county prosecutor, local safety coalition, or city police social channels before you go out. If you find a ride program, screenshot it before you head out.
+
+## The local lesson from the McGuff case
+
+If you want a real-life Central Ohio example of how quickly a vehicle encounter can turn into an OVI-related case, read our breakdown on [OSU women's basketball coach Kevin McGuff and the physical control process in Dublin](/blog/physical-control-parked-car-ohio-kevin-mcguff).
+
+Why include it here?
+- Dublin is close to Delaware County, and many drivers move between these areas daily.
+- High-profile cases generate public assumptions that are usually wrong.
+- The same legal mechanics apply whether you are a coach, a student, or a parent leaving a holiday party.
+
+If you are trying to understand "what happens next" in an OVI-related case, that post is a useful companion to this one.
+
+## If you get pulled over: how to keep a traffic stop from turning into a disaster
+
+This is not a "talk your way out of it" section. It is a "do not make it worse" section.
+
+[VISUAL:HOLIDAY_STOP_TIPS]
+
+### 1) Control the basics first
+- Signal early.
+- Pull over safely.
+- Keep your hands visible.
+- Provide license, registration, insurance.
+
+Officers document the smallest things: fumbling, confusion, slow responses, or repeated questions. Some of that may be nerves, but it often gets written as impairment indicators.
+
+### 2) Do not guess or volunteer details
+If asked questions like:
+- "Where are you coming from?"
+- "Have you been drinking?"
+- "How much?"
+- "When was your last drink?"
+
+Understand what is happening: the officer is building a timeline and creating admissions. You can be polite without giving a story that becomes evidence.
+
+### 3) Know what the stop is turning into
+The moment you see the shift from traffic enforcement to impairment investigation, you are in a different category of risk.
+
+Common signs:
+- "Step out of the vehicle."
+- "Any medical issues?"
+- "Would you mind doing a few tests?"
+- Flashlight checks, balance observations, repeated instructions.
+
+This is usually the start of field sobriety testing territory. For more on this, see our guide on [field sobriety test refusal](/blog/field-sobriety-test-refusal-ohio).
+
+### 4) After the stop, document everything you can
+If you are released or someone picks you up:
+- Write down times, locations, and the sequence of events.
+- Note weather, road conditions, footwear, and anything that affects balance.
+- Save receipts, ride-share logs, and messages showing your timeline.
+- Do not post about it.
+
+These details fade quickly. They matter later.
+
+## What happens after an OVI arrest in Ohio (high level)
+
+Every case is different, but the early phases are predictable:
+
+1. **Arrest and booking**
+2. **License consequences** (often immediate and confusing)
+3. **First court dates** (arraignment, pretrial scheduling)
+4. **Discovery and evidence review**
+5. **Motion practice and negotiations**
+6. **Resolution** (plea, dismissal, or trial)
+
+If you want the detailed version, including license suspension mechanics and typical penalties, use our full guide: [Understanding OVI and DUI charges in Ohio](/blog/understanding-ovi-dui-charges-ohio).
+
+## A 24-hour checklist if you are charged during the holidays
+
+Holiday cases are harder because people travel, offices close, and evidence can disappear. Use this list to reduce damage fast.
+
+[VISUAL:HOLIDAY_24HR_CHECKLIST]
+
+### Within the first 24 hours:
+- Write a timeline (where you were, who you were with, what you ate and drank, when you left).
+- Save any ride-share, GPS history, or text logs relevant to timing.
+- Identify potential witnesses and preserve contact info.
+- Photograph footwear and note any injuries or medical issues.
+- Gather any medical prescriptions and dosing timing (do not assume this "explains it away," but it matters).
+- Do not discuss the facts on social media or with acquaintances.
+- Do not assume your case is "standard." Holiday enforcement often includes extra documentation and video.
+- Schedule a consultation quickly, because court dates and license issues do not wait for January.
+
+## Where to find checkpoint and enforcement information
+
+For Ohio drivers, checkpoint information is inconsistent and sometimes released late. When it is available, it helps you plan.
+
+Use Mango Law's [DUI Checkpoint Map](/resources/dui-checkpoints) as a starting point, and remember:
+- Not every enforcement effort is a checkpoint.
+- Saturation patrols and "moving" enforcement are common during holiday windows.
+
+## FAQ
+
+### Are OVI checkpoints common in Central Ohio?
+They can happen, but many holiday enforcement efforts are saturation patrols and overtime-funded traffic stops rather than fixed checkpoints. Plan for both.
+
+### Can I avoid an OVI by "sleeping it off" in my car?
+Not necessarily. There are charges and legal risks tied to being in or near a vehicle while impaired, even when you believe you are making a safer choice. For the full breakdown, read our post on [physical control charges and the McGuff case](/blog/physical-control-parked-car-ohio-kevin-mcguff).
+
+### What is the safest decision if I am unsure?
+Do not drive. Use a ride-share, a sober driver, or stay put. Compared to the cost and consequences of an OVI, the safest option is usually the cheapest option.
+
+## Talk to a defense lawyer early if you are charged
+
+Holiday OVI cases can move quickly, especially on license issues and early court dates. The earlier you get guidance, the more options you typically have to preserve evidence, challenge procedure, and limit damage.
+
+If you need help, [contact Mango Law](/contact) for a consultation.`,
+    category: 'OVI/DUI Defense',
+    date: '2025-12-23',
+    author: 'Dominic Mango',
+    lastVerified: '2025-12-25',
+    sources: [
+      {
+        label: 'NHTSA Drive Sober or Get Pulled Over Campaign',
+        url: 'https://www.nhtsa.gov/campaign/drive-sober-or-get-pulled-over',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Traffic Safety Office (OTSO) Grant Guidance',
+        url: 'https://dam.assets.ohio.gov/image/upload/otso.ohio.gov/grants/FFY2026-Safe-Communities-Proposal-Guidelines-Presentation.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Dayton Daily News: Holiday traffic enforcement',
+        url: 'https://www.daytondailynews.com/local/dayton-police-step-up-traffic-enforcement-urge-drivers-to-stay-sober-safe-this-holiday-season/65QL42PM2NDK5G4AMLA2HRI7VA/',
+        type: 'secondary',
+      },
+      {
+        label: 'WHIO: Montgomery County ArriveSafe program',
+        url: 'https://www.whio.com/news/local/county-offering-free-rides-combat-ovi-crashes-during-holidays/WGWM65T7CJFK7NSTESM7KP7CTU/',
+        type: 'secondary',
+      },
+      {
+        label: 'Cleveland 19: Summit County Arrive Alive program',
+        url: 'https://www.cleveland19.com/2025/12/24/arrive-alive-free-rides-summit-county-residents-during-holiday-season/',
+        type: 'secondary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+    ],
+  },
+  {
     slug: 'physical-control-parked-car-ohio-kevin-mcguff',
     title: 'Physical Control of a Parked Car in Ohio: What the Kevin McGuff Case Teaches About ORC 4511.194',
     excerpt: 'Ohio State coach Kevin McGuff was charged with physical control while parked in his driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
     imageUrl: '/images/generated/blog-physical-control-parked-car.png',
     content: `Ohio State women's basketball coach Kevin McGuff made headlines when he was charged with physical control of a vehicle while intoxicated after being found asleep in his parked car in his own driveway. The case resolved with a plea to a reduced charge of disorderly conduct, but it raises important questions about Ohio's physical control statute and what it means for everyday drivers.
+
+[VISUAL:PHYSICAL_CONTROL_HIGHLIGHT]
 
 ## What happened in the McGuff case
 
@@ -1433,6 +1679,8 @@ One nuance in the McGuff case involves where the vehicle was located. Physical c
 
 ## Physical control vs. OVI: what's the difference?
 
+[VISUAL:OVI_VS_PHYSICAL_CONTROL]
+
 | Factor | OVI (4511.19) | Physical Control (4511.194) |
 |--------|---------------|----------------------------|
 | Vehicle movement | Required (operating) | Not required (stationary) |
@@ -1446,6 +1694,8 @@ Both charges are serious and can result in jail time, fines, license suspension,
 ## Why "sleeping it off" can still lead to charges
 
 Many people believe that if they've had too much to drink, the responsible thing to do is pull over and sleep it off rather than drive. While this is certainly safer than driving, it doesn't always protect you from criminal charges in Ohio.
+
+[VISUAL:SLEEPING_IT_OFF_WARNING]
 
 If you're found in the driver's seat with the keys accessible, you can be charged with physical control even if:
 - The car is parked
@@ -1488,6 +1738,8 @@ As the McGuff case illustrates, physical control charges can sometimes be negoti
 
 ## Penalties for physical control in Ohio
 
+[VISUAL:PHYSICAL_CONTROL_PENALTIES]
+
 A first-offense physical control conviction carries:
 - Up to 180 days in jail (with minimums possible depending on circumstances)
 - Fines up to $1,000 plus court costs
@@ -1510,6 +1762,8 @@ The McGuff case highlights several important points:
 4. **High-profile cases follow the same laws.** Whether you're a college coach or an everyday driver, Ohio's physical control statute applies equally.
 
 ## What to do if you're too impaired to drive
+
+[VISUAL:SAFE_ALTERNATIVES]
 
 If you find yourself impaired and need to avoid driving:
 

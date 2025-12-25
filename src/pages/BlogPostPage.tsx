@@ -947,6 +947,172 @@ export default function BlogPostPage() {
                     );
                   }
 
+                  // Physical Control / McGuff Case Visuals
+                  else if (visualType === 'PHYSICAL_CONTROL_HIGHLIGHT') {
+                    sections.push(
+                      <HighlightBox key={`visual-${index}`} variant="warning" title="Key Takeaway">
+                        <p>You can face criminal charges for being in the driver's seat of a parked car while intoxicated, even if you never intended to drive. Ohio's physical control statute is broader than many people realize.</p>
+                      </HighlightBox>
+                    );
+                  }
+                  else if (visualType === 'OVI_VS_PHYSICAL_CONTROL') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="OVI vs. Physical Control"
+                        leftItem={{
+                          label: 'OVI (4511.19)',
+                          value: 'Operating',
+                          description: 'Requires vehicle movement or operation. Mandatory license suspension (ALS). More severe penalties.'
+                        }}
+                        rightItem={{
+                          label: 'Physical Control (4511.194)',
+                          value: 'Stationary',
+                          description: 'No movement required. Being in driver\'s seat while impaired is enough. Slightly less severe.'
+                        }}
+                        leftColor="red"
+                        rightColor="gold"
+                      />
+                    );
+                  }
+                  else if (visualType === 'SLEEPING_IT_OFF_WARNING') {
+                    sections.push(
+                      <HighlightBox key={`visual-${index}`} variant="error" title="Common Misconception">
+                        <p>Many believe "sleeping it off" in their car is the responsible choice. While safer than driving, it can still result in physical control charges if you're in the driver's seat with keys accessible.</p>
+                      </HighlightBox>
+                    );
+                  }
+                  else if (visualType === 'PHYSICAL_CONTROL_PENALTIES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        <StatCard icon={Timer} value="180" label="Days Max Jail" color="red" description="First offense maximum" />
+                        <StatCard icon={DollarSign} value="$1,000" label="Max Fine" color="gold" description="Plus court costs" />
+                        <StatCard icon={Ban} value="6" label="License Points" color="mango" description="Added to driving record" />
+                        <StatCard icon={AlertTriangle} value="Possible" label="Suspension" color="blue" description="License may be suspended" />
+                      </div>
+                    );
+                  }
+                  else if (visualType === 'SAFE_ALTERNATIVES') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                        <HighlightBox variant="success" title="Best Choice">
+                          <p>Arrange alternative transportation: rideshare, taxi, or designated driver</p>
+                        </HighlightBox>
+                        <HighlightBox variant="warning" title="If Staying with Car">
+                          <p>Keys in trunk, sit in back seat or passenger seat</p>
+                        </HighlightBox>
+                        <HighlightBox variant="info" title="Document Everything">
+                          <p>Your positioning and key placement can support a defense</p>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+
+                  // Holiday Enforcement Visuals
+                  else if (visualType === 'HOLIDAY_ENFORCEMENT_STATS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        <StatCard icon={Calendar} value="Dec 12" label="Enforcement Starts" color="mango" description="Drive Sober campaign begins" />
+                        <StatCard icon={Calendar} value="Jan 1" label="Enforcement Ends" color="gold" description="New Year's Day" />
+                        <StatCard icon={Shield} value="Extra" label="Patrols" color="red" description="Grant-funded overtime" />
+                        <StatCard icon={AlertTriangle} value="Saturation" label="Enforcement" color="blue" description="Not just checkpoints" />
+                      </div>
+                    );
+                  }
+                  else if (visualType === 'HOLIDAY_ENFORCEMENT_TABLE') {
+                    sections.push(
+                      <PenaltyGrid
+                        key={`visual-${index}`}
+                        title="Holiday Enforcement Windows"
+                        columns={[
+                          { key: 'what', label: 'What It Is' },
+                          { key: 'dates', label: 'Dates' },
+                          { key: 'meaning', label: 'What It Means' }
+                        ]}
+                        rows={[
+                          { what: 'National Drive Sober Campaign', dates: 'Dec 12 - Jan 1', meaning: 'More patrols, stops, increased OVI focus' },
+                          { what: 'Ohio Grant Windows', dates: 'Dec 12 - Jan 1', meaning: 'Overtime-funded enforcement' },
+                          { what: 'Holiday Travel Surges', dates: 'Late Dec', meaning: 'Speed, belts, distracted driving focus' },
+                          { what: 'Local Ride Programs', dates: 'Varies', meaning: 'Free rides in some counties' }
+                        ]}
+                      />
+                    );
+                  }
+                  else if (visualType === 'HOLIDAY_OFFICER_FOCUS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <HighlightBox variant="error" title="Impaired Driving Signs">
+                          <ul className="list-disc pl-5 space-y-1">
+                            <li>Lane violations and weaving</li>
+                            <li>Rolling stops</li>
+                            <li>Wide turns</li>
+                            <li>Speed variance (too fast or slow)</li>
+                          </ul>
+                        </HighlightBox>
+                        <HighlightBox variant="warning" title="Distracted Driving">
+                          <ul className="list-disc pl-5 space-y-1">
+                            <li>Holding or supporting phone while driving is illegal</li>
+                            <li>Easy reason for officer contact</li>
+                            <li>Can lead to further investigation</li>
+                          </ul>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+                  else if (visualType === 'HOLIDAY_RIDE_PROGRAMS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <StatCard icon={Users} value="ArriveSafe" label="Montgomery County" color="mango" description="Uber voucher program during holidays" />
+                        <StatCard icon={Users} value="Arrive Alive" label="Summit County" color="gold" description="Lyft codes for holiday season" />
+                      </div>
+                    );
+                  }
+                  else if (visualType === 'HOLIDAY_STOP_TIPS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                        <HighlightBox variant="success" title="DO">
+                          <ul className="list-disc pl-5 space-y-1">
+                            <li>Signal early and pull over safely</li>
+                            <li>Keep hands visible</li>
+                            <li>Provide license, registration, insurance</li>
+                            <li>Stay calm and polite</li>
+                          </ul>
+                        </HighlightBox>
+                        <HighlightBox variant="error" title="DON'T">
+                          <ul className="list-disc pl-5 space-y-1">
+                            <li>Volunteer details about drinking</li>
+                            <li>Guess at amounts or times</li>
+                            <li>Argue with the officer</li>
+                            <li>Post about it on social media</li>
+                          </ul>
+                        </HighlightBox>
+                      </div>
+                    );
+                  }
+                  else if (visualType === 'HOLIDAY_24HR_CHECKLIST') {
+                    sections.push(
+                      <HighlightBox key={`visual-${index}`} variant="info" title="24-Hour Checklist After Charge">
+                        <ul className="list-disc pl-5 space-y-1">
+                          <li>Write a timeline (where, who, what, when)</li>
+                          <li>Save ride-share, GPS, and text logs</li>
+                          <li>Identify witnesses, preserve contact info</li>
+                          <li>Photograph footwear, note medical issues</li>
+                          <li>Do NOT discuss on social media</li>
+                          <li>Schedule consultation quickly</li>
+                        </ul>
+                      </HighlightBox>
+                    );
+                  }
+                  else if (visualType === 'HOLIDAY_KEY_TAKEAWAYS') {
+                    sections.push(
+                      <div key={`visual-${index}`} className="my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        <StatCard icon={Calendar} value="Dec 12-Jan 1" label="Enforcement Window" color="mango" description="Peak enforcement period" />
+                        <StatCard icon={Shield} value="Saturation" label="Patrol Type" color="gold" description="Moving patrols, not just checkpoints" />
+                        <StatCard icon={Users} value="Use Rides" label="Best Option" color="leaf" description="Free programs in some counties" />
+                      </div>
+                    );
+                  }
+
                   // Fallback for unknown visual types
                   else {
                     sections.push(
