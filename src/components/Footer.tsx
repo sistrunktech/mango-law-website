@@ -11,6 +11,7 @@ import {
   OFFICE_ADDRESS_STREET,
   OFFICE_ADDRESS_CITY_STATE_ZIP,
 } from '../lib/contactInfo';
+import { getCopyrightText, COMPANY_START_YEAR } from '../lib/legalDocuments';
 import FooterAccordion from './FooterAccordion';
 
 const resourceLinks = [
@@ -354,7 +355,7 @@ export default function Footer() {
 
       <div className="border-t border-brand-offWhite/10">
         <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-brand-offWhite/50 sm:flex-row">
-          <span>© {new Date().getFullYear()} Mango Law LLC. All rights reserved.</span>
+          <span>© {getCopyrightText(COMPANY_START_YEAR)} Mango Law LLC. All rights reserved.</span>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <Link to="/privacy" className="transition-colors hover:text-brand-leaf">
               Privacy Policy

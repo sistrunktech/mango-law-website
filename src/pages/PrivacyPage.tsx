@@ -1,17 +1,21 @@
 import { SEO } from '../lib/seo';
+import { getFormattedEffectiveDate, getDocument } from '../lib/legalDocuments';
 
 export default function PrivacyPage() {
+  const doc = getDocument('privacyPolicy');
+  const effectiveDate = getFormattedEffectiveDate('privacyPolicy');
+
   return (
     <section className="container py-12">
       <SEO
         title="Privacy Policy | Ohio Criminal Defense Attorney - Mango Law LLC"
         description="Read how Mango Law LLC collects, uses, and protects information on mango.law."
       />
-      <h1 className="text-3xl font-bold text-brand-black">Privacy Policy</h1>
+      <h1 className="text-3xl font-bold text-brand-black">{doc.title}</h1>
       <p className="mt-2 text-sm text-brand-black/60">
         Mango Law LLC - Ohio Criminal Defense Attorney
       </p>
-      <p className="mt-2 text-sm text-brand-black/60">Effective Date: [Month Day, Year]</p>
+      <p className="mt-2 text-sm text-brand-black/60">Effective Date: {effectiveDate}</p>
 
       <div className="mt-8 space-y-6 text-sm text-brand-black/80">
         <p>

@@ -1,15 +1,19 @@
 import { SEO } from '../lib/seo';
+import { getFormattedEffectiveDate, getDocument } from '../lib/legalDocuments';
 
 export default function TermsPage() {
+  const doc = getDocument('termsOfService');
+  const effectiveDate = getFormattedEffectiveDate('termsOfService');
+
   return (
     <section className="container py-12">
       <SEO
         title="Terms of Use | Mango Law LLC - Ohio Criminal Defense"
         description="Terms of use for mango.law, including jurisdiction, confidentiality, and legal disclaimer."
       />
-      <h1 className="text-3xl font-bold text-brand-black">Terms of Use</h1>
+      <h1 className="text-3xl font-bold text-brand-black">{doc.title}</h1>
       <p className="mt-2 text-sm text-brand-black/60">Mango Law LLC - Ohio Criminal Defense</p>
-      <p className="mt-2 text-sm text-brand-black/60">Effective Date: [Month Day, Year]</p>
+      <p className="mt-2 text-sm text-brand-black/60">Effective Date: {effectiveDate}</p>
 
       <div className="mt-8 space-y-6 text-sm text-brand-black/80">
         <p>
