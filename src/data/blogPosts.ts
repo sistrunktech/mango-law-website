@@ -187,7 +187,7 @@ Breath, blood and urine tests must follow strict regulations. Improper calibrati
 
 ### Negotiate for Reduced Charges
 
-Prosecutors may agree to amend an OVI to reckless operation or physical control, particularly for first offenders or cases with evidentiary issues.
+Prosecutors may agree to amend an OVI to reckless operation or [physical control](/blog/physical-control-parked-car-ohio-kevin-mcguff), particularly for first offenders or cases with evidentiary issues.
 
 ### Request Limited Driving Privileges
 
@@ -1401,6 +1401,150 @@ Checkpoint practices change and vary by agency. Focus on safety, keep the intera
         label: 'Ohio Revised Code § 4511.191 (Implied consent; ALS)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
         type: 'primary',
+      },
+    ],
+  },
+  {
+    slug: 'physical-control-parked-car-ohio-kevin-mcguff',
+    title: 'Physical Control of a Parked Car in Ohio: What the Kevin McGuff Case Teaches About ORC 4511.194',
+    excerpt: 'Ohio State coach Kevin McGuff was charged with physical control while parked in his driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
+    imageUrl: '/images/generated/blog-physical-control-parked-car.png',
+    content: `Ohio State women's basketball coach Kevin McGuff made headlines when he was charged with physical control of a vehicle while intoxicated after being found asleep in his parked car in his own driveway. The case resolved with a plea to a reduced charge of disorderly conduct, but it raises important questions about Ohio's physical control statute and what it means for everyday drivers.
+
+## What happened in the McGuff case
+
+According to public reports, Kevin McGuff was found asleep in his parked car in his driveway in the early morning hours after returning from a team function. His blood alcohol content was reportedly above the legal limit. Rather than an OVI charge (operating a vehicle while intoxicated), he was charged with **physical control** under [ORC 4511.194](https://codes.ohio.gov/ohio-revised-code/section-4511.194).
+
+The case ultimately resolved with McGuff pleading to disorderly conduct, avoiding the physical control conviction and any license suspension that would have followed.
+
+## What is "physical control" under Ohio law?
+
+Physical control under [ORC 4511.194](https://codes.ohio.gov/ohio-revised-code/section-4511.194) makes it illegal to be in the driver's position of a vehicle while under the influence of alcohol or drugs, even if the vehicle isn't moving. The statute is designed to prevent impaired individuals from putting themselves in a position where they could easily operate the vehicle.
+
+### Key elements the state must prove
+
+1. The person was in the driver's seat or "in control" of the vehicle
+2. The vehicle was on a public road, street, or property open to the public (with exceptions)
+3. The person was under the influence of alcohol, drugs, or a combination
+
+### The critical location question
+
+One nuance in the McGuff case involves where the vehicle was located. Physical control charges typically apply to vehicles on public roads or property open to the public for vehicular traffic. A private driveway can complicate this analysis, depending on the specific facts and how the property is situated.
+
+## Physical control vs. OVI: what's the difference?
+
+| Factor | OVI (4511.19) | Physical Control (4511.194) |
+|--------|---------------|----------------------------|
+| Vehicle movement | Required (operating) | Not required (stationary) |
+| Location | Any public road | Public road or property open to public |
+| Penalties | Generally more severe | Slightly less severe for first offense |
+| License suspension | Mandatory ALS | Possible suspension |
+| Points on license | 6 points | 6 points |
+
+Both charges are serious and can result in jail time, fines, license suspension, and a permanent criminal record.
+
+## Why "sleeping it off" can still lead to charges
+
+Many people believe that if they've had too much to drink, the responsible thing to do is pull over and sleep it off rather than drive. While this is certainly safer than driving, it doesn't always protect you from criminal charges in Ohio.
+
+If you're found in the driver's seat with the keys accessible, you can be charged with physical control even if:
+- The car is parked
+- The engine is off
+- You're asleep
+- You had no intention of driving
+
+### Factors that can influence a physical control case
+
+Courts and officers may consider:
+- Where the keys were located (in the ignition, in your pocket, in the trunk)
+- Whether the engine was running
+- The position of the driver's seat (reclined suggests sleeping, upright suggests ready to drive)
+- Location of the vehicle
+- Time of day and circumstances
+
+## Defense strategies for physical control charges
+
+Physical control cases can be defended through several approaches:
+
+### Challenge the "control" element
+
+If the keys weren't accessible or you weren't in a position to easily operate the vehicle, the state may not be able to prove you had "physical control."
+
+### Challenge the location
+
+If the vehicle was on genuinely private property not open to public traffic, the statute may not apply.
+
+### Challenge the testing
+
+Like [OVI cases](/blog/understanding-ovi-dui-charges-ohio), physical control charges often depend on breath or blood test results. These tests can be challenged based on:
+- Improper administration
+- Calibration issues
+- Chain of custody problems
+- Rising BAC defense
+
+### Negotiate for reduced charges
+
+As the McGuff case illustrates, physical control charges can sometimes be negotiated down to lesser offenses like disorderly conduct or reckless operation, particularly for first-time offenders or cases with evidentiary weaknesses.
+
+## Penalties for physical control in Ohio
+
+A first-offense physical control conviction carries:
+- Up to 180 days in jail (with minimums possible depending on circumstances)
+- Fines up to $1,000 plus court costs
+- Possible license suspension
+- 6 points on your driving record
+- Potential requirement for alcohol treatment
+
+Repeat offenses or high BAC levels can increase these penalties significantly.
+
+## Lessons from the McGuff case
+
+The McGuff case highlights several important points:
+
+1. **Being parked doesn't protect you.** Even in your own driveway, you can face charges if you're in a position to operate the vehicle while impaired.
+
+2. **Location matters but isn't always dispositive.** The private driveway aspect may have been a factor in the favorable resolution.
+
+3. **Negotiation is possible.** With experienced defense counsel, charges can sometimes be reduced to avoid the most serious consequences.
+
+4. **High-profile cases follow the same laws.** Whether you're a college coach or an everyday driver, Ohio's physical control statute applies equally.
+
+## What to do if you're too impaired to drive
+
+If you find yourself impaired and need to avoid driving:
+
+- **Best option**: Arrange alternative transportation (rideshare, taxi, designated driver)
+- **If you must stay with the car**: Put the keys in the trunk or away from the driver's area, and position yourself in the back seat or passenger seat
+- **Document your choices**: If possible, your positioning and key placement can support a defense if charges arise
+
+## Conclusion
+
+Ohio's physical control statute serves a legitimate safety purpose, but it can catch well-intentioned people who were trying to avoid driving while impaired. The McGuff case demonstrates both the risks of being in the driver's seat while intoxicated and the possibility of favorable outcomes with proper legal representation.
+
+If you're facing physical control charges in Delaware or Franklin County, the specific facts of your case matter. Contact Mango Law for a confidential consultation to understand your options.
+
+---
+
+*This article is for educational purposes and does not constitute legal advice. Ohio law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+    category: 'OVI/DUI Defense',
+    date: '2025-12-22',
+    author: 'Dominic Mango',
+    lastVerified: '2025-12-22',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.194 (Physical control)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.194',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Columbus Dispatch: Kevin McGuff case reporting',
+        url: 'https://www.dispatch.com/',
+        type: 'secondary',
       },
     ],
   },
