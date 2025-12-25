@@ -1,66 +1,62 @@
-import { AlertCircle, CheckCircle, Info, XCircle } from 'lucide-react';
 import { ReactNode } from 'react';
 
 interface HighlightBoxProps {
   children: ReactNode;
-  variant?: 'info' | 'success' | 'warning' | 'error';
+  variant?: 'info' | 'success' | 'warning' | 'error' | 'tip';
   title?: string;
 }
 
-export default function HighlightBox({ children, variant = 'info', title }: HighlightBoxProps) {
-  const variants = {
-    info: {
-      icon: Info,
-      bg: 'bg-blue-50',
-      border: 'border-blue-200',
-      iconBg: 'bg-blue-100',
-      iconColor: 'text-blue-700',
-      textColor: 'text-blue-900',
-    },
-    success: {
-      icon: CheckCircle,
-      bg: 'bg-brand-leaf/10',
-      border: 'border-brand-leaf/30',
-      iconBg: 'bg-brand-leaf/20',
-      iconColor: 'text-brand-leaf',
-      textColor: 'text-brand-forest',
-    },
-    warning: {
-      icon: AlertCircle,
-      bg: 'bg-brand-gold/10',
-      border: 'border-brand-gold/30',
-      iconBg: 'bg-brand-gold/20',
-      iconColor: 'text-brand-goldText',
-      textColor: 'text-brand-black',
-    },
-    error: {
-      icon: XCircle,
-      bg: 'bg-red-50',
-      border: 'border-red-200',
-      iconBg: 'bg-red-100',
-      iconColor: 'text-red-700',
-      textColor: 'text-red-900',
-    },
-  };
+const variantConfig = {
+  info: {
+    border: 'border-brand-leaf',
+    bg: 'bg-brand-leaf/5',
+    icon: '💡',
+    role: 'note' as const,
+  },
+  warning: {
+    border: 'border-brand-mango',
+    bg: 'bg-brand-mango/5',
+    icon: '⚠️',
+    role: 'alert' as const,
+  },
+  success: {
+    border: 'border-brand-leaf',
+    bg: 'bg-brand-leaf/5',
+    icon: '✓',
+    role: 'note' as const,
+  },
+  error: {
+    border: 'border-red-500',
+    bg: 'bg-red-50',
+    icon: '✕',
+    role: 'alert' as const,
+  },
+  tip: {
+    border: 'border-gray-300',
+    bg: 'bg-gray-50',
+    icon: '→',
+    role: 'note' as const,
+  },
+};
 
-  const config = variants[variant];
-  const Icon = config.icon;
+export default function HighlightBox({ children, variant = 'info', title }: HighlightBoxProps) {
+  const config = variantConfig[variant];
 
   return (
-    <div className={`my-6 rounded-xl border-2 ${config.border} ${config.bg} p-6`}>
-      <div className="flex gap-4">
-        <div className={`flex-shrink-0 rounded-lg ${config.iconBg} p-2`}>
-          <Icon className={`h-6 w-6 ${config.iconColor}`} />
-        </div>
-        <div className="flex-1">
-          {title && (
-            <h4 className={`mb-2 font-bold ${config.textColor}`}>{title}</h4>
-          )}
-          <div className={`prose prose-sm ${config.textColor}`}>
-            {children}
-          </div>
-        </div>
+    <aside
+      role={config.role}
+      aria-label={title || `${variant} callout`}
+      className={`my-8 rounded-r-lg border-l-4 ${config.border} ${config.bg} py-4 pl-6`}
+    >
+      {title && (
+        <p className="mb-2 flex items-center gap-2 font-semibold text-brand-black">
+          <span aria-hidden="true">{config.icon}</span>
+          {title}
+        </p>
+      )}
+      <div className="text-base leading-relaxed text-gray-700">
+        {children}
       </div>
-    </div>
+    </aside>
   );
 }

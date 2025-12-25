@@ -21,6 +21,7 @@ import {
   StatCard,
   HighlightBox,
   ProgressBar,
+  StickyConsultCTA,
 } from '../components/blog';
 
 function estimateReadingTime(content: string): number {
@@ -64,146 +65,171 @@ export default function BlogPostPage() {
         image={post.imageUrl}
         type="article"
       />
-      <section className="bg-white py-12">
-        <div className="container max-w-4xl">
+
+      {/* Hero Image Section */}
+      {post.imageUrl && (
+        <figure className="relative w-full aspect-[21/9] overflow-hidden bg-brand-black">
+          <img
+            src={post.imageUrl}
+            alt={`Editorial image for ${post.title}`}
+            className="h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
+            width={1260}
+            height={540}
+          />
+          {/* Subtle gradient overlay for text legibility */}
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-brand-black/60 via-transparent to-transparent"
+            aria-hidden="true"
+          />
+        </figure>
+      )}
+
+      <section className="bg-brand-offWhite py-16">
+        <div className="container max-w-7xl">
+          {/* Back button */}
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-sm font-medium text-brand-mango transition-colors hover:text-brand-leaf"
+            className="inline-flex items-center gap-2 text-sm font-medium text-brand-leaf transition-colors hover:text-brand-mango focus:outline-none focus:ring-2 focus:ring-brand-leaf focus:ring-offset-2"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to all articles
           </Link>
 
-          <div className="mt-8">
-            <div className="inline-block rounded-full bg-brand-mango/10 px-4 py-1.5 text-sm font-semibold text-brand-mango">
-              {post.category}
-            </div>
-
-            <h1 className="mt-6 text-4xl font-bold text-brand-black md:text-5xl">
-              {post.title}
-            </h1>
-
-            <div className="mt-6 flex flex-wrap items-center gap-6 text-sm text-brand-black/60">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+          {/* Article Header */}
+          <header className="mt-12 max-w-2xl">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+              <span className="rounded-full bg-brand-mango/10 px-3 py-1 text-sm font-semibold text-brand-mangoText">
+                {post.category}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4" aria-hidden="true" />
+                {estimateReadingTime(post.content)} min read
+              </span>
+              <time
+                dateTime={post.date}
+                className="flex items-center gap-1.5"
+              >
+                <Calendar className="h-4 w-4" aria-hidden="true" />
                 {new Date(post.date).toLocaleDateString('en-US', {
                   month: 'long',
                   day: 'numeric',
                   year: 'numeric',
                 })}
-              </div>
-              <div className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                {post.author}
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4" />
-                {estimateReadingTime(post.content)} min read
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4" />
-                Last verified{' '}
-                {new Date(post.lastVerified).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
-              </div>
+              </time>
             </div>
-          </div>
 
-          {post.imageUrl && (
-            <div className="mt-8 overflow-hidden rounded-2xl bg-brand-offWhite shadow-lg">
-              <div className="relative aspect-[16/9] max-h-[500px]">
-                <img
-                  src={post.imageUrl}
-                  alt={post.title}
-                  width={1200}
-                  height={675}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </div>
-            </div>
-          )}
+            <h1 className="mt-6 text-4xl font-bold leading-tight text-brand-black md:text-5xl">
+              {post.title}
+            </h1>
 
-          <div className="rounded-lg border-l-4 border-brand-mango bg-brand-mango/5 p-4 text-sm text-brand-black/70">
-            <strong>Legal Disclaimer:</strong> This article is for educational purposes only and
-            does not constitute legal advice. Criminal defense and personal injury law are complex
-            and fact-specific. Always consult with a qualified Ohio attorney about your specific
-            situation.
-          </div>
+            <p className="mt-4 text-lg text-gray-600">
+              {post.excerpt}
+            </p>
+          </header>
 
-          {hasVisuals && (
-            <div className="mt-4 rounded-lg border-l-4 border-brand-leaf bg-brand-leaf/5 p-4 text-sm text-brand-black/70">
-              <strong>Visual note:</strong> Visual summaries are simplified; confirm any legal details and numbers in{' '}
-              <a
-                href="#sources"
-                className="font-semibold text-brand-mangoText underline-offset-2 hover:text-brand-leaf hover:underline"
+          {/* Two-column layout: Main content + Sidebar */}
+          <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_288px]">
+            {/* Main Content Column */}
+            <div className="max-w-2xl">
+              {/* Legal Disclaimer */}
+              <aside
+                role="note"
+                aria-label="Legal disclaimer"
+                className="mb-8 rounded-r-lg border-l-4 border-brand-mango bg-brand-mango/5 py-4 pl-6"
               >
-                Sources
-              </a>
-              . Last verified{' '}
-              {new Date(post.lastVerified).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-              .
-            </div>
-          )}
+                <p className="text-sm leading-relaxed text-gray-700">
+                  <strong className="font-semibold text-brand-black">Legal Disclaimer:</strong> This article is for educational purposes only and
+                  does not constitute legal advice. Criminal defense and personal injury law are complex
+                  and fact-specific. Always consult with a qualified Ohio attorney about your specific
+                  situation.
+                </p>
+              </aside>
 
-          {post.sources.length > 0 && (
-            <div id="sources" className="mt-6 rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
-              <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
-                <FileText className="h-4 w-4 text-brand-mangoText" />
-                Sources
-              </div>
-              <p className="mt-2 text-xs text-brand-black/60">
-                Visual summaries and timelines are simplified. Use these sources to confirm current law and details.
-              </p>
-              <ul className="mt-3 space-y-2 text-sm text-brand-black/70">
-                {post.sources.map((source) => (
-                  <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              {hasVisuals && (
+                <aside
+                  role="note"
+                  aria-label="Visual content note"
+                  className="mb-8 rounded-r-lg border-l-4 border-brand-leaf bg-brand-leaf/5 py-4 pl-6"
+                >
+                  <p className="text-sm leading-relaxed text-gray-700">
+                    <strong className="font-semibold text-brand-black">Visual note:</strong> Visual summaries are simplified; confirm any legal details and numbers in{' '}
                     <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-brand-mangoText underline-offset-2 hover:text-brand-leaf hover:underline"
+                      href="#sources"
+                      className="font-medium text-brand-leaf underline-offset-2 hover:text-brand-mango hover:underline focus:outline-none focus:ring-2 focus:ring-brand-leaf"
                     >
-                      {source.label}
+                      Sources
                     </a>
-                    {source.type && (
-                      <span className="rounded-full bg-brand-offWhite px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
-                        {source.type}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+                    . Last verified{' '}
+                    {new Date(post.lastVerified).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                    .
+                  </p>
+                </aside>
+              )}
 
-          <div className="prose prose-lg mt-8 max-w-none
-            prose-headings:font-bold prose-headings:text-brand-black
-            prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-3xl
-            prose-h3:mt-10 prose-h3:mb-3 prose-h3:text-2xl
-            prose-h4:mt-8 prose-h4:mb-2 prose-h4:text-xl
-            prose-p:mb-6 prose-p:mt-0 prose-p:leading-relaxed prose-p:text-brand-black/80
-            prose-a:font-medium prose-a:text-brand-mango prose-a:no-underline hover:prose-a:text-brand-leaf hover:prose-a:underline
-            prose-strong:font-semibold prose-strong:text-brand-black
-            prose-ul:my-6 prose-ul:space-y-3
-            prose-ol:my-6 prose-ol:space-y-3
-            prose-li:text-brand-black/80 prose-li:leading-relaxed
-            prose-blockquote:border-l-4 prose-blockquote:border-brand-mango prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-brand-black/70
-            prose-code:rounded prose-code:bg-brand-black/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm
-            prose-code:before:content-none prose-code:after:content-none
-            prose-pre:rounded-xl prose-pre:bg-brand-black/5 prose-pre:p-4
-            prose-hr:my-10 prose-hr:border-brand-black/10
-            prose-table:my-8
-            prose-img:rounded-xl prose-img:shadow-md">
+              {post.sources.length > 0 && (
+                <aside
+                  id="sources"
+                  className="mb-12 rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+                  aria-labelledby="sources-heading"
+                >
+                  <h2
+                    id="sources-heading"
+                    className="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-black"
+                  >
+                    <FileText className="h-4 w-4 text-brand-leaf" aria-hidden="true" />
+                    Sources
+                  </h2>
+                  <p className="mb-4 text-xs text-gray-600">
+                    Visual summaries and timelines are simplified. Use these sources to confirm current law and details.
+                  </p>
+                  <ul className="space-y-2">
+                    {post.sources.map((source) => (
+                      <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium text-brand-leaf underline-offset-2 hover:text-brand-mango hover:underline focus:outline-none focus:ring-2 focus:ring-brand-leaf"
+                        >
+                          {source.label}
+                        </a>
+                        {source.type && (
+                          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-600">
+                            {source.type}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </aside>
+              )}
+
+              {/* Article Content */}
+              <article className="prose prose-lg max-w-none
+                prose-headings:font-bold prose-headings:text-brand-black
+                prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-3xl prose-h2:leading-tight
+                prose-h3:mt-10 prose-h3:mb-3 prose-h3:text-2xl
+                prose-h4:mt-8 prose-h4:mb-2 prose-h4:text-xl
+                prose-p:mb-6 prose-p:mt-0 prose-p:leading-relaxed prose-p:text-gray-700
+                prose-a:font-medium prose-a:text-brand-leaf prose-a:no-underline hover:prose-a:text-brand-mango hover:prose-a:underline
+                prose-strong:font-semibold prose-strong:text-brand-black
+                prose-ul:my-6 prose-ul:space-y-3
+                prose-ol:my-6 prose-ol:space-y-3
+                prose-li:text-gray-700 prose-li:leading-relaxed
+                prose-blockquote:border-l-4 prose-blockquote:border-brand-leaf prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600
+                prose-code:rounded prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm
+                prose-code:before:content-none prose-code:after:content-none
+                prose-pre:rounded-xl prose-pre:bg-gray-100 prose-pre:p-4
+                prose-hr:my-10 prose-hr:border-gray-200
+                prose-table:my-8
+                prose-img:rounded-xl prose-img:shadow-md"
+              >
             {(() => {
               const sections: JSX.Element[] = [];
               const parts = post.content.split(/(\[VISUAL:\w+\])/g);
@@ -1217,19 +1243,51 @@ export default function BlogPostPage() {
                 }
               });
 
-              return sections;
-            })()}
+                return sections;
+              })()}
+              </article>
+
+              {/* Author Bio with Structured Data */}
+              <footer className="mt-16 border-t border-gray-200 pt-8">
+                <div
+                  className="flex items-start gap-6"
+                  itemScope
+                  itemType="https://schema.org/Person"
+                >
+                  <img
+                    src="/images/nick_mango_profile_shot.jpg"
+                    alt="Dominic Mango, Ohio criminal defense attorney"
+                    itemProp="image"
+                    className="h-20 w-20 rounded-full object-cover"
+                    loading="lazy"
+                    width={80}
+                    height={80}
+                  />
+                  <div>
+                    <p className="font-semibold text-brand-black" itemProp="name">
+                      Dominic Mango
+                    </p>
+                    <p className="mb-2 text-sm text-gray-500">
+                      <span itemProp="credentials">Ohio Bar Member</span> · Criminal Defense Attorney
+                    </p>
+                    <p className="text-sm text-gray-600" itemProp="description">
+                      Dominic Mango is a criminal defense and personal injury attorney serving Delaware and Franklin Counties in Ohio. With extensive courtroom experience and a client-focused approach, Dominic has successfully defended hundreds of clients facing OVI/DUI, drug crimes, assault, weapons charges, and other serious criminal allegations.
+                    </p>
+                  </div>
+                </div>
+              </footer>
+            </div>
+
+            {/* Sticky Sidebar */}
+            <div className="hidden lg:block">
+              <StickyConsultCTA />
+            </div>
           </div>
 
-          <AuthorBio
-            name="Dominic Mango"
-            title="Criminal Defense Attorney"
-            credentials="Ohio Bar Member"
-            bio="Dominic Mango is a criminal defense and personal injury attorney serving Delaware and Franklin Counties in Ohio. With extensive courtroom experience and a client-focused approach, Dominic has successfully defended hundreds of clients facing OVI/DUI, drug crimes, assault, weapons charges, and other serious criminal allegations."
-            imageUrl="/images/nick_mango_profile_shot.jpg"
-          />
-
-          <RelatedPosts posts={getRelatedPosts(post.slug, post.category)} />
+          {/* Related Posts Section (full width) */}
+          <div className="mt-16">
+            <RelatedPosts posts={getRelatedPosts(post.slug, post.category, 2)} />
+          </div>
         </div>
       </section>
 

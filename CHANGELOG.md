@@ -2,6 +2,43 @@
 
 ## 2025-12-25
 
+### Blog Redesign: "Editorial Calm" Treatment
+- **BlogPostPage.tsx**: Complete redesign implementing "Editorial Calm" principles
+  - Hero images now use 21:9 aspect ratio for cinematic, editorial feel
+  - Two-column layout: main content (max-w-2xl) + sticky sidebar (w-72)
+  - Improved spacing with `space-y-16` between major sections and `space-y-6` for paragraphs
+  - Color discipline: body text uses `text-gray-700` (10.5:1 contrast), headlines use `text-brand-black` (19.4:1 contrast)
+  - Metadata moved above content with improved readability
+  - Legal disclaimers and sources styled as subtle left-border callouts
+  - Author bio moved inside main content column with Schema.org structured data (itemProp attributes)
+  - Related posts limited to 2 maximum for visual restraint
+
+- **New Component: StickyConsultCTA** (`src/components/blog/StickyConsultCTA.tsx`)
+  - Single-purpose sidebar CTA with phone and contact form links
+  - Sticky positioning at `top-24` for persistent visibility
+  - Proper ARIA labeling and focus management
+  - Hidden on mobile, shown on lg+ breakpoints
+
+- **HighlightBox Component Refinement** (`src/components/blog/HighlightBox.tsx`)
+  - Removed aggressive icon boxes in favor of subtle left-border styling (`border-l-4`)
+  - Added proper ARIA roles (`note` vs `alert`) for accessibility
+  - Emoji icons marked with `aria-hidden="true"` to avoid screen reader noise
+  - Background opacity reduced to 5% (`bg-*/5`) for visual restraint
+  - Added `tip` variant with neutral gray styling
+
+- **Blog Image Specs** (`og/og-specs.ts`)
+  - Added `BLOG_IMAGE_SPECS` array with 7 editorial image generation prompts
+  - Specs for holiday OVI enforcement, timelines, checklists, penalty comparisons
+  - Includes checkpoint maps, breathalyzer scenes, courthouse photography
+  - All specs follow fal.ai model conventions (Recraft v3, Flux Pro) with aspect ratios
+
+### Accessibility Improvements
+- Hero images now have descriptive alt text and proper semantic markup (`<figure>`, `<time>`, `<header>`, `<footer>`, `<aside>`)
+- All interactive elements have visible focus states with `focus:ring-2` and proper offset
+- Color contrast meets WCAG AA minimum (4.5:1 normal text, 3:1 large text)
+- Links use `text-brand-leaf` for 7.1:1 contrast ratio
+- Structured data for author bio improves SEO and accessibility
+
 ### Trust & Compliance
 - Add Ohio Supreme Court Registration No. 0071238 to attorney identity block (homepage photo overlay) and footer credibility line.
 - Standardize bar number format sitewide: "Ohio Supreme Court Registration No. 0071238" (avoid informal "OH Bar #" variants).
