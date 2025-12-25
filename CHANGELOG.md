@@ -1,18 +1,37 @@
 # Changelog
 
+## 2025-12-25
+
+### Docs
+- Refresh `README.md` to match current brand tokens, GTM-first tracking contract, `/admin/connections` usage, and env-var source of truth (`.env.example`).
+
 ## 2025-12-24
 
 ### Admin / Google Connectors
 - Fix `/admin/connections` resource selection for Google Analytics and Google Tag Manager by listing all accessible accounts/resources and adding an Account selector (prevents “random account” behavior).
 - Collapse the raw access-check debug payload behind a disclosure to keep the UI readable.
 
+### Accessibility (Keyboard)
+- Make DUI Checkpoint map markers keyboard accessible.
+- Add focus trapping to remaining modal-style launchers and ensure chat modal uses `aria-modal` appropriately.
+- Add `AccessibleTable` helper for consistent table semantics.
+
+### UI / Reliability
+- Fix homepage hero CTA buttons not responding to clicks (pointer cursor without navigation).
+- Move Turnstile widget/badge to live under the submit button and align with the confidentiality disclaimer; reduce overlap issues.
+- Add additional favicon sizes to improve SERP icon reliability.
+
 ## 2025-12-23
 
 ### Lead Capture + Forms
 - Fix lead-capture modal validation and standardize phone normalization/formatting across forms (stores digits, displays `(XXX) XXX-XXXX`).
+- Add intake fields to better route leads and personalize follow-up (case type + “how did you find us?” with referral details).
 - Surface Edge Function JSON error messages in the UI so “non-2xx” includes the actual server reason (e.g. `Verification required`, `Origin not allowed`).
 - Deploy/enable Cloudflare Turnstile (optional): client widget + server verification via `TURNSTILE_SECRET_KEY`.
 - Add a production-safe Turnstile site key fallback so the widget still renders if Bolt env injection fails (`src/lib/turnstile.ts`).
+
+### Chat UI
+- Polish chat modal styling and adjust Turnstile badge placement to avoid obstructing content.
 
 ### Email Templates (Supabase Edge Functions)
 - Replace per-function ad-hoc HTML with a shared email template generator (`supabase/functions/_shared/email/*`) used by `submit-contact`, `submit-lead`, and `chat-intake`.

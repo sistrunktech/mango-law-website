@@ -1,15 +1,13 @@
 # Mango Law Website
 
-Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on the Sistech Website 2025 reproducible framework.
-
-> Official Mango Law LLC website — React/Vite, Supabase forms, full law-firm architecture, and Windsurf/Codex-ready automation.
+Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on a React/Vite + Supabase stack with a GTM-first analytics contract and an admin panel for operational tooling.
 
 ## Features
 
 - **Modern React + Vite frontend** with TypeScript
 - **Sistech Law v1 component library** (PageHero, PracticeAreaCards, CTA sections, Testimonials, etc.)
 - **Supabase Edge Function integrations** (`submit-contact`, `submit-lead`, `chat-intake`)
-- **GTM-first analytics** via explicit `window.dataLayer` events (`mango_page_view`, `cta_click`, `lead_submitted`)
+- **GTM-first analytics** via explicit `window.dataLayer` events (`mango_page_view`, `cta_click`, `lead_submitted`) — no GTM click selectors required
 - **Tailwind design tokens** for the Mango Law brand
 - **Bolt.new / Windsurf agent compatibility** (scaffolding, build, deploy)
 - **SEO-optimized** practice-area and location pages for Delaware, OH
@@ -17,13 +15,16 @@ Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on
 
 ## Brand Tokens
 
+These are defined in `tailwind.config.js`.
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `brand.black` | `#000000` | Primary text |
-| `brand.mango` | `#F4A300` | Primary accent |
-| `brand.gold` | `#C78A00` | Secondary accent, hover states |
-| `brand.offWhite` | `#F9F7F4` | Backgrounds |
-| `brand.teal` | `#0F6E63` | Tertiary accent |
+| `brand.black` | `#0A0A0A` | Primary text |
+| `brand.offWhite` | `#FAF9F7` | Backgrounds |
+| `brand.mango` | `#E8A33C` | Primary CTA/accent |
+| `brand.mangoText` | `#B45309` | WCAG-safe mango for text on light backgrounds |
+| `brand.leaf` | `#2F5F4F` | Primary green accent |
+| `brand.goldText` | `#8A6A18` | WCAG-safe gold for text on light backgrounds |
 
 ## Quick Start
 
@@ -35,58 +36,48 @@ cp .env.example .env  # Configure your environment
 npm run dev
 ```
 
-## Folder Structure
+## Hosting + Deploy Model (Important)
 
-```
-mango-law-website/
-├── src/
-│   ├── components/    # Reusable UI components
-│   ├── pages/         # Route pages
-│   ├── data/          # Static data files
-│   ├── assets/        # Images, fonts
-│   ├── styles/        # Global styles, tokens
-│   └── lib/           # Utilities, Supabase client
-├── public/
-│   └── images/        # Brand logos, headshots
-├── supabase/
-│   ├── functions/     # Edge functions
-│   └── migrations/    # Database migrations
-├── design/            # Reference assets (Wayback screenshots)
-├── .github/workflows/ # CI/CD pipelines
-└── docs/              # Operations documentation
-```
+- Bolt publishes the **frontend** (Vite build output).
+- Supabase **Edge Functions** + **DB migrations** are deployed separately (see `docs/OPERATIONS.md`).
+- If the live site looks “stuck”, verify the deploy by checking View Source for a new `/assets/index-*.js` filename.
 
-## Deployment Workflow
+## Analytics (GTM-first)
 
-1. Code merged into `main`
-2. Bolt.new deploys the frontend from `main`
-3. Supabase Edge Functions + DB migrations are deployed separately (see `docs/OPERATIONS.md`)
+This site includes a single GTM container in `index.html` (`GTM-WLJQZKB5`). The app pushes explicit events to `window.dataLayer`:
 
-### Deploy Verification (important)
-- Confirm the live site is serving the latest build by checking View Source for the current `/assets/index-*.js` filename (it should change after a new deploy).
-- If the UI appears “stuck” on old behavior, it’s usually a stale/old frontend deploy rather than Supabase.
+- `mango_page_view`
+- `cta_click`
+- `lead_submitted` (single conversion event for outreach, includes `lead_source` and `checkpoint_id`)
 
-### Required Secrets
+Do not hard-code the GA4 `gtag.js` snippet anywhere in the site — GA4 should be configured inside GTM.
 
-| Variable | Description |
-|----------|-------------|
-| `VITE_SUPABASE_URL` | Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | Supabase anonymous key |
-| `RESEND_API_KEY` | Resend email API key |
-| `CONTACT_NOTIFY_TO` | Email for contact form notifications |
-| `CONTACT_NOTIFY_BCC` | Optional BCC for admin notifications |
-| `FROM_EMAIL` | Sender email address |
-| `FRONTEND_URL` | Base site URL for absolute links in emails (fallback: `VITE_SITE_URL`, then `https://mango.law`) |
-| `APP_THEME` | Email theme (`dark` or `light`) |
-| `APP_SEASON` | Email season (`spring`, `summer`, `fall`, `winter`) |
-| `APP_HOLIDAY` | Enable holiday accents (winter only) |
-| `ORIGIN_ALLOWLIST` | Comma-separated allowed origins for Edge Functions |
-| `VITE_TURNSTILE_SITE_KEY` | Optional Turnstile site key (client). If omitted, the app falls back to the repo’s default site key in `src/lib/turnstile.ts`. |
-| `TURNSTILE_SECRET_KEY` | Optional Turnstile secret key (server) |
+## Admin Panel (Google Connectors)
+
+Use `/admin/connections` to connect Google tools and select the correct resources:
+- **Analytics (GA4)**: select **Account** + **Property**
+- **Search Console**: prefer `sc-domain:mango.law` if available
+- **Tag Manager**: select **Account** + **Container**
+
+If you see missing lists or “wrong account” behavior, it’s almost always one of:
+- The connected Google user doesn’t have access to that account/property/container
+- The OAuth app scopes/consent weren’t granted for the right Google account
+- Google APIs are rate-limited or returning partial results (reconnect + re-check)
+
+## Environment Variables / Secrets
+
+Use `mango-law-website/.env.example` as the authoritative list. Keep it updated whenever env vars change.
+
+Commonly required values:
+- Frontend: `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+- Forms + email delivery (Edge Functions): `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`
+- Turnstile (optional): `VITE_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
+- Email theme config: `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`
 
 ## Documentation
 
 - **Operations guide:** [`docs/OPERATIONS.md`](docs/OPERATIONS.md)
+- **Keyboard accessibility guide:** [`docs/KEYBOARD-ACCESSIBILITY-GUIDE.md`](docs/KEYBOARD-ACCESSIBILITY-GUIDE.md)
 - **Changelog:** [`CHANGELOG.md`](CHANGELOG.md)
 - **Contributing:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
 

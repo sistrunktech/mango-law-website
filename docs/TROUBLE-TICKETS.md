@@ -21,6 +21,14 @@ This document tracks known issues and problems that require resolution.
 - GA4 conversions for “lead” should be based on the `lead_submitted` event (`lead_source`: `form|phone|email|chat`).
 - If forms fail, GA4 will not show form conversions even if other events fire correctly.
 
+### Admin / Google Connectors (Analytics, Search Console, GTM)
+- Use `/admin/connections` to connect Google tools and select the correct GA4 Property / Search Console property / GTM container.
+- If Analytics/GTM are not showing full account/resource lists or the selectors feel “stuck”, confirm:
+  - You connected the *correct Google user* (the one that actually owns/has access to the accounts).
+  - Google consent was granted for all requested scopes.
+  - `Check status` returns the expected lists (expand the debug payload to confirm what Google returned).
+  - See `docs/OPERATIONS.md` → “Google Integrations (Admin)” for step-by-step + troubleshooting.
+
 ## TICKET-001: Logo Generation Failure
 
 **Priority:** High
@@ -849,6 +857,39 @@ The `google-access-check` Edge Function only fetched **properties/containers fro
    - Click `Check status`
    - Select the correct **Account** and **Resource**, then click `Save`
 3. Re-run `Check status` and confirm the integration shows `Connected (healthy)`
+
+---
+
+## TICKET-026: Admin Connectors — Analytics/GTM Selectors Empty or Unselectable
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-25  
+**Assigned To:** TBD
+
+### Issue Summary
+In `/admin/connections`, the Analytics and/or Tag Manager selectors may not present usable account/property/container lists, preventing selection of the intended resources.
+
+### Notes / Symptoms
+- UI appears to auto-select a “random” account, or does not allow choosing a different one.
+- Account list shows fewer entries than expected, or resource list remains empty.
+- Search Console may work (shows properties), while Analytics/GTM don’t.
+
+### Likely root causes
+- The connected Google user does not have access to the expected Analytics/GTM accounts.
+- Google OAuth consent was completed with the wrong Google account (common when multiple accounts are logged in).
+- Missing/insufficient roles in GA4 or GTM for the connected Google user.
+- Google API returns partial lists or rate-limited responses.
+
+### Troubleshooting / Next steps
+1. In `/admin/connections`, click `Reconnect` for the affected integration and ensure you pick the correct Google user.
+2. Click `Check status` and expand the debug payload:
+   - Confirm `accounts.all` contains the expected accounts.
+   - Confirm GA4/GTM resources are present for the selected account.
+3. In Google:
+   - GA4: ensure the Google user has at least **Viewer** access on the intended account/property.
+   - GTM: ensure the Google user has at least **Read** access on the intended account/container.
+4. If the debug payload contains the expected resources but the UI can’t select/save them, capture the payload and open a code-level fix ticket.
 
 ---
 

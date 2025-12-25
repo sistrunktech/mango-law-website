@@ -77,6 +77,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - Create a Cloudflare Turnstile widget for the hostnames you will test on (at minimum `mango.law`; add `staging.mango.law` / Bolt preview hostnames as needed).
 - Bolt env (client): set `VITE_TURNSTILE_SITE_KEY` (preferred for rotation and multi-environment setups). If it’s missing, the app uses a default fallback site key from `src/lib/turnstile.ts`.
 - Supabase Edge Function secrets (server): set `TURNSTILE_SECRET_KEY`.
+- UI placement: the Turnstile widget is rendered *below the submit button* and aligned with the confidentiality/security disclaimer so it stays out of the main form flow.
 - Common failure modes:
   - The live site is serving an older frontend bundle (missing recent Turnstile updates) → requests submit with no token → Edge Functions return `400` with `Verification required`.
   - The Turnstile widget isn’t configured for the hostname being tested → verification fails.
@@ -177,6 +178,10 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
   - **Search Console**: choose `sc-domain:mango.law` when available (else `https://mango.law/`), then click `Save` (stored in `metadata.siteUrl`).
   - **Tag Manager**: choose the correct **Account** and **Container**, then click `Save` (stored in `google_integrations.account_id` + `metadata.containerId`).
 - **Step 4 — Re-check**: run `Check status` again after changing permissions or creating resources in Google.
+- Troubleshooting:
+  - If the selectors look “empty”, click `Reconnect` and ensure you grant consent to the correct Google user (the user that actually owns/has access to the Analytics/GTM accounts).
+  - If you *only* see one account/resource but you expect more, it’s usually permissions (the connected user doesn’t have access), or Google is returning a partial list; reconnect and try again.
+  - Use the “debug payload” disclosure in the UI to confirm what Google returned before changing code.
 - **Automated Updates**: pg_cron job runs hourly to automatically update checkpoint statuses. Manual refresh available via "Update Statuses" button.
   - **Cron health check (Supabase SQL editor):**
     - `SELECT * FROM cron.job WHERE jobname = 'update_checkpoint_statuses_hourly';`
@@ -200,6 +205,7 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
 
 ## CTA Tracking (GA4 / GTM)
 - This site is GTM-first: app code pushes explicit events to `window.dataLayer` (avoid GTM click selectors whenever possible).
+- The only tag snippet that should be hard-coded in `index.html` is GTM (`GTM-WLJQZKB5`). Do not add GA4 `gtag.js` directly to the site.
 - Events emitted by the app:
   - `mango_page_view` (from `src/lib/seo.tsx`)
   - `cta_click` (from `src/lib/analytics.ts`)
@@ -214,6 +220,7 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
 
 ## Email Template System (Edge Functions)
 - Shared builders live in `supabase/functions/_shared/email/templates.ts`.
+- Recommended for client compatibility: set `APP_THEME=light` unless you have a specific reason to force a dark email layout (many email clients apply their own dark-mode rendering and can produce unexpected inversions).
 - To add a new notification type:
   - Build the email HTML with `buildAdminEmailHtml(...)` and/or `buildClientConfirmationHtml(...)`.
   - Keep the Edge Function responsible for data validation, DB insert, and passing sanitized fields + metadata into the builder.
