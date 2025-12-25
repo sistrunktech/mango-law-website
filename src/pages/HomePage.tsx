@@ -138,6 +138,7 @@ export default function HomePage() {
 	                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8 transition-all duration-300 group-hover:from-brand-black/95">
 	                  <h3 className="text-2xl font-bold text-white">Dominic "Nick" Mango</h3>
 	                  <p className="text-sm font-medium text-brand-gold">Criminal Defense Attorney</p>
+	                  <p className="mt-1 text-xs text-brand-offWhite/70">Ohio Supreme Court Registration No. 0071238</p>
 	                  <p className="mt-2 text-xs text-brand-offWhite/90">Serving Delaware, Franklin & surrounding counties throughout Central Ohio.</p>
 	                </div>
 	              </Link>
@@ -268,7 +269,7 @@ export default function HomePage() {
           <CTASection
             title="Need counsel now? Let's talk today."
             body="Fast-moving situations deserve prompt, informed action. Schedule a consult or call to discuss your options."
-            primaryLabel="Free Consultation"
+            primaryLabel="Free Case Review"
             primaryHref="/contact"
             secondaryLabel={OFFICE_PHONE_DISPLAY}
             secondaryHref={`tel:${OFFICE_PHONE_TEL}`}

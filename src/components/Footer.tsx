@@ -326,7 +326,7 @@ export default function Footer() {
                 Facing charges? Get clear answers today.
               </p>
               <Link to="/contact" className="btn btn-primary w-full text-center text-sm">
-                Free Consultation
+                Free Case Review
               </Link>
             </div>
           </div>
@@ -355,7 +355,10 @@ export default function Footer() {
 
       <div className="border-t border-brand-offWhite/10">
         <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-brand-offWhite/50 sm:flex-row">
-          <span>© {getCopyrightText(COMPANY_START_YEAR)} Mango Law LLC. All rights reserved.</span>
+          <div className="flex flex-col items-center gap-1 sm:items-start">
+            <span>© {getCopyrightText(COMPANY_START_YEAR)} Mango Law LLC. All rights reserved.</span>
+            <span className="text-brand-offWhite/40">Dominic N. Mango | Ohio Supreme Court Registration No. 0071238</span>
+          </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <Link to="/privacy" className="transition-colors hover:text-brand-leaf">
               Privacy Policy

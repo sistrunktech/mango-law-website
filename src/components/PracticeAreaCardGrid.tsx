@@ -160,7 +160,7 @@ export default function PracticeAreaCardGrid() {
 
                 {/* Prominent CTA */}
                 <div className="mt-6 flex items-center gap-2 text-base font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
-                  Explore OVI Defense
+                  {oviArea.ctaText || 'Get help with OVI charges'}
                   <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
@@ -212,7 +212,7 @@ export default function PracticeAreaCardGrid() {
                 </p>
 
                 <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
-                  Learn more
+                  {criminalArea.ctaText || 'Discuss your case'}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
@@ -271,7 +271,7 @@ export default function PracticeAreaCardGrid() {
                 </p>
 
                 <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
-                  Learn more
+                  {area.ctaText || 'Talk to a lawyer'}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
@@ -300,7 +300,7 @@ export default function PracticeAreaCardGrid() {
                   to="/contact"
                   className="btn btn-primary w-full text-center transition-transform hover:scale-105"
                 >
-                  Request Consultation
+                  Free Case Review
                 </Link>
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}
