@@ -1023,6 +1023,26 @@ export default function BlogPostPage() {
                         blockquote: ({ node, ...props }) => (
                           <blockquote className="my-6 border-l-4 border-brand-mango pl-6 italic text-brand-black/70" {...props} />
                         ),
+                        table: ({ node, ...props }) => (
+                          <div className="my-8 overflow-x-auto rounded-lg border border-brand-black/10">
+                            <table className="w-full border-collapse text-sm" {...props} />
+                          </div>
+                        ),
+                        thead: ({ node, ...props }) => (
+                          <thead className="bg-brand-offWhite" {...props} />
+                        ),
+                        tbody: ({ node, ...props }) => (
+                          <tbody className="divide-y divide-brand-black/10" {...props} />
+                        ),
+                        tr: ({ node, ...props }) => (
+                          <tr className="border-b border-brand-black/10 last:border-0" {...props} />
+                        ),
+                        th: ({ node, ...props }) => (
+                          <th className="px-4 py-3 text-left font-semibold text-brand-black" {...props} />
+                        ),
+                        td: ({ node, ...props }) => (
+                          <td className="px-4 py-3 text-brand-black/80" {...props} />
+                        ),
                       }}
                     >
                       {part}
