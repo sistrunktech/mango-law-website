@@ -12,13 +12,13 @@ export default function BlogSection() {
           <div className="space-y-3">
               <div className="flex items-center gap-3">
               <div className="accent-line" />
-              <p className="eyebrow text-brand-goldText">Legal Insights</p>
+              <p className="eyebrow text-brand-goldText">Know Your Rights</p>
             </div>
             <h2 className="font-display text-display-sm md:text-display-md">
-              Knowledge is power
+              Arrested in Ohio? Start Here.
             </h2>
             <p className="max-w-xl text-brand-black/60">
-              Stay informed with expert legal guidance and insights into criminal defense.
+              Understand your situation, your rights, and your options with guidance from an Ohio defense attorney.
             </p>
           </div>
           <Link

@@ -175,10 +175,10 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden items-center gap-5 lg:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black/80 hover:text-brand-mango"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-leaf bg-brand-leaf/10 px-4 py-2.5 text-sm font-bold text-brand-forest transition-all hover:bg-brand-leaf hover:text-white"
               data-cta="header_call"
               onClick={() => {
                 trackCtaClick('header_call');
@@ -186,20 +186,20 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   target_number: OFFICE_PHONE_TEL,
                 });
               }}
-	            >
-	              <Phone className="h-4 w-4" aria-hidden="true" />
-	              Call/Text Nick direct {OFFICE_PHONE_DISPLAY}
-	            </a>
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call Now
+            </a>
             <button
               type="button"
-              className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black transition-all hover:bg-brand-gold"
+              className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black shadow-sm transition-all hover:bg-brand-gold hover:shadow-md"
               data-cta="header_free_consult"
               onClick={() => {
                 trackCtaClick('header_free_consult');
                 onOpenLeadModal?.('header_cta');
               }}
             >
-              Free Consultation
+              Free Case Review
             </button>
           </div>
 
@@ -215,22 +215,11 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
           </button>
 
           {/* Mobile phone + consult (right) */}
-          <div className="flex flex-col items-end gap-1 lg:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-1.5 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
-              onClick={() => {
-                trackCtaClick('mobile_header_free_consult');
-                onOpenLeadModal?.('header_cta');
-              }}
-              data-cta="mobile_header_free_consult"
-            >
-              Consult
-            </button>
+          <div className="flex items-center gap-2 lg:hidden">
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
-              className="text-xs font-semibold text-brand-black/80 transition-colors hover:text-brand-mango"
-              aria-label="Call or text the office"
+              className="inline-flex items-center justify-center rounded-lg border-2 border-brand-leaf bg-brand-leaf/10 p-2 text-brand-forest transition-all hover:bg-brand-leaf hover:text-white"
+              aria-label="Call Now"
               data-cta="mobile_header_call"
               onClick={() => {
                 trackCtaClick('mobile_header_call');
@@ -239,8 +228,19 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                 });
               }}
             >
-              {OFFICE_PHONE_DISPLAY}
+              <Phone className="h-5 w-5" aria-hidden="true" />
             </a>
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-2 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
+              onClick={() => {
+                trackCtaClick('mobile_header_free_consult');
+                onOpenLeadModal?.('header_cta');
+              }}
+              data-cta="mobile_header_free_consult"
+            >
+              Free Review
+            </button>
           </div>
         </div>
 
@@ -320,9 +320,9 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   }}
                   className="mx-4 rounded-lg bg-brand-mango px-5 py-3 text-center text-sm font-bold text-brand-black"
                   data-cta="mobile_menu_free_consult"
-                  aria-label="Open free consultation form"
+                  aria-label="Open free case review form"
                 >
-                  Free Consultation
+                  Free Case Review
                 </button>
               </div>
             </div>

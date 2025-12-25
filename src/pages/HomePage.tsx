@@ -2,12 +2,13 @@ import { Suspense, lazy } from 'react';
 import { CheckCircle, FileText, Users, Clock, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import ProcessSteps from '../components/ProcessSteps';
 import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
 const BlogSection = lazy(() => import('../components/BlogSection'));
 const TestimonialsList = lazy(() => import('../components/TestimonialsList'));
 const CTASection = lazy(() => import('../components/CTASection'));
 const LocationBlock = lazy(() => import('../components/LocationBlock'));
-const ContactForm = lazy(() => import('../components/ContactForm'));
+const QuickIntakeForm = lazy(() => import('../components/QuickIntakeForm'));
 import DeferredSection from '../components/DeferredSection';
 import { SEO, localBusinessSchema } from '../lib/seo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
@@ -45,15 +46,17 @@ export default function HomePage() {
         structuredData={localBusinessSchema}
       />
       <PageHero
-        eyebrow="Central Ohio Criminal Defense"
-        subtitle="Dominic “Nick” Mango — Criminal Defense & OVI/DUI Defense Attorney"
-        title="Strategic Criminal Defense for Central Ohio"
-        description="Serving Delaware, Franklin & surrounding counties throughout Central Ohio."
-        ctaLabel="Schedule a Case Review"
+        eyebrow="Central Ohio OVI/DUI & Criminal Defense"
+        subtitle="Nick Mango | Delaware, OH | 15+ Years | Former Prosecutor"
+        title="Arrested? Get Clear Next Steps Today."
+        description="Confidential consultation. Available 24/7 for urgent OVI, DUI, and criminal defense matters in Delaware and Franklin Counties."
+        ctaLabel="Free Case Review"
         ctaHref="/contact"
         phoneNumber={OFFICE_PHONE_DISPLAY}
         phoneCtaId="home_hero_call_office"
       />
+
+      <ProcessSteps />
 
       {/* Why Choose Us Section */}
       <section className="section bg-white">
@@ -145,18 +148,9 @@ export default function HomePage() {
 
       <PracticeAreaCardGrid />
 
-      <DeferredSection minHeight={520}>
-        <Suspense fallback={null}>
-          <BlogSection />
-        </Suspense>
-      </DeferredSection>
-
       {/* Stats/Trust Section */}
       <section className="relative overflow-hidden py-20">
-        {/* Forest to emerald gradient for energy */}
         <div className="absolute inset-0 bg-forest-emerald" />
-
-        {/* Subtle pattern overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-brand-black/20 to-transparent" />
 
         <div className="container relative">
@@ -165,11 +159,11 @@ export default function HomePage() {
               { value: '15+', label: 'Years Experience' },
               { value: '1000+', label: 'Cases Handled' },
               { value: '24/7', label: 'Availability' },
-              { value: '100%', label: 'Confidential' },
+              { value: 'Former', label: 'Prosecutor' },
             ].map((stat, i) => (
               <div key={i} className="space-y-3">
                 <p className="text-display-md font-black text-white">{stat.value}</p>
-                <p className="text-sm font-semibold uppercase tracking-wider text-brand-offWhite/80">{stat.label}</p>
+                <p className="text-sm font-semibold uppercase tracking-wider text-brand-offWhite">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -186,6 +180,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      <DeferredSection minHeight={520}>
+        <Suspense fallback={null}>
+          <BlogSection />
+        </Suspense>
+      </DeferredSection>
+
       <DeferredSection minHeight={420}>
         <Suspense fallback={null}>
           <LocationBlock />
@@ -200,17 +200,16 @@ export default function HomePage() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="accent-line" />
-                  <p className="eyebrow text-brand-goldText">Contact</p>
+                  <p className="eyebrow text-brand-goldText">Get Started</p>
                 </div>
-	                <h2 className="text-display-sm md:text-display-md">
-	                  Tell us what's going on
-	                </h2>
-	                <p className="text-lg text-brand-black/60">
-	                  Share a few details about the situation. Nick and the team respond promptly with next steps and a clear path forward.
-	                </p>
-	              </div>
+                <h2 className="text-display-sm md:text-display-md">
+                  Request Your Free Case Review
+                </h2>
+                <p className="text-lg text-brand-black/60">
+                  Tell us what happened. Nick responds promptly with clear next steps.
+                </p>
+              </div>
 
-              {/* Contact info cards */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}
@@ -227,10 +226,10 @@ export default function HomePage() {
                     <span className="text-2xl">📞</span>
                   </div>
                   <div>
-	                    <p className="text-sm font-medium text-brand-black/60">Call/Text Nick direct</p>
-	                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">{OFFICE_PHONE_DISPLAY}</p>
-	                  </div>
-	                </a>
+                    <p className="text-sm font-medium text-brand-black/60">Prefer to talk?</p>
+                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">{OFFICE_PHONE_DISPLAY}</p>
+                  </div>
+                </a>
                 <a
                   href={`mailto:${OFFICE_EMAIL}`}
                   className="group card card-interactive flex items-center gap-4 p-5"
@@ -253,11 +252,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Form */}
             <div className="card border-brand-black/5 bg-brand-offWhite p-8 shadow-soft-lg">
-              <DeferredSection minHeight={420}>
+              <DeferredSection minHeight={380}>
                 <Suspense fallback={null}>
-                  <ContactForm />
+                  <QuickIntakeForm />
                 </Suspense>
               </DeferredSection>
             </div>
