@@ -419,9 +419,10 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             )}
           </button>
 
-          <div className="mt-3 flex flex-col gap-3 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
+          <div className="mt-3 flex flex-col gap-2 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
             <p className="text-center text-xs text-brand-black/60 md:text-left">
-              Your information is confidential and protected by attorney-client privilege.
+              Submitting this form does not create an attorney-client relationship. Please do not send confidential or
+              sensitive information.
             </p>
             {turnstileSiteKey ? (
               <div className="flex flex-col items-center gap-1 md:items-end">

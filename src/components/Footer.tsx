@@ -360,7 +360,7 @@ export default function Footer() {
               Privacy Policy
             </Link>
             <Link to="/terms" className="transition-colors hover:text-brand-leaf">
-              Terms of Service
+              Terms of Use
             </Link>
             <a
               href="https://sistrunktech.com"

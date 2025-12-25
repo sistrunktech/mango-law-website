@@ -923,6 +923,36 @@ Consent Mode v2 signals are present on first load, and update immediately after 
 
 ---
 
+## TICKET-028: Privacy Policy + Terms of Use Refresh
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-25  
+**Assigned To:** TBD
+
+### Issue Summary
+Privacy Policy and Terms of Use pages need expanded, Ohio-specific language, updated effective date, and consistent footer link labels.
+
+### Scope
+- Replace stub copy with the provided Mango Law privacy and terms language.
+- Add meta titles:
+  - Privacy Policy: "Privacy Policy | Ohio Criminal Defense Attorney - Mango Law LLC"
+  - Terms of Use: "Terms of Use | Mango Law LLC - Ohio Criminal Defense"
+- Update footer label to "Terms of Use".
+- Add a one-line disclaimer near contact forms:
+  - "Submitting this form does not create an attorney-client relationship."
+
+### Status / Notes
+- Copy and layout updates are implemented in code but still need:
+  - Effective date filled in.
+  - Final legal review/approval.
+
+### Files Likely Involved
+`src/pages/PrivacyPage.tsx`, `src/pages/TermsPage.tsx`, `src/components/Footer.tsx`,
+`src/components/ContactForm.tsx`, `src/components/LeadCaptureModal.tsx`
+
+---
+
 ## Collaboration Notes (Codex / Agents)
 
 **Goal:** keep the repo moving without requiring the site owner to use terminal or GitHub UI for routine work.
