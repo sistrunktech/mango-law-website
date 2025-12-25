@@ -2,6 +2,22 @@
 
 ## 2025-12-25
 
+### Trust & Compliance
+- Add Ohio Supreme Court Registration No. 0071238 to attorney identity block (homepage photo overlay) and footer credibility line.
+- Standardize bar number format sitewide: "Ohio Supreme Court Registration No. 0071238" (avoid informal "OH Bar #" variants).
+
+### UX / CTAs
+- Replace passive "Explore / Learn more" CTAs on practice area cards with action-oriented, help-first language:
+  - OVI/DUI: "Get help with OVI charges"
+  - Criminal Defense: "Discuss your criminal case"
+  - Drug Crimes: "Talk to a lawyer about drug charges"
+  - Sex Crimes: "Get discreet defense help"
+  - White Collar: "Discuss fraud or embezzlement charges"
+  - Protection Orders: "Fight a protection order"
+  - Personal Injury: "Discuss your injury case"
+- Add `ctaText` field to `PracticeArea` type for maintainable CTA customization (`src/data/practiceAreas.ts`).
+- Unify homepage CTA language to "Free Case Review" (footer box, CTASection, practice area grid consultation card).
+
 ### Docs
 - Refresh `README.md` to match current brand tokens, GTM-first tracking contract, `/admin/connections` usage, and env-var source of truth (`.env.example`).
 
