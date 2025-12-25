@@ -16,7 +16,7 @@ export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-
   const panelRef = useRef<HTMLDivElement>(null);
   useFocusTrap(panelRef, isOpen, launcherButtonRef);
 
-  const bottomClass = chatBottomOffsetClass === 'bottom-24' ? 'bottom-44' : 'bottom-24';
+  const bottomClass = chatBottomOffsetClass.includes('bottom-24') ? 'bottom-44' : 'bottom-24';
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -64,7 +64,7 @@ export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-
           'group fixed left-auto right-4 z-50 flex items-center justify-center rounded-full bg-brand-mango shadow-lg transition-all hover:bg-brand-leaf hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-mango/50 sm:right-6',
           bottomClass,
           isCollapsed ? 'h-11 w-11' : 'h-14 w-14 hover:scale-110',
-          'lg:bottom-6 lg:left-6 lg:right-auto',
+          'lg:left-6 lg:right-auto',
         ].join(' ')}
       >
         <Accessibility

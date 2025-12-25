@@ -16,9 +16,10 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(false);
 
   const floatingBottomOffsetClass = (() => {
-    const base = location.pathname.startsWith('/resources/dui-checkpoints') ? 'bottom-24' : 'bottom-6';
-    if (!isConsentBannerVisible) return base;
-    return base === 'bottom-6' ? 'bottom-28' : 'bottom-36';
+    const isCheckpoints = location.pathname.startsWith('/resources/dui-checkpoints');
+    if (isCheckpoints) return 'bottom-24';
+    if (isConsentBannerVisible) return 'bottom-24 lg:bottom-6';
+    return 'bottom-6';
   })();
 
   const openLeadModal = (trigger: LeadSource) => {

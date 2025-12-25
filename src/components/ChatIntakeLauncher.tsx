@@ -91,7 +91,7 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
           <div
             className={[
               'fixed right-4 z-40 w-[min(320px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-2xl sm:right-6',
-              bottomOffsetClass === 'bottom-24' ? 'bottom-40' : 'bottom-20',
+              bottomOffsetClass.includes('bottom-24') ? 'bottom-40' : 'bottom-20',
             ].join(' ')}
             role="dialog"
             aria-label="Contact options"
