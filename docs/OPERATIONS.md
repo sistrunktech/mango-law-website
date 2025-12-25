@@ -188,7 +188,7 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
 By default, Supabase-hosted OAuth redirects and Edge Functions use the Supabase project domain (e.g., `https://<project-id>.supabase.co/...`).
 Google may display that domain on the consent screen (unprofessional / untrusted).
 
-Recommended fix: configure a **Supabase Custom Domain** (example: `api.mango.law`) and update Google OAuth redirect URIs to use it.
+Recommended fix: configure a **Supabase Custom Domain** (now using `api.mango.law`) and update Google OAuth redirect URIs to use it.
 
 High-level steps:
 1. Supabase Dashboard → Custom Domains:

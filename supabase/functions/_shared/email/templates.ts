@@ -42,7 +42,7 @@ export type ClientEmailData = {
 
 function getDefaultOptions(options?: EmailOptions): Required<EmailOptions> {
   return {
-    theme: options?.theme ?? "dark",
+    theme: options?.theme ?? "light",
     season: options?.season ?? "winter",
     holiday: options?.holiday ?? false,
     appEnv: options?.appEnv ?? "production",

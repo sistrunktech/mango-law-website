@@ -71,6 +71,7 @@ Use `mango-law-website/.env.example` as the authoritative list. Keep it updated 
 
 Commonly required values:
 - Frontend: `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+- Supabase custom domain (OAuth branding): `VITE_SUPABASE_CUSTOM_DOMAIN=https://api.mango.law`
 - Forms + email delivery (Edge Functions): `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`
 - Turnstile (optional): `VITE_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
 - Email theme config: `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`

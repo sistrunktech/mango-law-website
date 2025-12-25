@@ -151,6 +151,7 @@ Site currently uses `public/favicon.svg` only. We should add standard PNG favico
 
 ### Resolution notes
 - Added PNG favicons + Apple touch icon + web manifest and wired them in `index.html`.
+- Added `favicon.ico` to improve Google SERP icon rendering and legacy browser support.
 
 ---
 
@@ -832,6 +833,10 @@ Lead/contact/chat emails are functional but need copy/layout polish so admin not
 - Subjects are consistent and searchable (e.g., `New consultation request — {Name}`).
 - Lead confirmation is concise, branded, and sets expectations (response window, what happens next).
 
+### Progress
+- Updated admin subject lines to a consistent em-dash format for easy search.
+- Defaulted email theme to light when `APP_THEME` is unset (matches most clients, still overrideable).
+
 ---
 
 ## TICKET-025: Admin Connections — GA4/GTM Wrong Account Selection + Missing Lists
@@ -895,6 +900,10 @@ In `/admin/connections`, the Analytics and/or Tag Manager selectors may not pres
    - GTM: ensure the Google user has at least **Read** access on the intended account/container.
 4. If the debug payload contains the expected resources but the UI can’t select/save them, capture the payload and open a code-level fix ticket.
 
+### Current notes
+- Supabase custom domain set to `api.mango.law` in DNS; once verified, ensure OAuth redirects use the branded domain.
+- OAuth connect now forces account selection (`prompt=consent select_account`) to reduce “wrong account” connections.
+
 ---
 
 ## TICKET-027: GA4 Consent Settings — Consent Signals Missing (EEA)
@@ -920,6 +929,9 @@ Consent Mode v2 signals are present on first load, and update immediately after 
 1. Tag Assistant: confirm consent defaults exist on first load.
 2. Click Accept/Reject: confirm consent updates on the same page (no refresh required).
 3. GA4 DebugView / Admin consent settings: confirm consent signals move to healthy over time.
+
+### Current notes
+- Consent Mode v2 is implemented in code; remaining work is GTM consent configuration + validation.
 
 ---
 

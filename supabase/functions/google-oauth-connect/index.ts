@@ -70,7 +70,8 @@ Deno.serve(async (req: Request) => {
     authUrl.searchParams.set('response_type', 'code');
     authUrl.searchParams.set('scope', scopes.join(' '));
     authUrl.searchParams.set('access_type', 'offline');
-    authUrl.searchParams.set('prompt', 'consent');
+    authUrl.searchParams.set('prompt', 'consent select_account');
+    authUrl.searchParams.set('include_granted_scopes', 'true');
     authUrl.searchParams.set('state', encodedState);
 
     return new Response(

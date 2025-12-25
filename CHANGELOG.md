@@ -11,6 +11,13 @@
 ### Admin / Google Connectors
 - Preserve admin-selected Google resources (GA4 Property / GSC property / GTM container) across OAuth reconnects and avoid wiping refresh tokens when Google omits `refresh_token` on subsequent grants.
 - Add optional support for a Supabase custom domain in the frontend (`VITE_SUPABASE_CUSTOM_DOMAIN`) to improve OAuth branding and reduce “project-id.supabase.co” exposure.
+- Force Google OAuth to show the account picker and keep incremental scopes (`prompt=consent select_account`, `include_granted_scopes=true`).
+
+### Email Templates
+- Default email theme to light when `APP_THEME` is unset (still overrideable via env).
+
+### SEO / Icons
+- Add `favicon.ico` to improve Google SERP icon rendering and legacy favicon detection.
 
 ### Legal Pages
 - Replace Privacy Policy + Terms of Use stubs with full Mango Law copy and add form disclaimer about attorney-client relationship creation.

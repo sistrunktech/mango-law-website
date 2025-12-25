@@ -315,7 +315,7 @@ Deno.serve(async (req: Request) => {
         const siteUrl = Deno.env.get("FRONTEND_URL") || Deno.env.get("VITE_SITE_URL") || "https://mango.law";
         const appEnv = Deno.env.get("APP_ENV") || "production";
         const season = (Deno.env.get("APP_SEASON") || "winter") as EmailSeason;
-        const theme = (Deno.env.get("APP_THEME") || "dark") as EmailTheme;
+        const theme = (Deno.env.get("APP_THEME") || "light") as EmailTheme;
         const holiday = isTruthyEnv(Deno.env.get("APP_HOLIDAY"));
 
         const adminEmailBody = {
@@ -323,7 +323,7 @@ Deno.serve(async (req: Request) => {
           to: notifyTo.length ? notifyTo : ["admin@example.com"],
           bcc: notifyBcc.length ? notifyBcc : undefined,
           reply_to: formData.email.trim().toLowerCase(),
-          subject: `New contact request from ${formData.name.trim()}`,
+          subject: `New contact request — ${formData.name.trim()}`,
           html: buildAdminEmailHtml(
             "contact",
             {

@@ -318,7 +318,7 @@ Deno.serve(async (req: Request) => {
         const siteUrl = Deno.env.get("FRONTEND_URL") || Deno.env.get("VITE_SITE_URL") || "https://mango.law";
         const appEnv = Deno.env.get("APP_ENV") || "production";
         const season = (Deno.env.get("APP_SEASON") || "winter") as EmailSeason;
-        const theme = (Deno.env.get("APP_THEME") || "dark") as EmailTheme;
+        const theme = (Deno.env.get("APP_THEME") || "light") as EmailTheme;
         const holiday = isTruthyEnv(Deno.env.get("APP_HOLIDAY"));
 
         // Send standard email notification
@@ -333,7 +333,7 @@ Deno.serve(async (req: Request) => {
             to: chatNotifyTo.length ? chatNotifyTo : ["admin@example.com"],
             bcc: chatNotifyBcc.length ? chatNotifyBcc : undefined,
             reply_to: intakeData.email.trim().toLowerCase(),
-            subject: `New ${sourceLabel} Lead from ${intakeData.name}`,
+            subject: `New ${sourceLabel} Lead — ${intakeData.name}`,
             html: buildAdminEmailHtml(
               "chat",
               {
