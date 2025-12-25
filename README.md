@@ -8,6 +8,7 @@ Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on
 - **Sistech Law v1 component library** (PageHero, PracticeAreaCards, CTA sections, Testimonials, etc.)
 - **Supabase Edge Function integrations** (`submit-contact`, `submit-lead`, `chat-intake`)
 - **GTM-first analytics** via explicit `window.dataLayer` events (`mango_page_view`, `cta_click`, `lead_submitted`) — no GTM click selectors required
+- **Consent Mode v2 (advanced mode)** + lightweight consent banner (GTM/GA4-ready)
 - **Tailwind design tokens** for the Mango Law brand
 - **Bolt.new / Windsurf agent compatibility** (scaffolding, build, deploy)
 - **SEO-optimized** practice-area and location pages for Delaware, OH

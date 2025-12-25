@@ -231,7 +231,7 @@ function extractResourceOptions(
   if (!accessData) return [];
 
   if (type === 'search_console') {
-    const sites: any[] = accessData?.sites?.sample ?? [];
+    const sites: any[] = accessData?.sites?.all ?? accessData?.sites?.sample ?? [];
     return sites
       .map((s) => ({ value: String(s?.siteUrl ?? ''), label: String(s?.siteUrl ?? '') }))
       .filter((o) => Boolean(o.value));
@@ -439,19 +439,21 @@ export default function ConnectionsPage() {
       const existingAccount = getCurrentAccountValue(integrationType, integration);
       const accountOptions = extractAccountOptions(integrationType, result);
       const preferredAccount =
-        existingAccount ||
+        (existingAccount && accountOptions.some((o) => o.value === existingAccount) ? existingAccount : '') ||
         accountOptions.find((o) => /mango/i.test(o.label) || /mango/i.test(o.value))?.value ||
         accountOptions[0]?.value ||
         '';
 
       const resourceOptions = extractResourceOptions(integrationType, result, preferredAccount);
-      const preferredResource = existingResource || inferPreferredResource(integrationType, resourceOptions);
+      const preferredResource =
+        (existingResource && resourceOptions.some((o) => o.value === existingResource) ? existingResource : '') ||
+        inferPreferredResource(integrationType, resourceOptions);
       setResourceSelections((prev) => ({
         ...prev,
         [integrationType]: {
           ...prev[integrationType],
-          accountValue: prev[integrationType].accountValue || preferredAccount,
-          resourceValue: preferredResource || prev[integrationType].resourceValue || '',
+          accountValue: preferredAccount,
+          resourceValue: preferredResource || '',
         },
       }));
     } catch (error) {

@@ -1,6 +1,96 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Consent Mode v2 (advanced): must run BEFORE GTM loads -->
+    <script>
+      (function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          window.dataLayer.push(arguments);
+        }
+        window.gtag = window.gtag || gtag;
+
+        var CONSENT_COOKIE = 'ml_consent_v2';
+
+        function getCookie(name) {
+          try {
+            var value = document.cookie
+              .split('; ')
+              .find(function (row) {
+                return row.indexOf(name + '=') === 0;
+              });
+            if (!value) return null;
+            return decodeURIComponent(value.split('=')[1] || '');
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function setCookie(name, value, days) {
+          var maxAge = days * 24 * 60 * 60;
+          document.cookie =
+            name +
+            '=' +
+            encodeURIComponent(value) +
+            '; Path=/; Max-Age=' +
+            maxAge +
+            '; SameSite=Lax';
+        }
+
+        function normalizeConsent(input) {
+          var v = input || {};
+          var valid = { granted: true, denied: true };
+          function pick(key, fallback) {
+            var val = String(v[key] || fallback);
+            return valid[val] ? val : fallback;
+          }
+
+          var adStorage = pick('ad_storage', 'denied');
+          return {
+            analytics_storage: pick('analytics_storage', 'denied'),
+            ad_storage: adStorage,
+            ad_user_data: pick('ad_user_data', 'denied'),
+            ad_personalization: pick('ad_personalization', 'denied'),
+            functionality_storage: 'granted',
+            security_storage: 'granted',
+            // Privacy hardening (recommended by Google when ad_storage denied)
+            ads_data_redaction: adStorage === 'denied',
+          };
+        }
+
+        var stored = getCookie(CONSENT_COOKIE);
+        var storedObj = null;
+        if (stored) {
+          try {
+            storedObj = JSON.parse(stored);
+          } catch (e) {
+            storedObj = null;
+          }
+        }
+
+        var base = normalizeConsent(storedObj);
+        // Delay tag firing briefly only when consent is unknown (first visit).
+        if (!storedObj) base.wait_for_update = 1500;
+
+        gtag('consent', 'default', base);
+
+        window.__mlConsent = {
+          cookieName: CONSENT_COOKIE,
+          get: function () {
+            return storedObj;
+          },
+          update: function (next) {
+            try {
+              storedObj = next || null;
+              if (storedObj) setCookie(CONSENT_COOKIE, JSON.stringify(storedObj), 365);
+            } catch (e) {}
+            var normalized = normalizeConsent(next);
+            window.gtag('consent', 'update', normalized);
+          },
+        };
+      })();
+    </script>
+
     <!-- Google Tag Manager -->
     <script>
       (function (w, d, s, l, i) {

@@ -5,6 +5,13 @@
 ### Docs
 - Refresh `README.md` to match current brand tokens, GTM-first tracking contract, `/admin/connections` usage, and env-var source of truth (`.env.example`).
 
+### Consent (GTM / GA4)
+- Add Consent Mode v2 (advanced mode) defaults before GTM loads and a lightweight consent banner (accept/reject/customize) persisted via cookie.
+
+### Admin / Google Connectors
+- Preserve admin-selected Google resources (GA4 Property / GSC property / GTM container) across OAuth reconnects and avoid wiping refresh tokens when Google omits `refresh_token` on subsequent grants.
+- Add optional support for a Supabase custom domain in the frontend (`VITE_SUPABASE_CUSTOM_DOMAIN`) to improve OAuth branding and reduce “project-id.supabase.co” exposure.
+
 ## 2025-12-24
 
 ### Admin / Google Connectors

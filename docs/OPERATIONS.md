@@ -28,6 +28,7 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 
 ## Environment Variables
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
+- Optional client config: `VITE_SUPABASE_CUSTOM_DOMAIN` (recommended for OAuth branding; use an HTTPS Supabase custom domain like `https://api.mango.law`).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional).
 - Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `VITE_TURNSTILE_SITE_KEY` (optional).
 - SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
@@ -182,6 +183,24 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
   - If the selectors look “empty”, click `Reconnect` and ensure you grant consent to the correct Google user (the user that actually owns/has access to the Analytics/GTM accounts).
   - If you *only* see one account/resource but you expect more, it’s usually permissions (the connected user doesn’t have access), or Google is returning a partial list; reconnect and try again.
   - Use the “debug payload” disclosure in the UI to confirm what Google returned before changing code.
+
+### OAuth Branding (Avoid “project-id.supabase.co” on the Google consent screen)
+By default, Supabase-hosted OAuth redirects and Edge Functions use the Supabase project domain (e.g., `https://<project-id>.supabase.co/...`).
+Google may display that domain on the consent screen (unprofessional / untrusted).
+
+Recommended fix: configure a **Supabase Custom Domain** (example: `api.mango.law`) and update Google OAuth redirect URIs to use it.
+
+High-level steps:
+1. Supabase Dashboard → Custom Domains:
+   - Add a custom domain (commonly `api.mango.law`).
+   - Verify DNS + TLS is active.
+2. Update Google Cloud Console OAuth Client:
+   - Authorized redirect URI(s) should include the new callback URL:
+     - `https://api.mango.law/functions/v1/google-oauth-callback`
+   - Keep the old Supabase URL temporarily during migration if needed, then remove it later.
+3. Ensure the site uses the custom domain consistently for Supabase endpoints (Auth + Functions) to avoid mixed-domain flows.
+
+If you don’t do this, the connectors can still work — they’ll just show the Supabase domain during OAuth.
 - **Automated Updates**: pg_cron job runs hourly to automatically update checkpoint statuses. Manual refresh available via "Update Statuses" button.
   - **Cron health check (Supabase SQL editor):**
     - `SELECT * FROM cron.job WHERE jobname = 'update_checkpoint_statuses_hourly';`
@@ -217,6 +236,34 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
     - `mango_page_view` → send GA4 `page_view` with `page_location`, `page_path`, `page_title`
     - `cta_click` → send GA4 event `cta_click` with param `cta`
     - `lead_submitted` → send GA4 event `lead_submitted` with params `lead_source`, `checkpoint_id`, `target_number`, `target_email`
+
+## Consent Mode v2 (GTM / GA4)
+
+GA4 may show “consent signals inactive/missing for EEA users” unless Consent Mode v2 signals are sent.
+
+### How it’s implemented
+- `index.html` includes an inline Consent Mode v2 snippet that runs **before GTM loads** (advanced mode).
+- Defaults are set to **denied** for:
+  - `analytics_storage`
+  - `ad_storage`
+  - `ad_user_data`
+  - `ad_personalization`
+- A small in-app banner (`src/components/ConsentBanner.tsx`) lets users:
+  - Accept all
+  - Reject all
+  - Customize (Analytics vs Advertising)
+- Consent is persisted in a cookie: `ml_consent_v2`.
+
+### Notes
+- Current behavior is conservative: default denied globally until a user chooses (simple + compliant, but reduces measurement outside EEA).
+- If you want EEA-only defaults (recommended for measurement), add region detection in the hosting layer (or via a CMP) and adjust defaults accordingly.
+
+### GTM configuration (required)
+In GTM:
+- Enable consent settings/overview.
+- Ensure GA4 tags require `analytics_storage=granted`.
+- Ensure ad-related tags require `ad_storage=granted` (and the v2 signals where applicable).
+- Validate in Tag Assistant that the consent state exists on first load and updates immediately after user action.
 
 ## Email Template System (Edge Functions)
 - Shared builders live in `supabase/functions/_shared/email/templates.ts`.

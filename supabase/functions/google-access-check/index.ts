@@ -366,7 +366,8 @@ Deno.serve(async (req: Request) => {
       };
     } else if (integrationType === "search_console") {
       const sites = await fetchJson("https://www.googleapis.com/webmasters/v3/sites", accessToken);
-      const siteList = Array.isArray(sites.json?.siteEntry) ? sites.json.siteEntry.slice(0, 20) : [];
+      const allSites = Array.isArray(sites.json?.siteEntry) ? sites.json.siteEntry : [];
+      const siteList = allSites.slice(0, 25);
       const hasDomainProperty = siteList.some((s: any) => s.siteUrl === "sc-domain:mango.law");
 
       result = {
@@ -374,9 +375,10 @@ Deno.serve(async (req: Request) => {
         sites: {
           ok: sites.ok,
           status: sites.status,
-          count: Array.isArray(sites.json?.siteEntry) ? sites.json.siteEntry.length : 0,
+          count: allSites.length,
           hasDomainProperty,
           sample: siteList,
+          all: allSites.slice(0, 200),
         },
       };
     } else if (integrationType === "tag_manager") {

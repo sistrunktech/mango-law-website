@@ -276,6 +276,12 @@ export default function AdminGuidePage() {
               <InfoBox type="warning">
                 If you picked the wrong signed-in Google user during OAuth, use Reconnect and sign in with the correct Google account, then re-run “Check status”.
               </InfoBox>
+              <InfoBox type="info">
+                If the Google consent screen shows a Supabase project URL (like <code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">https://&lt;project-id&gt;.supabase.co</code>), the connectors can still work — but for a more professional experience, set up a Supabase custom domain (example: <code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">api.mango.law</code>) and update the OAuth redirect URI.
+              </InfoBox>
+              <InfoBox type="info">
+                If something feels “stuck”, expand the <strong className="text-white">Debug payload</strong> on the Connections page to confirm what Google returned (accounts/properties/containers/sites) before changing settings.
+              </InfoBox>
             </Section>
 
             <Section

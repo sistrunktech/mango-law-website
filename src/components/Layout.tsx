@@ -7,13 +7,19 @@ import AccessibilityLauncher from './AccessibilityLauncher';
 import ScrollToTop from './ScrollToTop';
 import LeadCaptureModal, { type LeadSource } from './LeadCaptureModal';
 import { trackLeadModalOpen } from '../lib/analytics';
+import ConsentBanner from './ConsentBanner';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
+  const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(false);
 
-  const floatingBottomOffsetClass = location.pathname.startsWith('/resources/dui-checkpoints') ? 'bottom-24' : 'bottom-6';
+  const floatingBottomOffsetClass = (() => {
+    const base = location.pathname.startsWith('/resources/dui-checkpoints') ? 'bottom-24' : 'bottom-6';
+    if (!isConsentBannerVisible) return base;
+    return base === 'bottom-6' ? 'bottom-28' : 'bottom-36';
+  })();
 
   const openLeadModal = (trigger: LeadSource) => {
     setLeadModalTrigger(trigger);
@@ -35,6 +41,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         {children}
       </main>
       <Footer />
+
+      <ConsentBanner onVisibilityChange={setIsConsentBannerVisible} />
 
       <AccessibilityLauncher chatBottomOffsetClass={floatingBottomOffsetClass} />
       <ChatIntakeLauncher

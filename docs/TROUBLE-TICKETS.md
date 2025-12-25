@@ -21,6 +21,10 @@ This document tracks known issues and problems that require resolution.
 - GA4 conversions for “lead” should be based on the `lead_submitted` event (`lead_source`: `form|phone|email|chat`).
 - If forms fail, GA4 will not show form conversions even if other events fire correctly.
 
+### Consent Mode v2 (EEA)
+- If GA4 shows “consent signals inactive/missing for EEA users”, verify Consent Mode v2 is implemented and GTM is configured to respect consent.
+- Implementation notes + GTM checklist live in `docs/OPERATIONS.md` → “Consent Mode v2 (GTM / GA4)”.
+
 ### Admin / Google Connectors (Analytics, Search Console, GTM)
 - Use `/admin/connections` to connect Google tools and select the correct GA4 Property / Search Console property / GTM container.
 - If Analytics/GTM are not showing full account/resource lists or the selectors feel “stuck”, confirm:
@@ -890,6 +894,32 @@ In `/admin/connections`, the Analytics and/or Tag Manager selectors may not pres
    - GA4: ensure the Google user has at least **Viewer** access on the intended account/property.
    - GTM: ensure the Google user has at least **Read** access on the intended account/container.
 4. If the debug payload contains the expected resources but the UI can’t select/save them, capture the payload and open a code-level fix ticket.
+
+---
+
+## TICKET-027: GA4 Consent Settings — Consent Signals Missing (EEA)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-25  
+**Assigned To:** TBD
+
+### Issue Summary
+GA4 Admin → Consent settings reports “consent signals inactive / missing for EEA users”.
+
+### Required outcome
+Consent Mode v2 signals are present on first load, and update immediately after user choice, so GA4 recognizes consent pings.
+
+### Implementation notes
+- Consent Mode v2 (advanced mode) is implemented in `index.html` before GTM loads.
+- A small banner allows Accept/Reject/Customize and persists consent in a cookie (`ml_consent_v2`).
+- GTM must be configured to respect consent (GA4 tags require `analytics_storage=granted`; ad tags require `ad_storage=granted` where relevant).
+- See `docs/OPERATIONS.md` → “Consent Mode v2 (GTM / GA4)”.
+
+### Verification steps
+1. Tag Assistant: confirm consent defaults exist on first load.
+2. Click Accept/Reject: confirm consent updates on the same page (no refresh required).
+3. GA4 DebugView / Admin consent settings: confirm consent signals move to healthy over time.
 
 ---
 
