@@ -4,10 +4,10 @@ import { useAccessibility, type FontSize } from '../contexts/AccessibilityContex
 import { useFocusTrap } from '../lib/useFocusTrap';
 
 interface AccessibilityLauncherProps {
-  chatBottomOffsetClass?: string;
+  bottomOffsetClass?: string;
 }
 
-export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-6' }: AccessibilityLauncherProps) {
+export default function AccessibilityLauncher({ bottomOffsetClass = 'bottom-24 lg:bottom-6' }: AccessibilityLauncherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { preferences, updatePreference, resetPreferences } = useAccessibility();
@@ -16,7 +16,7 @@ export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-
   const panelRef = useRef<HTMLDivElement>(null);
   useFocusTrap(panelRef, isOpen, launcherButtonRef);
 
-  const bottomClass = chatBottomOffsetClass.includes('bottom-24') ? 'bottom-44' : 'bottom-24';
+  const bottomClass = bottomOffsetClass;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

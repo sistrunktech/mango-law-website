@@ -7,9 +7,14 @@ import { trackChatOpen, trackCtaClick, trackLeadSubmitted } from '../lib/analyti
 interface ChatIntakeLauncherProps {
   onOpenLeadModal: () => void;
   bottomOffsetClass?: string;
+  chooserBottomOffsetClass?: string;
 }
 
-export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass = 'bottom-6' }: ChatIntakeLauncherProps) {
+export default function ChatIntakeLauncher({
+  onOpenLeadModal,
+  bottomOffsetClass = 'bottom-6',
+  chooserBottomOffsetClass = 'bottom-20',
+}: ChatIntakeLauncherProps) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isChooserOpen, setIsChooserOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -91,7 +96,7 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
           <div
             className={[
               'fixed right-4 z-40 w-[min(320px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-2xl sm:right-6',
-              bottomOffsetClass.includes('bottom-24') ? 'bottom-40' : 'bottom-20',
+              chooserBottomOffsetClass,
             ].join(' ')}
             role="dialog"
             aria-label="Contact options"

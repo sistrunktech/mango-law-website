@@ -15,11 +15,18 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
   const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(false);
 
-  const floatingBottomOffsetClass = (() => {
-    const isCheckpoints = location.pathname.startsWith('/resources/dui-checkpoints');
-    if (isCheckpoints) return 'bottom-24';
-    if (isConsentBannerVisible) return 'bottom-24 lg:bottom-6';
-    return 'bottom-6';
+  const isCheckpoints = location.pathname.startsWith('/resources/dui-checkpoints');
+  const chatBottomOffsetClass = (() => {
+    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-36 lg:bottom-6' : 'bottom-24 lg:bottom-6';
+    return isConsentBannerVisible ? 'bottom-28 lg:bottom-6' : 'bottom-6';
+  })();
+  const chatChooserBottomOffsetClass = (() => {
+    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-52 lg:bottom-20' : 'bottom-40 lg:bottom-20';
+    return isConsentBannerVisible ? 'bottom-44 lg:bottom-20' : 'bottom-20';
+  })();
+  const accessibilityBottomOffsetClass = (() => {
+    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-52 lg:bottom-6' : 'bottom-44 lg:bottom-6';
+    return isConsentBannerVisible ? 'bottom-40 lg:bottom-6' : 'bottom-24 lg:bottom-6';
   })();
 
   const openLeadModal = (trigger: LeadSource) => {
@@ -45,10 +52,11 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <ConsentBanner onVisibilityChange={setIsConsentBannerVisible} />
 
-      <AccessibilityLauncher chatBottomOffsetClass={floatingBottomOffsetClass} />
+      <AccessibilityLauncher bottomOffsetClass={accessibilityBottomOffsetClass} />
       <ChatIntakeLauncher
         onOpenLeadModal={() => openLeadModal('floating_chooser')}
-        bottomOffsetClass={floatingBottomOffsetClass}
+        bottomOffsetClass={chatBottomOffsetClass}
+        chooserBottomOffsetClass={chatChooserBottomOffsetClass}
       />
 
       <LeadCaptureModal
