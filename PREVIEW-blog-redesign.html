@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Redesign Preview - "Editorial Calm"</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background: #FAF9F7;
+        }
+
+        /* Hero Image */
+        .hero {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 21/9;
+            background: #0A0A0A;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.6), transparent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #2F5F4F;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            color: #E8A33C;
+        }
+
+        /* Header */
+        .article-header {
+            max-width: 672px;
+            margin-top: 3rem;
+        }
+
+        .metadata {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-badge {
+            background: rgba(232, 163, 60, 0.1);
+            color: #B45309;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #0A0A0A;
+            margin-bottom: 1rem;
+        }
+
+        .excerpt {
+            font-size: 1.125rem;
+            color: #6B7280;
+        }
+
+        /* Two-column layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr 288px;
+            }
+        }
+
+        /* Main content */
+        .main-content {
+            max-width: 672px;
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-left: 4px solid;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .callout-disclaimer {
+            border-color: #E8A33C;
+            background: rgba(232, 163, 60, 0.05);
+        }
+
+        .callout-info {
+            border-color: #2F5F4F;
+            background: rgba(47, 95, 79, 0.05);
+        }
+
+        .callout strong {
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        .callout p {
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #374151;
+        }
+
+        /* Sources */
+        .sources {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .sources h2 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #0A0A0A;
+            margin-bottom: 1rem;
+        }
+
+        .sources ul {
+            list-style: none;
+        }
+
+        .sources li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sources a {
+            color: #2F5F4F;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .sources a:hover {
+            color: #E8A33C;
+            text-decoration: underline;
+        }
+
+        /* Article content */
+        .prose h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #0A0A0A;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .prose h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0A0A0A;
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .prose p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+
+        .prose ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .prose li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+
+        .prose a {
+            color: #2F5F4F;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .prose a:hover {
+            color: #E8A33C;
+            text-decoration: underline;
+        }
+
+        /* Author bio */
+        .author-bio {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .author-bio-content {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .author-bio img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-bio h3 {
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        .author-bio .credentials {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin: 0.25rem 0;
+        }
+
+        .author-bio .description {
+            font-size: 0.875rem;
+            color: #6B7280;
+            line-height: 1.6;
+        }
+
+        /* Sticky sidebar */
+        .sidebar {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .sidebar {
+                display: block;
+                position: sticky;
+                top: 6rem;
+            }
+        }
+
+        .cta-card {
+            background: #0A0A0A;
+            color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+
+        .cta-card h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-card p {
+            font-size: 0.875rem;
+            color: #9CA3AF;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #E8A33C;
+            color: #0A0A0A;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-button-primary:hover {
+            background: #D4922E;
+        }
+
+        .cta-button-secondary {
+            display: block;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+        }
+
+        .cta-button-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Visual indicator */
+        .preview-banner {
+            background: #2F5F4F;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preview Banner -->
+    <div class="preview-banner">
+        📝 PREVIEW: "Editorial Calm" Blog Post Redesign
+    </div>
+
+    <!-- Hero Image -->
+    <div class="hero">
+        <img src="data:image/svg+xml,%3Csvg width='1260' height='540' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1260' height='540' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='%23E8A33C' text-anchor='middle' dominant-baseline='middle'%3EHero Image (21:9 aspect ratio)%3C/text%3E%3C/svg%3E" alt="Hero image placeholder">
+        <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Back Button -->
+        <a href="#" class="back-button">
+            ← Back to all articles
+        </a>
+
+        <!-- Article Header -->
+        <header class="article-header">
+            <div class="metadata">
+                <span class="category-badge">OVI/DUI Defense</span>
+                <span>⏱ 12 min read</span>
+                <time>December 26, 2025</time>
+            </div>
+
+            <h1>Holiday OVI Enforcement in Ohio: What Drivers Should Expect</h1>
+
+            <p class="excerpt">
+                Ohio's holiday enforcement wave ramps up from mid-December through New Year's Day. Here's what's changing, what police are looking for, and what to do if a traffic stop turns into an OVI investigation.
+            </p>
+        </header>
+
+        <!-- Two-column Grid -->
+        <div class="content-grid">
+            <!-- Main Content Column -->
+            <div class="main-content">
+                <!-- Legal Disclaimer -->
+                <aside class="callout callout-disclaimer">
+                    <p><strong>Legal Disclaimer:</strong> This article is for educational purposes only and does not constitute legal advice. Criminal defense and personal injury law are complex and fact-specific. Always consult with a qualified Ohio attorney about your specific situation.</p>
+                </aside>
+
+                <!-- Sources -->
+                <aside class="sources">
+                    <h2>📄 Sources</h2>
+                    <p style="font-size: 0.75rem; color: #6B7280; margin-bottom: 1rem;">Visual summaries and timelines are simplified. Use these sources to confirm current law and details.</p>
+                    <ul>
+                        <li><a href="#" target="_blank">NHTSA Drive Sober or Get Pulled Over Campaign ↗</a> <span style="font-size: 0.625rem; color: #6B7280;">PRIMARY</span></li>
+                        <li><a href="#" target="_blank">Ohio Traffic Safety Office Grant Guidance ↗</a> <span style="font-size: 0.625rem; color: #6B7280;">PRIMARY</span></li>
+                        <li><a href="#" target="_blank">Ohio Revised Code § 4511.19 (OVI) ↗</a> <span style="font-size: 0.625rem; color: #6B7280;">PRIMARY</span></li>
+                    </ul>
+                </aside>
+
+                <!-- Article Content -->
+                <article class="prose">
+                    <h2>Why Enforcement Spikes During the Holidays</h2>
+                    <p>The short version: more drivers + more parties + worse road conditions = higher crash risk, and agencies plan around that reality.</p>
+
+                    <p>Local reporting around Ohio has been consistent on the same points:</p>
+                    <ul>
+                        <li>Holiday travel increases volume</li>
+                        <li>Winter weather adds a risk multiplier</li>
+                        <li>Alcohol and drug impairment are more common during holiday celebration windows</li>
+                        <li>Distracted driving increases with navigation, texting, and coordination</li>
+                    </ul>
+
+                    <h3>What Officers Look For</h3>
+                    <p>During holiday enforcement pushes, the "stop reasons" tend to be basic traffic issues that are easy to observe and easy to justify in a report.</p>
+
+                    <aside class="callout callout-info">
+                        <p><strong>⚠️ Impaired Driving Signs:</strong></p>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
+                            <li>Lane violations and weaving</li>
+                            <li>Rolling stops</li>
+                            <li>Wide turns</li>
+                            <li>Speed variance (too fast or unusually slow)</li>
+                        </ul>
+                    </aside>
+
+                    <h3>Color Discipline in Action</h3>
+                    <p>Notice how this design uses <strong>minimal brand colors</strong>. The mango accent (#E8A33C) appears only in the category badge and the CTA button. Body text is a comfortable gray (#374151) with excellent contrast. Links use the forest green (#2F5F4F) for authority and trust.</p>
+
+                    <h2>The "Editorial Calm" Difference</h2>
+                    <p>When every other DUI lawyer site screams with badges, sliders, and "CALL NOW" banners, Mango Law whispers with authority. The generous spacing, restrained color palette, and typography-forward layout communicate confidence and professionalism.</p>
+
+                    <p>Every element earns its visual weight. If it doesn't serve comprehension or conversion, it's not here.</p>
+                </article>
+
+                <!-- Author Bio -->
+                <footer class="author-bio">
+                    <div class="author-bio-content">
+                        <img src="data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='40' fill='%232F5F4F'/%3E%3Ctext x='50%25' y='50%25' font-size='32' fill='white' text-anchor='middle' dominant-baseline='middle'%3EDM%3C/text%3E%3C/svg%3E" alt="Dominic Mango">
+                        <div>
+                            <h3>Dominic Mango</h3>
+                            <p class="credentials">Ohio Bar Member · Criminal Defense Attorney</p>
+                            <p class="description">Dominic Mango is a criminal defense and personal injury attorney serving Delaware and Franklin Counties in Ohio. With extensive courtroom experience and a client-focused approach, Dominic has successfully defended hundreds of clients facing OVI/DUI, drug crimes, assault, weapons charges, and other serious criminal allegations.</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- Sticky Sidebar -->
+            <aside class="sidebar">
+                <div class="cta-card">
+                    <h2>Facing OVI charges?</h2>
+                    <p>Get a free, confidential case review from an experienced Ohio defense attorney.</p>
+                    <a href="tel:7406022155" class="cta-button-primary">
+                        📞 (740) 602-2155
+                    </a>
+                    <a href="#" class="cta-button-secondary">
+                        Request Free Consultation
+                    </a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
