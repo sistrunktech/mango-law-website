@@ -2,6 +2,12 @@
 
 ## 2025-12-26
 
+### Content Governance
+- Add content governance docs (rules, changelog template, protected content registry, agent guardrails).
+- Introduce blog lifecycle fields, version snapshots, change request table, triggers, and RLS protections (`supabase/migrations/20251226123000_content_governance_guardrails.sql`).
+- Update BlogManager with status badges, finalize action, proposal workflow, review UI, and approval-token enforcement.
+- Add CI guardrail to require `docs/CONTENT_CHANGELOG.md` entries when protected blog content changes (`scripts/check-protected-content.mjs` + CI step).
+
 ### Blog
 - Add mobile/tablet TOC using semantic `details` + `summary` and unify heading anchors for in-page navigation.
 - Convert the blog sidebar CTA to a neutral card with a mango accent border, and contain sidebar scroll with a sticky wrapper + max-height.

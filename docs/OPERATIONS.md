@@ -184,6 +184,16 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
   - If you *only* see one account/resource but you expect more, it’s usually permissions (the connected user doesn’t have access), or Google is returning a partial list; reconnect and try again.
   - Use the “debug payload” disclosure in the UI to confirm what Google returned before changing code.
 
+### Content Governance (Blog)
+- Blog posts have lifecycle states: `draft`, `published`, `finalized`.
+- Finalized posts are locked for non-privileged users; changes require an approval token.
+- Approval token format: `APPROVED: <slug> -- <what changed> -- <minor|major> -- <timestamp>`.
+- Admin edits capture change type/reason for version snapshots (`last_change_type`, `last_change_reason`).
+- Version snapshots are stored in `blog_post_versions`; proposals live in `blog_post_change_requests`.
+- All protected content changes must be logged in `docs/CONTENT_CHANGELOG.md`.
+- Protected content registry lives in `docs/PROTECTED_CONTENT.md`.
+- Current content sources: file-based (`src/data/blogPosts.ts`) + DB (`blog_posts`). Long term, migrate fully to DB-driven content.
+
 ### OAuth Branding (Avoid “project-id.supabase.co” on the Google consent screen)
 By default, Supabase-hosted OAuth redirects and Edge Functions use the Supabase project domain (e.g., `https://<project-id>.supabase.co/...`).
 Google may display that domain on the consent screen (unprofessional / untrusted).

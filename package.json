@@ -6,14 +6,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/check-filenames.mjs && node scripts/check-orc-references.mjs",
+    "prebuild": "node scripts/check-filenames.mjs && node scripts/check-orc-references.mjs && node scripts/check-protected-content.mjs",
     "build": "tsc --noEmit && vite build",
     "analyze": "tsc --noEmit && vite build --mode analyze",
     "postbuild": "node scripts/generate-sitemap.mjs",
     "test": "ts-node --esm --transpile-only test/checkpointStatus.test.ts && ts-node --esm --transpile-only test/emailTemplates.test.ts",
     "preview": "vite preview",
     "optimize:practice-images": "node scripts/optimize-practice-images.mjs",
-    "generate:image": "node scripts/generateImage.js"
+    "generate:image": "node scripts/generateImage.js",
+    "content:check": "node scripts/check-protected-content.mjs"
   },
   "dependencies": {
     "@fal-ai/client": "^1.7.2",

@@ -80,6 +80,10 @@ Commonly required values:
 
 - **Operations guide:** [`docs/OPERATIONS.md`](docs/OPERATIONS.md)
 - **Keyboard accessibility guide:** [`docs/KEYBOARD-ACCESSIBILITY-GUIDE.md`](docs/KEYBOARD-ACCESSIBILITY-GUIDE.md)
+- **Content governance:** [`docs/CONTENT_GOVERNANCE.md`](docs/CONTENT_GOVERNANCE.md)
+- **Protected content registry:** [`docs/PROTECTED_CONTENT.md`](docs/PROTECTED_CONTENT.md)
+- **Content change log:** [`docs/CONTENT_CHANGELOG.md`](docs/CONTENT_CHANGELOG.md)
+- **Agent guardrails:** [`docs/AGENT_GUARDRAILS.md`](docs/AGENT_GUARDRAILS.md)
 - **Changelog:** [`CHANGELOG.md`](CHANGELOG.md)
 - **Contributing:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
