@@ -1,14 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
 import {
-  Calendar, User, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp,
-  Shield, Gavel, FileText, Ban, AlertOctagon, DollarSign, Users,
-  Timer, CheckCircle, XCircle, Info, Briefcase, Home
+  Calendar, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp,
+  Shield, Gavel, FileText, Ban, DollarSign, Users,
+  Timer, CheckCircle, Briefcase, Home
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { blogPosts } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
-import AuthorBio from '../components/AuthorBio';
 import RelatedPosts from '../components/RelatedPosts';
 import { SEO } from '../lib/seo';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
@@ -21,6 +20,7 @@ import {
   StatCard,
   HighlightBox,
   ProgressBar,
+  StickyConsultCTA,
 } from '../components/blog';
 
 function estimateReadingTime(content: string): number {
@@ -64,153 +64,152 @@ export default function BlogPostPage() {
         image={post.imageUrl}
         type="article"
       />
-      <section className="bg-white py-12">
-        <div className="container max-w-4xl">
+      <section className="bg-brand-offWhite py-16">
+        <div className="container max-w-7xl">
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-sm font-medium text-brand-mango transition-colors hover:text-brand-leaf"
+            className="inline-flex items-center gap-2 text-sm font-medium text-brand-leaf transition-colors hover:text-brand-leafLight"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to all articles
           </Link>
 
-          <div className="mt-8">
-            <div className="inline-block rounded-full bg-brand-mango/10 px-4 py-1.5 text-sm font-semibold text-brand-mango">
-              {post.category}
-            </div>
-
-            <h1 className="mt-6 text-4xl font-bold text-brand-black md:text-5xl">
-              {post.title}
-            </h1>
-
-            <div className="mt-6 flex flex-wrap items-center gap-6 text-sm text-brand-black/60">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+          <header className="mt-12 max-w-2xl">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+              <span className="rounded-full bg-brand-mango/10 px-3 py-1 text-sm font-semibold text-brand-mangoText">
+                {post.category}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4" aria-hidden="true" />
+                {estimateReadingTime(post.content)} min read
+              </span>
+              <time dateTime={post.date} className="flex items-center gap-1.5">
+                <Calendar className="h-4 w-4" aria-hidden="true" />
                 {new Date(post.date).toLocaleDateString('en-US', {
                   month: 'long',
                   day: 'numeric',
                   year: 'numeric',
                 })}
-              </div>
-              <div className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                {post.author}
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4" />
-                {estimateReadingTime(post.content)} min read
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4" />
-                Last verified{' '}
-                {new Date(post.lastVerified).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
-              </div>
+              </time>
             </div>
-          </div>
 
-          {post.imageUrl && (
-            <div className="mt-8 overflow-hidden rounded-2xl bg-brand-offWhite shadow-lg">
-              <div className="relative aspect-[16/9] max-h-[500px]">
+            <h1 className="mt-6 text-4xl font-bold leading-tight text-brand-black md:text-5xl">
+              {post.title}
+            </h1>
+
+            <p className="mt-4 text-lg text-gray-600">
+              {post.excerpt}
+            </p>
+          </header>
+        </div>
+
+        {post.imageUrl && (
+          <div className="mt-12">
+            <div className="container max-w-7xl">
+              <figure className="relative w-full aspect-[21/9] overflow-hidden bg-brand-black">
                 <img
                   src={post.imageUrl}
-                  alt={post.title}
-                  width={1200}
-                  height={675}
+                  alt={`Editorial image for ${post.title}`}
+                  className="h-full w-full object-cover"
                   loading="eager"
-                  fetchPriority="high"
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  width={1260}
+                  height={540}
                 />
-              </div>
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-brand-black/60 via-transparent to-transparent"
+                  aria-hidden="true"
+                />
+              </figure>
             </div>
-          )}
-
-          <div className="rounded-lg border-l-4 border-brand-mango bg-brand-mango/5 p-4 text-sm text-brand-black/70">
-            <strong>Legal Disclaimer:</strong> This article is for educational purposes only and
-            does not constitute legal advice. Criminal defense and personal injury law are complex
-            and fact-specific. Always consult with a qualified Ohio attorney about your specific
-            situation.
           </div>
+        )}
 
-          {hasVisuals && (
-            <div className="mt-4 rounded-lg border-l-4 border-brand-leaf bg-brand-leaf/5 p-4 text-sm text-brand-black/70">
-              <strong>Visual note:</strong> Visual summaries are simplified; confirm any legal details and numbers in{' '}
-              <a
-                href="#sources"
-                className="font-semibold text-brand-mangoText underline-offset-2 hover:text-brand-leaf hover:underline"
-              >
-                Sources
-              </a>
-              . Last verified{' '}
-              {new Date(post.lastVerified).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-              .
-            </div>
-          )}
-
-          {post.sources.length > 0 && (
-            <div id="sources" className="mt-6 rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
-              <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
-                <FileText className="h-4 w-4 text-brand-mangoText" />
-                Sources
+        <div className="container max-w-7xl">
+          <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_288px]">
+            <div className="max-w-2xl">
+              <div className="rounded-lg border-l-4 border-gray-300 bg-white/70 p-4 text-sm text-gray-600">
+                <strong>Legal Disclaimer:</strong> This article is for educational purposes only and
+                does not constitute legal advice. Criminal defense and personal injury law are complex
+                and fact-specific. Always consult with a qualified Ohio attorney about your specific
+                situation.
               </div>
-              <p className="mt-2 text-xs text-brand-black/60">
-                Visual summaries and timelines are simplified. Use these sources to confirm current law and details.
-              </p>
-              <ul className="mt-3 space-y-2 text-sm text-brand-black/70">
-                {post.sources.map((source) => (
-                  <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                    <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-brand-mangoText underline-offset-2 hover:text-brand-leaf hover:underline"
-                    >
-                      {source.label}
-                    </a>
-                    {source.type && (
-                      <span className="rounded-full bg-brand-offWhite px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
-                        {source.type}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
 
-          <div className="prose prose-lg mt-8 max-w-none
-            prose-headings:font-bold prose-headings:text-brand-black
-            prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-3xl
-            prose-h3:mt-10 prose-h3:mb-3 prose-h3:text-2xl
-            prose-h4:mt-8 prose-h4:mb-2 prose-h4:text-xl
-            prose-p:mb-6 prose-p:mt-0 prose-p:leading-relaxed prose-p:text-brand-black/80
-            prose-a:font-medium prose-a:text-brand-mango prose-a:no-underline hover:prose-a:text-brand-leaf hover:prose-a:underline
-            prose-strong:font-semibold prose-strong:text-brand-black
-            prose-ul:my-6 prose-ul:space-y-3
-            prose-ol:my-6 prose-ol:space-y-3
-            prose-li:text-brand-black/80 prose-li:leading-relaxed
-            prose-blockquote:border-l-4 prose-blockquote:border-brand-mango prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-brand-black/70
-            prose-code:rounded prose-code:bg-brand-black/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm
-            prose-code:before:content-none prose-code:after:content-none
-            prose-pre:rounded-xl prose-pre:bg-brand-black/5 prose-pre:p-4
-            prose-hr:my-10 prose-hr:border-brand-black/10
-            prose-table:my-8
-            prose-img:rounded-xl prose-img:shadow-md">
-            {(() => {
-              const sections: JSX.Element[] = [];
-              const parts = post.content.split(/(\[VISUAL:\w+\])/g);
+              {hasVisuals && (
+                <div className="mt-4 rounded-lg border-l-4 border-brand-leaf/40 bg-brand-leaf/5 p-4 text-sm text-gray-600">
+                  <strong>Visual note:</strong> Visual summaries are simplified; confirm any legal details and numbers in{' '}
+                  <a
+                    href="#sources"
+                    className="font-semibold text-brand-leaf underline-offset-2 hover:text-brand-leafLight hover:underline"
+                  >
+                    Sources
+                  </a>
+                  . Last verified{' '}
+                  {new Date(post.lastVerified).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                  .
+                </div>
+              )}
 
-              parts.forEach((part, index) => {
-                if (part.match(/\[VISUAL:(\w+)\]/)) {
-                  const visualType = part.match(/\[VISUAL:(\w+)\]/)?.[1];
+              {post.sources.length > 0 && (
+                <div id="sources" className="mt-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-soft">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
+                    <FileText className="h-4 w-4 text-brand-leaf" />
+                    Sources
+                  </div>
+                  <p className="mt-2 text-xs text-gray-500">
+                    Visual summaries and timelines are simplified. Use these sources to confirm current law and details.
+                  </p>
+                  <ul className="mt-3 space-y-2 text-sm text-gray-700">
+                    {post.sources.map((source) => (
+                      <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium text-brand-leaf underline-offset-2 hover:text-brand-leafLight hover:underline"
+                        >
+                          {source.label}
+                        </a>
+                        {source.type && (
+                          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-600">
+                            {source.type}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="prose prose-lg mt-8 max-w-none
+                prose-headings:font-bold prose-headings:text-brand-black
+                prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-3xl
+                prose-h3:mt-10 prose-h3:mb-3 prose-h3:text-2xl
+                prose-h4:mt-8 prose-h4:mb-2 prose-h4:text-xl
+                prose-p:mb-6 prose-p:mt-0 prose-p:leading-relaxed prose-p:text-gray-700
+                prose-a:font-medium prose-a:text-brand-leaf prose-a:no-underline hover:prose-a:text-brand-leafLight hover:prose-a:underline
+                prose-strong:font-semibold prose-strong:text-brand-black
+                prose-ul:my-6 prose-ul:space-y-3
+                prose-ol:my-6 prose-ol:space-y-3
+                prose-li:text-gray-700 prose-li:leading-relaxed
+                prose-blockquote:border-l-4 prose-blockquote:border-brand-leaf/40 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600
+                prose-code:rounded prose-code:bg-brand-black/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm
+                prose-code:before:content-none prose-code:after:content-none
+                prose-pre:rounded-xl prose-pre:bg-brand-black/5 prose-pre:p-4
+                prose-hr:my-10 prose-hr:border-gray-200
+                prose-table:my-8
+                prose-img:rounded-xl prose-img:shadow-md">
+                {(() => {
+                  const sections: JSX.Element[] = [];
+                  const parts = post.content.split(/(\[VISUAL:\w+\])/g);
+
+                  parts.forEach((part, index) => {
+                    if (part.match(/\[VISUAL:(\w+)\]/)) {
+                      const visualType = part.match(/\[VISUAL:(\w+)\]/)?.[1];
 
                   // BAC Limits
                   if (visualType === 'BAC_LIMITS') {
@@ -1129,8 +1128,8 @@ export default function BlogPostPage() {
                   // Fallback for unknown visual types
                   else {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-6 rounded-lg border-2 border-brand-mango/20 bg-brand-mango/5 p-4">
-                        <p className="text-sm text-brand-black/70">
+                      <div key={`visual-${index}`} className="my-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
+                        <p className="text-sm text-gray-600">
                           <span className="font-semibold">Visual Component:</span> {visualType}
                         </p>
                       </div>
@@ -1152,97 +1151,126 @@ export default function BlogPostPage() {
                           <h3 className="mb-3 mt-10 font-display text-2xl font-bold text-brand-black" {...props} />
                         ),
                         h4: ({ node, ...props }) => (
-                          <h4 className="mb-2 mt-8 text-xl font-semibold text-brand-black" {...props} />
-                        ),
-                        h5: ({ node, ...props }) => (
-                          <h5 className="mb-2 mt-6 text-lg font-semibold text-brand-black" {...props} />
-                        ),
-                        h6: ({ node, ...props }) => (
-                          <h6 className="mb-2 mt-6 text-base font-semibold text-brand-black" {...props} />
-                        ),
-                        p: ({ node, ...props }) => (
-                          <p className="mb-6 mt-0 leading-relaxed text-brand-black/80" {...props} />
-                        ),
-                        a: ({ node, ...props }) => {
-                          const isExternal = props.href?.startsWith('http');
-                          const isInternal = props.href?.startsWith('/');
+                              <h4 className="mb-2 mt-8 text-xl font-semibold text-brand-black" {...props} />
+                            ),
+                            h5: ({ node, ...props }) => (
+                              <h5 className="mb-2 mt-6 text-lg font-semibold text-brand-black" {...props} />
+                            ),
+                            h6: ({ node, ...props }) => (
+                              <h6 className="mb-2 mt-6 text-base font-semibold text-brand-black" {...props} />
+                            ),
+                            p: ({ node, ...props }) => (
+                              <p className="mb-6 mt-0 leading-relaxed text-gray-700" {...props} />
+                            ),
+                            a: ({ node, ...props }) => {
+                              const isExternal = props.href?.startsWith('http');
+                              const isInternal = props.href?.startsWith('/');
 
-                          if (isInternal) {
-                            return (
-                              <Link
-                                to={props.href || '#'}
-                                className="font-medium text-brand-mango no-underline hover:text-brand-leaf hover:underline"
-                              >
-                                {props.children}
-                              </Link>
-                            );
-                          }
+                              if (isInternal) {
+                                return (
+                                  <Link
+                                    to={props.href || '#'}
+                                    className="font-medium text-brand-leaf no-underline hover:text-brand-leafLight hover:underline"
+                                  >
+                                    {props.children}
+                                  </Link>
+                                );
+                              }
 
-                          return (
-                            <a
-                              {...props}
-                              className="font-medium text-brand-mango no-underline hover:text-brand-leaf hover:underline"
-                              target={isExternal ? '_blank' : undefined}
-                              rel={isExternal ? 'noopener noreferrer' : undefined}
-                            />
-                          );
-                        },
-                        ul: ({ node, ...props }) => (
-                          <ul {...props} className="my-6 space-y-3" />
-                        ),
-                        li: ({ node, ...props }) => (
-                          <li className="flex items-start gap-3 leading-relaxed text-brand-black/80">
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-mango" />
-                            <span>{props.children}</span>
-                          </li>
-                        ),
-                        strong: ({ node, ...props }) => (
-                          <strong className="font-semibold text-brand-black" {...props} />
-                        ),
-                        blockquote: ({ node, ...props }) => (
-                          <blockquote className="my-6 border-l-4 border-brand-mango pl-6 italic text-brand-black/70" {...props} />
-                        ),
-                        table: ({ node, ...props }) => (
-                          <div className="my-12 overflow-x-auto rounded-lg border border-brand-black/10">
-                            <table className="w-full border-collapse text-sm" {...props} />
-                          </div>
-                        ),
-                        thead: ({ node, ...props }) => (
-                          <thead className="bg-brand-offWhite" {...props} />
-                        ),
-                        tbody: ({ node, ...props }) => (
-                          <tbody className="divide-y divide-brand-black/10" {...props} />
-                        ),
-                        tr: ({ node, ...props }) => (
-                          <tr className="border-b border-brand-black/10 last:border-0" {...props} />
-                        ),
-                        th: ({ node, ...props }) => (
-                          <th className="px-4 py-3 text-left font-semibold text-brand-black" {...props} />
-                        ),
-                        td: ({ node, ...props }) => (
-                          <td className="px-4 py-3 text-brand-black/80" {...props} />
-                        ),
-                      }}
-                    >
-                      {part}
-                    </ReactMarkdown>
-                  );
-                }
-              });
+                              return (
+                                <a
+                                  {...props}
+                                  className="font-medium text-brand-leaf no-underline hover:text-brand-leafLight hover:underline"
+                                  target={isExternal ? '_blank' : undefined}
+                                  rel={isExternal ? 'noopener noreferrer' : undefined}
+                                />
+                              );
+                            },
+                            ul: ({ node, ...props }) => (
+                              <ul {...props} className="my-6 space-y-3" />
+                            ),
+                            li: ({ node, ...props }) => (
+                              <li className="flex items-start gap-3 leading-relaxed text-gray-700">
+                                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-leaf" />
+                                <span>{props.children}</span>
+                              </li>
+                            ),
+                            strong: ({ node, ...props }) => (
+                              <strong className="font-semibold text-brand-black" {...props} />
+                            ),
+                            blockquote: ({ node, ...props }) => (
+                              <blockquote className="my-6 border-l-4 border-brand-leaf/40 pl-6 italic text-gray-600" {...props} />
+                            ),
+                            table: ({ node, ...props }) => (
+                              <div className="my-8 overflow-x-auto rounded-lg border border-gray-200">
+                                <table className="w-full border-collapse text-sm" {...props} />
+                              </div>
+                            ),
+                            thead: ({ node, ...props }) => (
+                              <thead className="bg-brand-offWhite" {...props} />
+                            ),
+                            tbody: ({ node, ...props }) => (
+                              <tbody className="divide-y divide-gray-200" {...props} />
+                            ),
+                            tr: ({ node, ...props }) => (
+                              <tr className="border-b border-gray-200 last:border-0" {...props} />
+                            ),
+                            th: ({ node, ...props }) => (
+                              <th className="px-4 py-3 text-left font-semibold text-brand-black" {...props} />
+                            ),
+                            td: ({ node, ...props }) => (
+                              <td className="px-4 py-3 text-gray-700" {...props} />
+                            ),
+                          }}
+                        >
+                          {part}
+                        </ReactMarkdown>
+                      );
+                    }
+                  });
 
-              return sections;
-            })()}
+                  return sections;
+                })()}
+              </div>
+
+              <footer className="mt-16 border-t border-gray-200 pt-8">
+                <div
+                  className="flex items-start gap-6"
+                  itemScope
+                  itemType="https://schema.org/Person"
+                >
+                  <img
+                    src="/images/nick_mango_profile_shot.jpg"
+                    alt="Dominic Mango, Ohio criminal defense attorney"
+                    itemProp="image"
+                    className="h-20 w-20 rounded-full object-cover"
+                    loading="lazy"
+                    width={80}
+                    height={80}
+                  />
+                  <div>
+                    <p className="font-semibold text-brand-black" itemProp="name">
+                      Dominic Mango
+                    </p>
+                    <p className="mb-2 text-sm text-gray-500">
+                      <span itemProp="credentials">Ohio Bar Member</span> · Criminal Defense Attorney
+                    </p>
+                    <p className="text-sm text-gray-600" itemProp="description">
+                      Dominic Mango is a criminal defense and personal injury attorney serving Delaware and Franklin Counties in Ohio. With extensive courtroom experience and a client-focused approach, Dominic has successfully defended hundreds of clients facing OVI/DUI, drug crimes, assault, weapons charges, and other serious criminal allegations.
+                    </p>
+                  </div>
+                </div>
+              </footer>
+
+              <div className="mt-16">
+                <RelatedPosts posts={getRelatedPosts(post.slug, post.category, 2)} />
+              </div>
+            </div>
+
+            <div className="hidden lg:block">
+              <StickyConsultCTA />
+            </div>
           </div>
-
-          <AuthorBio
-            name="Dominic Mango"
-            title="Criminal Defense Attorney"
-            credentials="Ohio Bar Member"
-            bio="Dominic Mango is a criminal defense and personal injury attorney serving Delaware and Franklin Counties in Ohio. With extensive courtroom experience and a client-focused approach, Dominic has successfully defended hundreds of clients facing OVI/DUI, drug crimes, assault, weapons charges, and other serious criminal allegations."
-            imageUrl="/images/nick_mango_profile_shot.jpg"
-          />
-
-          <RelatedPosts posts={getRelatedPosts(post.slug, post.category)} />
         </div>
       </section>
 

@@ -39,6 +39,10 @@
 ### SEO / Icons
 - Add `favicon.ico` to improve Google SERP icon rendering and legacy favicon detection.
 
+### Blog
+- Redesign blog post pages with an "Editorial Calm" layout: 21:9 hero, two-column grid with sticky consult CTA, refined highlight callouts, updated prose palette, structured author bio, and related posts limited to two.
+- Add blog image generation specs to `og/og-specs.ts`.
+
 ### Legal Pages
 - Replace Privacy Policy + Terms of Use stubs with full Mango Law copy and add form disclaimer about attorney-client relationship creation.
 
