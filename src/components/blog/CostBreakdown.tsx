@@ -14,9 +14,9 @@ interface CostBreakdownProps {
 
 export default function CostBreakdown({ title, items }: CostBreakdownProps) {
   return (
-    <div className="my-8 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
+    <div className="my-12 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
       {title && (
-        <div className="flex items-center gap-3 border-b border-brand-black/10 bg-gradient-to-r from-brand-mango/5 to-brand-gold/5 px-6 py-4">
+        <div className="flex items-center gap-3 border-b border-brand-black/10 bg-brand-offWhite px-6 py-4">
           <DollarSign className="h-5 w-5 text-brand-mango" />
           <h4 className="font-bold text-brand-black">{title}</h4>
         </div>

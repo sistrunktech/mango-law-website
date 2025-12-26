@@ -27,19 +27,19 @@ export default function HighlightBox({ children, variant = 'info', title }: High
     },
     warning: {
       icon: AlertCircle,
-      bg: 'bg-brand-gold/10',
-      border: 'border-brand-gold/30',
-      iconBg: 'bg-brand-gold/20',
+      bg: 'bg-brand-gold/5',
+      border: 'border-brand-gold/20',
+      iconBg: 'bg-brand-gold/10',
       iconColor: 'text-brand-goldText',
-      textColor: 'text-brand-black',
+      textColor: 'text-brand-black/80',
     },
     error: {
-      icon: XCircle,
-      bg: 'bg-red-50',
-      border: 'border-red-200',
-      iconBg: 'bg-red-100',
-      iconColor: 'text-red-700',
-      textColor: 'text-red-900',
+      icon: AlertCircle,
+      bg: 'bg-red-50/50',
+      border: 'border-red-100',
+      iconBg: 'bg-red-50',
+      iconColor: 'text-red-600',
+      textColor: 'text-brand-black/80',
     },
   };
 
@@ -47,7 +47,7 @@ export default function HighlightBox({ children, variant = 'info', title }: High
   const Icon = config.icon;
 
   return (
-    <div className={`my-6 rounded-xl border-2 ${config.border} ${config.bg} p-6`}>
+    <div className={`my-12 rounded-xl border ${config.border} ${config.bg} p-6`}>
       <div className="flex gap-4">
         <div className={`flex-shrink-0 rounded-lg ${config.iconBg} p-2`}>
           <Icon className={`h-6 w-6 ${config.iconColor}`} />

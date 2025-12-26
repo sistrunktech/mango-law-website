@@ -30,7 +30,7 @@ export default function ComparisonCard({
   };
 
   return (
-    <div className="my-8 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
+    <div className="my-12 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
       {title && (
         <div className="border-b border-brand-black/10 bg-brand-black/5 px-6 py-4">
           <h4 className="font-bold text-brand-black">{title}</h4>

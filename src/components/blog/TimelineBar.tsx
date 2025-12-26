@@ -20,7 +20,7 @@ export default function TimelineBar({ title, items }: TimelineBarProps) {
   };
 
   return (
-    <div className="my-8 rounded-xl border border-brand-black/10 bg-white p-6 shadow-soft">
+    <div className="my-12 rounded-xl border border-brand-black/10 bg-white p-6 shadow-soft">
       {title && (
         <h4 className="mb-6 font-bold text-brand-black">{title}</h4>
       )}

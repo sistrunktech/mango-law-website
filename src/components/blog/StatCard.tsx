@@ -18,13 +18,13 @@ export default function StatCard({
   description,
   trend
 }: StatCardProps) {
-  const colorClasses = {
-    mango: 'from-brand-mango/10 to-brand-mango/5 border-brand-mango/20 text-brand-mangoText',
-    gold: 'from-brand-gold/10 to-brand-gold/5 border-brand-gold/30 text-brand-goldText',
-    leaf: 'from-brand-leaf/10 to-brand-leaf/5 border-brand-leaf/20 text-brand-leaf',
-    forest: 'from-brand-forest/10 to-brand-forest/5 border-brand-forest/20 text-brand-forest',
-    red: 'from-red-50 to-red-25 border-red-200 text-red-700',
-    blue: 'from-blue-50 to-blue-25 border-blue-200 text-blue-700',
+  const borderColorClasses = {
+    mango: 'border-l-brand-mango',
+    gold: 'border-l-brand-gold',
+    leaf: 'border-l-brand-leaf',
+    forest: 'border-l-brand-forest',
+    red: 'border-l-red-500',
+    blue: 'border-l-blue-500',
   };
 
   const iconColorClasses = {
@@ -37,13 +37,13 @@ export default function StatCard({
   };
 
   return (
-    <div className={`rounded-xl border-2 bg-gradient-to-br p-6 ${colorClasses[color]}`}>
+    <div className={`rounded-xl border border-brand-black/10 border-l-4 ${borderColorClasses[color]} bg-white p-6 shadow-sm`}>
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <div className="text-5xl font-bold mb-2">{value}</div>
-          <div className="text-sm font-semibold uppercase tracking-wide opacity-80">{label}</div>
+          <div className="text-5xl font-bold text-brand-black mb-2">{value}</div>
+          <div className="text-sm font-semibold uppercase tracking-wide text-brand-black/60">{label}</div>
           {description && (
-            <p className="mt-2 text-sm opacity-70">{description}</p>
+            <p className="mt-2 text-sm text-brand-black/70">{description}</p>
           )}
           {trend && (
             <div className="mt-3">{trend}</div>

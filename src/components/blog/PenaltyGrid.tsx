@@ -22,7 +22,7 @@ export default function PenaltyGrid({ title, columns, rows, description }: Penal
   const descriptionId = `${tableId}-description`;
 
   return (
-    <div className="my-8 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
+    <div className="my-12 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
       {title && (
         <div className="border-b border-brand-black/10 bg-brand-black/5 px-6 py-4">
           <h4 id={captionId} className="font-bold text-brand-black">{title}</h4>
@@ -42,7 +42,7 @@ export default function PenaltyGrid({ title, columns, rows, description }: Penal
             <caption className="sr-only">Penalty information table</caption>
           )}
           <thead>
-            <tr className="border-b-2 border-brand-mango/20 bg-gradient-to-r from-brand-mango/5 to-brand-gold/5">
+            <tr className="border-b-2 border-brand-black/10 bg-brand-offWhite">
               {columns.map((col) => (
                 <th
                   key={col.key}

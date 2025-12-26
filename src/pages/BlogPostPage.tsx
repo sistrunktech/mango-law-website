@@ -215,7 +215,7 @@ export default function BlogPostPage() {
                   // BAC Limits
                   if (visualType === 'BAC_LIMITS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 flex flex-wrap gap-4">
+                      <div key={`visual-${index}`} className="my-12 flex flex-wrap gap-4">
                         <IconStat icon={Scale} value="0.08%" label="Standard Adult Limit" color="mango" />
                         <IconStat icon={AlertTriangle} value="0.17%" label="High-Test Threshold" color="red" />
                         <IconStat icon={Scale} value="0.02%" label="Under 21 Limit" color="gold" />
@@ -343,7 +343,7 @@ export default function BlogPostPage() {
                   // Motion Types
                   else if (visualType === 'MOTION_TYPES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={Ban} value="Suppress" label="Motion to Suppress Evidence" color="mango" description="Challenge illegally obtained evidence" />
                         <StatCard icon={Gavel} value="Dismiss" label="Motion to Dismiss" color="gold" description="Request charge dismissal" />
                         <StatCard icon={FileText} value="Limine" label="Motion in Limine" color="leaf" description="Exclude prejudicial evidence" />
@@ -397,7 +397,7 @@ export default function BlogPostPage() {
                   // Defense Strategies
                   else if (visualType === 'DEFENSE_STRATEGIES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <HighlightBox variant="info" title="Challenge the Evidence">
                           <p>Question search legality, chain of custody, and lab testing procedures</p>
                         </HighlightBox>
@@ -411,7 +411,7 @@ export default function BlogPostPage() {
                   // Diversion Options
                   else if (visualType === 'DIVERSION_OPTIONS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={Shield} value="ILC" label="Intervention in Lieu" color="leaf" description="Treatment instead of conviction" />
                         <StatCard icon={CheckCircle} value="Sealed" label="Record Sealing" color="gold" description="Clean record after completion" />
                         <StatCard icon={Users} value="Community" label="Community Control" color="mango" description="Supervised probation" />
@@ -422,7 +422,7 @@ export default function BlogPostPage() {
                   // White Collar Defense Strategies
                   else if (visualType === 'WHITE_COLLAR_DEFENSE_STRATEGIES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <HighlightBox variant="info" title="Documentation Review">
                           <p>Challenge financial records, audit procedures, and accounting interpretations</p>
                         </HighlightBox>
@@ -510,7 +510,7 @@ export default function BlogPostPage() {
                   // Refusal Stats
                   else if (visualType === 'REFUSAL_STATS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={AlertTriangle} value="Subjective" label="FST Results" color="red" description="Conditions and interpretation can matter a lot" />
                         <StatCard icon={Ban} value="Voluntary" label="FST Refusal" color="leaf" description="Generally no separate criminal charge for refusing" />
                         <StatCard icon={Timer} value="ALS" label="Chemical Refusal" color="gold" description="Can trigger an administrative license suspension" />
@@ -600,7 +600,7 @@ export default function BlogPostPage() {
                   // Lookback Scenarios
                   else if (visualType === 'LOOKBACK_SCENARIOS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 space-y-4">
+                      <div key={`visual-${index}`} className="my-12 space-y-4">
                         <HighlightBox variant="info" title="Scenario 1: Within 10-Year Window">
                           <p>2015 OVI + 2024 OVI = Counted as 2nd offense with enhanced penalties</p>
                         </HighlightBox>
@@ -630,7 +630,7 @@ export default function BlogPostPage() {
                   // Ex Parte Restrictions
                   else if (visualType === 'EX_PARTE_RESTRICTIONS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 space-y-3">
+                      <div key={`visual-${index}`} className="my-12 space-y-3">
                         <HighlightBox variant="warning" title="Common Ex Parte CPO Restrictions">
                           <ul className="list-disc pl-5 space-y-1">
                             <li>No contact with protected person (direct or indirect)</li>
@@ -646,7 +646,7 @@ export default function BlogPostPage() {
                   // CPO Misuse Scenarios
                   else if (visualType === 'CPO_MISUSE_SCENARIOS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <HighlightBox variant="error" title="Custody Disputes">
                           <p>False allegations filed to gain advantage in divorce or custody proceedings</p>
                         </HighlightBox>
@@ -660,24 +660,28 @@ export default function BlogPostPage() {
                   // CPO Dos and Don'ts
                   else if (visualType === 'CPO_DOS_DONTS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
-                        <HighlightBox variant="success" title="DO">
-                          <ul className="list-disc pl-5 space-y-1">
-                            <li>Read order carefully and comply fully</li>
-                            <li>Hire an attorney immediately</li>
-                            <li>Document all evidence</li>
-                            <li>Attend full hearing</li>
-                          </ul>
-                        </HighlightBox>
-                        <HighlightBox variant="error" title="DON'T">
-                          <ul className="list-disc pl-5 space-y-1">
-                            <li>Contact petitioner directly</li>
-                            <li>Go near protected locations</li>
-                            <li>Ignore court deadlines</li>
-                            <li>Violate any order provisions</li>
-                          </ul>
-                        </HighlightBox>
-                      </div>
+                      <HighlightBox key={`visual-${index}`} variant="info" title="Critical Actions When Served with a Protection Order">
+                        <div className="grid gap-6 md:grid-cols-2">
+                          <div>
+                            <h5 className="mb-3 font-semibold text-brand-black">What You Must Do:</h5>
+                            <ul className="list-disc pl-5 space-y-2 text-sm">
+                              <li>Read order carefully and comply fully</li>
+                              <li>Hire an attorney immediately</li>
+                              <li>Document all evidence</li>
+                              <li>Attend full hearing</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h5 className="mb-3 font-semibold text-brand-black">What You Must Never Do:</h5>
+                            <ul className="list-disc pl-5 space-y-2 text-sm">
+                              <li>Contact petitioner directly</li>
+                              <li>Go near protected locations</li>
+                              <li>Ignore court deadlines</li>
+                              <li>Violate any order provisions</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </HighlightBox>
                     );
                   }
 
@@ -720,7 +724,7 @@ export default function BlogPostPage() {
                   // Collateral Consequences
                   else if (visualType === 'COLLATERAL_CONSEQUENCES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={Home} value="Housing" label="Residence Restrictions" color="red" description="Limited where you can live" />
                         <StatCard icon={Briefcase} value="Employment" label="Job Limitations" color="gold" description="Many careers closed off" />
                         <StatCard icon={Users} value="Relationships" label="Social Stigma" color="mango" description="Public registry listing" />
@@ -731,7 +735,7 @@ export default function BlogPostPage() {
                   // Sex Crimes Defenses
                   else if (visualType === 'SEX_CRIMES_DEFENSES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <HighlightBox variant="info" title="Challenge Credibility">
                           <p>Examine inconsistencies in accuser's statements and timeline</p>
                         </HighlightBox>
@@ -745,7 +749,7 @@ export default function BlogPostPage() {
                   // Comparative Fault Examples
                   else if (visualType === 'COMPARATIVE_FAULT_EXAMPLES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 space-y-4">
+                      <div key={`visual-${index}`} className="my-12 space-y-4">
                         <HighlightBox variant="info" title="Example: 20% at Fault">
                           <p>$100,000 damages × 80% = $80,000 recovery</p>
                         </HighlightBox>
@@ -779,7 +783,7 @@ export default function BlogPostPage() {
                   // Damage Caps
                   else if (visualType === 'DAMAGE_CAPS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <StatCard icon={DollarSign} value="May apply" label="Non-Economic Cap" color="mango" description="Depends on injury type and case facts" />
                         <StatCard icon={AlertTriangle} value="Often uncapped" label="Economic Damages" color="leaf" description="Medical bills, lost wages, and other out-of-pocket losses" />
                       </div>
@@ -875,7 +879,7 @@ export default function BlogPostPage() {
                   // Checkpoint Hotspot Blog Visualizations
                   else if (visualType === 'HOTSPOT_FACTORS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <StatCard icon={TrendingUp} value="High" label="Traffic Volume" color="mango" description="Major highways and downtown corridors" />
                         <StatCard icon={Users} value="Entertainment" label="Districts" color="gold" description="Bars, restaurants, nightlife areas" />
                         <StatCard icon={Scale} value="Historical" label="DUI Data" color="leaf" description="Areas with recurring incidents" />
@@ -885,7 +889,7 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'CHECKPOINT_PATTERNS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 flex flex-wrap gap-4">
+                      <div key={`visual-${index}`} className="my-12 flex flex-wrap gap-4">
                         <IconStat icon={Clock} value="10PM-2AM" label="Peak Hours" color="mango" />
                         <IconStat icon={Calendar} value="Fri-Sat" label="Weekend Nights" color="gold" />
                         <IconStat icon={Home} value="I-70/71/75" label="Major Interstates" color="leaf" />
@@ -895,7 +899,7 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'REGIONAL_HOTSPOTS_MAP') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <StatCard value="Cleveland" label="Northeast Ohio" color="mango" description="W. 6th St, Detroit Ave, I-90/I-71 exits near entertainment districts" />
                         <StatCard value="Columbus" label="Central Ohio" color="gold" description="High St, Short North, OSU campus, I-70/I-71 interchanges" />
                         <StatCard value="Cincinnati" label="Southwest Ohio" color="leaf" description="Over-the-Rhine, downtown, I-75/I-71 convergence areas" />
@@ -939,7 +943,7 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'AVOIDANCE_STRATEGIES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={AlertTriangle} value="Plan" label="Ahead" color="mango" description="Check news, social media, and checkpoint maps before driving" />
                         <StatCard icon={Users} value="Alternate" label="Transportation" color="gold" description="Use designated drivers, rideshare, or public transit" />
                         <StatCard icon={Clock} value="Avoid" label="High-Risk Times" color="leaf" description="Weekend late nights (10PM-2AM) and holiday periods" />
@@ -984,7 +988,7 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'PHYSICAL_CONTROL_PENALTIES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <StatCard icon={Timer} value="180" label="Days Max Jail" color="red" description="First offense maximum" />
                         <StatCard icon={DollarSign} value="$1,000" label="Max Fine" color="gold" description="Plus court costs" />
                         <StatCard icon={Ban} value="6" label="License Points" color="mango" description="Added to driving record" />
@@ -994,24 +998,29 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'SAFE_ALTERNATIVES') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-3">
-                        <HighlightBox variant="success" title="Best Choice">
-                          <p>Arrange alternative transportation: rideshare, taxi, or designated driver</p>
-                        </HighlightBox>
-                        <HighlightBox variant="warning" title="If Staying with Car">
-                          <p>Keys in trunk, sit in back seat or passenger seat</p>
-                        </HighlightBox>
-                        <HighlightBox variant="info" title="Document Everything">
-                          <p>Your positioning and key placement can support a defense</p>
-                        </HighlightBox>
-                      </div>
+                      <HighlightBox key={`visual-${index}`} variant="info" title="Safer Options to Avoid Physical Control Charges">
+                        <div className="space-y-4">
+                          <div>
+                            <h5 className="mb-2 font-semibold text-brand-black">Best Option:</h5>
+                            <p className="text-sm">Arrange alternative transportation: rideshare, taxi, or designated driver</p>
+                          </div>
+                          <div>
+                            <h5 className="mb-2 font-semibold text-brand-black">If You Must Stay with Your Vehicle:</h5>
+                            <p className="text-sm">Place keys in trunk and sit in the back seat or passenger seat (not driver's seat)</p>
+                          </div>
+                          <div>
+                            <h5 className="mb-2 font-semibold text-brand-black">Important:</h5>
+                            <p className="text-sm">Your positioning and key placement can support a defense if challenged</p>
+                          </div>
+                        </div>
+                      </HighlightBox>
                     );
                   }
 
                   // Holiday Enforcement Visuals
                   else if (visualType === 'HOLIDAY_ENFORCEMENT_STATS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <StatCard icon={Calendar} value="Dec 12" label="Enforcement Starts" color="mango" description="Drive Sober campaign begins" />
                         <StatCard icon={Calendar} value="Jan 1" label="Enforcement Ends" color="gold" description="New Year's Day" />
                         <StatCard icon={Shield} value="Extra" label="Patrols" color="red" description="Grant-funded overtime" />
@@ -1040,7 +1049,7 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'HOLIDAY_OFFICER_FOCUS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <HighlightBox variant="error" title="Impaired Driving Signs">
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Lane violations and weaving</li>
@@ -1061,7 +1070,7 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'HOLIDAY_RIDE_PROGRAMS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <StatCard icon={Users} value="ArriveSafe" label="Montgomery County" color="mango" description="Uber voucher program during holidays" />
                         <StatCard icon={Users} value="Arrive Alive" label="Summit County" color="gold" description="Lyft codes for holiday season" />
                       </div>
@@ -1069,24 +1078,28 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'HOLIDAY_STOP_TIPS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 md:grid-cols-2">
-                        <HighlightBox variant="success" title="DO">
-                          <ul className="list-disc pl-5 space-y-1">
-                            <li>Signal early and pull over safely</li>
-                            <li>Keep hands visible</li>
-                            <li>Provide license, registration, insurance</li>
-                            <li>Stay calm and polite</li>
-                          </ul>
-                        </HighlightBox>
-                        <HighlightBox variant="error" title="DON'T">
-                          <ul className="list-disc pl-5 space-y-1">
-                            <li>Volunteer details about drinking</li>
-                            <li>Guess at amounts or times</li>
-                            <li>Argue with the officer</li>
-                            <li>Post about it on social media</li>
-                          </ul>
-                        </HighlightBox>
-                      </div>
+                      <HighlightBox key={`visual-${index}`} variant="info" title="If You're Pulled Over During Holiday Enforcement">
+                        <div className="grid gap-6 md:grid-cols-2">
+                          <div>
+                            <h5 className="mb-3 font-semibold text-brand-black">Best Practices:</h5>
+                            <ul className="list-disc pl-5 space-y-2 text-sm">
+                              <li>Signal early and pull over safely</li>
+                              <li>Keep hands visible</li>
+                              <li>Provide license, registration, insurance</li>
+                              <li>Stay calm and polite</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h5 className="mb-3 font-semibold text-brand-black">What to Avoid:</h5>
+                            <ul className="list-disc pl-5 space-y-2 text-sm">
+                              <li>Volunteer details about drinking</li>
+                              <li>Guess at amounts or times</li>
+                              <li>Argue with the officer</li>
+                              <li>Post about it on social media</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </HighlightBox>
                     );
                   }
                   else if (visualType === 'HOLIDAY_24HR_CHECKLIST') {
@@ -1105,7 +1118,7 @@ export default function BlogPostPage() {
                   }
                   else if (visualType === 'HOLIDAY_KEY_TAKEAWAYS') {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         <StatCard icon={Calendar} value="Dec 12-Jan 1" label="Enforcement Window" color="mango" description="Peak enforcement period" />
                         <StatCard icon={Shield} value="Saturation" label="Patrol Type" color="gold" description="Moving patrols, not just checkpoints" />
                         <StatCard icon={Users} value="Use Rides" label="Best Option" color="leaf" description="Free programs in some counties" />
@@ -1190,7 +1203,7 @@ export default function BlogPostPage() {
                           <blockquote className="my-6 border-l-4 border-brand-mango pl-6 italic text-brand-black/70" {...props} />
                         ),
                         table: ({ node, ...props }) => (
-                          <div className="my-8 overflow-x-auto rounded-lg border border-brand-black/10">
+                          <div className="my-12 overflow-x-auto rounded-lg border border-brand-black/10">
                             <table className="w-full border-collapse text-sm" {...props} />
                           </div>
                         ),
