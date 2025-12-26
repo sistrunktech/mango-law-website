@@ -1,5 +1,13 @@
 # Changelog
 
+## 2025-12-26
+
+### Blog
+- Add mobile/tablet TOC using semantic `details` + `summary` and unify heading anchors for in-page navigation.
+- Convert the blog sidebar CTA to a neutral card with a mango accent border, and contain sidebar scroll with a sticky wrapper + max-height.
+- Add responsive PenaltyGrid cards on mobile while keeping the table layout on desktop.
+- Standardize StatCard/IconStat sizing for consistent card radius, shadows, and safer text sizing.
+
 ## 2025-12-25
 
 ### Trust & Compliance

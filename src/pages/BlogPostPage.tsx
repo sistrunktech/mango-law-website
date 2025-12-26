@@ -1,8 +1,9 @@
+import { Children, isValidElement, type ReactNode } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   Calendar, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp,
   Shield, Gavel, FileText, Ban, DollarSign, Users,
-  Timer, CheckCircle, Briefcase, Home, MapPin, BookOpen, Newspaper
+  Timer, CheckCircle, Briefcase, Home, MapPin, BookOpen, Newspaper, List
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -35,6 +36,30 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3) {
     .slice(0, limit);
 }
 
+function slugifyHeading(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .slice(0, 50);
+}
+
+function getHeadingText(children: ReactNode): string {
+  return Children.toArray(children)
+    .map((child) => {
+      if (typeof child === 'string' || typeof child === 'number') return String(child);
+      if (isValidElement(child) && child.props?.children) {
+        return getHeadingText(child.props.children as ReactNode);
+      }
+      return '';
+    })
+    .join('');
+}
+
+function getHeadingId(children: ReactNode): string {
+  return slugifyHeading(getHeadingText(children));
+}
+
 function extractTOCItems(content: string): { id: string; title: string; level: number }[] {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const items: { id: string; title: string; level: number }[] = [];
@@ -43,11 +68,7 @@ function extractTOCItems(content: string): { id: string; title: string; level: n
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[1].length;
     const title = match[2].trim();
-    const id = title
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .slice(0, 50);
+    const id = slugifyHeading(title);
     items.push({ id, title, level });
   }
 
@@ -75,6 +96,15 @@ export default function BlogPostPage() {
 
   const hasVisuals = post.content.includes('[VISUAL:');
   const tocItems = extractTOCItems(post.content);
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -142,6 +172,32 @@ export default function BlogPostPage() {
                 />
               </figure>
             </div>
+          </div>
+        )}
+
+        {tocItems.length > 0 && (
+          <div className="container mt-8 max-w-7xl lg:hidden">
+            <details className="rounded-lg border border-gray-200 bg-white p-4">
+              <summary className="flex cursor-pointer items-center gap-2 text-sm font-semibold text-brand-black">
+                <List className="h-4 w-4 text-brand-leaf" aria-hidden="true" />
+                In this article
+              </summary>
+              <ul className="mt-3 space-y-2 text-sm text-gray-700">
+                {tocItems.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection(item.id)}
+                      className={`block w-full text-left transition-colors hover:text-brand-leaf ${
+                        item.level === 2 ? 'font-medium text-brand-black/80' : 'pl-3 text-brand-black/60'
+                      }`}
+                    >
+                      {item.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </details>
           </div>
         )}
 
@@ -1198,27 +1254,47 @@ export default function BlogPostPage() {
                       remarkPlugins={[remarkGfm]}
                       components={{
                         h1: ({ node, ...props }) => (
-                          <h1 className="mb-6 mt-12 font-display text-4xl font-bold text-brand-black" {...props} />
+                          <h1
+                            id={getHeadingId(props.children)}
+                            className="mb-6 mt-12 scroll-mt-28 font-display text-4xl font-bold text-brand-black"
+                            {...props}
+                          />
                         ),
-                        h2: ({ node, children, ...props }) => {
-                          const text = String(children || '');
-                          const id = text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').slice(0, 50);
-                          return <h2 id={id} className="mb-4 mt-12 font-display text-3xl font-bold text-brand-black" {...props}>{children}</h2>;
-                        },
-                        h3: ({ node, children, ...props }) => {
-                          const text = String(children || '');
-                          const id = text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').slice(0, 50);
-                          return <h3 id={id} className="mb-3 mt-10 font-display text-2xl font-bold text-brand-black" {...props}>{children}</h3>;
-                        },
+                        h2: ({ node, ...props }) => (
+                          <h2
+                            id={getHeadingId(props.children)}
+                            className="mb-4 mt-12 scroll-mt-28 font-display text-3xl font-bold text-brand-black"
+                            {...props}
+                          />
+                        ),
+                        h3: ({ node, ...props }) => (
+                          <h3
+                            id={getHeadingId(props.children)}
+                            className="mb-3 mt-10 scroll-mt-28 font-display text-2xl font-bold text-brand-black"
+                            {...props}
+                          />
+                        ),
                         h4: ({ node, ...props }) => (
-                              <h4 className="mb-2 mt-8 text-xl font-semibold text-brand-black" {...props} />
-                            ),
-                            h5: ({ node, ...props }) => (
-                              <h5 className="mb-2 mt-6 text-lg font-semibold text-brand-black" {...props} />
-                            ),
-                            h6: ({ node, ...props }) => (
-                              <h6 className="mb-2 mt-6 text-base font-semibold text-brand-black" {...props} />
-                            ),
+                          <h4
+                            id={getHeadingId(props.children)}
+                            className="mb-2 mt-8 scroll-mt-28 text-xl font-semibold text-brand-black"
+                            {...props}
+                          />
+                        ),
+                        h5: ({ node, ...props }) => (
+                          <h5
+                            id={getHeadingId(props.children)}
+                            className="mb-2 mt-6 scroll-mt-28 text-lg font-semibold text-brand-black"
+                            {...props}
+                          />
+                        ),
+                        h6: ({ node, ...props }) => (
+                          <h6
+                            id={getHeadingId(props.children)}
+                            className="mb-2 mt-6 scroll-mt-28 text-base font-semibold text-brand-black"
+                            {...props}
+                          />
+                        ),
                             p: ({ node, ...props }) => (
                               <p className="mb-6 mt-0 leading-relaxed text-gray-700" {...props} />
                             ),
@@ -1327,8 +1403,10 @@ export default function BlogPostPage() {
               </div>
             </div>
 
-            <div className="hidden lg:block">
-              <StickyConsultCTA tocItems={tocItems} />
+            <div className="hidden lg:block lg:self-start">
+              <div className="sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto pb-6 pr-2">
+                <StickyConsultCTA tocItems={tocItems} />
+              </div>
             </div>
           </div>
         </div>
