@@ -4,16 +4,15 @@ interface IconStatProps {
   icon: LucideIcon;
   value: string | number;
   label: string;
-  color?: 'mango' | 'gold' | 'leaf' | 'red' | 'blue';
+  color?: 'neutral' | 'mango' | 'leaf' | 'red';
 }
 
-export default function IconStat({ icon: Icon, value, label, color = 'mango' }: IconStatProps) {
+export default function IconStat({ icon: Icon, value, label, color = 'neutral' }: IconStatProps) {
   const colorClasses = {
+    neutral: 'bg-gray-100 text-gray-600',
     mango: 'bg-brand-mango/10 text-brand-mangoText',
-    gold: 'bg-brand-gold/20 text-brand-goldText',
     leaf: 'bg-brand-leaf/10 text-brand-leaf',
-    red: 'bg-red-100 text-red-700',
-    blue: 'bg-blue-100 text-blue-700',
+    red: 'bg-red-50 text-red-600',
   };
 
   return (

@@ -1417,10 +1417,7 @@ Between family get-togethers, work parties, winter weather, and late-night drivi
 
 This post covers what's actually happening during the 2025 holiday season, what officers are focused on, and what to do if a routine stop starts turning into an OVI investigation.
 
-**Quick links**
-- Mango Law's [DUI Checkpoint Map](/resources/dui-checkpoints) (updated when new checkpoint info is available)
-- Our deep guide to [OVI and DUI charges in Ohio](/blog/understanding-ovi-dui-charges-ohio) (penalties, license suspensions, court process)
-- A local, high-profile example: [OSU coach Kevin McGuff and physical control charges](/blog/physical-control-parked-car-ohio-kevin-mcguff)
+[VISUAL:QUICK_LINKS]
 
 > **Important**: This article is general information, not legal advice. If you are facing an OVI, the details matter. Evidence, timelines, and the exact charge level can change outcomes.
 
@@ -1449,8 +1446,6 @@ That combination is exactly why the national enforcement push exists, and why Oh
 ## What is happening right now: the 2025 holiday enforcement window
 
 There are three overlapping layers to understand: national, statewide, and local.
-
-[VISUAL:HOLIDAY_ENFORCEMENT_STATS]
 
 ### 1) National enforcement: Drive Sober or Get Pulled Over (Dec 12 through Jan 1)
 NHTSA's Drive Sober or Get Pulled Over campaign runs **December 12 through January 1** for the winter holiday season. The message is not subtle, and the point is deterrence: more patrols, more stops, more impaired-driving enforcement.
@@ -1570,6 +1565,8 @@ Every case is different, but the early phases are predictable:
 6. **Resolution** (plea, dismissal, or trial)
 
 If you want the detailed version, including license suspension mechanics and typical penalties, use our full guide: [Understanding OVI and DUI charges in Ohio](/blog/understanding-ovi-dui-charges-ohio).
+
+[VISUAL:MID_ARTICLE_CTA]
 
 ## A 24-hour checklist if you are charged during the holidays
 

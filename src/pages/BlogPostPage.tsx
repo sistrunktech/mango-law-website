@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import {
   Calendar, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp,
   Shield, Gavel, FileText, Ban, DollarSign, Users,
-  Timer, CheckCircle, Briefcase, Home
+  Timer, CheckCircle, Briefcase, Home, MapPin, BookOpen, Newspaper
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -35,6 +35,25 @@ function getRelatedPosts(currentSlug: string, category: string, limit = 3) {
     .slice(0, limit);
 }
 
+function extractTOCItems(content: string): { id: string; title: string; level: number }[] {
+  const headingRegex = /^(#{2,3})\s+(.+)$/gm;
+  const items: { id: string; title: string; level: number }[] = [];
+  let match;
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    const title = match[2].trim();
+    const id = title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .slice(0, 50);
+    items.push({ id, title, level });
+  }
+
+  return items;
+}
+
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -55,6 +74,7 @@ export default function BlogPostPage() {
   }
 
   const hasVisuals = post.content.includes('[VISUAL:');
+  const tocItems = extractTOCItems(post.content);
 
   return (
     <>
@@ -217,8 +237,8 @@ export default function BlogPostPage() {
                       <div key={`visual-${index}`} className="my-12 flex flex-wrap gap-4">
                         <IconStat icon={Scale} value="0.08%" label="Standard Adult Limit" color="mango" />
                         <IconStat icon={AlertTriangle} value="0.17%" label="High-Test Threshold" color="red" />
-                        <IconStat icon={Scale} value="0.02%" label="Under 21 Limit" color="gold" />
-                        <IconStat icon={Scale} value="0.04%" label="Commercial Driver" color="blue" />
+                        <IconStat icon={Scale} value="0.02%" label="Under 21 Limit" color="mango" />
+                        <IconStat icon={Scale} value="0.04%" label="Commercial Driver" color="neutral" />
                       </div>
                     );
                   } else if (visualType === 'HB37_COMPARISON') {
@@ -344,7 +364,7 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={Ban} value="Suppress" label="Motion to Suppress Evidence" color="mango" description="Challenge illegally obtained evidence" />
-                        <StatCard icon={Gavel} value="Dismiss" label="Motion to Dismiss" color="gold" description="Request charge dismissal" />
+                        <StatCard icon={Gavel} value="Dismiss" label="Motion to Dismiss" color="neutral" description="Request charge dismissal" />
                         <StatCard icon={FileText} value="Limine" label="Motion in Limine" color="leaf" description="Exclude prejudicial evidence" />
                       </div>
                     );
@@ -412,7 +432,7 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={Shield} value="ILC" label="Intervention in Lieu" color="leaf" description="Treatment instead of conviction" />
-                        <StatCard icon={CheckCircle} value="Sealed" label="Record Sealing" color="gold" description="Clean record after completion" />
+                        <StatCard icon={CheckCircle} value="Sealed" label="Record Sealing" color="leaf" description="Clean record after completion" />
                         <StatCard icon={Users} value="Community" label="Community Control" color="mango" description="Supervised probation" />
                       </div>
                     );
@@ -512,7 +532,7 @@ export default function BlogPostPage() {
                       <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={AlertTriangle} value="Subjective" label="FST Results" color="red" description="Conditions and interpretation can matter a lot" />
                         <StatCard icon={Ban} value="Voluntary" label="FST Refusal" color="leaf" description="Generally no separate criminal charge for refusing" />
-                        <StatCard icon={Timer} value="ALS" label="Chemical Refusal" color="gold" description="Can trigger an administrative license suspension" />
+                        <StatCard icon={Timer} value="ALS" label="Chemical Refusal" color="red" description="Can trigger an administrative license suspension" />
                       </div>
                     );
                   }
@@ -725,7 +745,7 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={Home} value="Housing" label="Residence Restrictions" color="red" description="Limited where you can live" />
-                        <StatCard icon={Briefcase} value="Employment" label="Job Limitations" color="gold" description="Many careers closed off" />
+                        <StatCard icon={Briefcase} value="Employment" label="Job Limitations" color="red" description="Many careers closed off" />
                         <StatCard icon={Users} value="Relationships" label="Social Stigma" color="mango" description="Public registry listing" />
                       </div>
                     );
@@ -880,9 +900,9 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <StatCard icon={TrendingUp} value="High" label="Traffic Volume" color="mango" description="Major highways and downtown corridors" />
-                        <StatCard icon={Users} value="Entertainment" label="Districts" color="gold" description="Bars, restaurants, nightlife areas" />
-                        <StatCard icon={Scale} value="Historical" label="DUI Data" color="leaf" description="Areas with recurring incidents" />
-                        <StatCard icon={Calendar} value="Event-Based" label="Targeting" color="blue" description="Sports, concerts, holidays" />
+                        <StatCard icon={Users} value="Entertainment" label="Districts" color="neutral" description="Bars, restaurants, nightlife areas" />
+                        <StatCard icon={Scale} value="Historical" label="DUI Data" color="neutral" description="Areas with recurring incidents" />
+                        <StatCard icon={Calendar} value="Event-Based" label="Targeting" color="neutral" description="Sports, concerts, holidays" />
                       </div>
                     );
                   }
@@ -890,9 +910,9 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 flex flex-wrap gap-4">
                         <IconStat icon={Clock} value="10PM-2AM" label="Peak Hours" color="mango" />
-                        <IconStat icon={Calendar} value="Fri-Sat" label="Weekend Nights" color="gold" />
-                        <IconStat icon={Home} value="I-70/71/75" label="Major Interstates" color="leaf" />
-                        <IconStat icon={Users} value="College Towns" label="University Areas" color="blue" />
+                        <IconStat icon={Calendar} value="Fri-Sat" label="Weekend Nights" color="neutral" />
+                        <IconStat icon={Home} value="I-70/71/75" label="Major Interstates" color="neutral" />
+                        <IconStat icon={Users} value="College Towns" label="University Areas" color="neutral" />
                       </div>
                     );
                   }
@@ -900,9 +920,9 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
                         <StatCard value="Cleveland" label="Northeast Ohio" color="mango" description="W. 6th St, Detroit Ave, I-90/I-71 exits near entertainment districts" />
-                        <StatCard value="Columbus" label="Central Ohio" color="gold" description="High St, Short North, OSU campus, I-70/I-71 interchanges" />
-                        <StatCard value="Cincinnati" label="Southwest Ohio" color="leaf" description="Over-the-Rhine, downtown, I-75/I-71 convergence areas" />
-                        <StatCard value="Akron/Canton" label="Northeast Corridor" color="blue" description="SR-8, downtown areas, I-77 interchanges" />
+                        <StatCard value="Columbus" label="Central Ohio" color="mango" description="High St, Short North, OSU campus, I-70/I-71 interchanges" />
+                        <StatCard value="Cincinnati" label="Southwest Ohio" color="mango" description="Over-the-Rhine, downtown, I-75/I-71 convergence areas" />
+                        <StatCard value="Akron/Canton" label="Northeast Corridor" color="mango" description="SR-8, downtown areas, I-77 interchanges" />
                       </div>
                     );
                   }
@@ -944,7 +964,7 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-3">
                         <StatCard icon={AlertTriangle} value="Plan" label="Ahead" color="mango" description="Check news, social media, and checkpoint maps before driving" />
-                        <StatCard icon={Users} value="Alternate" label="Transportation" color="gold" description="Use designated drivers, rideshare, or public transit" />
+                        <StatCard icon={Users} value="Alternate" label="Transportation" color="leaf" description="Use designated drivers, rideshare, or public transit" />
                         <StatCard icon={Clock} value="Avoid" label="High-Risk Times" color="leaf" description="Weekend late nights (10PM-2AM) and holiday periods" />
                       </div>
                     );
@@ -989,9 +1009,9 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <StatCard icon={Timer} value="180" label="Days Max Jail" color="red" description="First offense maximum" />
-                        <StatCard icon={DollarSign} value="$1,000" label="Max Fine" color="gold" description="Plus court costs" />
+                        <StatCard icon={DollarSign} value="$1,000" label="Max Fine" color="red" description="Plus court costs" />
                         <StatCard icon={Ban} value="6" label="License Points" color="mango" description="Added to driving record" />
-                        <StatCard icon={AlertTriangle} value="Possible" label="Suspension" color="blue" description="License may be suspended" />
+                        <StatCard icon={AlertTriangle} value="Possible" label="Suspension" color="red" description="License may be suspended" />
                       </div>
                     );
                   }
@@ -1017,16 +1037,6 @@ export default function BlogPostPage() {
                   }
 
                   // Holiday Enforcement Visuals
-                  else if (visualType === 'HOLIDAY_ENFORCEMENT_STATS') {
-                    sections.push(
-                      <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <StatCard icon={Calendar} value="Dec 12" label="Enforcement Starts" color="mango" description="Drive Sober campaign begins" />
-                        <StatCard icon={Calendar} value="Jan 1" label="Enforcement Ends" color="gold" description="New Year's Day" />
-                        <StatCard icon={Shield} value="Extra" label="Patrols" color="red" description="Grant-funded overtime" />
-                        <StatCard icon={AlertTriangle} value="Saturation" label="Enforcement" color="blue" description="Not just checkpoints" />
-                      </div>
-                    );
-                  }
                   else if (visualType === 'HOLIDAY_ENFORCEMENT_TABLE') {
                     sections.push(
                       <PenaltyGrid
@@ -1070,8 +1080,8 @@ export default function BlogPostPage() {
                   else if (visualType === 'HOLIDAY_RIDE_PROGRAMS') {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 md:grid-cols-2">
-                        <StatCard icon={Users} value="ArriveSafe" label="Montgomery County" color="mango" description="Uber voucher program during holidays" />
-                        <StatCard icon={Users} value="Arrive Alive" label="Summit County" color="gold" description="Lyft codes for holiday season" />
+                        <StatCard icon={Users} value="ArriveSafe" label="Montgomery County" color="leaf" description="Uber voucher program during holidays" />
+                        <StatCard icon={Users} value="Arrive Alive" label="Summit County" color="leaf" description="Lyft codes for holiday season" />
                       </div>
                     );
                   }
@@ -1119,9 +1129,55 @@ export default function BlogPostPage() {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         <StatCard icon={Calendar} value="Dec 12-Jan 1" label="Enforcement Window" color="mango" description="Peak enforcement period" />
-                        <StatCard icon={Shield} value="Saturation" label="Patrol Type" color="gold" description="Moving patrols, not just checkpoints" />
+                        <StatCard icon={Shield} value="Saturation" label="Patrol Type" color="neutral" description="Moving patrols, not just checkpoints" />
                         <StatCard icon={Users} value="Use Rides" label="Best Option" color="leaf" description="Free programs in some counties" />
                       </div>
+                    );
+                  }
+                  else if (visualType === 'QUICK_LINKS') {
+                    sections.push(
+                      <nav key={`visual-${index}`} className="my-6 flex flex-wrap gap-2" aria-label="Related resources">
+                        <Link
+                          to="/resources/dui-checkpoints"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-brand-black/10 bg-white px-3 py-1.5 text-sm font-medium text-brand-black/80 transition-colors hover:border-brand-mango hover:text-brand-mangoText"
+                        >
+                          <MapPin className="h-3.5 w-3.5" />
+                          Checkpoint Map
+                        </Link>
+                        <Link
+                          to="/blog/understanding-ovi-dui-charges-ohio"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-brand-black/10 bg-white px-3 py-1.5 text-sm font-medium text-brand-black/80 transition-colors hover:border-brand-mango hover:text-brand-mangoText"
+                        >
+                          <BookOpen className="h-3.5 w-3.5" />
+                          OVI Guide
+                        </Link>
+                        <Link
+                          to="/blog/physical-control-parked-car-ohio-kevin-mcguff"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-brand-black/10 bg-white px-3 py-1.5 text-sm font-medium text-brand-black/80 transition-colors hover:border-brand-mango hover:text-brand-mangoText"
+                        >
+                          <Newspaper className="h-3.5 w-3.5" />
+                          McGuff Case
+                        </Link>
+                      </nav>
+                    );
+                  }
+                  else if (visualType === 'MID_ARTICLE_CTA') {
+                    sections.push(
+                      <aside
+                        key={`visual-${index}`}
+                        className="my-10 rounded-xl border border-brand-black/10 bg-brand-offWhite p-6"
+                        aria-label="Consultation call to action"
+                      >
+                        <p className="mb-4 text-base text-brand-black/80">
+                          Charged with an OVI in Delaware or Franklin County? Get advice before your first court date.
+                        </p>
+                        <Link
+                          to="/contact"
+                          className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/90"
+                        >
+                          Request Free Consultation
+                        </Link>
+                      </aside>
                     );
                   }
 
@@ -1144,12 +1200,16 @@ export default function BlogPostPage() {
                         h1: ({ node, ...props }) => (
                           <h1 className="mb-6 mt-12 font-display text-4xl font-bold text-brand-black" {...props} />
                         ),
-                        h2: ({ node, ...props }) => (
-                          <h2 className="mb-4 mt-12 font-display text-3xl font-bold text-brand-black" {...props} />
-                        ),
-                        h3: ({ node, ...props }) => (
-                          <h3 className="mb-3 mt-10 font-display text-2xl font-bold text-brand-black" {...props} />
-                        ),
+                        h2: ({ node, children, ...props }) => {
+                          const text = String(children || '');
+                          const id = text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').slice(0, 50);
+                          return <h2 id={id} className="mb-4 mt-12 font-display text-3xl font-bold text-brand-black" {...props}>{children}</h2>;
+                        },
+                        h3: ({ node, children, ...props }) => {
+                          const text = String(children || '');
+                          const id = text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').slice(0, 50);
+                          return <h3 id={id} className="mb-3 mt-10 font-display text-2xl font-bold text-brand-black" {...props}>{children}</h3>;
+                        },
                         h4: ({ node, ...props }) => (
                               <h4 className="mb-2 mt-8 text-xl font-semibold text-brand-black" {...props} />
                             ),
@@ -1268,7 +1328,7 @@ export default function BlogPostPage() {
             </div>
 
             <div className="hidden lg:block">
-              <StickyConsultCTA />
+              <StickyConsultCTA tocItems={tocItems} />
             </div>
           </div>
         </div>
