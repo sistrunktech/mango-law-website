@@ -192,6 +192,7 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
 - Version snapshots are stored in `blog_post_versions`; proposals live in `blog_post_change_requests`.
 - All protected content changes must be logged in `docs/CONTENT_CHANGELOG.md`.
 - Protected content registry lives in `docs/PROTECTED_CONTENT.md`.
+- Consolidated blog rules live in `docs/BLOG_REQUIREMENTS.md` (word count, ORC links, visuals, trust metadata).
 - Current content sources: file-based (`src/data/blogPosts.ts`) + DB (`blog_posts`). Long term, migrate fully to DB-driven content.
 
 ### OAuth Branding (Avoid “project-id.supabase.co” on the Google consent screen)

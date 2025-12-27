@@ -7,3 +7,4 @@
 - Avoid direct pushes to `main` unless urgent hotfixes; keep history clean and use small, reviewable PRs.
 - Content governance: do **not** edit finalized content without an approval token; always update `docs/CONTENT_CHANGELOG.md` for protected content changes.
 - Content governance: explicitly call out SEO/asset regressions (removed links, images, headings, meta/schema changes).
+- Blog requirements: review `docs/BLOG_REQUIREMENTS.md` before editing blog content or visuals.
