@@ -95,6 +95,7 @@ export default function BlogPostPage() {
   }
 
   const hasVisuals = post.content.includes('[VISUAL:');
+  const hasMidCta = post.content.includes('[VISUAL:MID_ARTICLE_CTA]');
   const tocItems = extractTOCItems(post.content);
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -105,6 +106,23 @@ export default function BlogPostPage() {
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
+  const midCta = (
+    <aside
+      key="auto-mid-cta"
+      className="my-10 rounded-xl border border-brand-black/10 border-l-4 border-brand-mango bg-brand-offWhite p-6"
+      aria-label="Consultation call to action"
+    >
+      <p className="mb-3 text-sm text-brand-black/80">
+        Need clarity before your next court date? Talk with a defense attorney about your options.
+      </p>
+      <Link
+        to="/contact"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2 text-xs font-semibold text-brand-black transition-colors hover:bg-brand-mango/90"
+      >
+        Request Free Consultation
+      </Link>
+    </aside>
+  );
 
   return (
     <>
@@ -124,32 +142,10 @@ export default function BlogPostPage() {
             Back to all articles
           </Link>
 
-          <header className="mt-12 max-w-2xl">
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
-              <span className="rounded-full bg-brand-mango/10 px-3 py-1 text-sm font-semibold text-brand-mangoText">
-                {post.category}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4" aria-hidden="true" />
-                {estimateReadingTime(post.content)} min read
-              </span>
-              <time dateTime={post.date} className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" aria-hidden="true" />
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
-              </time>
-            </div>
-
-            <h1 className="mt-6 text-4xl font-bold leading-tight text-brand-black md:text-5xl">
+          <header className="mt-10 max-w-3xl">
+            <h1 className="text-4xl font-bold leading-tight text-brand-black md:text-5xl">
               {post.title}
             </h1>
-
-            <p className="mt-4 text-lg text-gray-600">
-              {post.excerpt}
-            </p>
           </header>
         </div>
 
@@ -204,7 +200,13 @@ export default function BlogPostPage() {
         <div className="container max-w-7xl">
           <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_288px]">
             <div className="max-w-2xl">
-              <div className="rounded-lg border-l-4 border-gray-300 bg-white/70 p-4 text-sm text-gray-600">
+              {post.excerpt && (
+                <p className="mb-6 text-base text-gray-600">
+                  {post.excerpt}
+                </p>
+              )}
+
+              <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-5 text-sm text-brand-black/70">
                 <strong>Legal Disclaimer:</strong> This article is for educational purposes only and
                 does not constitute legal advice. Criminal defense and personal injury law are complex
                 and fact-specific. Always consult with a qualified Ohio attorney about your specific
@@ -212,7 +214,7 @@ export default function BlogPostPage() {
               </div>
 
               {hasVisuals && (
-                <div className="mt-4 rounded-lg border-l-4 border-brand-leaf/40 bg-brand-leaf/5 p-4 text-sm text-gray-600">
+                <div className="mt-4 rounded-xl border border-brand-black/10 border-l-4 border-brand-leaf/50 bg-brand-offWhite p-5 text-sm text-brand-black/70">
                   <strong>Visual note:</strong> Visual summaries are simplified; confirm any legal details and numbers in{' '}
                   <a
                     href="#sources"
@@ -231,7 +233,7 @@ export default function BlogPostPage() {
               )}
 
               {post.sources.length > 0 && (
-                <div id="sources" className="mt-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-soft">
+                <div id="sources" className="mt-6 rounded-xl border border-brand-black/10 bg-brand-offWhite p-5 shadow-sm">
                   <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
                     <FileText className="h-4 w-4 text-brand-leaf" />
                     Sources
@@ -251,7 +253,7 @@ export default function BlogPostPage() {
                           {source.label}
                         </a>
                         {source.type && (
-                          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-600">
+                          <span className="rounded-full bg-brand-black/5 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
                             {source.type}
                           </span>
                         )}
@@ -282,6 +284,8 @@ export default function BlogPostPage() {
                 {(() => {
                   const sections: JSX.Element[] = [];
                   const parts = post.content.split(/(\[VISUAL:\w+\])/g);
+                  let insertedMidCta = false;
+                  let markdownBlocks = 0;
 
                   parts.forEach((part, index) => {
                     if (part.match(/\[VISUAL:(\w+)\]/)) {
@@ -988,7 +992,7 @@ export default function BlogPostPage() {
                         key={`visual-${index}`}
                         title="DUI Checkpoint Process"
                         items={[
-                          { label: 'Approach Checkpoint', duration: 'Slow down, follow officer instructions', color: 'blue', width: '25%' },
+                          { label: 'Approach Checkpoint', duration: 'Slow down, follow officer instructions', color: 'leaf', width: '25%' },
                           { label: 'Initial Screening', duration: 'Provide license, brief questions', color: 'gold', width: '50%' },
                           { label: 'Secondary Screening (if needed)', duration: 'Field sobriety tests, further questioning', color: 'mango', width: '75%' },
                           { label: 'Arrest or Release', duration: 'Citation issued or free to go', color: 'leaf', width: '100%' }
@@ -1221,15 +1225,15 @@ export default function BlogPostPage() {
                     sections.push(
                       <aside
                         key={`visual-${index}`}
-                        className="my-10 rounded-xl border border-brand-black/10 bg-brand-offWhite p-6"
+                        className="my-10 rounded-xl border border-brand-black/10 border-l-4 border-brand-mango bg-brand-offWhite p-6"
                         aria-label="Consultation call to action"
                       >
-                        <p className="mb-4 text-base text-brand-black/80">
+                        <p className="mb-3 text-sm text-brand-black/80">
                           Charged with an OVI in Delaware or Franklin County? Get advice before your first court date.
                         </p>
                         <Link
                           to="/contact"
-                          className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/90"
+                          className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2 text-xs font-semibold text-brand-black transition-colors hover:bg-brand-mango/90"
                         >
                           Request Free Consultation
                         </Link>
@@ -1240,8 +1244,8 @@ export default function BlogPostPage() {
                   // Fallback for unknown visual types
                   else {
                     sections.push(
-                      <div key={`visual-${index}`} className="my-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
-                        <p className="text-sm text-gray-600">
+                      <div key={`visual-${index}`} className="my-6 rounded-lg border border-brand-black/10 bg-brand-offWhite p-4">
+                        <p className="text-sm text-brand-black/70">
                           <span className="font-semibold">Visual Component:</span> {visualType}
                         </p>
                       </div>
@@ -1338,7 +1342,7 @@ export default function BlogPostPage() {
                               <blockquote className="my-6 border-l-4 border-brand-leaf/40 pl-6 italic text-gray-600" {...props} />
                             ),
                             table: ({ node, ...props }) => (
-                              <div className="my-8 overflow-x-auto rounded-lg border border-gray-200">
+                              <div className="my-8 overflow-x-auto rounded-lg border border-brand-black/10 bg-brand-offWhite">
                                 <table className="w-full border-collapse text-sm" {...props} />
                               </div>
                             ),
@@ -1346,10 +1350,10 @@ export default function BlogPostPage() {
                               <thead className="bg-brand-offWhite" {...props} />
                             ),
                             tbody: ({ node, ...props }) => (
-                              <tbody className="divide-y divide-gray-200" {...props} />
+                              <tbody className="divide-y divide-brand-black/10" {...props} />
                             ),
                             tr: ({ node, ...props }) => (
-                              <tr className="border-b border-gray-200 last:border-0" {...props} />
+                              <tr className="border-b border-brand-black/10 last:border-0" {...props} />
                             ),
                             th: ({ node, ...props }) => (
                               <th className="px-4 py-3 text-left font-semibold text-brand-black" {...props} />
@@ -1362,6 +1366,13 @@ export default function BlogPostPage() {
                           {part}
                         </ReactMarkdown>
                       );
+                    }
+                    if (!hasMidCta) {
+                      markdownBlocks += 1;
+                      if (!insertedMidCta && markdownBlocks === 2 && post.content.length > 800) {
+                        sections.push(midCta);
+                        insertedMidCta = true;
+                      }
                     }
                   });
 

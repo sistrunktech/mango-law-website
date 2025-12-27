@@ -1,6 +1,6 @@
-import { Phone, List } from 'lucide-react';
+import { List } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../../lib/contactInfo';
+import { OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 
 interface TOCItem {
   id: string;
@@ -26,7 +26,7 @@ export default function StickyConsultCTA({ tocItems }: StickyConsultCTAProps) {
   return (
     <aside className="space-y-6" aria-labelledby="sidebar-cta-heading">
       {tocItems && tocItems.length > 0 && (
-        <nav className="rounded-lg border border-brand-black/10 bg-white p-5" aria-label="Table of contents">
+        <nav className="rounded-lg border border-brand-black/10 bg-brand-offWhite p-5" aria-label="Table of contents">
           <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-brand-black">
             <List className="h-4 w-4 text-brand-leaf" />
             In this article
@@ -49,23 +49,16 @@ export default function StickyConsultCTA({ tocItems }: StickyConsultCTAProps) {
         </nav>
       )}
 
-      <div className="rounded-lg border border-brand-black/10 border-l-4 border-brand-mango bg-white p-6 text-brand-black">
+      <div className="rounded-lg border border-brand-black/10 border-l-4 border-brand-mango bg-brand-offWhite p-6 text-brand-black">
         <h2 id="sidebar-cta-heading" className="mb-2 text-base font-semibold">
           Facing OVI charges?
         </h2>
-        <p className="mb-5 text-sm text-brand-black/70">
-          Get a free case review from an experienced Ohio defense attorney.
+        <p className="mb-4 text-sm text-brand-black/70">
+          Get a free case review from an experienced Ohio defense attorney. Call/text {OFFICE_PHONE_DISPLAY} if timing is urgent.
         </p>
-        <a
-          href={`tel:${OFFICE_PHONE_TEL}`}
-          className="mb-3 flex items-center justify-center gap-2 rounded bg-brand-mango px-5 py-2.5 text-sm font-semibold text-brand-black transition hover:bg-brand-mango/90 focus:outline-none focus:ring-2 focus:ring-brand-mango focus:ring-offset-2 focus:ring-offset-white"
-        >
-          <Phone className="h-4 w-4" aria-hidden="true" />
-          <span>{OFFICE_PHONE_DISPLAY}</span>
-        </a>
         <Link
           to="/contact"
-          className="block rounded border border-brand-black/20 px-5 py-2.5 text-center text-sm text-brand-black transition hover:border-brand-black/40 hover:bg-brand-black/5 focus:outline-none focus:ring-2 focus:ring-brand-black/50 focus:ring-offset-2 focus:ring-offset-white"
+          className="inline-flex items-center justify-center rounded bg-brand-mango px-4 py-2 text-xs font-semibold text-brand-black transition hover:bg-brand-mango/90 focus:outline-none focus:ring-2 focus:ring-brand-mango/40"
         >
           Request Free Consultation
         </Link>

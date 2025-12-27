@@ -13,14 +13,14 @@ interface TimelineBarProps {
 export default function TimelineBar({ title, items }: TimelineBarProps) {
   const colorClasses = {
     mango: 'bg-brand-mango',
-    gold: 'bg-brand-gold',
+    gold: 'bg-brand-mango',
     red: 'bg-red-500',
-    blue: 'bg-blue-500',
+    blue: 'bg-brand-leaf',
     leaf: 'bg-brand-leaf',
   };
 
   return (
-    <div className="my-12 rounded-xl border border-brand-black/10 bg-white p-6 shadow-soft">
+    <div className="my-12 rounded-xl border border-brand-black/10 bg-brand-offWhite p-6 shadow-sm">
       {title && (
         <h4 className="mb-6 font-bold text-brand-black">{title}</h4>
       )}
@@ -28,8 +28,8 @@ export default function TimelineBar({ title, items }: TimelineBarProps) {
         {items.map((item, index) => (
           <div key={index}>
             <div className="mb-2 flex items-center justify-between text-sm">
-              <span className="font-semibold text-brand-black">{item.label}</span>
-              <span className="font-bold text-brand-mango">{item.duration}</span>
+              <span className="text-xs font-semibold text-brand-black/70">{item.label}</span>
+              <span className="text-sm font-bold text-brand-mango">{item.duration}</span>
             </div>
             <div className="h-3 overflow-hidden rounded-full bg-brand-black/5">
               <div

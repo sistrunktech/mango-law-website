@@ -24,7 +24,7 @@ export default function PenaltyGrid({ title, columns, rows, description }: Penal
   const secondaryColumns = columns.slice(1);
 
   return (
-    <div className="my-12 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
+    <div className="my-12 overflow-hidden rounded-xl border border-brand-black/10 bg-brand-offWhite shadow-sm">
       {title && (
         <div className="border-b border-brand-black/10 bg-brand-black/5 px-6 py-4">
           <h4 id={captionId} className="font-bold text-brand-black">{title}</h4>
@@ -46,7 +46,7 @@ export default function PenaltyGrid({ title, columns, rows, description }: Penal
               return (
                 <div
                   key={rowId}
-                  className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+                  className="rounded-lg border border-brand-black/10 bg-brand-offWhite p-4 shadow-sm"
                 >
                   <div className="text-sm font-semibold text-brand-black">
                     {primaryValue || '\u2014'}
@@ -84,7 +84,7 @@ export default function PenaltyGrid({ title, columns, rows, description }: Penal
               <caption className="sr-only">Penalty information table</caption>
             )}
             <thead>
-              <tr className="border-b-2 border-brand-black/10 bg-brand-offWhite">
+              <tr className="border-b border-brand-black/10 bg-brand-offWhite">
                 {columns.map((col) => (
                   <th
                     key={col.key}
