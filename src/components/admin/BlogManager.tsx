@@ -123,11 +123,11 @@ export default function BlogManager() {
   };
 
   const extractContentStats = (content: string) => {
-    const internalLinks = (content.match(/\[[^\]]+\]\((\\/[^)]+)\)/g) || []).length;
-    const externalLinks = (content.match(/\[[^\]]+\]\((https?:\\/\\/[^)]+)\)/g) || []).length;
-    const images = (content.match(/!\\[[^\\]]*\\]\\(([^)]+)\\)/g) || []).length + (content.match(/<img\\s/gi) || []).length;
-    const visuals = (content.match(/\\[VISUAL:[^\\]]+\\]/g) || []).length;
-    const headings = (content.match(/^#{1,6}\\s+/gm) || []).length;
+    const internalLinks = (content.match(/\[[^\]]+\]\((\/[^)]+)\)/g) || []).length;
+    const externalLinks = (content.match(/\[[^\]]+\]\((https?:\/\/[^)]+)\)/g) || []).length;
+    const images = (content.match(/!\[[^\]]*\]\(([^)]+)\)/g) || []).length + (content.match(/<img\s/gi) || []).length;
+    const visuals = (content.match(/\[VISUAL:[^\]]+\]/g) || []).length;
+    const headings = (content.match(/^#{1,6}\s+/gm) || []).length;
     return { internalLinks, externalLinks, images, visuals, headings };
   };
 
