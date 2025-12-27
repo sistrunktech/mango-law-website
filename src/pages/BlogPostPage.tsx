@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import {
   Calendar, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp,
   Shield, Gavel, FileText, Ban, DollarSign, Users,
-  Timer, CheckCircle, Briefcase, Home, MapPin, BookOpen, Newspaper, List
+  Timer, CheckCircle, Briefcase, Home, List
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -1195,31 +1195,7 @@ export default function BlogPostPage() {
                     );
                   }
                   else if (visualType === 'QUICK_LINKS') {
-                    sections.push(
-                      <nav key={`visual-${index}`} className="my-6 flex flex-wrap gap-2" aria-label="Related resources">
-                        <Link
-                          to="/resources/dui-checkpoints"
-                          className="inline-flex items-center gap-1.5 rounded-full border border-brand-black/10 bg-white px-3 py-1.5 text-sm font-medium text-brand-black/80 transition-colors hover:border-brand-mango hover:text-brand-mangoText"
-                        >
-                          <MapPin className="h-3.5 w-3.5" />
-                          Checkpoint Map
-                        </Link>
-                        <Link
-                          to="/blog/understanding-ovi-dui-charges-ohio"
-                          className="inline-flex items-center gap-1.5 rounded-full border border-brand-black/10 bg-white px-3 py-1.5 text-sm font-medium text-brand-black/80 transition-colors hover:border-brand-mango hover:text-brand-mangoText"
-                        >
-                          <BookOpen className="h-3.5 w-3.5" />
-                          OVI Guide
-                        </Link>
-                        <Link
-                          to="/blog/physical-control-parked-car-ohio-kevin-mcguff"
-                          className="inline-flex items-center gap-1.5 rounded-full border border-brand-black/10 bg-white px-3 py-1.5 text-sm font-medium text-brand-black/80 transition-colors hover:border-brand-mango hover:text-brand-mangoText"
-                        >
-                          <Newspaper className="h-3.5 w-3.5" />
-                          McGuff Case
-                        </Link>
-                      </nav>
-                    );
+                    // Intentional no-op: replaced by TOC navigation in the layout.
                   }
                   else if (visualType === 'MID_ARTICLE_CTA') {
                     sections.push(
@@ -1415,7 +1391,7 @@ export default function BlogPostPage() {
             </div>
 
             <div className="hidden lg:block lg:self-start">
-              <div className="sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto pb-6 pr-2">
+              <div className="sticky top-24">
                 <StickyConsultCTA tocItems={tocItems} />
               </div>
             </div>
