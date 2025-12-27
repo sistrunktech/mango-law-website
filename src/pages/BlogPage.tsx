@@ -213,8 +213,8 @@ export default function BlogPage() {
               )}
             </div>
 
-            <div className="lg:col-span-1">
-              <div className="lg:sticky lg:top-8">
+            <div className="hidden lg:block lg:col-span-1">
+              <div className="lg:sticky lg:top-8 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:pr-2 lg:pb-6">
                 <BlogSidebar />
               </div>
             </div>

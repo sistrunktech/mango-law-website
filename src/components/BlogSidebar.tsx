@@ -38,7 +38,7 @@ export default function BlogSidebar() {
         <p className="mb-4 text-sm text-brand-black/70">
           Get a free consultation about your case. We're here to help protect your rights.
         </p>
-        <ContactForm />
+        <ContactForm variant="compact" />
       </div>
 
       <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-6">

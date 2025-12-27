@@ -7,17 +7,24 @@ import TurnstileWidget from './TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
 
-const inputClasses = [
-  'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
-  'placeholder:text-brand-black/40',
-  'transition-all duration-200',
-  'focus:border-brand-teal focus-visible:ring-2 focus-visible:ring-brand-teal/20',
-  'hover:border-brand-black/20',
-].join(' ');
+interface ContactFormProps {
+  variant?: 'default' | 'compact';
+}
 
-const labelClasses = 'block text-sm font-semibold text-brand-black';
+export default function ContactForm({ variant = 'default' }: ContactFormProps) {
+  const isCompact = variant === 'compact';
+  const inputClasses = [
+    'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white text-brand-black',
+    isCompact ? 'px-3 py-2.5 text-sm' : 'px-4 py-3',
+    'placeholder:text-brand-black/40',
+    'transition-all duration-200',
+    'focus:border-brand-teal focus-visible:ring-2 focus-visible:ring-brand-teal/20',
+    'hover:border-brand-black/20',
+  ].join(' ');
+  const labelClasses = isCompact
+    ? 'block text-xs font-semibold text-brand-black'
+    : 'block text-sm font-semibold text-brand-black';
 
-export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
@@ -107,17 +114,21 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
-      <div className="rounded-xl border border-brand-black/10 bg-white/70 p-4">
-        <p className="text-sm font-semibold text-brand-black">Free, confidential consultation. No obligation.</p>
-        <p className="mt-1 text-xs text-brand-black/60">
+    <form className={isCompact ? 'space-y-4' : 'space-y-5'} onSubmit={handleSubmit}>
+      <div className={`rounded-xl border border-brand-black/10 bg-white/70 ${isCompact ? 'p-3' : 'p-4'}`}>
+        <p className={`font-semibold text-brand-black ${isCompact ? 'text-xs' : 'text-sm'}`}>
+          Free, confidential consultation. No obligation.
+        </p>
+        <p className={`mt-1 text-brand-black/60 ${isCompact ? 'text-[11px]' : 'text-xs'}`}>
           Share only what you’re comfortable sharing — we’ll respond promptly with next steps.
         </p>
       </div>
 
-      <fieldset className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
-        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Your Info</legend>
-        <div className="mt-3 grid gap-5 sm:grid-cols-2">
+      <fieldset className={`border border-brand-black/10 bg-white shadow-sm ${isCompact ? 'rounded-xl p-4' : 'rounded-2xl p-5'}`}>
+        <legend className={`px-2 font-bold uppercase text-brand-goldText ${isCompact ? 'text-[10px] tracking-[0.16em]' : 'text-xs tracking-[0.18em]'}`}>
+          Your Info
+        </legend>
+        <div className={`mt-3 grid ${isCompact ? 'gap-4' : 'gap-5 sm:grid-cols-2'}`}>
           <div>
             <label htmlFor="name" className={labelClasses}>
               Full Name <span className="text-brand-mango">*</span>
@@ -178,7 +189,7 @@ export default function ContactForm() {
         </div>
 
         {(howFound === 'referral' || howFound === 'other') ? (
-          <div className="mt-5">
+          <div className={isCompact ? 'mt-4' : 'mt-5'}>
             <label htmlFor="how_found_detail" className={labelClasses}>
               {howFound === 'referral' ? 'Who can we thank?' : 'Quick note'} <span className="text-brand-mango">*</span>
             </label>
@@ -193,10 +204,12 @@ export default function ContactForm() {
         ) : null}
       </fieldset>
 
-      <fieldset className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
-        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Your Situation</legend>
+      <fieldset className={`border border-brand-black/10 bg-white shadow-sm ${isCompact ? 'rounded-xl p-4' : 'rounded-2xl p-5'}`}>
+        <legend className={`px-2 font-bold uppercase text-brand-goldText ${isCompact ? 'text-[10px] tracking-[0.16em]' : 'text-xs tracking-[0.18em]'}`}>
+          Your Situation
+        </legend>
         <div className="mt-3">
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className={`grid ${isCompact ? 'gap-4' : 'gap-5 sm:grid-cols-2'}`}>
             <div>
               <label htmlFor="case_type" className={labelClasses}>
                 What do you need help with? <span className="text-brand-mango">*</span>
@@ -271,7 +284,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'submitting' || (turnstileSiteKey ? !turnstileToken : false)}
-        className="btn btn-primary w-full py-4 text-base"
+        className={`btn btn-primary w-full ${isCompact ? 'py-3 text-sm' : 'py-4 text-base'}`}
         data-cta="contact_form_submit"
       >
         {status === 'submitting' ? (
@@ -288,7 +301,7 @@ export default function ContactForm() {
       </button>
 
       <div className="mt-3 flex flex-col gap-2 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
-        <p className="text-center text-xs text-brand-black/60 md:text-left">
+        <p className={`text-center text-brand-black/60 md:text-left ${isCompact ? 'text-[11px]' : 'text-xs'}`}>
           Submitting this form does not create an attorney-client relationship. Please do not send confidential or
           sensitive information.
         </p>
@@ -299,7 +312,7 @@ export default function ContactForm() {
               onToken={setTurnstileToken}
               theme="light"
               size="compact"
-              className="turnstile-widget origin-top-right scale-[0.9]"
+              className={`turnstile-widget origin-top-right ${isCompact ? 'scale-[0.85]' : 'scale-[0.9]'}`}
             />
             <p className="text-[10px] font-medium leading-tight text-brand-black/50">
               Protected by Cloudflare Turnstile

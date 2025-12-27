@@ -1362,15 +1362,25 @@ export default function BlogPostPage() {
                   itemScope
                   itemType="https://schema.org/Person"
                 >
-                  <img
-                    src="/images/nick_mango_profile_shot.jpg"
-                    alt="Dominic Mango, Ohio criminal defense attorney"
-                    itemProp="image"
-                    className="h-20 w-20 rounded-full object-cover"
-                    loading="lazy"
-                    width={80}
-                    height={80}
-                  />
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcSet="/images/headshots/nick-mango-author-160w.avif"
+                    />
+                    <source
+                      type="image/webp"
+                      srcSet="/images/headshots/nick-mango-author-160w.webp"
+                    />
+                    <img
+                      src="/images/headshots/nick-mango-author-160w.jpg"
+                      alt="Dominic Mango, Ohio criminal defense attorney"
+                      itemProp="image"
+                      className="h-20 w-20 rounded-full object-cover"
+                      loading="lazy"
+                      width={80}
+                      height={80}
+                    />
+                  </picture>
                   <div>
                     <p className="font-semibold text-brand-black" itemProp="name">
                       Dominic Mango
