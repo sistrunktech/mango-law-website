@@ -48,37 +48,28 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
       ].join(' ')}
       role="banner"
     >
-      {/* Desktop top bar (restores the original "green bar" header accent) */}
-      <div className="hidden border-b border-brand-black/10 bg-brand-leaf text-white lg:block">
-        <div className={`container flex flex-wrap items-center gap-4 ${isScrolled ? 'py-1.5' : 'py-2'}`}>
-          <a
-            href={`tel:${OFFICE_PHONE_TEL}`}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-white/95 transition-opacity hover:opacity-90"
-            data-cta="header_topbar_call"
-            onClick={() => {
-              trackCtaClick('header_topbar_call');
-              trackLeadSubmitted('phone', 'header_topbar_call', {
-                target_number: OFFICE_PHONE_TEL,
-              });
-            }}
-	          >
-	            <Phone className="h-4 w-4" aria-hidden="true" />
-	            <span>Call/Text Nick direct {OFFICE_PHONE_DISPLAY}</span>
-	          </a>
-
-          <Link
-            to={duiMapHref}
-            className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
-            data-cta="header_topbar_dui_map"
-            onClick={() => trackCtaClick('header_topbar_dui_map')}
-          >
-            <MapPinned className="h-4 w-4 text-brand-mango" aria-hidden="true" />
-            DUI Checkpoint Map
-          </Link>
+      {!isScrolled && (
+        <div className="hidden border-b border-brand-black/10 bg-brand-leaf text-white lg:block">
+          <div className="container flex flex-wrap items-center gap-3 py-1.5">
+            <a
+              href={`tel:${OFFICE_PHONE_TEL}`}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-white/95 transition-opacity hover:opacity-90"
+              data-cta="header_topbar_call"
+              onClick={() => {
+                trackCtaClick('header_topbar_call');
+                trackLeadSubmitted('phone', 'header_topbar_call', {
+                  target_number: OFFICE_PHONE_TEL,
+                });
+              }}
+            >
+              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>Call/Text Nick {OFFICE_PHONE_DISPLAY}</span>
+            </a>
+          </div>
         </div>
-      </div>
+      )}
 
-      {showDuiMapBanner && (
+      {!isScrolled && showDuiMapBanner && (
         <div className="border-b border-brand-black/10 bg-brand-leaf/90 text-white lg:hidden">
           <div className="container flex items-center justify-between gap-2 py-1">
             <Link
@@ -114,7 +105,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
       {/* Main navigation bar */}
       <div className="bg-brand-offWhite border-b border-brand-black/10">
         <div
-          className={`container flex items-center justify-between py-4 transition-all ${isScrolled ? 'lg:py-2' : ''}`}
+          className={`container flex items-center justify-between py-3 transition-all ${isScrolled ? 'lg:py-2' : 'lg:py-3'}`}
         >
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3">
@@ -141,8 +132,8 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                 width={1704}
                 height={555}
                 className={[
-                  'h-9 w-auto transition-all hover:opacity-90 lg:h-14',
-                  isScrolled ? 'lg:h-12' : '',
+                  'h-8 w-auto transition-all hover:opacity-90 lg:h-12',
+                  isScrolled ? 'lg:h-10' : '',
                 ].join(' ')}
                 loading="eager"
                 fetchPriority="high"

@@ -22,28 +22,28 @@ export default function ComparisonCard({
   rightColor = 'red',
 }: ComparisonCardProps) {
   const colorClasses = {
-    mango: 'bg-brand-mango/10 border-brand-mango/20 text-brand-mangoText',
-    gold: 'bg-brand-gold/20 border-brand-gold/30 text-brand-goldText',
-    leaf: 'bg-brand-leaf/10 border-brand-leaf/20 text-brand-leaf',
-    red: 'bg-red-50 border-red-200 text-red-700',
-    blue: 'bg-blue-50 border-blue-200 text-blue-700',
+    mango: 'border-l-brand-mango text-brand-black',
+    gold: 'border-l-brand-mango text-brand-black',
+    leaf: 'border-l-brand-leaf text-brand-black',
+    red: 'border-l-red-400 text-brand-black',
+    blue: 'border-l-brand-leaf text-brand-black',
   };
 
   return (
-    <div className="my-12 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
+    <div className="my-12 overflow-hidden rounded-xl border border-brand-black/10 bg-brand-offWhite shadow-sm">
       {title && (
-        <div className="border-b border-brand-black/10 bg-brand-black/5 px-6 py-4">
+        <div className="border-b border-brand-black/10 bg-brand-offWhite px-6 py-4">
           <h4 className="font-bold text-brand-black">{title}</h4>
         </div>
       )}
       <div className="grid gap-4 p-6 md:grid-cols-2 md:gap-6">
-        <div className={`rounded-lg border-2 p-5 ${colorClasses[leftColor]}`}>
-          <div className="mb-2 text-xs font-bold uppercase tracking-wide opacity-70">
+        <div className={`rounded-lg border border-brand-black/10 border-l-4 bg-brand-offWhite p-5 ${colorClasses[leftColor]}`}>
+          <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
             {leftItem.label}
           </div>
-          <div className="mb-2 text-3xl font-bold">{leftItem.value}</div>
+          <div className="mb-2 text-2xl font-bold">{leftItem.value}</div>
           {leftItem.description && (
-            <p className="text-sm opacity-80">{leftItem.description}</p>
+            <p className="text-sm text-brand-black/70">{leftItem.description}</p>
           )}
         </div>
 
@@ -51,13 +51,13 @@ export default function ComparisonCard({
           <ArrowRight className="h-6 w-6 text-brand-black/20" />
         </div>
 
-        <div className={`rounded-lg border-2 p-5 ${colorClasses[rightColor]}`}>
-          <div className="mb-2 text-xs font-bold uppercase tracking-wide opacity-70">
+        <div className={`rounded-lg border border-brand-black/10 border-l-4 bg-brand-offWhite p-5 ${colorClasses[rightColor]}`}>
+          <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
             {rightItem.label}
           </div>
-          <div className="mb-2 text-3xl font-bold">{rightItem.value}</div>
+          <div className="mb-2 text-2xl font-bold">{rightItem.value}</div>
           {rightItem.description && (
-            <p className="text-sm opacity-80">{rightItem.description}</p>
+            <p className="text-sm text-brand-black/70">{rightItem.description}</p>
           )}
         </div>
       </div>

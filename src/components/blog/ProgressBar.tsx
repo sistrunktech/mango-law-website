@@ -15,18 +15,18 @@ export default function ProgressBar({
 }: ProgressBarProps) {
   const colorClasses = {
     mango: 'bg-brand-mango',
-    gold: 'bg-brand-gold',
+    gold: 'bg-brand-mango',
     leaf: 'bg-brand-leaf',
     red: 'bg-red-500',
-    blue: 'bg-blue-500',
+    blue: 'bg-brand-leaf',
   };
 
   return (
     <div className="my-4">
       <div className="mb-2 flex items-center justify-between">
-        <span className="font-semibold text-brand-black">{label}</span>
+        <span className="text-xs font-semibold text-brand-black/70">{label}</span>
         {showValue && (
-          <span className="text-lg font-bold text-brand-mango">{percentage}%</span>
+          <span className="text-sm font-bold text-brand-mango">{percentage}%</span>
         )}
       </div>
       <div className="h-4 overflow-hidden rounded-full bg-brand-black/10">
