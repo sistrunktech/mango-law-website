@@ -357,10 +357,10 @@ export default function BlogPostPage() {
                     sections.push(
                       <CostBreakdown
                         key={`visual-${index}`}
-                        title="Common OVI-Related Costs (Varies)"
+                        title="Common OVI-Related Costs (Baseline + Variable)"
                         items={[
-                          { label: 'Court Fines', amount: 'Varies', description: 'Depends on offense level and court' },
-                          { label: 'License Reinstatement', amount: 'Varies', description: 'BMV fees and requirements depend on history' },
+                          { label: 'Court Fines (Statutory)', amount: '$565–$2,750', description: 'Baseline ranges for 1st–3rd OVI; felony tiers are higher' },
+                          { label: 'License Reinstatement (BMV)', amount: '$315', description: 'ALS/OVI suspensions added on/after 4/9/25' },
                           { label: 'Programs / Treatment', amount: 'Varies', description: 'Driver intervention, education, or treatment' },
                           { label: 'Insurance Impact', amount: 'Varies', description: 'Premium changes depend on insurer and coverage' },
                           { label: 'Ignition Interlock', amount: 'Varies', description: 'Only if ordered; costs vary by provider and duration' },
@@ -572,8 +572,8 @@ export default function BlogPostPage() {
                         title="Chemical Tests vs. Field Sobriety Tests"
                         leftItem={{
                           label: 'Chemical Tests',
-                          value: 'Mandatory',
-                          description: 'Breath/blood/urine - refusal can trigger an administrative suspension (length depends on history)'
+                          value: 'Implied Consent',
+                          description: 'Breath/oral fluid/blood/urine - refusal can trigger an ALS (length depends on history)'
                         }}
                         rightItem={{
                           label: 'Field Sobriety',
@@ -602,11 +602,10 @@ export default function BlogPostPage() {
                     sections.push(
                       <TimelineBar
                         key={`visual-${index}`}
-                        title="Ohio OVI Lookback Periods"
+                        title="Key 10-Year Windows in Ohio OVI Law"
                         items={[
-                          { label: 'Criminal Sentencing', duration: '10 years', color: 'mango', width: '50%' },
-                          { label: 'License Suspension (Conviction)', duration: '20 years', color: 'red', width: '100%' },
-                          { label: 'ALS Suspension (Refusal)', duration: '10 years', color: 'gold', width: '50%' }
+                          { label: 'Sentencing Enhancements (offense date)', duration: '10 years', color: 'mango', width: '50%' },
+                          { label: 'ALS Lookback (test date)', duration: '10 years', color: 'gold', width: '50%' }
                         ]}
                       />
                     );
@@ -1046,7 +1045,7 @@ export default function BlogPostPage() {
                         leftItem={{
                           label: 'OVI (4511.19)',
                           value: 'Operating',
-                          description: 'Requires vehicle movement or operation. Mandatory license suspension (ALS). More severe penalties.'
+                          description: 'Requires vehicle movement or operation. ALS can be triggered by refusal or results; court suspension follows conviction.'
                         }}
                         rightItem={{
                           label: 'Physical Control (4511.194)',
@@ -1068,10 +1067,10 @@ export default function BlogPostPage() {
                   else if (visualType === 'PHYSICAL_CONTROL_PENALTIES') {
                     sections.push(
                       <div key={`visual-${index}`} className="my-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <StatCard icon={Timer} value="180" label="Days Max Jail" color="red" description="First offense maximum" />
-                        <StatCard icon={DollarSign} value="$1,000" label="Max Fine" color="red" description="Plus court costs" />
-                        <StatCard icon={Ban} value="6" label="License Points" color="mango" description="Added to driving record" />
-                        <StatCard icon={AlertTriangle} value="Possible" label="Suspension" color="red" description="License may be suspended" />
+                        <StatCard icon={Timer} value="Up to 180" label="Days Max Jail" color="red" description="M1 statutory maximum" />
+                        <StatCard icon={DollarSign} value="Up to $1,000" label="Max Fine" color="red" description="Plus court costs" />
+                        <StatCard icon={Ban} value="0" label="License Points" color="mango" description="Ohio BMV points" />
+                        <StatCard icon={AlertTriangle} value="Up to 1 year" label="Suspension" color="red" description="Class 7 (court discretion)" />
                       </div>
                     );
                   }

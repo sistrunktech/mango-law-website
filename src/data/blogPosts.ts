@@ -160,15 +160,23 @@ This article is for educational purposes and does not constitute legal advice. C
     title: 'Understanding OVI/DUI Charges in Ohio: What You Need to Know',
     excerpt: 'Complete guide to Ohio OVI charges including penalties, defense strategies, and how to protect your record. Learn about ORC § 4511.19 and what to do if arrested.',
 	    imageUrl: '/images/generated/blog-ovi-charges.png',
-		    content: `## Introduction
+    content: `## Introduction
 
 Operating a vehicle while impaired (OVI) is the Ohio term for what many states call DUI. Ohio uses OVI to cover alcohol, drugs, or a combination of both. This guide explains how Ohio defines OVI, how cases are built, and what tends to vary by court so you can verify the law and make informed decisions.
+
+**Updated for 2025 law changes:** ORC 4511.19 was updated effective April 9, 2025 (HB 37). Minimum fines and reinstatement fees changed, so verify the current statute and BMV schedule before relying on older summaries.
 
 ## What OVI means in Ohio
 
 Ohio's core OVI statute is [ORC 4511.19](https://codes.ohio.gov/ohio-revised-code/section-4511.19). It prohibits operating a vehicle while impaired and sets out prohibited concentration categories. The exact thresholds and penalty subsections are statutory and can be updated, so confirm the current text in the statute.
 
 [VISUAL:OVI_VS_PHYSICAL_CONTROL]
+
+## Quick penalties snapshot (baseline)
+
+These are baseline ranges for common tiers. Exact outcomes depend on test category, refusal allegations, and priors.
+
+[VISUAL:FIRST_OFFENSE_PENALTIES]
 
 Physical control is a separate statute under [ORC 4511.194](https://codes.ohio.gov/ohio-revised-code/section-4511.194). The distinction matters because the elements and penalties differ, and defense strategy can change depending on which charge you face.
 
@@ -210,11 +218,11 @@ In some stops, an officer may use a handheld preliminary breath test. PBTs are d
 
 ## Chemical testing and implied consent
 
-Ohio's implied consent law is in [ORC 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191). Refusing a chemical test can trigger an administrative license suspension (ALS) even before a criminal case ends. The testing rules are governed in part by [Ohio Admin. Code 3701-53-05](https://codes.ohio.gov/ohio-administrative-code/rule-3701-53-05), which is often the source for suppression arguments when procedures are not followed.
+Ohio's implied consent law is in [ORC 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191). If you are arrested for OVI, Ohio law treats you as having consented to chemical testing of **breath, oral fluid, blood/serum/plasma, or urine**. Refusing a chemical test can trigger an administrative license suspension (ALS) even before a criminal case ends. The testing rules are governed in part by [Ohio Admin. Code 3701-53-05](https://codes.ohio.gov/ohio-administrative-code/rule-3701-53-05), which is often the source for suppression arguments when procedures are not followed.
 
-## Breath vs blood vs urine
+## Breath vs blood vs urine vs oral fluid
 
-Each testing method has its own rules and practical issues. Breath tests are common in roadside or station settings, blood tests require proper collection and chain of custody, and urine tests are used less frequently. When test results are central to the case, the testing method and compliance with procedures can be decisive.
+Each testing method has its own rules and practical issues. Breath tests are common in roadside or station settings, oral-fluid testing is now explicitly referenced in implied consent, blood tests require proper collection and chain of custody, and urine tests are used less frequently. When test results are central to the case, the testing method and compliance with procedures can be decisive.
 
 ## Blood draws and warrants
 
@@ -241,14 +249,18 @@ Penalty ranges and mandatory terms are set by statute and depend on:
 
 If you need the detailed ranges, review the applicable subsections in ORC 4511.19 with counsel and compare them to your certified record.
 
-## Cost and penalty structure (varies by case)
+[VISUAL:REPEAT_OFFENSE_PENALTIES]
+
+## Cost and penalty structure (baseline + variable)
 
 When evaluating practical exposure, separate costs into consistent buckets:
-1) mandatory statutory penalties (fines, minimum terms, suspension ranges)
+1) statutory penalties (fines, minimum terms, suspension ranges)
 2) administrative and BMV consequences (reinstatement fees, SR-22 requirements)
 3) common case costs (programs, probation, monitoring, assessments)
 4) scenario-dependent costs (high-test, refusal, priors, interlock)
 5) market estimates (attorney fees and insurance impact)
+
+The table below combines **official baseline items** (statutory fines and BMV fees) with **variable items** that depend on provider, county, and case posture.
 
 [VISUAL:OVI_COSTS]
 
@@ -385,7 +397,7 @@ Some clients worry about travel or professional background checks. The impact de
 
 ## Record sealing and long-term planning
 
-Some convictions can be sealed under Ohio law, while others have limits. OVI-related outcomes often require a careful eligibility review. If a clean record matters for employment or licensing, discuss long-term record planning with counsel early.
+Some convictions can be sealed under Ohio law, while others have limits. In Ohio, record sealing under [ORC 2953.32](https://codes.ohio.gov/ohio-revised-code/section-2953.32) generally does **not** apply to convictions under Chapter 4511 (traffic offenses), which includes OVI and physical control. If a clean record matters for employment or licensing, discuss long-term record planning with counsel early.
 
 ## Professional licensing and work impact
 
@@ -397,6 +409,23 @@ Many professional boards ask about criminal convictions, and some employers have
 - What records support the stop, testing, and offense timeline?
 - How does local court practice affect privileges and plea options?
 - Are any testing or documentation issues likely to be challenged?
+
+## FAQ
+
+**Is OVI the same as DUI in Ohio?**  
+Ohio uses the term OVI for impaired driving. Other states use DUI or DWI, but the conduct and penalties are defined under ORC 4511.19.
+
+**What happens if I refuse a chemical test?**  
+Refusal can trigger an administrative license suspension (ALS) under the implied-consent statute, even before your criminal case ends.
+
+**What is a “high-tier” OVI?**  
+Ohio has higher prohibited concentration categories (e.g., 0.17+), which can increase minimum penalties and restrictions.
+
+**How long does an OVI stay on my record?**  
+OVI convictions have lasting consequences and are not typically eligible for sealing under Ohio law. Confirm your specific eligibility with counsel.
+
+**Is physical control the same as OVI?**  
+No. OVI requires operation (movement). Physical control is a separate offense based on being in the driver’s seat with the key while impaired.
 
 ## Conclusion
 
@@ -436,6 +465,11 @@ If you need help in Delaware or Franklin County, contact Mango Law for a confide
       {
         label: 'Ohio BMV: Reinstatement fees',
         url: 'https://www.bmv.ohio.gov/dl-reinstatement-fees.aspx',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2953.32 (Record sealing)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2953.32',
         type: 'primary',
       },
       {
@@ -1085,7 +1119,7 @@ Field sobriety tests are generally voluntary in Ohio. Refusing them is not the s
 
 ## Field tests vs chemical tests
 
-Chemical testing is governed by implied consent under [ORC 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191). A chemical refusal can trigger an administrative license suspension. Field sobriety tests do not trigger that administrative suspension on their own, but they can still influence the officer's decision-making.
+Chemical testing is governed by implied consent under [ORC 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191). If you are arrested for OVI, Ohio law treats you as having consented to chemical testing of **breath, oral fluid, blood/serum/plasma, or urine**. A chemical refusal can trigger an administrative license suspension. Field sobriety tests do not trigger that administrative suspension on their own, but they can still influence the officer's decision-making.
 
 [VISUAL:CHEMICAL_VS_FST_COMPARISON]
 
@@ -1119,6 +1153,10 @@ Defense attorneys often challenge SFST evidence because the tests are sensitive 
 ## What refusing does (and does not do)
 
 Refusing SFSTs does not create a chemical-test penalty by itself, but it also does not prevent an arrest. Officers can still rely on driving behavior, admissions, and other observations. The decision often turns on the totality of circumstances.
+
+## License consequences are tied to chemical testing
+
+BMV suspension ranges and reinstatement fees are tied to chemical-test categories and convictions, not field sobriety tests alone. If licensing impact is your main concern, focus on the implied-consent rules and the specific test category alleged under ORC 4511.191.
 
 ## What officers document
 
@@ -1243,6 +1281,11 @@ This article is for educational purposes and does not constitute legal advice. C
         url: 'https://codes.ohio.gov/ohio-administrative-code/rule-3701-53-05',
         type: 'primary',
       },
+      {
+        label: 'Ohio BMV: Reinstatement fees',
+        url: 'https://www.bmv.ohio.gov/dl-reinstatement-fees.aspx',
+        type: 'primary',
+      },
     ],
   },
   {
@@ -1252,9 +1295,11 @@ This article is for educational purposes and does not constitute legal advice. C
     imageUrl: '/images/generated/blog-dui-lookback-period.png',
     content: `If you are facing an OVI and have any prior history, the lookback analysis is one of the first things to confirm. Whether a prior counts can change the charge level, sentencing range, and license consequences.
 
+**Updated for 2025 law changes:** Ohio’s OVI statute was updated effective April 9, 2025 (HB 37). Minimum fines and reinstatement fees changed, so verify the current statute and BMV schedule before relying on older summaries.
+
 ## What is the lookback period
 
-The lookback period (sometimes called the washout window) is the timeframe during which prior OVI convictions are counted for enhanced penalties under [ORC 4511.19](https://codes.ohio.gov/ohio-revised-code/section-4511.19). The exact rule is statutory and can change, so confirm the current law and your certified record rather than relying on older summaries.
+The lookback period (sometimes called the washout window) is the timeframe during which prior OVI convictions are counted for enhanced penalties under [ORC 4511.19](https://codes.ohio.gov/ohio-revised-code/section-4511.19). The repeat-offender tiers are keyed to priors **within ten years of the offense** (not just the conviction date). The exact rule is statutory and can change, so confirm the current law and your certified record rather than relying on older summaries.
 
 [VISUAL:LOOKBACK_TIMELINE]
 
@@ -1314,7 +1359,15 @@ Sometimes multiple cases occur within a short period of time, or two cases overl
 
 ## ALS vs criminal priors
 
-An administrative license suspension (ALS) is not the same as a criminal OVI conviction. ALS history can still affect privileges and local court expectations, but it is typically not the same as a prior offense for statutory enhancement. Confirm the distinction with counsel using the actual record.
+An administrative license suspension (ALS) is not the same as a criminal OVI conviction. ALS history can still affect privileges and local court expectations, but it is typically not the same as a prior offense for statutory enhancement. The implied-consent statute uses its own **ten-year window based on the test date** for ALS categories. Confirm the distinction with counsel using the actual record.
+
+## Different time windows that can affect an Ohio OVI case
+
+| Window | What it affects | Date anchor | Authority |
+| --- | --- | --- | --- |
+| 10 years | Sentencing enhancement tiers | Offense date | ORC 4511.19 |
+| 10 years | ALS lookback categories | Test date | ORC 4511.191 |
+| Case-specific | Felony/special tiers | Offense date | ORC 4511.19 |
 
 ## How prosecutors prove priors
 
@@ -1351,6 +1404,25 @@ For a broader overview, see [Understanding OVI/DUI Charges in Ohio](/blog/unders
 ## High-test and refusal issues
 
 Some cases involve additional allegations tied to test categories or refusal. The consequences are statutory and depend on history, test category, and what the state can prove. Confirm the current rules in ORC 4511.19 and ORC 4511.191.
+
+## Updated penalty ranges (baseline, verify statute)
+
+These are **minimum statutory ranges** for common tiers. Exact penalties depend on test category, refusals, and prior history.
+
+- **First OVI (no priors within 10 years):** $565–$1,075 fine, 1–3 year suspension
+- **Third OVI (two priors within 10 years):** $1,040–$2,750 fine, 2–12 year suspension; vehicle forfeiture can apply
+- **Felony-tier minimum fine:** $1,540 minimum for felony OVI sentencing blocks
+
+For full detail, review ORC 4511.19 with counsel.
+
+## Official fees snapshot
+
+| Fee item | Amount | Applies when |
+| --- | --- | --- |
+| ALS reinstatement fee | $315 | ALS added to record on/after 4/9/25 |
+| OVI/Physical Control suspension reinstatement fee | $315 | Conviction date on/after 4/9/25 |
+
+Source: Ohio BMV reinstatement fees.
 
 ## Cost and penalty structure (varies)
 
@@ -1461,6 +1533,11 @@ This article is for educational purposes and does not constitute legal advice. O
       {
         label: 'Ohio BMV: Driving record requests',
         url: 'https://www.bmv.ohio.gov/dl-record.aspx',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio BMV: Reinstatement fees',
+        url: 'https://www.bmv.ohio.gov/dl-reinstatement-fees.aspx',
         type: 'primary',
       },
     ],
@@ -2459,6 +2536,10 @@ Holiday cases are harder because people travel, offices close, and evidence can 
 - Do not assume your case is "standard." Holiday enforcement often includes extra documentation and video.
 - Schedule a consultation quickly, because court dates and license issues do not wait.
 
+## Are sobriety checkpoints legal in Ohio?
+
+Sobriety checkpoints can be lawful under federal law when they follow neutral, published guidelines. Whether a specific checkpoint was conducted properly is fact-specific, which is why documentation and timing matter.
+
 ## Where to find checkpoint and enforcement information
 
 Checkpoint information is inconsistent and sometimes released late. When it is available, it helps you plan. Use Mango Law's [DUI Checkpoint Map](/resources/dui-checkpoints) as a starting point, and remember:
@@ -2507,6 +2588,11 @@ This article is for educational purposes and does not constitute legal advice. C
         url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
         type: 'primary',
       },
+      {
+        label: 'Michigan Dept. of State Police v. Sitz (sobriety checkpoints)',
+        url: 'https://supreme.justia.com/cases/federal/us/496/444/',
+        type: 'primary',
+      },
     ],
   },
   {
@@ -2515,6 +2601,8 @@ This article is for educational purposes and does not constitute legal advice. C
     excerpt: 'Ohio State coach Kevin McGuff was charged with physical control while parked in his driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
     imageUrl: '/images/generated/blog-physical-control-parked-car.png',
     content: `Ohio State women's basketball coach Kevin McGuff made headlines when he was charged with physical control after being found asleep in his parked car in his own driveway. The case resolved with a plea to a reduced charge of disorderly conduct, but it raises important questions about Ohio's physical control statute and what it means for everyday drivers.
+
+Case reporting is cited in the sources below; outcomes can differ in other cases based on facts, record history, and local practice.
 
 [VISUAL:PHYSICAL_CONTROL_HIGHLIGHT]
 
@@ -2530,8 +2618,8 @@ Physical control under [ORC 4511.194](https://codes.ohio.gov/ohio-revised-code/s
 
 ### Key elements the state must prove
 
-1. The person was in the driver's seat or "in control" of the vehicle
-2. The vehicle was on a public road, street, or property open to the public (with exceptions)
+1. The person was in the driver's position of the front seat
+2. The person had possession of the ignition key or device
 3. The person was under the influence of alcohol, drugs, or a combination
 
 ### The critical location question
@@ -2544,13 +2632,15 @@ One nuance in the McGuff case involves where the vehicle was located. Physical c
 
 | Factor | OVI (4511.19) | Physical Control (4511.194) |
 |--------|---------------|----------------------------|
-| Vehicle movement | Required (operating) | Not required (stationary) |
+| Vehicle movement | Required (operating; movement) | Not required (stationary) |
 | Location | Any public road | Public road or property open to public |
 | Penalties | Generally more severe | Slightly less severe for first offense |
-| License suspension | Mandatory ALS | Possible suspension |
-| Points on license | 6 points | 6 points |
+| License suspension | ALS possible depending on refusal/results; court suspension on conviction | Possible court suspension (Class 7) |
+| Points on license | 6 points | 0 points |
 
 Both charges are serious and can result in jail time, fines, license suspension, and a permanent criminal record.
+
+Ohio defines “operate” as causing or having caused movement of a vehicle under [ORC 4511.01](https://codes.ohio.gov/ohio-revised-code/section-4511.01). That movement element is a key reason physical control exists as a separate charge when movement cannot be proven.
 
 ## Why "sleeping it off" can still lead to charges
 
@@ -2602,11 +2692,15 @@ As the McGuff case illustrates, physical control charges can sometimes be negoti
 [VISUAL:PHYSICAL_CONTROL_PENALTIES]
 
 A first-offense physical control conviction carries:
-- Up to 180 days in jail (with minimums possible depending on circumstances)
+- Up to 180 days in jail (M1 maximum; not mandatory)
 - Fines up to $1,000 plus court costs
-- Possible license suspension
-- 6 points on your driving record
+- Possible license suspension (Class 7; up to one year)
+- 0 points on your driving record under Ohio BMV’s schedule
 - Potential requirement for alcohol treatment
+
+## Testing and implied consent
+
+If you are arrested, Ohio’s implied-consent law can still apply. Chemical testing (breath, oral fluid, blood/serum/plasma, or urine) is governed by ORC 4511.191, and refusals can trigger administrative suspensions even in physical-control cases.
 
 Repeat offenses or high BAC levels can increase these penalties significantly.
 
@@ -2652,13 +2746,33 @@ If you're facing physical control charges in Delaware or Franklin County, the sp
         type: 'primary',
       },
       {
+        label: 'Ohio Revised Code § 4511.01 (Definitions; operate)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.01',
+        type: 'primary',
+      },
+      {
         label: 'Ohio Revised Code § 4511.19 (OVI)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
         type: 'primary',
       },
       {
-        label: 'Columbus Dispatch: Kevin McGuff case reporting',
-        url: 'https://www.dispatch.com/',
+        label: 'Ohio Revised Code § 4511.191 (Implied consent)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio BMV: Point System',
+        url: 'https://www.bmv.ohio.gov/dl-point-system.aspx',
+        type: 'primary',
+      },
+      {
+        label: 'Reuters: Kevin McGuff case reporting',
+        url: 'https://www.reuters.com/',
+        type: 'secondary',
+      },
+      {
+        label: 'WOSU: Kevin McGuff case reporting',
+        url: 'https://www.wosu.org/',
         type: 'secondary',
       },
     ],

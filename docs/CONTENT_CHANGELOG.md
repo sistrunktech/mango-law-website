@@ -34,6 +34,71 @@ Regression checklist:
 Approval token: APPROVED: understanding-ovi-dui-charges-ohio -- restore depth + visuals + EEAT -- major -- 2025-12-27T17:32-0500
 Rollback notes: commit pending
 
+Date/time: 2025-12-27 21:52 EST
+Post slug and title: understanding-ovi-dui-charges-ohio | Understanding OVI/DUI Charges in Ohio: What You Need to Know
+Change type: major
+Summary of change: Added HB 37 update banner, penalties snapshot, oral-fluid implied-consent language, clarified record sealing limits, expanded FAQ, and refreshed cost framing.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: understanding-ovi-dui-charges-ohio -- HB37 updates + penalties snapshot + oral-fluid update -- major -- 2025-12-27T21:52-0500
+Rollback notes: commit pending
+
+Date/time: 2025-12-27 21:52 EST
+Post slug and title: ohio-dui-lookback-period | Ohio DUI Lookback Period: How Prior Convictions Can Affect Your Case
+Change type: major
+Summary of change: Updated lookback definitions for offense/test date windows, corrected HB 37 penalty minimums, added official fee table, and clarified statutory anchors.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: ohio-dui-lookback-period -- HB37 penalties + window clarifications -- major -- 2025-12-27T21:52-0500
+Rollback notes: commit pending
+
+Date/time: 2025-12-27 21:52 EST
+Post slug and title: refuse-field-sobriety-test-ohio | Can I Refuse Field Sobriety Tests in Ohio? Your Rights Explained
+Change type: major
+Summary of change: Added oral-fluid implied-consent language and clarified license consequences tied to chemical testing categories.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: refuse-field-sobriety-test-ohio -- oral-fluid + implied-consent clarifications -- major -- 2025-12-27T21:52-0500
+Rollback notes: commit pending
+
+Date/time: 2025-12-27 21:52 EST
+Post slug and title: physical-control-parked-car-ohio-kevin-mcguff | Physical Control of a Parked Car in Ohio: What the Kevin McGuff Case Teaches About ORC 4511.194
+Change type: major
+Summary of change: Corrected penalties/points, added elements checklist and operate definition, added implied-consent note, and expanded sources.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: physical-control-parked-car-ohio-kevin-mcguff -- penalties + elements + sourcing -- major -- 2025-12-27T21:52-0500
+Rollback notes: commit pending
+
+Date/time: 2025-12-27 21:52 EST
+Post slug and title: holiday-ovi-enforcement-ohio-delaware-dublin-columbus | Holiday OVI Enforcement in Ohio: What Drivers in Delaware, Dublin, and Central Ohio Should Expect
+Change type: major
+Summary of change: Added sobriety checkpoint legality context and authoritative source link.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: holiday-ovi-enforcement-ohio-delaware-dublin-columbus -- checkpoint legality context -- major -- 2025-12-27T21:52-0500
+Rollback notes: commit pending
+
 Date/time: 2025-12-27 20:41 EST
 Post slug and title: holiday-ovi-enforcement-ohio-delaware-dublin-columbus | Holiday OVI Enforcement in Ohio: What Drivers in Delaware, Dublin, and Central Ohio Should Expect
 Change type: major

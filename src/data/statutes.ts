@@ -33,7 +33,7 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     section: '4511.191',
     title: 'Implied Consent to Chemical Testing',
     shortTitle: 'Implied Consent',
-    definition: 'Establishes that any person who operates a vehicle on Ohio roads has given implied consent to chemical testing (breath, blood, or urine) if arrested for OVI. Refusal triggers automatic administrative license suspension.',
+    definition: 'Establishes that any person who operates a vehicle on Ohio roads has given implied consent to chemical testing (breath, oral fluid, blood/serum/plasma, or urine) if arrested for OVI. Refusal triggers automatic administrative license suspension.',
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
     practiceAreas: ['ovi-dui'],
     relatedStatutes: ['4511.19', '4511.192'],
@@ -68,6 +68,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     lastVerified: '2025-12-15',
     sources: [
       { label: 'Ohio Revised Code § 4511.194', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.194', type: 'primary' },
+    ],
+  },
+  '4511.01': {
+    id: 'traffic-definitions',
+    section: '4511.01',
+    title: 'Traffic Law Definitions',
+    shortTitle: 'Definitions',
+    definition: 'Defines key terms used in Ohio traffic statutes, including the definition of “operate” (causing or having caused movement of a vehicle).',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.01',
+    practiceAreas: ['ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['4511.19', '4511.194'],
+    lastVerified: '2025-12-27',
+    sources: [
+      { label: 'Ohio Revised Code § 4511.01', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.01', type: 'primary' },
     ],
   },
   '4510.14': {
