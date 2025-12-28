@@ -15,7 +15,7 @@ export default function AboutPage() {
     <>
       <SEO
         title="About Dominic Mango | Criminal Defense Attorney Delaware, OH"
-        description="OSU Moritz College of Law graduate with 20+ years of criminal defense experience. Former prosecutor with hundreds of jury trials. Certified in BAC DataMaster and NHTSA field sobriety testing."
+        description="OSU Moritz College of Law graduate with 26+ years of Ohio criminal law experience. Former prosecutor with hundreds of jury trials. Certified in BAC DataMaster and NHTSA field sobriety testing."
         structuredData={attorneySchema}
       />
       <PageHero
@@ -219,9 +219,10 @@ export default function AboutPage() {
                 <h3 className="font-display text-2xl font-semibold text-brand-black">Experience & Background</h3>
                 <p className="text-brand-black/80 leading-relaxed">
                   Dominic Mango is a graduate of The Ohio State University's Moritz College of Law and has been practicing
-                  criminal defense in Delaware and Franklin Counties since 2001. He is licensed to practice in all Ohio courts,
-                  including Federal Court and the Southern District of Ohio. With hundreds of jury trials under his belt,
-                  Dominic has extensive experience in jury selection, trial strategy, and courtroom advocacy.
+                  criminal law in Central Ohio since 1999. He is licensed to practice in Ohio (not the state of Delaware) and
+                  appears in all Ohio courts, including Federal Court and the Southern District of Ohio. Mango Law LLC was
+                  established in February 2009 in Delaware, Ohio. With hundreds of jury trials under his belt, Dominic has
+                  extensive experience in jury selection, trial strategy, and courtroom advocacy.
                 </p>
                 <p className="text-brand-black/80 leading-relaxed">
                   His background includes serving as an Assistant Prosecuting Attorney in Delaware County (1999-2001), where
@@ -256,7 +257,7 @@ export default function AboutPage() {
                 <h3 className="font-display text-2xl font-semibold text-brand-black">Professional Timeline</h3>
                 <div className="space-y-3">
                   <div className="border-l-4 border-brand-mango pl-4">
-                    <p className="font-semibold text-brand-black">2009 – Present</p>
+                    <p className="font-semibold text-brand-black">Feb 2009 – Present</p>
                     <p className="text-brand-black/70">Attorney, Mango Law LLC</p>
                   </div>
                   <div className="border-l-4 border-brand-leaf pl-4">

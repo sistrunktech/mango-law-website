@@ -32,7 +32,7 @@ export interface SEOProps {
 const defaultSEO = {
   title: 'Mango Law LLC - Criminal Defense & OVI Attorney in Delaware, OH',
   description:
-    'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. Over 20 years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
+    'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
   image: '/images/brand/mango-logo-primary-fullcolor.svg',
   type: 'website' as const,
 };
@@ -137,6 +137,17 @@ export const localBusinessSchema = {
       image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
       telephone: `+1${OFFICE_PHONE_TEL}`,
       email: 'office@mango.law',
+      foundingDate: '2009-02',
+      foundingLocation: {
+        '@type': 'Place',
+        name: 'Delaware, Ohio',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Delaware',
+          addressRegion: 'OH',
+          addressCountry: 'US',
+        },
+      },
       priceRange: '$$',
       address: {
         '@type': 'PostalAddress',
@@ -210,6 +221,18 @@ export const localBusinessSchema = {
           '@type': 'AdministrativeArea',
           name: 'Franklin County',
         },
+        {
+          '@type': 'AdministrativeArea',
+          name: 'Union County',
+        },
+        {
+          '@type': 'AdministrativeArea',
+          name: 'Morrow County',
+        },
+        {
+          '@type': 'AdministrativeArea',
+          name: 'Marion County',
+        },
       ],
       openingHoursSpecification: [
         {
@@ -271,6 +294,16 @@ export const localBusinessSchema = {
         '@type': 'Occupation',
         name: 'Attorney',
       },
+      hasCredential: {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'Ohio Bar License',
+        credentialCategory: 'Bar Admission',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Supreme Court of Ohio',
+        },
+        dateIssued: '1999',
+      },
       alumniOf: {
         '@type': 'EducationalOrganization',
         name: 'The Ohio State University Moritz College of Law',
@@ -293,7 +326,7 @@ export const attorneySchema = {
   name: 'Dominic Mango',
   alternateName: 'Nick Mango',
   description:
-    'Experienced criminal defense attorney with over 20 years of practice in Delaware and Franklin Counties, Ohio.',
+    'Experienced criminal defense attorney with 26+ years of Ohio criminal law experience in Delaware and Franklin Counties.',
   url: 'https://mango.law/about',
   image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
   email: 'office@mango.law',
@@ -302,6 +335,16 @@ export const attorneySchema = {
   hasOccupation: {
     '@type': 'Occupation',
     name: 'Attorney',
+  },
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    name: 'Ohio Bar License',
+    credentialCategory: 'Bar Admission',
+    recognizedBy: {
+      '@type': 'Organization',
+      name: 'Supreme Court of Ohio',
+    },
+    dateIssued: '1999',
   },
   alumniOf: {
     '@type': 'EducationalOrganization',

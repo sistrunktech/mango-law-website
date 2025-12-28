@@ -8,6 +8,11 @@ Protect approved and finalized content from accidental or unreviewed changes whi
 - Associated assets (hero images, internal links, metadata, schema)
 - Admin CMS edits and file-based content edits
 
+## Firm Facts (Locked)
+- Dominic "Nick" Mango has been licensed to practice law in Ohio since 1999 (26+ years of Ohio criminal law experience).
+- Mango Law LLC was established in February 2009 in Delaware, Ohio.
+- Do not state or imply licensure in the state of Delaware; the firm practices Ohio law.
+
 ## Blog Post Lifecycle
 - **draft**: internal working content; not public.
 - **published**: public content; changes allowed but logged.

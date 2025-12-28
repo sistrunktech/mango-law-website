@@ -56,7 +56,7 @@ export default function CriminalDefensePage() {
     <>
       <SEO
         title="Criminal Defense Attorney Delaware, OH | Mango Law LLC"
-        description="Aggressive criminal defense for drug crimes, assault, theft, weapons charges, and more. Former prosecutor with 20+ years experience defending clients in Delaware and Franklin Counties."
+        description="Aggressive criminal defense for drug crimes, assault, theft, weapons charges, and more. Former prosecutor with 26+ years of Ohio criminal law experience defending clients in Delaware and Franklin Counties."
         image="/images/generated/criminal-defense-hero.png"
       />
       <PageHero
