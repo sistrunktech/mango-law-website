@@ -945,6 +945,28 @@ export default function BlogPostPage() {
                     );
                   }
 
+                  // Weapons Overview
+                  else if (visualType === 'WEAPONS_CHARGE_OVERVIEW') {
+                    sections.push(
+                      <ComparisonCard
+                        key={`visual-${index}`}
+                        title="Common Weapons Charge Categories"
+                        leftItem={{
+                          label: 'Carry / Transport',
+                          value: 'Possession Rules',
+                          description: 'Concealed carry and vehicle transport issues tied to how a firearm is stored or accessed'
+                        }}
+                        rightItem={{
+                          label: 'Weapons Disability',
+                          value: 'Status-Based',
+                          description: 'Prior convictions or court orders can bar possession regardless of intent'
+                        }}
+                        leftColor="mango"
+                        rightColor="red"
+                      />
+                    );
+                  }
+
                   // Firearm Consequences
                   else if (visualType === 'FIREARM_CONSEQUENCES') {
                     sections.push(

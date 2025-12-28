@@ -34,6 +34,44 @@ Regression checklist:
 Approval token: APPROVED: understanding-ovi-dui-charges-ohio -- restore depth + visuals + EEAT -- major -- 2025-12-27T17:32-0500
 Rollback notes: commit pending
 
+Date/time: 2025-12-27 22:23 EST
+Post slug and title: motion-practice-criminal-defense | The Power of Motion Practice in Criminal Defense
+Change type: major
+Summary of change: Added motion-type visual callout and confirmed compliance with blog visual requirements.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: APPROVED: motion-practice-criminal-defense -- visual callout + compliance pass -- major -- 2025-12-27T22:23-0500
+Rollback notes: commit pending
+
+Date/time: 2025-12-27 22:23 EST
+Post slug and title: ohio-weapons-charges-ccw-defense | Ohio Weapons Charges: CCW, Improper Handling, and Weapons Disability Defense
+Change type: major
+Summary of change: Expanded to full-length guide with statutory anchors, added weapons overview and consequences visuals, and updated sources.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: ohio-weapons-charges-ccw-defense -- expand + visuals + EEAT sources -- major -- 2025-12-27T22:23-0500
+Rollback notes: commit pending
+
+Date/time: 2025-12-27 22:23 EST
+Post slug and title: ohio-dui-checkpoint-hotspots | Ohio DUI Checkpoints: Legality, What to Expect, and Your Rights
+Change type: major
+Summary of change: Added checkpoint visuals, updated implied-consent wording to include oral fluid, and refreshed verification date.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: ohio-dui-checkpoint-hotspots -- visuals + implied-consent update -- major -- 2025-12-27T22:23-0500
+Rollback notes: commit pending
 Date/time: 2025-12-27 21:52 EST
 Post slug and title: understanding-ovi-dui-charges-ohio | Understanding OVI/DUI Charges in Ohio: What You Need to Know
 Change type: major

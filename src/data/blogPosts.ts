@@ -526,6 +526,8 @@ How strong a motion is (and what relief is realistically available) depends on:
 
 ## Common Defense Motions Under Ohio Law
 
+[VISUAL:MOTION_TYPES]
+
 ### Motion to Suppress Evidence (Crim.R. 12)
 
 Under the **Fourth Amendment** and [Ohio Crim. R. 12(C)(3)](https://www.supremecourt.ohio.gov/LegalResources/Rules/criminal/CriminalProcedure.pdf), defendants can file motions to suppress evidence obtained in violation of constitutional rights. If granted, the prosecution cannot use that evidence at trial.
@@ -1698,40 +1700,102 @@ This article is for educational purposes and does not constitute legal advice. C
     title: 'Ohio Weapons Charges: CCW, Improper Handling, and Weapons Disability Defense',
     excerpt: 'A conservative overview of Ohio weapons allegations, including concealed-carry, weapons-under-disability, and vehicle-transport issues under ORC Chapter 2923.',
     imageUrl: '/images/generated/blog-ohio-weapons-charges.png',
-    content: `Ohio weapons cases often turn on technical statutory definitions (concealed vs. open, transport rules, location restrictions, and disability status). A charge can arise even when someone believed they were being careful.
+    content: `Ohio weapons cases often turn on technical statutory definitions (concealed vs open, transport rules, location restrictions, and disability status). A charge can arise even when someone believed they were being careful. This guide focuses on Ohio law under ORC Chapter 2923 and the fact-specific issues that commonly drive outcomes.
 
-## What Varies (and why small facts matter)
+## Key statutes and definitions
 
-- whether the weapon was concealed and how it was carried
-- whether it was in a vehicle and where it was stored
-- the definitions and exceptions in the specific subsection charged
-- license status (if any) and compliance with conditions
-- prohibited locations and local enforcement practices
-- prior convictions or orders that may create a “weapons under disability” issue
-- federal overlap in some situations
+Ohio weapons cases usually start with the statute listed on the charge:
+- Carrying concealed weapons: [ORC 2923.12](https://codes.ohio.gov/ohio-revised-code/section-2923.12)
+- Weapons under disability: [ORC 2923.13](https://codes.ohio.gov/ohio-revised-code/section-2923.13)
+- Improper handling in a motor vehicle: [ORC 2923.16](https://codes.ohio.gov/ohio-revised-code/section-2923.16)
+- Definitions that control how terms are interpreted: [ORC 2923.11](https://codes.ohio.gov/ohio-revised-code/section-2923.11)
 
-## Key Ohio statutes to review
+Even small wording differences can change whether the state believes a weapon was concealed, accessible, or tied to a disability restriction.
 
-- Carrying concealed weapons: [ORC § 2923.12](https://codes.ohio.gov/ohio-revised-code/section-2923.12)
-- Weapons under disability: [ORC § 2923.13](https://codes.ohio.gov/ohio-revised-code/section-2923.13)
-- Improperly handling firearms in a motor vehicle: [ORC § 2923.16](https://codes.ohio.gov/ohio-revised-code/section-2923.16)
+[VISUAL:WEAPONS_CHARGE_OVERVIEW]
 
-## Defense themes (high-level)
+## Concealed carry vs transport in a vehicle
 
-Depending on the situation, defenses may involve:
-- challenging the stop/search and scope of consent
-- disputing knowing or constructive possession
-- applying statutory exceptions/definitions correctly
-- addressing disability status and relief procedures when available
-- mitigating collateral consequences and negotiating resolutions
+Carrying and transporting are treated differently. For example, how a weapon is stored in a vehicle, whether it is loaded, and whether it is accessible can affect the charge and the defenses available. License status can also matter, but a license does not override transport rules or location restrictions.
 
-Ohio weapons law is fact-specific. The safest approach is to have counsel review the exact statutory subsection being charged.
+Common vehicle-related issues include:
+- where the weapon was stored (glove box, console, case, trunk)
+- whether it was readily accessible to the driver or passengers
+- whether the vehicle stop and search were lawful
+- whether the driver made statements about ownership or knowledge
 
-If you’re facing weapons charges in Delaware or Franklin County, contact Mango Law for a confidential consultation.
+## Location restrictions and posted rules
+
+Some locations have special rules, and private property owners can also restrict carry. If a case involves a restricted area, the defense may focus on notice, signage, and whether the person knew or should have known the rules. These issues are fact-specific and can vary by court.
+
+## Weapons under disability
+
+Ohio law prohibits possession of firearms when a person is under a legal disability. Disability status can be triggered by certain felony convictions, drug offenses, or protection orders. The analysis depends on the specific disqualifying event and whether it is still in effect.
+
+If a disability applies, possession can be charged even if the weapon was not used. Federal law can also overlap in some cases, which is why early legal review matters.
+
+[VISUAL:FIREARM_CONSEQUENCES]
+
+## Common scenarios that trigger charges
+
+Common fact patterns include:
+- a firearm discovered during a traffic stop
+- a weapon stored in a vehicle that appears accessible to the driver
+- a possession allegation tied to a prior conviction or protection order
+- a family or domestic dispute where weapons are present
+
+Each scenario turns on small details like location, access, and knowledge. Those details are where defenses are built.
+
+## Common evidence issues
+
+Weapons cases often depend on how possession is proven. Being near a weapon is not always the same as knowing possession. Defense review commonly focuses on:
+- constructive possession vs actual possession
+- who controlled the location where the weapon was found
+- whether the weapon was secured or accessible
+- whether statements or admissions were properly recorded
+
+## Traffic stops and searches
+
+Many weapons cases begin with a traffic stop. The legality of the stop and the scope of the search can affect whether evidence is admissible. Consent, plain-view observations, and inventory searches each follow different rules, and minor mistakes in procedure can matter later.
+
+## Federal overlap and collateral consequences
+
+Some weapons allegations can trigger federal exposure, especially when a disability status exists. In addition to criminal penalties, convictions can affect employment, licensing, and future firearm rights. These long-term consequences should be considered early in the case.
+
+## What varies by county and court
+
+Local practice can affect outcomes:
+- charging decisions and plea policies
+- how courts handle diversion or reduction options
+- judicial expectations for compliance or mitigation
+- typical sentencing ranges and supervision terms
+
+## Defense strategy overview
+
+Common defense themes include:
+- challenging the legality of the stop or search
+- disputing knowledge or possession
+- applying statutory exceptions or definitions correctly
+- confirming whether a disability status applies
+- negotiating alternatives that reduce collateral consequences
+
+## What to gather early
+
+If you are charged, it can help to preserve:
+- the citation and court paperwork
+- body camera or dash camera references
+- photos of the vehicle and storage location
+- names of any passengers or witnesses
+- prior case records if disability status is alleged
+
+## Conclusion
+
+Ohio weapons law is technical and fact-specific. The most reliable path is to confirm the exact subsection charged, review the stop and search details, and evaluate the disability status or transport rules that apply to your case.
 
 ---
 
-*This article is for educational purposes and does not constitute legal advice. Ohio weapons law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+This article is for educational purposes and does not constitute legal advice. Ohio weapons law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.
+`,
     category: 'Criminal Defense',
     date: '2024-12-06',
     author: 'Dominic Mango',
@@ -1755,6 +1819,11 @@ If you’re facing weapons charges in Delaware or Franklin County, contact Mango
       {
         label: 'Ohio Revised Code § 2923.16 (Improperly handling firearms in a motor vehicle)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.16',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2923.11 (Weapons definitions)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2923.11',
         type: 'primary',
       },
       {
@@ -2290,11 +2359,15 @@ Under U.S. Supreme Court case law, sobriety checkpoints can be constitutional wh
 
 Checkpoint locations and frequency can vary widely by agency and season. Our map includes only publicly announced checkpoints we’ve collected, and it is not a prediction tool.
 
+[VISUAL:HOTSPOT_FACTORS]
+
 ## What to Expect at an Ohio DUI Checkpoint
 
 ### How Checkpoints Operate
 
 To be lawful, checkpoints are generally run under a neutral plan and marked so drivers can safely navigate the stop. The precise rules and best defenses can be fact-specific, so if something about a checkpoint seemed unsafe or arbitrary, talk to an attorney about the details.
+
+[VISUAL:CHECKPOINT_PROCESS]
 
 ### Initial Screening
 
@@ -2316,6 +2389,8 @@ During the initial stop, officers observe:
 If officers suspect impairment, they may direct you to a secondary screening area for additional questioning and possible field sobriety tests.
 
 	## Your Rights at a DUI Checkpoint
+
+[VISUAL:CHECKPOINT_RIGHTS]
 
 	### Stopping and directions
 
@@ -2340,7 +2415,7 @@ In Ohio, field sobriety tests (walk-and-turn, one-leg stand, horizontal gaze nys
 
 ### Refusing Chemical Tests Has Consequences
 
-If arrested and asked to submit to a breath, blood, or urine test, refusal can trigger an administrative license suspension under Ohio's implied consent law. The length and consequences can depend on your history and the circumstances, and the administrative process is separate from the criminal case.
+If arrested and asked to submit to a breath, oral fluid, blood/serum/plasma, or urine test, refusal can trigger an administrative license suspension under Ohio's implied consent law. The length and consequences can depend on your history and the circumstances, and the administrative process is separate from the criminal case.
 
 ## What varies by county and agency
 
@@ -2384,7 +2459,7 @@ Checkpoint practices change and vary by agency. Focus on safety, keep the intera
     category: 'OVI/DUI Defense',
     date: '2024-12-08',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-17',
+    lastVerified: '2025-12-27',
     sources: [
       {
         label: 'Michigan Dept. of State Police v. Sitz, 496 U.S. 444 (1990)',
