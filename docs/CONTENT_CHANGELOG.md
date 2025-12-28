@@ -34,6 +34,18 @@ Regression checklist:
 Approval token: APPROVED: understanding-ovi-dui-charges-ohio -- restore depth + visuals + EEAT -- major -- 2025-12-27T17:32-0500
 Rollback notes: commit pending
 
+Date/time: 2025-12-28 12:40 EST
+Post slug and title: ex-parte-protection-orders-ohio-defense | Ex Parte Protection Orders in Ohio: What to Do When Accused Without Notice
+Change type: major
+Summary of change: Implemented Option 2 expansion with communication playbook, procedural abuse framing, custody overlap guidance, venue notes, evidence packet guidance, FAQ, and added OFW/TP links and updated sources.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: ex-parte-protection-orders-ohio-defense -- option-2 expansion + tools links -- major -- 2025-12-28T12:40-0500
+Rollback notes: commit pending
 Date/time: 2025-12-27 22:23 EST
 Post slug and title: motion-practice-criminal-defense | The Power of Motion Practice in Criminal Defense
 Change type: major
