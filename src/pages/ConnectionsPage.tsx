@@ -448,6 +448,7 @@ export default function ConnectionsPage() {
       const preferredResource =
         (existingResource && resourceOptions.some((o) => o.value === existingResource) ? existingResource : '') ||
         inferPreferredResource(integrationType, resourceOptions);
+      
       setResourceSelections((prev) => ({
         ...prev,
         [integrationType]: {
@@ -456,6 +457,42 @@ export default function ConnectionsPage() {
           resourceValue: preferredResource || '',
         },
       }));
+
+      // Auto-save if we found a high-confidence match and no resource was previously saved
+      const currentIntegration = integration;
+      if (currentIntegration && !existingResource && preferredResource && /mango/i.test(preferredResource)) {
+        console.log(`Auto-persisting inferred resource for ${integrationType}: ${preferredResource}`);
+        
+        const selection = { accountValue: preferredAccount, resourceValue: preferredResource };
+        const integrationId = currentIntegration.id;
+
+        if (integrationType === 'business_profile') {
+          await supabase
+            .from('google_integrations')
+            .update({ 
+              account_id: selection.accountValue || null, 
+              location_id: selection.resourceValue, 
+              updated_at: new Date().toISOString() 
+            })
+            .eq('id', integrationId);
+        } else {
+          const existingMeta = currentIntegration.metadata || {};
+          const nextMeta = { ...existingMeta } as Record<string, unknown>;
+          if (integrationType === 'search_console') nextMeta.siteUrl = selection.resourceValue;
+          if (integrationType === 'analytics') nextMeta.propertyId = selection.resourceValue;
+          if (integrationType === 'tag_manager') nextMeta.containerId = selection.resourceValue;
+
+          await supabase
+            .from('google_integrations')
+            .update({ 
+              account_id: supportsAccountSelection(integrationType) ? (selection.accountValue || null) : currentIntegration.account_id, 
+              metadata: nextMeta, 
+              updated_at: new Date().toISOString() 
+            })
+            .eq('id', integrationId);
+        }
+        await loadIntegrations();
+      }
     } catch (error) {
       console.error('Access check error:', error);
       const checkedAt = new Date().toISOString();
