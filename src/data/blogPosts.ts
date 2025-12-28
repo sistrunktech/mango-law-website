@@ -22,73 +22,112 @@ export const blogPosts: BlogPost[] = [
     title: 'Bond & Jail Information in Delaware County, Ohio',
     excerpt: 'If someone is arrested for OVI or another charge in Delaware County, this guide explains how bail works in Ohio and how to post bond to secure a release.',
     imageUrl: '/images/generated/criminal-defense-hero.png',
-    content: `Delaware County citizens regularly ask what happens if someone is arrested for an OVI or another criminal charge. This guide answers two practical questions: **how a judge decides release conditions (bail)** and **how to post bond in Delaware County to secure a loved one’s release**.
+    content: `Delaware County residents often ask what happens after an arrest and how bond is set. This guide explains the difference between bail and bond, how Ohio courts decide release conditions, and where to post bond in Delaware County.
 
-## Bail vs. bond (what people mean)
+## Bail vs bond
 
-**Bail** is the set of release conditions the court orders to help ensure the accused returns to court and to address safety risks. Bail can involve money, but it can also include non-financial conditions.
+Bail is the amount or conditions the court sets to ensure the person returns to court. Bond is the method used to post bail (cash, recognizance, or surety). Ohio courts evaluate release under [ORC 2937.222](https://codes.ohio.gov/ohio-revised-code/section-2937.222), which lists factors such as the alleged offense, prior record, community ties, and risk to public safety.
 
-**Bond** is the mechanism used to satisfy the bail order (for example, signing a recognizance bond, posting a cash/deposit bond, or using a surety/bondsman).
+## What happens after arrest and booking
 
-## How Ohio courts decide bail
+After an arrest, the person is booked at the jail. Booking usually includes identification, fingerprints, and a brief health screening. The case is then routed to the appropriate court for bond determination and initial hearing scheduling.
 
-In Ohio, judges typically consider factors such as:
+## How judges decide release conditions
 
-- the seriousness of the charge(s)
-- community ties (work, family, housing)
-- criminal history and prior failures to appear
-- safety concerns and any alleged threats to victims or witnesses
+Courts consider multiple factors, including:
+- seriousness of the charge
+- prior record and pending cases
+- community ties and employment
+- risk to alleged victims or witnesses
+- compliance history in prior cases
 
-Ohio law allows release on recognizance in appropriate cases, and it also allows more restrictive conditions when necessary. In limited circumstances, courts may order detention without bail after making required findings under Ohio law.
+The decision can include financial bail, non-financial conditions, or detention in serious cases.
 
-## Common bond types in Ohio
+## Common types of bond in Ohio
 
-### Recognizance bond (O.R./ROR)
+### Recognizance bond (ROR)
 
-Often the least restrictive option. The person is released based on a written promise to appear (and any conditions the judge imposes). No cash deposit is required.
+A recognizance bond releases someone on a promise to appear. No money is posted, but failure to appear can lead to a warrant and additional charges.
 
-### Cash / deposit (“10%”) bond
+### Cash or 10% bond
 
-In many courts, a judge may permit a **deposit bond** where a portion of the bail amount (commonly described as “10%”) is deposited with the clerk. Whether any part is refunded and whether costs/fees are deducted depends on court orders and local practice.
+In many cases, the court allows a 10% deposit of the bond amount with the clerk. The remaining amount is typically secured by the court and may be refunded if all court appearances are completed (subject to court rules and fees).
 
-### Surety bond (bail bondsman)
+### Surety bond
 
-A surety bond is posted through a licensed bonding company. The bondsman typically charges a **non-refundable fee**. If the defendant fails to appear, the bondsman can be required to pay the bond and may pursue the defendant under applicable law and contract terms.
+A surety bond uses a licensed bond agent. The bondsman charges a fee that is typically non-refundable. This option is often used when the full cash deposit is not feasible.
 
-## How to post bond in Delaware County
+## Bond conditions beyond money
 
-The Delaware County Sheriff’s Office publishes guidance for families on its **Inmates** page. In short: **bond is paid at the Delaware County Municipal Court building (not at the jail)**.
+Courts can impose non-financial conditions, such as no-contact orders, travel limits, or alcohol monitoring. These conditions can affect release timing and daily life, so it is important to review them carefully.
 
-- **Delaware County Municipal Court**: 70 N. Union St., Delaware, OH 43015
+## Delaware County: where to post bond
 
-After bond is paid and the court processes the release, the jail must receive the proper paperwork before release. The Sheriff’s Office notes the process can take **up to four hours**, depending on the court’s caseload.
+The Delaware County Sheriff’s Office does not accept bond payments at the jail. Bond is posted through the **Delaware County Municipal Court** at **70 N. Union Street, Delaware, OH 43015**. After payment, the court sends release paperwork to the jail. Release can take time after paperwork is received.
 
 ## Step-by-step: posting bond for a loved one
 
-1. **Confirm the bond amount and type.** Use the case number (if you have it) and call the clerk to confirm the amount and what kind of bond is required.
-2. **Decide how you’ll post bond.** Depending on the judge’s order, you may be able to post a cash/deposit bond, or you may need a surety agent.
-3. **Go to the court with ID and payment.** Call ahead to confirm accepted payment methods and hours.
-4. **Wait for release processing.** Release timing varies; it can take hours after the jail receives the court’s paperwork.
+1. **Confirm bond amount and type** with the Municipal Court clerk.
+2. **Choose payment method** (cash deposit, surety bond, or recognizance if approved).
+3. **Post bond at the Municipal Court** with valid ID and accepted payment.
+4. **Wait for release processing** once the jail receives court paperwork.
+
+## Release timing and pickup
+
+Release timing varies based on jail processing and court paperwork. If you plan to pick someone up, bring ID and be prepared for a waiting period after the release order is transmitted.
+
+## Bond modification or review
+
+In some cases, counsel can request a bond modification or review hearing. The request may focus on new information, community ties, or changes in risk factors.
+
+## What varies by county and court
+
+Even within Ohio, bond procedures can vary by:
+- court schedules and staffing
+- local bond policies
+- charge type and record history
+- court-specific payment methods
+
+## Costs and practical considerations
+
+Bond decisions are separate from eventual fines or penalties. When using a surety bond, the fee is usually not refundable. When using a cash deposit, refund rules are set by the court and can include fees or administrative deductions.
+
+[VISUAL:COST_BREAKDOWN]
+
+## What to bring and ask
+
+When posting bond, bring a valid ID and confirm accepted payment methods. Consider asking:
+- what payment forms are accepted today
+- when paperwork will be sent to the jail
+- how to confirm release status
 
 ## Important local contact information
 
-- **Delaware County Municipal Court Clerk**: 70 N. Union St., Delaware, OH 43015 • (740) 203-1550
-- **Delaware County Sheriff’s Office Jail**: 844 U.S. Rt. 42 N., Delaware, OH 43015 • (740) 833-2840
+- **Delaware County Municipal Court Clerk**: 70 N. Union St., Delaware, OH 43015 · (740) 203-1550
+- **Delaware County Sheriff’s Office Jail**: 844 U.S. Rt. 42 N., Delaware, OH 43015 · (740) 833-2840
 
-## Additional notes
+## After release
 
-- **Surety bond fees aren’t refundable.** Paying a bondsman is typically a fee-based service.
-- **Recognizance depends on the judge’s assessment.** It’s usually reserved for lower-risk situations.
-- **Release conditions can include restrictions.** Courts may impose conditions like no-contact orders, electronic monitoring, or travel restrictions.
+After release, the person should keep all paperwork and note future court dates carefully. Missing a hearing can trigger a warrant, so calendar notices matter now.
 
 ## Conclusion
 
-Understanding bail and bond can reduce stress and help your family move faster after an arrest. If you have questions about the bond order, court dates, or how to protect someone’s rights after an arrest, talk to a criminal defense attorney as early as possible.`,
+Bond decisions are time-sensitive and local-process driven. Confirm the bond type, follow the court’s payment instructions, and ask about release timelines. If the case is complex or high-risk, speak with counsel about bond modification options.
+
+---
+
+This article is for educational purposes and does not constitute legal advice. Consult a qualified Ohio attorney about your situation.
+`,
     category: 'Criminal Defense',
     date: '2025-12-18',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-18',
+    lastVerified: '2025-12-27',
     sources: [
+      {
+        label: 'Ohio Revised Code § 2937.222 (Bail decisions)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.222',
+        type: 'primary',
+      },
       {
         label: 'Ohio Crim.R. 46 (Bail)',
         url: 'https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/criminal/criminalprocedure.pdf',
@@ -720,34 +759,122 @@ If you're facing criminal charges in Delaware or Franklin County, don't wait. Ea
     title: 'Drug Possession vs. Trafficking: Understanding Ohio Drug Crime Charges',
     excerpt: 'Learn the critical differences between possession and trafficking charges in Ohio, and how these distinctions affect your defense strategy.',
     imageUrl: '/images/generated/blog-drug-possession-trafficking.png',
-    content: `Ohio drug charges often come down to the statutory distinction between **possession** and **trafficking**—and the specific facts the state can prove.
+    content: `Ohio drug cases often turn on one core question: is the evidence consistent with personal possession, or does it indicate trafficking? The answer changes the charge level, penalties, and defense strategy.
 
-## What Varies (and why charging can differ)
+## Possession vs trafficking (overview)
 
-- the substance and how it’s classified/defined
-- the amount involved and whether it crosses statutory “bulk amount” thresholds
-- evidence of sale/intent (communications, packaging, cash, surveillance, admissions)
-- where the incident happened (some locations can trigger enhanced penalties)
-- your record and eligibility for diversion or treatment options
-- constitutional issues (stop, search, seizure, and statements)
+Under Ohio law, possession is addressed in [ORC 2925.11](https://codes.ohio.gov/ohio-revised-code/section-2925.11) and trafficking in [ORC 2925.03](https://codes.ohio.gov/ohio-revised-code/section-2925.03). The same substance can lead to very different charges depending on the facts.
 
-## Drug Possession (ORC § 2925.11)
+[VISUAL:POSSESSION_VS_TRAFFICKING]
 
-Possession cases focus on whether the state can prove you **knowingly** had control over the substance (actual or constructive possession). Common defenses include lack of knowledge, lack of control, and suppression issues tied to the stop/search.
+## What counts as possession
 
-## Drug Trafficking (ORC § 2925.03)
+Possession is not just physical possession. Ohio law recognizes both actual and constructive possession, which means the state may argue you exercised control even if the substance was not on your person. This is a common point of dispute, especially in shared spaces or vehicles.
 
-Trafficking can include selling, offering to sell, preparing for shipment, shipping, transporting, delivering, distributing, or possessing with intent to distribute—depending on the subsection and the proof. Ohio’s statutes also use tiered thresholds that can elevate the charge level.
+## What counts as trafficking
 
-## “Bulk amount” and thresholds (ORC § 2925.01)
+Trafficking includes selling, offering to sell, or preparing for distribution. In some cases, the state relies on surrounding evidence (packaging, statements, or digital messages) rather than a direct sale. The prosecution must still prove intent beyond a reasonable doubt.
 
-Ohio defines “bulk amount” and related measurement concepts in statute. The exact thresholds vary by substance and can be updated over time—so confirm the current definitions and the lab’s reported weights against the statute and discovery.
+## Bulk amount thresholds
 
-## Treatment alternatives (when eligible)
+Ohio defines “bulk amounts” in [ORC 2925.01](https://codes.ohio.gov/ohio-revised-code/section-2925.01). The thresholds differ by substance and can change by statute, so verify the exact definitions for the drug at issue.
 
-Ohio’s intervention-in-lieu-of-conviction statute can be an option in some cases, depending on the charge and your history. Eligibility is fact-specific and should be reviewed with counsel early.
+## Evidence that often matters
 
-If you’re facing drug possession or trafficking charges in Delaware or Franklin County, contact Mango Law for a confidential consultation.`,
+Cases often turn on:
+- the amount and packaging
+- text messages or communications
+- cash, scales, or distribution materials
+- statements to law enforcement
+- lab testing and chain of custody
+
+## Search and seizure issues
+
+Many drug cases rise or fall on how the evidence was obtained. If a stop, search, or warrant was improper, evidence can be challenged. These issues are often addressed through early motion practice and a detailed review of the body-cam timeline.
+
+## Lab testing and chain of custody
+
+The state must prove the substance and quantity through lab testing. Defense counsel often reviews:
+- lab reports and testing procedures
+- sample handling and storage
+- chain-of-custody documentation
+
+Errors or gaps in the chain can affect admissibility and leverage.
+
+## Informants and controlled buys
+
+Some trafficking cases involve informants or controlled buys. The reliability of informants, the audio or video record, and the chain of evidence can be key issues. Defense counsel often reviews these materials closely.
+
+## Shared spaces and co-defendants
+
+When multiple people live in or have access to a location, constructive possession becomes a major dispute. The state must still prove who had control or intent, not just who was present.
+
+## Forfeiture and property issues
+
+Some drug cases involve seizure or forfeiture of cash, vehicles, or other property. The rules and procedures can vary, and forfeiture is often a separate legal process from the criminal case.
+
+## What varies by county and court
+
+Local practice can influence outcomes, including:
+- diversion availability
+- treatment court eligibility
+- how prosecutors evaluate intent
+- local sentencing norms and plea expectations
+
+## Common defense themes
+
+Defense strategies depend on the evidence, but common themes include:
+- challenging the legality of the stop or search
+- contesting constructive possession
+- disputing intent to distribute
+- reviewing lab procedures and chain of custody
+
+[VISUAL:DEFENSE_STRATEGIES]
+
+## State vs federal exposure
+
+Most drug cases are handled in Ohio state courts, but certain facts can trigger federal attention. Interstate activity, large-scale distribution allegations, or federal task force involvement can change the forum and the stakes.
+
+## Trial vs plea considerations
+
+Whether a case proceeds to trial or resolves by plea often depends on evidence strength, lab results, and search issues. Early review of discovery helps clarify realistic outcomes and negotiation leverage.
+
+## Diversion and treatment options
+
+Some defendants may be eligible for intervention in lieu of conviction under [ORC 2951.041](https://codes.ohio.gov/ohio-revised-code/section-2951.041). Eligibility is fact-specific and often depends on charge level and prior record.
+
+[VISUAL:DIVERSION_OPTIONS]
+
+## Cost and penalty structure (varies)
+
+Drug cases can involve multiple cost layers:
+- statutory penalties tied to offense level
+- supervision or treatment requirements
+- potential forfeiture consequences
+- collateral costs such as employment and licensing impacts
+
+## Record sealing considerations
+
+Some outcomes can be sealed under Ohio law, but eligibility depends on the charge, the result, and your record. If sealing matters for employment or licensing, discuss that early so strategy aligns with long-term goals.
+
+## Collateral consequences
+
+Drug convictions can affect employment, licensing, and housing. These impacts are often fact-specific, but they are important to consider when evaluating plea options or diversion paths.
+
+## Practical steps after a charge
+
+- Preserve documents and communications.
+- Avoid discussing the case on social media or with third parties.
+- Speak with counsel before providing statements.
+
+## Conclusion
+
+Possession and trafficking cases are evidence-driven. The statute, the substance, and the surrounding facts determine the charge and the best defense strategy.
+
+---
+
+This article is for educational purposes and does not constitute legal advice. Consult a qualified Ohio defense attorney about your situation.
+`,
     category: 'Drug Crimes',
     date: '2024-11-25',
     author: 'Dominic Mango',
@@ -780,81 +907,128 @@ If you’re facing drug possession or trafficking charges in Delaware or Frankli
     title: 'White Collar Crime Defense: What You Need to Know',
     excerpt: 'Facing fraud, embezzlement, or other white collar charges? Learn about defense strategies and how to protect your professional reputation.',
     imageUrl: '/images/generated/blog-white-collar-defense.png',
-    content: `White collar crimes are non-violent offenses typically committed in business or professional settings. These cases can be high-stakes, document-heavy, and reputation-sensitive.
+    content: `White collar investigations often involve complex records, long timelines, and financial detail. This guide explains common Ohio statutes, typical evidence issues, and how defense strategy is built.
 
-## What Varies (and why outcomes differ)
+## Common Ohio white collar statutes
 
-- whether the case is state or federal
-- the alleged conduct and what intent the state must prove
-- the amount and accounting methodology (and whether the state’s math is disputed)
-- the quality of the documentary record (emails, logs, contracts, bank records)
-- collateral consequences (licensing, employment, immigration, civil exposure)
+Charges often arise under:
+- Theft under [ORC 2913.02](https://codes.ohio.gov/ohio-revised-code/section-2913.02)
+- Forgery under [ORC 2913.31](https://codes.ohio.gov/ohio-revised-code/section-2913.31)
+- Identity fraud under [ORC 2913.49](https://codes.ohio.gov/ohio-revised-code/section-2913.49)
+- Tampering with records under [ORC 2913.42](https://codes.ohio.gov/ohio-revised-code/section-2913.42)
 
-## Common White Collar Charges in Ohio
+The level of the offense often depends on the alleged loss amount and the facts that support intent.
 
-### Fraud
-- Credit card fraud
-- Identity theft
-- Insurance fraud
-- Mortgage fraud
-- Securities fraud
+## What prosecutors try to prove
 
-### Embezzlement
-Taking property entrusted to your care for personal use, often in employment contexts.
+Most cases focus on:
+- whether the conduct was intentional or negligent
+- how the financial loss is calculated
+- whether records support the alleged timeline
+- who had access to the accounts or documents
 
-### Money Laundering
-Concealing the source of illegally obtained money through legitimate business transactions.
+## Evidence that matters early
 
-### Tax Evasion
-Willfully avoiding tax obligations through fraud or deception.
+- accounting records and audit reports
+- emails, texts, and internal communications
+- access logs and device records
+- witness statements and business policies
 
-## Unique Challenges in White Collar Defense
+## Investigations and subpoenas
 
-### Complex Evidence
-White collar cases often involve:
-- Thousands of documents
-- Electronic records and emails
-- Accounting records
-- Expert testimony
-- Technical financial concepts
+White collar cases often start with document requests, subpoenas, or internal audits. Early legal guidance can help preserve records, avoid misunderstandings, and ensure compliance without creating unnecessary exposure.
 
-### Federal Involvement
-Many white collar cases are prosecuted federally, with different rules, harsher penalties, and more resources behind the prosecution.
+## Business disputes vs criminal conduct
 
-### Professional Consequences
-Beyond criminal penalties, white collar convictions can result in:
-- Loss of professional licenses
-- Inability to work in your field
-- Reputational damage
-- Civil liability
+Some cases begin as business disputes or employment conflicts. The line between civil liability and criminal conduct can depend on intent, documentation, and how the records are interpreted.
 
-## Defense Strategies
+## What varies by county and court
 
-### Early Investigation
-We often get involved before charges are filed, helping clients navigate:
-- Federal investigations
-- Grand jury subpoenas
-- Search warrant execution
-- Interview requests
+Local practice can influence outcomes, including:
+- charging thresholds by loss amount
+- restitution expectations
+- diversion or plea options
+- timeline for document-heavy discovery
 
-### Challenging the Case
-- Demonstrating lack of intent
-- Exposing accounting errors
-- Questioning expert analyses through [motion practice](/blog/motion-practice-criminal-defense)
-- Establishing good faith
+## Grand jury and charging timeline
 
-### Mitigation
-When appropriate, we work to:
-- Demonstrate cooperation
-- Make restitution
-- Show rehabilitation
-- Negotiate favorable pleas
+Some cases proceed through a grand jury after a long investigation. The timing can affect negotiation options, evidence preservation, and public exposure.
 
-## Protecting Your Future
+## Civil exposure and professional licensing
 
-White collar charges require immediate, sophisticated legal representation. At Mango Law, we understand the business context, can analyze complex financial records, and know how to challenge the prosecution's case through strategic [motion practice](/blog/motion-practice-criminal-defense) and expert analysis.
+White collar allegations can trigger parallel civil disputes, employment actions, or licensing reviews. These issues often move on a separate timeline and should be considered alongside the criminal case.
 
-If you're under investigation or have been charged with a white collar offense, contact us immediately. Every day matters in these cases.`,
+## Internal investigations and audit trails
+
+Companies often conduct internal reviews before charges are filed. Audit reports, access logs, and policy documents can shape the narrative, so it is important to review them carefully.
+
+## Document retention and preservation
+
+The preservation of emails, spreadsheets, and financial records matters. Missing or altered records can create separate allegations, so a defensible preservation plan is critical once an investigation is known.
+
+## Sentencing and mitigation focus
+
+When liability is likely, mitigation can matter. Restitution plans, community ties, and the absence of intent are common areas of focus in negotiations and sentencing arguments.
+
+## Common defense themes
+
+Defense strategies are fact-specific, but often include:
+- challenging loss calculations
+- demonstrating lack of criminal intent
+- highlighting policy failures or shared access
+- contesting the reliability of business records
+
+[VISUAL:WHITE_COLLAR_DEFENSE_STRATEGIES]
+
+## Penalty drivers (overview)
+
+Offense level and consequences depend on the statute and the facts. Loss amount, victim count, and restitution can affect the legal exposure and negotiation posture.
+
+[VISUAL:WHITE_COLLAR_PENALTIES]
+
+## Restitution and repayment
+
+Restitution is common in white collar cases. The timing, amount, and feasibility of repayment can influence negotiations and sentencing recommendations.
+
+## Federal exposure considerations
+
+Some cases trigger federal interest when conduct crosses state lines, involves federal programs, or implicates federal statutes. The forum can affect sentencing, discovery, and resolution paths.
+
+## Loss valuation disputes
+
+Loss calculations can vary based on accounting methods and assumptions. Defense counsel often reviews how losses were calculated and whether the methodology matches the statute and evidence.
+
+## Reputation and employment impact
+
+Even before a case resolves, allegations can affect professional standing and employment. Planning for this impact is part of a comprehensive defense strategy.
+
+## Interviews and proffer sessions
+
+Investigators may request interviews or proffer sessions. These discussions can carry risk if facts are unclear or records are incomplete. Counsel can help evaluate whether and how to participate.
+
+## Practical steps if you are investigated
+
+- Preserve records and do not delete files.
+- Avoid speaking with investigators without counsel.
+- Identify who had access to the accounts or systems.
+- Document any internal controls or policies that matter.
+
+## Parallel civil disputes
+
+Some cases involve simultaneous civil litigation over contracts, employment, or restitution. Decisions in one forum can affect the other, so it helps to coordinate strategy across both tracks.
+
+## Early risk assessment
+
+A focused review of the documents, access controls, and timeline can help identify exposure before charges are filed. This early assessment often shapes whether cooperation, negotiation, or litigation is the best path. It also helps identify the most important documents to preserve.
+
+## Conclusion
+
+White collar cases require careful review of records, intent, and loss calculations. Early legal guidance can prevent misunderstandings from turning into criminal exposure.
+
+---
+
+This article is for educational purposes and does not constitute legal advice. Consult a qualified Ohio defense attorney about your situation.
+`,
     category: 'White Collar Crimes',
     date: '2024-11-20',
     author: 'Dominic Mango',
@@ -871,8 +1045,18 @@ If you're under investigation or have been charged with a white collar offense, 
         type: 'primary',
       },
       {
+        label: 'Ohio Revised Code § 2913.31 (Forgery)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.31',
+        type: 'primary',
+      },
+      {
         label: 'Ohio Revised Code § 2913.49 (Identity fraud)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.49',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2913.42 (Tampering with records)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.42',
         type: 'primary',
       },
     ],
@@ -1286,40 +1470,129 @@ This article is for educational purposes and does not constitute legal advice. O
     title: 'Ex Parte Protection Orders in Ohio: What to Do When Accused Without Notice',
     excerpt: 'What an ex parte protection order is in Ohio, what varies by case, and practical next steps before the full hearing.',
     imageUrl: '/images/generated/blog-ex-parte-protection-orders.png',
-    content: `Ex parte civil protection orders (CPOs) can be issued quickly, sometimes without the respondent present, based on the petition and supporting materials. If you’ve been served, treat it seriously and prepare for the full hearing.
+    content: `Ex parte protection orders in Ohio can be issued quickly and without the respondent present. This guide explains how these orders work, what restrictions are common, and how the full hearing process typically unfolds.
 
-## What Varies (case to case)
+## Types of civil protection orders
 
-- which type of order is at issue and which statute applies
-- what relief the court ordered (no-contact, stay-away distance, residence, custody-related terms)
-- hearing timing and local court procedures
-- what evidence exists (messages, witnesses, video, prior incidents)
-- collateral consequences (employment, licensing, firearms, family court)
+Common statutes include:
+- Domestic violence CPOs under [ORC 3113.31](https://codes.ohio.gov/ohio-revised-code/section-3113.31)
+- Civil stalking/sexually oriented offense CPOs under [ORC 2903.214](https://codes.ohio.gov/ohio-revised-code/section-2903.214)
 
-## Key statutes to review
+The correct statute depends on the relationship and the allegations.
 
-- Domestic violence CPOs: [ORC § 3113.31](https://codes.ohio.gov/ohio-revised-code/section-3113.31)
-- Menacing by stalking orders: [ORC § 2903.214](https://codes.ohio.gov/ohio-revised-code/section-2903.214)
-- Violating a protection order: [ORC § 2919.27](https://codes.ohio.gov/ohio-revised-code/section-2919.27)
+## What “ex parte” means
 
-Federal firearms restrictions can also apply in certain situations; see [18 U.S.C. § 922](https://www.law.cornell.edu/uscode/text/18/922).
+An ex parte order is temporary and issued without hearing from the respondent first. The court uses the petition and affidavit to decide whether to grant immediate relief until a full hearing can be held.
 
-## Practical next steps
+## Common restrictions
 
-- Read the order carefully and follow it.
-- Avoid any contact that could be viewed as a violation.
-- Preserve communications and other evidence.
-- Prepare for the full hearing with counsel (timeline, witnesses, exhibits).
+Ex parte orders often include no-contact requirements and location restrictions. These terms can be broad, so it is important to read every line of the order carefully.
 
-If you’re dealing with a protection-order matter in Delaware or Franklin County, contact Mango Law for a confidential consultation.
+[VISUAL:EX_PARTE_RESTRICTIONS]
+
+## How service works
+
+Orders are typically served by law enforcement. Once served, the order is effective immediately. Keep a copy with you, and follow the terms exactly until the court modifies or terminates it.
+
+## Firearm and property issues
+
+Some orders require surrender of firearms or limit access to shared property. The order will specify the scope and timing. If the order affects housing or work access, note those impacts for the hearing.
+
+## Temporary orders vs long-term orders
+
+An ex parte order is temporary. The full hearing determines whether the order continues and under what terms. This is the stage where evidence and testimony are most important.
+
+## The full hearing
+
+A full hearing is where both sides can present evidence. This is usually the best opportunity to challenge the allegations, clarify context, and request modifications or dismissal.
+
+[VISUAL:HEARING_TIMELINE]
+
+## Evidence that matters
+
+Useful evidence may include:
+- texts, emails, and call logs
+- photos or videos
+- witness statements
+- location records
+
+Organizing this material early helps prepare for the hearing.
+
+## What varies by county and court
+
+Local practice can affect:
+- hearing timelines
+- scope of no-contact terms
+- firearm surrender procedures
+- use of remote hearings
+
+## Common defenses and issues
+
+Defense themes often include:
+- lack of credible evidence
+- inconsistent timelines or statements
+- misuse of the order for leverage in custody or housing disputes
+- overbroad restrictions that exceed the statutory purpose
+
+[VISUAL:CPO_MISUSE_SCENARIOS]
+
+## Child custody and parenting time
+
+Protection orders can affect parenting time and exchange arrangements. If children are involved, courts may impose specific contact or exchange rules that must be followed precisely.
+
+## Outcomes after the hearing
+
+After the full hearing, the court can terminate the order, modify it, or issue a longer-term order. The exact terms depend on the evidence and the statutory standard.
+
+## Communication pitfalls
+
+Indirect contact can include messages through friends, social media reactions, or attempts to coordinate child exchanges without court-approved methods. These issues are common sources of accidental violations.
+
+## Property return and access issues
+
+Orders can affect access to shared homes, vehicles, or personal property. If you need access, request a court-approved method rather than attempting to resolve it informally.
+
+## Violations and criminal exposure
+
+Violating a protection order is a separate criminal offense under [ORC 2919.27](https://codes.ohio.gov/ohio-revised-code/section-2919.27). Even indirect contact can be charged, so compliance is critical while a case is pending.
+
+## Practical steps if you are served
+
+- Do not contact the petitioner directly or indirectly.
+- Keep a copy of the order with you.
+- Document any factual disputes or evidence.
+- Speak with an attorney before the full hearing.
+
+[VISUAL:CPO_DOS_DONTS]
+
+## Modification requests
+
+In some cases, a court may modify an order to clarify contact methods, property access, or parenting schedules. Modification requests are fact-specific and typically require a hearing.
+
+## Documenting compliance
+
+Keep a record of compliance with the order, including custody exchanges, scheduled communications, and any court-approved contact. This documentation can be helpful if disputes arise later.
+
+## Record implications
+
+Protection orders are civil, but they can appear in background checks. This can matter for housing or certain employment screenings. If employment or licensing is a concern, ask counsel how the order may be referenced and whether any records can be sealed or limited.
+
+## After the order expires
+
+When a temporary order expires or a court terminates it, keep copies of the final entry. If you need to clarify that the order is no longer in effect, the court record is the best proof.
+
+## Conclusion
+
+Ex parte protection orders are temporary but serious. Understanding the statute, the hearing timeline, and the specific restrictions is the best way to protect your rights.
 
 ---
 
-*This article is for educational purposes and does not constitute legal advice. Protection-order law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+This article is for educational purposes and does not constitute legal advice. Consult a qualified Ohio attorney about your situation.
+`,
     category: 'Protection Orders',
     date: '2024-12-07',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-17',
+    lastVerified: '2025-12-27',
     sources: [
       {
         label: 'Ohio Revised Code § 3113.31 (Domestic violence civil protection orders)',
@@ -1385,7 +1658,7 @@ If you’re facing weapons charges in Delaware or Franklin County, contact Mango
     category: 'Criminal Defense',
     date: '2024-12-06',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-17',
+    lastVerified: '2025-12-27',
     sources: [
       {
         label: 'Ohio Revised Code Chapter 2923 (Weapons control)',
@@ -1419,42 +1692,137 @@ If you’re facing weapons charges in Delaware or Franklin County, contact Mango
 	    title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
 	    excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
 	    imageUrl: '/images/generated/blog-sex-crimes-defense.png',
-	    content: `Sex crime allegations are high-stakes and fact-sensitive. Charges, defenses, and potential registration consequences depend on the specific statute and the evidence in the case.
+	    content: `Sex crime allegations carry high stakes, and the process can move quickly. This guide explains the core Ohio statutes, how registration works, and why early legal review matters.
 
-## What Varies (case to case)
+## Ohio’s sex offense statutes (overview)
 
-- the specific offense and the elements the state must prove
-- age/relationship issues (when relevant) and how the statute defines them
-- digital evidence (messages, images, app data) and authenticity
-- consent and capacity questions (when legally relevant)
-- forensic evidence and chain of custody
-- search warrant scope, device searches, and statements to law enforcement
-- whether registration duties apply and what classification follows from a conviction
+Ohio’s primary sex offense statutes are in **ORC Chapter 2907**, with registration requirements in **ORC Chapter 2950**. Common charges include:
+- Rape under [ORC 2907.02](https://codes.ohio.gov/ohio-revised-code/section-2907.02)
+- Sexual battery under [ORC 2907.03](https://codes.ohio.gov/ohio-revised-code/section-2907.03)
+- Unlawful sexual conduct with a minor under [ORC 2907.04](https://codes.ohio.gov/ohio-revised-code/section-2907.04)
+- Importuning under [ORC 2907.21](https://codes.ohio.gov/ohio-revised-code/section-2907.21)
 
-## Ohio statutes to review (common in many cases)
+The specific charge depends on the alleged conduct, age, consent capacity, and any position of authority.
 
-- Sexual battery: [ORC § 2907.03](https://codes.ohio.gov/ohio-revised-code/section-2907.03)
-- Unlawful sexual conduct with a minor: [ORC § 2907.04](https://codes.ohio.gov/ohio-revised-code/section-2907.04)
-- Importuning (often in online sting investigations): [ORC § 2907.07](https://codes.ohio.gov/ohio-revised-code/section-2907.07)
+## Consent and capacity
 
-## Registration and reporting duties
+Ohio law distinguishes between factual consent and legal capacity to consent. Age, impairment, and authority relationships can all affect whether consent is legally valid. These issues are highly fact-specific and are often central to the defense.
 
-Ohio’s registration framework is primarily in [ORC Chapter 2950](https://codes.ohio.gov/ohio-revised-code/chapter-2950). Whether registration applies, how long it lasts, and what reporting is required depends on the specific conviction and classification (see [ORC § 2950.01](https://codes.ohio.gov/ohio-revised-code/section-2950.01) and [ORC § 2950.05](https://codes.ohio.gov/ohio-revised-code/section-2950.05)).
+## Importuning and online investigations
 
-## Next steps if you’re accused
+Importuning cases often involve online communication where law enforcement believes the other party is a minor. The investigation and evidence review matter, including device searches, chat logs, and search warrant scope.
 
-Avoid contacting the accuser or discussing the allegation on social media. Preserve communications and other records, and get legal advice quickly—early steps can affect what evidence exists and what statements are in the record.
+## Digital evidence and device searches
 
-If you’re under investigation or charged in Delaware or Franklin County, contact Mango Law for a confidential consultation.
+Many cases involve phones, computers, and social media records. Defense counsel often reviews:
+- search warrants and consent forms
+- extraction reports and metadata
+- message context and timestamps
+- whether the correct account is tied to the alleged conduct
+
+## Expert testimony and forensic review
+
+Some cases involve forensic analysts or medical experts. Reviewing the methods, timing, and documentation can be important, especially when the allegations depend on technical findings.
+
+## Pretrial hearings and evidentiary issues
+
+Defense counsel may litigate suppression issues, admissibility of statements, and scope of digital evidence before trial. These rulings can shape the overall posture of the case.
+
+## Sex offender registration (SORN)
+
+Ohio’s registration system is governed by **ORC 2950** and uses tier classifications. Registration length and reporting frequency depend on the offense and classification.
+
+[VISUAL:SORN_TIERS]
+
+### Registration duties
+
+Registered individuals must report and update personal information on specific schedules. Requirements can include address updates, work and school reporting, and in-person verification. The exact duties depend on the tier and offense.
+
+## No-contact orders and bond conditions
+
+Courts often issue no-contact orders during the case. These orders can affect living arrangements, communication, and access to shared devices or accounts. Violations can lead to new charges, so compliance is critical.
+
+## Evidence and medical examinations
+
+Some cases include medical or forensic examinations. The timing of the exam, the chain of custody, and the reporting process can matter. Defense counsel may review these records alongside witness statements and digital evidence.
+
+## Registration compliance risk
+
+Registration failures can create additional exposure. If registration applies, confirm the reporting schedule and keep a written record of each update or check-in.
+
+## Collateral consequences
+
+Beyond criminal penalties, convictions can trigger long-term consequences in:
+- housing eligibility
+- employment background checks
+- custody and family law proceedings
+- travel and international entry
+
+[VISUAL:COLLATERAL_CONSEQUENCES]
+
+## What varies by county and court
+
+Local practice can shape outcomes, including:
+- bond conditions and no-contact orders
+- handling of digital evidence
+- diversion availability (when legally permitted)
+- timelines for forensic review and trial scheduling
+
+## Common defense themes
+
+Defense strategies depend on the facts, but common themes include:
+- challenging the reliability and collection of digital evidence
+- contesting consent capacity or the alleged timeline
+- identifying inconsistencies in statements
+- presenting alibi or third-party evidence
+- constitutional issues with searches or interviews
+
+[VISUAL:SEX_CRIMES_DEFENSES]
+
+## Timeline reconstruction
+
+Many cases depend on timelines. Defense counsel often compares statements, digital records, and location data to verify when alleged events occurred. Inconsistencies can be important.
+
+## Witnesses and corroboration
+
+Witnesses who saw interactions before or after an incident may provide context. Even neutral witnesses can help confirm timing or circumstances.
+
+## Practical steps if you are accused
+
+- Preserve records and communications.
+- Avoid direct or indirect contact with the accuser.
+- Do not delete devices or accounts.
+- Speak with counsel before making statements. Early guidance helps avoid unintentional inconsistencies.
+
+## Common misconceptions
+
+- assuming the case is only about what was said between two people
+- assuming messages are self-explanatory without context
+- assuming an early interview cannot be challenged later
+- assuming device searches always capture complete context
+
+## Confidentiality and communication
+
+Attorney-client communications are privileged once representation begins. That protection supports candid case review. Avoid discussing the case with third parties, and keep written communications factual and consistent.
+
+## Conclusion
+
+Sex crime cases are complex and fact-sensitive. The statutes, evidence rules, and registration implications require careful review. Early legal guidance can clarify exposure and strategy.
 
 ---
 
-*This article is for educational purposes and does not constitute legal advice. Ohio sex crime law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+This article is for educational purposes and does not constitute legal advice. Consult a qualified Ohio defense attorney about your situation.
+`,
     category: 'Sex Crimes',
     date: '2024-12-05',
     author: 'Dominic Mango',
-	    lastVerified: '2025-12-17',
-	    sources: [
+    lastVerified: '2025-12-27',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 2907.02 (Rape)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.02',
+        type: 'primary',
+      },
       {
         label: 'Ohio Revised Code § 2907.03 (Sexual battery)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.03',
@@ -1465,11 +1833,11 @@ If you’re under investigation or charged in Delaware or Franklin County, conta
         url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.04',
         type: 'primary',
       },
-	      {
-	        label: 'Ohio Revised Code § 2907.07 (Importuning)',
-	        url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.07',
-	        type: 'primary',
-	      },
+      {
+        label: 'Ohio Revised Code § 2907.21 (Importuning)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2907.21',
+        type: 'primary',
+      },
       {
         label: 'Ohio Revised Code § 2950.01 (Sex offender classification definitions)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.01',
@@ -1480,6 +1848,11 @@ If you’re under investigation or charged in Delaware or Franklin County, conta
         url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.05',
         type: 'primary',
       },
+      {
+        label: 'Ohio Revised Code § 2950.07 (Registration schedule by tier)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.07',
+        type: 'primary',
+      },
     ],
   },
   {
@@ -1487,40 +1860,130 @@ If you’re under investigation or charged in Delaware or Franklin County, conta
     title: 'Personal Injury Claims in Ohio: Understanding Negligence, Damages, and Your Legal Rights',
     excerpt: 'A conservative overview of Ohio negligence claims: what varies, how comparative fault works, and where to verify deadlines and damages rules.',
     imageUrl: '/images/generated/blog-personal-injury-claims.png',
-    content: `When you’re injured due to someone else’s negligence, Ohio law may allow you to seek compensation. Personal injury claims are fact-specific, and outcomes often depend on the evidence, medical documentation, and how liability is allocated.
+    content: `Ohio personal injury claims are governed by negligence principles. This guide explains the core elements, common case types, and why timing and documentation matter.
 
-## What Varies (case to case)
+## The basic elements of negligence
 
-- how the incident happened and who may be responsible
-- the medical evidence and causation (what the incident actually caused)
-- insurance coverage and policy limits
-- comparative fault arguments (what each side claims you did or didn’t do)
-- the type of damages available under the claim
-- statutory deadlines and special rules for certain claims
+Most Ohio injury claims require proof of:
+- a legal duty
+- breach of that duty
+- causation
+- damages
 
-## Key statutes to review
+The evidence needed to show each element depends on the facts and the type of claim.
 
-- Comparative negligence: [ORC § 2315.33](https://codes.ohio.gov/ohio-revised-code/section-2315.33)
-- Limitations periods (bodily injury): [ORC § 2305.10](https://codes.ohio.gov/ohio-revised-code/section-2305.10)
-- Noneconomic damages caps (when applicable): [ORC § 2315.18](https://codes.ohio.gov/ohio-revised-code/section-2315.18)
-- Wrongful death: [ORC § 2125.01](https://codes.ohio.gov/ohio-revised-code/section-2125.01)
+## Common claim types
+
+Ohio personal injury cases can include:
+- vehicle collisions
+- premises liability (slip and fall)
+- dog bite cases
+- product defects
+- wrongful death
+
+## Comparative fault
+
+Ohio uses a modified comparative fault rule under [ORC 2315.33](https://codes.ohio.gov/ohio-revised-code/section-2315.33). If your share of fault reaches the statutory threshold, recovery may be reduced or barred.
+
+[VISUAL:COMPARATIVE_FAULT_EXAMPLES]
+
+## Statute of limitations
+
+Filing deadlines are strict and vary by claim type. The main statute of limitations for many injury cases is [ORC 2305.10](https://codes.ohio.gov/ohio-revised-code/section-2305.10), but some claims have shorter deadlines or special notice rules.
+
+[VISUAL:STATUTE_LIMITATIONS]
+
+## Damages categories
+
+Damages generally fall into:
+- economic damages (medical bills, lost income)
+- non-economic damages (pain and suffering)
+
+Ohio law can impose limits on certain non-economic damages, depending on the case type and injury.
+
+[VISUAL:DAMAGE_CAPS]
+
+## What varies by county and case
+
+Outcomes can change based on:
+- available insurance coverage
+- medical documentation and causation proof
+- prior injuries or pre-existing conditions
+- local court scheduling and discovery practices
+
+## Medical treatment and records
+
+Early treatment creates records that help establish causation. Keep copies of visits, imaging, and provider notes. Gaps in treatment can be used to argue that injuries were not related to the incident.
+
+## Insurance claim process
+
+Most cases start with an insurance claim and a demand package. The demand typically includes records, bills, wage loss documentation, and a narrative explaining how the injuries affected daily life. The quality of this package often influences settlement negotiations.
+
+Insurers may request statements or medical authorizations. It is reasonable to understand what is being requested before agreeing to broad releases.
+
+## Settlement vs trial
+
+Many cases resolve by settlement, but a fair outcome still depends on evidence quality and case posture. When liability or damages are disputed, depositions and expert testimony can become important.
+
+## Wrongful death considerations
+
+Wrongful death claims are governed by [ORC 2125.01](https://codes.ohio.gov/ohio-revised-code/section-2125.01). These cases involve additional estate procedures and can have different damage categories.
+
+## Coverage and policy limits
+
+Insurance limits can constrain recovery even when liability is clear. Understanding available policies early helps set realistic expectations.
+
+## Property damage vs injury claims
+
+Vehicle repairs are usually handled separately from bodily injury claims. Be cautious about quick settlements that resolve all claims before treatment is complete.
+
+## Litigation timeline (general)
+
+If a case does not resolve early, it can move into formal litigation with written discovery, depositions, and expert reports. The timeline depends on the court and case complexity.
+
+## Lost wages and employment records
+
+If time off work is part of the claim, employer documentation is important. Payroll records, job descriptions, and time-off notes help support wage loss and future earning impacts.
+
+## Social media and surveillance
+
+Insurance carriers may review public posts or conduct surveillance. Be cautious about posting activity that could be misinterpreted, and keep statements consistent with medical records.
 
 ## Practical steps after an injury
 
-- Get appropriate medical care and follow up.
-- Preserve evidence (photos, video, witnesses, incident reports).
-- Avoid guesswork about deadlines; confirm the applicable limitations period early.
-- Be cautious about recorded statements to insurers without advice.
+- Document the incident and preserve photos.
+- Seek medical care and follow treatment plans.
+- Keep receipts for out-of-pocket expenses.
+- Track missed work or modified duty days.
+- Avoid posting about the incident on social media.
+- Keep a brief timeline of symptoms and appointments.
+- Save copies of insurance correspondence.
+- Review any releases before signing.
 
-If you were injured in Delaware or Franklin County and want a case-specific evaluation, contact Mango Law for a confidential consultation.
+## Future medical care and life planning
+
+Some injuries require ongoing treatment or long-term care. In those cases, physicians and experts may project future costs and limitations. These projections depend on documented medical opinions. Consistent follow-up care helps support those projections.
+
+## Case valuation factors
+
+Value often depends on the nature of the injury, recovery timeline, and documented impact on work and daily activities. Consistent records help present a clear and credible picture.
+
+## Settlement releases
+
+Settlement agreements usually require a release of claims. Read these terms carefully, especially if future medical care is possible. Once a release is signed, reopening the claim is difficult. Review all terms and confirm that treatment is stable before agreeing.
+
+## Conclusion
+
+Personal injury claims are evidence-driven and deadline-sensitive. Early documentation and careful legal review are essential to protect your claim. Good recordkeeping makes every later step easier. Ask about deadlines early for clarity.
 
 ---
 
-*This article is for educational purposes and does not constitute legal advice. Ohio personal injury law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+This article is for educational purposes and does not constitute legal advice. Consult an Ohio attorney about the facts of your case.
+`,
     category: 'Personal Injury',
     date: '2024-12-04',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-17',
+    lastVerified: '2025-12-27',
     sources: [
       {
         label: 'Ohio Revised Code § 2315.33 (Comparative negligence)',
@@ -1549,47 +2012,130 @@ If you were injured in Delaware or Franklin County and want a case-specific eval
     title: 'Assault and Domestic Violence Defense in Ohio: Understanding ORC sections 2903.13, 2919.25, and Protection Orders',
     excerpt: 'A conservative overview of Ohio assault and domestic violence allegations: what varies by case, common statutes involved, and how protection orders can affect strategy.',
     imageUrl: '/images/generated/blog-assault-domestic-violence.png',
-    content: `Assault and domestic violence allegations can move quickly in Ohio, especially if a protection order is involved. The exact charge level, penalties, and collateral consequences depend on the specific statute, the alleged conduct, the relationship between the parties, and your prior record.
+    content: `Assault and domestic violence allegations in Ohio can move fast. A single report can lead to arrest, bond conditions, and a protection order within days. This guide explains the statutes involved, the differences between assault and domestic violence, and the issues that often shape outcomes.
 
-## What Varies (case to case)
+## Ohio assault statutes (overview)
 
-- the relationship category (including whether the state alleges a “family or household member” relationship)
-- injury allegations and medical evidence
-- self-defense / defense of others issues
-- 911 calls, body-cam, and witness credibility
-- whether a protection order was issued and what it requires
-- prior convictions and how they affect charging and sentencing
-- collateral consequences (employment, professional licensing, firearms)
+Ohio separates assault-related offenses by conduct and level. The core statutes include:
+- Assault under [ORC 2903.13](https://codes.ohio.gov/ohio-revised-code/section-2903.13)
+- Felonious assault under [ORC 2903.11](https://codes.ohio.gov/ohio-revised-code/section-2903.11)
+- Aggravated menacing under [ORC 2903.21](https://codes.ohio.gov/ohio-revised-code/section-2903.21)
 
-## Common statutes involved (primary sources)
+### Key idea: conduct and injury level
 
-- Assault: [ORC § 2903.13](https://codes.ohio.gov/ohio-revised-code/section-2903.13)
-- Felonious assault: [ORC § 2903.11](https://codes.ohio.gov/ohio-revised-code/section-2903.11)
-- Domestic violence: [ORC § 2919.25](https://codes.ohio.gov/ohio-revised-code/section-2919.25)
-- Aggravated menacing: [ORC § 2903.21](https://codes.ohio.gov/ohio-revised-code/section-2903.21)
+Assault cases often turn on the type of harm alleged, the conduct described, and whether a deadly weapon was involved. The offense level can change if the alleged victim is a protected person (for example, a peace officer or medical worker), or if the evidence supports a more serious charge.
 
-## Protection orders (CPOs)
+[VISUAL:ASSAULT_PENALTY_GRID]
 
-Civil protection orders in domestic violence cases are governed by [ORC § 3113.31](https://codes.ohio.gov/ohio-revised-code/section-3113.31). If a court order is issued, take the terms seriously and avoid any contact that could be viewed as a violation.
+## Domestic violence (ORC 2919.25)
 
-## Defense themes (high-level)
+Domestic violence is governed by [ORC 2919.25](https://codes.ohio.gov/ohio-revised-code/section-2919.25). The conduct is similar to assault, but the statute applies only when the alleged victim is a family or household member.
 
-Depending on the facts, defense work often focuses on:
-- preserving and reviewing video and communications
-- documenting injuries (including injuries to the accused)
-- challenging timelines and identification
-- litigating Fourth/Fifth Amendment issues when relevant
-- negotiating for charge reductions or non-conviction outcomes where available
+### Who qualifies as a family or household member
 
-If you’re facing an assault or domestic violence allegation in Delaware or Franklin County, contact Mango Law for a confidential consultation.
+Ohio uses specific statutory definitions that include:
+- spouses and former spouses
+- people living together or who lived together
+- parents of a child in common
+- certain relatives by blood or marriage
+
+The relationship definition can be contested in some cases, which is why the actual facts matter.
+
+### Why domestic violence is treated differently
+
+Domestic violence cases often involve immediate bond conditions, no-contact orders, and restricted access to the home or shared property. A conviction can also trigger federal firearms consequences under [18 U.S.C. 922(g)(9)](https://www.law.cornell.edu/uscode/text/18/922).
+
+[VISUAL:DV_REPEAT_PENALTIES]
+
+## Civil protection orders and no-contact orders
+
+Protection orders are civil orders, but they carry criminal consequences when violated. Two common statutes are:
+- Domestic violence CPOs under [ORC 3113.31](https://codes.ohio.gov/ohio-revised-code/section-3113.31)
+- Civil stalking/sexually oriented offense CPOs under [ORC 2903.214](https://codes.ohio.gov/ohio-revised-code/section-2903.214)
+
+### Ex parte vs full hearing
+
+Courts can issue a temporary order without hearing from the respondent first. The full hearing is where the court decides whether to extend the order and for how long.
+
+[VISUAL:CPO_TIMELINE]
+
+### Violations
+
+A violation of a protection order is a separate criminal offense under [ORC 2919.27](https://codes.ohio.gov/ohio-revised-code/section-2919.27). Even indirect contact can create issues, so it is important to follow the order exactly while the case is pending.
+
+## How these cases are built
+
+Evidence often includes:
+- 911 recordings and officer body-cam video
+- photographs of injuries or property damage
+- medical records and timelines
+- text messages and social media messages
+- witness statements from neighbors or family
+
+The quality and consistency of the evidence matter, especially when accounts conflict.
+
+## What varies by county and court
+
+Local practice can shape outcomes, especially on bond and protection orders:
+- how quickly hearings are scheduled
+- whether no-contact orders are automatic
+- diversion or treatment availability
+- local plea norms and sentencing expectations
+
+## Court-ordered programs and assessments
+
+Some courts require assessments, counseling, or education as part of bond or sentencing. Requirements vary by court and by the facts of the case, so confirm what applies in your jurisdiction.
+
+## Common defense themes
+
+Defense strategies depend on the facts, but common themes include:
+- self-defense under [ORC 2901.09](https://codes.ohio.gov/ohio-revised-code/section-2901.09)
+- lack of proof of the required mental state
+- inconsistent accounts or missing corroboration
+- credibility issues, including motive to fabricate
+- constitutional challenges to searches, seizures, or statements
+
+[VISUAL:DEFENSE_COMPARISON]
+
+## Firearms and collateral consequences
+
+A domestic violence conviction can trigger federal firearms restrictions. It can also affect employment, housing, and family law matters. These consequences often matter just as much as the criminal penalties.
+
+[VISUAL:FIREARM_CONSEQUENCES]
+
+## Preparing for a protection-order hearing
+
+If a hearing is scheduled, it helps to:
+- gather communications and timestamps
+- bring witnesses who observed the events
+- organize photographs or medical records
+- note any inconsistencies in the timeline
+
+Courts often move quickly, so preparation matters.
+
+## Record consequences and future impact
+
+Even a misdemeanor conviction can affect background checks, licensing, and family court decisions. Eligibility for sealing or expungement depends on the charge and the outcome, so it is worth discussing long-term impact early.
+
+## Practical steps after an accusation
+
+- Follow all court orders exactly.
+- Avoid direct or indirect contact with the petitioner if an order exists.
+- Preserve evidence (messages, photos, witness names).
+- Talk to an attorney early to review the facts and the statute.
+
+## Conclusion
+
+Assault and domestic violence cases are fact-specific and move quickly. Understanding the statute, the relationship definition, and the local court process is essential for a clear defense strategy.
 
 ---
 
-*This article is for educational purposes and does not constitute legal advice. Ohio assault and domestic violence law is complex and fact-specific. Consult with a qualified Ohio attorney about your situation.*`,
+This article is for educational purposes and does not constitute legal advice. Consult a qualified Ohio defense attorney about your situation.
+`,
     category: 'Criminal Defense',
     date: '2024-12-03',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-17',
+    lastVerified: '2025-12-27',
     sources: [
       {
         label: 'Ohio Revised Code § 2903.13 (Assault)',
@@ -1607,6 +2153,11 @@ If you’re facing an assault or domestic violence allegation in Delaware or Fra
         type: 'primary',
       },
       {
+        label: 'Ohio Revised Code § 2901.09 (Self-defense)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2901.09',
+        type: 'primary',
+      },
+      {
         label: 'Ohio Revised Code § 2919.25 (Domestic violence)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25',
         type: 'primary',
@@ -1614,6 +2165,16 @@ If you’re facing an assault or domestic violence allegation in Delaware or Fra
       {
         label: 'Ohio Revised Code § 3113.31 (CPOs)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2903.214 (Civil protection orders)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.214',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.27 (Violating a protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
         type: 'primary',
       },
       {
@@ -1770,106 +2331,59 @@ Checkpoint practices change and vary by agency. Focus on safety, keep the intera
     title: 'Holiday OVI Enforcement in Ohio: What Drivers in Delaware, Dublin, and Central Ohio Should Expect',
     excerpt: 'Ohio\'s holiday enforcement wave ramps up from mid-December through New Year\'s Day. Here\'s what\'s changing, what police are looking for, and what to do if a traffic stop turns into an OVI investigation.',
     imageUrl: '/images/generated/blog-ohio-holiday-ovi-enforcement.png',
-    content: `Holiday travel in Central Ohio is not just more traffic. It is more enforcement.
+    content: `Holiday travel in Central Ohio means more traffic and, in many areas, more patrol activity. If you are traveling through Delaware, Dublin, Powell, Lewis Center, Westerville, Worthington, or into Columbus, expect more visible enforcement during holiday windows.
 
-Between family get-togethers, work parties, winter weather, and late-night driving, law enforcement agencies across Ohio traditionally increase patrols and OVI enforcement during the Christmas and New Year window. If you are traveling through Delaware, Dublin, Powell, Lewis Center, Westerville, Worthington, or into Columbus, assume you will see more marked cruisers, more traffic stops, and less tolerance for "close enough" driving decisions.
-
-[VISUAL:HOLIDAY_KEY_TAKEAWAYS]
-
-This post covers what's actually happening during the 2025 holiday season, what officers are focused on, and what to do if a routine stop starts turning into an OVI investigation.
-
-[VISUAL:QUICK_LINKS]
+This post covers what tends to change during holiday enforcement, what officers look for, and how to respond if a routine stop starts turning into an OVI investigation.
 
 > **Important**: This article is general information, not legal advice. If you are facing an OVI, the details matter. Evidence, timelines, and the exact charge level can change outcomes.
 
 ## Key takeaways
 
-If you only read one section, read this:
-
-- Expect heightened enforcement from mid-December through New Year's Day due to the national **Drive Sober or Get Pulled Over** push.
-- Ohio agencies commonly use grant-funded overtime for targeted OVI, distracted driving, and general traffic enforcement.
-- Winter conditions make "minor" driving errors look worse (and officers take them more seriously).
-- Ride-voucher programs exist in some counties during the holidays. Use them if you are even close to the line.
-- If you are stopped, your choices in the first 5 to 10 minutes can shape the entire case.
+- Expect heightened enforcement from mid-December through New Year's Day due to national campaigns.
+- Ohio agencies commonly use grant-funded overtime for targeted OVI and traffic enforcement.
+- Winter conditions make minor driving errors look worse, and officers document them.
+- Ride-voucher programs exist in some counties during the holidays. Use them if you are close to the line.
+- Your choices in the first minutes of a stop can shape the case.
 
 ## Why enforcement spikes during the holidays in Ohio
 
-The short version: more drivers + more parties + worse road conditions = higher crash risk, and agencies plan around that reality.
+The short version: more drivers, more parties, worse road conditions, and higher crash risk. Agencies plan around that reality, and patrol visibility is part of the deterrence strategy.
 
-Local reporting around Ohio has been consistent on the same points:
-- Holiday travel increases volume.
-- Winter weather adds a risk multiplier.
-- Alcohol and drug impairment are more common during holiday celebration windows.
-- Distracted driving increases with navigation, texting, and coordination.
+## National and Ohio campaign alignment (high level)
 
-That combination is exactly why the national enforcement push exists, and why Ohio agencies stack overtime patrols and OVI task force activity during this period.
+NHTSA's Drive Sober or Get Pulled Over campaign typically runs through the winter holidays. Ohio's Traffic Safety Office (OTSO) aligns grant-funded enforcement with that national window. The exact dates can vary year to year, so check official sources if you need precise timelines.
 
-## What is happening right now: the 2025 holiday enforcement window
-
-There are three overlapping layers to understand: national, statewide, and local.
-
-### 1) National enforcement: Drive Sober or Get Pulled Over (Dec 12 through Jan 1)
-NHTSA's Drive Sober or Get Pulled Over campaign runs **December 12 through January 1** for the winter holiday season. The message is not subtle, and the point is deterrence: more patrols, more stops, more impaired-driving enforcement.
-
-### 2) Ohio grant and campaign alignment: OTSO enforcement participation
-Ohio's Traffic Safety Office programming ties directly into these national enforcement windows. OTSO grant guidance materials list the winter holiday Drive Sober or Get Pulled Over period as **December 12, 2025 through January 1, 2026**, and agencies using overtime enforcement funds are expected to participate in those campaign windows.
-
-### 3) Local agencies: targeted overtime patrols and local initiatives
-This is where it becomes real for drivers.
-
-For example, Dayton Police publicly announced increased traffic enforcement during the holiday season using grant-funded overtime for **OVI enforcement, distracted driving enforcement, and general traffic enforcement**. Their traffic supervisor specifically pointed to more enforcement not only on major highways, but across city streets as well.
-
-Even if you never drive near Dayton, the takeaway matters for Central Ohio: local agencies across the state commonly do the same thing during the same time window, and the increased patrol visibility is the point.
-
-## A simple table to plan your holiday driving
-
-[VISUAL:HOLIDAY_ENFORCEMENT_TABLE]
-
-## What officers are focused on during holiday enforcement
+## What officers focus on during holiday enforcement
 
 During holiday enforcement pushes, the "stop reasons" tend to be basic traffic issues that are easy to observe and easy to justify in a report.
 
 [VISUAL:HOLIDAY_OFFICER_FOCUS]
 
 ### Impaired driving indicators
-- Lane violations and weaving
-- Rolling stops
-- Wide turns
-- Speed variance (too fast or unusually slow)
-- Delayed reaction at lights or to braking traffic
+
+- lane violations and weaving
+- rolling stops
+- wide turns
+- speed variance (too fast or unusually slow)
+- delayed reaction at lights or to braking traffic
 
 ### Distracted driving
-Ohio's current distracted driving framework is stricter than many drivers assume. Local reporting has emphasized that Ohio law makes it illegal to **hold or support a phone while driving**, with limited exceptions. If you are glancing down at your phone in stop-and-go traffic on US-23, I-71, or I-270, you are giving an officer an easy reason to initiate contact.
 
-### Speed and basic compliance (seat belts, lights, plates)
-Holiday patrol periods often pair OVI enforcement with selective traffic enforcement: speeding, following too close, equipment issues, and seat belts.
+Ohio's distracted driving law prohibits holding or supporting a phone while driving, with limited exceptions. Even quick glances down can lead to a stop if the officer observes the conduct.
 
-Those stops are not "OVI stops" at the beginning. They become OVI investigations if the officer thinks impairment is possible.
+### Speed and basic compliance
 
-## Local programs that can keep you out of an OVI case entirely
+Holiday patrol periods often pair OVI enforcement with traffic enforcement: speeding, following too close, equipment issues, and seat belts. These stops can evolve into OVI investigations if impairment is suspected.
 
-Some counties use holiday ride programs to prevent impaired driving. If you have a safe option that costs $0 to $20 instead of an OVI arrest, use it.
+## Local programs that can keep you out of an OVI case
+
+Some counties offer holiday ride programs to discourage impaired driving. Program availability changes each year, so check local government or safety coalition announcements before you go out.
 
 [VISUAL:HOLIDAY_RIDE_PROGRAMS]
 
-### Montgomery County: ArriveSafe
-Montgomery County's ArriveSafe program has been promoted as a holiday Uber voucher option for residents, with public reporting noting specific holiday windows and QR code redemption.
-
-### Summit County: Arrive Alive (Lyft codes)
-Summit County has also promoted an "Arrive Alive" holiday rides program with Lyft codes for Christmas and New Year's season windows. Programs like this change year to year, and codes can be time-limited, but they are worth checking if you are traveling to Northeast Ohio.
-
-**Bottom line**: search your county prosecutor, local safety coalition, or city police social channels before you go out. If you find a ride program, screenshot it before you head out.
-
 ## The local lesson from the McGuff case
 
-If you want a real-life Central Ohio example of how quickly a vehicle encounter can turn into an OVI-related case, read our breakdown on [OSU women's basketball coach Kevin McGuff and the physical control process in Dublin](/blog/physical-control-parked-car-ohio-kevin-mcguff).
-
-Why include it here?
-- Dublin is close to Delaware County, and many drivers move between these areas daily.
-- High-profile cases generate public assumptions that are usually wrong.
-- The same legal mechanics apply whether you are a coach, a student, or a parent leaving a holiday party.
-
-If you are trying to understand "what happens next" in an OVI-related case, that post is a useful companion to this one.
+If you want a Central Ohio example of how quickly a vehicle encounter can turn into an OVI-related case, see our breakdown of [the Kevin McGuff physical control case in Dublin](/blog/physical-control-parked-car-ohio-kevin-mcguff). The same legal mechanics apply whether you are a coach, a student, or a parent leaving a holiday event.
 
 ## If you get pulled over: how to keep a traffic stop from turning into a disaster
 
@@ -1878,14 +2392,16 @@ This is not a "talk your way out of it" section. It is a "do not make it worse" 
 [VISUAL:HOLIDAY_STOP_TIPS]
 
 ### 1) Control the basics first
+
 - Signal early.
 - Pull over safely.
 - Keep your hands visible.
 - Provide license, registration, insurance.
 
-Officers document the smallest things: fumbling, confusion, slow responses, or repeated questions. Some of that may be nerves, but it often gets written as impairment indicators.
+Officers document the smallest things. Some of that may be nerves, but it often gets written as impairment indicators.
 
 ### 2) Do not guess or volunteer details
+
 If asked questions like:
 - "Where are you coming from?"
 - "Have you been drinking?"
@@ -1895,17 +2411,16 @@ If asked questions like:
 Understand what is happening: the officer is building a timeline and creating admissions. You can be polite without giving a story that becomes evidence.
 
 ### 3) Know what the stop is turning into
-The moment you see the shift from traffic enforcement to impairment investigation, you are in a different category of risk.
 
 Common signs:
 - "Step out of the vehicle."
 - "Any medical issues?"
 - "Would you mind doing a few tests?"
-- Flashlight checks, balance observations, repeated instructions.
 
-This is usually the start of field sobriety testing territory. For more on this, see our guide on [field sobriety test refusal](/blog/field-sobriety-test-refusal-ohio).
+This is usually the start of field sobriety testing territory. For more on this, see our guide on [refusing field sobriety tests in Ohio](/blog/refuse-field-sobriety-test-ohio).
 
 ### 4) After the stop, document everything you can
+
 If you are released or someone picks you up:
 - Write down times, locations, and the sequence of events.
 - Note weather, road conditions, footwear, and anything that affects balance.
@@ -1919,60 +2434,63 @@ These details fade quickly. They matter later.
 Every case is different, but the early phases are predictable:
 
 1. **Arrest and booking**
-2. **License consequences** (often immediate and confusing)
+2. **License consequences** (often immediate)
 3. **First court dates** (arraignment, pretrial scheduling)
 4. **Discovery and evidence review**
 5. **Motion practice and negotiations**
 6. **Resolution** (plea, dismissal, or trial)
 
-If you want the detailed version, including license suspension mechanics and typical penalties, use our full guide: [Understanding OVI and DUI charges in Ohio](/blog/understanding-ovi-dui-charges-ohio).
+If you want the detailed version, including license suspension mechanics and typical penalties, see our guide on [Understanding OVI and DUI charges in Ohio](/blog/understanding-ovi-dui-charges-ohio).
 
 [VISUAL:MID_ARTICLE_CTA]
 
-## A 24-hour checklist if you are charged during the holidays
+## A 24-hour checklist after a holiday arrest
 
 Holiday cases are harder because people travel, offices close, and evidence can disappear. Use this list to reduce damage fast.
 
-[VISUAL:HOLIDAY_24HR_CHECKLIST]
-
 ### Within the first 24 hours:
+
 - Write a timeline (where you were, who you were with, what you ate and drank, when you left).
 - Save any ride-share, GPS history, or text logs relevant to timing.
 - Identify potential witnesses and preserve contact info.
 - Photograph footwear and note any injuries or medical issues.
-- Gather any medical prescriptions and dosing timing (do not assume this "explains it away," but it matters).
+- Gather medical prescriptions and dosing timing if relevant.
 - Do not discuss the facts on social media or with acquaintances.
 - Do not assume your case is "standard." Holiday enforcement often includes extra documentation and video.
-- Schedule a consultation quickly, because court dates and license issues do not wait for January.
+- Schedule a consultation quickly, because court dates and license issues do not wait.
 
 ## Where to find checkpoint and enforcement information
 
-For Ohio drivers, checkpoint information is inconsistent and sometimes released late. When it is available, it helps you plan.
-
-Use Mango Law's [DUI Checkpoint Map](/resources/dui-checkpoints) as a starting point, and remember:
+Checkpoint information is inconsistent and sometimes released late. When it is available, it helps you plan. Use Mango Law's [DUI Checkpoint Map](/resources/dui-checkpoints) as a starting point, and remember:
 - Not every enforcement effort is a checkpoint.
 - Saturation patrols and "moving" enforcement are common during holiday windows.
 
 ## FAQ
 
 ### Are OVI checkpoints common in Central Ohio?
+
 They can happen, but many holiday enforcement efforts are saturation patrols and overtime-funded traffic stops rather than fixed checkpoints. Plan for both.
 
 ### Can I avoid an OVI by "sleeping it off" in my car?
-Not necessarily. There are charges and legal risks tied to being in or near a vehicle while impaired, even when you believe you are making a safer choice. For the full breakdown, read our post on [physical control charges and the McGuff case](/blog/physical-control-parked-car-ohio-kevin-mcguff).
+
+Not necessarily. There are legal risks tied to being in or near a vehicle while impaired, even when you believe you are making a safer choice. For the full breakdown, read our post on [physical control charges and the McGuff case](/blog/physical-control-parked-car-ohio-kevin-mcguff).
 
 ### What is the safest decision if I am unsure?
+
 Do not drive. Use a ride-share, a sober driver, or stay put. Compared to the cost and consequences of an OVI, the safest option is usually the cheapest option.
 
 ## Talk to a defense lawyer early if you are charged
 
 Holiday OVI cases can move quickly, especially on license issues and early court dates. The earlier you get guidance, the more options you typically have to preserve evidence, challenge procedure, and limit damage.
 
-If you need help, [contact Mango Law](/contact) for a consultation.`,
+---
+
+This article is for educational purposes and does not constitute legal advice. Consult a qualified Ohio OVI attorney about your situation.
+`,
     category: 'OVI/DUI Defense',
     date: '2025-12-23',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-25',
+    lastVerified: '2025-12-27',
     sources: [
       {
         label: 'NHTSA Drive Sober or Get Pulled Over Campaign',
@@ -1983,21 +2501,6 @@ If you need help, [contact Mango Law](/contact) for a consultation.`,
         label: 'Ohio Traffic Safety Office (OTSO) Grant Guidance',
         url: 'https://dam.assets.ohio.gov/image/upload/otso.ohio.gov/grants/FFY2026-Safe-Communities-Proposal-Guidelines-Presentation.pdf',
         type: 'primary',
-      },
-      {
-        label: 'Dayton Daily News: Holiday traffic enforcement',
-        url: 'https://www.daytondailynews.com/local/dayton-police-step-up-traffic-enforcement-urge-drivers-to-stay-sober-safe-this-holiday-season/65QL42PM2NDK5G4AMLA2HRI7VA/',
-        type: 'secondary',
-      },
-      {
-        label: 'WHIO: Montgomery County ArriveSafe program',
-        url: 'https://www.whio.com/news/local/county-offering-free-rides-combat-ovi-crashes-during-holidays/WGWM65T7CJFK7NSTESM7KP7CTU/',
-        type: 'secondary',
-      },
-      {
-        label: 'Cleveland 19: Summit County Arrive Alive program',
-        url: 'https://www.cleveland19.com/2025/12/24/arrive-alive-free-rides-summit-county-residents-during-holiday-season/',
-        type: 'secondary',
       },
       {
         label: 'Ohio Revised Code § 4511.19 (OVI)',
@@ -2011,13 +2514,13 @@ If you need help, [contact Mango Law](/contact) for a consultation.`,
     title: 'Physical Control of a Parked Car in Ohio: What the Kevin McGuff Case Teaches About ORC 4511.194',
     excerpt: 'Ohio State coach Kevin McGuff was charged with physical control while parked in his driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
     imageUrl: '/images/generated/blog-physical-control-parked-car.png',
-    content: `Ohio State women's basketball coach Kevin McGuff made headlines when he was charged with physical control of a vehicle while intoxicated after being found asleep in his parked car in his own driveway. The case resolved with a plea to a reduced charge of disorderly conduct, but it raises important questions about Ohio's physical control statute and what it means for everyday drivers.
+    content: `Ohio State women's basketball coach Kevin McGuff made headlines when he was charged with physical control after being found asleep in his parked car in his own driveway. The case resolved with a plea to a reduced charge of disorderly conduct, but it raises important questions about Ohio's physical control statute and what it means for everyday drivers.
 
 [VISUAL:PHYSICAL_CONTROL_HIGHLIGHT]
 
 ## What happened in the McGuff case
 
-According to public reports, Kevin McGuff was found asleep in his parked car in his driveway in the early morning hours after returning from a team function. His blood alcohol content was reportedly above the legal limit. Rather than an OVI charge (operating a vehicle while intoxicated), he was charged with **physical control** under [ORC 4511.194](https://codes.ohio.gov/ohio-revised-code/section-4511.194).
+According to public reports, Kevin McGuff was found asleep in his parked car in his driveway in the early morning hours after returning from a team function. Rather than an OVI charge (operating a vehicle while intoxicated), he was charged with **physical control** under [ORC 4511.194](https://codes.ohio.gov/ohio-revised-code/section-4511.194).
 
 The case ultimately resolved with McGuff pleading to disorderly conduct, avoiding the physical control conviction and any license suspension that would have followed.
 
@@ -2141,7 +2644,7 @@ If you're facing physical control charges in Delaware or Franklin County, the sp
     category: 'OVI/DUI Defense',
     date: '2025-12-22',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-22',
+    lastVerified: '2025-12-27',
     sources: [
       {
         label: 'Ohio Revised Code § 4511.194 (Physical control)',

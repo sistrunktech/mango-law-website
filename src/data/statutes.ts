@@ -376,6 +376,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 2950.05', url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.05', type: 'primary' },
     ],
   },
+  '2950.07': {
+    id: 'registration-durations',
+    section: '2950.07',
+    title: 'Registration Durations',
+    shortTitle: 'Registration Duration',
+    definition: 'Defines the length and tier-based duration of sex offender registration duties in Ohio.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2950.07',
+    practiceAreas: ['sex-crimes', 'criminal-defense'],
+    relatedStatutes: ['2950.01', '2950.05'],
+    lastVerified: '2025-12-27',
+    sources: [
+      { label: 'Ohio Revised Code § 2950.07', url: 'https://codes.ohio.gov/ohio-revised-code/section-2950.07', type: 'primary' },
+    ],
+  },
   '2923.11': {
     id: 'weapons-control-definitions',
     section: '2923.11',
@@ -584,6 +598,19 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 2925.14', url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.14', type: 'primary' },
     ],
   },
+  '2937.222': {
+    id: 'pretrial-release-factors',
+    section: '2937.222',
+    title: 'Pretrial Release Factors',
+    shortTitle: 'Bail Factors',
+    definition: 'Lists factors Ohio courts must weigh when setting bail or conditions of release, including public safety, flight risk, and offense circumstances.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2937.222',
+    practiceAreas: ['criminal-defense'],
+    lastVerified: '2025-12-27',
+    sources: [
+      { label: 'Ohio Revised Code § 2937.222', url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.222', type: 'primary' },
+    ],
+  },
   '2913.02': {
     id: 'theft',
     section: '2913.02',
@@ -624,6 +651,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     lastVerified: '2025-12-15',
     sources: [
       { label: 'Ohio Revised Code § 2913.04', url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.04', type: 'primary' },
+    ],
+  },
+  '2913.31': {
+    id: 'forgery',
+    section: '2913.31',
+    title: 'Forgery',
+    shortTitle: 'Forgery',
+    definition: 'Prohibits making, altering, or using a forged writing with purpose to defraud or knowing it will be used to deceive. Charging level varies by the type of document and alleged harm.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2913.31',
+    practiceAreas: ['criminal-defense', 'white-collar'],
+    relatedStatutes: ['2913.02', '2913.43'],
+    lastVerified: '2025-12-27',
+    sources: [
+      { label: 'Ohio Revised Code § 2913.31', url: 'https://codes.ohio.gov/ohio-revised-code/section-2913.31', type: 'primary' },
     ],
   },
   '2913.42': {
