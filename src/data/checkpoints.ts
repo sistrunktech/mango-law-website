@@ -18,6 +18,8 @@ export interface DUICheckpoint {
   updated_at: string;
   is_verified: boolean;
   views_count: number;
+  announcement_date?: string | null;
+  geocoding_confidence?: string | null;
 }
 
 export function isAggregatorSourceName(sourceName: string | null | undefined): boolean {

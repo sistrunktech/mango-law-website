@@ -450,21 +450,29 @@ export default function DUICheckpointsPage() {
                         </div>
                       </div>
                       <h3 className="mb-2 text-lg font-bold text-brand-black">
-                        No checkpoints found
+                        No announced checkpoints at this time
                       </h3>
-                      <p className="text-sm text-brand-black/70">
+                      <p className="text-sm text-brand-black/80 max-w-md mx-auto">
                         {selectedCounty === 'all'
-                          ? 'There are no upcoming DUI checkpoints scheduled at this time.'
-                          : `No checkpoints scheduled in ${selectedCounty} County.`}
+                          ? 'We have not detected any officially announced OVI checkpoints scheduled for this period. Please check back later or follow local law enforcement for real-time updates.'
+                          : `There are currently no scheduled checkpoints detected in ${selectedCounty} County.`}
                       </p>
-                      {selectedCounty !== 'all' && (
-                        <button
-                          onClick={() => setSelectedCounty('all')}
-                          className="mt-4 text-sm font-semibold text-brand-mango hover:text-brand-leaf"
+                      <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                        {selectedCounty !== 'all' && (
+                          <button
+                            onClick={() => setSelectedCounty('all')}
+                            className="text-sm font-semibold text-brand-mango hover:text-brand-leaf transition-colors"
+                          >
+                            View all counties
+                          </button>
+                        )}
+                        <a 
+                          href="/contact" 
+                          className="text-sm font-semibold bg-brand-mango/10 text-brand-mangoText px-4 py-2 rounded-lg hover:bg-brand-mango/20 transition-colors"
                         >
-                          View all counties
-                        </button>
-                      )}
+                          Contact office for legal help
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>
