@@ -21,8 +21,9 @@ import HandoffDocManager from '../components/admin/HandoffDocManager';
 import ReviewCampaignManager from '../components/admin/ReviewCampaignManager';
 import ReviewManager from '../components/admin/ReviewManager';
 import SocialMediaManager from '../components/admin/SocialMediaManager';
+import SEORankManager from '../components/admin/SEORankManager';
 
-type Tab = 'blog' | 'contacts' | 'checkpoints' | 'docs' | 'campaigns' | 'reviews' | 'social';
+type Tab = 'blog' | 'contacts' | 'checkpoints' | 'docs' | 'campaigns' | 'reviews' | 'social' | 'seo';
 
 export default function AdminDashboardPage() {
   const { user, loading, signOut } = useAuth();
@@ -54,6 +55,7 @@ export default function AdminDashboardPage() {
 
   const tabs = [
     { id: 'blog' as Tab, label: 'Blog Posts', icon: FileText },
+    { id: 'seo' as Tab, label: 'Search Intelligence', icon: Link2 },
     { id: 'social' as Tab, label: 'Social Media', icon: Send },
     { id: 'campaigns' as Tab, label: 'Review Campaigns', icon: Users },
     { id: 'reviews' as Tab, label: 'Google Reviews', icon: Star },
@@ -113,14 +115,14 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
-          <nav className="flex gap-1 -mb-px">
+          <nav className="flex gap-1 -mb-px overflow-x-auto scrollbar-hide">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-3 font-medium text-sm transition ${
+                  className={`flex items-center gap-2 px-4 py-3 font-medium text-sm transition whitespace-nowrap ${
                     activeTab === tab.id
                       ? 'text-[#E8A33C] border-b-2 border-[#E8A33C] bg-[#232323]/50'
                       : 'text-slate-400 hover:text-white hover:bg-[#232323]/30'
@@ -137,6 +139,7 @@ export default function AdminDashboardPage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {activeTab === 'blog' && <BlogManager />}
+        {activeTab === 'seo' && <SEORankManager />}
         {activeTab === 'social' && <SocialMediaManager />}
         {activeTab === 'campaigns' && <ReviewCampaignManager />}
         {activeTab === 'reviews' && <ReviewManager />}

@@ -42,12 +42,12 @@ export default function HomePage() {
     <>
       <SEO
         title="Criminal Defense & OVI Attorney Delaware, OH | Mango Law LLC"
-        description="Experienced criminal defense attorney serving Delaware and Franklin Counties. Over 20 years defending OVI/DUI, drug crimes, assault, sex crimes, and white collar cases. Former prosecutor."
+        description="Experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI/DUI, drug crimes, assault, sex crimes, and white collar cases. Former prosecutor."
         structuredData={localBusinessSchema}
       />
       <PageHero
         eyebrow="Central Ohio OVI/DUI & Criminal Defense"
-        subtitle="Nick Mango | Delaware, OH | 15+ Years | Former Prosecutor"
+        subtitle="Nick Mango | Delaware, OH | 26+ Years | Former Prosecutor"
         title="Arrested? Get Clear Next Steps Today."
         description="Confidential consultation. Available 24/7 for urgent OVI, DUI, and criminal defense matters in Delaware and Franklin Counties."
         ctaLabel="Free Case Review"
@@ -157,7 +157,7 @@ export default function HomePage() {
         <div className="container relative">
           <div className="grid gap-10 text-center md:grid-cols-4">
             {[
-              { value: '15+', label: 'Years Experience' },
+              { value: '26+', label: 'Years Experience' },
               { value: '1000+', label: 'Cases Handled' },
               { value: '24/7', label: 'Availability' },
               { value: 'Former', label: 'Prosecutor' },
