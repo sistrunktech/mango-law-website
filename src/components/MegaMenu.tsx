@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
   const [isOpen, setIsOpen] = useState(false);
+  const openTimeoutRef = useRef<number | null>(null);
   const closeTimeoutRef = useRef<number | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -32,7 +33,12 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
     updatePanelPosition();
 
     const onReposition = () => updatePanelPosition();
-    const onScroll = () => setIsOpen(false);
+    // Immediate closure on scroll to prevent the fixed panel from ghosting over the hero section
+    const onScroll = () => {
+      setIsOpen(false);
+      if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current);
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
     
     window.addEventListener('resize', onReposition);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -48,11 +54,26 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
       clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
-    setIsOpen(true);
-    updatePanelPosition();
+    
+    // Hover intent: delay opening by 150ms to prevent accidental triggers while moving to hero
+    if (!isOpen && !openTimeoutRef.current) {
+      openTimeoutRef.current = window.setTimeout(() => {
+        setIsOpen(true);
+        updatePanelPosition();
+        openTimeoutRef.current = null;
+      }, 150);
+    } else if (isOpen) {
+      // If already open, just keep it open
+      setIsOpen(true);
+    }
   };
 
   const handleMouseLeave = () => {
+    if (openTimeoutRef.current) {
+      clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = null;
+    }
+    
     closeTimeoutRef.current = window.setTimeout(() => {
       setIsOpen(false);
     }, 300);
@@ -130,7 +151,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
           id="mega-menu-panel"
           role="region"
           aria-label="Practice Areas Menu"
-          className="fixed z-50 w-[90vw] max-w-5xl -translate-x-1/2 pt-2"
+          className="pointer-events-none fixed z-50 w-[90vw] max-w-5xl -translate-x-1/2 pt-2"
           style={{
             top: panelPosition.top,
             left: panelPosition.left,
@@ -138,7 +159,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="rounded-2xl border border-brand-offWhite/10 bg-brand-black/95 p-8 shadow-2xl backdrop-blur-sm">
+          <div className="pointer-events-auto rounded-2xl border border-brand-offWhite/10 bg-brand-black/95 p-8 shadow-2xl backdrop-blur-sm">
             <div className="grid gap-8 md:grid-cols-3">
               {/* Practice Areas */}
               <div>

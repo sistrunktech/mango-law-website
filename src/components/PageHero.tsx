@@ -123,7 +123,7 @@ export default function PageHero({
         <div className="pointer-events-none absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-brand-leaf/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-brand-mango/6 blur-[100px]" />
 
-        <div className="container relative">
+        <div className="container relative z-10">
           <div className={[
             alignLeft ? 'max-w-3xl' : 'mx-auto max-w-4xl',
             alignLeft ? 'text-left' : 'text-center',
@@ -159,6 +159,7 @@ export default function PageHero({
                   section={orcSection}
                   variant="micro"
                   className="text-brand-mango/90 hover:text-brand-mango"
+                  suppressLink
                 />
               </div>
             )}
@@ -175,7 +176,7 @@ export default function PageHero({
 
             {/* CTA Buttons */}
             <div className={[
-              'mt-8 flex flex-col gap-4 sm:flex-row',
+              'relative z-20 mt-8 flex flex-col gap-4 sm:flex-row',
               alignLeft ? 'items-start justify-start' : 'items-center justify-center',
             ].join(' ')}>
               {ctaLabel && ctaHref && (
