@@ -134,6 +134,7 @@ export default function PracticeAreaCardGrid() {
                       section={oviArea.orcSection}
                       variant="micro"
                       className="text-brand-black/60 hover:text-brand-mangoText"
+                      suppressLink
                     />
                   </div>
                 )}
@@ -203,6 +204,7 @@ export default function PracticeAreaCardGrid() {
                       section={criminalArea.orcSection}
                       variant="micro"
                       className="text-brand-black/60 hover:text-brand-mangoText"
+                      suppressLink
                     />
                   </div>
                 )}
@@ -262,6 +264,7 @@ export default function PracticeAreaCardGrid() {
                       section={area.orcSection}
                       variant="micro"
                       className="text-brand-black/60 hover:text-brand-mangoText"
+                      suppressLink
                     />
                   </div>
                 )}

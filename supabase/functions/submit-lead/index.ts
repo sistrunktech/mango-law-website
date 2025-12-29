@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.48.0";
 import { buildAdminEmailHtml, buildClientConfirmationHtml } from "../_shared/email/templates.ts";
-import { formatFrom, formatPhoneForDisplay, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
+import { formatFrom, formatPhoneForDisplay, formatTimestampForEmail, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
 import type { EmailSeason, EmailTheme } from "../_shared/email/tokens.ts";
 
 interface LeadCaptureData {
@@ -315,6 +315,7 @@ Deno.serve(async (req: Request) => {
         const theme = (Deno.env.get("APP_THEME") || "light") as EmailTheme;
         const holiday = isTruthyEnv(Deno.env.get("APP_HOLIDAY"));
 
+        const receivedAt = formatTimestampForEmail(new Date());
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
@@ -348,6 +349,7 @@ Deno.serve(async (req: Request) => {
                   messageLabel: "Message",
                   message: payload.message?.trim() || null,
                   meta: [
+                    { label: "Received", value: receivedAt },
                     { label: "Referrer", value: referrer || "Not provided" },
                     { label: "IP", value: ip },
                     { label: "UA", value: userAgent },
@@ -391,6 +393,7 @@ Deno.serve(async (req: Request) => {
                 intro:
                   "Thanks for reaching out. We received your request and will follow up as soon as possible during business hours.",
                 details: [
+                  { label: "Received", value: receivedAt },
                   { label: "Name", value: payload.name.trim() },
                   { label: "Email", value: email },
                   { label: "Phone", value: formatPhoneForDisplay(normalizedPhone) },

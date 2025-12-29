@@ -29,7 +29,7 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 ## Environment Variables
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
 - Optional client config: `VITE_SUPABASE_CUSTOM_DOMAIN` (recommended for OAuth branding; use an HTTPS Supabase custom domain like `https://api.mango.law`).
-- Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional).
+- Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional), `SERPER_API_KEY` (Search Intelligence).
 - Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `VITE_TURNSTILE_SITE_KEY` (optional).
 - SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
 - Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `VITE_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
@@ -57,6 +57,7 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
   - Theme/season toggles: `APP_THEME` (`dark|light`), `APP_SEASON` (`spring|summer|fall|winter`), `APP_HOLIDAY` (`true|false`).
   - Host links: `FRONTEND_URL` (fallback: `VITE_SITE_URL`, then `https://mango.law`).
 - **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, and upserts checkpoints to database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
+- **check-rankings**: Search Intelligence job that pulls Serper.dev results for active keywords and writes ranking history to `seo_rankings`. Requires `SERPER_API_KEY` and service-role access (no fallback key).
 - **generate-review-response**: Generates draft responses for reviews using the configured AI provider/model.
 - **sync-google-reviews**: Syncs Google reviews into the DB (used by admin dashboard).
 - **google-oauth-connect / google-oauth-callback**: OAuth connect + callback endpoints for GBP/GA/GSC/GTM token storage. Callback must allow unauthenticated Google redirects (no Supabase `Authorization` header).
@@ -71,6 +72,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
   - `supabase functions deploy submit-contact`
   - `supabase functions deploy submit-lead`
   - `supabase functions deploy chat-intake`
+  - `supabase functions deploy check-rankings`
 - Apply DB migrations:
   - `supabase db push`
 
@@ -112,6 +114,10 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - **leads**: Captures lead-capture modal submissions (id, name, email, phone, lead_source, checkpoint_id, county, urgency, message, ip_address, user_agent, referrer, created_at, status).
 - **rate_limit_requests**: Tracks API requests for rate limiting (id, ip_address, endpoint, created_at). Auto-cleanup removes records older than 1 hour.
 - **dui_checkpoints**: Stores DUI checkpoint locations and schedules (id, title, location_address, location_city, location_county, latitude, longitude, start_date, end_date, status, source_url, source_name, description, is_verified, views_count, created_at, updated_at). Indexed on county, status, and date fields for efficient filtering.
+  - New fields: `announcement_date`, `geocoding_confidence`, `last_geocoded_at` (for transparency + geocoding diagnostics).
+- **seo_keywords**: Keyword inventory for Search Intelligence (keyword, location_context, target_url, is_active, timestamps).
+- **seo_rankings**: Daily ranking history with optional local-pack flag and SERP data payloads.
+  - Seeded via migration `20251228180500_seed_initial_keywords.sql` (Delaware + Marysville starter set; update as needed).
 - **geocoding_cache**: Caches Mapbox geocoding results to minimize API calls (id, address, latitude, longitude, formatted_address, confidence, provider, metadata, hit_count, created_at, updated_at). Unique index on address for fast lookups.
 - **scraper_logs**: Tracks checkpoint scraper execution for monitoring (id, scraper_name, status, started_at, completed_at, duration_ms, checkpoints_found, checkpoints_new, checkpoints_updated, errors, metadata, created_at). Indexed on scraper_name and created_at.
 - **brand_assets**: Brand asset management table (id, file_path, variant_type, color_variant, file_format, dimensions, usage_notes, is_active, created_at, updated_at).
@@ -119,6 +125,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - **RLS Enabled**: All tables use Row Level Security. Public read access to checkpoints and geocoding cache; service role has full access; rate limiting enforces IP-based restrictions.
 - **Indexes**: Comprehensive indexes on frequently queried columns including composite indexes for date range queries, location searches, and rate limiting.
 - **Functions**: Helper functions for `increment_column()` (generic counter for views/metrics), `increment()` (backward-compatible wrapper), `increment_geocoding_cache_hit()`, `cleanup_old_scraper_logs()`, `update_checkpoint_status()` (auto-transitions statuses), `invoke_checkpoint_scraper()`, `trigger_checkpoint_scraper_now()`.
+- **Security hardening**: Database functions now set `search_path = public, pg_temp` via migration `20251228180000_secure_function_search_paths.sql` to address mutable search path warnings.
 - **pg_cron Extension**: Enabled for scheduled jobs. Daily scraper runs at 2:00 AM EST (7:00 AM UTC).
 - **pg_net Extension**: Enabled for async HTTP requests from database functions to Edge Functions.
 - **Backups/PITR**: Via Supabase defaults; add monitoring alerts when available.
@@ -144,6 +151,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - **Data Sources**:
   - **Confirmed checkpoints**: Scraper pulls from OVICheckpoint.com, geocodes addresses, and stores in `dui_checkpoints`.
   - **Pending announcements**: RSS ingestion stores “details pending” items in `dui_checkpoint_announcements` (list-only; no map pins).
+- **Transparency**: The UI surfaces “Announced on” dates when available and displays an explicit “No announced checkpoints at this time” empty state.
 - **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
 - **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `VITE_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints will be inserted without `latitude/longitude` and the map will show few/no markers.
 - **Scraper Schedule**: Runs daily at 2:00 AM EST via pg_cron. Manual trigger available in admin dashboard.
@@ -212,6 +220,9 @@ High-level steps:
 3. Ensure the site uses the custom domain consistently for Supabase endpoints (Auth + Functions) to avoid mixed-domain flows.
 
 If you don’t do this, the connectors can still work — they’ll just show the Supabase domain during OAuth.
+
+## Supabase Auth Security
+- Enable **Leaked Password Protection** in Supabase Dashboard → Auth → Providers → Email.
 - **Automated Updates**: pg_cron job runs hourly to automatically update checkpoint statuses. Manual refresh available via "Update Statuses" button.
   - **Cron health check (Supabase SQL editor):**
     - `SELECT * FROM cron.job WHERE jobname = 'update_checkpoint_statuses_hourly';`

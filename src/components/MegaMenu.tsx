@@ -19,8 +19,11 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
     const anchorRect = containerEl?.getBoundingClientRect() ?? triggerRect;
 
     setPanelPosition({
-      top: triggerRect.bottom + 8,
-      left: anchorRect.left + anchorRect.width / 2,
+      top: triggerRect.bottom,
+      left: Math.max(
+        anchorRect.left + anchorRect.width / 2,
+        450 // Prevent it from going too far left
+      ),
     });
   };
 
@@ -29,11 +32,14 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
     updatePanelPosition();
 
     const onReposition = () => updatePanelPosition();
+    const onScroll = () => setIsOpen(false);
+    
     window.addEventListener('resize', onReposition);
-    window.addEventListener('scroll', onReposition, true);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
     return () => {
       window.removeEventListener('resize', onReposition);
-      window.removeEventListener('scroll', onReposition, true);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [isOpen]);
 
@@ -73,9 +79,25 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
       }
     };
 
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        triggerRef.current &&
+        !triggerRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      return () => document.removeEventListener('keydown', handleEscape);
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
     }
   }, [isOpen]);
 
@@ -108,11 +130,13 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
           id="mega-menu-panel"
           role="region"
           aria-label="Practice Areas Menu"
-          className="fixed z-50 w-[90vw] max-w-5xl -translate-x-1/2"
+          className="fixed z-50 w-[90vw] max-w-5xl -translate-x-1/2 pt-2"
           style={{
             top: panelPosition.top,
             left: panelPosition.left,
           }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <div className="rounded-2xl border border-brand-offWhite/10 bg-brand-black/95 p-8 shadow-2xl backdrop-blur-sm">
             <div className="grid gap-8 md:grid-cols-3">
