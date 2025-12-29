@@ -5,6 +5,7 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 
 const faqs = [
@@ -55,7 +56,7 @@ export default function CriminalDefensePage() {
     <>
       <SEO
         title="Criminal Defense Attorney Delaware, OH | Mango Law LLC"
-        description="Aggressive criminal defense for drug crimes, assault, theft, weapons charges, and more. Former prosecutor with 20+ years experience defending clients in Delaware and Franklin Counties."
+        description="Aggressive criminal defense for drug crimes, assault, theft, weapons charges, and more. Former prosecutor with 26+ years of Ohio criminal law experience defending clients in Delaware and Franklin Counties."
         image="/images/generated/criminal-defense-hero.png"
       />
       <PageHero
@@ -67,6 +68,7 @@ export default function CriminalDefensePage() {
         showQuickActions={false}
         alignLeft={true}
         compact={true}
+        phoneCtaId="criminal_defense_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -213,8 +215,9 @@ export default function CriminalDefensePage() {
         title="Need a defense plan tailored to your case?"
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel="(740) 602-2155"
-        secondaryHref="tel:7406022155"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="criminal_defense_cta_call_office"
       />
     </>
   );

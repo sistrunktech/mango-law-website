@@ -4,8 +4,12 @@ import ChatBubble from './ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import TextInput from './TextInput';
 import PhoneInput from './PhoneInput';
-import { OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
+import { OFFICE_PHONE_DISPLAY, GENERAL_OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
+import { trackLeadSubmitted } from '../../lib/analytics';
+import TurnstileWidget from '../TurnstileWidget';
+import { TURNSTILE_SITE_KEY } from '../../lib/turnstile';
+import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../../lib/intake';
 
 interface ConversationStep {
   id: string;
@@ -20,18 +24,44 @@ interface ConversationWindowProps {
 }
 
 export default function ConversationWindow({ onClose, bottomOffsetClass = 'bottom-6' }: ConversationWindowProps) {
-  const [currentStep, setCurrentStep] = useState<'name' | 'phone' | 'message' | 'confirmation' | 'followup'>('name');
+  const [currentStep, setCurrentStep] = useState<
+    | 'name'
+    | 'phone'
+    | 'email'
+    | 'case_type'
+    | 'county'
+    | 'urgency'
+    | 'how_found'
+    | 'how_found_detail'
+    | 'message'
+    | 'confirmation'
+    | 'followup'
+  >(
+    'name',
+  );
   const [isTyping, setIsTyping] = useState(true);
   const [conversation, setConversation] = useState<ConversationStep[]>([]);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [caseType, setCaseType] = useState('');
+  const [county, setCounty] = useState('');
+  const [urgency, setUrgency] = useState<'exploring' | 'soon' | 'urgent' | 'emergency'>('exploring');
+  const [howFound, setHowFound] = useState('');
+  const [howFoundDetail, setHowFoundDetail] = useState('');
   const [message, setMessage] = useState('');
   const [nameError, setNameError] = useState('');
   const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [caseTypeError, setCaseTypeError] = useState('');
+  const [howFoundError, setHowFoundError] = useState('');
+  const [howFoundDetailError, setHowFoundDetailError] = useState('');
   const [messageError, setMessageError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
   const [showFollowup, setShowFollowup] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileSiteKey = TURNSTILE_SITE_KEY;
 
   const conversationRef = useRef<HTMLDivElement>(null);
   const followupTimerRef = useRef<number>();
@@ -53,6 +83,12 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           setCurrentStep(data.currentStep || 'name');
           setName(data.name || '');
           setPhone(data.phone || '');
+          setEmail(data.email || '');
+          setCaseType(data.caseType || '');
+          setCounty(data.county || '');
+          setUrgency(data.urgency || 'exploring');
+          setHowFound(data.howFound || '');
+          setHowFoundDetail(data.howFoundDetail || '');
           setMessage(data.message || '');
         } else {
           localStorage.removeItem('mango-chat-session');
@@ -66,18 +102,24 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
   // Save conversation to localStorage
   useEffect(() => {
-    if (conversation.length > 0 || name || phone || message) {
+    if (conversation.length > 0 || name || phone || email || caseType || county || howFound || howFoundDetail || message) {
       const sessionData = {
         conversation,
         currentStep,
         name,
         phone,
+        email,
+        caseType,
+        county,
+        urgency,
+        howFound,
+        howFoundDetail,
         message,
         lastActivity: new Date().toISOString(),
       };
       localStorage.setItem('mango-chat-session', JSON.stringify(sessionData));
     }
-  }, [conversation, currentStep, name, phone, message]);
+  }, [conversation, currentStep, name, phone, email, caseType, county, urgency, howFound, howFoundDetail, message]);
 
   // Reset inactivity timer
   useEffect(() => {
@@ -179,9 +221,116 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
     setTimeout(() => {
       setIsTyping(false);
+      addBotMessage("Thanks. What's the best email address to reach you?");
+      setCurrentStep('email');
+    }, 600);
+  };
+
+  const handleEmailSubmit = () => {
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!trimmedEmail) {
+      setEmailError('Please enter your email');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+
+    setEmailError('');
+    addUserMessage(trimmedEmail);
+    setIsTyping(true);
+
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage('What do you need help with?');
+      setCurrentStep('case_type');
+    }, 600);
+  };
+
+  const handleCaseTypeSelect = (value: string, label: string) => {
+    if (!value) {
+      setCaseTypeError('Please choose an option');
+      return;
+    }
+    setCaseTypeError('');
+    setCaseType(value);
+    addUserMessage(label);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage('Which county is this in? (optional)');
+      setCurrentStep('county');
+    }, 450);
+  };
+
+  const handleCountySelect = (value: string, label: string) => {
+    setCounty(value);
+    addUserMessage(label);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage('How urgent is your situation?');
+      setCurrentStep('urgency');
+    }, 450);
+  };
+
+  const handleUrgencySelect = (value: 'exploring' | 'soon' | 'urgent' | 'emergency', label: string) => {
+    setUrgency(value);
+    addUserMessage(label);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage('How did you find Nick/Mango Law?');
+      setCurrentStep('how_found');
+    }, 450);
+  };
+
+  const handleHowFoundSelect = (value: string, label: string) => {
+    if (!value) {
+      setHowFoundError('Please choose an option');
+      return;
+    }
+    setHowFoundError('');
+    setHowFound(value);
+    addUserMessage(label);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      if (value === 'referral') {
+        addBotMessage('Who can we thank for the referral?');
+        setCurrentStep('how_found_detail');
+        return;
+      }
+      if (value === 'other') {
+        addBotMessage('Can you share a quick note on how you found us?');
+        setCurrentStep('how_found_detail');
+        return;
+      }
       addBotMessage("Got it. What's going on today? How can we help?");
       setCurrentStep('message');
-    }, 600);
+    }, 450);
+  };
+
+  const handleHowFoundDetailSubmit = () => {
+    const trimmed = howFoundDetail.trim();
+    if (!trimmed) {
+      setHowFoundDetailError(howFound === 'referral' ? 'Please enter a name' : 'Please enter a quick note');
+      return;
+    }
+    if (trimmed.length < 2) {
+      setHowFoundDetailError('Please add a bit more detail');
+      return;
+    }
+    setHowFoundDetailError('');
+    addUserMessage(trimmed);
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      addBotMessage("Thanks. What's going on today? How can we help?");
+      setCurrentStep('message');
+    }, 450);
   };
 
   const handleMessageSubmit = async () => {
@@ -200,6 +349,13 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
     setIsTyping(true);
     setIsSubmitting(true);
 
+    if (turnstileSiteKey && !turnstileToken) {
+      setIsTyping(false);
+      setIsSubmitting(false);
+      setSubmissionError('Please complete the verification step and try again.');
+      return;
+    }
+
     // Build conversation context
     const conversationContext = conversation
       .map((step) => `Bot: ${typeof step.botMessage === 'string' ? step.botMessage : ''}\nUser: ${step.userResponse || ''}`)
@@ -212,21 +368,39 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${supabaseAnonKey}`,
+          apikey: supabaseAnonKey,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name: name.trim(),
           phone: phone.replace(/\D/g, ''),
-          email: null,
+          email: email.trim().toLowerCase(),
+          case_type: caseType || null,
+          county: county || null,
+          urgency: urgency || null,
+          how_found: howFound || null,
+          how_found_detail: howFoundDetail || null,
           initial_message: trimmedMessage,
           conversation_context: conversationContext,
           source: 'chat_widget',
+          turnstile_token: turnstileToken,
         }),
       });
 
       if (!response.ok) {
-        throw new Error(`Submission failed: ${response.status}`);
+        let details: string | undefined;
+        try {
+          const data = await response.json();
+          details = typeof data?.error === 'string' ? data.error : undefined;
+        } catch {
+          // ignore
+        }
+        throw new Error(details ? `Submission failed: ${details}` : `Submission failed: ${response.status}`);
       }
+
+      trackLeadSubmitted('chat', 'chat_widget', {
+        source: 'chat_widget',
+      });
 
       setIsTyping(false);
       setIsSubmitting(false);
@@ -237,11 +411,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
             <p className="font-semibold">Need immediate help?</p>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY} — Office</span>
+              <span>{OFFICE_PHONE_DISPLAY} — Call/Text (Direct)</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY}</span>
+              <span>{GENERAL_OFFICE_PHONE_DISPLAY} — Office</span>
             </div>
           </div>
         </div>
@@ -267,7 +441,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
       console.error('Chat submission error:', error);
       setIsTyping(false);
       setIsSubmitting(false);
-      setSubmissionError(`We had trouble sending your message. Please call us directly at ${OFFICE_PHONE_DISPLAY}.`);
+      setSubmissionError(
+        error instanceof Error && error.message
+          ? error.message
+          : `We had trouble sending your message. Please call or text us directly at ${OFFICE_PHONE_DISPLAY}.`,
+      );
 
       const errorMessage = (
         <div>
@@ -275,11 +453,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           <div className="space-y-2 text-xs">
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY} — Office</span>
+              <span>{OFFICE_PHONE_DISPLAY} — Call/Text (Direct)</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY}</span>
+              <span>{GENERAL_OFFICE_PHONE_DISPLAY} — Office</span>
             </div>
           </div>
         </div>
@@ -301,10 +479,14 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
   return (
     <div
       className={[
-        'fixed inset-x-3 top-4 z-50 flex max-w-full flex-col rounded-2xl border border-brand-black/10 bg-white shadow-2xl',
+        'fixed inset-x-3 bottom-4 z-50 flex max-w-full flex-col overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-lift-lg',
         bottomOffsetClass,
-        'lg:left-auto lg:right-6 lg:top-auto lg:bottom-6 lg:h-[600px] lg:w-[400px]',
+        'max-h-[85vh]',
+        'lg:inset-x-auto lg:right-6 lg:bottom-6 lg:max-h-none lg:h-[640px] lg:w-[420px]',
       ].join(' ')}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Chat"
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-brand-black/10 bg-gradient-to-r from-brand-mango to-brand-gold p-4">
@@ -331,7 +513,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
       </div>
 
       {/* Conversation */}
-      <div ref={conversationRef} className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div ref={conversationRef} className="flex-1 overflow-y-auto bg-brand-offWhite p-4 space-y-4">
         {conversation.map((step) => (
           <div key={step.id} className="space-y-3">
             <ChatBubble message={step.botMessage} sender="bot" timestamp={step.timestamp} />
@@ -345,7 +527,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
       {/* Input Area */}
       {currentStep !== 'confirmation' && currentStep !== 'followup' && (
-        <div className="border-t border-brand-black/10 bg-brand-black/5 p-4">
+        <div className="border-t border-brand-black/10 bg-white p-4">
           {currentStep === 'name' && (
             <div className="space-y-3">
               <TextInput
@@ -385,6 +567,128 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
             </div>
           )}
 
+          {currentStep === 'email' && (
+            <div className="space-y-3">
+              <TextInput
+                value={email}
+                onChange={setEmail}
+                onSubmit={handleEmailSubmit}
+                placeholder="you@example.com"
+                error={emailError}
+              />
+              <button
+                onClick={handleEmailSubmit}
+                disabled={!email.trim() || isTyping}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span>Continue</span>
+                <Send size={14} />
+              </button>
+            </div>
+          )}
+
+          {currentStep === 'case_type' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-1 gap-2">
+                {CASE_TYPE_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => handleCaseTypeSelect(opt.value, opt.label)}
+                    disabled={isTyping}
+                    className="w-full rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 disabled:opacity-50"
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              {caseTypeError ? <p className="text-xs text-red-600">{caseTypeError}</p> : null}
+            </div>
+          )}
+
+          {currentStep === 'county' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleCountySelect('', 'Skip')}
+                  disabled={isTyping}
+                  className="col-span-2 rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-sm font-semibold text-brand-black/70 transition-colors hover:bg-brand-black/5 disabled:opacity-50"
+                >
+                  Skip
+                </button>
+                {COUNTY_OPTIONS.map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => handleCountySelect(c, `${c} County`)}
+                    disabled={isTyping}
+                    className="rounded-xl border border-brand-black/10 bg-white px-3 py-2 text-xs font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 disabled:opacity-50"
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 'urgency' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-1 gap-2">
+                {URGENCY_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => handleUrgencySelect(opt.value, opt.label)}
+                    disabled={isTyping}
+                    className="w-full rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 disabled:opacity-50"
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 'how_found' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-1 gap-2">
+                {HOW_FOUND_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => handleHowFoundSelect(opt.value, opt.label)}
+                    disabled={isTyping}
+                    className="w-full rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10 disabled:opacity-50"
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              {howFoundError ? <p className="text-xs text-red-600">{howFoundError}</p> : null}
+            </div>
+          )}
+
+          {currentStep === 'how_found_detail' && (
+            <div className="space-y-3">
+              <TextInput
+                value={howFoundDetail}
+                onChange={setHowFoundDetail}
+                onSubmit={handleHowFoundDetailSubmit}
+                placeholder={howFound === 'referral' ? 'Name of the person or business' : 'Tell us a little more'}
+                error={howFoundDetailError}
+              />
+              <button
+                onClick={handleHowFoundDetailSubmit}
+                disabled={!howFoundDetail.trim() || isTyping}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span>Continue</span>
+                <Send size={14} />
+              </button>
+            </div>
+          )}
+
           {currentStep === 'message' && (
             <div className="space-y-3">
               <TextInput
@@ -397,7 +701,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
               />
               <button
                 onClick={handleMessageSubmit}
-                disabled={!message.trim() || isSubmitting}
+                disabled={!message.trim() || isSubmitting || (turnstileSiteKey ? !turnstileToken : false)}
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
@@ -412,9 +716,21 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
                   </>
                 )}
               </button>
-              {submissionError && (
-                <p className="text-xs text-red-600">{submissionError}</p>
-              )}
+              {turnstileSiteKey ? (
+                <div className="mt-2 flex items-end justify-between gap-3 rounded-xl border border-brand-black/10 bg-white px-3 py-2">
+                  <p className="text-[10px] font-medium leading-tight text-brand-black/60">
+                    Protected by Cloudflare Turnstile
+                  </p>
+                  <TurnstileWidget
+                    siteKey={turnstileSiteKey}
+                    onToken={setTurnstileToken}
+                    theme="light"
+                    size="compact"
+                    className="turnstile-widget origin-top-right scale-[0.9]"
+                  />
+                </div>
+              ) : null}
+              {submissionError ? <p className="text-xs text-red-600">{submissionError}</p> : null}
             </div>
           )}
         </div>

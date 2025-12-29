@@ -8,6 +8,8 @@ type ORCLabelProps = {
   showDefinition?: boolean;
   showLink?: boolean;
   className?: string;
+  /** If true, renders as a span instead of a Link to avoid nested link issues */
+  suppressLink?: boolean;
 };
 
 export default function ORCLabel({
@@ -16,6 +18,7 @@ export default function ORCLabel({
   showDefinition = false,
   showLink = true,
   className = '',
+  suppressLink = false,
 }: ORCLabelProps) {
   const statute = getStatute(section);
 
@@ -23,19 +26,45 @@ export default function ORCLabel({
     return null;
   }
 
+  const content = (
+    <>
+      § {statute.section} — {statute.shortTitle}
+    </>
+  );
+
   if (variant === 'micro') {
+    if (suppressLink) {
+      return (
+        <span
+          className={`inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-brand-black/60 ${className}`}
+          title={statute.title}
+        >
+          {content}
+        </span>
+      );
+    }
     return (
       <Link
         to={`/glossary#${statute.id}`}
         className={`relative -m-2 inline-flex items-center gap-1 rounded p-2 text-[10px] font-semibold uppercase tracking-wider text-brand-black/60 transition-colors hover:text-brand-mango focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-offWhite ${className}`}
         title={statute.title}
       >
-        § {statute.section} — {statute.shortTitle}
+        {content}
       </Link>
     );
   }
 
   if (variant === 'inline') {
+    if (suppressLink) {
+      return (
+        <span
+          className={`inline-flex items-center gap-1 text-sm font-semibold text-brand-leaf underline decoration-brand-leaf/30 ${className}`}
+          title={statute.definition}
+        >
+          ORC § {statute.section}
+        </span>
+      );
+    }
     return (
       <Link
         to={`/glossary#${statute.id}`}

@@ -128,7 +128,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       el.style.transition = 'width 0.2s, height 0.2s, margin 0.2s, box-shadow 0.2s';
       el.style.zIndex = isSelected ? '1000' : '1';
 
-      el.addEventListener('mouseenter', () => {
+      const applyHoverStyles = () => {
         const hoverSize = baseSize + 8;
         const offset = -4;
         el.style.width = `${hoverSize}px`;
@@ -136,19 +136,37 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         el.style.marginLeft = `${offset}px`;
         el.style.marginTop = `${offset}px`;
         el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)';
-      });
+      };
 
-      el.addEventListener('mouseleave', () => {
+      const removeHoverStyles = () => {
         el.style.width = `${baseSize}px`;
         el.style.height = `${baseSize}px`;
         el.style.marginLeft = '0px';
         el.style.marginTop = '0px';
         el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-      });
+      };
+
+      el.addEventListener('mouseenter', applyHoverStyles);
+      el.addEventListener('mouseleave', removeHoverStyles);
+      el.addEventListener('focus', applyHoverStyles);
+      el.addEventListener('blur', removeHoverStyles);
 
       const startDate = new Date(checkpoint.start_date);
       const endDate = new Date(checkpoint.end_date);
       const sourceNameForPopup = checkpoint.source_name && !isAggregatorSourceName(checkpoint.source_name) ? checkpoint.source_name : null;
+
+      const label = [
+        `DUI checkpoint: ${checkpoint.title}`,
+        `${checkpoint.location_city}, ${checkpoint.location_county} County`,
+        `Status: ${displayStatus}`,
+        `Start: ${startDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`,
+        `End: ${endDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`,
+        'Press Enter for details.',
+      ].join('. ');
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('aria-label', label);
+      el.setAttribute('aria-haspopup', 'dialog');
 
       const popup = new mapboxgl.Popup({ offset: 25, closeButton: true })
         .setHTML(`
@@ -181,9 +199,22 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         .setPopup(popup)
         .addTo(map.current!);
 
-      marker.getElement().addEventListener('click', () => {
+      const activateMarker = () => {
         if (onCheckpointSelect) {
           onCheckpointSelect(checkpoint);
+        }
+        marker.togglePopup();
+      };
+
+      el.addEventListener('click', activateMarker);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activateMarker();
+          return;
+        }
+        if (e.key === 'Escape') {
+          marker.getPopup()?.remove();
         }
       });
 

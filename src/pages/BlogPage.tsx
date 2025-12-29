@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, User, Clock } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, Search, X } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import BlogSidebar from '../components/BlogSidebar';
 import CTASection from '../components/CTASection';
@@ -24,12 +24,38 @@ function estimateReadTime(content: string): number {
   return Math.ceil(wordCount / wordsPerMinute);
 }
 
+const sortedBlogPosts = [...blogPosts].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('All Posts');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredPosts = selectedCategory === 'All Posts'
-    ? blogPosts
-    : blogPosts.filter(post => post.category === selectedCategory);
+  const filteredPosts = useMemo(() => {
+    let posts = sortedBlogPosts;
+
+    if (selectedCategory !== 'All Posts') {
+      posts = posts.filter((post) => post.category === selectedCategory);
+    }
+
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim();
+      posts = posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(query) ||
+          post.excerpt.toLowerCase().includes(query) ||
+          post.content.toLowerCase().includes(query) ||
+          post.category.toLowerCase().includes(query)
+      );
+    }
+
+    return posts;
+  }, [selectedCategory, searchQuery]);
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+  };
 
   return (
     <>
@@ -40,15 +66,45 @@ export default function BlogPage() {
         ctaLabel="Free Consultation"
         ctaHref="/contact"
         variant="light"
+        phoneCtaId="blog_hero_call_office"
       />
 
       <section className="section bg-white">
         <div className="container">
+          <div className="mb-6">
+            <div className="relative max-w-md">
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-brand-black/40" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search articles..."
+                className="w-full rounded-xl border border-brand-black/10 bg-white py-3 pl-12 pr-10 text-sm text-brand-black placeholder-brand-black/40 shadow-soft transition-all focus:border-brand-mango focus:outline-none focus:ring-2 focus:ring-brand-mango/20"
+              />
+              {searchQuery && (
+                <button
+                  onClick={handleClearSearch}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-brand-black/40 transition-colors hover:bg-brand-black/5 hover:text-brand-black"
+                  aria-label="Clear search"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+            {searchQuery && (
+              <p className="mt-2 text-sm text-brand-black/60">
+                {filteredPosts.length} result{filteredPosts.length !== 1 ? 's' : ''} for "{searchQuery}"
+                {selectedCategory !== 'All Posts' && ` in ${selectedCategory}`}
+              </p>
+            )}
+          </div>
+
           <div className="mb-8 flex flex-wrap gap-3">
             {categories.map((category) => {
-              const count = category === 'All Posts'
-                ? blogPosts.length
-                : blogPosts.filter(p => p.category === category).length;
+              const count =
+                category === 'All Posts'
+                  ? sortedBlogPosts.length
+                  : sortedBlogPosts.filter((p) => p.category === category).length;
 
               return (
                 <button
@@ -131,20 +187,34 @@ export default function BlogPage() {
               {filteredPosts.length === 0 && (
                 <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-12 text-center">
                   <p className="text-lg text-brand-black/60">
-                    No articles found in this category.
+                    {searchQuery
+                      ? `No articles found matching "${searchQuery}"`
+                      : 'No articles found in this category.'}
                   </p>
-                  <button
-                    onClick={() => setSelectedCategory('All Posts')}
-                    className="mt-4 text-sm font-semibold text-brand-mangoText hover:text-brand-leaf"
-                  >
-                    View all posts
-                  </button>
+                  <div className="mt-4 flex flex-wrap justify-center gap-3">
+                    {searchQuery && (
+                      <button
+                        onClick={handleClearSearch}
+                        className="text-sm font-semibold text-brand-mangoText hover:text-brand-leaf"
+                      >
+                        Clear search
+                      </button>
+                    )}
+                    {selectedCategory !== 'All Posts' && (
+                      <button
+                        onClick={() => setSelectedCategory('All Posts')}
+                        className="text-sm font-semibold text-brand-mangoText hover:text-brand-leaf"
+                      >
+                        View all categories
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
 
-            <div className="lg:col-span-1">
-              <div className="lg:sticky lg:top-8">
+            <div className="hidden lg:block lg:col-span-1">
+              <div className="lg:sticky lg:top-8 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:pr-2 lg:pb-6">
                 <BlogSidebar />
               </div>
             </div>
@@ -160,6 +230,7 @@ export default function BlogPage() {
         primaryHref="/contact"
         secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="blog_cta_call_office"
       />
     </>
   );

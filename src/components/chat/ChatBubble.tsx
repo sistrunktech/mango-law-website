@@ -27,8 +27,8 @@ export default function ChatBubble({ message, sender, timestamp }: ChatBubblePro
         <div
           className={`rounded-2xl px-4 py-3 ${
             isBot
-              ? 'bg-brand-black/5 text-brand-black'
-              : 'bg-brand-mango text-brand-black'
+              ? 'bg-white text-brand-black shadow-sm ring-1 ring-brand-black/5'
+              : 'bg-brand-mango text-brand-black shadow-sm'
           }`}
         >
           {typeof message === 'string' ? (

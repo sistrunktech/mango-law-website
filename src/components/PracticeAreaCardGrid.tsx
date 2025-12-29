@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Phone, Calendar, Star } from 'lucide-react';
 import { practiceAreas } from '../data/practiceAreas';
 import ORCLabel from './ORCLabel';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 function useMinWidthQuery(minWidthPx: number): boolean {
   const getMatches = () => (typeof window === 'undefined' ? true : window.matchMedia(`(min-width: ${minWidthPx}px)`).matches);
@@ -133,6 +134,7 @@ export default function PracticeAreaCardGrid() {
                       section={oviArea.orcSection}
                       variant="micro"
                       className="text-brand-black/60 hover:text-brand-mangoText"
+                      suppressLink
                     />
                   </div>
                 )}
@@ -159,7 +161,7 @@ export default function PracticeAreaCardGrid() {
 
                 {/* Prominent CTA */}
                 <div className="mt-6 flex items-center gap-2 text-base font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
-                  Explore OVI Defense
+                  {oviArea.ctaText || 'Get help with OVI charges'}
                   <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
@@ -202,6 +204,7 @@ export default function PracticeAreaCardGrid() {
                       section={criminalArea.orcSection}
                       variant="micro"
                       className="text-brand-black/60 hover:text-brand-mangoText"
+                      suppressLink
                     />
                   </div>
                 )}
@@ -211,7 +214,7 @@ export default function PracticeAreaCardGrid() {
                 </p>
 
                 <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
-                  Learn more
+                  {criminalArea.ctaText || 'Discuss your case'}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
@@ -261,6 +264,7 @@ export default function PracticeAreaCardGrid() {
                       section={area.orcSection}
                       variant="micro"
                       className="text-brand-black/60 hover:text-brand-mangoText"
+                      suppressLink
                     />
                   </div>
                 )}
@@ -270,7 +274,7 @@ export default function PracticeAreaCardGrid() {
                 </p>
 
                 <div className="mt-5 flex items-center gap-2 text-sm font-bold text-brand-mangoText opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-brand-leaf">
-                  Learn more
+                  {area.ctaText || 'Talk to a lawyer'}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
@@ -299,11 +303,18 @@ export default function PracticeAreaCardGrid() {
                   to="/contact"
                   className="btn btn-primary w-full text-center transition-transform hover:scale-105"
                 >
-                  Request Consultation
+                  Free Case Review
                 </Link>
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}
                   className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mangoText"
+                  data-cta="practice_area_grid_call_office"
+                  onClick={() => {
+                    trackCtaClick('practice_area_grid_call_office');
+                    trackLeadSubmitted('phone', 'practice_area_grid_call_office', {
+                      target_number: OFFICE_PHONE_TEL,
+                    });
+                  }}
                 >
                   <Phone className="h-4 w-4" />
                   {OFFICE_PHONE_DISPLAY}

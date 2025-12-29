@@ -106,7 +106,7 @@ const NAMING_RECOMMENDATIONS: Record<IntegrationType, { title: string; lines: st
       'Account: Mango Law',
       'GA4 Property: Mango Law | Website | Prod',
       'Web Data Stream: mango.law | Web | Prod',
-      'Key events (GA4): generate_lead, click_to_call, chat_open, cta_click',
+      'Key events (GA4): page_view, cta_click, lead_submitted',
     ],
   },
   search_console: {
@@ -122,8 +122,8 @@ const NAMING_RECOMMENDATIONS: Record<IntegrationType, { title: string; lines: st
       'Account: Mango Law',
       'Container: Mango Law | mango.law | Web | Prod',
       'Workspace: Main',
-      'Tags: GA4 | Config | mango.law | Prod; GA4 | Event | cta_click; GA4 | Event | generate_lead; GA4 | Event | click_to_call; GA4 | Event | chat_open',
-      'Triggers: Click | CTA | [data-cta]; Click | Phone | tel:; Form | Lead | submit; Page View | All Pages',
+      'Tags: GA4 | Config | mango.law | Prod; GA4 | Event | page_view; GA4 | Event | cta_click; GA4 | Event | lead_submitted',
+      'Triggers: Event | mango_page_view; Event | cta_click; Event | lead_submitted; (optional) Click | Phone | tel:',
     ],
   },
 };
@@ -162,7 +162,11 @@ function statusPill(status: IntegrationStatus) {
   }
 }
 
-type ResourceSelectionState = { value: string; saving: boolean };
+function supportsAccountSelection(type: IntegrationType) {
+  return type === 'business_profile' || type === 'analytics' || type === 'tag_manager';
+}
+
+type ResourceSelectionStateV2 = { accountValue: string; resourceValue: string; saving: boolean };
 
 function getCurrentResourceValue(type: IntegrationType, integration?: GoogleIntegration): string {
   if (!integration) return '';
@@ -174,44 +178,105 @@ function getCurrentResourceValue(type: IntegrationType, integration?: GoogleInte
   return '';
 }
 
-function extractResourceOptions(type: IntegrationType, accessData: any): Array<{ value: string; label: string }> {
+function getCurrentAccountValue(type: IntegrationType, integration?: GoogleIntegration): string {
+  if (!integration) return '';
+  if (!supportsAccountSelection(type)) return '';
+  return integration.account_id || '';
+}
+
+function extractAccountOptions(type: IntegrationType, accessData: any): Array<{ value: string; label: string }> {
+  if (!supportsAccountSelection(type) || !accessData) return [];
+
+  if (type === 'analytics') {
+    const accounts: any[] = accessData?.accounts?.all ?? accessData?.accounts?.sample ?? [];
+    return accounts
+      .map((a) => ({
+        value: String(a?.name ?? ''),
+        label: String(a?.displayName ?? a?.name ?? ''),
+      }))
+      .filter((o) => Boolean(o.value))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }
+
+  if (type === 'tag_manager') {
+    const accounts: any[] = accessData?.accounts?.all ?? accessData?.accounts?.sample ?? [];
+    return accounts
+      .map((a) => ({
+        value: String(a?.accountId ?? ''),
+        label: String(a?.name ?? a?.accountName ?? a?.accountId ?? ''),
+      }))
+      .filter((o) => Boolean(o.value))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }
+
+  if (type === 'business_profile') {
+    const accounts: any[] = accessData?.accounts?.all ?? accessData?.accounts?.sample ?? [];
+    return accounts
+      .map((a) => ({
+        value: String(a?.name ?? ''),
+        label: String(a?.accountName ?? a?.name ?? ''),
+      }))
+      .filter((o) => Boolean(o.value))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }
+
+  return [];
+}
+
+function extractResourceOptions(
+  type: IntegrationType,
+  accessData: any,
+  accountValue?: string,
+): Array<{ value: string; label: string }> {
   if (!accessData) return [];
 
   if (type === 'search_console') {
-    const sites: any[] = accessData?.sites?.sample ?? [];
+    const sites: any[] = accessData?.sites?.all ?? accessData?.sites?.sample ?? [];
     return sites
       .map((s) => ({ value: String(s?.siteUrl ?? ''), label: String(s?.siteUrl ?? '') }))
       .filter((o) => Boolean(o.value));
   }
 
   if (type === 'analytics') {
-    const properties: any[] = accessData?.properties?.sample ?? [];
+    const allProps: any[] = accessData?.properties?.all ?? accessData?.properties?.sample ?? [];
+    const properties = accountValue ? allProps.filter((p) => String(p?.parent ?? '') === accountValue) : allProps;
     return properties
-      .map((p) => ({
-        value: String(p?.name ?? ''),
-        label: String(p?.displayName ?? p?.name ?? ''),
-      }))
-      .filter((o) => Boolean(o.value));
+      .map((p) => {
+        const value = String(p?.name ?? '');
+        const displayName = String(p?.displayName ?? p?.name ?? '');
+        const parent = String(p?.parent ?? '');
+        const parentSuffix = parent ? ` (${parent})` : '';
+        return { value, label: `${displayName}${accountValue ? '' : parentSuffix}` };
+      })
+      .filter((o) => Boolean(o.value))
+      .sort((a, b) => a.label.localeCompare(b.label));
   }
 
   if (type === 'tag_manager') {
-    const containers: any[] = accessData?.containers?.sample ?? [];
+    const allContainers: any[] = accessData?.containers?.all ?? accessData?.containers?.sample ?? [];
+    const containers = accountValue ? allContainers.filter((c) => String(c?.accountId ?? '') === accountValue) : allContainers;
     return containers
-      .map((c) => ({
-        value: String(c?.containerId ?? ''),
-        label: String(c?.name ?? c?.publicId ?? c?.containerId ?? ''),
-      }))
-      .filter((o) => Boolean(o.value));
+      .map((c) => {
+        const value = String(c?.containerId ?? '');
+        const name = String(c?.name ?? c?.publicId ?? c?.containerId ?? '');
+        const accountName = String(c?.accountName ?? c?.accountId ?? '');
+        const accountLabel = accountValue ? '' : accountName ? ` (${accountName})` : '';
+        return { value, label: `${name}${accountLabel}` };
+      })
+      .filter((o) => Boolean(o.value))
+      .sort((a, b) => a.label.localeCompare(b.label));
   }
 
   if (type === 'business_profile') {
-    const locations: any[] = accessData?.locations?.sample ?? [];
+    const allLocations: any[] = accessData?.locations?.all ?? accessData?.locations?.sample ?? [];
+    const locations = accountValue ? allLocations.filter((l) => String(l?.accountName ?? '') === accountValue) : allLocations;
     return locations
       .map((l) => ({
         value: String(l?.name ?? ''),
         label: String(l?.title ?? l?.storefrontAddress?.addressLines?.join(', ') ?? l?.name ?? ''),
       }))
-      .filter((o) => Boolean(o.value));
+      .filter((o) => Boolean(o.value))
+      .sort((a, b) => a.label.localeCompare(b.label));
   }
 
   return [];
@@ -226,6 +291,10 @@ function inferPreferredResource(type: IntegrationType, options: Array<{ value: s
     const prefix = options.find((o) => o.value === 'https://mango.law/');
     if (prefix) return prefix.value;
   }
+
+  // Prefer obvious Mango Law matches when possible.
+  const mango = options.find((o) => /mango/i.test(o.label) || /mango/i.test(o.value));
+  if (mango) return mango.value;
 
   return options[0].value;
 }
@@ -250,11 +319,11 @@ export default function ConnectionsPage() {
     search_console: { status: 'idle' },
     tag_manager: { status: 'idle' },
   });
-  const [resourceSelections, setResourceSelections] = useState<Record<IntegrationType, ResourceSelectionState>>({
-    business_profile: { value: '', saving: false },
-    analytics: { value: '', saving: false },
-    search_console: { value: '', saving: false },
-    tag_manager: { value: '', saving: false },
+  const [resourceSelections, setResourceSelections] = useState<Record<IntegrationType, ResourceSelectionStateV2>>({
+    business_profile: { accountValue: '', resourceValue: '', saving: false },
+    analytics: { accountValue: '', resourceValue: '', saving: false },
+    search_console: { accountValue: '', resourceValue: '', saving: false },
+    tag_manager: { accountValue: '', resourceValue: '', saving: false },
   });
 
   useEffect(() => {
@@ -366,13 +435,64 @@ export default function ConnectionsPage() {
 
       // Prime selection UI with an existing saved selection, or a sensible default.
       const integration = getIntegration(integrationType);
-      const existing = getCurrentResourceValue(integrationType, integration);
-      const options = extractResourceOptions(integrationType, result);
-      const preferred = existing || inferPreferredResource(integrationType, options);
+      const existingResource = getCurrentResourceValue(integrationType, integration);
+      const existingAccount = getCurrentAccountValue(integrationType, integration);
+      const accountOptions = extractAccountOptions(integrationType, result);
+      const preferredAccount =
+        (existingAccount && accountOptions.some((o) => o.value === existingAccount) ? existingAccount : '') ||
+        accountOptions.find((o) => /mango/i.test(o.label) || /mango/i.test(o.value))?.value ||
+        accountOptions[0]?.value ||
+        '';
+
+      const resourceOptions = extractResourceOptions(integrationType, result, preferredAccount);
+      const preferredResource =
+        (existingResource && resourceOptions.some((o) => o.value === existingResource) ? existingResource : '') ||
+        inferPreferredResource(integrationType, resourceOptions);
+      
       setResourceSelections((prev) => ({
         ...prev,
-        [integrationType]: { ...prev[integrationType], value: preferred || prev[integrationType].value || '' },
+        [integrationType]: {
+          ...prev[integrationType],
+          accountValue: preferredAccount,
+          resourceValue: preferredResource || '',
+        },
       }));
+
+      // Auto-save if we found a high-confidence match and no resource was previously saved
+      const currentIntegration = integration;
+      if (currentIntegration && !existingResource && preferredResource && /mango/i.test(preferredResource)) {
+        console.log(`Auto-persisting inferred resource for ${integrationType}: ${preferredResource}`);
+        
+        const selection = { accountValue: preferredAccount, resourceValue: preferredResource };
+        const integrationId = currentIntegration.id;
+
+        if (integrationType === 'business_profile') {
+          await supabase
+            .from('google_integrations')
+            .update({ 
+              account_id: selection.accountValue || null, 
+              location_id: selection.resourceValue, 
+              updated_at: new Date().toISOString() 
+            })
+            .eq('id', integrationId);
+        } else {
+          const existingMeta = currentIntegration.metadata || {};
+          const nextMeta = { ...existingMeta } as Record<string, unknown>;
+          if (integrationType === 'search_console') nextMeta.siteUrl = selection.resourceValue;
+          if (integrationType === 'analytics') nextMeta.propertyId = selection.resourceValue;
+          if (integrationType === 'tag_manager') nextMeta.containerId = selection.resourceValue;
+
+          await supabase
+            .from('google_integrations')
+            .update({ 
+              account_id: supportsAccountSelection(integrationType) ? (selection.accountValue || null) : currentIntegration.account_id, 
+              metadata: nextMeta, 
+              updated_at: new Date().toISOString() 
+            })
+            .eq('id', integrationId);
+        }
+        await loadIntegrations();
+      }
     } catch (error) {
       console.error('Access check error:', error);
       const checkedAt = new Date().toISOString();
@@ -389,8 +509,11 @@ export default function ConnectionsPage() {
     const integration = getIntegration(integrationType);
     if (!integration) return;
 
-    const value = (resourceSelections[integrationType]?.value || '').trim();
-    if (!value) {
+    const selection = resourceSelections[integrationType];
+    const accountValue = (selection?.accountValue || '').trim();
+    const resourceValue = (selection?.resourceValue || '').trim();
+
+    if (!resourceValue) {
       setMessage({ type: 'error', text: 'Select a resource first, then click Save.' });
       setTimeout(() => setMessage(null), 3500);
       return;
@@ -402,19 +525,19 @@ export default function ConnectionsPage() {
       if (integrationType === 'business_profile') {
         const { error } = await supabase
           .from('google_integrations')
-          .update({ location_id: value, updated_at: new Date().toISOString() })
+          .update({ account_id: accountValue || null, location_id: resourceValue, updated_at: new Date().toISOString() })
           .eq('id', integration.id);
         if (error) throw error;
       } else {
         const existingMeta = integration.metadata || {};
         const nextMeta = { ...existingMeta } as Record<string, unknown>;
-        if (integrationType === 'search_console') nextMeta.siteUrl = value;
-        if (integrationType === 'analytics') nextMeta.propertyId = value;
-        if (integrationType === 'tag_manager') nextMeta.containerId = value;
+        if (integrationType === 'search_console') nextMeta.siteUrl = resourceValue;
+        if (integrationType === 'analytics') nextMeta.propertyId = resourceValue;
+        if (integrationType === 'tag_manager') nextMeta.containerId = resourceValue;
 
         const { error } = await supabase
           .from('google_integrations')
-          .update({ metadata: nextMeta, updated_at: new Date().toISOString() })
+          .update({ account_id: supportsAccountSelection(integrationType) ? (accountValue || null) : integration.account_id, metadata: nextMeta, updated_at: new Date().toISOString() })
           .eq('id', integration.id);
         if (error) throw error;
       }
@@ -610,9 +733,13 @@ export default function ConnectionsPage() {
             const PillIcon = pill.icon;
             const accessCheck = accessChecks[type];
             const selection = resourceSelections[type];
+            const accountOptions =
+              isConnected && accessCheck.status === 'success'
+                ? extractAccountOptions(type, accessCheck.data)
+                : [];
             const selectionOptions =
               isConnected && accessCheck.status === 'success'
-                ? extractResourceOptions(type, accessCheck.data)
+                ? extractResourceOptions(type, accessCheck.data, selection.accountValue || undefined)
                 : [];
 
             return (
@@ -771,7 +898,7 @@ export default function ConnectionsPage() {
                         <div>
                           <h4 className="text-sm font-semibold text-white">Setup guide</h4>
                           <p className="text-sm text-slate-400 mt-1">
-                            “Connect” stores tokens. “Setup” verifies we can see the right resources for <span className="text-slate-200">mango.law</span>.
+                            “Connect” stores access. “Check status” loads the Google resources this connection can see. Select the correct account/resource for <span className="text-slate-200">mango.law</span> and click Save.
                           </p>
                         </div>
                         <button
@@ -810,11 +937,12 @@ export default function ConnectionsPage() {
                       </div>
 
                       <div className="mt-3 text-sm text-slate-300">
-                        <div className="font-medium text-slate-200">Common missing pieces</div>
+                        <div className="font-medium text-slate-200">Common issues + fixes</div>
                         <ul className="mt-2 space-y-1 list-disc pl-5">
-                          <li>Wrong Google account (switch accounts and reconnect).</li>
+                          <li>Wrong account/resource selected (use the Account/Resource dropdowns under “Latest status check”, then Save).</li>
+                          <li>Wrong signed-in Google user during OAuth (Reconnect, choose the correct Google user, then re-run “Check status”).</li>
                           <li>Insufficient permissions (request role: {ACCESS_ROLE_COPY[type].role}).</li>
-                          <li>Resource not created yet (create it in Google, then run “Check status”).</li>
+                          <li>Resource not created yet in Google (create it, then re-run “Check status”).</li>
                         </ul>
                       </div>
 
@@ -835,46 +963,89 @@ export default function ConnectionsPage() {
                         <h4 className="text-sm font-semibold text-white">Latest status check</h4>
                         <span className="text-xs text-slate-500">{formatDate(accessCheck.checkedAt)}</span>
                       </div>
-                      {selectionOptions.length > 0 && (
-                        <div className="mt-3 rounded-lg border border-[#2A2A2A] bg-black/20 p-3">
-                          <div className="flex flex-wrap items-end justify-between gap-3">
-                            <div className="min-w-[240px] flex-1">
-                              <div className="text-xs font-semibold text-slate-300">Select resource (required for “healthy”)</div>
+                      <div className="mt-3 rounded-lg border border-[#2A2A2A] bg-black/20 p-3 relative z-10">
+                        <div className="flex flex-wrap items-end justify-between gap-3">
+                          <div className="min-w-[240px] flex-1">
+                            <div className="text-xs font-semibold text-slate-300">Select resource (required for “healthy”)</div>
+                            {supportsAccountSelection(type) && accountOptions.length > 0 ? (
+                              <div className="mt-2">
+                                <div className="text-[11px] font-semibold text-slate-400">Account</div>
+                                <select
+                                  value={selection.accountValue}
+                                  onChange={(e) => {
+                                    const nextAccount = e.target.value;
+                                    const nextResourceOptions = extractResourceOptions(type, accessCheck.data, nextAccount);
+                                    const nextResource = inferPreferredResource(type, nextResourceOptions);
+                                    setResourceSelections((prev) => ({
+                                      ...prev,
+                                      [type]: { ...prev[type], accountValue: nextAccount, resourceValue: nextResource },
+                                    }));
+                                  }}
+                                  className="mt-2 w-full cursor-pointer rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C]/40 pointer-events-auto"
+                                >
+                                  <option value="">Choose…</option>
+                                  {accountOptions.map((o) => (
+                                    <option key={o.value} value={o.value}>
+                                      {o.label}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            ) : null}
+
+                            <div className="mt-3">
+                              <div className="text-[11px] font-semibold text-slate-400">Resource</div>
                               <select
-                                value={selection.value}
+                                value={selection.resourceValue}
                                 onChange={(e) =>
                                   setResourceSelections((prev) => ({
                                     ...prev,
-                                    [type]: { ...prev[type], value: e.target.value },
+                                    [type]: { ...prev[type], resourceValue: e.target.value },
                                   }))
                                 }
-                                className="mt-2 w-full rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C]/40"
+                                className="mt-2 w-full cursor-pointer rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-2 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C]/40 disabled:cursor-not-allowed disabled:opacity-60 pointer-events-auto"
+                                disabled={selectionOptions.length === 0}
                               >
-                                <option value="">Choose…</option>
+                                <option value="">
+                                  {selectionOptions.length === 0 ? 'No resources found — check permissions' : 'Choose…'}
+                                </option>
                                 {selectionOptions.map((o) => (
                                   <option key={o.value} value={o.value}>
                                     {o.label}
                                   </option>
                                 ))}
                               </select>
-                              <div className="mt-2 text-xs text-slate-500">
-                                Saved selection: <span className="font-mono text-slate-300">{getCurrentResourceValue(type, integration) || '—'}</span>
-                              </div>
                             </div>
-                            <button
-                              onClick={() => handleSaveSelectedResource(type)}
-                              disabled={!selection.value || selection.saving}
-                              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#232323] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2A2A2A] disabled:opacity-50"
-                            >
-                              {selection.saving ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Link2 className="h-4 w-4" />}
-                              Save
-                            </button>
+
+                            <div className="mt-2 text-xs text-slate-500">
+                              Saved selection:{' '}
+                              <span className="font-mono text-slate-300">{getCurrentResourceValue(type, integration) || '—'}</span>
+                            </div>
+                            {selectionOptions.length === 0 ? (
+                              <div className="mt-2 text-xs text-slate-400">
+                                If you have access but no resources appear, reconnect using the correct Google user and ensure the requested role is granted, then re-run “Check status”.
+                              </div>
+                            ) : null}
                           </div>
+
+                          <button
+                            onClick={() => handleSaveSelectedResource(type)}
+                            disabled={!selection.resourceValue || selection.saving}
+                            className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#232323] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2A2A2A] disabled:opacity-50"
+                          >
+                            {selection.saving ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Link2 className="h-4 w-4" />}
+                            Save
+                          </button>
                         </div>
-                      )}
-                      <pre className="mt-2 text-xs text-slate-300 overflow-auto max-h-56 bg-black/25 p-3 rounded">
-                        {JSON.stringify(accessCheck.data, null, 2)}
-                      </pre>
+                      </div>
+                      <details className="mt-3 rounded-lg border border-[#2A2A2A] bg-black/20 p-3">
+                        <summary className="cursor-pointer select-none text-xs font-semibold text-slate-300">
+                          Debug payload
+                        </summary>
+                        <pre className="mt-3 text-xs text-slate-300 overflow-auto max-h-56 bg-black/25 p-3 rounded">
+                          {JSON.stringify(accessCheck.data, null, 2)}
+                        </pre>
+                      </details>
                     </div>
                   )}
 
@@ -899,8 +1070,8 @@ export default function ConnectionsPage() {
         <div className="mt-8 p-4 bg-[#1A1A1A] rounded-lg border border-[#2A2A2A]">
           <h3 className="text-sm font-medium text-slate-300 mb-2">Need Help?</h3>
           <p className="text-sm text-slate-500">
-            “Connect” stores tokens; “Setup” verifies the right account/property for <span className="text-slate-300">mango.law</span>.
-            Use “Check status” after granting access or creating the missing Google resource.
+            “Connect” stores access. “Check status” loads accounts/resources and enables selection. If you have multiple Google accounts, choose the correct one in the Account dropdown, then choose the resource and click Save.
+            Re-run “Check status” after changing permissions or creating a missing Google resource.
           </p>
         </div>
       </main>

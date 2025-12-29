@@ -47,3 +47,25 @@ export const OG_SPECS: OgSpec[] = [
       "Contact Mango Law hero: modern law office interior, welcoming front desk, warm mango-gold accent lighting, deep forest background, space for overlay text, photo-real.",
   },
 ];
+
+// Blog image generation specs for editorial content
+export const BLOG_IMAGE_SPECS = [
+  {
+    id: "holiday-ovi-enforcement-hero",
+    route: "/blog/holiday-ovi-enforcement-ohio-delaware-dublin-columbus",
+    model: "fal-ai/recraft-v3",
+    prompt: `Editorial photograph, winter night scene on a rural Ohio highway.
+      Shallow depth of field focusing on wet asphalt reflecting amber streetlight.
+      Police vehicle visible but intentionally out of focus in deep background,
+      creating tension without alarm. Color palette: deep blue-black shadows,
+      warm amber highlights (#E8A33C), muted forest green undertones (#2F5F4F).
+      Mood: contemplative, serious, not sensationalized.
+      Style: documentary photography, 35mm film grain, cinematic aspect ratio 21:9.
+      No visible faces, no explicit police confrontation, no flashing lights.`,
+    negative_prompt: "cartoon, illustration, stock photo aesthetic, bright red and blue police lights, dramatic action, accident scene, mugshot, handcuffs visible, sensationalized",
+    style: "realistic_image",
+    aspect_ratio: "21:9",
+    strength: 0.85,
+  },
+  // Add 6 more image specs here (enforcement-timeline, ovi-signs-checklist, etc.)
+];

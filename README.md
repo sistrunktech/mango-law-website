@@ -1,28 +1,34 @@
 # Mango Law Website
 
-Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on the Sistech Website 2025 reproducible framework.
-
-> Official Mango Law LLC website — React/Vite, Supabase forms, full law-firm architecture, and Windsurf/Codex-ready automation.
+Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on a React/Vite + Supabase stack with a GTM-first analytics contract and an admin panel for operational tooling.
 
 ## Features
 
 - **Modern React + Vite frontend** with TypeScript
 - **Sistech Law v1 component library** (PageHero, PracticeAreaCards, CTA sections, Testimonials, etc.)
-- **Supabase Edge Function integrations** (`submit-contact`, environment-guarded secrets)
+- **Supabase Edge Function integrations** (`submit-contact`, `submit-lead`, `chat-intake`)
+- **GTM-first analytics** via explicit `window.dataLayer` events (`mango_page_view`, `cta_click`, `lead_submitted`) — no GTM click selectors required
+- **Consent Mode v2 (advanced mode)** + lightweight consent banner (GTM/GA4-ready)
 - **Tailwind design tokens** for the Mango Law brand
 - **Bolt.new / Windsurf agent compatibility** (scaffolding, build, deploy)
 - **SEO-optimized** practice-area and location pages for Delaware, OH
-- **Staging → production deploy pipeline** with clean parity checks
+- **Search Intelligence dashboard** for keyword rank tracking (Serper.dev-backed)
+- **Regional expansion data** for Union, Morrow, and Marion counties (tiered service areas)
+- **Checkpoint transparency** with announced-on dates and improved empty states
+- **Optional bot protection** via Cloudflare Turnstile (client + server verification)
 
 ## Brand Tokens
 
+These are defined in `tailwind.config.js`.
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `brand.black` | `#000000` | Primary text |
-| `brand.mango` | `#F4A300` | Primary accent |
-| `brand.gold` | `#C78A00` | Secondary accent, hover states |
-| `brand.offWhite` | `#F9F7F4` | Backgrounds |
-| `brand.teal` | `#0F6E63` | Tertiary accent |
+| `brand.black` | `#0A0A0A` | Primary text |
+| `brand.offWhite` | `#FAF9F7` | Backgrounds |
+| `brand.mango` | `#E8A33C` | Primary CTA/accent |
+| `brand.mangoText` | `#B45309` | WCAG-safe mango for text on light backgrounds |
+| `brand.leaf` | `#2F5F4F` | Primary green accent |
+| `brand.goldText` | `#8A6A18` | WCAG-safe gold for text on light backgrounds |
 
 ## Quick Start
 
@@ -34,48 +40,57 @@ cp .env.example .env  # Configure your environment
 npm run dev
 ```
 
-## Folder Structure
+## Hosting + Deploy Model (Important)
 
-```
-mango-law-website/
-├── src/
-│   ├── components/    # Reusable UI components
-│   ├── pages/         # Route pages
-│   ├── data/          # Static data files
-│   ├── assets/        # Images, fonts
-│   ├── styles/        # Global styles, tokens
-│   └── lib/           # Utilities, Supabase client
-├── public/
-│   └── images/        # Brand logos, headshots
-├── supabase/
-│   ├── functions/     # Edge functions
-│   └── migrations/    # Database migrations
-├── design/            # Reference assets (Wayback screenshots)
-├── .github/workflows/ # CI/CD pipelines
-└── docs/              # Operations documentation
-```
+- Bolt publishes the **frontend** (Vite build output).
+- Supabase **Edge Functions** + **DB migrations** are deployed separately (see `docs/OPERATIONS.md`).
+- If the live site looks “stuck”, verify the deploy by checking View Source for a new `/assets/index-*.js` filename.
 
-## Deployment Workflow
+## Analytics (GTM-first)
 
-1. Windsurf / Codex scaffolds new components or pages
-2. Code merged into `staging` triggers Vite build + Supabase validation
-3. Bolt.new deploys staging for parity review
-4. PR from `staging` → `main` triggers full build + production deploy
-5. DNS routes mango.law → Bolt production environment
+This site includes a single GTM container in `index.html` (`GTM-WLJQZKB5`). The app pushes explicit events to `window.dataLayer`:
 
-### Required Secrets
+- `mango_page_view`
+- `cta_click`
+- `lead_submitted` (single conversion event for outreach, includes `lead_source` and `checkpoint_id`)
 
-| Variable | Description |
-|----------|-------------|
-| `VITE_SUPABASE_URL` | Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | Supabase anonymous key |
-| `RESEND_API_KEY` | Resend email API key |
-| `CONTACT_NOTIFY_TO` | Email for contact form notifications |
-| `FROM_EMAIL` | Sender email address |
+Do not hard-code the GA4 `gtag.js` snippet anywhere in the site — GA4 should be configured inside GTM.
+
+## Admin Panel (Google Connectors)
+
+Use `/admin/connections` to connect Google tools and select the correct resources:
+- **Analytics (GA4)**: select **Account** + **Property**
+- **Search Console**: prefer `sc-domain:mango.law` if available
+- **Tag Manager**: select **Account** + **Container**
+
+If you see missing lists or “wrong account” behavior, it’s almost always one of:
+- The connected Google user doesn’t have access to that account/property/container
+- The OAuth app scopes/consent weren’t granted for the right Google account
+- Google APIs are rate-limited or returning partial results (reconnect + re-check)
+
+## Environment Variables / Secrets
+
+Use `mango-law-website/.env.example` as the authoritative list. Keep it updated whenever env vars change.
+
+Commonly required values:
+- Frontend: `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+- Supabase custom domain (OAuth branding): `VITE_SUPABASE_CUSTOM_DOMAIN=https://api.mango.law`
+- Forms + email delivery (Edge Functions): `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`
+- Turnstile (optional): `VITE_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
+- Email theme config: `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`
+- Search Intelligence: `SERPER_API_KEY`
 
 ## Documentation
 
 - **Operations guide:** [`docs/OPERATIONS.md`](docs/OPERATIONS.md)
+- **Keyboard accessibility guide:** [`docs/KEYBOARD-ACCESSIBILITY-GUIDE.md`](docs/KEYBOARD-ACCESSIBILITY-GUIDE.md)
+- **Content governance:** [`docs/CONTENT_GOVERNANCE.md`](docs/CONTENT_GOVERNANCE.md)
+- **Blog requirements:** [`docs/BLOG_REQUIREMENTS.md`](docs/BLOG_REQUIREMENTS.md)
+- **Protected content registry:** [`docs/PROTECTED_CONTENT.md`](docs/PROTECTED_CONTENT.md)
+- **Content change log:** [`docs/CONTENT_CHANGELOG.md`](docs/CONTENT_CHANGELOG.md)
+- **SEO strategy:** [`docs/SEO-STRATEGY-2025.md`](docs/SEO-STRATEGY-2025.md)
+- **Research inputs:** [`docs/RESEARCH-INPUTS-2025.md`](docs/RESEARCH-INPUTS-2025.md)
+- **Agent guardrails:** [`docs/AGENT_GUARDRAILS.md`](docs/AGENT_GUARDRAILS.md)
 - **Changelog:** [`CHANGELOG.md`](CHANGELOG.md)
 - **Contributing:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
 

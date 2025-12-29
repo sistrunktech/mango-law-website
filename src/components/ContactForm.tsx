@@ -1,20 +1,35 @@
 import { FormEvent, useState } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
+import { trackLeadSubmitted } from '../lib/analytics';
+import { normalizePhoneDigits } from '../lib/phone';
+import TurnstileWidget from './TurnstileWidget';
+import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
+import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
 
-const inputClasses = [
-  'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
-  'placeholder:text-brand-black/40',
-  'transition-all duration-200',
-  'focus:border-brand-teal focus-visible:ring-2 focus-visible:ring-brand-teal/20',
-  'hover:border-brand-black/20',
-].join(' ');
+interface ContactFormProps {
+  variant?: 'default' | 'compact';
+}
 
-const labelClasses = 'block text-sm font-semibold text-brand-black';
+export default function ContactForm({ variant = 'default' }: ContactFormProps) {
+  const isCompact = variant === 'compact';
+  const inputClasses = [
+    'mt-2 w-full rounded-xl border-2 border-brand-black/10 bg-white text-brand-black',
+    isCompact ? 'px-3 py-2.5 text-sm' : 'px-4 py-3',
+    'placeholder:text-brand-black/40',
+    'transition-all duration-200',
+    'focus:border-brand-teal focus-visible:ring-2 focus-visible:ring-brand-teal/20',
+    'hover:border-brand-black/20',
+  ].join(' ');
+  const labelClasses = isCompact
+    ? 'block text-xs font-semibold text-brand-black'
+    : 'block text-sm font-semibold text-brand-black';
 
-export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [howFound, setHowFound] = useState('');
+  const turnstileSiteKey = TURNSTILE_SITE_KEY;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,15 +38,25 @@ export default function ContactForm() {
       return;
     }
 
+    if (turnstileSiteKey && !turnstileToken) {
+      setError('Please complete the verification step and try again.');
+      return;
+    }
+
     const form = event.currentTarget;
     const formData = new FormData(form);
     const payload = {
       name: formData.get('name'),
       email: formData.get('email'),
-      phone: formData.get('phone'),
+      phone: formData.get('phone') ? normalizePhoneDigits(String(formData.get('phone'))) : null,
       message: formData.get('message'),
-      how_heard: formData.get('how_heard'),
+      case_type: formData.get('case_type'),
+      county: formData.get('county'),
+      urgency: formData.get('urgency'),
+      how_found: formData.get('how_found'),
+      how_found_detail: formData.get('how_found_detail'),
       honey: formData.get('honey'),
+      turnstile_token: turnstileToken,
     };
 
     if (payload.honey) {
@@ -46,10 +71,21 @@ export default function ContactForm() {
         body: payload,
       });
       if (fnError) {
-        throw fnError;
+        let serverMessage: string | undefined;
+        try {
+          const context = (fnError as any)?.context;
+          const response: Response | undefined = context?.clone ? context.clone() : context;
+          const json = response ? await response.json().catch(() => null) : null;
+          serverMessage = typeof json?.error === 'string' ? json.error : undefined;
+        } catch {
+          // ignore
+        }
+        throw new Error(serverMessage || fnError.message);
       }
+      trackLeadSubmitted('form', 'contact_form_submit');
       setStatus('success');
       form.reset();
+      setHowFound('');
     } catch (err) {
       setStatus('error');
       setError(err instanceof Error ? err.message : 'Unable to submit. Please try again.');
@@ -78,17 +114,21 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
-      <div className="rounded-xl border border-brand-black/10 bg-white/70 p-4">
-        <p className="text-sm font-semibold text-brand-black">Free, confidential consultation. No obligation.</p>
-        <p className="mt-1 text-xs text-brand-black/60">
+    <form className={isCompact ? 'space-y-4' : 'space-y-5'} onSubmit={handleSubmit}>
+      <div className={`rounded-xl border border-brand-black/10 bg-white/70 ${isCompact ? 'p-3' : 'p-4'}`}>
+        <p className={`font-semibold text-brand-black ${isCompact ? 'text-xs' : 'text-sm'}`}>
+          Free, confidential consultation. No obligation.
+        </p>
+        <p className={`mt-1 text-brand-black/60 ${isCompact ? 'text-[11px]' : 'text-xs'}`}>
           Share only what you’re comfortable sharing — we’ll respond promptly with next steps.
         </p>
       </div>
 
-      <fieldset className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
-        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Your Info</legend>
-        <div className="mt-3 grid gap-5 sm:grid-cols-2">
+      <fieldset className={`border border-brand-black/10 bg-white shadow-sm ${isCompact ? 'rounded-xl p-4' : 'rounded-2xl p-5'}`}>
+        <legend className={`px-2 font-bold uppercase text-brand-goldText ${isCompact ? 'text-[10px] tracking-[0.16em]' : 'text-xs tracking-[0.18em]'}`}>
+          Your Info
+        </legend>
+        <div className={`mt-3 grid ${isCompact ? 'gap-4' : 'gap-5 sm:grid-cols-2'}`}>
           <div>
             <label htmlFor="name" className={labelClasses}>
               Full Name <span className="text-brand-mango">*</span>
@@ -127,27 +167,89 @@ export default function ContactForm() {
             />
           </div>
           <div>
-            <label htmlFor="how_heard" className={labelClasses}>
-              How did you find us?
+            <label htmlFor="how_found" className={labelClasses}>
+              How did you find Nick/Mango Law? <span className="text-brand-mango">*</span>
             </label>
             <select
-              id="how_heard"
-              name="how_heard"
+              id="how_found"
+              name="how_found"
+              required
               className={inputClasses}
+              value={howFound}
+              onChange={(e) => setHowFound(e.target.value)}
             >
               <option value="">Select an option</option>
-              <option value="google">Google Search</option>
-              <option value="referral">Referral</option>
-              <option value="social">Social Media</option>
-              <option value="other">Other</option>
+              {HOW_FOUND_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
             </select>
           </div>
         </div>
+
+        {(howFound === 'referral' || howFound === 'other') ? (
+          <div className={isCompact ? 'mt-4' : 'mt-5'}>
+            <label htmlFor="how_found_detail" className={labelClasses}>
+              {howFound === 'referral' ? 'Who can we thank?' : 'Quick note'} <span className="text-brand-mango">*</span>
+            </label>
+            <input
+              id="how_found_detail"
+              name="how_found_detail"
+              required
+              className={inputClasses}
+              placeholder={howFound === 'referral' ? 'Name of the person or business' : 'Tell us a little more'}
+            />
+          </div>
+        ) : null}
       </fieldset>
 
-      <fieldset className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
-        <legend className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Your Situation</legend>
+      <fieldset className={`border border-brand-black/10 bg-white shadow-sm ${isCompact ? 'rounded-xl p-4' : 'rounded-2xl p-5'}`}>
+        <legend className={`px-2 font-bold uppercase text-brand-goldText ${isCompact ? 'text-[10px] tracking-[0.16em]' : 'text-xs tracking-[0.18em]'}`}>
+          Your Situation
+        </legend>
         <div className="mt-3">
+          <div className={`grid ${isCompact ? 'gap-4' : 'gap-5 sm:grid-cols-2'}`}>
+            <div>
+              <label htmlFor="case_type" className={labelClasses}>
+                What do you need help with? <span className="text-brand-mango">*</span>
+              </label>
+              <select id="case_type" name="case_type" required className={inputClasses}>
+                <option value="">Select an option</option>
+                {CASE_TYPE_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="urgency" className={labelClasses}>
+                How urgent is your situation?
+              </label>
+              <select id="urgency" name="urgency" className={inputClasses} defaultValue="exploring">
+                {URGENCY_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="county" className={labelClasses}>
+                County (optional)
+              </label>
+              <select id="county" name="county" className={inputClasses} defaultValue="">
+                <option value="">Select county...</option>
+                {COUNTY_OPTIONS.map((county) => (
+                  <option key={county} value={county}>
+                    {county} County
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           <label htmlFor="message" className={labelClasses}>
             How can we help? <span className="text-brand-mango">*</span>
           </label>
@@ -159,9 +261,6 @@ export default function ContactForm() {
             rows={4}
             placeholder="Briefly describe your situation and any upcoming court dates."
           />
-          <p className="mt-2 text-xs text-brand-black/60">
-            Your information is confidential and protected by attorney-client privilege.
-          </p>
         </div>
       </fieldset>
 
@@ -184,8 +283,8 @@ export default function ContactForm() {
       {/* Submit button */}
       <button
         type="submit"
-        disabled={status === 'submitting'}
-        className="btn btn-primary w-full py-4 text-base"
+        disabled={status === 'submitting' || (turnstileSiteKey ? !turnstileToken : false)}
+        className={`btn btn-primary w-full ${isCompact ? 'py-3 text-sm' : 'py-4 text-base'}`}
         data-cta="contact_form_submit"
       >
         {status === 'submitting' ? (
@@ -200,6 +299,27 @@ export default function ContactForm() {
           </>
         )}
       </button>
+
+      <div className="mt-3 flex flex-col gap-2 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
+        <p className={`text-center text-brand-black/60 md:text-left ${isCompact ? 'text-[11px]' : 'text-xs'}`}>
+          Submitting this form does not create an attorney-client relationship. Please do not send confidential or
+          sensitive information.
+        </p>
+        {turnstileSiteKey ? (
+          <div className="flex flex-col items-center gap-1 md:items-end">
+            <TurnstileWidget
+              siteKey={turnstileSiteKey}
+              onToken={setTurnstileToken}
+              theme="light"
+              size="compact"
+              className={`turnstile-widget origin-top-right ${isCompact ? 'scale-[0.85]' : 'scale-[0.9]'}`}
+            />
+            <p className="text-[10px] font-medium leading-tight text-brand-black/50">
+              Protected by Cloudflare Turnstile
+            </p>
+          </div>
+        ) : null}
+      </div>
     </form>
   );
 }

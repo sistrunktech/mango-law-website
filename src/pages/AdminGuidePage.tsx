@@ -2,6 +2,7 @@ import {
   FileText,
   Mail,
   MapPin,
+  Link2,
   LogIn,
   Edit2,
   Plus,
@@ -237,6 +238,50 @@ export default function AdminGuidePage() {
                 title="Security"
                 description="Never share your admin credentials. Log out when finished, especially on shared computers."
               />
+            </Section>
+
+            <Section
+              icon={<Link2 className="w-6 h-6" />}
+              title="Google Integrations (GA4 / GSC / GTM)"
+              id="google-integrations"
+            >
+              <p className="text-slate-300 mb-4">
+                Use the Connections hub to link your Google tools and select the correct account/resources for <strong className="text-white">mango.law</strong>.
+              </p>
+
+              <StepBox
+                number={1}
+                title="Open Connections"
+                description="Go to /admin/connections"
+              />
+              <StepBox
+                number={2}
+                title="Connect a Google tool"
+                description="Click Connect (or Reconnect) for Analytics, Search Console, or Tag Manager, then complete the Google consent screen."
+              />
+              <StepBox
+                number={3}
+                title="Run “Check status”"
+                description="This loads the accounts/resources your Google connection can see."
+              />
+              <StepBox
+                number={4}
+                title="Select the correct Account + Resource"
+                description="If you have multiple Google accounts, choose the correct one, then choose the GA4 Property / GSC Property / GTM Container and click Save."
+              />
+
+              <InfoBox type="info">
+                Search Console typically works best with the <strong className="text-white">domain property</strong> (<code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">sc-domain:mango.law</code>). If you only have URL-prefix properties, choose <code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">https://mango.law/</code>.
+              </InfoBox>
+              <InfoBox type="warning">
+                If you picked the wrong signed-in Google user during OAuth, use Reconnect and sign in with the correct Google account, then re-run “Check status”.
+              </InfoBox>
+              <InfoBox type="info">
+                If the Google consent screen shows a Supabase project URL (like <code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">https://&lt;project-id&gt;.supabase.co</code>), the connectors can still work — but for a more professional experience, set up a Supabase custom domain (example: <code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">api.mango.law</code>) and update the OAuth redirect URI.
+              </InfoBox>
+              <InfoBox type="info">
+                If something feels “stuck”, expand the <strong className="text-white">Debug payload</strong> on the Connections page to confirm what Google returned (accounts/properties/containers/sites) before changing settings.
+              </InfoBox>
             </Section>
 
             <Section

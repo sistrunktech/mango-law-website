@@ -14,7 +14,7 @@ export default function AuthorBio({
   title = 'Attorney at Law',
   credentials,
   bio,
-  imageUrl = '/images/nick_mango_profile_shot.jpg',
+  imageUrl = '/images/headshots/nick-mango-author-160w.jpg',
 }: AuthorBioProps) {
   const [imageError, setImageError] = useState(false);
 
@@ -28,6 +28,8 @@ export default function AuthorBio({
             alt={name}
             className="h-24 w-24 shrink-0 rounded-full object-cover"
             onError={() => setImageError(true)}
+            width={96}
+            height={96}
           />
         ) : (
           <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-brand-mango/20">

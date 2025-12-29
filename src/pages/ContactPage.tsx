@@ -3,22 +3,29 @@ import ContactForm from '../components/ContactForm';
 import PageHero from '../components/PageHero';
 import LocationBlock from '../components/LocationBlock';
 import { SEO } from '../lib/seo';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import {
+  OFFICE_PHONE_DISPLAY,
+  OFFICE_PHONE_TEL,
+  GENERAL_OFFICE_PHONE_DISPLAY,
+  GENERAL_OFFICE_PHONE_TEL,
+} from '../lib/contactInfo';
 
 export default function ContactPage() {
   return (
     <>
       <SEO
         title="Contact Mango Law LLC | Delaware, OH Criminal Defense Attorney"
-        description={`Schedule a consultation with experienced criminal defense attorney Dominic Mango. Located at 46 W. Winter Street, Delaware, OH. Call ${OFFICE_PHONE_DISPLAY} or email office@mango.law.`}
+        description={`Schedule a consultation with experienced criminal defense attorney Dominic "Nick" Mango. Located in Delaware, OH. Call or text ${OFFICE_PHONE_DISPLAY} or email office@mango.law.`}
       />
       <PageHero
         eyebrow="Contact"
         title="Schedule a consult with Mango Law."
-        description="Share a few details and we’ll respond promptly. For urgent matters, call the office."
-        ctaLabel="Call the office"
+        description="Share a few details and we’ll respond promptly. For urgent matters, call or text our direct line."
+        ctaLabel="Call/Text now"
         ctaHref={`tel:${OFFICE_PHONE_TEL}`}
         variant="light"
+        phoneCtaId="contact_hero_call_office"
       />
 
       <section className="bg-white">
@@ -70,14 +77,35 @@ export default function ContactPage() {
 
             <div className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Prefer to call?</p>
-              <p className="mt-2 text-sm text-brand-black/70">If your situation is urgent, call the office now.</p>
-              <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
-                className="btn btn-primary mt-4 w-full"
-                data-cta="contact_page_call_office"
-              >
-                Call {OFFICE_PHONE_DISPLAY}
-              </a>
+              <p className="mt-2 text-sm text-brand-black/70">For the quickest response, call or text our direct line.</p>
+              <div className="mt-4 space-y-2">
+                <a
+                  href={`tel:${OFFICE_PHONE_TEL}`}
+                  className="btn btn-primary w-full"
+                  data-cta="contact_page_call_office"
+                  onClick={() => {
+                    trackCtaClick('contact_page_call_office');
+                    trackLeadSubmitted('phone', 'contact_page_call_office', {
+                      target_number: OFFICE_PHONE_TEL,
+                    });
+                  }}
+                >
+                  Call/Text {OFFICE_PHONE_DISPLAY}
+                </a>
+                <a
+                  href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
+                  className="btn btn-secondary w-full"
+                  data-cta="contact_page_call_secondary"
+                  onClick={() => {
+                    trackCtaClick('contact_page_call_secondary');
+                    trackLeadSubmitted('phone', 'contact_page_call_secondary', {
+                      target_number: GENERAL_OFFICE_PHONE_TEL,
+                    });
+                  }}
+                >
+                  Office {GENERAL_OFFICE_PHONE_DISPLAY}
+                </a>
+              </div>
             </div>
           </div>
 

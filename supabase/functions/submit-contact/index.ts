@@ -1,12 +1,24 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.48.0";
+import { buildAdminEmailHtml, buildClientConfirmationHtml } from "../_shared/email/templates.ts";
+import { formatFrom, formatPhoneForDisplay, formatTimestampForEmail, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
+import type { EmailSeason, EmailTheme } from "../_shared/email/tokens.ts";
 
 interface ContactFormData {
   name: string;
   email: string;
-  phone: string;
+  phone?: string | null;
   message: string;
+  case_type?: string | null;
+  county?: string | null;
+  urgency?: string | null;
+  how_found?: string | null;
+  how_found_detail?: string | null;
+  how_heard?: string | null;
+  how_heard_detail?: string | null;
   honeypot?: string;
+  honey?: string;
+  turnstile_token?: string | null;
 }
 
 interface LogContext {
@@ -72,6 +84,26 @@ function validateEmail(email: string): boolean {
 function validatePhone(phone: string): boolean {
   const cleaned = phone.replace(/\D/g, "");
   return cleaned.length >= 10 && cleaned.length <= 15;
+}
+
+async function verifyTurnstile(args: { token: string; ip: string }): Promise<boolean> {
+  const secret = Deno.env.get("TURNSTILE_SECRET_KEY");
+  if (!secret) return true;
+
+  const body = new URLSearchParams();
+  body.set("secret", secret);
+  body.set("response", args.token);
+  if (args.ip && args.ip !== "unknown") body.set("remoteip", args.ip);
+
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body,
+  });
+
+  if (!res.ok) return false;
+  const json = await res.json().catch(() => null);
+  return Boolean(json?.success);
 }
 
 function getClientIp(req: Request): string {
@@ -161,7 +193,7 @@ Deno.serve(async (req: Request) => {
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseServiceKey = Deno.env.get("SERVICE_ROLE_KEY")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const rateLimit = await checkRateLimit(supabase, ip, "/submit-contact", 1, 10);
@@ -196,7 +228,7 @@ Deno.serve(async (req: Request) => {
 
     const formData: ContactFormData = await req.json();
 
-    if (formData.honeypot) {
+    if (formData.honeypot || formData.honey) {
       log("warn", "Honeypot triggered (likely spam)", { ...logContext, status: 400 });
       return new Response(
         JSON.stringify({ error: "Invalid submission" }),
@@ -212,6 +244,26 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    const turnstileSecret = Deno.env.get("TURNSTILE_SECRET_KEY");
+    if (turnstileSecret) {
+      const token = String(formData.turnstile_token || "").trim();
+      if (!token) {
+        log("warn", "Missing Turnstile token", { ...logContext, status: 400 });
+        return new Response(
+          JSON.stringify({ error: "Verification required" }),
+          { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+        );
+      }
+      const ok = await verifyTurnstile({ token, ip });
+      if (!ok) {
+        log("warn", "Turnstile verification failed", { ...logContext, status: 400 });
+        return new Response(
+          JSON.stringify({ error: "Verification failed" }),
+          { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+        );
+      }
+    }
+
     if (!validateEmail(formData.email)) {
       log("warn", "Invalid email format", { ...logContext, email: formData.email, status: 400 });
       return new Response(
@@ -220,7 +272,8 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    if (formData.phone && !validatePhone(formData.phone)) {
+    const normalizedPhone = formData.phone ? normalizePhoneForStorage(formData.phone) : null;
+    if (normalizedPhone && !validatePhone(normalizedPhone)) {
       log("warn", "Invalid phone format", { ...logContext, status: 400 });
       return new Response(
         JSON.stringify({ error: "Invalid phone number format" }),
@@ -231,8 +284,13 @@ Deno.serve(async (req: Request) => {
     const { error: dbError } = await supabase.from("contact_leads").insert({
       name: formData.name.trim(),
       email: formData.email.trim().toLowerCase(),
-      phone: formData.phone?.trim() || null,
+      phone: normalizedPhone,
       message: formData.message.trim(),
+      case_type: formData.case_type?.trim() || null,
+      county: formData.county?.trim() || null,
+      urgency: formData.urgency?.trim() || null,
+      how_found: (formData.how_found || formData.how_heard || "").trim() || null,
+      how_found_detail: (formData.how_found_detail || formData.how_heard_detail || "").trim() || null,
       ip_address: ip,
       user_agent: userAgent,
     });
@@ -246,32 +304,63 @@ Deno.serve(async (req: Request) => {
     }
 
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
-    const fromEmail = Deno.env.get("FROM_EMAIL") || "noreply@example.com";
-    const notifyTo = Deno.env.get("CONTACT_NOTIFY_TO") || "admin@example.com";
+    const fromEmail = formatFrom(Deno.env.get("FROM_EMAIL") || "noreply@example.com");
+    const notifyTo = parseEmailList(Deno.env.get("CONTACT_NOTIFY_TO")) || ["admin@example.com"];
+    const notifyBcc = parseEmailList(
+      Deno.env.get("CONTACT_NOTIFY_BCC") || Deno.env.get("CHAT_LEAD_NOTIFY_CC"),
+    );
 
     if (resendApiKey) {
       try {
+        const siteUrl = Deno.env.get("FRONTEND_URL") || Deno.env.get("VITE_SITE_URL") || "https://mango.law";
+        const appEnv = Deno.env.get("APP_ENV") || "production";
+        const season = (Deno.env.get("APP_SEASON") || "winter") as EmailSeason;
+        const theme = (Deno.env.get("APP_THEME") || "light") as EmailTheme;
+        const holiday = isTruthyEnv(Deno.env.get("APP_HOLIDAY"));
+
+        const receivedAt = formatTimestampForEmail(new Date());
+        const adminEmailBody = {
+          from: fromEmail,
+          to: notifyTo.length ? notifyTo : ["admin@example.com"],
+          bcc: notifyBcc.length ? notifyBcc : undefined,
+          reply_to: formData.email.trim().toLowerCase(),
+          subject: `New contact request — ${formData.name.trim()}`,
+          html: buildAdminEmailHtml(
+            "contact",
+            {
+              title: "New contact request",
+              summaryLine: `${formData.name.trim()} · ${normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : "No phone"}`,
+              fields: [
+                { label: "Name", value: formData.name.trim() },
+                { label: "Email", value: formData.email.trim().toLowerCase() },
+                { label: "Phone", value: normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : "Not provided" },
+                { label: "Help needed", value: formData.case_type?.trim() || "Not provided" },
+                { label: "Urgency", value: formData.urgency?.trim() || "Not provided" },
+                { label: "County", value: formData.county?.trim() || "Not provided" },
+                { label: "How found", value: (formData.how_found || formData.how_heard || "").trim() || "Not provided" },
+                { label: "How found detail", value: (formData.how_found_detail || formData.how_heard_detail || "").trim() || "Not provided" },
+              ],
+              messageLabel: "Message",
+              message: formData.message.trim(),
+              meta: [
+                { label: "Received", value: receivedAt },
+                { label: "IP", value: ip },
+                { label: "UA", value: userAgent },
+              ],
+              replyToEmail: formData.email.trim().toLowerCase(),
+              callToPhone: normalizedPhone || null,
+            },
+            { siteUrl, appEnv, season, theme, holiday },
+          ),
+        };
+
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${resendApiKey}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            from: fromEmail,
-            to: [notifyTo],
-            subject: `New Contact Form Submission from ${formData.name}`,
-            html: `
-              <h2>New Contact Form Submission</h2>
-              <p><strong>Name:</strong> ${formData.name}</p>
-              <p><strong>Email:</strong> ${formData.email}</p>
-              <p><strong>Phone:</strong> ${formData.phone || "Not provided"}</p>
-              <p><strong>Message:</strong></p>
-              <p>${formData.message.replace(/\n/g, "<br>")}</p>
-              <hr>
-              <p><small>IP: ${ip} | User Agent: ${userAgent}</small></p>
-            `,
-          }),
+          body: JSON.stringify(adminEmailBody),
         });
 
         if (!emailResponse.ok) {
@@ -279,6 +368,49 @@ Deno.serve(async (req: Request) => {
           log("error", "Email notification failed", { ...logContext, error: errorText });
         } else {
           log("info", "Email notification sent successfully", logContext);
+        }
+
+        const confirmationResponse = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${resendApiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: fromEmail,
+            to: [formData.email.trim().toLowerCase()],
+            subject: "We received your message — Mango Law LLC",
+            html: buildClientConfirmationHtml(
+              "contact",
+              {
+                title: "We received your message",
+                greetingName: formData.name.trim(),
+                intro: "Thanks for reaching out. We received your message and will respond as soon as possible during business hours.",
+                details: [
+                  { label: "Received", value: receivedAt },
+                  { label: "Name", value: formData.name.trim() },
+                  { label: "Email", value: formData.email.trim().toLowerCase() },
+                  ...(normalizedPhone ? [{ label: "Phone", value: formatPhoneForDisplay(normalizedPhone) }] : []),
+                  ...(formData.case_type?.trim() ? [{ label: "Help needed", value: formData.case_type.trim() }] : []),
+                  ...(formData.county?.trim() ? [{ label: "County", value: formData.county.trim() }] : []),
+                  ...(formData.urgency?.trim() ? [{ label: "Urgency", value: formData.urgency.trim() }] : []),
+                ],
+                message: formData.message.trim(),
+                caseType: formData.case_type?.trim() || null,
+                urgency: formData.urgency?.trim() || null,
+                county: formData.county?.trim() || null,
+                includeHelpfulLinks: true,
+              },
+              { siteUrl, appEnv, season, theme, holiday },
+            ),
+          }),
+        });
+
+        if (!confirmationResponse.ok) {
+          const errorText = await confirmationResponse.text();
+          log("error", "Lead confirmation email failed", { ...logContext, error: errorText });
+        } else {
+          log("info", "Lead confirmation email sent successfully", logContext);
         }
       } catch (emailError) {
         log("error", "Email sending exception", {

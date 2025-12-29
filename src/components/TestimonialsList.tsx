@@ -70,7 +70,7 @@ export default function TestimonialsList({ showHeader = true, variant = 'standar
                   )}
                 </div>
                 <Link to="/contact" className="btn btn-primary" data-cta="reviews_featured_cta">
-                  Schedule a Free Consultation
+                  Free Case Review
                 </Link>
               </div>
             </div>

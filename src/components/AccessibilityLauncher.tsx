@@ -1,17 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Accessibility, X, RotateCcw, Type, Eye, MousePointer, Link, Focus, Brain, Space } from 'lucide-react';
 import { useAccessibility, type FontSize } from '../contexts/AccessibilityContext';
+import { useFocusTrap } from '../lib/useFocusTrap';
 
 interface AccessibilityLauncherProps {
-  chatBottomOffsetClass?: string;
+  bottomOffsetClass?: string;
 }
 
-export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-6' }: AccessibilityLauncherProps) {
+export default function AccessibilityLauncher({ bottomOffsetClass = 'bottom-24 lg:bottom-6' }: AccessibilityLauncherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { preferences, updatePreference, resetPreferences } = useAccessibility();
 
-  const bottomClass = chatBottomOffsetClass === 'bottom-24' ? 'bottom-44' : 'bottom-24';
+  const launcherButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(panelRef, isOpen, launcherButtonRef);
+
+  const bottomClass = bottomOffsetClass;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -52,13 +57,14 @@ export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-
   return (
     <>
       <button
+        ref={launcherButtonRef}
         onClick={() => setIsOpen(true)}
         aria-label="Open accessibility options (Alt+A)"
         className={[
           'group fixed left-auto right-4 z-50 flex items-center justify-center rounded-full bg-brand-mango shadow-lg transition-all hover:bg-brand-leaf hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-mango/50 sm:right-6',
           bottomClass,
           isCollapsed ? 'h-11 w-11' : 'h-14 w-14 hover:scale-110',
-          'lg:bottom-6 lg:left-6 lg:right-auto',
+          'lg:left-6 lg:right-auto',
         ].join(' ')}
       >
         <Accessibility
@@ -82,6 +88,7 @@ export default function AccessibilityLauncher({ chatBottomOffsetClass = 'bottom-
             role="dialog"
             aria-label="Accessibility Settings"
             aria-modal="true"
+            ref={panelRef}
           >
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-brand-black/10 bg-white p-6">
               <div className="flex items-center gap-3">

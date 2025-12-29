@@ -223,6 +223,8 @@ Deno.serve(async (req: Request) => {
           source_name: 'OVICheckpoint.com',
           description: raw.description || null,
           updated_at: new Date().toISOString(),
+          geocoding_confidence: geocoded?.confidence || 'none',
+          last_geocoded_at: geocoded ? new Date().toISOString() : null,
         };
 
         const match = await findExistingCheckpointMatch(supabase, {
@@ -258,11 +260,19 @@ Deno.serve(async (req: Request) => {
           stats.checkpointsUpdated++;
           console.log(`Updated (${match.matchKind}): ${raw.title}`);
         } else {
+          // Attempt insert, handling unique constraint if heuristic match failed but exact DB conflict exists
           const { error: insertError } = await supabase
             .from('dui_checkpoints')
             .insert(checkpointData);
 
-          if (insertError) throw insertError;
+          if (insertError) {
+            if (insertError.message.includes('unique_checkpoint_event')) {
+              console.log(`Skipping duplicate (constraint): ${raw.title}`);
+              stats.checkpointsSkipped++;
+              continue;
+            }
+            throw insertError;
+          }
           stats.checkpointsNew++;
           console.log(`Inserted: ${raw.title}`);
         }

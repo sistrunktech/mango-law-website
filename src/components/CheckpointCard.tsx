@@ -64,6 +64,13 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
       )}
 
       <div className="mt-4 space-y-2">
+        {checkpoint.announcement_date && (
+          <div className="flex items-center gap-2 text-xs text-brand-black/50 italic">
+            <Clock className="h-3 w-3" />
+            <span>Announced on {new Date(checkpoint.announcement_date).toLocaleDateString()}</span>
+          </div>
+        )}
+
         {showSourceName && (
           <div className="flex items-center gap-2 text-xs text-brand-black/60">
             <AlertCircle className="h-3.5 w-3.5" />

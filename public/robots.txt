@@ -7,4 +7,6 @@ Allow: /
 Sitemap: https://mango.law/sitemap.xml
 
 # Disallow admin or internal pages if any
+Disallow: /admin
+Disallow: /admin/
 Disallow: /brand-guidelines

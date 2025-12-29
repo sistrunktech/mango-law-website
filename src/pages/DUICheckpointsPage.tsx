@@ -9,11 +9,10 @@ import CTASection from '../components/CTASection';
 import BlogSidebar from '../components/BlogSidebar';
 import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
-import EmergencyBanner from '../components/EmergencyBanner';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
-import { trackCtaClick } from '../lib/analytics';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -126,9 +125,8 @@ export default function DUICheckpointsPage() {
         ctaLabel="Know Your Rights"
         ctaHref="/ovi-dui-defense-delaware-oh"
         variant="light"
+        phoneCtaId="dui_checkpoints_hero_call_office"
       />
-
-      <EmergencyBanner />
 
       <section className="section bg-white">
         <div className="container">
@@ -152,7 +150,12 @@ export default function DUICheckpointsPage() {
                 <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
                   <a
                     href={`tel:${OFFICE_PHONE_TEL}`}
-                    onClick={() => trackCtaClick('checkpoint_banner_call')}
+                    onClick={() => {
+                      trackCtaClick('checkpoint_banner_call');
+                      trackLeadSubmitted('phone', 'checkpoint_banner_call', {
+                        target_number: OFFICE_PHONE_TEL,
+                      });
+                    }}
                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10"
                     data-cta="checkpoint_banner_call"
                     aria-label={`Call: ${OFFICE_PHONE_DISPLAY}`}
@@ -447,21 +450,29 @@ export default function DUICheckpointsPage() {
                         </div>
                       </div>
                       <h3 className="mb-2 text-lg font-bold text-brand-black">
-                        No checkpoints found
+                        No announced checkpoints at this time
                       </h3>
-                      <p className="text-sm text-brand-black/70">
+                      <p className="text-sm text-brand-black/80 max-w-md mx-auto">
                         {selectedCounty === 'all'
-                          ? 'There are no upcoming DUI checkpoints scheduled at this time.'
-                          : `No checkpoints scheduled in ${selectedCounty} County.`}
+                          ? 'We have not detected any officially announced OVI checkpoints scheduled for this period. Please check back later or follow local law enforcement for real-time updates.'
+                          : `There are currently no scheduled checkpoints detected in ${selectedCounty} County.`}
                       </p>
-                      {selectedCounty !== 'all' && (
-                        <button
-                          onClick={() => setSelectedCounty('all')}
-                          className="mt-4 text-sm font-semibold text-brand-mango hover:text-brand-leaf"
+                      <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                        {selectedCounty !== 'all' && (
+                          <button
+                            onClick={() => setSelectedCounty('all')}
+                            className="text-sm font-semibold text-brand-mango hover:text-brand-leaf transition-colors"
+                          >
+                            View all counties
+                          </button>
+                        )}
+                        <a 
+                          href="/contact" 
+                          className="text-sm font-semibold bg-brand-mango/10 text-brand-mangoText px-4 py-2 rounded-lg hover:bg-brand-mango/20 transition-colors"
                         >
-                          View all counties
-                        </button>
-                      )}
+                          Contact office for legal help
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -485,6 +496,7 @@ export default function DUICheckpointsPage() {
         primaryHref="/contact"
         secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="dui_checkpoints_cta_call_office"
       />
 
       <LeadCaptureModal

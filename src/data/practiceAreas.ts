@@ -11,6 +11,7 @@ export type PracticeArea = {
   imageAlt?: string;
   orcSection?: string;
   practiceAreaKey?: string;
+  ctaText?: string;
 };
 
 export const practiceAreas: PracticeArea[] = [
@@ -23,6 +24,7 @@ export const practiceAreas: PracticeArea[] = [
     imageAlt: 'Criminal Defense representation in Delaware County Ohio',
     practiceAreaKey: 'criminal-defense',
     orcSection: '2903.13',
+    ctaText: 'Discuss your criminal case',
   },
   {
     title: 'OVI / DUI Defense',
@@ -33,6 +35,7 @@ export const practiceAreas: PracticeArea[] = [
     imageAlt: 'OVI DUI Defense lawyer in Delaware Ohio',
     practiceAreaKey: 'ovi-dui',
     orcSection: '4511.19',
+    ctaText: 'Get help with OVI charges',
   },
   {
     title: 'Drug Crimes',
@@ -43,6 +46,7 @@ export const practiceAreas: PracticeArea[] = [
     imageAlt: 'Drug crimes defense attorney in Delaware Ohio',
     practiceAreaKey: 'drug-crimes',
     orcSection: '2925.11',
+    ctaText: 'Talk to a lawyer about drug charges',
   },
   {
     title: 'Sex Crimes',
@@ -53,6 +57,7 @@ export const practiceAreas: PracticeArea[] = [
     imageAlt: 'Sex crimes defense lawyer in Delaware Ohio',
     practiceAreaKey: 'sex-crimes',
     orcSection: '2907.03',
+    ctaText: 'Get discreet defense help',
   },
   {
     title: 'White Collar Crimes',
@@ -63,6 +68,7 @@ export const practiceAreas: PracticeArea[] = [
     imageAlt: 'White collar crimes attorney in Delaware Ohio',
     practiceAreaKey: 'white-collar',
     orcSection: '2913.42',
+    ctaText: 'Discuss fraud or embezzlement charges',
   },
   {
     title: 'Protection Orders',
@@ -73,6 +79,7 @@ export const practiceAreas: PracticeArea[] = [
     imageAlt: 'Protection order defense lawyer in Delaware Ohio',
     practiceAreaKey: 'protection-orders',
     orcSection: '3113.31',
+    ctaText: 'Fight a protection order',
   },
   {
     title: 'Personal Injury',
@@ -83,6 +90,7 @@ export const practiceAreas: PracticeArea[] = [
     imageAlt: 'Personal injury lawyer in Delaware Ohio',
     practiceAreaKey: 'personal-injury',
     orcSection: '2315.33',
+    ctaText: 'Discuss your injury case',
   },
 ];
 

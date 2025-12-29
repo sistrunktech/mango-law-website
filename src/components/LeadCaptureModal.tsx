@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/phone';
+import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
+import TurnstileWidget from './TurnstileWidget';
+import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
+import { useFocusTrap } from '../lib/useFocusTrap';
 
 export type LeadSource =
   | 'emergency_banner'
@@ -20,26 +26,47 @@ interface LeadCaptureModalProps {
   checkpointId?: string;
 }
 
-const COUNTIES = ['Delaware', 'Franklin', 'Union', 'Marion', 'Morrow', 'Licking', 'Knox', 'Other'];
-const URGENCY_OPTIONS = [
-  { value: 'exploring', label: 'Just exploring options' },
-  { value: 'soon', label: 'Court date in next 2 weeks' },
-  { value: 'urgent', label: 'Court date this week' },
-  { value: 'emergency', label: 'Already arrested / need help now' },
-];
-
 export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointId }: LeadCaptureModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    case_type: '',
     county: '',
     urgency: 'exploring',
+    how_found: '',
+    how_found_detail: '',
     message: '',
+    honeypot: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+
+  useFocusTrap(modalRef, isOpen);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = '';
+      };
+    }
+  }, [isOpen, onClose]);
+
+  const turnstileSiteKey = TURNSTILE_SITE_KEY;
 
   if (!isOpen) return null;
 
@@ -48,9 +75,21 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(formData.email)) newErrors.email = 'Invalid email format';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim().toLowerCase())) newErrors.email = 'Invalid email format';
     if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
-    else if (!/^[\\d\\s\\-\\(\\)]+$/.test(formData.phone)) newErrors.phone = 'Invalid phone format';
+    else if (!isLikelyValidPhone(formData.phone)) newErrors.phone = 'Invalid phone format';
+    if (!formData.case_type.trim()) newErrors.case_type = 'Please select what you need help with';
+    if (!formData.how_found.trim()) newErrors.how_found = 'Please tell us how you found Nick/Mango Law';
+    if (formData.how_found === 'referral' && !formData.how_found_detail.trim()) {
+      newErrors.how_found_detail = 'Who can we thank for the referral?';
+    }
+    if (formData.how_found === 'other' && !formData.how_found_detail.trim()) {
+      newErrors.how_found_detail = 'Please share a quick note';
+    }
+
+    if (turnstileSiteKey && !turnstileToken) {
+      newErrors.turnstile = 'Please complete the verification step';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -65,34 +104,53 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
       return;
     }
 
+    const normalizedPhone = normalizePhoneDigits(formData.phone);
+
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from('leads').insert({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        county: formData.county || null,
-        urgency: formData.urgency,
-        message: formData.message || null,
-        lead_source: trigger,
-        checkpoint_id: checkpointId || null,
-        user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : null,
-        referrer: typeof document !== 'undefined' ? document.referrer || null : null,
+      const { error } = await supabase.functions.invoke('submit-lead', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: normalizedPhone,
+          case_type: formData.case_type,
+          county: formData.county || null,
+          urgency: formData.urgency,
+          how_found: formData.how_found || null,
+          how_found_detail: formData.how_found_detail || null,
+          message: formData.message || null,
+          lead_source: trigger,
+          checkpoint_id: checkpointId || null,
+          honeypot: formData.honeypot,
+          turnstile_token: turnstileToken,
+        },
       });
 
-      if (error) throw error;
-
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'lead_submitted', {
-          event_category: 'Lead',
-          event_label: trigger,
-        });
+      if (error) {
+        let serverMessage: string | undefined;
+        try {
+          const context = (error as any)?.context;
+          const response: Response | undefined = context?.clone ? context.clone() : context;
+          const json = response ? await response.json().catch(() => null) : null;
+          serverMessage = typeof json?.error === 'string' ? json.error : undefined;
+        } catch {
+          // ignore
+        }
+        throw new Error(serverMessage || error.message);
       }
+
+      trackLeadSubmitted('form', trigger);
 
       setIsSuccess(true);
     } catch (error) {
       console.error('Failed to submit lead:', error);
-      setErrors({ submit: 'Failed to submit. Please call us directly.' });
+      const message =
+        error instanceof Error
+          ? error.message
+          : typeof (error as any)?.message === 'string'
+            ? String((error as any).message)
+            : 'Failed to submit. Please call or text us directly.';
+      setErrors({ submit: message });
     } finally {
       setIsSubmitting(false);
     }
@@ -100,7 +158,13 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === 'phone') {
+      setFormData((prev) => ({ ...prev, phone: formatUsPhone(value) }));
+    } else if (name === 'email') {
+      setFormData((prev) => ({ ...prev, email: value }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
@@ -119,9 +183,15 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
                 href={`tel:${OFFICE_PHONE_TEL}`}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white"
                 data-cta="lead_success_call"
+                onClick={() => {
+                  trackCtaClick('lead_success_call');
+                  trackLeadSubmitted('phone', 'lead_success_call', {
+                    target_number: OFFICE_PHONE_TEL,
+                  });
+                }}
               >
                 <Phone className="h-5 w-5" />
-                Call {OFFICE_PHONE_DISPLAY}
+                Call/Text {OFFICE_PHONE_DISPLAY}
               </a>
             </div>
             <button
@@ -136,17 +206,34 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
     );
   }
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === backdropRef.current) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl">
+    <div
+      ref={backdropRef}
+      onClick={handleBackdropClick}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div
+        ref={modalRef}
+        className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl"
+      >
         <button
           onClick={onClose}
+          aria-label="Close modal"
           className="absolute right-4 top-4 rounded-full p-1 text-brand-black/40 transition-colors hover:bg-brand-black/5 hover:text-brand-black"
         >
           <X className="h-5 w-5" />
         </button>
 
-        <h2 className="mb-2 text-xl font-bold text-brand-black">Free Case Evaluation</h2>
+        <h2 id="modal-title" className="mb-2 text-xl font-bold text-brand-black">Free Case Evaluation</h2>
         <p className="mb-6 text-sm text-brand-black/70">Get confidential legal advice from an experienced DUI defense attorney.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -176,6 +263,8 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
                 errors.email ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
               }`}
               placeholder="you@example.com"
+              autoCapitalize="none"
+              autoCorrect="off"
             />
             {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
           </div>
@@ -195,6 +284,40 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
           </div>
 
+          {/* Honeypot */}
+          <div className="hidden" aria-hidden="true">
+            <label>
+              Do not fill this field
+              <input
+                name="honeypot"
+                tabIndex={-1}
+                autoComplete="off"
+                value={formData.honeypot}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-brand-black">What do you need help with? *</label>
+            <select
+              name="case_type"
+              value={formData.case_type}
+              onChange={handleChange}
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
+                errors.case_type ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
+              }`}
+            >
+              <option value="">Select an option...</option>
+              {CASE_TYPE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            {errors.case_type && <p className="mt-1 text-xs text-red-600">{errors.case_type}</p>}
+          </div>
+
           <div>
             <label className="mb-1 block text-sm font-medium text-brand-black">County</label>
             <select
@@ -204,7 +327,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               className="w-full rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
             >
               <option value="">Select county...</option>
-              {COUNTIES.map((county) => (
+              {COUNTY_OPTIONS.map((county) => (
                 <option key={county} value={county}>{county} County</option>
               ))}
             </select>
@@ -223,6 +346,45 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               ))}
             </select>
           </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-brand-black">How did you find Nick/Mango Law? *</label>
+            <select
+              name="how_found"
+              value={formData.how_found}
+              onChange={handleChange}
+              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
+                errors.how_found ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
+              }`}
+            >
+              <option value="">Select an option...</option>
+              {HOW_FOUND_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            {errors.how_found && <p className="mt-1 text-xs text-red-600">{errors.how_found}</p>}
+          </div>
+
+          {formData.how_found === 'referral' || formData.how_found === 'other' ? (
+            <div>
+              <label className="mb-1 block text-sm font-medium text-brand-black">
+                {formData.how_found === 'referral' ? 'Who can we thank?' : 'Quick note'} *
+              </label>
+              <input
+                type="text"
+                name="how_found_detail"
+                value={formData.how_found_detail}
+                onChange={handleChange}
+                className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
+                  errors.how_found_detail ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
+                }`}
+                placeholder={formData.how_found === 'referral' ? 'Name of the person or business' : 'Tell us a little more'}
+              />
+              {errors.how_found_detail && <p className="mt-1 text-xs text-red-600">{errors.how_found_detail}</p>}
+            </div>
+          ) : null}
 
           <div>
             <label className="mb-1 block text-sm font-medium text-brand-black">Message (optional)</label>
@@ -244,7 +406,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || (turnstileSiteKey ? !turnstileToken : false)}
             className="w-full rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? (
@@ -257,7 +419,27 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             )}
           </button>
 
-          <p className="text-center text-xs text-brand-black/60">Your information is confidential and protected by attorney-client privilege.</p>
+          <div className="mt-3 flex flex-col gap-2 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
+            <p className="text-center text-xs text-brand-black/60 md:text-left">
+              Submitting this form does not create an attorney-client relationship. Please do not send confidential or
+              sensitive information.
+            </p>
+            {turnstileSiteKey ? (
+              <div className="flex flex-col items-center gap-1 md:items-end">
+                <TurnstileWidget
+                  siteKey={turnstileSiteKey}
+                  onToken={setTurnstileToken}
+                  theme="light"
+                  size="compact"
+                  className="turnstile-widget origin-top-right scale-[0.9]"
+                />
+                <p className="text-[10px] font-medium leading-tight text-brand-black/50">
+                  Protected by Cloudflare Turnstile
+                </p>
+                {errors.turnstile ? <p className="text-xs text-red-600">{errors.turnstile}</p> : null}
+              </div>
+            ) : null}
+          </div>
         </form>
       </div>
     </div>

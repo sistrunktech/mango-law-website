@@ -4,6 +4,35 @@ This document tracks known issues and problems that require resolution.
 
 ---
 
+## Launch Snapshot (P0)
+
+### Lead Intake Forms (Contact / Modal / Chat)
+- Forms rely on Supabase Edge Functions: `submit-contact`, `submit-lead`, `chat-intake`.
+- Current status: submissions are working on production after Turnstile + deploy fixes; keep monitoring deliverability and template polish.
+- Common failure modes observed during launch testing (keep for future debugging):
+  - Edge Functions not deployed (404) or DB tables missing (500).
+  - Turnstile enforced server-side but missing client token (400 `Verification required`).
+  - `ORIGIN_ALLOWLIST` missing the current host (403 `Origin not allowed`).
+  - Admin/lead emails delivered with delays (investigate Resend logs + suppression/deliverability).
+- Testing recommendation: include a unique marker in message fields (timestamp + short ID) so you can correlate DB rows, Resend logs, and GA4 events.
+
+### GA4 / GTM Conversion Tracking Finalization
+- The site is GTM-first: GA4 should consume `mango_page_view`, `cta_click`, and `lead_submitted` from `window.dataLayer` (avoid click selectors).
+- GA4 conversions for “lead” should be based on the `lead_submitted` event (`lead_source`: `form|phone|email|chat`).
+- If forms fail, GA4 will not show form conversions even if other events fire correctly.
+
+### Consent Mode v2 (EEA)
+- If GA4 shows “consent signals inactive/missing for EEA users”, verify Consent Mode v2 is implemented and GTM is configured to respect consent.
+- Implementation notes + GTM checklist live in `docs/OPERATIONS.md` → “Consent Mode v2 (GTM / GA4)”.
+
+### Admin / Google Connectors (Analytics, Search Console, GTM)
+- Use `/admin/connections` to connect Google tools and select the correct GA4 Property / Search Console property / GTM container.
+- If Analytics/GTM are not showing full account/resource lists or the selectors feel “stuck”, confirm:
+  - You connected the *correct Google user* (the one that actually owns/has access to the accounts).
+  - Google consent was granted for all requested scopes.
+  - `Check status` returns the expected lists (expand the debug payload to confirm what Google returned).
+  - See `docs/OPERATIONS.md` → “Google Integrations (Admin)” for step-by-step + troubleshooting.
+
 ## TICKET-001: Logo Generation Failure
 
 **Priority:** High
@@ -113,12 +142,16 @@ Floating chat launcher is currently always “expanded label” and does not imp
 ## TICKET-003: Favicon Assets (16/32) Not Wired
 
 **Priority:** Low
-**Status:** Open
+**Status:** Closed
 **Date Created:** 2025-12-12
 **Assigned To:** TBD
 
 ### Issue Summary
 Site currently uses `public/favicon.svg` only. We should add standard PNG favicon assets (`favicon-16x16.png`, `favicon-32x32.png`, optional `apple-touch-icon.png`) and update `index.html`.
+
+### Resolution notes
+- Added PNG favicons + Apple touch icon + web manifest and wired them in `index.html`.
+- Added `favicon.ico` to improve Google SERP icon rendering and legacy browser support.
 
 ---
 
@@ -412,7 +445,7 @@ The public map on `/resources/dui-checkpoints` sometimes shows markers far outsi
 ## TICKET-013: Checkpoint Status Incorrect ("Active" After End Date)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
 
@@ -437,6 +470,10 @@ Some checkpoints display `status='active'` even though the checkpoint ended days
 3. Re-verify `/resources/dui-checkpoints`:
    - past checkpoints show `completed`
    - “Active” view contains only checkpoints whose end time is in the future.
+
+### Resolution notes
+- Re-ran the backfill script in `scan` mode against production credentials; no corrupt candidates detected and no inserts/updates needed.
+- Hardened the script so it can load local `.env` automatically, supports `VITE_*` env fallbacks, and requires `--confirm-replace` before running `replace-ovicheckpoint` in `--apply` mode.
 
 ### Verification
 - After backfill, a checkpoint with an `end_date` in the past displays as `completed` on the public page and is not shown in “Active”.
@@ -599,9 +636,12 @@ For each visual that includes hard numbers:
 ## TICKET-019: Content Tracking — P0 Batch 1 (5 Slugs)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
+
+### Issue Summary
+Update the highest-risk blog posts to follow the “no drift” SOP: conservative language, explicit sources, and `lastVerified` metadata so content can be maintained confidently over time.
 
 ### Scope (slugs)
 - `understanding-ovi-dui-charges-ohio`
@@ -614,14 +654,21 @@ For each visual that includes hard numbers:
 - Remove absolutes and add “What varies…” section(s) where needed.
 - Add `lastVerified` + credible sources; reconcile any numeric claims to sources.
 
+### Resolution notes
+- Updated all batch slugs in `src/data/blogPosts.ts` with conservative, source-first language and refreshed `lastVerified`.
+- Removed numeric-heavy `[VISUAL:*]` markers from blog post content to reduce drift risk.
+
 ---
 
 ## TICKET-020: Content Tracking — P1 Batch 2 (5 Slugs)
 
 **Priority:** Medium  
-**Status:** Open  
+**Status:** Closed  
 **Date Created:** 2025-12-14  
 **Assigned To:** TBD
+
+### Issue Summary
+Apply the same trust/maintenance pass as P0 across the next set of blog posts (sources + last verified + reduced numeric drift risk).
 
 ### Scope (slugs)
 - `ohio-dui-lookback-period`
@@ -634,6 +681,10 @@ For each visual that includes hard numbers:
 - Add `lastVerified` + credible sources; avoid unsourced numbers.
 - Add county/court variation notes where relevant.
 - Avoid “hotspot” framing; keep tone conservative and rights-focused.
+
+### Resolution notes
+- Updated all batch slugs in `src/data/blogPosts.ts` with conservative, source-first language and refreshed `lastVerified`.
+- Added missing ORC glossary entry for `2907.07` and updated practice area mapping (`src/data/statutes.ts`).
 
 ---
 
@@ -679,6 +730,238 @@ Move the CTA headline + phone number + consult button + any supporting copy curr
 
 ### Resolution notes
 - Implemented in PR #19 for `/resources/dui-checkpoints` (moved call/consult CTAs into the “About Ohio DUI Checkpoint Data” card).
+
+---
+
+## TICKET-023: Lead Intake Forms Reliability + GA4 Conversion Verification
+
+**Priority:** High  
+**Status:** Closed  
+**Date Created:** 2025-12-23  
+**Assigned To:** TBD
+
+### Issue Summary
+During launch testing, lead intake paths (lead-capture modal, contact form, chat intake) intermittently failed and/or produced delayed emails. This blocks confident GA4 conversion tracking for forms.
+
+### Symptoms observed
+- Modal submit fails with generic “Edge Function returned a non-2xx status code”.
+- Chat submit fails (non-2xx) and shows “We had trouble sending your message”.
+- Emails sometimes arrive later even after the UI showed an error (suggests intermittent failures, retries, or earlier deployments being fixed after the fact).
+- GA4 not registering form conversions because submits are not consistently completing.
+
+### Root cause categories (known from prior debugging)
+1. Supabase deploy drift
+   - Functions not deployed (404 `NOT_FOUND`) or migrations not applied / tables missing (500 DB insert failure).
+2. Turnstile misconfiguration
+   - `TURNSTILE_SECRET_KEY` set in Supabase (enforces verification) while the frontend is missing a valid site key or serving an older bundle → requests submit with no token → 400 `Verification required`.
+   - Turnstile widget not configured for the hostname being tested (staging/Bolt preview) → verification fails.
+3. Origin allowlist / CORS
+   - Missing current host in `ORIGIN_ALLOWLIST` → 403 `Origin not allowed`.
+4. Email deliverability
+   - Resend suppression, rate limits, or provider delays causing late delivery (even when the DB insert succeeded).
+
+### Affected paths
+- Lead-capture modal → Edge Function `submit-lead` → table `leads`
+- Contact page form → Edge Function `submit-contact` → table `contact_leads`
+- Chat widget → Edge Function `chat-intake` → table `chat_leads`
+
+### Required resolution / acceptance criteria
+1. Submits are reliable on production (`https://mango.law`)
+   - Modal, contact form, and chat submit successfully without retries.
+2. Turnstile is consistent
+   - Widget visible on all lead flows when enabled, and submissions include a token.
+3. Emails are timely
+   - Admin email (To: `office@mango.law`, BCC: `tim@sistrunktech.com`) + lead confirmation email arrive within a reasonable window (define target SLA; start with <2 minutes).
+4. GA4 conversions are measurable
+   - GA4 receives `lead_submitted` with `lead_source=form` after successful form submits.
+   - GA4 marks `lead_submitted` as a conversion and uses `lead_source` + `checkpoint_id` as reporting dimensions.
+
+### Debug checklist (fast)
+1. Verify Bolt env:
+   - `VITE_TURNSTILE_SITE_KEY` set for the deployed environment.
+2. Verify Supabase secrets:
+   - `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`.
+3. Verify Edge Functions deployed:
+   - `supabase functions deploy submit-contact`
+   - `supabase functions deploy submit-lead`
+   - `supabase functions deploy chat-intake`
+4. Verify migrations applied:
+   - `supabase db push`
+5. Verify Resend logs:
+   - Check for delivery failures/suppression and confirm the “from” identity is verified.
+
+### Testing protocol (recommended)
+When testing, include a unique marker in message fields:
+`[TEST 2025-12-23 23:58 ET | A1B2] please ignore`
+Then reconcile:
+- Browser Network (request + response)
+- Supabase Function Logs (same timestamp/IP)
+- DB row (lead/contact/chat table)
+- Resend email log + delivery time
+- GA4 DebugView / Realtime
+
+### Resolution notes
+- Implemented Turnstile widget in all lead flows (modal/contact/chat) + server-side verification in Supabase Edge Functions.
+- Made Supabase lead functions public (`verify_jwt=false`) and added missing lead tables via migration.
+- Added a Turnstile site key fallback (`src/lib/turnstile.ts`) to prevent hosting env injection issues from blocking submissions.
+- If the site regresses to `Verification required`, first verify the live site is serving the latest `/assets/index-*.js` bundle (a stale frontend deploy can omit newer Turnstile changes).
+
+---
+
+## TICKET-024: Email Templates Polish (Admin + Lead Confirmation)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-23  
+**Assigned To:** TBD
+
+### Issue Summary
+Lead/contact/chat emails are functional but need copy/layout polish so admin notifications are highly scannable and lead confirmations feel on-brand and professional.
+
+### Current implementation status
+- Centralized email template system is implemented and shared across Edge Functions (`supabase/functions/_shared/email/*`).
+- This ticket recall is now specifically about copy/layout polish and any additional fields/links you want included.
+
+### Goals
+- Separate “admin notification” vs “lead confirmation” templates (content + tone + subject lines).
+- Ensure all templates clearly include: name, phone, email, source (contact/modal/chat), and timestamp.
+- Confirm admin routing stays: To `office@mango.law`, BCC `tim@sistrunktech.com` (until testing is done).
+- Keep required disclaimers (no attorney-client relationship, urgent matters call/text).
+
+### Acceptance Criteria
+- Emails render well in Gmail (desktop + mobile).
+- Subjects are consistent and searchable (e.g., `New consultation request — {Name}`).
+- Lead confirmation is concise, branded, and sets expectations (response window, what happens next).
+
+### Progress
+- Updated admin subject lines to a consistent em-dash format for easy search.
+- Defaulted email theme to light when `APP_THEME` is unset (matches most clients, still overrideable).
+
+---
+
+## TICKET-025: Admin Connections — GA4/GTM Wrong Account Selection + Missing Lists
+
+**Priority:** High  
+**Status:** Closed  
+**Date Created:** 2025-12-24  
+**Assigned To:** TBD
+
+### Issue Summary
+In `/admin/connections`, Google Analytics and Google Tag Manager appeared to “pick a random account” and did not show the full list of accessible accounts/resources, making it hard to select the correct GA4 Property / GTM Container for `mango.law`.
+
+### Root cause
+The `google-access-check` Edge Function only fetched **properties/containers from the first returned account** and only returned a small sample list to the UI.
+
+### Fix
+- `google-access-check` now returns **full account lists** and **properties/containers across accessible accounts** (with safe caps).
+- `/admin/connections` now shows an **Account** selector for GA4/GTM/GBP and filters the Resource selector accordingly; debug payload is collapsed by default.
+
+### Files touched
+- `supabase/functions/google-access-check/index.ts`
+- `src/pages/ConnectionsPage.tsx`
+
+### Verification steps
+1. Go to `/admin/connections`
+2. For Analytics and Tag Manager:
+   - Click `Check status`
+   - Select the correct **Account** and **Resource**, then click `Save`
+3. Re-run `Check status` and confirm the integration shows `Connected (healthy)`
+
+---
+
+## TICKET-026: Admin Connectors — Analytics/GTM Selectors Empty or Unselectable
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-25  
+**Assigned To:** TBD
+
+### Issue Summary
+In `/admin/connections`, the Analytics and/or Tag Manager selectors may not present usable account/property/container lists, preventing selection of the intended resources.
+
+### Notes / Symptoms
+- UI appears to auto-select a “random” account, or does not allow choosing a different one.
+- Account list shows fewer entries than expected, or resource list remains empty.
+- Search Console may work (shows properties), while Analytics/GTM don’t.
+
+### Likely root causes
+- The connected Google user does not have access to the expected Analytics/GTM accounts.
+- Google OAuth consent was completed with the wrong Google account (common when multiple accounts are logged in).
+- Missing/insufficient roles in GA4 or GTM for the connected Google user.
+- Google API returns partial lists or rate-limited responses.
+
+### Troubleshooting / Next steps
+1. In `/admin/connections`, click `Reconnect` for the affected integration and ensure you pick the correct Google user.
+2. Click `Check status` and expand the debug payload:
+   - Confirm `accounts.all` contains the expected accounts.
+   - Confirm GA4/GTM resources are present for the selected account.
+3. In Google:
+   - GA4: ensure the Google user has at least **Viewer** access on the intended account/property.
+   - GTM: ensure the Google user has at least **Read** access on the intended account/container.
+4. If the debug payload contains the expected resources but the UI can’t select/save them, capture the payload and open a code-level fix ticket.
+
+### Current notes
+- Supabase custom domain set to `api.mango.law` in DNS; once verified, ensure OAuth redirects use the branded domain.
+- OAuth connect now forces account selection (`prompt=consent select_account`) to reduce “wrong account” connections.
+
+---
+
+## TICKET-027: GA4 Consent Settings — Consent Signals Missing (EEA)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-25  
+**Assigned To:** TBD
+
+### Issue Summary
+GA4 Admin → Consent settings reports “consent signals inactive / missing for EEA users”.
+
+### Required outcome
+Consent Mode v2 signals are present on first load, and update immediately after user choice, so GA4 recognizes consent pings.
+
+### Implementation notes
+- Consent Mode v2 (advanced mode) is implemented in `index.html` before GTM loads.
+- A small banner allows Accept/Reject/Customize and persists consent in a cookie (`ml_consent_v2`).
+- GTM must be configured to respect consent (GA4 tags require `analytics_storage=granted`; ad tags require `ad_storage=granted` where relevant).
+- See `docs/OPERATIONS.md` → “Consent Mode v2 (GTM / GA4)”.
+
+### Verification steps
+1. Tag Assistant: confirm consent defaults exist on first load.
+2. Click Accept/Reject: confirm consent updates on the same page (no refresh required).
+3. GA4 DebugView / Admin consent settings: confirm consent signals move to healthy over time.
+
+### Current notes
+- Consent Mode v2 is implemented in code; remaining work is GTM consent configuration + validation.
+
+---
+
+## TICKET-028: Privacy Policy + Terms of Use Refresh
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2025-12-25  
+**Assigned To:** TBD
+
+### Issue Summary
+Privacy Policy and Terms of Use pages need expanded, Ohio-specific language, updated effective date, and consistent footer link labels.
+
+### Scope
+- Replace stub copy with the provided Mango Law privacy and terms language.
+- Add meta titles:
+  - Privacy Policy: "Privacy Policy | Ohio Criminal Defense Attorney - Mango Law LLC"
+  - Terms of Use: "Terms of Use | Mango Law LLC - Ohio Criminal Defense"
+- Update footer label to "Terms of Use".
+- Add a one-line disclaimer near contact forms:
+  - "Submitting this form does not create an attorney-client relationship."
+
+### Status / Notes
+- Copy and layout updates are implemented in code but still need:
+  - Effective date filled in.
+  - Final legal review/approval.
+
+### Files Likely Involved
+`src/pages/PrivacyPage.tsx`, `src/pages/TermsPage.tsx`, `src/components/Footer.tsx`,
+`src/components/ContactForm.tsx`, `src/components/LeadCaptureModal.tsx`
 
 ---
 

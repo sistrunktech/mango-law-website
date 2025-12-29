@@ -1,13 +1,22 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.48.0";
+import { buildAdminEmailHtml, buildClientConfirmationHtml } from "../_shared/email/templates.ts";
+import { formatFrom, formatPhoneForDisplay, formatTimestampForEmail, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
+import type { EmailSeason, EmailTheme } from "../_shared/email/tokens.ts";
 
 interface ChatIntakeData {
   name: string;
   email: string;
   phone?: string;
   initial_message: string;
+  case_type?: string | null;
+  county?: string | null;
+  urgency?: string | null;
+  how_found?: string | null;
+  how_found_detail?: string | null;
   conversation_context?: string;
   honeypot?: string;
+  turnstile_token?: string | null;
 }
 
 interface LogContext {
@@ -73,6 +82,26 @@ function validateEmail(email: string): boolean {
 function validatePhone(phone: string): boolean {
   const cleaned = phone.replace(/\D/g, "");
   return cleaned.length >= 10 && cleaned.length <= 15;
+}
+
+async function verifyTurnstile(args: { token: string; ip: string }): Promise<boolean> {
+  const secret = Deno.env.get("TURNSTILE_SECRET_KEY");
+  if (!secret) return true;
+
+  const body = new URLSearchParams();
+  body.set("secret", secret);
+  body.set("response", args.token);
+  if (args.ip && args.ip !== "unknown") body.set("remoteip", args.ip);
+
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body,
+  });
+
+  if (!res.ok) return false;
+  const json = await res.json().catch(() => null);
+  return Boolean(json?.success);
 }
 
 function getClientIp(req: Request): string {
@@ -162,7 +191,7 @@ Deno.serve(async (req: Request) => {
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseServiceKey = Deno.env.get("SERVICE_ROLE_KEY")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const rateLimit = await checkRateLimit(supabase, ip, "/chat-intake", 1, 20);
@@ -213,6 +242,26 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    const turnstileSecret = Deno.env.get("TURNSTILE_SECRET_KEY");
+    if (turnstileSecret) {
+      const token = String(intakeData.turnstile_token || "").trim();
+      if (!token) {
+        log("warn", "Missing Turnstile token", { ...logContext, status: 400 });
+        return new Response(
+          JSON.stringify({ error: "Verification required" }),
+          { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+        );
+      }
+      const ok = await verifyTurnstile({ token, ip });
+      if (!ok) {
+        log("warn", "Turnstile verification failed", { ...logContext, status: 400 });
+        return new Response(
+          JSON.stringify({ error: "Verification failed" }),
+          { status: 400, headers: { ...allHeaders, "Content-Type": "application/json" } },
+        );
+      }
+    }
+
     if (!validateEmail(intakeData.email)) {
       log("warn", "Invalid email format", { ...logContext, email: intakeData.email, status: 400 });
       return new Response(
@@ -221,7 +270,8 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    if (intakeData.phone && !validatePhone(intakeData.phone)) {
+    const normalizedPhone = intakeData.phone ? normalizePhoneForStorage(intakeData.phone) : null;
+    if (normalizedPhone && !validatePhone(normalizedPhone)) {
       log("warn", "Invalid phone format", { ...logContext, status: 400 });
       return new Response(
         JSON.stringify({ error: "Invalid phone number format" }),
@@ -232,8 +282,13 @@ Deno.serve(async (req: Request) => {
     const { error: dbError } = await supabase.from("chat_leads").insert({
       name: intakeData.name.trim(),
       email: intakeData.email.trim().toLowerCase(),
-      phone: intakeData.phone?.trim() || null,
+      phone: normalizedPhone,
       initial_message: intakeData.initial_message.trim(),
+      case_type: intakeData.case_type?.trim() || null,
+      county: intakeData.county?.trim() || null,
+      urgency: intakeData.urgency?.trim() || null,
+      how_found: intakeData.how_found?.trim() || null,
+      how_found_detail: intakeData.how_found_detail?.trim() || null,
       conversation_context: intakeData.conversation_context || null,
       ip_address: ip,
       user_agent: userAgent,
@@ -248,9 +303,10 @@ Deno.serve(async (req: Request) => {
     }
 
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
-    const fromEmail = Deno.env.get("FROM_EMAIL") || "noreply@example.com";
-    const chatNotifyTo = Deno.env.get("CHAT_LEAD_NOTIFY_TO") || Deno.env.get("CONTACT_NOTIFY_TO") || "admin@example.com";
-    const chatNotifyCC = Deno.env.get("CHAT_LEAD_NOTIFY_CC");
+    const fromEmail = formatFrom(Deno.env.get("FROM_EMAIL") || "noreply@example.com");
+    const chatNotifyTo = parseEmailList(Deno.env.get("CHAT_LEAD_NOTIFY_TO") || Deno.env.get("CONTACT_NOTIFY_TO")) ||
+      ["admin@example.com"];
+    const chatNotifyBcc = parseEmailList(Deno.env.get("CHAT_LEAD_NOTIFY_BCC") || Deno.env.get("CHAT_LEAD_NOTIFY_CC"));
     const sourceLabel = Deno.env.get("CHAT_LEAD_SOURCE_LABEL") || "Chat Widget";
     const enableSmsAlerts = Deno.env.get("ENABLE_SMS_LEAD_ALERTS") === "true";
     const smsGatewayOffice = Deno.env.get("SMS_GATEWAY_OFFICE");
@@ -259,6 +315,13 @@ Deno.serve(async (req: Request) => {
 
     if (resendApiKey) {
       try {
+        const siteUrl = Deno.env.get("FRONTEND_URL") || Deno.env.get("VITE_SITE_URL") || "https://mango.law";
+        const appEnv = Deno.env.get("APP_ENV") || "production";
+        const season = (Deno.env.get("APP_SEASON") || "winter") as EmailSeason;
+        const theme = (Deno.env.get("APP_THEME") || "light") as EmailTheme;
+        const holiday = isTruthyEnv(Deno.env.get("APP_HOLIDAY"));
+
+        const receivedAt = formatTimestampForEmail(new Date());
         // Send standard email notification
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
@@ -268,23 +331,40 @@ Deno.serve(async (req: Request) => {
           },
           body: JSON.stringify({
             from: fromEmail,
-            to: [chatNotifyTo],
-            cc: chatNotifyCC ? [chatNotifyCC] : undefined,
-            subject: `New ${sourceLabel} Lead from ${intakeData.name}`,
-            html: `
-              <h2>New ${sourceLabel} Lead</h2>
-              <p><strong>Name:</strong> ${intakeData.name}</p>
-              <p><strong>Email:</strong> ${intakeData.email || "Not provided"}</p>
-              <p><strong>Phone:</strong> ${intakeData.phone || "Not provided"}</p>
-              <p><strong>Initial Message:</strong></p>
-              <p>${intakeData.initial_message.replace(/\n/g, "<br>")}</p>
-              ${intakeData.conversation_context ? `
-              <p><strong>Conversation Context:</strong></p>
-              <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px;">${intakeData.conversation_context}</pre>
-              ` : ""}
-              <hr>
-              <p><small>IP: ${ip} | User Agent: ${userAgent}</small></p>
-            `,
+            to: chatNotifyTo.length ? chatNotifyTo : ["admin@example.com"],
+            bcc: chatNotifyBcc.length ? chatNotifyBcc : undefined,
+            reply_to: intakeData.email.trim().toLowerCase(),
+            subject: `New ${sourceLabel} Lead — ${intakeData.name}`,
+            html: buildAdminEmailHtml(
+              "chat",
+              {
+                title: `New ${sourceLabel} lead`,
+                summaryLine:
+                  `${intakeData.name.trim()} · ${normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : "No phone"}`,
+                fields: [
+                  { label: "Name", value: intakeData.name.trim() },
+                  { label: "Email", value: intakeData.email.trim().toLowerCase() },
+                  { label: "Phone", value: normalizedPhone ? formatPhoneForDisplay(normalizedPhone) : "Not provided" },
+                  { label: "Help needed", value: intakeData.case_type?.trim() || "Not provided" },
+                  { label: "Urgency", value: intakeData.urgency?.trim() || "Not provided" },
+                  { label: "County", value: intakeData.county?.trim() || "Not provided" },
+                  { label: "How found", value: intakeData.how_found?.trim() || "Not provided" },
+                  { label: "How found detail", value: intakeData.how_found_detail?.trim() || "Not provided" },
+                ],
+                messageLabel: "Initial message",
+                message: intakeData.initial_message.trim(),
+                transcriptLabel: "Conversation context",
+                transcript: intakeData.conversation_context || null,
+                meta: [
+                  { label: "Received", value: receivedAt },
+                  { label: "IP", value: ip },
+                  { label: "UA", value: userAgent },
+                ],
+                replyToEmail: intakeData.email.trim().toLowerCase(),
+                callToPhone: normalizedPhone,
+              },
+              { siteUrl, appEnv, season, theme, holiday },
+            ),
           }),
         });
 
@@ -293,6 +373,51 @@ Deno.serve(async (req: Request) => {
           log("error", "Email notification failed", { ...logContext, error: errorText });
         } else {
           log("info", "Email notification sent successfully", logContext);
+        }
+
+        const confirmationResponse = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${resendApiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: fromEmail,
+            to: [intakeData.email.trim().toLowerCase()],
+            subject: "We received your message — Mango Law LLC",
+            html: buildClientConfirmationHtml(
+              "chat",
+              {
+                title: "We received your message",
+                greetingName: intakeData.name.trim(),
+                intro:
+                  "Thanks for reaching out. We received your message and will respond as soon as possible during business hours.",
+                details: [
+                  { label: "Received", value: receivedAt },
+                  { label: "Name", value: intakeData.name.trim() },
+                  { label: "Email", value: intakeData.email.trim().toLowerCase() },
+                  ...(normalizedPhone ? [{ label: "Phone", value: formatPhoneForDisplay(normalizedPhone) }] : []),
+                  ...(intakeData.case_type?.trim() ? [{ label: "Help needed", value: intakeData.case_type.trim() }] : []),
+                  ...(intakeData.county?.trim() ? [{ label: "County", value: intakeData.county.trim() }] : []),
+                  ...(intakeData.urgency?.trim() ? [{ label: "Urgency", value: intakeData.urgency.trim() }] : []),
+                ],
+                message: intakeData.initial_message.trim(),
+                leadSource: "chat",
+                caseType: intakeData.case_type?.trim() || null,
+                urgency: intakeData.urgency?.trim() || null,
+                county: intakeData.county?.trim() || null,
+                includeHelpfulLinks: true,
+              },
+              { siteUrl, appEnv, season, theme, holiday },
+            ),
+          }),
+        });
+
+        if (!confirmationResponse.ok) {
+          const errorText = await confirmationResponse.text();
+          log("error", "Lead confirmation email failed", { ...logContext, error: errorText });
+        } else {
+          log("info", "Lead confirmation email sent successfully", logContext);
         }
 
         // Send SMS-style notifications via email-to-SMS gateways

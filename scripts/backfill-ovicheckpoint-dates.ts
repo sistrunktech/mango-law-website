@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { createClient } from '@supabase/supabase-js';
 import { scrapeOVICheckpoint } from '../supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts';
 import { geocodeAddress, parseAddress } from '../supabase/functions/checkpoint-scraper/geocoding.ts';
@@ -43,18 +44,19 @@ function usage(): string {
     '',
     'Required env:',
     '  SUPABASE_URL',
-    '  SUPABASE_SERVICE_ROLE_KEY',
+    '  SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY)',
     'Optional env:',
-    '  MAPBOX_PUBLIC_TOKEN (to geocode while inserting)',
+    '  MAPBOX_PUBLIC_TOKEN (or VITE_MAPBOX_PUBLIC_TOKEN) (to geocode while inserting)',
     '',
     'Examples:',
     '  npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts',
     '  npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode upsert --apply',
-    '  npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode replace-ovicheckpoint --apply',
+    '  npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode replace-ovicheckpoint --apply --confirm-replace',
     '',
     'Flags:',
     '  --mode <scan|upsert|replace-ovicheckpoint>   (default: scan)',
     '  --apply                                     Actually write changes (default: dry-run)',
+    '  --confirm-replace                            Required when using --mode replace-ovicheckpoint with --apply',
     '  --output <path>                              Report JSON path (default: ./reports/checkpoint-backfill-<ts>.json)',
     '  --no-geocode                                 Skip geocoding even if token present',
     '  --limit <n>                                  Limit canonical rows processed (debug only)',
@@ -79,6 +81,7 @@ function parseArgs(argv: string[]) {
 
   const mode = (args.get('mode') || 'scan') as ScriptMode;
   const apply = Boolean(args.get('apply'));
+  const confirmReplace = Boolean(args.get('confirm-replace'));
   const noGeocode = Boolean(args.get('no-geocode'));
   const limitRaw = args.get('limit');
   const limit = typeof limitRaw === 'string' ? Number(limitRaw) : undefined;
@@ -99,7 +102,11 @@ function parseArgs(argv: string[]) {
     throw new Error(`Invalid --corrupt-window-hours "${corruptWindowHoursRaw}".\n\n${usage()}`);
   }
 
-  return { mode, apply, noGeocode, limit, output, corruptWindowHours };
+  if (mode === 'replace-ovicheckpoint' && apply && !confirmReplace) {
+    throw new Error(`Refusing to run replace mode without explicit confirmation.\n\n${usage()}`);
+  }
+
+  return { mode, apply, confirmReplace, noGeocode, limit, output, corruptWindowHours };
 }
 
 function normalizeKeyPart(input: string): string {
@@ -175,9 +182,10 @@ async function writeReport(path: string, payload: unknown) {
 async function main() {
   const { mode, apply, noGeocode, limit, output, corruptWindowHours } = parseArgs(process.argv.slice(2));
 
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const mapboxToken = process.env.MAPBOX_PUBLIC_TOKEN;
+  const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+  const supabaseServiceKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SERVICE_ROLE_KEY;
+  const mapboxToken = process.env.MAPBOX_PUBLIC_TOKEN ?? process.env.VITE_MAPBOX_PUBLIC_TOKEN;
 
   if (!supabaseUrl || !supabaseServiceKey) {
     throw new Error(`Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY.\n\n${usage()}`);

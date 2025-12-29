@@ -14,9 +14,9 @@ interface CostBreakdownProps {
 
 export default function CostBreakdown({ title, items }: CostBreakdownProps) {
   return (
-    <div className="my-8 overflow-hidden rounded-xl border border-brand-black/10 bg-white shadow-soft">
+    <div className="my-12 overflow-hidden rounded-xl border border-brand-black/10 bg-brand-offWhite shadow-sm">
       {title && (
-        <div className="flex items-center gap-3 border-b border-brand-black/10 bg-gradient-to-r from-brand-mango/5 to-brand-gold/5 px-6 py-4">
+        <div className="flex items-center gap-3 border-b border-brand-black/10 bg-brand-offWhite px-6 py-4">
           <DollarSign className="h-5 w-5 text-brand-mango" />
           <h4 className="font-bold text-brand-black">{title}</h4>
         </div>
@@ -33,14 +33,14 @@ export default function CostBreakdown({ title, items }: CostBreakdownProps) {
               }`}
             >
               <div className="flex-1">
-                <div className={`font-semibold ${item.isTotal ? 'text-lg text-brand-mango' : 'text-brand-black'}`}>
+                <div className={`font-semibold ${item.isTotal ? 'text-base text-brand-mango' : 'text-sm text-brand-black'}`}>
                   {item.label}
                 </div>
                 {item.description && (
                   <p className="mt-1 text-sm text-brand-black/60">{item.description}</p>
                 )}
               </div>
-              <div className={`whitespace-nowrap font-bold ${item.isTotal ? 'text-2xl text-brand-mango' : 'text-lg text-brand-black'}`}>
+              <div className={`whitespace-nowrap font-bold ${item.isTotal ? 'text-xl text-brand-mango' : 'text-base text-brand-black'}`}>
                 {item.amount}
               </div>
             </div>

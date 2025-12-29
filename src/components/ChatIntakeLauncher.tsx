@@ -1,15 +1,20 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MessageCircle, Phone, FileText } from 'lucide-react';
 import ConversationWindow from './chat/ConversationWindow';
-import { OFFICE_PHONE_TEL } from '../lib/contactInfo';
-import { trackChatOpen, trackCtaClick } from '../lib/analytics';
+import { OFFICE_PHONE_TEL, GENERAL_OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { trackChatOpen, trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 interface ChatIntakeLauncherProps {
   onOpenLeadModal: () => void;
   bottomOffsetClass?: string;
+  chooserBottomOffsetClass?: string;
 }
 
-export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass = 'bottom-6' }: ChatIntakeLauncherProps) {
+export default function ChatIntakeLauncher({
+  onOpenLeadModal,
+  bottomOffsetClass = 'bottom-6',
+  chooserBottomOffsetClass = 'bottom-20',
+}: ChatIntakeLauncherProps) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isChooserOpen, setIsChooserOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -42,10 +47,18 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
   return (
     <>
       {isChatOpen && (
-        <ConversationWindow
-          bottomOffsetClass={bottomOffsetClass}
-          onClose={() => setIsChatOpen(false)}
-        />
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-40 bg-brand-black/30 backdrop-blur-sm"
+            onClick={() => setIsChatOpen(false)}
+            aria-label="Close chat"
+          />
+          <ConversationWindow
+            bottomOffsetClass={bottomOffsetClass}
+            onClose={() => setIsChatOpen(false)}
+          />
+        </>
       )}
 
       <button
@@ -83,7 +96,7 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
           <div
             className={[
               'fixed right-4 z-40 w-[min(320px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-2xl sm:right-6',
-              bottomOffsetClass === 'bottom-24' ? 'bottom-40' : 'bottom-20',
+              chooserBottomOffsetClass,
             ].join(' ')}
             role="dialog"
             aria-label="Contact options"
@@ -105,11 +118,30 @@ export default function ChatIntakeLauncher({ onOpenLeadModal, bottomOffsetClass 
               <a
                 href={`tel:${OFFICE_PHONE_TEL}`}
                 className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
-                onClick={() => trackCtaClick('floating_chooser_call')}
-                data-cta="floating_chooser_call"
+                onClick={() => {
+                  trackCtaClick('floating_chooser_call_office');
+                  trackLeadSubmitted('phone', 'floating_chooser_call_office', {
+                    target_number: OFFICE_PHONE_TEL,
+                  });
+                }}
+                data-cta="floating_chooser_call_office"
               >
                 <Phone className="h-4 w-4 text-brand-mango" aria-hidden="true" />
-                Call the office
+                Call/Text (fastest)
+              </a>
+              <a
+                href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
+                className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
+                onClick={() => {
+                  trackCtaClick('floating_chooser_call_office_secondary');
+                  trackLeadSubmitted('phone', 'floating_chooser_call_office_secondary', {
+                    target_number: GENERAL_OFFICE_PHONE_TEL,
+                  });
+                }}
+                data-cta="floating_chooser_call_office_secondary"
+              >
+                <Phone className="h-4 w-4 text-brand-leaf" aria-hidden="true" />
+                Call office line
               </a>
               <button
                 type="button"

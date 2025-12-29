@@ -123,6 +123,67 @@ async function fetchJson(url: string, accessToken: string) {
   return { ok: res.ok, status: res.status, json, text };
 }
 
+async function fetchPagedItems(args: {
+  url: string;
+  accessToken: string;
+  itemsKey: string;
+  pageSize?: number;
+  maxItems?: number;
+  maxPages?: number;
+}): Promise<{ ok: boolean; status: number; count: number; sample: any[]; all: any[]; text?: string }> {
+  const pageSize = args.pageSize ?? 200;
+  const maxItems = args.maxItems ?? 500;
+  const maxPages = args.maxPages ?? 10;
+  const all: any[] = [];
+  let pageToken: string | null = null;
+  let lastStatus = 0;
+  let ok = true;
+  let text = "";
+
+  for (let page = 0; page < maxPages; page++) {
+    const u = new URL(args.url);
+    if (!u.searchParams.has("pageSize")) u.searchParams.set("pageSize", String(pageSize));
+    if (pageToken) u.searchParams.set("pageToken", pageToken);
+
+    const res = await fetchJson(u.toString(), args.accessToken);
+    lastStatus = res.status;
+    ok = ok && res.ok;
+    text = res.text;
+
+    const items = Array.isArray(res.json?.[args.itemsKey]) ? res.json[args.itemsKey] : [];
+    all.push(...items);
+
+    pageToken = typeof res.json?.nextPageToken === "string" ? res.json.nextPageToken : null;
+    if (!pageToken) break;
+    if (all.length >= maxItems) break;
+  }
+
+  const trimmed = all.slice(0, maxItems);
+  return {
+    ok,
+    status: lastStatus,
+    count: all.length,
+    sample: trimmed.slice(0, 25),
+    all: trimmed,
+    text,
+  };
+}
+
+async function fetchTagManagerContainersByAccount(args: { accountId: string; accessToken: string }) {
+  const res = await fetchJson(`https://www.googleapis.com/tagmanager/v2/accounts/${args.accountId}/containers`, args.accessToken);
+  const containers = Array.isArray(res.json?.container) ? res.json.container : [];
+  return { ok: res.ok, status: res.status, containers };
+}
+
+async function fetchAnalyticsPropertiesByAccount(args: { accountName: string; accessToken: string }) {
+  const url = new URL("https://analyticsadmin.googleapis.com/v1beta/properties");
+  url.searchParams.set("pageSize", "200");
+  url.searchParams.set("filter", `parent:${args.accountName}`);
+  const res = await fetchJson(url.toString(), args.accessToken);
+  const properties = Array.isArray(res.json?.properties) ? res.json.properties : [];
+  return { ok: res.ok, status: res.status, properties };
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 200, headers: corsHeaders });
@@ -232,61 +293,81 @@ Deno.serve(async (req: Request) => {
     let result: Record<string, unknown> = { integrationType, checkedAt };
 
     if (integrationType === "business_profile") {
-      const accounts = await fetchJson("https://mybusinessaccountmanagement.googleapis.com/v1/accounts", accessToken);
-      let firstAccountName: string | null = null;
-      const accountList = Array.isArray(accounts.json?.accounts) ? accounts.json.accounts.slice(0, 10) : [];
-      if (accountList.length > 0) firstAccountName = accountList[0]?.name || null;
+      const accounts = await fetchPagedItems({
+        url: "https://mybusinessaccountmanagement.googleapis.com/v1/accounts",
+        accessToken,
+        itemsKey: "accounts",
+        pageSize: 200,
+        maxItems: 200,
+        maxPages: 10,
+      });
 
-      const locations = firstAccountName
-        ? await fetchJson(`https://mybusinessbusinessinformation.googleapis.com/v1/${firstAccountName}/locations`, accessToken)
-        : { ok: false, status: 0, json: null, text: "no_accounts" };
-
-      const locationList = Array.isArray(locations.json?.locations) ? locations.json.locations.slice(0, 10) : [];
+      const allLocations: any[] = [];
+      let locationsOk = true;
+      let locationsStatus = 0;
+      for (const account of accounts.all) {
+        const accountName = String(account?.name ?? "").trim();
+        if (!accountName) continue;
+        const locationsRes = await fetchJson(
+          `https://mybusinessbusinessinformation.googleapis.com/v1/${accountName}/locations`,
+          accessToken,
+        );
+        locationsOk = locationsOk && locationsRes.ok;
+        locationsStatus = locationsRes.status;
+        const locations = Array.isArray(locationsRes.json?.locations) ? locationsRes.json.locations : [];
+        allLocations.push(...locations.map((loc: any) => ({ ...loc, accountName })));
+      }
 
       result = {
         ...result,
-        accounts: {
-          ok: accounts.ok,
-          status: accounts.status,
-          count: Array.isArray(accounts.json?.accounts) ? accounts.json.accounts.length : 0,
-          sample: accountList,
-        },
+        accounts,
         locations: {
-          ok: locations.ok,
-          status: locations.status,
-          count: Array.isArray(locations.json?.locations) ? locations.json.locations.length : 0,
-          sample: locationList,
+          ok: locationsOk,
+          status: locationsStatus,
+          count: allLocations.length,
+          sample: allLocations.slice(0, 25),
+          all: allLocations.slice(0, 250),
         },
       };
     } else if (integrationType === "analytics") {
-      const accounts = await fetchJson("https://analyticsadmin.googleapis.com/v1beta/accounts", accessToken);
-      const accountList = Array.isArray(accounts.json?.accounts) ? accounts.json.accounts.slice(0, 10) : [];
-      const firstAccount = accountList[0]?.name || null;
+      const accounts = await fetchPagedItems({
+        url: "https://analyticsadmin.googleapis.com/v1beta/accounts",
+        accessToken,
+        itemsKey: "accounts",
+        pageSize: 200,
+        maxItems: 200,
+        maxPages: 10,
+      });
 
-      const properties = firstAccount
-        ? await fetchJson(`https://analyticsadmin.googleapis.com/v1beta/properties?filter=parent:${encodeURIComponent(firstAccount)}`, accessToken)
-        : { ok: false, status: 0, json: null, text: "no_accounts" };
-
-      const propertyList = Array.isArray(properties.json?.properties) ? properties.json.properties.slice(0, 10) : [];
+      // Fetch properties per account (more reliable than unfiltered list for some GA4 setups).
+      const allProperties: any[] = [];
+      let propertiesOk = true;
+      let propertiesStatus = 0;
+      for (const account of accounts.all) {
+        const accountName = String(account?.name ?? "").trim();
+        if (!accountName) continue;
+        const propsRes = await fetchAnalyticsPropertiesByAccount({ accountName, accessToken });
+        propertiesOk = propertiesOk && propsRes.ok;
+        propertiesStatus = propsRes.status;
+        allProperties.push(...propsRes.properties);
+        if (allProperties.length >= 500) break;
+      }
 
       result = {
         ...result,
-        accounts: {
-          ok: accounts.ok,
-          status: accounts.status,
-          count: Array.isArray(accounts.json?.accounts) ? accounts.json.accounts.length : 0,
-          sample: accountList,
-        },
+        accounts,
         properties: {
-          ok: properties.ok,
-          status: properties.status,
-          count: Array.isArray(properties.json?.properties) ? properties.json.properties.length : 0,
-          sample: propertyList,
+          ok: propertiesOk,
+          status: propertiesStatus,
+          count: allProperties.length,
+          sample: allProperties.slice(0, 25),
+          all: allProperties.slice(0, 500),
         },
       };
     } else if (integrationType === "search_console") {
       const sites = await fetchJson("https://www.googleapis.com/webmasters/v3/sites", accessToken);
-      const siteList = Array.isArray(sites.json?.siteEntry) ? sites.json.siteEntry.slice(0, 20) : [];
+      const allSites = Array.isArray(sites.json?.siteEntry) ? sites.json.siteEntry : [];
+      const siteList = allSites.slice(0, 25);
       const hasDomainProperty = siteList.some((s: any) => s.siteUrl === "sc-domain:mango.law");
 
       result = {
@@ -294,35 +375,65 @@ Deno.serve(async (req: Request) => {
         sites: {
           ok: sites.ok,
           status: sites.status,
-          count: Array.isArray(sites.json?.siteEntry) ? sites.json.siteEntry.length : 0,
+          count: allSites.length,
           hasDomainProperty,
           sample: siteList,
+          all: allSites.slice(0, 200),
         },
       };
     } else if (integrationType === "tag_manager") {
       const accounts = await fetchJson("https://www.googleapis.com/tagmanager/v2/accounts", accessToken);
-      const accountList = Array.isArray(accounts.json?.account) ? accounts.json.account.slice(0, 10) : [];
-      const firstAccountId = accountList[0]?.accountId || null;
+      const accountList = Array.isArray(accounts.json?.account) ? accounts.json.account : [];
+      const accountSample = accountList.slice(0, 25);
 
-      const containers = firstAccountId
-        ? await fetchJson(`https://www.googleapis.com/tagmanager/v2/accounts/${firstAccountId}/containers`, accessToken)
-        : { ok: false, status: 0, json: null, text: "no_accounts" };
+      const allContainers: any[] = [];
+      let containersOk = true;
+      let containersStatus = 0;
+      const accountIdToName = new Map<string, string>();
+      for (const acc of accountList) {
+        const id = String(acc?.accountId ?? "").trim();
+        if (!id) continue;
+        const name = String(acc?.name ?? acc?.accountName ?? acc?.path ?? id);
+        accountIdToName.set(id, name);
+      }
 
-      const containerList = Array.isArray(containers.json?.container) ? containers.json.container.slice(0, 20) : [];
+      const sortedAccounts = [...accountList].sort((a: any, b: any) => {
+        const al = String(a?.name ?? a?.accountName ?? a?.accountId ?? "");
+        const bl = String(b?.name ?? b?.accountName ?? b?.accountId ?? "");
+        return al.localeCompare(bl);
+      });
+
+      for (const acc of sortedAccounts) {
+        const accountId = String(acc?.accountId ?? "").trim();
+        if (!accountId) continue;
+        const containersRes = await fetchTagManagerContainersByAccount({ accountId, accessToken });
+        containersOk = containersOk && containersRes.ok;
+        containersStatus = containersRes.status;
+        allContainers.push(
+          ...containersRes.containers.map((c: any) => ({
+            ...c,
+            accountId,
+            accountName: accountIdToName.get(accountId) || accountId,
+          })),
+        );
+        if (allContainers.length >= 500) break;
+      }
 
       result = {
         ...result,
         accounts: {
           ok: accounts.ok,
           status: accounts.status,
-          count: Array.isArray(accounts.json?.account) ? accounts.json.account.length : 0,
-          sample: accountList,
+          count: accountList.length,
+          sample: accountSample,
+          all: accountList,
         },
         containers: {
-          ok: containers.ok,
-          status: containers.status,
-          count: Array.isArray(containers.json?.container) ? containers.json.container.length : 0,
-          sample: containerList,
+          ok: containersOk,
+          status: containersStatus,
+          count: allContainers.length,
+          sample: allContainers.slice(0, 25),
+          all: allContainers.slice(0, 500),
         },
       };
     }

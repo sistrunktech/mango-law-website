@@ -173,7 +173,7 @@ Deno.serve(async (req: Request) => {
 
     const { data: existing, error: existingError } = await supabase
       .from('google_integrations')
-      .select('id')
+      .select('id, refresh_token, account_id, location_id, metadata')
       .eq('integration_type', integrationType)
       .maybeSingle();
 
@@ -183,15 +183,28 @@ Deno.serve(async (req: Request) => {
     }
 
     if (existing) {
+      const preservedMeta = (existing as any).metadata || {};
+      const mergedMeta = { ...preservedMeta, ...metadata };
+      const preservedRefreshToken = (existing as any).refresh_token || null;
+      const preservedAccountId = (existing as any).account_id || null;
+      const preservedLocationId = (existing as any).location_id || null;
+
+      // IMPORTANT:
+      // - Google does not always return a refresh_token on subsequent auth flows.
+      // - For non-GBP integrations we don't want to wipe admin-selected account/resource state.
+      const nextRefreshToken = tokens.refresh_token || preservedRefreshToken;
+      const nextAccountId = integrationType === 'business_profile' ? (accountId || preservedAccountId) : preservedAccountId;
+      const nextLocationId = integrationType === 'business_profile' ? (locationId || preservedLocationId) : preservedLocationId;
+
       const { error: updateError } = await supabase
         .from('google_integrations')
         .update({
           access_token: tokens.access_token,
-          refresh_token: tokens.refresh_token || null,
+          refresh_token: nextRefreshToken || null,
           token_expires_at: tokenExpiresAt,
-          account_id: accountId || null,
-          location_id: locationId || null,
-          metadata,
+          account_id: nextAccountId || null,
+          location_id: nextLocationId || null,
+          metadata: mergedMeta,
           is_active: true,
           updated_at: new Date().toISOString(),
         })

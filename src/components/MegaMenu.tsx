@@ -5,8 +5,10 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
   const [isOpen, setIsOpen] = useState(false);
+  const openTimeoutRef = useRef<number | null>(null);
   const closeTimeoutRef = useRef<number | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
 
   const updatePanelPosition = () => {
@@ -18,8 +20,11 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
     const anchorRect = containerEl?.getBoundingClientRect() ?? triggerRect;
 
     setPanelPosition({
-      top: triggerRect.bottom + 8,
-      left: anchorRect.left + anchorRect.width / 2,
+      top: triggerRect.bottom,
+      left: Math.max(
+        anchorRect.left + anchorRect.width / 2,
+        450 // Prevent it from going too far left
+      ),
     });
   };
 
@@ -28,11 +33,19 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
     updatePanelPosition();
 
     const onReposition = () => updatePanelPosition();
+    // Immediate closure on scroll to prevent the fixed panel from ghosting over the hero section
+    const onScroll = () => {
+      setIsOpen(false);
+      if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current);
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+    
     window.addEventListener('resize', onReposition);
-    window.addEventListener('scroll', onReposition, true);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
     return () => {
       window.removeEventListener('resize', onReposition);
-      window.removeEventListener('scroll', onReposition, true);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [isOpen]);
 
@@ -41,15 +54,73 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
       clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
-    setIsOpen(true);
-    updatePanelPosition();
+    
+    // Hover intent: delay opening by 150ms to prevent accidental triggers while moving to hero
+    if (!isOpen && !openTimeoutRef.current) {
+      openTimeoutRef.current = window.setTimeout(() => {
+        setIsOpen(true);
+        updatePanelPosition();
+        openTimeoutRef.current = null;
+      }, 150);
+    } else if (isOpen) {
+      // If already open, just keep it open
+      setIsOpen(true);
+    }
   };
 
   const handleMouseLeave = () => {
+    if (openTimeoutRef.current) {
+      clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = null;
+    }
+    
     closeTimeoutRef.current = window.setTimeout(() => {
       setIsOpen(false);
     }, 300);
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      setIsOpen(true);
+      updatePanelPosition();
+      setTimeout(() => {
+        const firstLink = menuRef.current?.querySelector('a');
+        firstLink?.focus();
+      }, 10);
+    }
+  };
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        setIsOpen(false);
+        triggerRef.current?.focus();
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        triggerRef.current &&
+        !triggerRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isOpen]);
 
   return (
     <div
@@ -60,6 +131,10 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
       <button
         type="button"
         ref={triggerRef}
+        onKeyDown={handleKeyDown}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        aria-controls="mega-menu-panel"
         className={[
           'flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors',
           variant === 'light' ? 'text-brand-black/70' : 'text-brand-offWhite/80',
@@ -72,13 +147,19 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
 
       {isOpen && panelPosition && (
         <div
-          className="fixed z-50 w-[90vw] max-w-5xl -translate-x-1/2"
+          ref={menuRef}
+          id="mega-menu-panel"
+          role="region"
+          aria-label="Practice Areas Menu"
+          className="pointer-events-none fixed z-50 w-[90vw] max-w-5xl -translate-x-1/2 pt-2"
           style={{
             top: panelPosition.top,
             left: panelPosition.left,
           }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <div className="rounded-2xl border border-brand-offWhite/10 bg-brand-black/95 p-8 shadow-2xl backdrop-blur-sm">
+          <div className="pointer-events-auto rounded-2xl border border-brand-offWhite/10 bg-brand-black/95 p-8 shadow-2xl backdrop-blur-sm">
             <div className="grid gap-8 md:grid-cols-3">
               {/* Practice Areas */}
               <div>

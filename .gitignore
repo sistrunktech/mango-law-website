@@ -22,3 +22,4 @@ temp-generated/
 supabase/.temp/
 *.code-workspace
 reports/
+public/sitemap.xml

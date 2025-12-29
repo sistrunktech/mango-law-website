@@ -1,5 +1,150 @@
 # Changelog
 
+## 2025-12-28
+
+### Firm Facts + Governance
+- Update homepage/About/Criminal Defense copy to reflect 26+ years of Ohio criminal law experience and Feb 2009 firm start date.
+- Extend structured data with founding date/location and Ohio bar credential (`src/lib/seo.tsx`).
+- Add locked “Firm Facts” guardrails in `docs/CONTENT_GOVERNANCE.md`.
+
+### Search Intelligence (SEO Tracker MVP)
+- Add `seo_keywords` + `seo_rankings` tables and rank tracking trigger (`supabase/migrations/20251228171500_add_seo_tracker_and_checkpoint_improvements.sql`).
+- Add `check-rankings` Edge Function (Serper.dev integration) and admin UI dashboard tab.
+- Remove hardcoded Serper API fallback; `SERPER_API_KEY` is now required for rank checks.
+- Seed initial keyword list via migration (`supabase/migrations/20251228180500_seed_initial_keywords.sql`).
+- Document 2025 SEO roadmap in `docs/SEO-STRATEGY-2025.md` and research inputs in `docs/RESEARCH-INPUTS-2025.md`.
+
+### Regional Expansion
+- Expand `serviceAreas.ts` with Union, Morrow, and Marion counties plus tiered cities and court metadata.
+- Extend local business JSON-LD `areaServed` to match expansion coverage.
+
+### Checkpoint Transparency + Integrity
+- Add announcement date support for checkpoints (`supabase/migrations/20251228172000_add_announcement_date_to_checkpoints.sql`).
+- Show “Announced on” dates in `CheckpointCard` and improve empty-state messaging in `/dui-checkpoints`.
+- Harden checkpoint scraper geocoding diagnostics + deduplication.
+
+### Admin Connectors
+- Auto-persist inferred Google resource selections when Mango Law properties are detected (reduces “status not saved” errors).
+
+### Security Hardening
+- Set `search_path = public, pg_temp` for 13 Supabase functions to resolve mutable search path warnings (`supabase/migrations/20251228180000_secure_function_search_paths.sql`).
+
+## 2025-12-26
+
+### Content Governance
+- Add content governance docs (rules, changelog template, protected content registry, agent guardrails).
+- Introduce blog lifecycle fields, version snapshots, change request table, triggers, and RLS protections (`supabase/migrations/20251226123000_content_governance_guardrails.sql`).
+- Update BlogManager with status badges, finalize action, proposal workflow, review UI, and approval-token enforcement.
+- Add CI guardrail to require `docs/CONTENT_CHANGELOG.md` entries when protected blog content changes (`scripts/check-protected-content.mjs` + CI step).
+
+### Blog
+- Add mobile/tablet TOC using semantic `details` + `summary` and unify heading anchors for in-page navigation.
+- Convert the blog sidebar CTA to a neutral card with a mango accent border, and contain sidebar scroll with a sticky wrapper + max-height.
+- Add responsive PenaltyGrid cards on mobile while keeping the table layout on desktop.
+- Standardize StatCard/IconStat sizing for consistent card radius, shadows, and safer text sizing.
+
+## 2025-12-25
+
+### Trust & Compliance
+- Add Ohio Supreme Court Registration No. 0071238 to attorney identity block (homepage photo overlay) and footer credibility line.
+- Standardize bar number format sitewide: "Ohio Supreme Court Registration No. 0071238" (avoid informal "OH Bar #" variants).
+
+### Blog / SEO
+- Homepage blog section now shows most recent posts sorted by date with category diversity (one post per category for better SEO coverage).
+- Fix holiday OVI enforcement blog post using duplicate hero image; now uses correct `blog-ohio-holiday-ovi-enforcement.png`.
+
+### UX / CTAs
+- Replace passive "Explore / Learn more" CTAs on practice area cards with action-oriented, help-first language:
+  - OVI/DUI: "Get help with OVI charges"
+  - Criminal Defense: "Discuss your criminal case"
+  - Drug Crimes: "Talk to a lawyer about drug charges"
+  - Sex Crimes: "Get discreet defense help"
+  - White Collar: "Discuss fraud or embezzlement charges"
+  - Protection Orders: "Fight a protection order"
+  - Personal Injury: "Discuss your injury case"
+- Add `ctaText` field to `PracticeArea` type for maintainable CTA customization (`src/data/practiceAreas.ts`).
+- Unify homepage CTA language to "Free Case Review" (footer box, CTASection, practice area grid consultation card).
+
+### Docs
+- Refresh `README.md` to match current brand tokens, GTM-first tracking contract, `/admin/connections` usage, and env-var source of truth (`.env.example`).
+
+### Consent (GTM / GA4)
+- Add Consent Mode v2 (advanced mode) defaults before GTM loads and a lightweight consent banner (accept/reject/customize) persisted via cookie.
+
+### Admin / Google Connectors
+- Preserve admin-selected Google resources (GA4 Property / GSC property / GTM container) across OAuth reconnects and avoid wiping refresh tokens when Google omits `refresh_token` on subsequent grants.
+- Add optional support for a Supabase custom domain in the frontend (`VITE_SUPABASE_CUSTOM_DOMAIN`) to improve OAuth branding and reduce “project-id.supabase.co” exposure.
+- Force Google OAuth to show the account picker and keep incremental scopes (`prompt=consent select_account`, `include_granted_scopes=true`).
+
+### Email Templates
+- Default email theme to light when `APP_THEME` is unset (still overrideable via env).
+
+### SEO / Icons
+- Add `favicon.ico` to improve Google SERP icon rendering and legacy favicon detection.
+
+### Blog
+- Redesign blog post pages with an "Editorial Calm" layout: 21:9 hero, two-column grid with sticky consult CTA, refined highlight callouts, updated prose palette, structured author bio, and related posts limited to two.
+- Add blog image generation specs to `og/og-specs.ts`.
+
+### Legal Pages
+- Replace Privacy Policy + Terms of Use stubs with full Mango Law copy and add form disclaimer about attorney-client relationship creation.
+
+## 2025-12-24
+
+### Admin / Google Connectors
+- Fix `/admin/connections` resource selection for Google Analytics and Google Tag Manager by listing all accessible accounts/resources and adding an Account selector (prevents “random account” behavior).
+- Collapse the raw access-check debug payload behind a disclosure to keep the UI readable.
+
+### Accessibility (Keyboard)
+- Make DUI Checkpoint map markers keyboard accessible.
+- Add focus trapping to remaining modal-style launchers and ensure chat modal uses `aria-modal` appropriately.
+- Add `AccessibleTable` helper for consistent table semantics.
+
+### UI / Reliability
+- Fix homepage hero CTA buttons not responding to clicks (pointer cursor without navigation).
+- Move Turnstile widget/badge to live under the submit button and align with the confidentiality disclaimer; reduce overlap issues.
+- Add additional favicon sizes to improve SERP icon reliability.
+
+## 2025-12-23
+
+### Lead Capture + Forms
+- Fix lead-capture modal validation and standardize phone normalization/formatting across forms (stores digits, displays `(XXX) XXX-XXXX`).
+- Add intake fields to better route leads and personalize follow-up (case type + “how did you find us?” with referral details).
+- Surface Edge Function JSON error messages in the UI so “non-2xx” includes the actual server reason (e.g. `Verification required`, `Origin not allowed`).
+- Deploy/enable Cloudflare Turnstile (optional): client widget + server verification via `TURNSTILE_SECRET_KEY`.
+- Add a production-safe Turnstile site key fallback so the widget still renders if Bolt env injection fails (`src/lib/turnstile.ts`).
+
+### Chat UI
+- Polish chat modal styling and adjust Turnstile badge placement to avoid obstructing content.
+
+### Email Templates (Supabase Edge Functions)
+- Replace per-function ad-hoc HTML with a shared email template generator (`supabase/functions/_shared/email/*`) used by `submit-contact`, `submit-lead`, and `chat-intake`.
+- Add environment-driven theme/season controls for email styling (`APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`) and a `FRONTEND_URL` base for helpful resource links.
+
+### Supabase (Required Operational Updates)
+- Add missing `contact_leads` + `chat_leads` tables via migration (`supabase/migrations/20251223000000_create_contact_and_chat_leads_tables.sql`).
+- Ensure public lead Edge Functions are callable from the site by setting `verify_jwt = false` in:
+  - `supabase/functions/submit-contact/config.toml`
+  - `supabase/functions/submit-lead/config.toml`
+  - `supabase/functions/chat-intake/config.toml`
+
+## 2025-12-19
+
+### Header
+- Restore the desktop “top green bar” (phone + DUI checkpoint map link) above the main header (`src/components/SiteHeader.tsx`).
+- Document header-only rollback steps (`docs/HEADER-ROLLBACK.md`).
+
+## 2025-12-17
+
+### Blog Trust + Content
+- Rewrite blog posts to be source-first and reduce numeric drift risk (remove numeric-heavy `[VISUAL:*]` markers; refresh `lastVerified`) (`src/data/blogPosts.ts`).
+
+### Favicons
+- Add PNG favicons, Apple touch icon, and web manifest; wire in `index.html` (`public/*`, `index.html`).
+
+### ORC Glossary
+- Add missing glossary entry for ORC § 2907.07 (Importuning) (`src/data/statutes.ts`).
+
 ## 2025-12-15
 
 ### Deploy / Publish Reliability (Bolt)
@@ -213,7 +358,7 @@
 - **Chat Interface**:
   - Conversational UI with bot and user message styling
   - Typing indicators with animated dots
-  - Step-by-step flow: name → phone → message → confirmation
+- Step-by-step flow: name → phone → email → message → confirmation
   - localStorage persistence with 30-minute session timeout
   - Delayed follow-up messages (20-30 seconds after confirmation)
 - **Phone Number Handling**:
@@ -335,8 +480,7 @@
 - Expand `.env.example` with deployment-related variables and chat/email keys.
 
 ### Database Schema
-- Deploy `contact_leads` table with RLS policies (service_role INSERT/SELECT only).
-- Deploy `chat_leads` table with conversation context support and RLS policies.
+- Define lead intake tables (`contact_leads`, `chat_leads`) and RLS policies (implemented via migrations; see 2025-12-23).
 - Deploy `rate_limit_requests` table for API rate limiting with automatic cleanup.
 - Add performance indexes on email, created_at, and rate limiting lookup.
 

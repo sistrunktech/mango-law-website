@@ -14,21 +14,31 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js?...` into the served HTML.
 
 - Verify in DevTools → Network that there is no request to `bolt.new/badge.js` on first load.
-- If Bolt provides a project setting to disable the badge entirely, prefer disabling it at the hosting level as well.
+- Disable the badge in Bolt’s project settings (brand/badge/attribution). If the UI changes, search settings for “badge” or “bolt”.
 - If adding CSP later, prefer server-side headers and verify Mapbox still works (it may require `worker-src blob:` and other allowances).
+
+### What Bolt Deploys (and what it doesn’t)
+- Bolt deploys the **frontend** (the Vite build output for `index.html` + `src/**`).
+- Bolt does **not** deploy Supabase Edge Functions or Supabase DB migrations. Those must be deployed separately via Supabase CLI or the Supabase Dashboard.
+
+### Deploy verification (important)
+- The live site may be served via a CDN edge layer; if you don’t see recent changes, assume the **frontend deploy is stale** until proven otherwise.
+- Quick check: View Source on `https://mango.law` and confirm the `/assets/index-*.js` filename changes after a publish.
+- If the asset filename doesn’t change, you’re still on an older build (and any “fix” in GitHub won’t show up yet).
 
 ## Environment Variables
 - Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
-- Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback).
-- Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `APP_ENV`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`.
+- Optional client config: `VITE_SUPABASE_CUSTOM_DOMAIN` (recommended for OAuth branding; use an HTTPS Supabase custom domain like `https://api.mango.law`).
+- Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional), `SERPER_API_KEY` (Search Intelligence).
+- Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `VITE_TURNSTILE_SITE_KEY` (optional).
 - SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
 - Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `VITE_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
 - See `.env.example` for the full list; update it whenever variables change.
 - **Supabase project pinning:** the frontend is currently pinned to the production Supabase project in `src/lib/supabaseClient.ts` to prevent “split brain” data and OAuth redirect drift. If you truly need multiple environments later, reintroduce host/env-based switching carefully and update Google OAuth redirect URIs accordingly.
 
 ## Contact Numbers (Do Not Swap)
-- **Office / Main line:** `(740) 602-2155` (`tel:7406022155`) — default for all “Call” CTAs.
-- Do not use personal/direct numbers in public UI; keep anything like `SMS_GATEWAY_NICK` limited to internal SMS notifications only.
+- **Primary (Call/Text):** `(740) 417-6191` (`tel:7404176191`) — default for all “Call/Text” CTAs (fastest response).
+- **Secondary (Office line):** `(740) 602-2155` (`tel:7406022155`) — show only where a second number is helpful (footer/contact/about).
 
 ## Secrets Placement
 - GitHub Actions: secrets and variables have been added via `gh secret set` / `gh variable set`. Replace placeholder Supabase values (`VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `VITE_SUPABASE_URL`) with real env-specific keys.
@@ -36,19 +46,51 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - Keep service-role keys server-side only; client should only see `VITE_*` and non-sensitive config.
 
 ## Edge Functions (deployed)
-- **submit-contact**: Validates payload with honeypot protection, inserts into `contact_leads`, sends notification via Resend. Includes CORS validation against `ORIGIN_ALLOWLIST`, rate limiting (10 req/min per IP), comprehensive security headers, and structured JSON logging.
-- **chat-intake**: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. **NEW**: Now includes SMS notifications via email-to-SMS gateways (Verizon/AT&T) for instant mobile alerts. Sends to office, attorney, and test numbers configured in environment variables.
+- **Public lead functions** (`verify_jwt=false` in `supabase/functions/*/config.toml`):
+  - `submit-contact`: Validates payload with honeypot protection, inserts into `contact_leads`, sends admin notification + lead confirmation email via Resend. Includes CORS validation against `ORIGIN_ALLOWLIST`, rate limiting (10 req/min per IP), comprehensive security headers, and structured JSON logging.
+  - `submit-lead`: Handles lead-capture modal submissions, inserts into `leads`, sends admin notification + lead confirmation email via Resend. Rate limited to 10 req/min per IP.
+  - `chat-intake`: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. Includes optional SMS notifications via email-to-SMS gateways.
+- **Bot protection** (optional): If `TURNSTILE_SECRET_KEY` is set, `submit-contact`, `submit-lead`, and `chat-intake` require a valid Turnstile token (`turnstile_token`).
+  - Client-side site key: the app uses `VITE_TURNSTILE_SITE_KEY` when present, otherwise falls back to the default site key in `src/lib/turnstile.ts`.
+  - If you rotate Turnstile keys, update both the Bolt env var (preferred) and the fallback constant (or remove/adjust the fallback).
+- **Email templates** (shared): `submit-contact`, `submit-lead`, and `chat-intake` generate email HTML via `supabase/functions/_shared/email/*`.
+  - Theme/season toggles: `APP_THEME` (`dark|light`), `APP_SEASON` (`spring|summer|fall|winter`), `APP_HOLIDAY` (`true|false`).
+  - Host links: `FRONTEND_URL` (fallback: `VITE_SITE_URL`, then `https://mango.law`).
 - **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, and upserts checkpoints to database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
-- **send-review-invitation**: (Existing) Sends review invitations with JWT authentication required.
+- **check-rankings**: Search Intelligence job that pulls Serper.dev results for active keywords and writes ranking history to `seo_rankings`. Requires `SERPER_API_KEY` and service-role access (no fallback key).
+- **generate-review-response**: Generates draft responses for reviews using the configured AI provider/model.
+- **sync-google-reviews**: Syncs Google reviews into the DB (used by admin dashboard).
 - **google-oauth-connect / google-oauth-callback**: OAuth connect + callback endpoints for GBP/GA/GSC/GTM token storage. Callback must allow unauthenticated Google redirects (no Supabase `Authorization` header).
 - **google-access-check**: Admin-only “Check status” endpoint for `/admin/connections` that lists accessible resources per integration (accounts/properties/containers/sites) and writes an `admin_activity_log` entry.
+
+## Supabase Deploy Checklist (Prod)
+Project ref (prod): `rgucewewminsevbjgcad`
+
+- Link the repo:
+  - `supabase link --project-ref rgucewewminsevbjgcad`
+- Deploy Edge Functions (frontend deploy does not cover this):
+  - `supabase functions deploy submit-contact`
+  - `supabase functions deploy submit-lead`
+  - `supabase functions deploy chat-intake`
+  - `supabase functions deploy check-rankings`
+- Apply DB migrations:
+  - `supabase db push`
+
+## Turnstile Setup (Recommended)
+- Create a Cloudflare Turnstile widget for the hostnames you will test on (at minimum `mango.law`; add `staging.mango.law` / Bolt preview hostnames as needed).
+- Bolt env (client): set `VITE_TURNSTILE_SITE_KEY` (preferred for rotation and multi-environment setups). If it’s missing, the app uses a default fallback site key from `src/lib/turnstile.ts`.
+- Supabase Edge Function secrets (server): set `TURNSTILE_SECRET_KEY`.
+- UI placement: the Turnstile widget is rendered *below the submit button* and aligned with the confidentiality/security disclaimer so it stays out of the main form flow.
+- Common failure modes:
+  - The live site is serving an older frontend bundle (missing recent Turnstile updates) → requests submit with no token → Edge Functions return `400` with `Verification required`.
+  - The Turnstile widget isn’t configured for the hostname being tested → verification fails.
 
 ### Security Features
 - **Security Headers**: All responses include CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers.
 - **Rate Limiting**: Database-backed rate limiting tracks requests per IP/endpoint. Returns HTTP 429 with Retry-After header when limits exceeded. Limits: submit-contact (10/min), chat-intake (20/min).
 - **Structured Logging**: JSON-formatted logs include timestamp, level, message, endpoint, method, IP, user agent, status, duration, and error details.
 - **Input Validation**: Email format, phone format, required fields validated before processing.
-- **Spam Protection**: Honeypot field detection for bot submissions.
+- **Spam Protection**: Honeypot field detection for bot submissions; optional Turnstile server-side verification.
 
 ## Image generation workflow
 - Script: `npm run generate:image -- --prompt "your prompt here"`
@@ -68,9 +110,14 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 
 ## Database (deployed)
 - **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).
-- **chat_leads**: Captures chat intake submissions (id, name, email, message, conversation_context, source, meta, created_at). **UPDATED**: Simplified schema with generic `meta` field for flexible metadata storage.
+- **chat_leads**: Captures chat intake submissions (id, name, email, phone, initial_message, conversation_context, ip_address, user_agent, created_at).
+- **leads**: Captures lead-capture modal submissions (id, name, email, phone, lead_source, checkpoint_id, county, urgency, message, ip_address, user_agent, referrer, created_at, status).
 - **rate_limit_requests**: Tracks API requests for rate limiting (id, ip_address, endpoint, created_at). Auto-cleanup removes records older than 1 hour.
 - **dui_checkpoints**: Stores DUI checkpoint locations and schedules (id, title, location_address, location_city, location_county, latitude, longitude, start_date, end_date, status, source_url, source_name, description, is_verified, views_count, created_at, updated_at). Indexed on county, status, and date fields for efficient filtering.
+  - New fields: `announcement_date`, `geocoding_confidence`, `last_geocoded_at` (for transparency + geocoding diagnostics).
+- **seo_keywords**: Keyword inventory for Search Intelligence (keyword, location_context, target_url, is_active, timestamps).
+- **seo_rankings**: Daily ranking history with optional local-pack flag and SERP data payloads.
+  - Seeded via migration `20251228180500_seed_initial_keywords.sql` (Delaware + Marysville starter set; update as needed).
 - **geocoding_cache**: Caches Mapbox geocoding results to minimize API calls (id, address, latitude, longitude, formatted_address, confidence, provider, metadata, hit_count, created_at, updated_at). Unique index on address for fast lookups.
 - **scraper_logs**: Tracks checkpoint scraper execution for monitoring (id, scraper_name, status, started_at, completed_at, duration_ms, checkpoints_found, checkpoints_new, checkpoints_updated, errors, metadata, created_at). Indexed on scraper_name and created_at.
 - **brand_assets**: Brand asset management table (id, file_path, variant_type, color_variant, file_format, dimensions, usage_notes, is_active, created_at, updated_at).
@@ -78,6 +125,7 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - **RLS Enabled**: All tables use Row Level Security. Public read access to checkpoints and geocoding cache; service role has full access; rate limiting enforces IP-based restrictions.
 - **Indexes**: Comprehensive indexes on frequently queried columns including composite indexes for date range queries, location searches, and rate limiting.
 - **Functions**: Helper functions for `increment_column()` (generic counter for views/metrics), `increment()` (backward-compatible wrapper), `increment_geocoding_cache_hit()`, `cleanup_old_scraper_logs()`, `update_checkpoint_status()` (auto-transitions statuses), `invoke_checkpoint_scraper()`, `trigger_checkpoint_scraper_now()`.
+- **Security hardening**: Database functions now set `search_path = public, pg_temp` via migration `20251228180000_secure_function_search_paths.sql` to address mutable search path warnings.
 - **pg_cron Extension**: Enabled for scheduled jobs. Daily scraper runs at 2:00 AM EST (7:00 AM UTC).
 - **pg_net Extension**: Enabled for async HTTP requests from database functions to Edge Functions.
 - **Backups/PITR**: Via Supabase defaults; add monitoring alerts when available.
@@ -103,13 +151,14 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - **Data Sources**:
   - **Confirmed checkpoints**: Scraper pulls from OVICheckpoint.com, geocodes addresses, and stores in `dui_checkpoints`.
   - **Pending announcements**: RSS ingestion stores “details pending” items in `dui_checkpoint_announcements` (list-only; no map pins).
+- **Transparency**: The UI surfaces “Announced on” dates when available and displays an explicit “No announced checkpoints at this time” empty state.
 - **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
 - **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `VITE_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints will be inserted without `latitude/longitude` and the map will show few/no markers.
 - **Scraper Schedule**: Runs daily at 2:00 AM EST via pg_cron. Manual trigger available in admin dashboard.
 - **One-time data repair (OVICheckpoint history)**: If historical checkpoint dates were corrupted by an earlier scraper regression, use `scripts/backfill-ovicheckpoint-dates.ts`:
   - Dry-run: `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts`
   - Apply (safe insert only): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode upsert --apply`
-  - Apply (clean rebuild of OVICheckpoint rows): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode replace-ovicheckpoint --apply`
+  - Apply (clean rebuild of OVICheckpoint rows): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode replace-ovicheckpoint --apply --confirm-replace`
   - The script writes a JSON audit report to `reports/` (gitignored).
   - In replace mode, if `MAPBOX_PUBLIC_TOKEN` is not set, the script will still try to reuse existing in-Ohio coordinates by matching county/city/address to preserve map pins.
 
@@ -128,6 +177,52 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
   - **Checkpoint CRUD**: Create, edit, and delete checkpoints with geocoding preview.
   - **Geocoding Preview**: Real-time address validation and coordinate lookup as you type. Shows confidence level (high/medium/low) and formatted address.
   - **Manual Entry**: Full form with all checkpoint fields including source tracking and verification status.
+
+### Google Integrations (Admin)
+Use `/admin/connections` to connect and *select the correct resources* for each tool (do not assume the first Google account returned is the right one).
+- **Step 1 — Connect**: Click `Connect` (or `Reconnect`) and complete the Google consent flow.
+- **Step 2 — Check status**: Click `Check status` to load the list of available accounts/resources.
+- **Step 3 — Select + Save**:
+  - **GA4 (Analytics)**: choose the correct **Account** and **GA4 Property**, then click `Save` (stored in `google_integrations.account_id` + `metadata.propertyId`).
+  - **Search Console**: choose `sc-domain:mango.law` when available (else `https://mango.law/`), then click `Save` (stored in `metadata.siteUrl`).
+  - **Tag Manager**: choose the correct **Account** and **Container**, then click `Save` (stored in `google_integrations.account_id` + `metadata.containerId`).
+- **Step 4 — Re-check**: run `Check status` again after changing permissions or creating resources in Google.
+- Troubleshooting:
+  - If the selectors look “empty”, click `Reconnect` and ensure you grant consent to the correct Google user (the user that actually owns/has access to the Analytics/GTM accounts).
+  - If you *only* see one account/resource but you expect more, it’s usually permissions (the connected user doesn’t have access), or Google is returning a partial list; reconnect and try again.
+  - Use the “debug payload” disclosure in the UI to confirm what Google returned before changing code.
+
+### Content Governance (Blog)
+- Blog posts have lifecycle states: `draft`, `published`, `finalized`.
+- Finalized posts are locked for non-privileged users; changes require an approval token.
+- Approval token format: `APPROVED: <slug> -- <what changed> -- <minor|major> -- <timestamp>`.
+- Admin edits capture change type/reason for version snapshots (`last_change_type`, `last_change_reason`).
+- Version snapshots are stored in `blog_post_versions`; proposals live in `blog_post_change_requests`.
+- All protected content changes must be logged in `docs/CONTENT_CHANGELOG.md`.
+- Protected content registry lives in `docs/PROTECTED_CONTENT.md`.
+- Consolidated blog rules live in `docs/BLOG_REQUIREMENTS.md` (word count, ORC links, visuals, trust metadata).
+- Current content sources: file-based (`src/data/blogPosts.ts`) + DB (`blog_posts`). Long term, migrate fully to DB-driven content.
+
+### OAuth Branding (Avoid “project-id.supabase.co” on the Google consent screen)
+By default, Supabase-hosted OAuth redirects and Edge Functions use the Supabase project domain (e.g., `https://<project-id>.supabase.co/...`).
+Google may display that domain on the consent screen (unprofessional / untrusted).
+
+Recommended fix: configure a **Supabase Custom Domain** (now using `api.mango.law`) and update Google OAuth redirect URIs to use it.
+
+High-level steps:
+1. Supabase Dashboard → Custom Domains:
+   - Add a custom domain (commonly `api.mango.law`).
+   - Verify DNS + TLS is active.
+2. Update Google Cloud Console OAuth Client:
+   - Authorized redirect URI(s) should include the new callback URL:
+     - `https://api.mango.law/functions/v1/google-oauth-callback`
+   - Keep the old Supabase URL temporarily during migration if needed, then remove it later.
+3. Ensure the site uses the custom domain consistently for Supabase endpoints (Auth + Functions) to avoid mixed-domain flows.
+
+If you don’t do this, the connectors can still work — they’ll just show the Supabase domain during OAuth.
+
+## Supabase Auth Security
+- Enable **Leaked Password Protection** in Supabase Dashboard → Auth → Providers → Email.
 - **Automated Updates**: pg_cron job runs hourly to automatically update checkpoint statuses. Manual refresh available via "Update Statuses" button.
   - **Cron health check (Supabase SQL editor):**
     - `SELECT * FROM cron.job WHERE jobname = 'update_checkpoint_statuses_hourly';`
@@ -144,16 +239,61 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 
 ## Chat System
 - **UI**: Conversational chat interface (`ChatIntakeLauncher.tsx`, `ConversationWindow.tsx`) with bot/user message styling and typing indicators.
-- **Flow**: Multi-step conversation (name → phone → message → confirmation) with localStorage persistence and 30-minute session timeout.
+- **Flow**: Multi-step conversation (name → phone → email → message → confirmation) with localStorage persistence and 30-minute session timeout.
 - **Phone Validation**: Real-time formatting and validation with (XXX) XXX-XXXX format.
 - **SMS Notifications**: Instant mobile alerts via email-to-SMS gateways (Verizon/AT&T). Sends to office, attorney, and test numbers. Zero additional cost (no Twilio subscription).
 - **Delayed Follow-up**: Automated follow-up message 20-30 seconds after confirmation to re-engage users.
 
 ## CTA Tracking (GA4 / GTM)
-- Primary CTAs include stable `data-cta` attributes (e.g. `header_free_consult`, `header_call`, `checkpoint_banner_free_consult`).
-- Lead capture submissions also store `lead_source` (`LeadCaptureModal` `trigger`) in Supabase `leads.lead_source`.
-- Recommended GTM setup: add a click trigger for elements matching `[data-cta]` and send `data-cta` as the event label.
-- Additionally, app code can push `cta_click` events to `window.dataLayer` via `src/lib/analytics.ts`.
+- This site is GTM-first: app code pushes explicit events to `window.dataLayer` (avoid GTM click selectors whenever possible).
+- The only tag snippet that should be hard-coded in `index.html` is GTM (`GTM-WLJQZKB5`). Do not add GA4 `gtag.js` directly to the site.
+- Events emitted by the app:
+  - `mango_page_view` (from `src/lib/seo.tsx`)
+  - `cta_click` (from `src/lib/analytics.ts`)
+  - `lead_submitted` (from `src/lib/analytics.ts`)
+- `lead_submitted` payload includes `lead_source` (`form` | `phone` | `email` | `chat`) and `checkpoint_id` (location identifier like `contact_form_submit`), with optional `target_number` / `target_email`.
+  - Recommended GTM setup:
+  - GA4 Config tag (Measurement ID) with `send_page_view=false`
+  - GA4 Event tags triggered by the Custom Events above:
+    - `mango_page_view` → send GA4 `page_view` with `page_location`, `page_path`, `page_title`
+    - `cta_click` → send GA4 event `cta_click` with param `cta`
+    - `lead_submitted` → send GA4 event `lead_submitted` with params `lead_source`, `checkpoint_id`, `target_number`, `target_email`
+
+## Consent Mode v2 (GTM / GA4)
+
+GA4 may show “consent signals inactive/missing for EEA users” unless Consent Mode v2 signals are sent.
+
+### How it’s implemented
+- `index.html` includes an inline Consent Mode v2 snippet that runs **before GTM loads** (advanced mode).
+- Defaults are set to **denied** for:
+  - `analytics_storage`
+  - `ad_storage`
+  - `ad_user_data`
+  - `ad_personalization`
+- A small in-app banner (`src/components/ConsentBanner.tsx`) lets users:
+  - Accept all
+  - Reject all
+  - Customize (Analytics vs Advertising)
+- Consent is persisted in a cookie: `ml_consent_v2`.
+
+### Notes
+- Current behavior is conservative: default denied globally until a user chooses (simple + compliant, but reduces measurement outside EEA).
+- If you want EEA-only defaults (recommended for measurement), add region detection in the hosting layer (or via a CMP) and adjust defaults accordingly.
+
+### GTM configuration (required)
+In GTM:
+- Enable consent settings/overview.
+- Ensure GA4 tags require `analytics_storage=granted`.
+- Ensure ad-related tags require `ad_storage=granted` (and the v2 signals where applicable).
+- Validate in Tag Assistant that the consent state exists on first load and updates immediately after user action.
+
+## Email Template System (Edge Functions)
+- Shared builders live in `supabase/functions/_shared/email/templates.ts`.
+- Recommended for client compatibility: set `APP_THEME=light` unless you have a specific reason to force a dark email layout (many email clients apply their own dark-mode rendering and can produce unexpected inversions).
+- To add a new notification type:
+  - Build the email HTML with `buildAdminEmailHtml(...)` and/or `buildClientConfirmationHtml(...)`.
+  - Keep the Edge Function responsible for data validation, DB insert, and passing sanitized fields + metadata into the builder.
+  - Add any new “helpful resources” rules to `supabase/functions/_shared/email/recommendations.ts`.
 
 ## Agent/PR Expectations
 - When adding/updating env vars or infra, update `.env.example`, this `docs/OPERATIONS.md`, and `CHANGELOG.md`.

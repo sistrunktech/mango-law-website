@@ -36,13 +36,19 @@ END;
 $$;
 
 -- Run daily at 08:15 UTC (safe off-hours). Unschedule first for idempotency.
-SELECT cron.unschedule('cancel_stale_checkpoint_announcements');
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'pg_cron') THEN
+    PERFORM cron.unschedule(jobid)
+    FROM cron.job
+    WHERE jobname = 'cancel_stale_checkpoint_announcements';
 
-SELECT cron.schedule(
-  'cancel_stale_checkpoint_announcements',
-  '15 8 * * *',
-  $$SELECT cancel_stale_checkpoint_announcements();$$
-);
+    PERFORM cron.schedule(
+      'cancel_stale_checkpoint_announcements',
+      '15 8 * * *',
+      'SELECT cancel_stale_checkpoint_announcements();'
+    );
+  END IF;
+END $$;
 
 GRANT EXECUTE ON FUNCTION cancel_stale_checkpoint_announcements() TO service_role;
-

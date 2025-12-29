@@ -5,6 +5,7 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 const faqs = [
   {
@@ -62,6 +63,7 @@ export default function DrugCrimePage() {
         alignLeft={true}
         compact={true}
         orcSection="2925.11"
+        phoneCtaId="drug_crime_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -205,8 +207,9 @@ export default function DrugCrimePage() {
         title="Let's review your drug case quickly."
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel="(740) 602-2155"
-        secondaryHref="tel:7406022155"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="drug_crime_cta_call_office"
       />
     </>
   );

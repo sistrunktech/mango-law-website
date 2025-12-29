@@ -4,7 +4,7 @@ import { Menu, X, Phone, MapPinned } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
-import { trackCtaClick } from '../lib/analytics';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import type { LeadSource } from './LeadCaptureModal';
 
 interface SiteHeaderProps {
@@ -15,8 +15,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showDuiMapBanner, setShowDuiMapBanner] = useState(false);
-  const logoSrc = '/images/brand/mango-logo-tagline-cropped-164x56.png';
-  const logoSrc2x = '/images/brand/mango-logo-tagline-cropped-328x112.png';
+  const logoFallbackSrc = '/images/brand/mango-logo-primary-fullcolor-tagline-480w.png';
   const duiMapHref = '/resources/dui-checkpoints';
   const duiMapBannerStorageKey = 'mango_dui_map_banner_dismissed_v1';
 
@@ -39,7 +38,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
   return (
     <header
       className={[
-        'relative z-50 transition-all lg:sticky lg:top-0 lg:z-50',
+        'sticky top-0 z-50 transition-all',
         isScrolled
           ? [
               'lg:border-b lg:shadow-sm lg:backdrop-blur-sm',
@@ -49,7 +48,28 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
       ].join(' ')}
       role="banner"
     >
-      {showDuiMapBanner && (
+      {!isScrolled && (
+        <div className="hidden border-b border-brand-black/10 bg-brand-leaf text-white lg:block">
+          <div className="container flex flex-wrap items-center gap-3 py-1.5">
+            <a
+              href={`tel:${OFFICE_PHONE_TEL}`}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-white/95 transition-opacity hover:opacity-90"
+              data-cta="header_topbar_call"
+              onClick={() => {
+                trackCtaClick('header_topbar_call');
+                trackLeadSubmitted('phone', 'header_topbar_call', {
+                  target_number: OFFICE_PHONE_TEL,
+                });
+              }}
+            >
+              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>Call/Text Nick {OFFICE_PHONE_DISPLAY}</span>
+            </a>
+          </div>
+        </div>
+      )}
+
+      {!isScrolled && showDuiMapBanner && (
         <div className="border-b border-brand-black/10 bg-brand-leaf/90 text-white lg:hidden">
           <div className="container flex items-center justify-between gap-2 py-1">
             <Link
@@ -85,19 +105,41 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
       {/* Main navigation bar */}
       <div className="bg-brand-offWhite border-b border-brand-black/10">
         <div
-          className={`container flex items-center justify-between py-4 transition-all ${isScrolled ? 'lg:py-2' : ''}`}
+          className={`container flex items-center justify-between py-3 transition-all ${isScrolled ? 'lg:py-2' : 'lg:py-3'}`}
         >
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3">
-            <img
-              src={logoSrc}
-              alt="Mango Law LLC - Criminal & OVI/DUI Defense"
-              srcSet={`${logoSrc} 1x, ${logoSrc2x} 2x`}
-              width={164}
-              height={56}
-              className={`h-14 w-auto transition-all hover:opacity-90 ${isScrolled ? 'lg:h-12' : ''}`}
-              loading="eager"
-            />
+            <picture>
+              <source
+                type="image/avif"
+                srcSet={[
+                  '/images/brand/mango-logo-primary-fullcolor-tagline-240w.avif 240w',
+                  '/images/brand/mango-logo-primary-fullcolor-tagline-480w.avif 480w',
+                ].join(', ')}
+                sizes="(min-width: 1024px) 220px, 170px"
+              />
+              <source
+                type="image/webp"
+                srcSet={[
+                  '/images/brand/mango-logo-primary-fullcolor-tagline-240w.webp 240w',
+                  '/images/brand/mango-logo-primary-fullcolor-tagline-480w.webp 480w',
+                ].join(', ')}
+                sizes="(min-width: 1024px) 220px, 170px"
+              />
+              <img
+                src={logoFallbackSrc}
+                alt="Mango Law LLC - Criminal & OVI/DUI Defense"
+                width={1704}
+                height={555}
+                className={[
+                  'h-8 w-auto transition-all hover:opacity-90 lg:h-12',
+                  isScrolled ? 'lg:h-10' : '',
+                ].join(' ')}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
           </Link>
 
           {/* Desktop Navigation */}
@@ -124,54 +166,35 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden items-center gap-5 lg:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black/80 hover:text-brand-mango"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-leaf bg-brand-leaf/10 px-4 py-2.5 text-sm font-bold text-brand-forest transition-all hover:bg-brand-leaf hover:text-white"
               data-cta="header_call"
-              onClick={() => trackCtaClick('header_call')}
+              onClick={() => {
+                trackCtaClick('header_call');
+                trackLeadSubmitted('phone', 'header_call', {
+                  target_number: OFFICE_PHONE_TEL,
+                });
+              }}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
-              {OFFICE_PHONE_DISPLAY}
+              Call Now
             </a>
             <button
               type="button"
-              className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black transition-all hover:bg-brand-gold"
+              className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black shadow-sm transition-all hover:bg-brand-gold hover:shadow-md"
               data-cta="header_free_consult"
               onClick={() => {
                 trackCtaClick('header_free_consult');
                 onOpenLeadModal?.('header_cta');
               }}
             >
-              Free Consultation
+              Free Case Review
             </button>
           </div>
 
-          {/* Mobile phone + consult */}
-          <div className="flex flex-col items-end gap-2 lg:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-2 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
-              onClick={() => {
-                trackCtaClick('mobile_header_free_consult');
-                onOpenLeadModal?.('header_cta');
-              }}
-              data-cta="mobile_header_free_consult"
-            >
-              Consult
-            </button>
-            <a
-              href={`tel:${OFFICE_PHONE_TEL}`}
-              className="text-xs font-semibold text-brand-black/80 transition-colors hover:text-brand-mango"
-              aria-label="Call the office"
-              data-cta="mobile_header_call"
-              onClick={() => trackCtaClick('mobile_header_call')}
-            >
-              {OFFICE_PHONE_DISPLAY}
-            </a>
-          </div>
-
-          {/* Mobile menu button */}
+          {/* Mobile menu button (center) */}
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -181,6 +204,35 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
+
+          {/* Mobile phone + consult (right) */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <a
+              href={`tel:${OFFICE_PHONE_TEL}`}
+              className="inline-flex items-center justify-center rounded-lg border-2 border-brand-leaf bg-brand-leaf/10 p-2 text-brand-forest transition-all hover:bg-brand-leaf hover:text-white"
+              aria-label="Call Now"
+              data-cta="mobile_header_call"
+              onClick={() => {
+                trackCtaClick('mobile_header_call');
+                trackLeadSubmitted('phone', 'mobile_header_call', {
+                  target_number: OFFICE_PHONE_TEL,
+                });
+              }}
+            >
+              <Phone className="h-5 w-5" aria-hidden="true" />
+            </a>
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-2 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
+              onClick={() => {
+                trackCtaClick('mobile_header_free_consult');
+                onOpenLeadModal?.('header_cta');
+              }}
+              data-cta="mobile_header_free_consult"
+            >
+              Free Review
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -239,12 +291,17 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   href={`tel:${OFFICE_PHONE_TEL}`}
                   className="flex items-center gap-2 px-4 text-sm font-medium text-brand-black"
                   data-cta="mobile_menu_call"
-                  onClick={() => trackCtaClick('mobile_menu_call')}
+                  onClick={() => {
+                    trackCtaClick('mobile_menu_call');
+                    trackLeadSubmitted('phone', 'mobile_menu_call', {
+                      target_number: OFFICE_PHONE_TEL,
+                    });
+                  }}
                 >
-                  <Phone className="h-4 w-4 text-brand-mangoText" />
-                  <span className="text-xs opacity-70">Call:</span>
-                  {OFFICE_PHONE_DISPLAY}
-                </a>
+	                  <Phone className="h-4 w-4 text-brand-mangoText" />
+	                  <span className="text-xs opacity-70">Call/Text Nick direct:</span>
+	                  {OFFICE_PHONE_DISPLAY}
+	                </a>
                 <button
                   type="button"
                   onClick={() => {
@@ -254,9 +311,9 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   }}
                   className="mx-4 rounded-lg bg-brand-mango px-5 py-3 text-center text-sm font-bold text-brand-black"
                   data-cta="mobile_menu_free_consult"
-                  aria-label="Open free consultation form"
+                  aria-label="Open free case review form"
                 >
-                  Free Consultation
+                  Free Case Review
                 </button>
               </div>
             </div>

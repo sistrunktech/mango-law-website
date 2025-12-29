@@ -5,6 +5,7 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 
 const faqs = [
   {
@@ -61,6 +62,7 @@ export default function SexCrimePage() {
         showQuickActions={false}
         alignLeft={true}
         compact={true}
+        phoneCtaId="sex_crime_hero_call_office"
       />
 
       <section className="section bg-white">
@@ -208,8 +210,9 @@ export default function SexCrimePage() {
         body="Your privacy and your future are our top priorities. Contact us for a confidential consultation."
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel="(740) 602-2155"
-        secondaryHref="tel:7406022155"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="sex_crime_cta_call_office"
       />
     </>
   );

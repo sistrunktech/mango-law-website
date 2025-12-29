@@ -258,6 +258,22 @@
     filter: brightness(1.05);
     box-shadow: var(--shadow-glow);
   }
+
+  /* Cloudflare Turnstile */
+  .turnstile-widget {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .turnstile-widget iframe {
+    display: block;
+    max-width: 100% !important;
+  }
+
+  /* Reduce “boxed” look for embedded CAPTCHA containers */
+  .turnstile-widget > div {
+    margin: 0 !important;
+  }
 }
 
 /* ============================================

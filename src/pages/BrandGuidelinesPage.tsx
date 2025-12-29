@@ -11,6 +11,7 @@ export default function BrandGuidelinesPage() {
         variant="light"
         ctaLabel="Contact Us"
         ctaHref="/contact"
+        phoneCtaId="brand_guidelines_hero_call_office"
       />
 
       <section className="section bg-white">

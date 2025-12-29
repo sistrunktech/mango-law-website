@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
 import ORCLabel from './ORCLabel';
+import { OFFICE_PHONE_DISPLAY } from '../lib/contactInfo';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 type Props = {
   eyebrow?: string;
@@ -12,6 +14,7 @@ type Props = {
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
   phoneNumber?: string;
+  phoneCtaId?: string;
   variant?: 'dark' | 'light';
   /** Image URL for hero background - ready for FAL.ai generated assets */
   backgroundUrl?: string;
@@ -56,7 +59,8 @@ export default function PageHero({
   ctaHref,
   secondaryCtaLabel,
   secondaryCtaHref,
-  phoneNumber = '(740) 602-2155',
+  phoneNumber = OFFICE_PHONE_DISPLAY,
+  phoneCtaId = 'page_hero_call',
   variant = 'dark',
   backgroundUrl,
   attorneyPhotoUrl,
@@ -81,13 +85,13 @@ export default function PageHero({
         ].join(' ')}
       >
         {/* Deep black to forest green gradient - sophisticated, authoritative */}
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-[#0F1A14] to-brand-forest" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-black via-[#0F1A14] to-brand-forest" />
 
         {/* Subtle texture overlay for depth */}
-        <div className="absolute inset-0 texture-noise" />
+        <div className="pointer-events-none absolute inset-0 texture-noise" />
 
         {/* Subtle gradient overlay for visual interest */}
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-brand-leaf/5" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-brand-leaf/5" />
 
         {/* Diagonal emerald accent stripe */}
         <div
@@ -105,7 +109,7 @@ export default function PageHero({
 
         {/* Background image with overlay (if provided) */}
         {backgroundUrl && (
-          <div className="absolute inset-0">
+          <div className="pointer-events-none absolute inset-0">
             <img
               src={backgroundUrl}
               alt=""
@@ -119,7 +123,7 @@ export default function PageHero({
         <div className="pointer-events-none absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-brand-leaf/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-brand-mango/6 blur-[100px]" />
 
-        <div className="container relative">
+        <div className="container relative z-10">
           <div className={[
             alignLeft ? 'max-w-3xl' : 'mx-auto max-w-4xl',
             alignLeft ? 'text-left' : 'text-center',
@@ -155,6 +159,7 @@ export default function PageHero({
                   section={orcSection}
                   variant="micro"
                   className="text-brand-mango/90 hover:text-brand-mango"
+                  suppressLink
                 />
               </div>
             )}
@@ -171,7 +176,7 @@ export default function PageHero({
 
             {/* CTA Buttons */}
             <div className={[
-              'mt-8 flex flex-col gap-4 sm:flex-row',
+              'relative z-20 mt-8 flex flex-col gap-4 sm:flex-row',
               alignLeft ? 'items-start justify-start' : 'items-center justify-center',
             ].join(' ')}>
               {ctaLabel && ctaHref && (
@@ -186,9 +191,17 @@ export default function PageHero({
               <a
                 href={`tel:${phoneNumber.replace(/\D/g, '')}`}
                 className="group inline-flex items-center gap-2 rounded-lg border-2 border-brand-offWhite/30 px-8 py-4 text-lg font-bold text-brand-offWhite transition-all hover:border-brand-mango hover:text-brand-mango"
+                data-cta={phoneCtaId}
+                onClick={() => {
+                  const telNumber = phoneNumber.replace(/\D/g, '');
+                  trackCtaClick(phoneCtaId);
+                  trackLeadSubmitted('phone', phoneCtaId, {
+                    target_number: telNumber,
+                  });
+                }}
               >
                 <Phone className="h-5 w-5" />
-                {phoneNumber}
+                <span>Call/Text {phoneNumber}</span>
               </a>
             </div>
 

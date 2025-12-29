@@ -7,13 +7,27 @@ import AccessibilityLauncher from './AccessibilityLauncher';
 import ScrollToTop from './ScrollToTop';
 import LeadCaptureModal, { type LeadSource } from './LeadCaptureModal';
 import { trackLeadModalOpen } from '../lib/analytics';
+import ConsentBanner from './ConsentBanner';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
+  const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(false);
 
-  const floatingBottomOffsetClass = location.pathname.startsWith('/resources/dui-checkpoints') ? 'bottom-24' : 'bottom-6';
+  const isCheckpoints = location.pathname.startsWith('/resources/dui-checkpoints');
+  const chatBottomOffsetClass = (() => {
+    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-36 lg:bottom-6' : 'bottom-24 lg:bottom-6';
+    return isConsentBannerVisible ? 'bottom-28 lg:bottom-6' : 'bottom-6';
+  })();
+  const chatChooserBottomOffsetClass = (() => {
+    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-52 lg:bottom-20' : 'bottom-40 lg:bottom-20';
+    return isConsentBannerVisible ? 'bottom-44 lg:bottom-20' : 'bottom-20';
+  })();
+  const accessibilityBottomOffsetClass = (() => {
+    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-52 lg:bottom-6' : 'bottom-44 lg:bottom-6';
+    return isConsentBannerVisible ? 'bottom-40 lg:bottom-6' : 'bottom-24 lg:bottom-6';
+  })();
 
   const openLeadModal = (trigger: LeadSource) => {
     setLeadModalTrigger(trigger);
@@ -36,10 +50,13 @@ export default function Layout({ children }: { children: ReactNode }) {
       </main>
       <Footer />
 
-      <AccessibilityLauncher chatBottomOffsetClass={floatingBottomOffsetClass} />
+      <ConsentBanner onVisibilityChange={setIsConsentBannerVisible} />
+
+      <AccessibilityLauncher bottomOffsetClass={accessibilityBottomOffsetClass} />
       <ChatIntakeLauncher
         onOpenLeadModal={() => openLeadModal('floating_chooser')}
-        bottomOffsetClass={floatingBottomOffsetClass}
+        bottomOffsetClass={chatBottomOffsetClass}
+        chooserBottomOffsetClass={chatChooserBottomOffsetClass}
       />
 
       <LeadCaptureModal
