@@ -82,7 +82,7 @@ export function recommendHelpfulLinks(input: HelpfulLinkInput): HelpfulLink[] {
         links.push({ label: "Personal injury", href: absolute(input.siteUrl, "/personal-injury-lawyer-delaware-oh") });
         break;
       case "bond_jail":
-        links.push({ label: "Bond & jail information (Delaware County)", href: absolute(input.siteUrl, "/resources/bond-jail-information") });
+        links.push({ label: "Bond & jail information (Delaware County)", href: absolute(input.siteUrl, "/blog/bond-jail-information-delaware-county-ohio") });
         break;
       default:
         break;
@@ -109,7 +109,7 @@ export function recommendHelpfulLinks(input: HelpfulLinkInput): HelpfulLink[] {
   }
 
   if (text.includes("bond") || text.includes("bail") || text.includes("jail")) {
-    links.push({ label: "Bond & jail information (Delaware County)", href: absolute(input.siteUrl, "/resources/bond-jail-information") });
+    links.push({ label: "Bond & jail information (Delaware County)", href: absolute(input.siteUrl, "/blog/bond-jail-information-delaware-county-ohio") });
   }
 
   if (text.includes("protection order") || text.includes("cpo") || text.includes("restraining")) {

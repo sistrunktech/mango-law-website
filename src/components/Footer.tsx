@@ -17,7 +17,7 @@ import FooterAccordion from './FooterAccordion';
 const resourceLinks = [
   { href: '/resources/dui-checkpoints', label: 'DUI Checkpoint Map' },
   { href: '/glossary', label: 'Legal Glossary' },
-  { href: '/resources/bond-jail-information', label: 'Bond and Jail Information' },
+  { href: '/blog/bond-jail-information-delaware-county-ohio', label: 'Bond and Jail Information' },
   { href: '/resources/what-to-do-after-ovi-arrest', label: 'What to Do After an OVI Arrest' },
   { href: '/locations', label: 'Service Areas' },
 ];
