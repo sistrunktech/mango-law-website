@@ -40,3 +40,15 @@ export function isTruthyEnv(value: string | undefined | null): boolean {
   return v === "true" || v === "1" || v === "yes" || v === "y" || v === "on";
 }
 
+export function formatTimestampForEmail(date: Date, timeZone = "America/New_York"): string {
+  return date.toLocaleString("en-US", {
+    timeZone,
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZoneName: "short",
+  });
+}

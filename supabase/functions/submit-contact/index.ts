@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.48.0";
 import { buildAdminEmailHtml, buildClientConfirmationHtml } from "../_shared/email/templates.ts";
-import { formatFrom, formatPhoneForDisplay, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
+import { formatFrom, formatPhoneForDisplay, formatTimestampForEmail, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
 import type { EmailSeason, EmailTheme } from "../_shared/email/tokens.ts";
 
 interface ContactFormData {
@@ -318,6 +318,7 @@ Deno.serve(async (req: Request) => {
         const theme = (Deno.env.get("APP_THEME") || "light") as EmailTheme;
         const holiday = isTruthyEnv(Deno.env.get("APP_HOLIDAY"));
 
+        const receivedAt = formatTimestampForEmail(new Date());
         const adminEmailBody = {
           from: fromEmail,
           to: notifyTo.length ? notifyTo : ["admin@example.com"],
@@ -342,6 +343,7 @@ Deno.serve(async (req: Request) => {
               messageLabel: "Message",
               message: formData.message.trim(),
               meta: [
+                { label: "Received", value: receivedAt },
                 { label: "IP", value: ip },
                 { label: "UA", value: userAgent },
               ],
@@ -385,6 +387,7 @@ Deno.serve(async (req: Request) => {
                 greetingName: formData.name.trim(),
                 intro: "Thanks for reaching out. We received your message and will respond as soon as possible during business hours.",
                 details: [
+                  { label: "Received", value: receivedAt },
                   { label: "Name", value: formData.name.trim() },
                   { label: "Email", value: formData.email.trim().toLowerCase() },
                   ...(normalizedPhone ? [{ label: "Phone", value: formatPhoneForDisplay(normalizedPhone) }] : []),

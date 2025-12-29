@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.48.0";
 import { buildAdminEmailHtml, buildClientConfirmationHtml } from "../_shared/email/templates.ts";
-import { formatFrom, formatPhoneForDisplay, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
+import { formatFrom, formatPhoneForDisplay, formatTimestampForEmail, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
 import type { EmailSeason, EmailTheme } from "../_shared/email/tokens.ts";
 
 interface ChatIntakeData {
@@ -321,6 +321,7 @@ Deno.serve(async (req: Request) => {
         const theme = (Deno.env.get("APP_THEME") || "light") as EmailTheme;
         const holiday = isTruthyEnv(Deno.env.get("APP_HOLIDAY"));
 
+        const receivedAt = formatTimestampForEmail(new Date());
         // Send standard email notification
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
@@ -355,6 +356,7 @@ Deno.serve(async (req: Request) => {
                 transcriptLabel: "Conversation context",
                 transcript: intakeData.conversation_context || null,
                 meta: [
+                  { label: "Received", value: receivedAt },
                   { label: "IP", value: ip },
                   { label: "UA", value: userAgent },
                 ],
@@ -391,6 +393,7 @@ Deno.serve(async (req: Request) => {
                 intro:
                   "Thanks for reaching out. We received your message and will respond as soon as possible during business hours.",
                 details: [
+                  { label: "Received", value: receivedAt },
                   { label: "Name", value: intakeData.name.trim() },
                   { label: "Email", value: intakeData.email.trim().toLowerCase() },
                   ...(normalizedPhone ? [{ label: "Phone", value: formatPhoneForDisplay(normalizedPhone) }] : []),
