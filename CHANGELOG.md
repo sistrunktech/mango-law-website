@@ -1,5 +1,34 @@
 # Changelog
 
+## 2025-12-28
+
+### Firm Facts + Governance
+- Update homepage/About/Criminal Defense copy to reflect 26+ years of Ohio criminal law experience and Feb 2009 firm start date.
+- Extend structured data with founding date/location and Ohio bar credential (`src/lib/seo.tsx`).
+- Add locked “Firm Facts” guardrails in `docs/CONTENT_GOVERNANCE.md`.
+
+### Search Intelligence (SEO Tracker MVP)
+- Add `seo_keywords` + `seo_rankings` tables and rank tracking trigger (`supabase/migrations/20251228171500_add_seo_tracker_and_checkpoint_improvements.sql`).
+- Add `check-rankings` Edge Function (Serper.dev integration) and admin UI dashboard tab.
+- Remove hardcoded Serper API fallback; `SERPER_API_KEY` is now required for rank checks.
+- Seed initial keyword list via migration (`supabase/migrations/20251228180500_seed_initial_keywords.sql`).
+- Document 2025 SEO roadmap in `docs/SEO-STRATEGY-2025.md` and research inputs in `docs/RESEARCH-INPUTS-2025.md`.
+
+### Regional Expansion
+- Expand `serviceAreas.ts` with Union, Morrow, and Marion counties plus tiered cities and court metadata.
+- Extend local business JSON-LD `areaServed` to match expansion coverage.
+
+### Checkpoint Transparency + Integrity
+- Add announcement date support for checkpoints (`supabase/migrations/20251228172000_add_announcement_date_to_checkpoints.sql`).
+- Show “Announced on” dates in `CheckpointCard` and improve empty-state messaging in `/dui-checkpoints`.
+- Harden checkpoint scraper geocoding diagnostics + deduplication.
+
+### Admin Connectors
+- Auto-persist inferred Google resource selections when Mango Law properties are detected (reduces “status not saved” errors).
+
+### Security Hardening
+- Set `search_path = public, pg_temp` for 13 Supabase functions to resolve mutable search path warnings (`supabase/migrations/20251228180000_secure_function_search_paths.sql`).
+
 ## 2025-12-26
 
 ### Content Governance
