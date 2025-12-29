@@ -12,6 +12,9 @@ Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on
 - **Tailwind design tokens** for the Mango Law brand
 - **Bolt.new / Windsurf agent compatibility** (scaffolding, build, deploy)
 - **SEO-optimized** practice-area and location pages for Delaware, OH
+- **Search Intelligence dashboard** for keyword rank tracking (Serper.dev-backed)
+- **Regional expansion data** for Union, Morrow, and Marion counties (tiered service areas)
+- **Checkpoint transparency** with announced-on dates and improved empty states
 - **Optional bot protection** via Cloudflare Turnstile (client + server verification)
 
 ## Brand Tokens
@@ -75,6 +78,7 @@ Commonly required values:
 - Forms + email delivery (Edge Functions): `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`
 - Turnstile (optional): `VITE_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
 - Email theme config: `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`
+- Search Intelligence: `SERPER_API_KEY`
 
 ## Documentation
 
@@ -84,6 +88,8 @@ Commonly required values:
 - **Blog requirements:** [`docs/BLOG_REQUIREMENTS.md`](docs/BLOG_REQUIREMENTS.md)
 - **Protected content registry:** [`docs/PROTECTED_CONTENT.md`](docs/PROTECTED_CONTENT.md)
 - **Content change log:** [`docs/CONTENT_CHANGELOG.md`](docs/CONTENT_CHANGELOG.md)
+- **SEO strategy:** [`docs/SEO-STRATEGY-2025.md`](docs/SEO-STRATEGY-2025.md)
+- **Research inputs:** [`docs/RESEARCH-INPUTS-2025.md`](docs/RESEARCH-INPUTS-2025.md)
 - **Agent guardrails:** [`docs/AGENT_GUARDRAILS.md`](docs/AGENT_GUARDRAILS.md)
 - **Changelog:** [`CHANGELOG.md`](CHANGELOG.md)
 - **Contributing:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
