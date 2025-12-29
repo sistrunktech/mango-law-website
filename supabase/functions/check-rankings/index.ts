@@ -14,10 +14,10 @@ Deno.serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
-    const serperApiKey = Deno.env.get('SERPER_API_KEY') ?? '93563705321430c67243c5f1b3f0ddbdcbda44c7';
+    const serperApiKey = Deno.env.get('SERPER_API_KEY');
 
-    if (!supabaseUrl || !supabaseServiceKey) {
-      throw new Error('Missing Supabase configuration');
+    if (!supabaseUrl || !supabaseServiceKey || !serperApiKey) {
+      throw new Error('Missing Supabase or Serper configuration');
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
