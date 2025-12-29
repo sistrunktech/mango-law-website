@@ -55,6 +55,16 @@ export default function ORCLabel({
   }
 
   if (variant === 'inline') {
+    if (suppressLink) {
+      return (
+        <span
+          className={`inline-flex items-center gap-1 text-sm font-semibold text-brand-leaf underline decoration-brand-leaf/30 ${className}`}
+          title={statute.definition}
+        >
+          ORC § {statute.section}
+        </span>
+      );
+    }
     return (
       <Link
         to={`/glossary#${statute.id}`}

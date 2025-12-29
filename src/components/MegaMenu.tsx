@@ -32,11 +32,14 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
     updatePanelPosition();
 
     const onReposition = () => updatePanelPosition();
+    const onScroll = () => setIsOpen(false);
+    
     window.addEventListener('resize', onReposition);
-    window.addEventListener('scroll', onReposition, true);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
     return () => {
       window.removeEventListener('resize', onReposition);
-      window.removeEventListener('scroll', onReposition, true);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [isOpen]);
 
@@ -76,9 +79,25 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
       }
     };
 
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        triggerRef.current &&
+        !triggerRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      return () => document.removeEventListener('keydown', handleEscape);
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
     }
   }, [isOpen]);
 
