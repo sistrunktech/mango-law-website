@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2025-12-29 14:30 EST
+Post slug and title: what-to-do-after-ovi-arrest-ohio | What to Do After an OVI Arrest in Ohio: A Step-by-Step Guide
+Change type: major
+Summary of change: Consolidated the OVI arrest guide into the blog system with an 8-step checklist and removed the placeholder resource page.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: what-to-do-after-ovi-arrest-ohio -- blog consolidation + 8-step guide -- major -- 2025-12-29T14:30-0500
+Rollback notes: commit pending
+
 
 Date/time: 2025-12-27 17:32 EST
 Post slug and title: understanding-ovi-dui-charges-ohio | Understanding OVI/DUI Charges in Ohio: What You Need to Know

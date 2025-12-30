@@ -156,6 +156,89 @@ This article is for educational purposes and does not constitute legal advice. C
     ],
   },
   {
+    slug: 'what-to-do-after-ovi-arrest-ohio',
+    title: 'What to Do After an OVI Arrest in Ohio: A Step-by-Step Guide',
+    excerpt: 'The first 48 hours after an OVI arrest are critical. Learn about the 30-day license appeal deadline, how to request driving privileges, and what to expect at your first court appearance.',
+    imageUrl: '/images/generated/blog-ovi-charges.png',
+    category: 'OVI/DUI Defense',
+    date: '2025-12-29',
+    author: 'Dominic Mango',
+    lastVerified: '2025-12-29',
+    content: `An OVI arrest in Ohio starts two separate cases: a criminal case in court and an administrative case with the BMV. The first 48 hours are critical for protecting your rights and your ability to drive. This guide explains the immediate steps you should take and the deadlines you cannot afford to miss.
+
+## 1. The 30-day ALS appeal deadline
+
+When you are arrested for OVI, the officer likely seized your license and imposed an **Administrative License Suspension (ALS)**. This suspension is effective immediately.
+
+**Critical deadline:** You have only **30 days** from the date of your initial appearance (arraignment) to appeal the ALS. An appeal challenges the legal basis for the suspension itself. If you miss this window, the suspension remains in place regardless of the outcome of your criminal case.
+
+## 2. Immediate steps after release
+
+- **Secure your vehicle:** Confirm where your car was towed and the requirements for release.
+- **Review your paperwork:** You should have received a citation (ticket) and a BMV 2255 form.
+- **Note your court date:** Your arraignment is typically scheduled within five business days of your arrest.
+- **Write down everything:** Record the timeline of events, including what you ate/drank, the officer's statements, and the conditions of the stop.
+
+## 3. Documents to gather and preserve
+
+Building a defense requires evidence. Start gathering:
+
+- **The citation:** Note the specific statutory subsections charged (for example, ORC 4511.19(A)(1)(a)).
+- **BMV 2255 form:** This document is the formal notice of your license suspension.
+- **Witness information:** Names and contact details of anyone who was with you or saw the stop.
+- **Medical records:** If you have medical conditions that could affect balance, speech, or testing results.
+
+## 4. Requesting occupational driving privileges
+
+Most drivers can request limited driving privileges to go to work, school, or medical appointments.
+
+- **Waiting periods:** Depending on your record and whether you refused a test, there may be a hard suspension period (for example, 15 days for a first-offense test, 30 days for a refusal).
+- **The request:** You must file a formal motion with the court. You will need proof of insurance (SR-22).
+
+## 5. What to expect at your arraignment
+
+The arraignment is your first formal court appearance. The judge will formally read the charges and ask for your plea (typically **Not Guilty** at this stage).
+
+## 6. ALS vs. court-ordered suspensions
+
+- **Administrative License Suspension (ALS):** Imposed by the BMV based on a test failure or refusal.
+- **Judicial/court suspension:** Imposed by the judge as part of a sentence or pretrial condition.
+
+## 7. First OVI vs. subsequent offenses
+
+Ohio law carries mandatory minimum penalties that increase significantly with prior offenses within the lookback period. First offenses typically carry a minimum three days in jail or DIP and a one-year license suspension.
+
+## 8. Why early attorney involvement matters
+
+An attorney can immediately:
+
+- **Challenge the ALS** within the 30-day window.
+- **File discovery motions** for police video and breathalyzer logs.
+- **Identify suppression issues** regarding the stop or testing procedures.
+- **Negotiate privileges** to get you back on the road safely.
+
+---
+
+This guide is for educational purposes and does not constitute legal advice.`,
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.191 (ALS)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio BMV: License suspensions and fees',
+        url: 'https://www.bmv.ohio.gov/susp-fees-index.aspx',
+        type: 'primary',
+      },
+    ],
+  },
+  {
     slug: 'understanding-ovi-dui-charges-ohio',
     title: 'Understanding OVI/DUI Charges in Ohio: What You Need to Know',
     excerpt: 'Complete guide to Ohio OVI charges including penalties, defense strategies, and how to protect your record. Learn about ORC § 4511.19 and what to do if arrested.',

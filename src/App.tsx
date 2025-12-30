@@ -21,7 +21,6 @@ const GlossaryPage = lazy(() => import('./pages/GlossaryPage'));
 const OfCounselPage = lazy(() => import('./pages/OfCounselPage'));
 const ServiceAreasPage = lazy(() => import('./pages/ServiceAreasPage'));
 const DUICheckpointsPage = lazy(() => import('./pages/DUICheckpointsPage'));
-const WhatToDoAfterOVIPage = lazy(() => import('./pages/WhatToDoAfterOVIPage'));
 const CheckpointAdminPage = lazy(() => import('./pages/CheckpointAdminPage'));
 const AdminLoginPage = lazy(() => import('./pages/AdminLoginPage'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
@@ -77,7 +76,6 @@ function App() {
                   <Route path="/of-counsel" element={<OfCounselPage />} />
                   <Route path="/locations" element={<ServiceAreasPage />} />
                   <Route path="/resources/dui-checkpoints" element={<DUICheckpointsPage />} />
-                  <Route path="/resources/what-to-do-after-ovi-arrest" element={<WhatToDoAfterOVIPage />} />
                   <Route path="/admin/checkpoints" element={<CheckpointAdminPage />} />
                   <Route path="/brand-guide" element={<BrandGuidelinesPage />} />
                   <Route path="/brand-guidelines" element={<BrandGuidelinesPage />} />

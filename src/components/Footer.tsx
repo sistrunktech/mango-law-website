@@ -18,7 +18,7 @@ const resourceLinks = [
   { href: '/resources/dui-checkpoints', label: 'DUI Checkpoint Map' },
   { href: '/glossary', label: 'Legal Glossary' },
   { href: '/blog/bond-jail-information-delaware-county-ohio', label: 'Bond and Jail Information' },
-  { href: '/resources/what-to-do-after-ovi-arrest', label: 'What to Do After an OVI Arrest' },
+  { href: '/blog/what-to-do-after-ovi-arrest-ohio', label: 'What to Do After an OVI Arrest' },
   { href: '/locations', label: 'Service Areas' },
 ];
 
