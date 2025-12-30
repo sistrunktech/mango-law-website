@@ -5,6 +5,7 @@ This registry tracks approved/finalized content and its source of truth.
 | Slug | Title | Source of Truth | Last Approved | Notes |
 |---|---|---|---|---|
 | bond-jail-information-delaware-county-ohio | Bond & Jail Information in Delaware County, Ohio | src/data/blogPosts.ts | 2025-12-27 | |
+| what-to-do-after-ovi-arrest-ohio | What to Do After an OVI Arrest in Ohio: A Step-by-Step Guide | src/data/blogPosts.ts | 2025-12-29 | |
 | understanding-ovi-dui-charges-ohio | Understanding OVI/DUI Charges in Ohio: What You Need to Know | src/data/blogPosts.ts | 2025-12-27 | |
 | motion-practice-criminal-defense | The Power of Motion Practice in Criminal Defense | src/data/blogPosts.ts | 2025-12-27 | |
 | drug-possession-vs-trafficking-ohio | Drug Possession vs. Trafficking: Understanding Ohio Drug Crime Charges | src/data/blogPosts.ts | 2025-12-27 | |

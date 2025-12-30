@@ -56,7 +56,7 @@ export function recommendHelpfulLinks(input: HelpfulLinkInput): HelpfulLink[] {
       case "dui":
         links.push(
           { label: "OVI / DUI defense", href: absolute(input.siteUrl, "/ovi-dui-defense-delaware-oh") },
-          { label: "What to do after an OVI arrest (guide)", href: absolute(input.siteUrl, "/resources/what-to-do-after-ovi-arrest") },
+          { label: "What to do after an OVI arrest (guide)", href: absolute(input.siteUrl, "/blog/what-to-do-after-ovi-arrest-ohio") },
           { label: "ORC § 4511.19 — OVI/DUI (official)", href: "https://codes.ohio.gov/ohio-revised-code/section-4511.19" },
         );
         break;
@@ -98,7 +98,7 @@ export function recommendHelpfulLinks(input: HelpfulLinkInput): HelpfulLink[] {
     text.includes("bac")
   ) {
     links.push(
-      { label: "What to do after an OVI arrest (guide)", href: absolute(input.siteUrl, "/resources/what-to-do-after-ovi-arrest") },
+      { label: "What to do after an OVI arrest (guide)", href: absolute(input.siteUrl, "/blog/what-to-do-after-ovi-arrest-ohio") },
       { label: "ORC § 4511.19 — OVI/DUI (official)", href: "https://codes.ohio.gov/ohio-revised-code/section-4511.19" },
       { label: "Ohio Revised Code glossary", href: absolute(input.siteUrl, "/glossary") },
     );

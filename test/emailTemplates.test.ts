@@ -46,7 +46,7 @@ function run() {
 
   assert.ok(clientHtml.includes("Helpful resources"));
   assert.ok(clientHtml.includes("4511.19"));
-  assert.ok(clientHtml.includes("/resources/what-to-do-after-ovi-arrest"));
+  assert.ok(clientHtml.includes("/blog/what-to-do-after-ovi-arrest-ohio"));
 }
 
 run();
