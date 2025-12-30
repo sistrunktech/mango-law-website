@@ -282,21 +282,9 @@ function extractResourceOptions(
   return [];
 }
 
-function inferPreferredResource(type: IntegrationType, options: Array<{ value: string; label: string }>): string {
-  if (options.length === 0) return '';
-
-  if (type === 'search_console') {
-    const domain = options.find((o) => o.value === 'sc-domain:mango.law');
-    if (domain) return domain.value;
-    const prefix = options.find((o) => o.value === 'https://mango.law/');
-    if (prefix) return prefix.value;
-  }
-
-  // Prefer obvious Mango Law matches when possible.
-  const mango = options.find((o) => /mango/i.test(o.label) || /mango/i.test(o.value));
-  if (mango) return mango.value;
-
-  return options[0].value;
+function inferPreferredResource(_type: IntegrationType, options: Array<{ value: string; label: string }>): string {
+  if (options.length === 1) return options[0].value;
+  return '';
 }
 
 export default function ConnectionsPage() {
@@ -433,7 +421,7 @@ export default function ConnectionsPage() {
         [integrationType]: { status: 'success', checkedAt, data: result },
       }));
 
-      // Prime selection UI with an existing saved selection, or a sensible default.
+      // Prime selection UI with an existing saved selection, or a single available option.
       const integration = getIntegration(integrationType);
       const existingResource = getCurrentResourceValue(integrationType, integration);
       const existingAccount = getCurrentAccountValue(integrationType, integration);
@@ -448,7 +436,7 @@ export default function ConnectionsPage() {
       const preferredResource =
         (existingResource && resourceOptions.some((o) => o.value === existingResource) ? existingResource : '') ||
         inferPreferredResource(integrationType, resourceOptions);
-      
+
       setResourceSelections((prev) => ({
         ...prev,
         [integrationType]: {
@@ -457,42 +445,6 @@ export default function ConnectionsPage() {
           resourceValue: preferredResource || '',
         },
       }));
-
-      // Auto-save if we found a high-confidence match and no resource was previously saved
-      const currentIntegration = integration;
-      if (currentIntegration && !existingResource && preferredResource && /mango/i.test(preferredResource)) {
-        console.log(`Auto-persisting inferred resource for ${integrationType}: ${preferredResource}`);
-        
-        const selection = { accountValue: preferredAccount, resourceValue: preferredResource };
-        const integrationId = currentIntegration.id;
-
-        if (integrationType === 'business_profile') {
-          await supabase
-            .from('google_integrations')
-            .update({ 
-              account_id: selection.accountValue || null, 
-              location_id: selection.resourceValue, 
-              updated_at: new Date().toISOString() 
-            })
-            .eq('id', integrationId);
-        } else {
-          const existingMeta = currentIntegration.metadata || {};
-          const nextMeta = { ...existingMeta } as Record<string, unknown>;
-          if (integrationType === 'search_console') nextMeta.siteUrl = selection.resourceValue;
-          if (integrationType === 'analytics') nextMeta.propertyId = selection.resourceValue;
-          if (integrationType === 'tag_manager') nextMeta.containerId = selection.resourceValue;
-
-          await supabase
-            .from('google_integrations')
-            .update({ 
-              account_id: supportsAccountSelection(integrationType) ? (selection.accountValue || null) : currentIntegration.account_id, 
-              metadata: nextMeta, 
-              updated_at: new Date().toISOString() 
-            })
-            .eq('id', integrationId);
-        }
-        await loadIntegrations();
-      }
     } catch (error) {
       console.error('Access check error:', error);
       const checkedAt = new Date().toISOString();
