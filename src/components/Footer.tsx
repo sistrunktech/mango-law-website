@@ -40,10 +40,10 @@ export default function Footer() {
           <div className="mb-8">
             <Link to="/" className="mb-4 inline-block">
               <img
-                src="/images/brand/mango-logo-white-cropped.png"
+                src="/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png"
                 alt="Mango Law LLC"
-                width={48}
-                height={48}
+                width={1704}
+                height={555}
                 className="h-12 w-auto"
                 loading="lazy"
               />
@@ -183,10 +183,10 @@ export default function Footer() {
           <div className="space-y-5">
             <Link to="/" className="inline-block">
               <img
-                src="/images/brand/mango-logo-white-cropped.png"
+                src="/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png"
                 alt="Mango Law LLC"
-                width={56}
-                height={56}
+                width={1704}
+                height={555}
                 className="h-14 w-auto"
                 loading="lazy"
               />
