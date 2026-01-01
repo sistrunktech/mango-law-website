@@ -965,6 +965,82 @@ Privacy Policy and Terms of Use pages need expanded, Ohio-specific language, upd
 
 ---
 
+## TICKET-029: SEO Rendering — CSR Ceiling (Metadata Not Pre-rendered)
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2026-01-01  
+**Assigned To:** TBD
+
+### Issue Summary
+The current Vite + React CSR architecture serves a “Loading…” shell to bots on first hit, so title/meta/schema data are not present without JavaScript.
+
+### Desired Outcome
+Move to SSR/SSG (Astro or Next.js) so metadata and JSON-LD render in the initial HTML.
+
+### Acceptance Criteria
+- Server HTML includes `<title>`, meta description, canonical URL, and JSON-LD for core routes.
+- Blog and practice pages are pre-rendered with their SEO data without requiring JS.
+
+---
+
+## TICKET-030: Intent Pages — High-Value Landing Routes
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2026-01-01  
+**Assigned To:** TBD
+
+### Issue Summary
+Top-level intent pages are missing for high-value queries; current coverage lives in blog or is absent.
+
+### Scope
+- `/ovi-checkpoints-ohio` (move the resource out of the blog to a top-level route)
+- `/delaware-ohio-ovi-lawyer` (core keyword landing page)
+- `/holiday-ovi-enforcement-ohio` (seasonal authority page)
+
+### Acceptance Criteria
+- Each route has full content, CTA(s), and internal links to related practice pages/resources.
+- SEO component uses the standard title/description pattern and breadcrumb schema.
+
+---
+
+## TICKET-031: SEO Title/Description Pattern Enforcement
+
+**Priority:** High  
+**Status:** Open  
+**Date Created:** 2026-01-01  
+**Assigned To:** TBD
+
+### Issue Summary
+Default SEO values do not consistently follow the desired naming pattern when props are missing or incomplete.
+
+### Desired Outcome
+Enforce: `Primary Keyword – Secondary Modifier | Mango Law` for defaults and fallbacks.
+
+### Acceptance Criteria
+- SEO defaults and fallbacks follow the pattern without manual per-page fixes.
+- Dev warnings identify pages missing required metadata inputs.
+
+---
+
+## TICKET-032: Search Console + Core Web Vitals Monitoring
+
+**Priority:** Medium  
+**Status:** Open  
+**Date Created:** 2026-01-01  
+**Assigned To:** TBD
+
+### Issue Summary
+After schema and favicon changes, indexing quality and rich results coverage must be verified in Google Search Console.
+
+### Acceptance Criteria
+- Rich result coverage confirmed for FAQ/Article/Breadcrumb schema.
+- Favicon updates observed in SERP appearance (or documented as pending).
+- CWV metrics monitored post-deploy and recorded in notes.
+
+---
+
 ## Collaboration Notes (Codex / Agents)
 
 **Goal:** keep the repo moving without requiring the site owner to use terminal or GitHub UI for routine work.

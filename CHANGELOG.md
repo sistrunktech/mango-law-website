@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-01-01
+
+### SEO Quick Wins
+- Sync LegalService `areaServed` with `src/data/serviceAreas.ts` for schema accuracy.
+- Add FAQPage, Article, and BreadcrumbList schema automation in `src/lib/seo.tsx`, including standalone article/breadcrumb emission.
+- Standardize Open Graph + Twitter tags and add dev-only title/description length warnings.
+
+### Infrastructure + Indexing
+- Consolidate favicons to SVG + PNG fallbacks (`index.html`).
+- Harden `public/robots.txt` bot blocks and disallow admin/internal paths.
+
+### Site-wide Schema + Noindex
+- Deploy FAQ/breadcrumb schema on practice area pages and core routes.
+- Add breadcrumb schema on About/Reviews/Contact/Blog/Glossary and core pages.
+- Apply `noindex` directives to admin/auth/internal documentation pages.
+
 ## 2025-12-28
 
 ### Firm Facts + Governance

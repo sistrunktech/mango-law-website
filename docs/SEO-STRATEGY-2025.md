@@ -6,6 +6,19 @@ Core Market: Delaware + Franklin Counties (Dominance)
 Expansion Market: Union, Morrow, Marion (Rural Growth)
 Primary Objective: Capture high-intent OVI/criminal defense queries while building durable authority through integrated resource hubs (/glossary and /resources/dui-checkpoints).
 
+## Status Update (2026-01-01)
+Completed:
+- SEO component now supports FAQPage, Article, and BreadcrumbList schema plus dynamic `areaServed` from `src/data/serviceAreas.ts`.
+- Social tags are standardized and dev-only SEO length warnings are active.
+- Favicon declarations consolidated and robots rules hardened.
+- Breadcrumbs/FAQ schema deployed on practice pages; admin/auth/internal routes set to `noindex`.
+
+Remaining P0:
+- Migrate CSR to SSR/SSG (Astro or Next.js) so metadata renders without JS.
+- Build intent pages: `/ovi-checkpoints-ohio`, `/delaware-ohio-ovi-lawyer`, `/holiday-ovi-enforcement-ohio`.
+- Enforce SEO title/description naming pattern defaults.
+- Monitor GSC for rich result coverage and icon propagation; track CWV after rollout.
+
 ## 1) Project Overview & Objective
 Mango Law LLC is positioning as a boutique, technical defense practice in Central Ohio. The strategy prioritizes high-intent OVI and criminal defense queries, reinforced by authoritative resource hubs that create a navigable, crawlable topical graph.
 
