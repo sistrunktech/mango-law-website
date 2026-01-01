@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { Sparkles, Info, Zap, DollarSign, TrendingUp } from 'lucide-react';
 
@@ -37,11 +37,7 @@ export default function ModelSelector({
   const [loading, setLoading] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
 
-  useEffect(() => {
-    loadModels();
-  }, [useCase]);
-
-  const loadModels = async () => {
+  const loadModels = useCallback(async () => {
     try {
       const { data, error } = await supabase
         ?.from('ai_model_config')
@@ -54,9 +50,12 @@ export default function ModelSelector({
       if (data) {
         setModels(data);
         const activeModel = data.find(m => m.is_active);
-        if (activeModel && !selectedModel) {
-          setSelectedModel(activeModel.model_name);
-          onModelChange(activeModel.model_name);
+        if (activeModel) {
+          setSelectedModel((prev) => {
+            if (prev) return prev;
+            onModelChange(activeModel.model_name);
+            return activeModel.model_name;
+          });
         }
       }
     } catch (error) {
@@ -64,7 +63,11 @@ export default function ModelSelector({
     } finally {
       setLoading(false);
     }
-  };
+  }, [onModelChange, useCase]);
+
+  useEffect(() => {
+    loadModels();
+  }, [loadModels]);
 
   const handleModelChange = (modelName: string) => {
     setSelectedModel(modelName);

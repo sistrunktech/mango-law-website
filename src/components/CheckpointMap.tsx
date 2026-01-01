@@ -42,7 +42,6 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState<string | null>(null);
-  const displayNow = now ?? new Date();
 
   // Initialize map
   useEffect(() => {
@@ -98,6 +97,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   // Update markers when checkpoints change
   useEffect(() => {
     if (!map.current || isLoading) return;
+    const displayNow = now ?? new Date();
 
     // Remove existing markers
     markers.current.forEach((marker) => marker.remove());
@@ -238,7 +238,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         duration: 1000,
       });
     }
-  }, [checkpoints, selectedCheckpoint, onCheckpointSelect, isLoading, displayNow]);
+  }, [checkpoints, selectedCheckpoint, onCheckpointSelect, isLoading, now]);
 
   // Center on selected checkpoint
   useEffect(() => {

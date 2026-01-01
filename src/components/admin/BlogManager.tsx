@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { useAuth } from '../../contexts/AuthContext';
 import { Plus, Edit2, Trash2, Eye, EyeOff, HelpCircle, Save, X, Lock, CheckCircle } from 'lucide-react';
@@ -65,15 +65,7 @@ export default function BlogManager() {
   const [reviewingRequest, setReviewingRequest] = useState<BlogPostChangeRequest | null>(null);
   const [reviewApprovalToken, setReviewApprovalToken] = useState('');
 
-  useEffect(() => {
-    loadPosts();
-    if (user) {
-      loadAdminRole();
-      loadChangeRequests();
-    }
-  }, [user]);
-
-  const loadPosts = async () => {
+  const loadPosts = useCallback(async () => {
     if (!supabase) return;
     setLoading(true);
     const { data, error } = await supabase
@@ -85,9 +77,9 @@ export default function BlogManager() {
       setPosts(data);
     }
     setLoading(false);
-  };
+  }, []);
 
-  const loadAdminRole = async () => {
+  const loadAdminRole = useCallback(async () => {
     if (!supabase || !user?.email) return;
     const { data } = await supabase
       .from('admin_users')
@@ -96,16 +88,24 @@ export default function BlogManager() {
       .eq('is_active', true)
       .maybeSingle();
     setAdminRole(data?.role ?? null);
-  };
+  }, [user?.email]);
 
-  const loadChangeRequests = async () => {
+  const loadChangeRequests = useCallback(async () => {
     if (!supabase || !user?.email) return;
     const { data } = await supabase
       .from('blog_post_change_requests')
       .select('*')
       .order('created_at', { ascending: false });
     if (data) setChangeRequests(data as BlogPostChangeRequest[]);
-  };
+  }, [user?.email]);
+
+  useEffect(() => {
+    loadPosts();
+    if (user) {
+      loadAdminRole();
+      loadChangeRequests();
+    }
+  }, [loadPosts, loadAdminRole, loadChangeRequests, user]);
 
   const resolveStatus = (post: Partial<BlogPost>) => {
     if (post.status) return post.status;

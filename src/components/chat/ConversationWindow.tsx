@@ -68,6 +68,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
   const conversationRef = useRef<HTMLDivElement>(null);
   const followupTimerRef = useRef<number>();
   const inactivityTimerRef = useRef<number>();
+  const hasInitializedRef = useRef(false);
 
   // Load saved conversation from localStorage
   useEffect(() => {
@@ -149,6 +150,9 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
 
   // Initial bot message
   useEffect(() => {
+    if (hasInitializedRef.current) return;
+    hasInitializedRef.current = true;
+
     if (conversation.length === 0) {
       setTimeout(() => {
         setIsTyping(false);
@@ -157,7 +161,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
     } else {
       setIsTyping(false);
     }
-  }, []);
+  }, [conversation.length]);
 
   const addBotMessage = (msg: string | React.ReactNode) => {
     setConversation((prev) => [

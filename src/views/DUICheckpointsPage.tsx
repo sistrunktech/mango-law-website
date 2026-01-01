@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { AlertTriangle, Filter, MapPinned, Shield, Info, Calendar, Clock } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import CheckpointCard from '../components/CheckpointCard';
@@ -41,21 +41,13 @@ export default function DUICheckpointsPage() {
     return () => window.clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    loadCheckpoints();
-  }, [viewMode, dateRange]);
-
-  useEffect(() => {
-    filterCheckpoints();
-  }, [checkpoints, selectedCounty]);
-
-  const filterPublicCheckpoints = (data: DUICheckpoint[]) => {
+  const filterPublicCheckpoints = useCallback((data: DUICheckpoint[]) => {
     // Public page should only show checkpoints with a real upstream source URL.
     // This prevents demo/seed rows from appearing as “real” checkpoints.
     return data.filter((c) => Boolean(c.source_url));
-  };
+  }, []);
 
-  const loadCheckpoints = async () => {
+  const loadCheckpoints = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -81,9 +73,9 @@ export default function DUICheckpointsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [dateRange, filterPublicCheckpoints, viewMode]);
 
-  const filterCheckpoints = () => {
+  const filterCheckpoints = useCallback(() => {
     let filtered = checkpoints;
 
     if (selectedCounty !== 'all') {
@@ -92,7 +84,15 @@ export default function DUICheckpointsPage() {
 
     setFilteredCheckpoints(filtered);
     setCurrentPage(1); // Reset to first page when filters change
-  };
+  }, [checkpoints, selectedCounty]);
+
+  useEffect(() => {
+    loadCheckpoints();
+  }, [loadCheckpoints]);
+
+  useEffect(() => {
+    filterCheckpoints();
+  }, [filterCheckpoints]);
 
   // Calculate pagination
   const totalPages = Math.ceil(filteredCheckpoints.length / itemsPerPage);

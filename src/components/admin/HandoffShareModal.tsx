@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { X, Mail, Download, Link as LinkIcon, Github, Copy, Check, Lock, Calendar, Eye } from 'lucide-react';
 import Tooltip from './Tooltip';
 import { createShareLink, getDocumentShares, revokeShareLink } from '../../lib/handoff/shareUtils';
@@ -49,14 +49,14 @@ export default function HandoffShareModal({ document, onClose }: Props) {
   const [githubCommit, setGithubCommit] = useState('Add website handoff documentation');
   const [githubBranch, setGithubBranch] = useState('main');
 
-  useEffect(() => {
-    loadShareLinks();
-  }, []);
-
-  const loadShareLinks = async () => {
+  const loadShareLinks = useCallback(async () => {
     const links = await getDocumentShares(document.id);
     setShareLinks(links);
-  };
+  }, [document.id]);
+
+  useEffect(() => {
+    loadShareLinks();
+  }, [loadShareLinks]);
 
   const handleCreateShareLink = async () => {
     setGenerating(true);

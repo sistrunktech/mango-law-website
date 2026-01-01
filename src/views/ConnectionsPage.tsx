@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '../contexts/AuthContext';
 import {
@@ -306,7 +306,11 @@ import { SEO } from '../lib/seo';
 export default function ConnectionsPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams() ?? new URLSearchParams();
+  const rawSearchParams = useSearchParams();
+  const searchParams = useMemo(
+    () => rawSearchParams ?? new URLSearchParams(),
+    [rawSearchParams],
+  );
   const [integrations, setIntegrations] = useState<GoogleIntegration[]>([]);
   const [loadingIntegrations, setLoadingIntegrations] = useState(true);
   const [connecting, setConnecting] = useState<string | null>(null);

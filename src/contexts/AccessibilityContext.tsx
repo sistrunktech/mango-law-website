@@ -64,7 +64,7 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     if (prefersReducedMotion && !preferences.reducedMotion) {
       setPreferences((prev) => ({ ...prev, reducedMotion: true }));
     }
-  }, []);
+  }, [preferences.reducedMotion]);
 
   useEffect(() => {
     try {

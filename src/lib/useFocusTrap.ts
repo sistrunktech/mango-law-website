@@ -61,10 +61,11 @@ export function useFocusTrap(
 
     container.addEventListener('keydown', handleTab);
 
+    const restoreFocusElement = restoreFocusRef?.current;
     return () => {
       container.removeEventListener('keydown', handleTab);
 
-      const elementToRestore = restoreFocusRef?.current || previouslyFocused;
+      const elementToRestore = restoreFocusElement || previouslyFocused;
       if (elementToRestore && elementToRestore.focus) {
         elementToRestore.focus();
       }

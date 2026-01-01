@@ -35,68 +35,64 @@ export default function GeocodingPreview({
     }
 
     const timer = setTimeout(() => {
-      geocodeAddress();
+      void (async () => {
+        setLoading(true);
+        setError(null);
+
+        try {
+          const mapboxToken =
+            process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN || process.env.VITE_MAPBOX_PUBLIC_TOKEN;
+          if (!mapboxToken) {
+            throw new Error('Mapbox token not configured');
+          }
+
+          const encodedAddress = encodeURIComponent(fullAddress);
+          const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${mapboxToken}&country=US&limit=1`;
+
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error('Geocoding failed');
+          }
+
+          const data = await response.json();
+
+          if (!data.features || data.features.length === 0) {
+            throw new Error('No results found');
+          }
+
+          const feature = data.features[0];
+          const [longitude, latitude] = feature.center;
+
+          let confidence = 'medium';
+          if (feature.relevance >= 0.9) {
+            confidence = 'high';
+          } else if (feature.relevance < 0.7) {
+            confidence = 'low';
+          }
+
+          const geocodeResult = {
+            latitude,
+            longitude,
+            formatted_address: feature.place_name,
+            confidence,
+          };
+
+          setResult(geocodeResult);
+
+          if (onCoordinatesFound) {
+            onCoordinatesFound(latitude, longitude);
+          }
+        } catch (err) {
+          setError(err instanceof Error ? err.message : 'Failed to geocode address');
+          setResult(null);
+        } finally {
+          setLoading(false);
+        }
+      })();
     }, 800);
 
     return () => clearTimeout(timer);
-  }, [address, city, county]);
-
-  const geocodeAddress = async () => {
-    if (!address || !city) return;
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const mapboxToken =
-        process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN || process.env.VITE_MAPBOX_PUBLIC_TOKEN;
-      if (!mapboxToken) {
-        throw new Error('Mapbox token not configured');
-      }
-
-      const encodedAddress = encodeURIComponent(fullAddress);
-      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${mapboxToken}&country=US&limit=1`;
-
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Geocoding failed');
-      }
-
-      const data = await response.json();
-
-      if (!data.features || data.features.length === 0) {
-        throw new Error('No results found');
-      }
-
-      const feature = data.features[0];
-      const [longitude, latitude] = feature.center;
-
-      let confidence = 'medium';
-      if (feature.relevance >= 0.9) {
-        confidence = 'high';
-      } else if (feature.relevance < 0.7) {
-        confidence = 'low';
-      }
-
-      const geocodeResult = {
-        latitude,
-        longitude,
-        formatted_address: feature.place_name,
-        confidence,
-      };
-
-      setResult(geocodeResult);
-
-      if (onCoordinatesFound) {
-        onCoordinatesFound(latitude, longitude);
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to geocode address');
-      setResult(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [address, city, county, fullAddress, onCoordinatesFound]);
 
   if (!address || !city) {
     return null;
