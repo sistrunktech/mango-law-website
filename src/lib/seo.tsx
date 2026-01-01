@@ -21,6 +21,8 @@ function trackPageView(pageTitle: string) {
 
 export interface SEOProps {
   title?: string;
+  primaryKeyword?: string;
+  secondaryModifier?: string;
   description?: string;
   image?: string;
   url?: string;
@@ -39,16 +41,47 @@ export interface SEOProps {
   breadcrumbs?: Array<{ name: string; item: string }>;
 }
 
+const TITLE_SUFFIX = 'Mango Law';
+const TITLE_SUFFIX_REGEX = /\|\s*Mango Law( LLC)?/i;
+
 const defaultSEO = {
-  title: 'Mango Law LLC - Criminal Defense & OVI Attorney in Delaware, OH',
+  primaryKeyword: 'Criminal Defense',
+  secondaryModifier: 'OVI Attorney in Ohio',
+  title: 'Criminal Defense - OVI Attorney in Ohio | Mango Law',
   description:
     'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
   image: '/images/brand/mango-logo-primary-fullcolor.svg',
   type: 'website' as const,
 };
 
+function formatTitle({
+  title,
+  primaryKeyword,
+  secondaryModifier,
+}: {
+  title?: string;
+  primaryKeyword?: string;
+  secondaryModifier?: string;
+}) {
+  const basePrimary = (primaryKeyword || defaultSEO.primaryKeyword).trim();
+  const baseSecondary = (secondaryModifier || defaultSEO.secondaryModifier).trim();
+  let resolvedTitle = (title || '').trim();
+
+  if (!resolvedTitle) {
+    resolvedTitle = `${basePrimary} - ${baseSecondary}`;
+  }
+
+  if (TITLE_SUFFIX_REGEX.test(resolvedTitle)) {
+    return resolvedTitle.replace(TITLE_SUFFIX_REGEX, `| ${TITLE_SUFFIX}`);
+  }
+
+  return `${resolvedTitle} | ${TITLE_SUFFIX}`;
+}
+
 export function SEO({
   title,
+  primaryKeyword,
+  secondaryModifier,
   description,
   image,
   url,
@@ -63,7 +96,7 @@ export function SEO({
   const location = useLocation();
 
   const siteUrl = 'https://mango.law';
-  const fullTitle = title ?? defaultSEO.title;
+  const fullTitle = formatTitle({ title, primaryKeyword, secondaryModifier });
   const fullDescription = description ?? defaultSEO.description;
   const fullImage = image
     ? image.startsWith('http')
