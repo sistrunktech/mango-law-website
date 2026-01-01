@@ -93,7 +93,7 @@ async function prerenderRoutes(routes) {
     for (const route of routes) {
       const url = `${baseUrl}${route}`;
       await page.goto(url, { waitUntil: 'networkidle0' });
-      await page.waitForTimeout(250);
+      await new Promise((resolve) => setTimeout(resolve, 250));
 
       const html = await page.content();
       const outputPath = route === '/' ? path.join(DIST_DIR, 'index.html') : path.join(DIST_DIR, route, 'index.html');
