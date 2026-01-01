@@ -289,7 +289,7 @@ export default function OviDuiPage() {
                   to={item.href}
                   className="mt-4 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf"
                 >
-                  Learn more ->
+                  Learn more
                 </Link>
               </div>
             ))}

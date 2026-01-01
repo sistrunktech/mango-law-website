@@ -159,7 +159,7 @@ export default function OviCheckpointsOhioPage() {
                 in OVI cases, so early guidance can protect your options.
               </p>
               <Link to="/contact" className="mt-4 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf">
-                Request a confidential consult ->
+                Request a confidential consult
               </Link>
             </div>
           </div>

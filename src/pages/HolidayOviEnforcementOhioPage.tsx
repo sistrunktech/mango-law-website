@@ -159,7 +159,7 @@ export default function HolidayOviEnforcementOhioPage() {
                 Ask for a lawyer and avoid making statements without counsel. Evidence timing matters in OVI cases.
               </p>
               <Link to="/contact" className="mt-4 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf">
-                Request a consult ->
+                Request a consult
               </Link>
             </div>
           </div>
