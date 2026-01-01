@@ -114,7 +114,7 @@ Generated logo assets did not match the required brand specifications provided i
 
 ### Next Steps
 1. Optional cleanup (low priority): remove/archival of older placeholder/generated assets once confirmed unused.
-2. Optional (recommended): add proper PNG favicons (16×16, 32×32, apple-touch-icon) and wire in `index.html`.
+2. Optional (recommended): add proper PNG favicons (16×16, 32×32, apple-touch-icon) and wire in `src/app/layout.tsx` metadata.
 
 ---
 
@@ -147,10 +147,10 @@ Floating chat launcher is currently always “expanded label” and does not imp
 **Assigned To:** TBD
 
 ### Issue Summary
-Site currently uses `public/favicon.svg` only. We should add standard PNG favicon assets (`favicon-16x16.png`, `favicon-32x32.png`, optional `apple-touch-icon.png`) and update `index.html`.
+Site currently uses `public/favicon.svg` only. We should add standard PNG favicon assets (`favicon-16x16.png`, `favicon-32x32.png`, optional `apple-touch-icon.png`) and update the Next.js metadata (`src/app/layout.tsx`, legacy Vite used `index.html`).
 
 ### Resolution notes
-- Added PNG favicons + Apple touch icon + web manifest and wired them in `index.html`.
+- Added PNG favicons + Apple touch icon + web manifest and wired them in `src/app/layout.tsx` metadata (legacy Vite used `index.html`).
 - Added `favicon.ico` to improve Google SERP icon rendering and legacy browser support.
 
 ---
@@ -258,7 +258,7 @@ Local publishing tools sometimes include `node_modules/` (which contains scoped 
 - Ensure publishes exclude install artifacts:
   - `node_modules/`, `dist/`, local output folders, and large binary bundles.
 - Repo includes `mango-law-website/.boltignore` and a `prebuild` filename safety check (`scripts/check-filenames.mjs`) to prevent regressions.
-- If Bolt publish/build fails with a missing module error for dev-only tooling (example: `rollup-plugin-visualizer`), ensure the Vite config only loads it in analyze mode via dynamic import (`vite.config.ts`).
+- Legacy (Vite-only): if Bolt publish/build fails with a missing module error for dev-only tooling (example: `rollup-plugin-visualizer`), ensure the Vite config only loads it in analyze mode via dynamic import (`vite.config.ts`).
 - Ensure `.boltignore` does not exclude required source folders (example: `og/`) even if OG generation is disabled at runtime.
 
 ---
@@ -289,7 +289,7 @@ Schema.org Validator reports errors on the homepage structured data (`LegalServi
    - `https://schema.org/Monday`, etc.
 
 ### Files Likely Involved
-`src/lib/seo.tsx`, `src/pages/HomePage.tsx`, `src/pages/AboutPage.tsx`
+`src/lib/seo.tsx`, `src/views/HomePage.tsx`, `src/views/AboutPage.tsx`
 
 ### Resolution notes
 - Refactored homepage schema to a single `@graph` (`LegalService` + `Person`) linked via `founder`.
@@ -338,7 +338,7 @@ The public DUI checkpoints page (`/resources/dui-checkpoints`) shows "Pending ch
   - view age/expires date
 
 ### Files Likely Involved
-`src/pages/DUICheckpointsPage.tsx`, `src/lib/checkpointAnnouncementsService.ts`, new supabase migration(s), optional cron SQL.
+`src/views/DUICheckpointsPage.tsx`, `src/lib/checkpointAnnouncementsService.ts`, new supabase migration(s), optional cron SQL.
 
 ### Verification
 - Public page no longer shows old "planned this weekend" items.
@@ -347,15 +347,15 @@ The public DUI checkpoints page (`/resources/dui-checkpoints`) shows "Pending ch
 
 ---
 
-## TICKET-010: Faster Crawl / "Instant Indexing" for SPA (Vite + React)
+## TICKET-010: Faster Crawl / "Instant Indexing" (Legacy SPA)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Closed (superseded by TICKET-029)  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
 ### Issue Summary
-SPA pages can be crawled slower and updates can take longer to surface in Search results. We want the fastest practical indexing behavior for new/updated pages (especially blog posts and new resources) without a full rewrite.
+SPA pages can be crawled slower and updates can take longer to surface in Search results. This is now handled by the Next.js SSR/SSG migration (see TICKET-029).
 
 ### Recommended approach (phased)
 #### Phase 1 (MVP, minimal architecture change)
@@ -391,7 +391,7 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 
 ### Current MVP implementation
 - `robots.txt` already references `https://mango.law/sitemap.xml`.
-- `npm run build` generates `dist/sitemap.xml` via `scripts/generate-sitemap.mjs` (runs in `postbuild`).
+- `node scripts/generate-sitemap.mjs` writes `public/sitemap.xml` (run in the deploy pipeline).
 - The sitemap includes all static marketing routes plus `/blog/:slug` entries sourced from `src/data/blogPosts.ts`.
 
 ---
@@ -404,13 +404,13 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 **Assigned To:** TBD
 
 ### Issue Summary
-`https://mango.law/sitemap.xml` is returning the SPA HTML (index.html) instead of XML. This prevents sitemap validation/submission and blocks the “instant indexing” MVP.
+`https://mango.law/sitemap.xml` was returning SPA HTML instead of XML. This prevented sitemap validation/submission and blocked the “instant indexing” MVP.
 
-### Root cause (likely)
-- The publish pipeline is not deploying `dist/sitemap.xml` reliably (or it is not being generated in the deployed build artifact).
+### Root cause (legacy)
+- The publish pipeline was not deploying a generated sitemap reliably.
 
 ### Fix (implemented)
-- Added a Vite build plugin that writes `dist/sitemap.xml` during the build step (`closeBundle()`), so it works even if the host runs `vite build` directly.
+- `scripts/generate-sitemap.mjs` now writes `public/sitemap.xml` and should run as part of the Next.js deploy pipeline.
 
 ### Verification
 - After publish, `https://mango.law/sitemap.xml` starts with `<?xml` and has `Content-Type: application/xml` (or `text/xml`).
@@ -858,7 +858,7 @@ The `google-access-check` Edge Function only fetched **properties/containers fro
 
 ### Files touched
 - `supabase/functions/google-access-check/index.ts`
-- `src/pages/ConnectionsPage.tsx`
+- `src/views/ConnectionsPage.tsx`
 
 ### Verification steps
 1. Go to `/admin/connections`
@@ -920,7 +920,7 @@ GA4 Admin → Consent settings reports “consent signals inactive / missing for
 Consent Mode v2 signals are present on first load, and update immediately after user choice, so GA4 recognizes consent pings.
 
 ### Implementation notes
-- Consent Mode v2 (advanced mode) is implemented in `index.html` before GTM loads.
+- Consent Mode v2 (advanced mode) is implemented in `src/app/layout.tsx` before GTM loads.
 - A small banner allows Accept/Reject/Customize and persists consent in a cookie (`ml_consent_v2`).
 - GTM must be configured to respect consent (GA4 tags require `analytics_storage=granted`; ad tags require `ad_storage=granted` where relevant).
 - See `docs/OPERATIONS.md` → “Consent Mode v2 (GTM / GA4)”.
@@ -960,7 +960,7 @@ Privacy Policy and Terms of Use pages need expanded, Ohio-specific language, upd
   - Final legal review/approval.
 
 ### Files Likely Involved
-`src/pages/PrivacyPage.tsx`, `src/pages/TermsPage.tsx`, `src/components/Footer.tsx`,
+`src/views/PrivacyPage.tsx`, `src/views/TermsPage.tsx`, `src/components/Footer.tsx`,
 `src/components/ContactForm.tsx`, `src/components/LeadCaptureModal.tsx`
 
 ---
@@ -968,12 +968,12 @@ Privacy Policy and Terms of Use pages need expanded, Ohio-specific language, upd
 ## TICKET-029: SEO Rendering — CSR Ceiling (Metadata Not Pre-rendered)
 
 **Priority:** High  
-**Status:** In Progress  
+**Status:** Resolved (pending cutover)  
 **Date Created:** 2026-01-01  
 **Assigned To:** Codex
 
 ### Issue Summary
-The current Vite + React CSR architecture serves a “Loading…” shell to bots on first hit, so title/meta/schema data are not present without JavaScript.
+The legacy Vite + React CSR architecture served a “Loading…” shell to bots on first hit, so title/meta/schema data were not present without JavaScript.
 
 ### Desired Outcome
 Move to SSR/SSG (Astro or Next.js) so metadata and JSON-LD render in the initial HTML.
@@ -986,14 +986,14 @@ Move to SSR/SSG (Astro or Next.js) so metadata and JSON-LD render in the initial
 - Next.js app router scaffolded with server metadata (`src/lib/seo-metadata.ts`) and JSON-LD (`src/components/StructuredData.tsx`).
 - Blog routes now emit Article schema + metadata via `generateMetadata` and `generateStaticParams`.
 - Practice area + intent pages emit FAQ/Breadcrumb schema server-side.
-- Remaining: finalize deployment config + run full build/test before cutover.
+- Build/test completed locally; pending Cloudflare Pages cutover + production validation.
 
 ---
 
 ## TICKET-030: Intent Pages — High-Value Landing Routes
 
 **Priority:** High  
-**Status:** In Progress  
+**Status:** Resolved  
 **Date Created:** 2026-01-01  
 **Assigned To:** Codex
 
@@ -1009,12 +1009,15 @@ Top-level intent pages are missing for high-value queries; current coverage live
 - Each route has full content, CTA(s), and internal links to related practice pages/resources.
 - SEO component uses the standard title/description pattern and breadcrumb schema.
 
+### Status / Notes
+- Intent routes now live under the Next.js app router with server metadata + breadcrumbs.
+
 ---
 
 ## TICKET-031: SEO Title/Description Pattern Enforcement
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Resolved  
 **Date Created:** 2026-01-01  
 **Assigned To:** TBD
 
@@ -1050,6 +1053,7 @@ After schema and favicon changes, indexing quality and rich results coverage mus
 
 ### Tracking
 - Log updates in `docs/performance/search-console/2026-01-01.md`.
+- Start monitoring after the Cloudflare Pages cutover and sitemap submission.
 
 ---
 

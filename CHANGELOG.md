@@ -9,6 +9,11 @@
 - Remove Vite entrypoints and update scripts/deps for Next build.
 - Update client env names to `NEXT_PUBLIC_*` in code + `.env.example`.
 
+### Docs + Ops Alignment
+- Update README + ops docs with new documentation paths and sitemap build steps.
+- Refresh SEO strategy status and ticket statuses to reflect SSR/SSG + intent page completion.
+- Update accessibility guide examples for Next.js navigation.
+
 ### OVI SEO Regional Intent Pages (PR #47)
 - Add specialized OVI defense pages for **Delaware**, **Marysville**, **Dublin**, **Powell**, **Westerville**, **Sunbury**, and **Lewis Center**.
 - Implement unique local intent copy and specific court metadata for each region.
@@ -41,7 +46,7 @@
 - Add `check-rankings` Edge Function (Serper.dev integration) and admin UI dashboard tab.
 - Remove hardcoded Serper API fallback; `SERPER_API_KEY` is now required for rank checks.
 - Seed initial keyword list via migration (`supabase/migrations/20251228180500_seed_initial_keywords.sql`).
-- Document 2025 SEO roadmap in `docs/SEO-STRATEGY-2025.md` and research inputs in `docs/RESEARCH-INPUTS-2025.md`.
+- Document 2025 SEO roadmap in `docs/technical/SEO-STRATEGY-2025.md` and research inputs in `docs/legacy/RESEARCH-INPUTS-2025.md`.
 
 ### Regional Expansion
 - Expand `serviceAreas.ts` with Union, Morrow, and Marion counties plus tiered cities and court metadata.

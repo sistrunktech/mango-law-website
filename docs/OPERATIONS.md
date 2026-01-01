@@ -12,7 +12,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 ## Hosting (Cloudflare Pages + Bolt Legacy)
 ### Cloudflare Pages (target)
 - Deploy the Next.js build to Cloudflare Pages for SSR/SSG support.
-- Build command: `npm run build` (then `npx @cloudflare/next-on-pages` if using the adapter).
+- Build command: `npm run build && node scripts/generate-sitemap.mjs` (then `npx @cloudflare/next-on-pages` if using the adapter).
 - Supabase Edge Functions + DB migrations are still deployed separately via Supabase CLI/Dashboard.
 
 ### Bolt (legacy during migration)
@@ -198,7 +198,7 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
 - Version snapshots are stored in `blog_post_versions`; proposals live in `blog_post_change_requests`.
 - All protected content changes must be logged in `docs/CONTENT_CHANGELOG.md`.
 - Protected content registry lives in `docs/PROTECTED_CONTENT.md`.
-- Consolidated blog rules live in `docs/BLOG_REQUIREMENTS.md` (word count, ORC links, visuals, trust metadata).
+- Consolidated blog rules live in `docs/technical/BLOG_REQUIREMENTS.md` (word count, ORC links, visuals, trust metadata).
 - Current content sources: file-based (`src/data/blogPosts.ts`) + DB (`blog_posts`). Long term, migrate fully to DB-driven content.
 
 ### OAuth Branding (Avoid “project-id.supabase.co” on the Google consent screen)

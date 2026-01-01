@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-01-01 14:39 EST
+Post slug and title: Strategy update | docs/technical/SEO-STRATEGY-2025.md
+Change type: minor
+Summary of change: Refresh status to reflect SSR/SSG migration + intent pages completion and document remaining cutover/monitoring tasks.
+Regression checklist:
+- Hero changed? n/a
+- Images removed? n/a
+- Links changed? n/a
+- Headings changed? yes
+- Meta/schema changed? n/a
+Approval token: n/a
+Rollback notes: docs-only update in codex/docs-nextjs-alignment
+
 Date/time: 2025-12-29 14:30 EST
 Post slug and title: what-to-do-after-ovi-arrest-ohio | What to Do After an OVI Arrest in Ohio: A Step-by-Step Guide
 Change type: major

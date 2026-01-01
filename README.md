@@ -83,13 +83,14 @@ Commonly required values:
 ## Documentation
 
 - **Operations guide:** [`docs/OPERATIONS.md`](docs/OPERATIONS.md)
-- **Keyboard accessibility guide:** [`docs/KEYBOARD-ACCESSIBILITY-GUIDE.md`](docs/KEYBOARD-ACCESSIBILITY-GUIDE.md)
+- **Keyboard accessibility guide:** [`docs/kb/KEYBOARD-ACCESSIBILITY-GUIDE.md`](docs/kb/KEYBOARD-ACCESSIBILITY-GUIDE.md)
 - **Content governance:** [`docs/CONTENT_GOVERNANCE.md`](docs/CONTENT_GOVERNANCE.md)
-- **Blog requirements:** [`docs/BLOG_REQUIREMENTS.md`](docs/BLOG_REQUIREMENTS.md)
+- **Blog requirements:** [`docs/technical/BLOG_REQUIREMENTS.md`](docs/technical/BLOG_REQUIREMENTS.md)
 - **Protected content registry:** [`docs/PROTECTED_CONTENT.md`](docs/PROTECTED_CONTENT.md)
 - **Content change log:** [`docs/CONTENT_CHANGELOG.md`](docs/CONTENT_CHANGELOG.md)
-- **SEO strategy:** [`docs/SEO-STRATEGY-2025.md`](docs/SEO-STRATEGY-2025.md)
-- **Research inputs:** [`docs/RESEARCH-INPUTS-2025.md`](docs/RESEARCH-INPUTS-2025.md)
+- **SEO strategy:** [`docs/technical/SEO-STRATEGY-2025.md`](docs/technical/SEO-STRATEGY-2025.md)
+- **SEO crawl strategy:** [`docs/technical/SEO-CRAWL-STRATEGY.md`](docs/technical/SEO-CRAWL-STRATEGY.md)
+- **Research inputs (legacy):** [`docs/legacy/RESEARCH-INPUTS-2025.md`](docs/legacy/RESEARCH-INPUTS-2025.md)
 - **Agent guardrails:** [`docs/AGENT_GUARDRAILS.md`](docs/AGENT_GUARDRAILS.md)
 - **Changelog:** [`CHANGELOG.md`](CHANGELOG.md)
 - **Contributing:** [`CONTRIBUTING.md`](CONTRIBUTING.md)

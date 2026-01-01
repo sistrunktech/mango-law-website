@@ -22,3 +22,4 @@ This document describes how Mango Law pages are surfaced to search engines witho
 ## Notes
 - If you add a route, ensure it is in the sitemap so it gets crawled.
 - Admin/internal routes are intentionally excluded from indexing.
+- Run `node scripts/generate-sitemap.mjs` in the deploy pipeline so `public/sitemap.xml` stays current.
