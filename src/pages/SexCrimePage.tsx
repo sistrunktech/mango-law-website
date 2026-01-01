@@ -6,6 +6,7 @@ import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { SEO } from '../lib/seo';
 
 const faqs = [
   {
@@ -53,6 +54,17 @@ const faqs = [
 export default function SexCrimePage() {
   return (
     <>
+      <SEO
+        title="Sex Crime Defense Lawyer Delaware, OH | Mango Law LLC"
+        description="Discreet and aggressive defense for sex crime allegations. Former prosecutor with 26+ years of experience defending clients in Delaware and Franklin Counties."
+        image="/images/generated/sex-crimes-defense-hero.png"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+          { name: 'Sex Crimes', item: '/sex-crime-defense-lawyer-delaware-oh' },
+        ]}
+      />
       <PageHero
         eyebrow="Sex Crimes"
         title="Discreet, assertive defense for sensitive allegations"

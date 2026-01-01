@@ -3,10 +3,12 @@ import { Home, Search, Phone, ArrowLeft } from 'lucide-react';
 import MangoIcon from '../components/MangoIcon';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { SEO } from '../lib/seo';
 
 export default function NotFoundPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1B4332] via-[#2F5F4F] to-[#1B4332] flex items-center justify-center px-4 py-12">
+      <SEO title="404 - Page Not Found | Mango Law LLC" noindex={true} />
       <div className="max-w-2xl w-full text-center">
         <div className="mb-8 flex justify-center">
           <div className="relative">

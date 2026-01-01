@@ -13,6 +13,7 @@ import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { SEO } from '../lib/seo';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -118,6 +119,14 @@ export default function DUICheckpointsPage() {
 
   return (
     <>
+      <SEO
+        title="Ohio DUI Checkpoint Map | Real-Time Sobriety Checkpoints"
+        description="View real-time locations of sobriety checkpoints across Ohio. Know your rights, plan your route, and stay informed about upcoming checkpoints."
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'DUI Checkpoints', item: '/resources/dui-checkpoints' },
+        ]}
+      />
       <PageHero
         eyebrow="DUI Resources"
         title="Ohio DUI Checkpoint Map"

@@ -69,6 +69,12 @@ export default function OviDuiPage() {
         title="OVI/DUI Defense Lawyer Delaware, OH | Mango Law LLC"
         description="Experienced OVI/DUI defense attorney in Delaware County. Challenge traffic stops, field sobriety tests, and breathalyzer results. Certified in BAC DataMaster and NHTSA testing."
         image="/images/generated/ovi-dui-defense-hero.png"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+          { name: 'OVI / DUI Defense', item: '/ovi-dui-defense-delaware-oh' },
+        ]}
       />
       <PageHero
         eyebrow="OVI / DUI Defense"

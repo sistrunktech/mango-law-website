@@ -16,9 +16,12 @@ import {
   AlertCircle
 } from 'lucide-react';
 
+import { SEO } from '../lib/seo';
+
 export default function AdminGuidePage() {
   return (
     <div className="min-h-screen bg-slate-900 py-12">
+      <SEO title="Admin Guide | Mango Law LLC" noindex={true} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden">
           <div className="bg-gradient-to-r from-amber-500 to-orange-600 p-8 text-white">

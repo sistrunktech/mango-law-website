@@ -131,6 +131,13 @@ export default function BlogPostPage() {
         description={post.excerpt}
         image={post.imageUrl}
         type="article"
+        article={{
+          headline: post.title,
+          author: post.author,
+          datePublished: post.date,
+          dateModified: post.lastVerified,
+          image: post.imageUrl,
+        }}
       />
       <section className="bg-brand-offWhite py-16">
         <div className="container max-w-7xl">

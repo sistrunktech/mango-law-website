@@ -4,6 +4,8 @@ import { Lock, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import MangoIcon from '../components/MangoIcon';
 
+import { SEO } from '../lib/seo';
+
 export default function ResetPasswordPage() {
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
@@ -159,7 +161,8 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center p-4">
+      <SEO title="Reset Password | Mango Law LLC" noindex={true} />
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">

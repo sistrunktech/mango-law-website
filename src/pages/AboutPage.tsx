@@ -17,6 +17,10 @@ export default function AboutPage() {
         title="About Dominic Mango | Criminal Defense Attorney Delaware, OH"
         description="OSU Moritz College of Law graduate with 26+ years of Ohio criminal law experience. Former prosecutor with hundreds of jury trials. Certified in BAC DataMaster and NHTSA field sobriety testing."
         structuredData={attorneySchema}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'About', item: '/about' },
+        ]}
       />
       <PageHero
         eyebrow="About"

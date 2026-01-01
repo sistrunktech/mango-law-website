@@ -6,6 +6,7 @@ import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { SEO } from '../lib/seo';
 
 const faqs = [
   {
@@ -53,6 +54,17 @@ const faqs = [
 export default function PersonalInjuryPage() {
   return (
     <>
+      <SEO
+        title="Personal Injury Lawyer Delaware, OH | Mango Law LLC"
+        description="Selective personal injury representation for cases with clear liability and insurance coverage. Experienced legal guidance in Delaware and Franklin Counties."
+        image="/images/generated/personal-injury-hero.png"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+          { name: 'Personal Injury', item: '/personal-injury-lawyer-delaware-oh' },
+        ]}
+      />
       <PageHero
         eyebrow="Personal Injury"
         title="Selective personal injury matters"

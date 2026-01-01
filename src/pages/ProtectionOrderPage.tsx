@@ -6,6 +6,7 @@ import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { SEO } from '../lib/seo';
 
 const faqs = [
   {
@@ -53,6 +54,17 @@ const faqs = [
 export default function ProtectionOrderPage() {
   return (
     <>
+      <SEO
+        title="Protection Order Lawyer Delaware, OH | Mango Law LLC"
+        description="Strategic defense for civil protection orders (CPO) and domestic violence allegations. Protect your rights and reputation in Delaware and Franklin Counties."
+        image="/images/generated/protection-order-defense-hero.png"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+          { name: 'Protection Orders', item: '/protection-order-lawyer-delaware-oh' },
+        ]}
+      />
       <PageHero
         eyebrow="Protection Orders"
         title="Defense in civil protection order matters"

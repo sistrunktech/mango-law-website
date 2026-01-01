@@ -6,6 +6,7 @@ import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { SEO } from '../lib/seo';
 
 const faqs = [
   {
@@ -53,6 +54,17 @@ const faqs = [
 export default function DrugCrimePage() {
   return (
     <>
+      <SEO
+        title="Drug Crime Lawyer Delaware, OH | Mango Law LLC"
+        description="Strategic drug crime defense for possession, trafficking, and paraphernalia charges. Former prosecutor with 26+ years of experience in Delaware and Franklin Counties."
+        image="/images/generated/drug-crimes-defense-hero.png"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+          { name: 'Drug Crimes', item: '/drug-crime-lawyer-delaware-oh' },
+        ]}
+      />
       <PageHero
         eyebrow="Drug Crimes"
         title="Drug crime defense with attention to testing, searches, and diversion paths"

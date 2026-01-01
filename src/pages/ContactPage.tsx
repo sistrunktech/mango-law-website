@@ -17,6 +17,10 @@ export default function ContactPage() {
       <SEO
         title="Contact Mango Law LLC | Delaware, OH Criminal Defense Attorney"
         description={`Schedule a consultation with experienced criminal defense attorney Dominic "Nick" Mango. Located in Delaware, OH. Call or text ${OFFICE_PHONE_DISPLAY} or email office@mango.law.`}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Contact', item: '/contact' },
+        ]}
       />
       <PageHero
         eyebrow="Contact"
