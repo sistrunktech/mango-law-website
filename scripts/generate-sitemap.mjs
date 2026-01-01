@@ -26,6 +26,9 @@ const STATIC_PATHS = [
   '/of-counsel',
   '/locations',
   '/resources/dui-checkpoints',
+  '/ovi-checkpoints-ohio',
+  '/delaware-ohio-ovi-lawyer',
+  '/holiday-ovi-enforcement-ohio',
   '/privacy',
   '/terms',
 ];
