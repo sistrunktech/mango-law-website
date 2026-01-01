@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { supabase, supabaseProjectRef, supabaseUrl } from '../../lib/supabaseClient';
 import { MapPin, Plus, Edit2, Trash2, Eye, Calendar, Search } from 'lucide-react';

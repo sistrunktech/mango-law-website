@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -46,8 +48,10 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    const token = import.meta.env.VITE_MAPBOX_PUBLIC_TOKEN || import.meta.env.MAPBOX_PUBLIC_TOKEN;
-    const styleUrl = import.meta.env.VITE_MAPBOX_STYLE_URL || import.meta.env.MAPBOX_STYLE_URL;
+    const token =
+      process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN || process.env.VITE_MAPBOX_PUBLIC_TOKEN;
+    const styleUrl =
+      process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL || process.env.VITE_MAPBOX_STYLE_URL;
 
     if (!token) {
       setMapError('Mapbox token not configured');

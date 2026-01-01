@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type FontSize = 'default' | 'medium' | 'large' | 'x-large';
@@ -39,6 +41,9 @@ const AccessibilityContext = createContext<AccessibilityContextType | undefined>
 
 export function AccessibilityProvider({ children }: { children: ReactNode }) {
   const [preferences, setPreferences] = useState<AccessibilityPreferences>(() => {
+    if (typeof window === 'undefined') {
+      return defaultPreferences;
+    }
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -52,6 +57,9 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
   });
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion && !preferences.reducedMotion) {
       setPreferences((prev) => ({ ...prev, reducedMotion: true }));

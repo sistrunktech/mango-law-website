@@ -3,36 +3,33 @@
 This document tracks current environment expectations, secrets handling, CI/CD, and what to update when changes are made.
 
 ## Stack
-- React 18 + Vite + TypeScript, Tailwind with Mango brand tokens.
-- React Router v6 routes for all pages in the sitemap.
+- Next.js App Router + React 18 + TypeScript, Tailwind with Mango brand tokens.
+- File-based routes under `src/app` (public + internal groups).
 - Supabase client initialized in `src/lib/supabaseClient.ts` for admin auth + CMS + checkpoints + forms.
 - CI: GitHub Actions build workflow (`.github/workflows/ci.yml`).
-- Optional OG/hero pipeline: fal.ai generation + Supabase Storage upload via `plugins/vite-og-plugin.ts` (runs only when env is present).
+- Legacy (Vite-only): OG/hero pipeline via `plugins/vite-og-plugin.ts` (deprecated during Next migration).
 
-## Hosting (Bolt)
-### Bolt badge (perf)
-Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js?...` into the served HTML.
+## Hosting (Cloudflare Pages + Bolt Legacy)
+### Cloudflare Pages (target)
+- Deploy the Next.js build to Cloudflare Pages for SSR/SSG support.
+- Build command: `npm run build` (then `npx @cloudflare/next-on-pages` if using the adapter).
+- Supabase Edge Functions + DB migrations are still deployed separately via Supabase CLI/Dashboard.
 
-- Verify in DevTools → Network that there is no request to `bolt.new/badge.js` on first load.
-- Disable the badge in Bolt’s project settings (brand/badge/attribution). If the UI changes, search settings for “badge” or “bolt”.
-- If adding CSP later, prefer server-side headers and verify Mapbox still works (it may require `worker-src blob:` and other allowances).
-
-### What Bolt Deploys (and what it doesn’t)
-- Bolt deploys the **frontend** (the Vite build output for `index.html` + `src/**`).
-- Bolt does **not** deploy Supabase Edge Functions or Supabase DB migrations. Those must be deployed separately via Supabase CLI or the Supabase Dashboard.
+### Bolt (legacy during migration)
+- Bolt remains live until cutover; treat it as a legacy deploy target.
+- Bolt deploys the **frontend** only (previously Vite build output). It does **not** deploy Supabase Edge Functions or DB migrations.
 
 ### Deploy verification (important)
 - The live site may be served via a CDN edge layer; if you don’t see recent changes, assume the **frontend deploy is stale** until proven otherwise.
-- Quick check: View Source on `https://mango.law` and confirm the `/assets/index-*.js` filename changes after a publish.
-- If the asset filename doesn’t change, you’re still on an older build (and any “fix” in GitHub won’t show up yet).
+- Quick check: View Source on `https://mango.law` and confirm that HTML reflects the latest build metadata/scripts.
 
 ## Environment Variables
-- Client-exposed (`VITE_`): `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_MAPBOX_PUBLIC_TOKEN`, `VITE_MAPBOX_STYLE_URL` (optional).
-- Optional client config: `VITE_SUPABASE_CUSTOM_DOMAIN` (recommended for OAuth branding; use an HTTPS Supabase custom domain like `https://api.mango.law`).
+- Client-exposed (`NEXT_PUBLIC_`): `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`, `NEXT_PUBLIC_MAPBOX_STYLE_URL` (optional).
+- Optional client config: `NEXT_PUBLIC_SUPABASE_CUSTOM_DOMAIN` (recommended for OAuth branding; use an HTTPS Supabase custom domain like `https://api.mango.law`).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional), `SERPER_API_KEY` (Search Intelligence).
-- Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `VITE_TURNSTILE_SITE_KEY` (optional).
+- Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (optional).
 - SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
-- Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `VITE_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
+- Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `NEXT_PUBLIC_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
 - See `.env.example` for the full list; update it whenever variables change.
 - **Supabase project pinning:** the frontend is currently pinned to the production Supabase project in `src/lib/supabaseClient.ts` to prevent “split brain” data and OAuth redirect drift. If you truly need multiple environments later, reintroduce host/env-based switching carefully and update Google OAuth redirect URIs accordingly.
 
@@ -41,9 +38,9 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
 - **Secondary (Office line):** `(740) 602-2155` (`tel:7406022155`) — show only where a second number is helpful (footer/contact/about).
 
 ## Secrets Placement
-- GitHub Actions: secrets and variables have been added via `gh secret set` / `gh variable set`. Replace placeholder Supabase values (`VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `VITE_SUPABASE_URL`) with real env-specific keys.
+- GitHub Actions: secrets and variables have been added via `gh secret set` / `gh variable set`. Replace placeholder Supabase values (`NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `NEXT_PUBLIC_SUPABASE_URL`) with real env-specific keys.
 - Supabase: mirror the same secrets per environment; do not expose `SERVICE_ROLE_KEY` or `SUPABASE_JWT_SECRET` to the client.
-- Keep service-role keys server-side only; client should only see `VITE_*` and non-sensitive config.
+- Keep service-role keys server-side only; client should only see `NEXT_PUBLIC_*` and non-sensitive config.
 
 ## Edge Functions (deployed)
 - **Public lead functions** (`verify_jwt=false` in `supabase/functions/*/config.toml`):
@@ -51,11 +48,11 @@ Bolt hosting may inject a third-party script tag like `https://bolt.new/badge.js
   - `submit-lead`: Handles lead-capture modal submissions, inserts into `leads`, sends admin notification + lead confirmation email via Resend. Rate limited to 10 req/min per IP.
   - `chat-intake`: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. Includes optional SMS notifications via email-to-SMS gateways.
 - **Bot protection** (optional): If `TURNSTILE_SECRET_KEY` is set, `submit-contact`, `submit-lead`, and `chat-intake` require a valid Turnstile token (`turnstile_token`).
-  - Client-side site key: the app uses `VITE_TURNSTILE_SITE_KEY` when present, otherwise falls back to the default site key in `src/lib/turnstile.ts`.
-  - If you rotate Turnstile keys, update both the Bolt env var (preferred) and the fallback constant (or remove/adjust the fallback).
+  - Client-side site key: the app uses `NEXT_PUBLIC_TURNSTILE_SITE_KEY` when present, otherwise falls back to the default site key in `src/lib/turnstile.ts`.
+  - If you rotate Turnstile keys, update the Cloudflare/Bolt env var and the fallback constant (or remove/adjust the fallback).
 - **Email templates** (shared): `submit-contact`, `submit-lead`, and `chat-intake` generate email HTML via `supabase/functions/_shared/email/*`.
   - Theme/season toggles: `APP_THEME` (`dark|light`), `APP_SEASON` (`spring|summer|fall|winter`), `APP_HOLIDAY` (`true|false`).
-  - Host links: `FRONTEND_URL` (fallback: `VITE_SITE_URL`, then `https://mango.law`).
+  - Host links: `FRONTEND_URL` (fallback: `NEXT_PUBLIC_SITE_URL`, then `https://mango.law`).
 - **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, and upserts checkpoints to database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
 - **check-rankings**: Search Intelligence job that pulls Serper.dev results for active keywords and writes ranking history to `seo_rankings`. Requires `SERPER_API_KEY` and service-role access (no fallback key).
 - **generate-review-response**: Generates draft responses for reviews using the configured AI provider/model.
@@ -78,7 +75,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
 
 ## Turnstile Setup (Recommended)
 - Create a Cloudflare Turnstile widget for the hostnames you will test on (at minimum `mango.law`; add `staging.mango.law` / Bolt preview hostnames as needed).
-- Bolt env (client): set `VITE_TURNSTILE_SITE_KEY` (preferred for rotation and multi-environment setups). If it’s missing, the app uses a default fallback site key from `src/lib/turnstile.ts`.
+- Client env: set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (preferred for rotation and multi-environment setups). If it’s missing, the app uses a default fallback site key from `src/lib/turnstile.ts`.
 - Supabase Edge Function secrets (server): set `TURNSTILE_SECRET_KEY`.
 - UI placement: the Turnstile widget is rendered *below the submit button* and aligned with the confidentiality/security disclaimer so it stays out of the main form flow.
 - Common failure modes:
@@ -104,9 +101,10 @@ Project ref (prod): `rgucewewminsevbjgcad`
   - `--batch path/to/tasks.json` for multiple prompts; JSON array supports `{ prompt, count?, model?, image?, strength?, style?, colors? }`
 
 ## OG/hero generation (build-time)
-- Vite plugin: `plugins/vite-og-plugin.ts` reads `og/og-specs.ts` prompts, generates OG images via fal.ai, uploads to Supabase Storage, emits `og-manifest.json`, and injects home OG tags.
+- Legacy (Vite-only) plugin: `plugins/vite-og-plugin.ts` reads `og/og-specs.ts` prompts, generates OG images via fal.ai, uploads to Supabase Storage, emits `og-manifest.json`, and injects home OG tags.
 - Requirements (build/CI only): `FAL_KEY`, `SUPABASE_URL`, `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), bucket `og-images` (or override via `SB_BUCKET`), `OG_SIGNED_URL_TTL` (default 1 year).
 - Behavior: If envs are missing, plugin logs a warning and skips generation (build still succeeds). Safe to run in CI as long as service-role is kept server-side only.
+- Next.js migration note: move OG generation into a script or API route if needed; the Vite plugin will not run in Next builds.
 
 ## Database (deployed)
 - **contact_leads**: Captures form submissions (id, name, email, phone, message, ip_address, user_agent, created_at).
@@ -134,7 +132,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - Build-only workflow in `.github/workflows/ci.yml` (Node 20, npm ci, npm run build).
 - `npm run build` runs a preflight filename check (`scripts/check-filenames.mjs`) to prevent publish failures caused by unsupported filename characters.
 - Bundle analysis (`npm run analyze`) uses a dynamic import of `rollup-plugin-visualizer` so Bolt publish/build environments without dev dependencies don’t fail.
-- TODO: add staging/prod deploy jobs with env-specific secrets, run migrations, and smoke tests before cutover. Target hosts today: Bolt staging `https://sistrunktech-mango-l-lqhi.bolt.host`, production `https://mango.law` (and `https://staging.mango.law` when live).
+- **Staging/Prod Deploy**: Staging deploys are automated via Bolt/Netlify on non-main branches. Production deploys to `https://mango.law` occur on merges to `main`. Database migrations must be pushed manually via `supabase db push` before cutover.
 
 ## Domains/DNS
 - Registrar: Porkbun. Current records (as of 2025-12-06):
@@ -153,7 +151,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
   - **Pending announcements**: RSS ingestion stores “details pending” items in `dui_checkpoint_announcements` (list-only; no map pins).
 - **Transparency**: The UI surfaces “Announced on” dates when available and displays an explicit “No announced checkpoints at this time” empty state.
 - **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
-- **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `VITE_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints will be inserted without `latitude/longitude` and the map will show few/no markers.
+- **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints will be inserted without `latitude/longitude` and the map will show few/no markers.
 - **Scraper Schedule**: Runs daily at 2:00 AM EST via pg_cron. Manual trigger available in admin dashboard.
 - **One-time data repair (OVICheckpoint history)**: If historical checkpoint dates were corrupted by an earlier scraper regression, use `scripts/backfill-ovicheckpoint-dates.ts`:
   - Dry-run: `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts`
@@ -246,7 +244,7 @@ If you don’t do this, the connectors can still work — they’ll just show th
 
 ## CTA Tracking (GA4 / GTM)
 - This site is GTM-first: app code pushes explicit events to `window.dataLayer` (avoid GTM click selectors whenever possible).
-- The only tag snippet that should be hard-coded in `index.html` is GTM (`GTM-WLJQZKB5`). Do not add GA4 `gtag.js` directly to the site.
+- The only tag snippet that should be hard-coded in `src/app/layout.tsx` is GTM (`GTM-WLJQZKB5`). Do not add GA4 `gtag.js` directly to the site.
 - Events emitted by the app:
   - `mango_page_view` (from `src/lib/seo.tsx`)
   - `cta_click` (from `src/lib/analytics.ts`)
@@ -264,7 +262,7 @@ If you don’t do this, the connectors can still work — they’ll just show th
 GA4 may show “consent signals inactive/missing for EEA users” unless Consent Mode v2 signals are sent.
 
 ### How it’s implemented
-- `index.html` includes an inline Consent Mode v2 snippet that runs **before GTM loads** (advanced mode).
+- `src/app/layout.tsx` should include any inline Consent Mode v2 snippet that runs **before GTM loads** (advanced mode).
 - Defaults are set to **denied** for:
   - `analytics_storage`
   - `ad_storage`

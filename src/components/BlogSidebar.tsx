@@ -1,5 +1,5 @@
 import { BookOpen, Phone, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import ContactForm from './ContactForm';
 import { testimonials } from '../data/testimonials';
 
@@ -60,7 +60,7 @@ export default function BlogSidebar() {
           {glossaryTerms.map((item) => (
             <Link
               key={item.slug}
-              to={`/glossary#${item.slug}`}
+              href={`/glossary#${item.slug}`}
               className="group block rounded-lg bg-white p-3 transition-all hover:shadow-sm"
             >
               <div className="flex items-center justify-between">
@@ -81,7 +81,7 @@ export default function BlogSidebar() {
         </div>
 
         <Link
-          to="/glossary"
+          href="/glossary"
           className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
         >
           View all legal terms
@@ -116,7 +116,7 @@ export default function BlogSidebar() {
         </div>
 
         <Link
-          to="/reviews"
+          href="/reviews"
           className="inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
         >
           Read more reviews
@@ -132,7 +132,7 @@ export default function BlogSidebar() {
           {quickPracticeAreas.map((area) => (
             <Link
               key={area.href}
-              to={area.href}
+              href={area.href}
               className="group flex items-center justify-between rounded-lg bg-white px-4 py-3 text-sm font-medium text-brand-black transition-all hover:shadow-sm hover:text-brand-leaf"
             >
               {area.name}
@@ -143,7 +143,7 @@ export default function BlogSidebar() {
           ))}
         </div>
         <Link
-          to="/practice-areas"
+          href="/practice-areas"
           className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
         >
           View all practice areas

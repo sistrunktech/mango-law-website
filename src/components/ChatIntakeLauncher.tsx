@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useMemo, useState } from 'react';
 import { MessageCircle, Phone, FileText } from 'lucide-react';
 import ConversationWindow from './chat/ConversationWindow';

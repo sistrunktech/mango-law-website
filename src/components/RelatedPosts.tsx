@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Calendar, Clock } from 'lucide-react';
 import { BlogPost } from '../data/blogPosts';
 
@@ -22,7 +22,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
         {posts.map((post) => (
           <Link
             key={post.slug}
-            to={`/blog/${post.slug}`}
+            href={`/blog/${post.slug}`}
             className="group block overflow-hidden rounded-xl border border-brand-black/10 bg-white transition-all hover:border-brand-mango hover:shadow-lg"
           >
             {post.imageUrl && (

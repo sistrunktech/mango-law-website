@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
 import { X, Send, Phone } from 'lucide-react';
 import ChatBubble from './ChatBubble';

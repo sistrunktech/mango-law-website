@@ -1,10 +1,10 @@
 # Mango Law Website
 
-Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on a React/Vite + Supabase stack with a GTM-first analytics contract and an admin panel for operational tooling.
+Modern criminal defense website for **Mango Law LLC** (Delaware, Ohio), built on a Next.js + Supabase stack with a GTM-first analytics contract and an admin panel for operational tooling.
 
 ## Features
 
-- **Modern React + Vite frontend** with TypeScript
+- **Next.js App Router (SSR/SSG)** with TypeScript
 - **Sistech Law v1 component library** (PageHero, PracticeAreaCards, CTA sections, Testimonials, etc.)
 - **Supabase Edge Function integrations** (`submit-contact`, `submit-lead`, `chat-intake`)
 - **GTM-first analytics** via explicit `window.dataLayer` events (`mango_page_view`, `cta_click`, `lead_submitted`) — no GTM click selectors required
@@ -42,13 +42,13 @@ npm run dev
 
 ## Hosting + Deploy Model (Important)
 
-- Bolt publishes the **frontend** (Vite build output).
+- Cloudflare Pages is the target for the Next.js build (SSR/SSG-friendly).
+- Bolt remains live during migration until cutover; treat it as the legacy deploy target.
 - Supabase **Edge Functions** + **DB migrations** are deployed separately (see `docs/OPERATIONS.md`).
-- If the live site looks “stuck”, verify the deploy by checking View Source for a new `/assets/index-*.js` filename.
 
 ## Analytics (GTM-first)
 
-This site includes a single GTM container in `index.html` (`GTM-WLJQZKB5`). The app pushes explicit events to `window.dataLayer`:
+This site includes a single GTM container injected from `src/app/layout.tsx` (`GTM-WLJQZKB5`). The app pushes explicit events to `window.dataLayer`:
 
 - `mango_page_view`
 - `cta_click`
@@ -73,10 +73,10 @@ If you see missing lists or “wrong account” behavior, it’s almost always o
 Use `mango-law-website/.env.example` as the authoritative list. Keep it updated whenever env vars change.
 
 Commonly required values:
-- Frontend: `VITE_SITE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
-- Supabase custom domain (OAuth branding): `VITE_SUPABASE_CUSTOM_DOMAIN=https://api.mango.law`
+- Frontend: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- Supabase custom domain (OAuth branding): `NEXT_PUBLIC_SUPABASE_CUSTOM_DOMAIN=https://api.mango.law`
 - Forms + email delivery (Edge Functions): `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`
-- Turnstile (optional): `VITE_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
+- Turnstile (optional): `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
 - Email theme config: `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`
 - Search Intelligence: `SERPER_API_KEY`
 

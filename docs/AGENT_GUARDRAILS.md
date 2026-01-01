@@ -1,6 +1,6 @@
 # Agent Guardrails (Content Governance)
 
-Use these rules for any AI coding agent working on content or CMS features.
+Use these rules for any AI coding agent working on content or CMS features for Mango Law LLC.
 
 - Treat **finalized** content as read-only unless a valid approval token is provided.
 - Any change that removes images, links, headings, or SEO metadata is a **regression risk** and must be called out.
@@ -10,7 +10,13 @@ Use these rules for any AI coding agent working on content or CMS features.
   `APPROVED: <slug> -- <what changed> -- <minor|major> -- <timestamp>`
 - If unsure whether a change is minor or major, treat it as **major**.
 
+## Protected Contexts
+- **Firm Facts**: Attorney background, firm establishment date, and licensure.
+- **SEO Schema**: `src/lib/seo.tsx` logic and JSON-LD blocks.
+- **Practice Areas**: Content in `src/data/practiceAreas.ts`.
+
 References:
 - `docs/CONTENT_GOVERNANCE.md`
 - `docs/PROTECTED_CONTENT.md`
 - `docs/CONTENT_CHANGELOG.md`
+- `docs/OPERATIONS.md`

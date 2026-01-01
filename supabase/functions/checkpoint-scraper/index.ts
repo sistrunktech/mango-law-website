@@ -169,7 +169,10 @@ Deno.serve(async (req: Request) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    const mapboxToken = Deno.env.get('MAPBOX_PUBLIC_TOKEN') || Deno.env.get('VITE_MAPBOX_PUBLIC_TOKEN');
+    const mapboxToken =
+      Deno.env.get('MAPBOX_PUBLIC_TOKEN') ||
+      Deno.env.get('NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN') ||
+      Deno.env.get('VITE_MAPBOX_PUBLIC_TOKEN');
 
     if (!supabaseUrl || !supabaseServiceKey) {
       throw new Error('Missing Supabase configuration');

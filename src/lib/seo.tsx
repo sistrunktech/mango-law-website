@@ -1,7 +1,18 @@
+'use client';
+
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { OFFICE_PHONE_TEL } from './contactInfo';
-import { serviceAreas } from '../data/serviceAreas';
+import { usePathname } from 'next/navigation';
+import { defaultSEO, resolveSeo } from './seo-config';
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  mergeStructuredData,
+  type ArticleData,
+  type BreadcrumbItem,
+  type FAQEntry,
+  localBusinessSchema,
+  attorneySchema,
+} from './structured-data';
 
 function trackPageView(pageTitle: string) {
   const page_location = window.location.href;
@@ -30,52 +41,9 @@ export interface SEOProps {
   type?: 'website' | 'article';
   noindex?: boolean;
   structuredData?: object;
-  faqs?: Array<{ question: string; answer: string }>;
-  article?: {
-    headline: string;
-    author: string;
-    datePublished: string;
-    dateModified: string;
-    image?: string;
-  };
-  breadcrumbs?: Array<{ name: string; item: string }>;
-}
-
-const TITLE_SUFFIX = 'Mango Law';
-const TITLE_SUFFIX_REGEX = /\|\s*Mango Law( LLC)?/i;
-
-const defaultSEO = {
-  primaryKeyword: 'Criminal Defense',
-  secondaryModifier: 'OVI Attorney in Ohio',
-  title: 'Criminal Defense - OVI Attorney in Ohio | Mango Law',
-  description:
-    'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
-  image: '/images/brand/mango-logo-primary-fullcolor.svg',
-  type: 'website' as const,
-};
-
-function formatTitle({
-  title,
-  primaryKeyword,
-  secondaryModifier,
-}: {
-  title?: string;
-  primaryKeyword?: string;
-  secondaryModifier?: string;
-}) {
-  const basePrimary = (primaryKeyword || defaultSEO.primaryKeyword).trim();
-  const baseSecondary = (secondaryModifier || defaultSEO.secondaryModifier).trim();
-  let resolvedTitle = (title || '').trim();
-
-  if (!resolvedTitle) {
-    resolvedTitle = `${basePrimary} - ${baseSecondary}`;
-  }
-
-  if (TITLE_SUFFIX_REGEX.test(resolvedTitle)) {
-    return resolvedTitle.replace(TITLE_SUFFIX_REGEX, `| ${TITLE_SUFFIX}`);
-  }
-
-  return `${resolvedTitle} | ${TITLE_SUFFIX}`;
+  faqs?: FAQEntry[];
+  article?: ArticleData;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 export function SEO({
@@ -93,21 +61,23 @@ export function SEO({
   article,
   breadcrumbs,
 }: SEOProps) {
-  const location = useLocation();
+  const pathname = usePathname() ?? '';
 
-  const siteUrl = 'https://mango.law';
-  const fullTitle = formatTitle({ title, primaryKeyword, secondaryModifier });
-  const fullDescription = description ?? defaultSEO.description;
-  const fullImage = image
-    ? image.startsWith('http')
-      ? image
-      : `${siteUrl}${image}`
-    : `${siteUrl}${defaultSEO.image}`;
-  const fullUrl = canonicalUrl || url || `${siteUrl}${location.pathname}`;
+  const { fullTitle, fullDescription, fullImage, fullUrl } = resolveSeo({
+    title,
+    primaryKeyword,
+    secondaryModifier,
+    description,
+    image,
+    url,
+    canonicalUrl,
+    type,
+    pathname,
+  });
 
   useEffect(() => {
     // Development warnings for SEO best practices
-    if (import.meta.env.DEV) {
+    if (process.env.NODE_ENV === 'development') {
       if (fullTitle.length > 60) {
         console.warn(`SEO Warning: Title is ${fullTitle.length} characters. Recommended max is 60.`);
       }
@@ -163,78 +133,19 @@ export function SEO({
       document.head.appendChild(link);
     }
 
-    if (structuredData || faqs) {
+    const mergedData = mergeStructuredData(structuredData, faqs);
+    if (mergedData) {
       let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement | null;
       if (!script) {
         script = document.createElement('script');
         script.type = 'application/ld+json';
         document.head.appendChild(script);
       }
-
-      const combinedData = structuredData ? { ...structuredData } : null;
-
-      if (faqs && faqs.length > 0) {
-        const faqSchema = {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faqs.map((faq: { question: string; answer: string }) => ({
-            '@type': 'Question',
-            name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
-          })),
-        };
-
-        if (combinedData) {
-          // If there's already structured data, we can either wrap in @graph or add as separate script
-          // For simplicity and maximum compatibility, we'll use @graph if combinedData has @graph
-          if ((combinedData as any)['@graph']) {
-            (combinedData as any)['@graph'].push(faqSchema);
-            script.textContent = JSON.stringify(combinedData);
-          } else {
-            // Otherwise just wrap both in a graph
-            script.textContent = JSON.stringify({
-              '@context': 'https://schema.org',
-              '@graph': [combinedData, faqSchema],
-            });
-          }
-        } else {
-          script.textContent = JSON.stringify(faqSchema);
-        }
-      } else if (combinedData) {
-        script.textContent = JSON.stringify(combinedData);
-      }
-
+      script.textContent = JSON.stringify(mergedData);
     }
 
     if (article) {
-      const articleSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: article.headline,
-        author: {
-          '@type': 'Person',
-          name: article.author,
-        },
-        datePublished: article.datePublished,
-        dateModified: article.dateModified,
-        image: article.image || fullImage,
-        publisher: {
-          '@type': 'Organization',
-          name: 'Mango Law LLC',
-          logo: {
-            '@type': 'ImageObject',
-            url: 'https://mango.law/images/brand/mango-logo-primary-fullcolor.svg',
-          },
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': fullUrl,
-        },
-      };
-
+      const articleSchema = buildArticleSchema(article, fullUrl, fullImage);
       let articleScript = document.querySelector('script[data-schema="article"]') as HTMLScriptElement | null;
       if (!articleScript) {
         articleScript = document.createElement('script');
@@ -246,209 +157,25 @@ export function SEO({
     }
 
     if (breadcrumbs && breadcrumbs.length > 0) {
-      const breadcrumbSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: breadcrumbs.map((crumb, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          name: crumb.name,
-          item: crumb.item.startsWith('http') ? crumb.item : `${siteUrl}${crumb.item}`,
-        })),
-      };
-
-      let breadcrumbScript = document.querySelector('script[data-schema="breadcrumbs"]') as HTMLScriptElement | null;
-      if (!breadcrumbScript) {
-        breadcrumbScript = document.createElement('script');
-        breadcrumbScript.type = 'application/ld+json';
-        breadcrumbScript.setAttribute('data-schema', 'breadcrumbs');
-        document.head.appendChild(breadcrumbScript);
+      const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
+      if (breadcrumbSchema) {
+        let breadcrumbScript = document.querySelector('script[data-schema="breadcrumbs"]') as HTMLScriptElement | null;
+        if (!breadcrumbScript) {
+          breadcrumbScript = document.createElement('script');
+          breadcrumbScript.type = 'application/ld+json';
+          breadcrumbScript.setAttribute('data-schema', 'breadcrumbs');
+          document.head.appendChild(breadcrumbScript);
+        }
+        breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
       }
-      breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
     }
   }, [fullTitle, fullDescription, fullImage, fullUrl, type, noindex, structuredData, faqs, article, breadcrumbs]);
 
   useEffect(() => {
     trackPageView(fullTitle);
-  }, [location.pathname, location.search, location.hash, fullTitle]);
+  }, [pathname, fullTitle]);
 
   return null;
 }
 
-export const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'LegalService',
-      '@id': 'https://mango.law/#legalservice',
-      name: 'Mango Law LLC',
-      alternateName: 'Mango Law',
-      description:
-        'Criminal defense and OVI/DUI attorney serving Delaware and Franklin Counties in Ohio.',
-      url: 'https://mango.law',
-      logo: 'https://mango.law/images/brand/mango-logo-primary-fullcolor.svg',
-      image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
-      telephone: `+1${OFFICE_PHONE_TEL}`,
-      email: 'office@mango.law',
-      foundingDate: '2009-02',
-      foundingLocation: {
-        '@type': 'Place',
-        name: 'Delaware, Ohio',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Delaware',
-          addressRegion: 'OH',
-          addressCountry: 'US',
-        },
-      },
-      priceRange: '$$',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '46 W. Winter Street',
-        addressLocality: 'Delaware',
-        addressRegion: 'OH',
-        postalCode: '43015',
-        addressCountry: 'US',
-      },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: 40.2987,
-        longitude: -83.068,
-      },
-      areaServed: serviceAreas.map((area) => ({
-        '@type': area.type === 'city' ? 'City' : area.type === 'county' ? 'AdministrativeArea' : 'Place',
-        name: area.name,
-        '@id': `https://mango.law/locations#${area.slug}`,
-      })),
-      openingHoursSpecification: [
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: [
-            'https://schema.org/Monday',
-            'https://schema.org/Tuesday',
-            'https://schema.org/Wednesday',
-            'https://schema.org/Thursday',
-            'https://schema.org/Friday',
-          ],
-          opens: '09:00',
-          closes: '17:00',
-        },
-      ],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Legal Services',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'OVI/DUI Defense',
-              description: 'Defense representation for OVI and DUI charges in Ohio.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Criminal Defense',
-              description:
-                'Defense for drug crimes, assault, theft, weapons charges, and other criminal matters.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Protection Order Defense',
-              description: 'Defense against civil protection orders and domestic violence allegations.',
-            },
-          },
-        ],
-      },
-      founder: { '@id': 'https://mango.law/#dominic-mango' },
-    },
-    {
-      '@type': 'Person',
-      '@id': 'https://mango.law/#dominic-mango',
-      name: 'Dominic Mango',
-      alternateName: 'Nick Mango',
-      jobTitle: 'Criminal Defense Attorney',
-      url: 'https://mango.law/about',
-      image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
-      worksFor: { '@id': 'https://mango.law/#legalservice' },
-      hasOccupation: {
-        '@type': 'Occupation',
-        name: 'Attorney',
-      },
-      hasCredential: {
-        '@type': 'EducationalOccupationalCredential',
-        name: 'Ohio Bar License',
-        credentialCategory: 'Bar Admission',
-        recognizedBy: {
-          '@type': 'Organization',
-          name: 'Supreme Court of Ohio',
-        },
-        dateIssued: '1999',
-      },
-      alumniOf: {
-        '@type': 'EducationalOrganization',
-        name: 'The Ohio State University Moritz College of Law',
-      },
-      knowsAbout: [
-        'Criminal Defense',
-        'OVI Defense',
-        'DUI Defense',
-        'Drug Crime Defense',
-        'White Collar Defense',
-      ],
-    },
-  ],
-};
-
-export const attorneySchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  '@id': 'https://mango.law/#dominic-mango',
-  name: 'Dominic Mango',
-  alternateName: 'Nick Mango',
-  description:
-    'Experienced criminal defense attorney with 26+ years of Ohio criminal law experience in Delaware and Franklin Counties.',
-  url: 'https://mango.law/about',
-  image: 'https://mango.law/images/headshots/nick-mango-hero.jpg',
-  email: 'office@mango.law',
-  telephone: `+1${OFFICE_PHONE_TEL}`,
-  worksFor: { '@id': 'https://mango.law/#legalservice' },
-  hasOccupation: {
-    '@type': 'Occupation',
-    name: 'Attorney',
-  },
-  hasCredential: {
-    '@type': 'EducationalOccupationalCredential',
-    name: 'Ohio Bar License',
-    credentialCategory: 'Bar Admission',
-    recognizedBy: {
-      '@type': 'Organization',
-      name: 'Supreme Court of Ohio',
-    },
-    dateIssued: '1999',
-  },
-  alumniOf: {
-    '@type': 'EducationalOrganization',
-    name: 'The Ohio State University Moritz College of Law',
-  },
-  knowsAbout: [
-    'Criminal Defense',
-    'OVI Defense',
-    'DUI Defense',
-    'Drug Crime Defense',
-    'Assault Defense',
-    'Domestic Violence Defense',
-    'Sex Crime Defense',
-    'White Collar Crime Defense',
-    'Protection Order Defense',
-  ],
-  award: [
-    'Certified in BAC DataMaster Operation',
-    'NHTSA Field Sobriety Test Certification',
-  ],
-};
+export { localBusinessSchema, attorneySchema };

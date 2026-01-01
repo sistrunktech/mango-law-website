@@ -1,5 +1,5 @@
 import { Phone, Star, BookOpen, MessageSquare } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import ContactForm from './ContactForm';
 
 const practiceAreas = [
@@ -79,7 +79,7 @@ export default function ReviewsSidebar() {
           {relatedResources.map((resource) => (
             <Link
               key={resource.href}
-              to={resource.href}
+              href={resource.href}
               className="group block rounded-lg bg-brand-offWhite p-3 transition-all hover:shadow-sm"
             >
               <p className="font-semibold text-brand-black transition-colors group-hover:text-brand-leaf">
@@ -101,7 +101,7 @@ export default function ReviewsSidebar() {
           {practiceAreas.map((area) => (
             <Link
               key={area.href}
-              to={area.href}
+              href={area.href}
               className="group flex items-center justify-between rounded-lg bg-white px-4 py-3 text-sm font-medium text-brand-black transition-all hover:shadow-sm hover:text-brand-leaf"
             >
               {area.name}
@@ -112,7 +112,7 @@ export default function ReviewsSidebar() {
           ))}
         </div>
         <Link
-          to="/practice-areas"
+          href="/practice-areas"
           className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
         >
           View all practice areas

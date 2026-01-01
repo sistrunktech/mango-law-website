@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
 import { blogPosts, type BlogPost } from '../data/blogPosts';
 
@@ -52,7 +52,7 @@ export default function BlogSection() {
             </p>
           </div>
           <Link
-            to="/blog"
+            href="/blog"
             className="group hidden items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf md:inline-flex"
           >
             View all articles
@@ -64,7 +64,7 @@ export default function BlogSection() {
           {recentPosts.map((post) => (
             <Link
               key={post.slug}
-              to={`/blog/${post.slug}`}
+              href={`/blog/${post.slug}`}
               className="group card card-hover p-0 overflow-hidden"
             >
                 {post.imageUrl && (
@@ -115,7 +115,7 @@ export default function BlogSection() {
         </div>
 
         <div className="mt-8 text-center md:hidden">
-          <Link to="/blog" className="btn btn-secondary">
+          <Link href="/blog" className="btn btn-secondary">
             View all articles
           </Link>
         </div>

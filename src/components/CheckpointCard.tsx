@@ -1,3 +1,5 @@
+'use client';
+
 import { MapPin, Clock, Calendar, AlertCircle, ExternalLink, Shield } from 'lucide-react';
 import {
   formatCheckpointDateRange,

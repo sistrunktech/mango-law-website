@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Scale, ExternalLink, ArrowRight } from 'lucide-react';
 import { getStatute, getRelatedStatutes } from '../data/statutes';
 
@@ -46,7 +46,7 @@ export default function LegalCodeCallout({
 
       <div className="flex flex-wrap gap-3">
         <Link
-          to={`/glossary#${statute.id}`}
+          href={`/glossary#${statute.id}`}
           className="inline-flex items-center gap-2 rounded-lg bg-brand-leaf px-5 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-brand-forest hover:shadow-md"
         >
           View in legal glossary
@@ -72,7 +72,7 @@ export default function LegalCodeCallout({
             {relatedStatutes.map((related) => (
               <Link
                 key={related.section}
-                to={`/glossary#${related.id}`}
+                href={`/glossary#${related.id}`}
                 className="group flex items-start gap-3 rounded-lg border border-brand-black/5 bg-white p-4 transition-all hover:border-brand-leaf/30 hover:shadow-sm"
               >
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-brand-leaf/10 transition-colors group-hover:bg-brand-leaf/20">

@@ -1,3 +1,5 @@
+'use client';
+
 import { FormEvent, useState } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { X, Mail, Download, Link as LinkIcon, Github, Copy, Check, Lock, Calendar, Eye } from 'lucide-react';
 import Tooltip from './Tooltip';

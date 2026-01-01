@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { Sparkles, Info, Zap, DollarSign, TrendingUp } from 'lucide-react';

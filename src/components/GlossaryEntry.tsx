@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Scale, ExternalLink, ArrowRight, BookMarked, CheckCircle, FileText } from 'lucide-react';
 import { getRelatedStatutes, type OhioStatute } from '../data/statutes';
 
@@ -123,7 +123,7 @@ export default function GlossaryEntry({
               return (
                 <Link
                   key={area}
-                  to={practiceInfo.href}
+                  href={practiceInfo.href}
                   className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-brand-leaf/20 bg-brand-leaf/5 px-4 py-2 text-sm font-semibold text-brand-leaf transition-all hover:border-brand-leaf hover:bg-brand-leaf/10"
                 >
                   {practiceInfo.title}

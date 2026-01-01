@@ -114,8 +114,8 @@ export async function generateHandoffDocument(
     content += `| Package | Version | Purpose |\n`;
     content += `|---------|---------|----------|\n`;
     const keyDeps = [
+      { name: 'next', purpose: 'SSR/SSG framework' },
       { name: 'react', purpose: 'UI framework' },
-      { name: 'react-router-dom', purpose: 'Client-side routing' },
       { name: '@supabase/supabase-js', purpose: 'Backend & database' },
       { name: 'tailwindcss', purpose: 'Styling framework' },
       { name: 'lucide-react', purpose: 'Icon library' },

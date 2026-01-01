@@ -2,6 +2,18 @@
 
 ## 2026-01-01
 
+### Next.js SSR/SSG Migration (WIP)
+- Add Next.js App Router with route groups for public and internal pages.
+- Pre-render metadata + JSON-LD via `src/lib/seo-metadata.ts` and `src/components/StructuredData.tsx`.
+- Add static blog params/metadata and server-side FAQ/Breadcrumb schema for practice + intent pages.
+- Remove Vite entrypoints and update scripts/deps for Next build.
+- Update client env names to `NEXT_PUBLIC_*` in code + `.env.example`.
+
+### OVI SEO Regional Intent Pages (PR #47)
+- Add specialized OVI defense pages for **Delaware**, **Marysville**, **Dublin**, **Powell**, **Westerville**, **Sunbury**, and **Lewis Center**.
+- Implement unique local intent copy and specific court metadata for each region.
+- fix: remove decorative arrow tokens from link text to improve screen reader clarity.
+
 ### SEO Quick Wins
 - Sync LegalService `areaServed` with `src/data/serviceAreas.ts` for schema accuracy.
 - Add FAQPage, Article, and BreadcrumbList schema automation in `src/lib/seo.tsx`, including standalone article/breadcrumb emission.
@@ -15,6 +27,7 @@
 - Deploy FAQ/breadcrumb schema on practice area pages and core routes.
 - Add breadcrumb schema on About/Reviews/Contact/Blog/Glossary and core pages.
 - Apply `noindex` directives to admin/auth/internal documentation pages.
+- Log SEO quick wins and technical backlog in `docs/TROUBLE-TICKETS.md`.
 
 ## 2025-12-28
 

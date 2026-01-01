@@ -1,6 +1,7 @@
 # Dependencies and builds
 node_modules
 dist
+.next
 .tsbuildinfo
 vite.config.js
 vite.config.d.ts

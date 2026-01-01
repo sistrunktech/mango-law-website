@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { megaMenuSections } from '../data/megaMenuData';
 import { useEffect, useState, useRef } from 'react';
@@ -170,7 +172,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
                   {megaMenuSections.practiceAreas.items.map((item) => (
                     <Link
                       key={item.href}
-                      to={item.href}
+                      href={item.href}
                       className="group flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-brand-mango/10"
                       onClick={() => setIsOpen(false)}
                     >
@@ -197,7 +199,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
                   {megaMenuSections.resources.items.map((item) => (
                     <Link
                       key={item.href}
-                      to={item.href}
+                      href={item.href}
                       className="group flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-brand-mango/10"
                       onClick={() => setIsOpen(false)}
                     >
@@ -224,7 +226,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
                   {megaMenuSections.locations.items.slice(0, 4).map((item) => (
                     <Link
                       key={item.href}
-                      to={item.href}
+                      href={item.href}
                       className="group flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-brand-mango/10"
                       onClick={() => setIsOpen(false)}
                     >
@@ -244,7 +246,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
                 {/* View All Locations */}
                 <div className="mt-3">
                   <Link
-                    to="/locations"
+                    href="/locations"
                     className="block text-center text-sm font-semibold text-brand-mango transition-colors hover:text-brand-gold"
                     onClick={() => setIsOpen(false)}
                   >
@@ -257,7 +259,7 @@ export default function MegaMenu({ variant = 'dark' }: { variant?: 'dark' | 'lig
                   <p className="text-sm font-semibold text-brand-offWhite">Need immediate help?</p>
                   <p className="mt-1 text-xs text-brand-offWhite/70">Get a free consultation today</p>
                   <Link
-                    to="/contact"
+                    href="/contact"
                     className="mt-3 inline-block rounded-lg bg-brand-mango px-4 py-2 text-sm font-bold text-brand-black transition-all hover:bg-brand-gold"
                     onClick={() => setIsOpen(false)}
                   >
