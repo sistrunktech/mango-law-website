@@ -8,6 +8,8 @@ import ScraperLogsViewer from '../components/ScraperLogsViewer';
 import AdminAuth from '../components/AdminAuth';
 import CheckpointAnnouncementsManager from '../components/admin/CheckpointAnnouncementsManager';
 
+import { SEO } from '../lib/seo';
+
 export default function CheckpointAdminPage() {
   const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
   const [loading, setLoading] = useState(true);
@@ -116,6 +118,7 @@ export default function CheckpointAdminPage() {
 
   return (
     <AdminAuth>
+      <SEO title="Checkpoint Admin | Mango Law LLC" noindex={true} />
       <div className="min-h-screen bg-brand-offWhite py-12">
       <div className="container max-w-6xl">
         <div className="mb-8 flex items-center justify-between">

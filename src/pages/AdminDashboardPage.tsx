@@ -25,6 +25,8 @@ import SEORankManager from '../components/admin/SEORankManager';
 
 type Tab = 'blog' | 'contacts' | 'checkpoints' | 'docs' | 'campaigns' | 'reviews' | 'social' | 'seo';
 
+import { SEO } from '../lib/seo';
+
 export default function AdminDashboardPage() {
   const { user, loading, signOut } = useAuth();
   const navigate = useNavigate();
@@ -66,6 +68,7 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#0F0F0F]">
+      <SEO title="Admin Dashboard | Mango Law LLC" noindex={true} />
       <header className="bg-[#1A1A1A] border-b border-[#2A2A2A] sticky top-0 z-50 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">

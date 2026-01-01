@@ -7,6 +7,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { generatePDF, downloadPDF } from '../lib/handoff/pdfGenerator';
 
+import { SEO } from '../lib/seo';
+
 export default function HandoffSharePage() {
   const { token } = useParams<{ token: string }>();
   const [loading, setLoading] = useState(true);
@@ -156,6 +158,7 @@ export default function HandoffSharePage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO title={`${document.title} | Mango Law Shared Document`} noindex={true} />
       <div className="print:hidden sticky top-0 bg-slate-800 border-b border-slate-700 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">

@@ -4,6 +4,8 @@ import { Mail, ArrowLeft, CheckCircle } from 'lucide-react';
 import { supabase, supabaseProjectRef } from '../lib/supabaseClient';
 import MangoIcon from '../components/MangoIcon';
 
+import { SEO } from '../lib/seo';
+
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -94,7 +96,8 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1B4332] via-[#2F5F4F] to-[#1B4332] flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center p-4">
+      <SEO title="Forgot Password | Mango Law LLC" noindex={true} />
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">

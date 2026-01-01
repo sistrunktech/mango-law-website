@@ -1,9 +1,18 @@
-import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
 import PageHero from '../components/PageHero';
+import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
+import { SEO } from '../lib/seo';
 
 export default function PracticeAreasPage() {
   return (
     <>
+      <SEO
+        title="Criminal Defense Practice Areas | Mango Law LLC"
+        description="Focused on criminal defense and OVI/DUI in Delaware, Ohio. Explore our practice areas and schedule a free consultation."
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+        ]}
+      />
       <PageHero
         eyebrow="Practice Areas"
         title="Focused on criminal defense and OVI in Delaware, Ohio."

@@ -11,9 +11,9 @@ User-agent: GPTBot
 User-agent: meta-externalagent
 Disallow: /
 
-# Global rules
+# Global Rules
 User-agent: *
-# Cloudflare content signals (AI Audit)
+# Cloudflare Content Signals (AI Audit)
 # search: yes, ai-train: no
 Disallow: /admin
 Disallow: /admin/

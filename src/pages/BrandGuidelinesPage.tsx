@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { SEO } from '../lib/seo';
 
 export default function BrandGuidelinesPage() {
   return (
     <>
+      <SEO title="Brand Guidelines | Mango Law LLC" noindex={true} />
       <PageHero
         eyebrow="Brand Guidelines"
         title="Mango Law Brand System"

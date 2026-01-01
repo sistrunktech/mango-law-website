@@ -4,12 +4,21 @@ import CTASection from '../components/CTASection';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { Quote } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
+import { SEO } from '../lib/seo';
 
 export default function ReviewsPage() {
   const [featured, ...rest] = testimonials;
 
   return (
     <>
+      <SEO
+        title="Client Reviews | Mango Law LLC"
+        description="Read what past clients have to say about working with criminal defense attorney Dominic Mango in Delaware and Franklin Counties."
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Reviews', item: '/reviews' },
+        ]}
+      />
       <PageHero
         eyebrow="Reviews"
         title="What clients say about working with Mango Law."

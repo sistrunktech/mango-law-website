@@ -3,6 +3,7 @@ import { Search, BookOpen, Filter } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import GlossaryEntry from '../components/GlossaryEntry';
 import { getAllStatutes } from '../data/statutes';
+import { SEO } from '../lib/seo';
 
 const practiceAreaFilters = [
   { value: 'all', label: 'All Practice Areas' },
@@ -47,6 +48,14 @@ export default function GlossaryPage() {
 
   return (
     <>
+      <SEO
+        title="Ohio Revised Code Glossary | Criminal & Traffic Law Terms"
+        description="A plain-English guide to Ohio criminal and civil statutes. Search by statute number, practice area, or keyword."
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Glossary', item: '/glossary' },
+        ]}
+      />
       <PageHero
         eyebrow="Legal Reference"
         title="Ohio Revised Code Glossary"

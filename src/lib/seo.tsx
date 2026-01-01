@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { OFFICE_PHONE_TEL } from './contactInfo';
+import { serviceAreas } from '../data/serviceAreas';
 
 function trackPageView(pageTitle: string) {
   const page_location = window.location.href;
@@ -27,6 +28,15 @@ export interface SEOProps {
   type?: 'website' | 'article';
   noindex?: boolean;
   structuredData?: object;
+  faqs?: Array<{ question: string; answer: string }>;
+  article?: {
+    headline: string;
+    author: string;
+    datePublished: string;
+    dateModified: string;
+    image?: string;
+  };
+  breadcrumbs?: Array<{ name: string; item: string }>;
 }
 
 const defaultSEO = {
@@ -46,6 +56,9 @@ export function SEO({
   type = 'website',
   noindex = false,
   structuredData,
+  faqs,
+  article,
+  breadcrumbs,
 }: SEOProps) {
   const location = useLocation();
 
@@ -60,6 +73,19 @@ export function SEO({
   const fullUrl = canonicalUrl || url || `${siteUrl}${location.pathname}`;
 
   useEffect(() => {
+    // Development warnings for SEO best practices
+    if (import.meta.env.DEV) {
+      if (fullTitle.length > 60) {
+        console.warn(`SEO Warning: Title is ${fullTitle.length} characters. Recommended max is 60.`);
+      }
+      if (fullDescription.length > 160) {
+        console.warn(`SEO Warning: Description is ${fullDescription.length} characters. Recommended max is 160.`);
+      }
+      if (fullDescription.length < 50 && fullDescription !== defaultSEO.description) {
+        console.warn(`SEO Warning: Description is very short (${fullDescription.length} chars). Recommended min is 50.`);
+      }
+    }
+
     document.title = fullTitle;
 
     const metaTags: Array<{ name?: string; property?: string; content: string }> = [
@@ -104,16 +130,110 @@ export function SEO({
       document.head.appendChild(link);
     }
 
-    if (structuredData) {
+    if (structuredData || faqs) {
       let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement | null;
       if (!script) {
         script = document.createElement('script');
         script.type = 'application/ld+json';
         document.head.appendChild(script);
       }
-      script.textContent = JSON.stringify(structuredData);
+
+      const combinedData = structuredData ? { ...structuredData } : null;
+
+      if (faqs && faqs.length > 0) {
+        const faqSchema = {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqs.map((faq: { question: string; answer: string }) => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: faq.answer,
+            },
+          })),
+        };
+
+        if (combinedData) {
+          // If there's already structured data, we can either wrap in @graph or add as separate script
+          // For simplicity and maximum compatibility, we'll use @graph if combinedData has @graph
+          if ((combinedData as any)['@graph']) {
+            (combinedData as any)['@graph'].push(faqSchema);
+            script.textContent = JSON.stringify(combinedData);
+          } else {
+            // Otherwise just wrap both in a graph
+            script.textContent = JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [combinedData, faqSchema],
+            });
+          }
+        } else {
+          script.textContent = JSON.stringify(faqSchema);
+        }
+      } else if (combinedData) {
+        script.textContent = JSON.stringify(combinedData);
+      }
+
     }
-  }, [fullTitle, fullDescription, fullImage, fullUrl, type, noindex, structuredData]);
+
+    if (article) {
+      const articleSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: article.headline,
+        author: {
+          '@type': 'Person',
+          name: article.author,
+        },
+        datePublished: article.datePublished,
+        dateModified: article.dateModified,
+        image: article.image || fullImage,
+        publisher: {
+          '@type': 'Organization',
+          name: 'Mango Law LLC',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://mango.law/images/brand/mango-logo-primary-fullcolor.svg',
+          },
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': fullUrl,
+        },
+      };
+
+      let articleScript = document.querySelector('script[data-schema="article"]') as HTMLScriptElement | null;
+      if (!articleScript) {
+        articleScript = document.createElement('script');
+        articleScript.type = 'application/ld+json';
+        articleScript.setAttribute('data-schema', 'article');
+        document.head.appendChild(articleScript);
+      }
+      articleScript.textContent = JSON.stringify(articleSchema);
+    }
+
+    if (breadcrumbs && breadcrumbs.length > 0) {
+      const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((crumb, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: crumb.name,
+          item: crumb.item.startsWith('http') ? crumb.item : `${siteUrl}${crumb.item}`,
+        })),
+      };
+
+      let breadcrumbScript = document.querySelector('script[data-schema="breadcrumbs"]') as HTMLScriptElement | null;
+      if (!breadcrumbScript) {
+        breadcrumbScript = document.createElement('script');
+        breadcrumbScript.type = 'application/ld+json';
+        breadcrumbScript.setAttribute('data-schema', 'breadcrumbs');
+        document.head.appendChild(breadcrumbScript);
+      }
+      breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
+    }
+  }, [fullTitle, fullDescription, fullImage, fullUrl, type, noindex, structuredData, faqs, article, breadcrumbs]);
 
   useEffect(() => {
     trackPageView(fullTitle);
@@ -162,78 +282,11 @@ export const localBusinessSchema = {
         latitude: 40.2987,
         longitude: -83.068,
       },
-      areaServed: [
-        {
-          '@type': 'City',
-          name: 'Delaware',
-          '@id': 'https://en.wikipedia.org/wiki/Delaware,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Columbus',
-          '@id': 'https://en.wikipedia.org/wiki/Columbus,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Dublin',
-          '@id': 'https://en.wikipedia.org/wiki/Dublin,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Westerville',
-          '@id': 'https://en.wikipedia.org/wiki/Westerville,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Marysville',
-          '@id': 'https://en.wikipedia.org/wiki/Marysville,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Gahanna',
-          '@id': 'https://en.wikipedia.org/wiki/Gahanna,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Grove City',
-          '@id': 'https://en.wikipedia.org/wiki/Grove_City,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Reynoldsburg',
-          '@id': 'https://en.wikipedia.org/wiki/Reynoldsburg,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Upper Arlington',
-          '@id': 'https://en.wikipedia.org/wiki/Upper_Arlington,_Ohio',
-        },
-        {
-          '@type': 'City',
-          name: 'Hilliard',
-          '@id': 'https://en.wikipedia.org/wiki/Hilliard,_Ohio',
-        },
-        {
-          '@type': 'AdministrativeArea',
-          name: 'Delaware County',
-        },
-        {
-          '@type': 'AdministrativeArea',
-          name: 'Franklin County',
-        },
-        {
-          '@type': 'AdministrativeArea',
-          name: 'Union County',
-        },
-        {
-          '@type': 'AdministrativeArea',
-          name: 'Morrow County',
-        },
-        {
-          '@type': 'AdministrativeArea',
-          name: 'Marion County',
-        },
-      ],
+      areaServed: serviceAreas.map((area) => ({
+        '@type': area.type === 'city' ? 'City' : area.type === 'county' ? 'AdministrativeArea' : 'Place',
+        name: area.name,
+        '@id': `https://mango.law/locations#${area.slug}`,
+      })),
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',

@@ -6,6 +6,7 @@ import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { SEO } from '../lib/seo';
 
 const faqs = [
   {
@@ -53,6 +54,17 @@ const faqs = [
 export default function WhiteCollarPage() {
   return (
     <>
+      <SEO
+        title="White Collar Crimes Attorney Delaware, OH | Mango Law LLC"
+        description="Strategic defense for fraud, embezzlement, and white collar investigations. Former prosecutor with 26+ years of experience in Delaware and Franklin Counties."
+        image="/images/generated/white-collar-defense-hero.png"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+          { name: 'White Collar Crimes', item: '/white-collar-crimes-attorney-delaware-oh' },
+        ]}
+      />
       <PageHero
         eyebrow="White Collar Crimes"
         title="Strategic defense for white collar investigations and charges"

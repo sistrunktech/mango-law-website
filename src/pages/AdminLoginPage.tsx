@@ -4,6 +4,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { Shield, AlertCircle } from 'lucide-react';
 import { supabaseProjectRef } from '../lib/supabaseClient';
 
+import { SEO } from '../lib/seo';
+
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +30,8 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1B4332] via-[#2F5F4F] to-[#1B4332] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center p-4">
+      <SEO title="Admin Login | Mango Law LLC" noindex={true} />
       <div className="max-w-md w-full">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/20">
           <div className="flex flex-col items-center mb-8">

@@ -2,10 +2,19 @@ import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { SEO } from '../lib/seo';
 
 export default function OfCounselPage() {
   return (
     <>
+      <SEO
+        title="Geoffrey Spall - Of Counsel | Mango Law LLC"
+        description="Meet Geoffrey Spall, Of Counsel to Mango Law LLC, providing additional support and expertise across our criminal defense practice areas."
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Of Counsel', item: '/of-counsel' },
+        ]}
+      />
       <PageHero
         eyebrow="Of Counsel"
         title="Geoffrey Spall — Of Counsel to Mango Law"

@@ -10,6 +10,10 @@ export default function PrivacyPage() {
       <SEO
         title="Privacy Policy | Ohio Criminal Defense Attorney - Mango Law LLC"
         description="Read how Mango Law LLC collects, uses, and protects information on mango.law."
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Privacy Policy', item: '/privacy' },
+        ]}
       />
       <h1 className="text-3xl font-bold text-brand-black">{doc.title}</h1>
       <p className="mt-2 text-sm text-brand-black/60">

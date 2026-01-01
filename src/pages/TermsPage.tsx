@@ -10,6 +10,10 @@ export default function TermsPage() {
       <SEO
         title="Terms of Use | Mango Law LLC - Ohio Criminal Defense"
         description="Terms of use for mango.law, including jurisdiction, confidentiality, and legal disclaimer."
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Terms of Use', item: '/terms' },
+        ]}
       />
       <h1 className="text-3xl font-bold text-brand-black">{doc.title}</h1>
       <p className="mt-2 text-sm text-brand-black/60">Mango Law LLC - Ohio Criminal Defense</p>

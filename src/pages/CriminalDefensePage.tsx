@@ -58,6 +58,12 @@ export default function CriminalDefensePage() {
         title="Criminal Defense Attorney Delaware, OH | Mango Law LLC"
         description="Aggressive criminal defense for drug crimes, assault, theft, weapons charges, and more. Former prosecutor with 26+ years of Ohio criminal law experience defending clients in Delaware and Franklin Counties."
         image="/images/generated/criminal-defense-hero.png"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+          { name: 'Criminal Defense', item: '/criminal-defense-delaware-oh' },
+        ]}
       />
       <PageHero
         eyebrow="Criminal Defense"
