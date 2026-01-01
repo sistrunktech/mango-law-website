@@ -1039,6 +1039,9 @@ After schema and favicon changes, indexing quality and rich results coverage mus
 - Favicon updates observed in SERP appearance (or documented as pending).
 - CWV metrics monitored post-deploy and recorded in notes.
 
+### Tracking
+- Log updates in `docs/performance/search-console/2026-01-01.md`.
+
 ---
 
 ## Collaboration Notes (Codex / Agents)
