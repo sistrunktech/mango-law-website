@@ -52,7 +52,15 @@ function createStaticServer() {
     }
 
     const requestPath = decodeURIComponent(req.url.split('?')[0]);
-    let filePath = path.join(DIST_DIR, requestPath);
+    const safePath = path
+      .normalize(requestPath)
+      .replace(/^(\.\.(\/|\\|$))+/, '')
+      .replace(/^\/+/, '');
+    let filePath = path.join(DIST_DIR, safePath);
+
+    if (!filePath.startsWith(DIST_DIR)) {
+      filePath = path.join(DIST_DIR, 'index.html');
+    }
 
     try {
       const stats = await stat(filePath);
