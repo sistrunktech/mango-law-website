@@ -21,6 +21,9 @@ const GlossaryPage = lazy(() => import('./pages/GlossaryPage'));
 const OfCounselPage = lazy(() => import('./pages/OfCounselPage'));
 const ServiceAreasPage = lazy(() => import('./pages/ServiceAreasPage'));
 const DUICheckpointsPage = lazy(() => import('./pages/DUICheckpointsPage'));
+const OviCheckpointsOhioPage = lazy(() => import('./pages/OviCheckpointsOhioPage'));
+const DelawareOhioOviLawyerPage = lazy(() => import('./pages/DelawareOhioOviLawyerPage'));
+const HolidayOviEnforcementOhioPage = lazy(() => import('./pages/HolidayOviEnforcementOhioPage'));
 const CheckpointAdminPage = lazy(() => import('./pages/CheckpointAdminPage'));
 const AdminLoginPage = lazy(() => import('./pages/AdminLoginPage'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
@@ -76,6 +79,9 @@ function App() {
                   <Route path="/of-counsel" element={<OfCounselPage />} />
                   <Route path="/locations" element={<ServiceAreasPage />} />
                   <Route path="/resources/dui-checkpoints" element={<DUICheckpointsPage />} />
+                  <Route path="/ovi-checkpoints-ohio" element={<OviCheckpointsOhioPage />} />
+                  <Route path="/delaware-ohio-ovi-lawyer" element={<DelawareOhioOviLawyerPage />} />
+                  <Route path="/holiday-ovi-enforcement-ohio" element={<HolidayOviEnforcementOhioPage />} />
                   <Route path="/admin/checkpoints" element={<CheckpointAdminPage />} />
                   <Route path="/brand-guide" element={<BrandGuidelinesPage />} />
                   <Route path="/brand-guidelines" element={<BrandGuidelinesPage />} />

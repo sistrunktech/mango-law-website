@@ -256,6 +256,47 @@ export default function OviDuiPage() {
         </div>
       </section>
 
+      <section className="section bg-brand-offWhite">
+        <div className="container">
+          <div className="mb-8 text-center">
+            <h2 className="font-display text-display-sm md:text-display-md mb-3">OVI resources</h2>
+            <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
+              Practical guidance for checkpoints, holiday enforcement, and Delaware County representation.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: 'Ohio OVI checkpoints',
+                description: 'How checkpoints work, your rights, and what to expect during a stop.',
+                href: '/ovi-checkpoints-ohio',
+              },
+              {
+                title: 'Holiday enforcement',
+                description: 'What changes during holiday patrols and how to plan ahead.',
+                href: '/holiday-ovi-enforcement-ohio',
+              },
+              {
+                title: 'Delaware OVI lawyer',
+                description: 'Local defense strategy built for Delaware County courts.',
+                href: '/delaware-ohio-ovi-lawyer',
+              },
+            ].map((item) => (
+              <div key={item.title} className="card bg-white border border-brand-black/5 p-6">
+                <h3 className="text-lg font-semibold text-brand-black">{item.title}</h3>
+                <p className="mt-2 text-sm text-brand-black/70">{item.description}</p>
+                <Link
+                  to={item.href}
+                  className="mt-4 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf"
+                >
+                  Learn more ->
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <FAQSection faqs={faqs} title="OVI / DUI FAQs" />
 
       <ServiceAreasSection practiceArea="OVI / DUI Defense" />
