@@ -986,7 +986,8 @@ Move to SSR/SSG (Astro or Next.js) so metadata and JSON-LD render in the initial
 - Next.js app router scaffolded with server metadata (`src/lib/seo-metadata.ts`) and JSON-LD (`src/components/StructuredData.tsx`).
 - Blog routes now emit Article schema + metadata via `generateMetadata` and `generateStaticParams`.
 - Practice area + intent pages emit FAQ/Breadcrumb schema server-side.
-- Remaining: finalize deployment config + run full build/test before cutover.
+- Build completed on `codex/nextjs-migration` (warnings only: `@next/next/no-img-element`, hooks deps).
+- Remaining: finalize deployment config and clear image warnings via `codex/next-image-migration`.
 
 ---
 

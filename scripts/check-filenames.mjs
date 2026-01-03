@@ -6,6 +6,7 @@ const repoRoot = process.cwd();
 
 const EXCLUDED_DIRS = new Set(['.git', 'node_modules', 'dist']);
 const SAFE_PATH_RE = /^[A-Za-z0-9._/-]+$/;
+const NEXT_APP_SAFE_RE = /^[A-Za-z0-9._/()[\]-]+$/;
 
 function listTrackedPaths() {
   try {
@@ -49,7 +50,9 @@ const tracked = listTrackedPaths();
 const paths = tracked ?? [...walk(repoRoot)];
 
 for (const relPath of paths) {
-  if (!SAFE_PATH_RE.test(relPath)) bad.push({ relPath, offenders: getOffendingChars(relPath) });
+  const isNextAppRoute = relPath.startsWith('src/app/');
+  const matcher = isNextAppRoute ? NEXT_APP_SAFE_RE : SAFE_PATH_RE;
+  if (!matcher.test(relPath)) bad.push({ relPath, offenders: getOffendingChars(relPath) });
 }
 
 if (bad.length) {

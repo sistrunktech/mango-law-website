@@ -12,7 +12,8 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 ## Hosting (Cloudflare Pages + Bolt Legacy)
 ### Cloudflare Pages (target)
 - Deploy the Next.js build to Cloudflare Pages for SSR/SSG support.
-- Build command: `npm run build` (then `npx @cloudflare/next-on-pages` if using the adapter).
+- Build command: `npm run build && npx @cloudflare/next-on-pages` (recommended for Pages).
+- Build output directory: `.vercel/output`.
 - Supabase Edge Functions + DB migrations are still deployed separately via Supabase CLI/Dashboard.
 
 ### Bolt (legacy during migration)
@@ -22,6 +23,13 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 ### Deploy verification (important)
 - The live site may be served via a CDN edge layer; if you don’t see recent changes, assume the **frontend deploy is stale** until proven otherwise.
 - Quick check: View Source on `https://mango.law` and confirm that HTML reflects the latest build metadata/scripts.
+
+### Cutover checklist (Next.js → Cloudflare Pages)
+- Merge order: `codex/nextjs-migration` → `codex/docs-nextjs-alignment` → `codex/lint-cleanup` → `codex/next-image-migration`.
+- Ensure Pages env vars match `.env.example` (all `NEXT_PUBLIC_*`, plus server-only keys for Edge Functions).
+- Configure Pages build to use Node 20, then run the build command above and verify no build errors.
+- Update DNS (Cloudflare): swap `@` + `www` from Bolt to the Pages target only after CI and a preview deploy are green.
+- Validate `/admin/*` routes, `/blog/:slug`, and `/resources/dui-checkpoints` on the new deployment before disabling Bolt.
 
 ## Environment Variables
 - Client-exposed (`NEXT_PUBLIC_`): `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`, `NEXT_PUBLIC_MAPBOX_STYLE_URL` (optional).
@@ -131,6 +139,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
 ## CI/CD
 - Build-only workflow in `.github/workflows/ci.yml` (Node 20, npm ci, npm run build).
 - `npm run build` runs a preflight filename check (`scripts/check-filenames.mjs`) to prevent publish failures caused by unsupported filename characters.
+- Next.js route group names under `src/app` use `()` and `[]`; the filename check allows those characters only within `src/app`.
 - Bundle analysis (`npm run analyze`) uses a dynamic import of `rollup-plugin-visualizer` so Bolt publish/build environments without dev dependencies don’t fail.
 - **Staging/Prod Deploy**: Staging deploys are automated via Bolt/Netlify on non-main branches. Production deploys to `https://mango.law` occur on merges to `main`. Database migrations must be pushed manually via `supabase db push` before cutover.
 
