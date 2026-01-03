@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
@@ -96,13 +97,13 @@ export default function WhiteCollarPage() {
                     challenge the government's evidence, and negotiate with prosecutors to protect your freedom and your future.
                   </p>
                 </div>
-                <img
+                <Image
                   src="/images/generated/white-collar-defense-hero.png"
                   alt="White collar crime defense with financial documents and business records review"
                   className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
                   loading="lazy"
-                  width="1200"
-                  height="900"
+                  width={1200}
+                  height={900}
                 />
               </div>
 

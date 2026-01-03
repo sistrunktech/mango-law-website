@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
@@ -35,9 +36,11 @@ export default function OfCounselPage() {
               <div className="sticky top-24">
                 <div className="relative overflow-hidden rounded-2xl shadow-soft-lg" style={{ background: 'linear-gradient(135deg, #2C3E50 0%, #34495E 100%)' }}>
                   <div className="p-4">
-                    <img
+                    <Image
                       src="/images/geoff_spall_.webp"
                       alt="Geoffrey Spall, Attorney"
+                      width={1500}
+                      height={1999}
                       className="w-full h-auto rounded-xl object-cover max-h-[500px]"
                     />
                   </div>

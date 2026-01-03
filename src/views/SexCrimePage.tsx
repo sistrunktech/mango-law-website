@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
@@ -97,13 +98,13 @@ export default function SexCrimePage() {
                     evidence, and fight for your rights at every stage.
                   </p>
                 </div>
-                <img
+                <Image
                   src="/images/generated/sex-crimes-defense-hero.png"
                   alt="Confidential attorney-client consultation in private office setting"
                   className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
                   loading="lazy"
-                  width="1200"
-                  height="900"
+                  width={1200}
+                  height={900}
                 />
               </div>
 

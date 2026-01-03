@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { User } from 'lucide-react';
 
@@ -25,7 +26,7 @@ export default function AuthorBio({
       <h3 className="mb-4 text-lg font-bold text-brand-black">About the Author</h3>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
         {!imageError ? (
-          <img
+          <Image
             src={imageUrl}
             alt={name}
             className="h-24 w-24 shrink-0 rounded-full object-cover"

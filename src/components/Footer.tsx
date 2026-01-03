@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { navLinks, practiceAreaLinks } from '../data/navigation';
@@ -41,7 +42,7 @@ export default function Footer() {
         <div className="pt-4 lg:hidden">
           <div className="mb-8">
             <Link href="/" className="mb-4 inline-block">
-              <img
+              <Image
                 src="/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png"
                 alt="Mango Law LLC"
                 width={1704}
@@ -184,7 +185,7 @@ export default function Footer() {
         <div className="hidden lg:grid lg:grid-cols-[1.3fr_1fr_1fr_1.2fr_1.1fr] lg:gap-8">
           <div className="space-y-5">
             <Link href="/" className="inline-block">
-              <img
+              <Image
                 src="/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png"
                 alt="Mango Law LLC"
                 width={1704}

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
@@ -97,13 +98,13 @@ export default function ProtectionOrderPage() {
                     allegations, present evidence, cross-examine witnesses, and fight to protect your rights, reputation, and future.
                   </p>
                 </div>
-                <img
+                <Image
                   src="/images/generated/protection-order-defense-hero.png"
                   alt="Protection order legal defense with attorney preparing hearing strategy"
                   className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
                   loading="lazy"
-                  width="1200"
-                  height="900"
+                  width={1200}
+                  height={900}
                 />
               </div>
 

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import BlogSection from '../components/BlogSection';
 import TestimonialsList from '../components/TestimonialsList';
 import CTASection from '../components/CTASection';
@@ -111,29 +112,15 @@ export default function HomePage() {
                 >
 	                <div className="p-4">
 	                  <div className="duotone-forest relative overflow-hidden rounded-xl">
-	                    <picture>
-                      <source
-                        type="image/avif"
-                        srcSet="/images/headshots/nick-mango-hero-332w.avif 332w, /images/headshots/nick-mango-hero-664w.avif 664w"
-                        sizes="(min-width: 1024px) 520px, 100vw"
-                      />
-                      <source
-                        type="image/webp"
-                        srcSet="/images/headshots/nick-mango-hero-332w.webp 332w, /images/headshots/nick-mango-hero-664w.webp 664w"
-                        sizes="(min-width: 1024px) 520px, 100vw"
-                      />
-                      <img
-                        src="/images/headshots/nick-mango-hero-664w.jpg"
-                        srcSet="/images/headshots/nick-mango-hero-332w.jpg 332w, /images/headshots/nick-mango-hero-664w.jpg 664w"
-                        sizes="(min-width: 1024px) 520px, 100vw"
-                        alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
-                        width={700}
-                        height={900}
-                        fetchPriority="high"
-                        decoding="async"
-                        className="mx-auto h-auto max-h-[520px] w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </picture>
+                    <Image
+                      src="/images/headshots/nick-mango-hero-664w.jpg"
+                      alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
+                      width={700}
+                      height={900}
+                      sizes="(min-width: 1024px) 520px, 100vw"
+                      priority
+                      className="mx-auto h-auto max-h-[520px] w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
 	                </div>
 	                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-black/90 via-brand-black/60 to-transparent p-8 transition-all duration-300 group-hover:from-brand-black/95">

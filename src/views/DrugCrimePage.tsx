@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
@@ -98,13 +99,13 @@ export default function DrugCrimePage() {
                 appropriate, always working toward the best possible outcome.
               </p>
             </div>
-            <img
+            <Image
               src="/images/generated/drug-crimes-defense-hero.png"
               alt="Drug crime legal defense strategy with evidence review and lab testing documentation"
               className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
               loading="lazy"
-              width="1200"
-              height="900"
+              width={1200}
+              height={900}
             />
               </div>
 
