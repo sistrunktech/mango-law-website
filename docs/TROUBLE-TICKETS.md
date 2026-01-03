@@ -350,7 +350,7 @@ The public DUI checkpoints page (`/resources/dui-checkpoints`) shows "Pending ch
 ## TICKET-010: Faster Crawl / "Instant Indexing" for SPA (Vite + React)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** Superseded (see TICKET-029)  
 **Date Created:** 2025-12-13  
 **Assigned To:** TBD
 
@@ -393,6 +393,9 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 - `robots.txt` already references `https://mango.law/sitemap.xml`.
 - `npm run build` generates `dist/sitemap.xml` via `scripts/generate-sitemap.mjs` (runs in `postbuild`).
 - The sitemap includes all static marketing routes plus `/blog/:slug` entries sourced from `src/data/blogPosts.ts`.
+
+### Status / Notes
+- Next.js migration (TICKET-029) supersedes this phased Vite prerender plan; keep as fallback if migration pauses.
 
 ---
 
@@ -968,9 +971,9 @@ Privacy Policy and Terms of Use pages need expanded, Ohio-specific language, upd
 ## TICKET-029: SEO Rendering — CSR Ceiling (Metadata Not Pre-rendered)
 
 **Priority:** High  
-**Status:** Open  
+**Status:** In Progress (PR: codex/nextjs-migration)  
 **Date Created:** 2026-01-01  
-**Assigned To:** TBD
+**Assigned To:** Codex
 
 ### Issue Summary
 The current Vite + React CSR architecture serves a “Loading…” shell to bots on first hit, so title/meta/schema data are not present without JavaScript.
@@ -982,14 +985,22 @@ Move to SSR/SSG (Astro or Next.js) so metadata and JSON-LD render in the initial
 - Server HTML includes `<title>`, meta description, canonical URL, and JSON-LD for core routes.
 - Blog and practice pages are pre-rendered with their SEO data without requiring JS.
 
+### Progress
+- Next.js App Router scaffolded with server metadata and JSON-LD in `codex/nextjs-migration`.
+- Blog routes emit Article schema + metadata via `generateMetadata` and `generateStaticParams`.
+- Practice/intent pages emit FAQ + Breadcrumb schema server-side.
+
+### Remaining
+- Finalize deployment config and run full build/test before cutover.
+
 ---
 
 ## TICKET-030: Intent Pages — High-Value Landing Routes
 
 **Priority:** High  
-**Status:** Open  
+**Status:** In Progress (PR: codex/nextjs-migration)  
 **Date Created:** 2026-01-01  
-**Assigned To:** TBD
+**Assigned To:** Codex
 
 ### Issue Summary
 Top-level intent pages are missing for high-value queries; current coverage lives in blog or is absent.
@@ -1003,14 +1014,18 @@ Top-level intent pages are missing for high-value queries; current coverage live
 - Each route has full content, CTA(s), and internal links to related practice pages/resources.
 - SEO component uses the standard title/description pattern and breadcrumb schema.
 
+### Progress
+- Intent routes implemented in the Next.js branch with server-side metadata + schema.
+- Pending final content review and internal link pass after cutover.
+
 ---
 
 ## TICKET-031: SEO Title/Description Pattern Enforcement
 
 **Priority:** High  
-**Status:** Open  
+**Status:** In Progress (PR: codex/nextjs-migration)  
 **Date Created:** 2026-01-01  
-**Assigned To:** TBD
+**Assigned To:** Codex
 
 ### Issue Summary
 Default SEO values do not consistently follow the desired naming pattern when props are missing or incomplete.
@@ -1021,6 +1036,10 @@ Enforce: `Primary Keyword – Secondary Modifier | Mango Law` for defaults and f
 ### Acceptance Criteria
 - SEO defaults and fallbacks follow the pattern without manual per-page fixes.
 - Dev warnings identify pages missing required metadata inputs.
+
+### Progress
+- Shared `formatTitle` + defaults staged in `src/lib/seo-config.ts` (Next.js branch).
+- Server metadata and client-side SEO warnings reuse the shared pattern.
 
 ---
 

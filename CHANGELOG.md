@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-01-03
+
+### Pending PRs (Staged)
+- `codex/nextjs-migration`: Next.js App Router SSR/SSG migration with server metadata + JSON-LD.
+- `codex/docs-nextjs-alignment`: documentation updates for migration scope and cutover notes.
+- `codex/lint-cleanup`: ESLint cleanup to keep CI green after migration changes.
+- `codex/next-image-migration`: replace `<img>/<picture>` with `next/image` and allow Google review image hosts.
+
+### Docs
+- Align SEO migration ticket statuses with staged Next.js work and merge sequencing.
+
 ## 2026-01-01
 
 ### SEO Quick Wins
