@@ -151,7 +151,6 @@ function checkpointLocationDateKey(row: LocationKeyRow & { start_date: string })
   const yyyyMmDd = start.toISOString().slice(0, 10);
   return `${checkpointLocationKey(row)}|${yyyyMmDd}`;
 }
-
 function isOhioCoordinate(latitude: number, longitude: number): boolean {
   // Rough sanity bounds for Ohio (inclusive).
   // https://en.wikipedia.org/wiki/Ohio#Geography (approx)
@@ -309,9 +308,13 @@ async function main() {
     },
     analysis: {
       planned_inserts: plannedInserts.length,
+<<<<<<< HEAD
       corrupt_candidates_window: corruptCandidates.length,
       invalid_date_order_rows: invalidDateOrderRows.length,
       duplicate_location_date_groups_window: duplicateGroupsWindow.length,
+=======
+      corrupt_candidates_last_48h: corruptCandidates.length,
+>>>>>>> origin/codex/preserve-ovicheckpoint-coords
       existing_ohio_coords_reuse_pool: existingCoordsByLocationKey.size,
     },
     corrupt_candidates_window: corruptCandidates.map((r) => ({
