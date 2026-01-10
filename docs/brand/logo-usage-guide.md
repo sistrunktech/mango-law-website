@@ -49,7 +49,9 @@ All logo assets are located in `/public/images/brand/generated/` and are in SVG 
   - `public/favicon-32x32.png`
   - `public/apple-touch-icon.png`
   - `public/site.webmanifest`
-- **Source:** `public/images/brand/mango-icon-fullcolor.svg`
+- **Sources:**
+  - `public/favicon.svg` from `public/images/brand/mango-logo-option1-16x16px.svg`
+  - PNG/touch icons from `public/images/brand/mango-icon-fullcolor.svg`
 
 ### MangoIcon Component
 - **File:** `src/components/MangoIcon.tsx`
