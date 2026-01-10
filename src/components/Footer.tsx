@@ -44,7 +44,7 @@ export default function Footer() {
                 alt="Mango Law LLC"
                 width={1704}
                 height={555}
-                className="h-12 w-auto"
+                className="h-16 w-auto transition-opacity group-hover:opacity-90"
                 loading="lazy"
               />
             </Link>
