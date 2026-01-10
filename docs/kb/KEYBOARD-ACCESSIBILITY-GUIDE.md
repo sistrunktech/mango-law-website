@@ -472,15 +472,15 @@ export default function KeyboardShortcutsModal() {
 
 ### 2. Focus Management on Page Navigation
 
-Add focus management for React Router navigation:
+Add focus management for Next.js navigation:
 
 ```tsx
 // src/components/ScrollToTop.tsx - Enhance existing component
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 export default function ScrollToTop() {
-  const { pathname } = useLocation();
+  const pathname = usePathname() ?? '';
   const mainContentRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {

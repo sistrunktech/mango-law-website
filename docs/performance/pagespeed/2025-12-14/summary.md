@@ -35,7 +35,7 @@ This folder contains the raw PSI exports and extracted text:
 
 **Fix plan**
 - Keep CSS small and ensure critical styles are minimal.
-- Verify Vite config doesn’t inline large CSS or block rendering unnecessarily.
+- Verify build config doesn’t inline large CSS or block rendering unnecessarily (legacy note from Vite).
 - Consider preloading critical CSS or splitting non-critical CSS if feasible.
 
 **Related TODOs**

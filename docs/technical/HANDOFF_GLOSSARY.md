@@ -1,4 +1,4 @@
-# Dev Handoff Scope: Hybrid Glossary UI + Statute URLs (React + Vite)
+# Dev Handoff Scope: Hybrid Glossary UI + Statute URLs (Next.js App Router)
 
 Goal: build a single “statute library” UI that works as both:
 
@@ -138,19 +138,17 @@ export type Statute = {
 };
 ```
 
-## 4) Rendering strategy for SEO (Vite + React)
+## 4) Rendering strategy for SEO (Next.js App Router)
 
 Need HTML output per statute URL for consistent indexing.
 
-Recommended: **build-time pre-render** (SSG) so hosting stays static.
+Recommended: **build-time pre-render** (SSG) using Next.js route generation.
 
-Implementation options:
-
-- A) React Router framework pre-render (if adopting its framework conventions)
-- B) Vite SSR build + static generation script (render each route at build time)
-- C) `vite-plugin-ssr` pre-render (dedicated tooling)
-
-For Bolt static hosting, B or C is usually the least painful.
+Implementation approach:
+- Create `/glossary` and `/glossary/[slug]` in `src/app/(site)/glossary/`.
+- Use `generateStaticParams()` to pre-render each statute slug.
+- Use `generateMetadata()` to emit title/description/canonical for each statute.
+- Use `notFound()` for unknown slugs and consider `revalidate` if ISR is needed.
 
 ## 5) SEO requirements per statute page
 

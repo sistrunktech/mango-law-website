@@ -16,8 +16,8 @@ All legal document metadata is centralized in `src/lib/legalDocuments.ts`. This 
 | File | Purpose |
 |------|---------|
 | `src/lib/legalDocuments.ts` | Central configuration for all legal documents |
-| `src/pages/TermsPage.tsx` | Terms of Use page |
-| `src/pages/PrivacyPage.tsx` | Privacy Policy page |
+| `src/views/TermsPage.tsx` | Terms of Use page |
+| `src/views/PrivacyPage.tsx` | Privacy Policy page |
 | `src/components/Footer.tsx` | Footer with copyright year |
 
 ## Updating Effective Dates

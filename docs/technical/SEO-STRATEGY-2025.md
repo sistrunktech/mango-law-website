@@ -12,12 +12,14 @@ Completed:
 - Social tags are standardized and dev-only SEO length warnings are active.
 - Favicon declarations consolidated and robots rules hardened.
 - Breadcrumbs/FAQ schema deployed on practice pages; admin/auth/internal routes set to `noindex`.
+- CSR → SSR/SSG migration completed via Next.js App Router with server metadata + JSON-LD.
+- Intent pages shipped: `/ovi-checkpoints-ohio`, `/delaware-ohio-ovi-lawyer`, `/holiday-ovi-enforcement-ohio`.
+- Title/description defaults centralized via `src/lib/seo-config.ts`.
 
 Remaining P0:
-- Migrate CSR to SSR/SSG (Astro or Next.js) so metadata renders without JS.
-- Build intent pages: `/ovi-checkpoints-ohio`, `/delaware-ohio-ovi-lawyer`, `/holiday-ovi-enforcement-ohio`.
-- Enforce SEO title/description naming pattern defaults.
+- Cloudflare Pages cutover + production validation (view source for metadata + JSON-LD).
 - Monitor GSC for rich result coverage and icon propagation; track CWV after rollout.
+- Confirm sitemap submission + index coverage after cutover.
 
 ## 1) Project Overview & Objective
 Mango Law LLC is positioning as a boutique, technical defense practice in Central Ohio. The strategy prioritizes high-intent OVI and criminal defense queries, reinforced by authoritative resource hubs that create a navigable, crawlable topical graph.
@@ -174,7 +176,7 @@ Objective: Maintain 99.9% accuracy to build peak user trust and satisfy Google's
 
 Reference docs:
 - `docs/CONTENT_GOVERNANCE.md`
-- `docs/BLOG_REQUIREMENTS.md`
+- `docs/technical/BLOG_REQUIREMENTS.md`
 - `docs/PENALTY-LANGUAGE-STYLE-GUIDE.md`
 
 ## 9) DUI Checkpoint Verification Protocol

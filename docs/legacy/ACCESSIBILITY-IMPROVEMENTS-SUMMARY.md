@@ -151,7 +151,7 @@ This document summarizes the keyboard accessibility improvements implemented for
 
 ## 📚 Documentation Created
 
-1. **KEYBOARD-ACCESSIBILITY-GUIDE.md**
+1. **kb/KEYBOARD-ACCESSIBILITY-GUIDE.md**
    - Comprehensive 450+ line guide
    - Implementation details for all fixes
    - Code examples for remaining issues
@@ -217,7 +217,7 @@ const handleKeyDown = (e: React.KeyboardEvent) => {
 ## 📞 Resources
 
 **Documentation:**
-- Full guide: `docs/KEYBOARD-ACCESSIBILITY-GUIDE.md`
+- Full guide: `docs/kb/KEYBOARD-ACCESSIBILITY-GUIDE.md`
 - WCAG 2.1: https://www.w3.org/WAI/WCAG21/quickref/
 - ARIA Practices: https://www.w3.org/WAI/ARIA/apg/
 
