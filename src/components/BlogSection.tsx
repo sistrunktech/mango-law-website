@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
 import { blogPosts, type BlogPost } from '../data/blogPosts';
@@ -69,14 +70,13 @@ export default function BlogSection() {
             >
                 {post.imageUrl && (
                   <div className="relative aspect-[16/9] overflow-hidden bg-brand-offWhite">
-                    <img
+                    <Image
                       src={post.imageUrl}
                       alt={post.title}
-                      width={800}
-                      height={450}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
-                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   </div>

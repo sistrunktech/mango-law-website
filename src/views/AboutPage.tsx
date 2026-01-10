@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import { SEO, attorneySchema } from '../lib/seo';
@@ -100,14 +101,13 @@ export default function AboutPage() {
 
                   <div className="bg-gradient-to-br from-brand-offWhite to-white p-3 pt-0">
                     <div className="relative overflow-hidden rounded-xl bg-white ring-1 ring-brand-black/5">
-                      <img
+                      <Image
                         src="/images/headshots/nick-mango-standing-profile-court-steps.png"
                         alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
                         width={496}
                         height={984}
                         className="h-[340px] w-full object-contain sm:h-[420px]"
                         loading="lazy"
-                        decoding="async"
                       />
                     </div>
                   </div>
@@ -120,14 +120,13 @@ export default function AboutPage() {
                   <div className="relative overflow-hidden rounded-2xl border border-brand-black/10 bg-gradient-to-br from-brand-offWhite to-white shadow-soft-lg">
                     <div className="p-4">
                       <div className="relative overflow-hidden rounded-xl bg-white ring-1 ring-brand-black/5">
-                        <img
+                        <Image
                           src="/images/headshots/nick-mango-standing-profile-court-steps.png"
                           alt="Dominic 'Nick' Mango, Criminal Defense Attorney"
                           width={496}
                           height={984}
                           className="h-[560px] w-full object-contain"
                           loading="lazy"
-                          decoding="async"
                         />
                       </div>
                     </div>

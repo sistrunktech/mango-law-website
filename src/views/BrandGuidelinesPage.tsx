@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '../components/PageHero';
 import { SEO } from '../lib/seo';
@@ -216,9 +217,11 @@ export default function BrandGuidelinesPage() {
                   <h3 className="font-display text-2xl font-bold text-brand-black mb-4">Logo Variants</h3>
                   <div className="grid gap-6 md:grid-cols-2">
                     <div className="card bg-brand-offWhite p-8 text-center">
-                      <img
+                      <Image
                         src="/images/brand/mango-logo-tagline-fullcolor.svg"
                         alt="Mango Law Horizontal Logo"
+                        width={320}
+                        height={320}
                         className="w-full max-w-xs mx-auto mb-4"
                       />
                       <div className="text-sm font-bold text-brand-black">Horizontal Lockup</div>
@@ -226,9 +229,11 @@ export default function BrandGuidelinesPage() {
                     </div>
 
                     <div className="card bg-brand-offWhite p-8 text-center">
-                      <img
+                      <Image
                         src="/images/brand/mango-logo-vertical-fullcolor.svg"
                         alt="Mango Law Vertical Logo"
+                        width={200}
+                        height={200}
                         className="w-full max-w-[200px] mx-auto mb-4"
                       />
                       <div className="text-sm font-bold text-brand-black">Vertical Lockup</div>
@@ -241,9 +246,11 @@ export default function BrandGuidelinesPage() {
                   <h3 className="font-display text-2xl font-bold text-brand-black mb-4">Color Variations</h3>
                   <div className="grid gap-6 md:grid-cols-3">
                     <div className="card bg-white p-6 text-center border-2 border-brand-black/10">
-                      <img
+                      <Image
                         src="/images/brand/mango-icon-fullcolor.svg"
                         alt="Full Color Icon"
+                        width={96}
+                        height={96}
                         className="w-24 h-24 mx-auto mb-3"
                       />
                       <div className="text-sm font-bold text-brand-black">Full Color</div>
@@ -251,9 +258,11 @@ export default function BrandGuidelinesPage() {
                     </div>
 
                     <div className="card bg-brand-forest p-6 text-center">
-                      <img
+                      <Image
                         src="/images/brand/icon-white.svg"
                         alt="White Icon"
+                        width={96}
+                        height={96}
                         className="w-24 h-24 mx-auto mb-3"
                       />
                       <div className="text-sm font-bold text-white">White</div>
@@ -261,9 +270,11 @@ export default function BrandGuidelinesPage() {
                     </div>
 
                     <div className="card bg-brand-offWhite p-6 text-center">
-                      <img
+                      <Image
                         src="/images/brand/icon-black.svg"
                         alt="Black Icon"
+                        width={96}
+                        height={96}
                         className="w-24 h-24 mx-auto mb-3"
                       />
                       <div className="text-sm font-bold text-brand-black">Black</div>

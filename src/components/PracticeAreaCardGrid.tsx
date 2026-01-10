@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight, Phone, Calendar, Star } from 'lucide-react';
 import { practiceAreas } from '../data/practiceAreas';
@@ -24,17 +25,6 @@ function useMinWidthQuery(minWidthPx: number): boolean {
   return matches;
 }
 
-function getGeneratedImageVariants(imageUrl: string | undefined) {
-  if (!imageUrl) return null;
-  if (!imageUrl.endsWith('.png')) return null;
-  const base = imageUrl.replace(/\.png$/, '');
-  return {
-    avifSrcSet: `${base}-480w.avif 480w, ${base}-960w.avif 960w`,
-    webpSrcSet: `${base}-480w.webp 480w, ${base}-960w.webp 960w`,
-    fallbackSrc: imageUrl,
-  };
-}
-
 function DecorativeGeneratedImage({
   imageUrl,
   alt,
@@ -44,17 +34,15 @@ function DecorativeGeneratedImage({
   alt: string;
   sizes: string;
 }) {
-  const variants = getGeneratedImageVariants(imageUrl);
-  if (!variants) {
-    return <img src={imageUrl} alt={alt} className="h-full w-full object-cover object-center" loading="lazy" decoding="async" />;
-  }
-
   return (
-    <picture>
-      <source type="image/avif" srcSet={variants.avifSrcSet} sizes={sizes} />
-      <source type="image/webp" srcSet={variants.webpSrcSet} sizes={sizes} />
-      <img src={variants.fallbackSrc} alt={alt} className="h-full w-full object-cover object-center" loading="lazy" decoding="async" />
-    </picture>
+    <Image
+      src={imageUrl}
+      alt={alt}
+      fill
+      sizes={sizes}
+      className="object-cover object-center"
+      loading="lazy"
+    />
   );
 }
 

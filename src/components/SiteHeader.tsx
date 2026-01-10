@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -113,37 +114,18 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
         >
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
-            <picture>
-              <source
-                type="image/avif"
-                srcSet={[
-                  '/images/brand/mango-logo-primary-fullcolor-tagline-240w.avif 240w',
-                  '/images/brand/mango-logo-primary-fullcolor-tagline-480w.avif 480w',
-                ].join(', ')}
-                sizes="(min-width: 1024px) 220px, 170px"
-              />
-              <source
-                type="image/webp"
-                srcSet={[
-                  '/images/brand/mango-logo-primary-fullcolor-tagline-240w.webp 240w',
-                  '/images/brand/mango-logo-primary-fullcolor-tagline-480w.webp 480w',
-                ].join(', ')}
-                sizes="(min-width: 1024px) 220px, 170px"
-              />
-              <img
-                src={logoFallbackSrc}
-                alt="Mango Law LLC - Criminal & OVI/DUI Defense"
-                width={1704}
-                height={555}
-                className={[
-                  'h-8 w-auto transition-all hover:opacity-90 lg:h-12',
-                  isScrolled ? 'lg:h-10' : '',
-                ].join(' ')}
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-              />
-            </picture>
+            <Image
+              src={logoFallbackSrc}
+              alt="Mango Law LLC - Criminal & OVI/DUI Defense"
+              width={1704}
+              height={555}
+              sizes="(min-width: 1024px) 220px, 170px"
+              priority
+              className={[
+                'h-8 w-auto transition-all hover:opacity-90 lg:h-12',
+                isScrolled ? 'lg:h-10' : '',
+              ].join(' ')}
+            />
           </Link>
 
           {/* Desktop Navigation */}

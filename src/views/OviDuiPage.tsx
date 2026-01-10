@@ -1,4 +1,5 @@
 import { oviSubsections } from '../data/practiceAreas';
+import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
@@ -109,13 +110,13 @@ export default function OviDuiPage() {
                     We know what it takes to win OVI cases in Delaware County.
                   </p>
                 </div>
-                <img
+                <Image
                   src="/images/generated/ovi-dui-defense-hero.png"
                   alt="Professional OVI/DUI defense consultation with legal documents and breathalyzer equipment"
                   className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
                   loading="lazy"
-                  width="1200"
-                  height="900"
+                  width={1200}
+                  height={900}
                 />
               </div>
 
@@ -199,13 +200,13 @@ export default function OviDuiPage() {
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="order-2 lg:order-1">
-              <img
+              <Image
                 src="/images/generated/ovi-case-strategy.png"
                 alt="Attorney reviewing OVI case evidence and developing defense strategy"
                 className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
                 loading="lazy"
-                width="1200"
-                height="900"
+                width={1200}
+                height={900}
               />
             </div>
             <div className="space-y-6 order-1 lg:order-2">

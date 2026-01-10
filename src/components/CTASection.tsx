@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Phone } from 'lucide-react';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
@@ -33,10 +34,13 @@ export default function CTASection({
       {/* Background image placeholder */}
       {backgroundUrl && (
         <div className="absolute inset-0">
-          <img
+          <Image
             src={backgroundUrl}
             alt=""
-            className="h-full w-full object-cover opacity-20"
+            fill
+            sizes="100vw"
+            className="object-cover opacity-20"
+            aria-hidden="true"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/90 to-transparent" />
         </div>

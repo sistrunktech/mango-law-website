@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { X, Send, Phone } from 'lucide-react';
 import ChatBubble from './ChatBubble';
@@ -498,9 +499,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
       <div className="flex items-center justify-between border-b border-brand-black/10 bg-gradient-to-r from-brand-mango to-brand-gold p-4">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-brand-black/10 p-2">
-            <img
+            <Image
               src="/images/brand/mango-icon-fullcolor.svg"
               alt="Mango Law"
+              width={40}
+              height={40}
               className="h-full w-full"
             />
           </div>

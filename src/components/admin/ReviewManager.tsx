@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import {
@@ -272,9 +273,11 @@ export default function ReviewManager() {
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   {review.author_photo_url ? (
-                    <img
+                    <Image
                       src={review.author_photo_url}
                       alt={review.author_name}
+                      width={48}
+                      height={48}
                       className="w-12 h-12 rounded-full"
                     />
                   ) : (

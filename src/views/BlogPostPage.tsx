@@ -2,6 +2,7 @@
 
 import { Children, isValidElement, type ReactNode } from 'react';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   Calendar, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp,
@@ -165,14 +166,13 @@ export default function BlogPostPage() {
           <div className="mt-12">
             <div className="container max-w-7xl">
               <figure className="relative w-full aspect-[21/9] overflow-hidden bg-brand-black">
-                <img
+                <Image
                   src={post.imageUrl}
                   alt={`Editorial image for ${post.title}`}
-                  className="h-full w-full object-cover"
-                  loading="eager"
-                  decoding="async"
-                  width={1260}
-                  height={540}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  priority
                 />
                 <div
                   className="absolute inset-0 bg-gradient-to-t from-brand-black/60 via-transparent to-transparent"
@@ -1395,25 +1395,15 @@ export default function BlogPostPage() {
                   itemScope
                   itemType="https://schema.org/Person"
                 >
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcSet="/images/headshots/nick-mango-author-160w.avif"
-                    />
-                    <source
-                      type="image/webp"
-                      srcSet="/images/headshots/nick-mango-author-160w.webp"
-                    />
-                    <img
-                      src="/images/headshots/nick-mango-author-160w.jpg"
-                      alt="Dominic Mango, Ohio criminal defense attorney"
-                      itemProp="image"
-                      className="h-20 w-20 rounded-full object-cover"
-                      loading="lazy"
-                      width={80}
-                      height={80}
-                    />
-                  </picture>
+                  <Image
+                    src="/images/headshots/nick-mango-author-160w.jpg"
+                    alt="Dominic Mango, Ohio criminal defense attorney"
+                    itemProp="image"
+                    className="h-20 w-20 rounded-full object-cover"
+                    width={80}
+                    height={80}
+                    loading="lazy"
+                  />
                   <div>
                     <p className="font-semibold text-brand-black" itemProp="name">
                       Dominic Mango

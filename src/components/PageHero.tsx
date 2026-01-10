@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
 import ORCLabel from './ORCLabel';
@@ -112,10 +113,13 @@ export default function PageHero({
         {/* Background image with overlay (if provided) */}
         {backgroundUrl && (
           <div className="pointer-events-none absolute inset-0">
-            <img
+            <Image
               src={backgroundUrl}
               alt=""
-              className="h-full w-full object-cover"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              aria-hidden="true"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/90 to-brand-black/70" />
           </div>
