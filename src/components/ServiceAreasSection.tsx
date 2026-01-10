@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 
 interface ServiceAreasSectionProps {
@@ -35,7 +35,7 @@ export default function ServiceAreasSection({ practiceArea }: ServiceAreasSectio
               {locations.slice(0, -1).map((loc, i) => (
                 <span key={loc.slug}>
                   <Link
-                    to={`/locations#${loc.slug}`}
+                    href={`/locations#${loc.slug}`}
                     className="font-medium text-brand-forest underline decoration-brand-mango/30 transition-colors hover:text-brand-mango hover:decoration-brand-mango"
                   >
                     {loc.name}
@@ -45,21 +45,21 @@ export default function ServiceAreasSection({ practiceArea }: ServiceAreasSectio
               ))}
               and{' '}
               <Link
-                to={`/locations#${locations[locations.length - 1].slug}`}
+                href={`/locations#${locations[locations.length - 1].slug}`}
                 className="font-medium text-brand-forest underline decoration-brand-mango/30 transition-colors hover:text-brand-mango hover:decoration-brand-mango"
               >
                 {locations[locations.length - 1].name}
               </Link>
               , as well as throughout{' '}
               <Link
-                to="/locations#delaware-county"
+                href="/locations#delaware-county"
                 className="font-medium text-brand-forest underline decoration-brand-mango/30 transition-colors hover:text-brand-mango hover:decoration-brand-mango"
               >
                 Delaware County
               </Link>{' '}
               and{' '}
               <Link
-                to="/locations#franklin-county"
+                href="/locations#franklin-county"
                 className="font-medium text-brand-forest underline decoration-brand-mango/30 transition-colors hover:text-brand-mango hover:decoration-brand-mango"
               >
                 Franklin County
@@ -68,7 +68,7 @@ export default function ServiceAreasSection({ practiceArea }: ServiceAreasSectio
             </p>
             <div className="mt-6">
               <Link
-                to="/locations"
+                href="/locations"
                 className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-bold text-brand-black transition-all hover:bg-brand-gold"
               >
                 <MapPin className="h-5 w-5" />

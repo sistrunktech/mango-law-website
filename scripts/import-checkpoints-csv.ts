@@ -3,9 +3,15 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
+const supabaseUrl =
+  process.env.SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
-const mapboxToken = process.env.VITE_MAPBOX_PUBLIC_TOKEN || process.env.MAPBOX_PUBLIC_TOKEN;
+const mapboxToken =
+  process.env.MAPBOX_PUBLIC_TOKEN ||
+  process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN ||
+  process.env.VITE_MAPBOX_PUBLIC_TOKEN;
 
 if (!supabaseUrl || !supabaseKey) {
   console.error('Missing Supabase credentials!');

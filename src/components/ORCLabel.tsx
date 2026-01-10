@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Scale } from 'lucide-react';
 import { getStatute } from '../data/statutes';
 
@@ -45,7 +45,7 @@ export default function ORCLabel({
     }
     return (
       <Link
-        to={`/glossary#${statute.id}`}
+        href={`/glossary#${statute.id}`}
         className={`relative -m-2 inline-flex items-center gap-1 rounded p-2 text-[10px] font-semibold uppercase tracking-wider text-brand-black/60 transition-colors hover:text-brand-mango focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-offWhite ${className}`}
         title={statute.title}
       >
@@ -67,7 +67,7 @@ export default function ORCLabel({
     }
     return (
       <Link
-        to={`/glossary#${statute.id}`}
+        href={`/glossary#${statute.id}`}
         className={`relative -m-2 inline-flex items-center gap-1 rounded p-2 text-sm font-semibold text-brand-leaf underline decoration-brand-leaf/30 transition-colors hover:text-brand-mango hover:decoration-brand-mango/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-leaf/40 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-offWhite ${className}`}
         title={statute.definition}
       >
@@ -105,7 +105,7 @@ export default function ORCLabel({
       {showLink && (
         <div className="flex flex-wrap gap-3">
           <Link
-            to={`/glossary#${statute.id}`}
+            href={`/glossary#${statute.id}`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
           >
             View in glossary

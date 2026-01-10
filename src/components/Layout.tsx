@@ -1,5 +1,7 @@
+'use client';
+
 import { ReactNode, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import SiteHeader from './SiteHeader';
 import Footer from './Footer';
 import ChatIntakeLauncher from './ChatIntakeLauncher';
@@ -10,12 +12,12 @@ import { trackLeadModalOpen } from '../lib/analytics';
 import ConsentBanner from './ConsentBanner';
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const location = useLocation();
+  const pathname = usePathname() ?? '';
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
   const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(false);
 
-  const isCheckpoints = location.pathname.startsWith('/resources/dui-checkpoints');
+  const isCheckpoints = pathname.startsWith('/resources/dui-checkpoints');
   const chatBottomOffsetClass = (() => {
     if (isCheckpoints) return isConsentBannerVisible ? 'bottom-36 lg:bottom-6' : 'bottom-24 lg:bottom-6';
     return isConsentBannerVisible ? 'bottom-28 lg:bottom-6' : 'bottom-6';

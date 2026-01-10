@@ -1,12 +1,12 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const DIST_DIR = path.resolve(process.cwd(), 'dist');
 const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
-const SITE_URL = (process.env.VITE_SITE_URL || process.env.SITE_URL || 'https://mango.law').replace(
-  /\/$/,
-  ''
-);
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.SITE_URL ||
+  'https://mango.law'
+).replace(/\/$/, '');
 
 const STATIC_PATHS = [
   '/',
@@ -94,10 +94,9 @@ async function main() {
   const urls = Array.from(urlsByLoc.values()).sort((a, b) => a.loc.localeCompare(b.loc));
   const xml = toSitemapXml(urls);
 
-  const distPath = path.join(DIST_DIR, 'sitemap.xml');
   const publicPath = path.join(PUBLIC_DIR, 'sitemap.xml');
-  await Promise.all([writeFile(distPath, xml, 'utf8'), writeFile(publicPath, xml, 'utf8')]);
-  console.log(`Generated sitemap: ${distPath} (${urls.length} URLs)`);
+  await writeFile(publicPath, xml, 'utf8');
+  console.log(`Generated sitemap: ${publicPath} (${urls.length} URLs)`);
 }
 
 main().catch((error) => {

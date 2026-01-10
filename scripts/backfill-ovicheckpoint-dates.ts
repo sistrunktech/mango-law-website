@@ -46,7 +46,7 @@ function usage(): string {
     '  SUPABASE_URL (or VITE_SUPABASE_URL)',
     '  SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY)',
     'Optional env:',
-    '  MAPBOX_PUBLIC_TOKEN (or VITE_MAPBOX_PUBLIC_TOKEN) (to geocode while inserting)',
+    '  MAPBOX_PUBLIC_TOKEN (or NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN) (to geocode while inserting)',
     '',
     'Examples:',
     '  npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts',
@@ -177,10 +177,16 @@ async function writeReport(path: string, payload: unknown) {
 async function main() {
   const { mode, apply, confirmReplace, noGeocode, limit, output, corruptWindowHours } = parseArgs(process.argv.slice(2));
 
-  const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+  const supabaseUrl =
+    process.env.SUPABASE_URL ??
+    process.env.NEXT_PUBLIC_SUPABASE_URL ??
+    process.env.VITE_SUPABASE_URL;
   const supabaseServiceKey =
     process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SERVICE_ROLE_KEY;
-  const mapboxToken = process.env.MAPBOX_PUBLIC_TOKEN ?? process.env.VITE_MAPBOX_PUBLIC_TOKEN;
+  const mapboxToken =
+    process.env.MAPBOX_PUBLIC_TOKEN ??
+    process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN ??
+    process.env.VITE_MAPBOX_PUBLIC_TOKEN;
 
   if (!supabaseUrl || !supabaseServiceKey) {
     throw new Error(
@@ -310,13 +316,9 @@ async function main() {
     },
     analysis: {
       planned_inserts: plannedInserts.length,
-<<<<<<< HEAD
       corrupt_candidates_window: corruptCandidates.length,
       invalid_date_order_rows: invalidDateOrderRows.length,
       duplicate_location_date_groups_window: duplicateGroupsWindow.length,
-=======
-      corrupt_candidates_last_48h: corruptCandidates.length,
->>>>>>> origin/codex/preserve-ovicheckpoint-coords
       existing_ohio_coords_reuse_pool: existingCoordsByLocationKey.size,
     },
     corrupt_candidates_window: corruptCandidates.map((r) => ({

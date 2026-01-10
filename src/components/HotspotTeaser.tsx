@@ -1,6 +1,8 @@
+'use client';
+
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, TrendingUp, ExternalLink } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function HotspotTeaser() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -49,7 +51,7 @@ export default function HotspotTeaser() {
             ))}
           </div>
           <Link
-            to="/blog/ohio-dui-checkpoint-hotspots"
+            href="/blog/ohio-dui-checkpoint-hotspots"
             className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white hover:shadow-md"
           >
             Read the Full Hotspot Guide

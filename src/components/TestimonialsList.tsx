@@ -1,6 +1,6 @@
 import { Quote } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 type Props = {
   showHeader?: boolean;
@@ -69,7 +69,7 @@ export default function TestimonialsList({ showHeader = true, variant = 'standar
                     <p className="mt-1 text-xs text-brand-black/60">{featured.location}</p>
                   )}
                 </div>
-                <Link to="/contact" className="btn btn-primary" data-cta="reviews_featured_cta">
+                <Link href="/contact" className="btn btn-primary" data-cta="reviews_featured_cta">
                   Free Case Review
                 </Link>
               </div>

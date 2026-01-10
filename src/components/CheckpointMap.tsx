@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -40,14 +42,15 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState<string | null>(null);
-  const displayNow = now ?? new Date();
 
   // Initialize map
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    const token = import.meta.env.VITE_MAPBOX_PUBLIC_TOKEN || import.meta.env.MAPBOX_PUBLIC_TOKEN;
-    const styleUrl = import.meta.env.VITE_MAPBOX_STYLE_URL || import.meta.env.MAPBOX_STYLE_URL;
+    const token =
+      process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN || process.env.VITE_MAPBOX_PUBLIC_TOKEN;
+    const styleUrl =
+      process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL || process.env.VITE_MAPBOX_STYLE_URL;
 
     if (!token) {
       setMapError('Mapbox token not configured');
@@ -94,6 +97,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   // Update markers when checkpoints change
   useEffect(() => {
     if (!map.current || isLoading) return;
+    const displayNow = now ?? new Date();
 
     // Remove existing markers
     markers.current.forEach((marker) => marker.remove());
@@ -234,7 +238,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         duration: 1000,
       });
     }
-  }, [checkpoints, selectedCheckpoint, onCheckpointSelect, isLoading, displayNow]);
+  }, [checkpoints, selectedCheckpoint, onCheckpointSelect, isLoading, now]);
 
   // Center on selected checkpoint
   useEffect(() => {

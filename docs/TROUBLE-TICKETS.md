@@ -476,7 +476,7 @@ Some checkpoints display `status='active'` even though the checkpoint ended days
 
 ### Resolution notes
 - Re-ran the backfill script in `scan` mode against production credentials; no corrupt candidates detected and no inserts/updates needed.
-- Hardened the script so it can load local `.env` automatically, supports `VITE_*` env fallbacks, and requires `--confirm-replace` before running `replace-ovicheckpoint` in `--apply` mode.
+- Hardened the script so it can load local `.env` automatically, supports `NEXT_PUBLIC_*` (and legacy `VITE_*`) env fallbacks, and requires `--confirm-replace` before running `replace-ovicheckpoint` in `--apply` mode.
 
 ### Verification
 - After backfill, a checkpoint with an `end_date` in the past displays as `completed` on the public page and is not shown in “Active”.
@@ -780,8 +780,8 @@ During launch testing, lead intake paths (lead-capture modal, contact form, chat
    - GA4 marks `lead_submitted` as a conversion and uses `lead_source` + `checkpoint_id` as reporting dimensions.
 
 ### Debug checklist (fast)
-1. Verify Bolt env:
-   - `VITE_TURNSTILE_SITE_KEY` set for the deployed environment.
+1. Verify client env:
+   - `NEXT_PUBLIC_TURNSTILE_SITE_KEY` set for the deployed environment.
 2. Verify Supabase secrets:
    - `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`.
 3. Verify Edge Functions deployed:
@@ -986,12 +986,10 @@ Move to SSR/SSG (Astro or Next.js) so metadata and JSON-LD render in the initial
 - Blog and practice pages are pre-rendered with their SEO data without requiring JS.
 
 ### Progress
-- Next.js App Router scaffolded with server metadata and JSON-LD in `codex/nextjs-migration`.
-- Blog routes emit Article schema + metadata via `generateMetadata` and `generateStaticParams`.
-- Practice/intent pages emit FAQ + Breadcrumb schema server-side.
-
-### Remaining
-- Finalize deployment config and run full build/test before cutover.
+- Next.js app router scaffolded with server metadata (`src/lib/seo-metadata.ts`) and JSON-LD (`src/components/StructuredData.tsx`) in `codex/nextjs-migration`.
+- Blog routes now emit Article schema + metadata via `generateMetadata` and `generateStaticParams`.
+- Practice area + intent pages emit FAQ/Breadcrumb schema server-side.
+- Remaining: finalize deployment config + run full build/test before cutover.
 
 ---
 
@@ -1038,8 +1036,7 @@ Enforce: `Primary Keyword – Secondary Modifier | Mango Law` for defaults and f
 - Dev warnings identify pages missing required metadata inputs.
 
 ### Progress
-- Shared `formatTitle` + defaults staged in `src/lib/seo-config.ts` (Next.js branch).
-- Server metadata and client-side SEO warnings reuse the shared pattern.
+- Shared `formatTitle` + defaults moved into `src/lib/seo-config.ts` and reused by server metadata and client SEO warnings.
 
 ---
 
