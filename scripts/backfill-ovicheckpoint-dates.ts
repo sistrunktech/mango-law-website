@@ -43,7 +43,7 @@ function usage(): string {
     'Backfill OVICheckpoint dates (safe dry-run by default)',
     '',
     'Required env:',
-    '  SUPABASE_URL',
+    '  SUPABASE_URL (or VITE_SUPABASE_URL)',
     '  SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY)',
     'Optional env:',
     '  MAPBOX_PUBLIC_TOKEN (or VITE_MAPBOX_PUBLIC_TOKEN) (to geocode while inserting)',
@@ -100,10 +100,6 @@ function parseArgs(argv: string[]) {
 
   if (!Number.isFinite(corruptWindowHours) || corruptWindowHours <= 0) {
     throw new Error(`Invalid --corrupt-window-hours "${corruptWindowHoursRaw}".\n\n${usage()}`);
-  }
-
-  if (mode === 'replace-ovicheckpoint' && apply && !confirmReplace) {
-    throw new Error(`Refusing to run replace mode without explicit confirmation.\n\n${usage()}`);
   }
 
   return { mode, apply, confirmReplace, noGeocode, limit, output, corruptWindowHours };
@@ -179,7 +175,7 @@ async function writeReport(path: string, payload: unknown) {
 }
 
 async function main() {
-  const { mode, apply, noGeocode, limit, output, corruptWindowHours } = parseArgs(process.argv.slice(2));
+  const { mode, apply, confirmReplace, noGeocode, limit, output, corruptWindowHours } = parseArgs(process.argv.slice(2));
 
   const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
   const supabaseServiceKey =
@@ -187,7 +183,13 @@ async function main() {
   const mapboxToken = process.env.MAPBOX_PUBLIC_TOKEN ?? process.env.VITE_MAPBOX_PUBLIC_TOKEN;
 
   if (!supabaseUrl || !supabaseServiceKey) {
-    throw new Error(`Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY.\n\n${usage()}`);
+    throw new Error(
+      `Missing SUPABASE_URL (or VITE_SUPABASE_URL) or SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY).\n\n${usage()}`
+    );
+  }
+
+  if (mode === 'replace-ovicheckpoint' && apply && !confirmReplace) {
+    throw new Error(`Refusing to run replace mode without --confirm-replace.\n\n${usage()}`);
   }
 
   const reportPath =
