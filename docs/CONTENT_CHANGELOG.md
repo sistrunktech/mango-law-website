@@ -22,6 +22,20 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 
 Date/time: 2025-01-13 12:00 UTC
+Post slug and title: motion-practice-criminal-defense | The Power of Motion Practice in Criminal Defense
+Change type: major
+Summary of change: Expanded and refined motion practice guidance to align with the P0 motion practice update.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: motion-practice-criminal-defense -- merge content updates -- minor -- 2025-01-13T12:00:00Z
+Rollback notes: commit pending
+
+
+Date/time: 2025-01-13 12:00 UTC
 Post slug and title: refuse-field-sobriety-test-ohio | Can I Refuse Field Sobriety Tests in Ohio? Your Rights Explained
 Change type: major
 Summary of change: Rewrote the field sobriety refusal guide with structured sections on rights, test types, consequences, and local considerations; added cross-links to motion practice and lookback guidance.
