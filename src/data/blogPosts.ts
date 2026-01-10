@@ -1185,166 +1185,113 @@ This article is for educational purposes and does not constitute legal advice. C
     title: 'Can I Refuse Field Sobriety Tests in Ohio? Your Rights Explained',
     excerpt: 'Learn your rights regarding field sobriety tests in Ohio, the consequences of refusal, and how this decision affects your OVI defense strategy.',
     imageUrl: '/images/generated/blog-field-sobriety-refusal.png',
-    content: `Field sobriety tests are a common part of an OVI stop in Ohio, but many drivers do not know what the tests are, how they are used, or whether they are required. This guide explains the basics, what refusing means, and where local practice can change outcomes.
+    content: `If you've been pulled over for suspected OVI/DUI in Ohio, one of the most important decisions you'll make is whether to perform field sobriety tests. Unlike chemical tests, **you have the right to refuse field sobriety tests in Ohio**—but understanding the implications is critical.
 
-## What field sobriety tests are
+## What Are Field Sobriety Tests?
 
-Standardized field sobriety tests (SFSTs) are the set of roadside coordination tests taught under NHTSA guidance. The common tests include:
-- horizontal gaze nystagmus (HGN)
-- walk-and-turn
-- one-leg stand
+Field sobriety tests (FSTs) are physical and cognitive exercises that officers use to evaluate whether a driver is impaired. These are different from chemical tests (breath, blood, or urine) and are typically administered roadside before an arrest.
 
-Officers use these tests to look for clues of impairment, but results are still subject to interpretation and the conditions of the stop.
+### Common Field Sobriety Tests
 
-## Are field sobriety tests required in Ohio
+**Standardized Tests (NHTSA-Approved)**:
+- Horizontal Gaze Nystagmus (HGN): Officer tracks your eye movements
+- Walk-and-Turn: Walk heel-to-toe in a straight line
+- One-Leg Stand: Stand on one leg while counting
 
-Field sobriety tests are generally voluntary in Ohio. Refusing them is not the same as refusing a chemical test under implied consent. That said, an officer can still note a refusal and rely on other observations in a decision to arrest.
+**Non-Standardized Tests**:
+- Alphabet recitation
+- Finger-to-nose
+- Romberg balance test
+- Counting backwards
+
+## Your Right to Refuse
+
+Field sobriety tests are generally **voluntary** in Ohio. There is no Ohio statute that requires you to perform these roadside coordination exercises, and refusing them does **not** trigger the implied-consent administrative suspension that applies to chemical testing.
+
+### No Implied Consent for FSTs
+
+Ohio's implied consent law ([ORC § 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191)) applies to **chemical tests** (breath, blood, or urine) after an OVI arrest—not to field sobriety tests.
+
+[VISUAL:RIGHTS_HIGHLIGHT]
+
+## Why Officers Want You to Perform FSTs
+
+Field sobriety tests serve one primary purpose: building evidence for prosecution. Officers use FST results to:
+
+- Establish probable cause for arrest
+- Document signs of impairment
+- Create video evidence for trial
+- Justify chemical testing
+
+**Critical point**: FSTs are inherently subjective. The officer decides whether you pass or fail.
+
+## Consequences of Refusal vs. Performance
+
+### If You Refuse
+
+- Officer notes refusal in report
+- The officer may still continue the investigation and may still arrest based on other observations
+- You avoid creating performance-based FST “failure” evidence on camera
+- Refusal may become part of the narrative in a case depending on the circumstances and local practice
+
+### If You Perform
+
+- Everything you do becomes evidence
+- The officer’s interpretation of the clues is documented in the report
+- Video footage can be used in court
+- You may still be arrested regardless of performance
 
 [VISUAL:FST_REFUSAL_COMPARISON]
 
-## Field tests vs chemical tests
+## How Refusal Affects Your Defense
 
-Chemical testing is governed by implied consent under [ORC 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191). If you are arrested for OVI, Ohio law treats you as having consented to chemical testing of **breath, oral fluid, blood/serum/plasma, or urine**. A chemical refusal can trigger an administrative license suspension. Field sobriety tests do not trigger that administrative suspension on their own, but they can still influence the officer's decision-making.
+Refusing field sobriety tests can sometimes help your defense by:
+
+- Eliminating video evidence of stumbling
+- Removing officer testimony about FST failure
+- Forcing the prosecution to rely more heavily on other evidence
+- Limiting subjective interpretation
+
+## What Varies (And What to Confirm)
+
+Two drivers can face very different outcomes from the same roadside encounter. Factors that often vary include:
+
+- **The reason for the stop** (and whether the officer had legal grounds)
+- **Roadside conditions** (lighting, weather, uneven pavement, traffic, footwear, injuries, anxiety)
+- **Bodycam/dashcam clarity** and what it actually shows
+- **Local court expectations** and how a judge treats standardized vs. non-standardized tests
+
+## What About Chemical Tests?
+
+**Chemical test refusal is different** and can carry significant administrative consequences under Ohio’s implied-consent rules. The details depend on your record/history and the specific statutory provisions.
+
+- Refusal can trigger an **administrative license suspension (ALS)**
+- Repeat refusals can increase consequences
+- There may be separate administrative steps and deadlines to challenge an ALS
 
 [VISUAL:CHEMICAL_VS_FST_COMPARISON]
 
-## How SFSTs are scored
+Many attorneys advise performing chemical tests even if you've refused FSTs. For comprehensive information about [OVI/DUI charges and penalties in Ohio](/blog/understanding-ovi-dui-charges-ohio), including how refusals affect your case, visit our detailed guide.
 
-Officers are trained to look for specific cues or "clues" during each test. The scoring is not a medical diagnosis; it is a checklist of observations. If the environment or instruction is inconsistent, the reliability of the scoring can be challenged.
+## Delaware and Franklin County Considerations
 
-## Quick overview of each test
+Law enforcement practices and court expectations can vary by county and by judge. If you were stopped in Delaware County or Franklin County, it’s especially important to review the stop, the officer’s observations, and any video carefully with counsel who regularly practices in those courts.
 
-HGN involves observing eye movements while a person follows a stimulus. The walk-and-turn and one-leg stand evaluate balance and divided attention. Each test has a specific instruction sequence and timing. Deviations from that sequence can change how the results should be interpreted.
+## When to Contact an Attorney
 
-## HGN details
+If you've been arrested for OVI in Delaware or Franklin County:
 
-HGN is often described as the most technical of the SFSTs because it depends on proper positioning, timing, and observation. Lighting, movement, and the subject's vision can affect what the officer sees. Defense counsel often review video and documentation to confirm the test was conducted consistently with training.
+- Act promptly—deadlines can come quickly, and video/records are easier to preserve early
+- Get tailored advice—OVI cases are fact-specific and depend on the stop, testing, and your record
+- Avoid assumptions—defenses may exist depending on the evidence and procedures used
 
-## Walk-and-turn and one-leg stand details
+At Mango Law, we challenge every aspect of OVI cases through strategic [motion practice](/blog/motion-practice-criminal-defense): traffic stop legality, FST administration, chemical test accuracy, and constitutional violations. If you have prior OVI convictions, understanding [Ohio's lookback period](/blog/ohio-dui-lookback-period) is critical to your defense strategy.
 
-These two tests are sensitive to conditions. Uneven pavement, weather, footwear, or simple nervousness can influence performance. The instructions matter because even small changes in how the test is explained can change how a person performs.
-
-## Why SFST results are challenged
-
-Defense attorneys often challenge SFST evidence because the tests are sensitive to conditions and method. Common issues include:
-- uneven surfaces or poor lighting
-- unclear instructions or inconsistent scoring
-- medical conditions, fatigue, or injuries
-- footwear, weather, or traffic distractions
-- deviations from standardized procedures
-
-[VISUAL:REFUSAL_STATS]
-
-## What refusing does (and does not do)
-
-Refusing SFSTs does not create a chemical-test penalty by itself, but it also does not prevent an arrest. Officers can still rely on driving behavior, admissions, and other observations. The decision often turns on the totality of circumstances.
-
-## License consequences are tied to chemical testing
-
-BMV suspension ranges and reinstatement fees are tied to chemical-test categories and convictions, not field sobriety tests alone. If licensing impact is your main concern, focus on the implied-consent rules and the specific test category alleged under ORC 4511.191.
-
-## What officers document
-
-In most cases, officers document:
-- driving behavior that led to the stop
-- physical observations and statements
-- whether SFSTs were offered and how you responded
-- any field test performance or refusal
-- any chemical test results or refusal
-
-These details become the factual basis for the case, which is why the quality and accuracy of reporting matters.
-
-## Preliminary breath tests and admissions
-
-Some stops include a handheld preliminary breath test. A PBT is not the same as an evidentiary breath test at the station, but it can still influence an officer's decision. Admissions about drinking can also be cited, which is why most defense reviews focus on the totality of observations rather than one single factor.
-
-## Medical and environmental factors
-
-Balance issues, injuries, anxiety, fatigue, and certain medical conditions can affect SFST performance. Weather, lighting, and surface conditions can also matter. These factors do not automatically resolve a case, but they can be important in evaluating the reliability of SFST evidence.
-
-## Drug impairment considerations
-
-In drug OVI cases, officers may use a different set of observations and drug recognition protocols. SFSTs can still be used, but the analysis often focuses on the totality of symptoms rather than a single test result.
-
-## What varies by county and court
-
-Local practice matters for how SFSTs are treated:
-- some courts are more skeptical of SFST evidence
-- some prosecutors focus heavily on body-cam compliance
-- plea and diversion availability can shift the practical leverage
-- timelines for suppression motions vary by court
-
-## Defense considerations
-
-Common defense themes include:
-- lack of reasonable suspicion for the stop
-- improper SFST administration under NHTSA standards
-- medical or physical conditions affecting performance
-- inaccurate or incomplete reporting of clues
-- inconsistent video or missing documentation
-
-If you want a broader view of OVI law and penalties, see [Understanding OVI/DUI Charges in Ohio](/blog/understanding-ovi-dui-charges-ohio).
-
-## How SFSTs show up in court
-
-In many cases, SFST evidence is presented through officer testimony and video. Defense attorneys often compare testimony to body-cam footage and evaluate whether the officer followed standardized procedures. When the video is inconsistent with the report, it can change the weight of the evidence.
-
-## SFST admissibility and foundation
-
-Courts often expect the state to lay a foundation for SFST evidence. That foundation can involve training, method, and compliance with standardized procedures. If the foundation is weak, the weight of the SFST evidence can be reduced or challenged.
-
-## How attorneys use NHTSA materials
-
-NHTSA training materials outline how tests should be administered and scored. Defense attorneys compare the officer's actions to those standards. When the procedure deviates from the standard, it can weaken the reliability of the evidence.
-
-## What to request in discovery
-
-Common requests include:
-- body-cam and dash-cam footage
-- incident reports and SFST score sheets
-- dispatch logs and timing information
-- calibration records for any testing devices
-
-This documentation can clarify whether the SFSTs were administered under appropriate conditions.
-
-## Why some drivers decline tests
-
-Some drivers decline SFSTs because they are nervous, have medical issues, or do not believe they can perform well on the roadside. Others decline because they want to avoid generating additional evidence. The outcome still depends on the totality of circumstances, so refusal is not a guaranteed outcome in either direction.
-
-## What to remember at the stop
-
-This is not legal advice, but it is common for people to:
-- stay calm and polite
-- avoid volunteering extra details
-- keep responses brief
-
-Your specific situation may require different decisions, so discuss your case with counsel.
-
-## Practical next steps after an arrest
-
-- Write down your timeline while details are fresh
-- Keep any medical records that may explain testing performance
-- Preserve receipts or location records that support your timeline
-- Bring all paperwork to your attorney early
-
-## Common questions
-
-- Can an officer arrest me without SFSTs? In some cases, yes, depending on the totality of observations.
-- Do SFSTs prove a specific BAC? No. They are observational tools, not chemical tests.
-- Does refusing guarantee dismissal? No. It changes the evidence, but does not end the case.
-
-## Conclusion
-
-Field sobriety tests are only one part of an OVI case. Whether you complied or refused, the case still depends on the legality of the stop, testing procedures, and what the state can prove. An attorney can evaluate the record and identify suppression issues early.
-
----
-
-This article is for educational purposes and does not constitute legal advice. Consult a qualified Ohio OVI attorney about your situation.
-`,
+Contact us at **(740) 602-2155** for a confidential case evaluation.`,
     category: 'OVI/DUI Defense',
     date: '2024-12-07',
     author: 'Dominic Mango',
-    lastVerified: '2025-12-27',
+    lastVerified: '2025-12-14',
     sources: [
       {
         label: 'Ohio Revised Code § 4511.191 (Implied consent)',
@@ -1354,21 +1301,6 @@ This article is for educational purposes and does not constitute legal advice. C
       {
         label: 'Ohio Revised Code § 4511.19 (OVI)',
         url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
-        type: 'primary',
-      },
-      {
-        label: 'NHTSA: DWI Detection and Standardized Field Sobriety Testing (SFST) Participant Manual',
-        url: 'https://www.nhtsa.gov/dwi-detection-and-standardized-field-sobriety-test-sfst',
-        type: 'guide',
-      },
-      {
-        label: 'Ohio Administrative Code 3701-53-05 (Alcohol testing)',
-        url: 'https://codes.ohio.gov/ohio-administrative-code/rule-3701-53-05',
-        type: 'primary',
-      },
-      {
-        label: 'Ohio BMV: Reinstatement fees',
-        url: 'https://www.bmv.ohio.gov/dl-reinstatement-fees.aspx',
         type: 'primary',
       },
     ],
