@@ -46,7 +46,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return allPages.map((page) => ({
     url: `${baseUrl}${page}`,
     lastModified: new Date(),
-    changeFrequency: page.startsWith('/blog/') ? 'monthly' : 'weekly' as const,
-    priority: page === '' ? 1 : page.startsWith('/blog/') ? 0.7 : 0.8,
   }))
 }
