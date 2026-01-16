@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
 import { blogPosts, type BlogPost } from '../data/blogPosts';
 
@@ -52,7 +53,7 @@ export default function BlogSection() {
             </p>
           </div>
           <Link
-            to="/blog"
+            href="/blog"
             className="group hidden items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf md:inline-flex"
           >
             View all articles
@@ -64,19 +65,18 @@ export default function BlogSection() {
           {recentPosts.map((post) => (
             <Link
               key={post.slug}
-              to={`/blog/${post.slug}`}
+              href={`/blog/${post.slug}`}
               className="group card card-hover p-0 overflow-hidden"
             >
                 {post.imageUrl && (
                   <div className="relative aspect-[16/9] overflow-hidden bg-brand-offWhite">
-                    <img
+                    <Image
                       src={post.imageUrl}
                       alt={post.title}
-                      width={800}
-                      height={450}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
-                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   </div>
@@ -115,7 +115,7 @@ export default function BlogSection() {
         </div>
 
         <div className="mt-8 text-center md:hidden">
-          <Link to="/blog" className="btn btn-secondary">
+          <Link href="/blog" className="btn btn-secondary">
             View all articles
           </Link>
         </div>

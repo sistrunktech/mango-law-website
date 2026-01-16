@@ -3,16 +3,22 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseUrl =
+  process.env.SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  process.env.VITE_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const MAPBOX_TOKEN = process.env.MAPBOX_PUBLIC_TOKEN || process.env.VITE_MAPBOX_PUBLIC_TOKEN;
+const MAPBOX_TOKEN =
+  process.env.MAPBOX_PUBLIC_TOKEN ||
+  process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN ||
+  process.env.VITE_MAPBOX_PUBLIC_TOKEN;
 
 if (!supabaseUrl || !supabaseServiceRoleKey) {
   throw new Error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY env vars.');
 }
 
 if (!MAPBOX_TOKEN) {
-  throw new Error('Missing MAPBOX_PUBLIC_TOKEN (or VITE_MAPBOX_PUBLIC_TOKEN) env var.');
+  throw new Error('Missing MAPBOX_PUBLIC_TOKEN (or NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN) env var.');
 }
 
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);

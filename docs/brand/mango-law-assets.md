@@ -31,6 +31,12 @@ Note: These PNGs are legacy Wayback screenshots for visual/reference only. Do **
 - Updated logo variant (PNG, cropped-to-content; currently used in footer):
   - Tagline lockup: `public/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png`
   - Square/icon variant: `public/images/brand/mango-logo-primary-1080x1080px-cropped-to-content.png`
+- Favicons / PWA:
+  - `public/favicon.svg`
+  - `public/favicon-16x16.png`
+  - `public/favicon-32x32.png`
+  - `public/apple-touch-icon.png`
+  - `public/site.webmanifest`
 - Alternates already available (gold/white/black variants): `icon-*.svg`, `logo-stacked-*.svg`, `logo-horizontal*.svg` in `public/images/brand/`.
 - Headshots:
   - `public/images/headshots/nick-mango-hero.jpg` (hero-friendly, office setting)

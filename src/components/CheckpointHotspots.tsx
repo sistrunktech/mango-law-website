@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { MapPin, TrendingUp } from 'lucide-react';
 import { getCheckpointHotspots, type CheckpointHotspot } from '../lib/checkpointService';

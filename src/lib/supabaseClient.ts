@@ -4,7 +4,10 @@ import { createClient } from '@supabase/supabase-js';
 // Google OAuth redirect URIs and can surface demo/seed checkpoint data on public pages).
 const PROD_SUPABASE_URL = 'https://rgucewewminsevbjgcad.supabase.co';
 // Optional: Supabase custom domain (recommended for OAuth branding, e.g. https://api.mango.law)
-const CUSTOM_SUPABASE_URL = (import.meta as any)?.env?.VITE_SUPABASE_CUSTOM_DOMAIN as string | undefined;
+const CUSTOM_SUPABASE_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_CUSTOM_DOMAIN ||
+  process.env.SUPABASE_CUSTOM_DOMAIN ||
+  process.env.VITE_SUPABASE_CUSTOM_DOMAIN;
 // NOTE: Supabase anon keys are public (shipped to the browser by design). This fallback prevents prod breakage if Bolt env vars drift.
 const PROD_SUPABASE_ANON_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJndWNld2V3bWluc2V2YmpnY2FkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ4Nzg0NjksImV4cCI6MjA4MDQ1NDQ2OX0.M3-pUdV9RpDTlaimO0AGHpPED0xf8Nxgl4L0VoUHpXw';

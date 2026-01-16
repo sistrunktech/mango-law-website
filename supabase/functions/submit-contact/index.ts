@@ -312,7 +312,11 @@ Deno.serve(async (req: Request) => {
 
     if (resendApiKey) {
       try {
-        const siteUrl = Deno.env.get("FRONTEND_URL") || Deno.env.get("VITE_SITE_URL") || "https://mango.law";
+        const siteUrl =
+          Deno.env.get("FRONTEND_URL") ||
+          Deno.env.get("NEXT_PUBLIC_SITE_URL") ||
+          Deno.env.get("VITE_SITE_URL") ||
+          "https://mango.law";
         const appEnv = Deno.env.get("APP_ENV") || "production";
         const season = (Deno.env.get("APP_SEASON") || "winter") as EmailSeason;
         const theme = (Deno.env.get("APP_THEME") || "light") as EmailTheme;

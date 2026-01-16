@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
 import { Accessibility, X, RotateCcw, Type, Eye, MousePointer, Link, Focus, Brain, Space } from 'lucide-react';
 import { useAccessibility, type FontSize } from '../contexts/AccessibilityContext';

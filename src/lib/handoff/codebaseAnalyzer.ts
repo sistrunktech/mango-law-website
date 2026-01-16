@@ -41,17 +41,14 @@ export async function analyzeCodebase(): Promise<CodebaseStats> {
     const deps = packageJson.dependencies as Record<string, string> || {};
     const devDeps = packageJson.devDependencies as Record<string, string> || {};
 
+    if (deps['next']) techs.add('Next.js ' + deps['next']);
     if (deps['react']) techs.add('React ' + deps['react']);
-    if (deps['react-router-dom']) techs.add('React Router');
     if (deps['@supabase/supabase-js']) techs.add('Supabase');
     if (deps['tailwindcss'] || devDeps['tailwindcss']) {
       techs.add('Tailwind CSS');
     }
     if (deps['typescript'] || devDeps['typescript']) {
       techs.add('TypeScript');
-    }
-    if (deps['vite'] || devDeps['vite']) {
-      techs.add('Vite');
     }
     if (deps['mapbox-gl']) techs.add('Mapbox GL');
 
@@ -110,9 +107,10 @@ export async function analyzeCodebase(): Promise<CodebaseStats> {
 
     // Known environment variables
     stats.environmentVariables = [
-      'VITE_SUPABASE_URL',
-      'VITE_SUPABASE_ANON_KEY',
-      'VITE_MAPBOX_TOKEN',
+      'NEXT_PUBLIC_SUPABASE_URL',
+      'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+      'NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN',
+      'NEXT_PUBLIC_MAPBOX_STYLE_URL',
       'SUPABASE_SERVICE_ROLE_KEY',
       'RESEND_API_KEY',
     ];
@@ -147,7 +145,7 @@ mango-law-website/
 │   │   ├── blog/
 │   │   ├── chat/
 │   │   └── [35+ shared components]
-│   ├── pages/
+│   ├── views/
 │   │   ├── HomePage.tsx
 │   │   ├── AboutPage.tsx
 │   │   ├── ContactPage.tsx
@@ -168,8 +166,10 @@ mango-law-website/
 │   │   └── checkpointService.ts
 │   ├── styles/
 │   │   └── tailwind.css
-│   ├── App.tsx
-│   └── main.tsx
+│   ├── app/
+│   │   ├── (site)/
+│   │   └── (internal)/
+│   └── views/
 ├── supabase/
 │   ├── functions/
 │   │   ├── checkpoint-scraper/
@@ -183,11 +183,11 @@ mango-law-website/
 │   └── brand/
 ├── design/
 │   └── reference/
-├── dist/
+├── .next/
 │   └── [build output]
 ├── package.json
 ├── tsconfig.json
-├── vite.config.ts
+├── next.config.mjs
 ├── tailwind.config.js
 └── README.md
 \`\`\`

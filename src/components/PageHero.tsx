@@ -1,4 +1,7 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
 import ORCLabel from './ORCLabel';
 import { OFFICE_PHONE_DISPLAY } from '../lib/contactInfo';
@@ -110,10 +113,13 @@ export default function PageHero({
         {/* Background image with overlay (if provided) */}
         {backgroundUrl && (
           <div className="pointer-events-none absolute inset-0">
-            <img
+            <Image
               src={backgroundUrl}
               alt=""
-              className="h-full w-full object-cover"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              aria-hidden="true"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/90 to-brand-black/70" />
           </div>
@@ -181,7 +187,7 @@ export default function PageHero({
             ].join(' ')}>
               {ctaLabel && ctaHref && (
                 <Link
-                  to={ctaHref}
+                  href={ctaHref}
                   className="group inline-flex items-center gap-2 rounded-lg bg-brand-mango px-8 py-4 text-lg font-bold text-brand-black shadow-lg transition-all hover:bg-brand-gold hover:shadow-xl hover:-translate-y-0.5"
                 >
                   {ctaLabel}
@@ -237,7 +243,7 @@ export default function PageHero({
               {quickActions.map((action, i) => (
                 <Link
                   key={i}
-                  to={action.href}
+                  href={action.href}
                   className="group relative rounded-2xl bg-white border border-brand-black/10 p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg"
                 >
                   <div className="flex items-start gap-5">

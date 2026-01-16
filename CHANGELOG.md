@@ -13,6 +13,23 @@
 
 ## 2026-01-01
 
+### Next.js SSR/SSG Migration (WIP)
+- Add Next.js App Router with route groups for public and internal pages.
+- Pre-render metadata + JSON-LD via `src/lib/seo-metadata.ts` and `src/components/StructuredData.tsx`.
+- Add static blog params/metadata and server-side FAQ/Breadcrumb schema for practice + intent pages.
+- Remove Vite entrypoints and update scripts/deps for Next build.
+- Update client env names to `NEXT_PUBLIC_*` in code + `.env.example`.
+
+### Docs + Ops Alignment
+- Update README + ops docs with new documentation paths and sitemap build steps.
+- Refresh SEO strategy status and ticket statuses to reflect SSR/SSG + intent page completion.
+- Update accessibility guide examples for Next.js navigation.
+
+### OVI SEO Regional Intent Pages (PR #47)
+- Add specialized OVI defense pages for **Delaware**, **Marysville**, **Dublin**, **Powell**, **Westerville**, **Sunbury**, and **Lewis Center**.
+- Implement unique local intent copy and specific court metadata for each region.
+- fix: remove decorative arrow tokens from link text to improve screen reader clarity.
+
 ### SEO Quick Wins
 - Sync LegalService `areaServed` with `src/data/serviceAreas.ts` for schema accuracy.
 - Add FAQPage, Article, and BreadcrumbList schema automation in `src/lib/seo.tsx`, including standalone article/breadcrumb emission.
@@ -26,6 +43,7 @@
 - Deploy FAQ/breadcrumb schema on practice area pages and core routes.
 - Add breadcrumb schema on About/Reviews/Contact/Blog/Glossary and core pages.
 - Apply `noindex` directives to admin/auth/internal documentation pages.
+- Log SEO quick wins and technical backlog in `docs/TROUBLE-TICKETS.md`.
 
 ## 2025-12-28
 
@@ -39,7 +57,7 @@
 - Add `check-rankings` Edge Function (Serper.dev integration) and admin UI dashboard tab.
 - Remove hardcoded Serper API fallback; `SERPER_API_KEY` is now required for rank checks.
 - Seed initial keyword list via migration (`supabase/migrations/20251228180500_seed_initial_keywords.sql`).
-- Document 2025 SEO roadmap in `docs/SEO-STRATEGY-2025.md` and research inputs in `docs/RESEARCH-INPUTS-2025.md`.
+- Document 2025 SEO roadmap in `docs/technical/SEO-STRATEGY-2025.md` and research inputs in `docs/legacy/RESEARCH-INPUTS-2025.md`.
 
 ### Regional Expansion
 - Expand `serviceAreas.ts` with Union, Morrow, and Marion counties plus tiered cities and court metadata.

@@ -118,7 +118,7 @@ The biggest, most reliable wins in this repo are:
 
 **Files / locations**
 
-- `src/pages/HomePage.tsx`
+- `src/views/HomePage.tsx`
 - `public/images/headshots/nick-mango-hero.*` (new variants alongside the original)
 
 **Acceptance criteria**
@@ -182,7 +182,7 @@ The biggest, most reliable wins in this repo are:
 
 **Files / locations**
 
-- `src/pages/HomePage.tsx` (where those sections are rendered)
+- `src/views/HomePage.tsx` (where those sections are rendered)
 - New: `src/components/DeferredSection.tsx` (or `src/lib/useInView.ts`)
 
 **Acceptance criteria**
@@ -336,7 +336,7 @@ The biggest, most reliable wins in this repo are:
 
 **Files / locations (likely)**
 
-- `src/pages/HomePage.tsx` (heading structure)
+- `src/views/HomePage.tsx` (heading structure)
 - `src/components/ORCLabel.tsx` (chip-style links)
 - `src/components/PracticeAreaCardGrid.tsx` (click targets)
 - Any components rendering tag/chip link clusters
@@ -378,9 +378,9 @@ The biggest, most reliable wins in this repo are:
 | --- | --- | --- |
 | P0 | Disable Bolt badge | Bolt settings, `docs/OPERATIONS.md` |
 | P0 | Practice area images: modern formats + prevent hidden mobile downloads | `src/components/PracticeAreaCardGrid.tsx`, `src/data/practiceAreas.ts`, `public/images/generated/*` |
-| P0 | Nick hero headshot responsive | `src/pages/HomePage.tsx`, `public/images/headshots/*` |
+| P0 | Nick hero headshot responsive | `src/views/HomePage.tsx`, `public/images/headshots/*` |
 | P0 | Header logo optimization | `src/components/SiteHeader.tsx`, `public/images/brand/*` |
-| P1 | Defer below-fold chunks | `src/pages/HomePage.tsx`, new `DeferredSection` component |
+| P1 | Defer below-fold chunks | `src/views/HomePage.tsx`, new `DeferredSection` component |
 | P1 | Bundle analyzer + unused JS plan | `vite.config.ts`, `package.json` |
 | P2 | CSS/fonts critical path | `src/styles/tailwind.css`, `index.html`, maybe `public/fonts/*` |
 | P2 | Cache headers | Bolt settings, `docs/OPERATIONS.md` |

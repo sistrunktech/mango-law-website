@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { BookOpen, ExternalLink } from 'lucide-react';
 import { getStatutesByPracticeArea, getStatute, type OhioStatute } from '../data/statutes';
 
@@ -53,7 +53,7 @@ export default function StatuteSidebar({
           >
             <div className="mb-2 flex items-start justify-between gap-2">
               <Link
-                to={`/glossary#${statute.id}`}
+                href={`/glossary#${statute.id}`}
                 className="flex-1 font-semibold text-brand-black transition-colors group-hover:text-brand-leaf"
               >
                 § {statute.section}
@@ -75,7 +75,7 @@ export default function StatuteSidebar({
               {statute.definition.split('.')[0]}.
             </p>
             <Link
-              to={`/glossary#${statute.id}`}
+              href={`/glossary#${statute.id}`}
               className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
             >
               Learn more

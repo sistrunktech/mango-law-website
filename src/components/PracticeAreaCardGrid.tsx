@@ -1,5 +1,8 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight, ArrowUpRight, Phone, Calendar, Star } from 'lucide-react';
 import { practiceAreas } from '../data/practiceAreas';
 import ORCLabel from './ORCLabel';
@@ -22,17 +25,6 @@ function useMinWidthQuery(minWidthPx: number): boolean {
   return matches;
 }
 
-function getGeneratedImageVariants(imageUrl: string | undefined) {
-  if (!imageUrl) return null;
-  if (!imageUrl.endsWith('.png')) return null;
-  const base = imageUrl.replace(/\.png$/, '');
-  return {
-    avifSrcSet: `${base}-480w.avif 480w, ${base}-960w.avif 960w`,
-    webpSrcSet: `${base}-480w.webp 480w, ${base}-960w.webp 960w`,
-    fallbackSrc: imageUrl,
-  };
-}
-
 function DecorativeGeneratedImage({
   imageUrl,
   alt,
@@ -42,17 +34,15 @@ function DecorativeGeneratedImage({
   alt: string;
   sizes: string;
 }) {
-  const variants = getGeneratedImageVariants(imageUrl);
-  if (!variants) {
-    return <img src={imageUrl} alt={alt} className="h-full w-full object-cover object-center" loading="lazy" decoding="async" />;
-  }
-
   return (
-    <picture>
-      <source type="image/avif" srcSet={variants.avifSrcSet} sizes={sizes} />
-      <source type="image/webp" srcSet={variants.webpSrcSet} sizes={sizes} />
-      <img src={variants.fallbackSrc} alt={alt} className="h-full w-full object-cover object-center" loading="lazy" decoding="async" />
-    </picture>
+    <Image
+      src={imageUrl}
+      alt={alt}
+      fill
+      sizes={sizes}
+      className="object-cover object-center"
+      loading="lazy"
+    />
   );
 }
 
@@ -82,7 +72,7 @@ export default function PracticeAreaCardGrid() {
             </p>
           </div>
           <Link
-            to="/practice-areas"
+            href="/practice-areas"
             className="group relative -m-2 hidden items-center gap-2 rounded p-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:inline-flex"
           >
             View all practice areas
@@ -95,7 +85,7 @@ export default function PracticeAreaCardGrid() {
           {/* Featured Hero Card - OVI/DUI (spans 2 columns on lg) */}
           {oviArea && (
             <Link
-              to={oviArea.href}
+              href={oviArea.href}
               className="group relative overflow-hidden rounded-2xl border-2 border-brand-mango/20 bg-gradient-to-br from-brand-mango/5 via-white to-brand-gold/5 shadow-lift transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-brand-mango/40 md:col-span-2 lg:col-span-2"
             >
               {/* Background Image */}
@@ -174,7 +164,7 @@ export default function PracticeAreaCardGrid() {
           {/* Criminal Defense - Standard Card */}
           {criminalArea && (
             <Link
-              to={criminalArea.href}
+              href={criminalArea.href}
               className="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20"
             >
               {/* Background Image */}
@@ -226,7 +216,7 @@ export default function PracticeAreaCardGrid() {
           {/* Other Practice Areas - Standard Cards */}
           {otherAreas.map((area, index) => (
             <Link
-              to={area.href}
+              href={area.href}
               key={area.href}
               className="group relative overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift hover:border-brand-leaf/20"
               style={{ animationDelay: `${(index + 2) * 50}ms` }}
@@ -300,7 +290,7 @@ export default function PracticeAreaCardGrid() {
 
               <div className="mt-6 space-y-3">
                 <Link
-                  to="/contact"
+                  href="/contact"
                   className="btn btn-primary w-full text-center transition-transform hover:scale-105"
                 >
                   Free Case Review
@@ -328,7 +318,7 @@ export default function PracticeAreaCardGrid() {
 
         {/* Mobile view all link */}
         <div className="mt-8 text-center md:hidden">
-          <Link to="/practice-areas" className="btn btn-secondary">
+          <Link href="/practice-areas" className="btn btn-secondary">
             View all practice areas
           </Link>
         </div>

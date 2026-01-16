@@ -1,3 +1,5 @@
+'use client';
+
 import GoogleMap from './GoogleMap';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';

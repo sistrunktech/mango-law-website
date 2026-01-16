@@ -1,4 +1,7 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight, Phone } from 'lucide-react';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
@@ -31,10 +34,13 @@ export default function CTASection({
       {/* Background image placeholder */}
       {backgroundUrl && (
         <div className="absolute inset-0">
-          <img
+          <Image
             src={backgroundUrl}
             alt=""
-            className="h-full w-full object-cover opacity-20"
+            fill
+            sizes="100vw"
+            className="object-cover opacity-20"
+            aria-hidden="true"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/90 to-transparent" />
         </div>
@@ -65,7 +71,7 @@ export default function CTASection({
           {/* Actions */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
-              to={primaryHref}
+              href={primaryHref}
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg bg-brand-mango px-7 py-3.5 text-sm font-bold text-brand-black shadow-lg transition-all hover:bg-brand-gold hover:shadow-xl hover:-translate-y-1 active:translate-y-0"
             >
               <span className="relative z-10">{primaryLabel}</span>

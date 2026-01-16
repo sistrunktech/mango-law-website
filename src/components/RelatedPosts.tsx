@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Calendar, Clock } from 'lucide-react';
 import { BlogPost } from '../data/blogPosts';
 
@@ -22,19 +23,18 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
         {posts.map((post) => (
           <Link
             key={post.slug}
-            to={`/blog/${post.slug}`}
+            href={`/blog/${post.slug}`}
             className="group block overflow-hidden rounded-xl border border-brand-black/10 bg-white transition-all hover:border-brand-mango hover:shadow-lg"
           >
             {post.imageUrl && (
-              <div className="aspect-video w-full overflow-hidden">
-                <img
+              <div className="relative aspect-video w-full overflow-hidden">
+                <Image
                   src={post.imageUrl}
                   alt={post.title}
-                  width={800}
-                  height={450}
-                  className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform group-hover:scale-105"
                   loading="lazy"
-                  decoding="async"
                 />
               </div>
             )}

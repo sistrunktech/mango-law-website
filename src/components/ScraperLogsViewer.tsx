@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { Activity, RefreshCw, CheckCircle, AlertTriangle, XCircle, Loader2 } from 'lucide-react';
 import { supabase, supabaseAnonKey, supabaseUrl } from '../lib/supabaseClient';

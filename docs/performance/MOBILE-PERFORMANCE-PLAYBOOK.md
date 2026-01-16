@@ -60,7 +60,7 @@ If an image must not download on mobile, do not render the element at all until
 a min-width media query matches (matchMedia gate).
 
 Repo hotspots:
-- src/pages/HomePage.tsx
+- src/views/HomePage.tsx
 - src/components/PracticeAreaCardGrid.tsx
 - src/components/SiteHeader.tsx
 - public/images/generated/*

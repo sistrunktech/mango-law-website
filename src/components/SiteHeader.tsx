@@ -1,5 +1,9 @@
+'use client';
+
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, MapPinned } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
@@ -12,6 +16,7 @@ interface SiteHeaderProps {
 }
 
 export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
+  const pathname = usePathname() ?? '';
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showDuiMapBanner, setShowDuiMapBanner] = useState(false);
@@ -73,7 +78,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
         <div className="border-b border-brand-black/10 bg-brand-leaf/90 text-white lg:hidden">
           <div className="container flex items-center justify-between gap-2 py-1">
             <Link
-              to={duiMapHref}
+              href={duiMapHref}
               className="flex min-w-0 items-center gap-1.5 text-xs font-semibold"
               data-cta="mobile_dui_map_banner"
               onClick={() => trackCtaClick('mobile_dui_map_banner')}
@@ -108,38 +113,19 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
           className={`container flex items-center justify-between py-3 transition-all ${isScrolled ? 'lg:py-2' : 'lg:py-3'}`}
         >
           {/* Logo */}
-          <Link to="/" className="group flex items-center gap-3">
-            <picture>
-              <source
-                type="image/avif"
-                srcSet={[
-                  '/images/brand/mango-logo-primary-fullcolor-tagline-240w.avif 240w',
-                  '/images/brand/mango-logo-primary-fullcolor-tagline-480w.avif 480w',
-                ].join(', ')}
-                sizes="(min-width: 1024px) 220px, 170px"
-              />
-              <source
-                type="image/webp"
-                srcSet={[
-                  '/images/brand/mango-logo-primary-fullcolor-tagline-240w.webp 240w',
-                  '/images/brand/mango-logo-primary-fullcolor-tagline-480w.webp 480w',
-                ].join(', ')}
-                sizes="(min-width: 1024px) 220px, 170px"
-              />
-              <img
-                src={logoFallbackSrc}
-                alt="Mango Law LLC - Criminal & OVI/DUI Defense"
-                width={1704}
-                height={555}
-                className={[
-                  'h-8 w-auto transition-all hover:opacity-90 lg:h-12',
-                  isScrolled ? 'lg:h-10' : '',
-                ].join(' ')}
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-              />
-            </picture>
+          <Link href="/" className="group flex items-center gap-3">
+            <Image
+              src={logoFallbackSrc}
+              alt="Mango Law LLC - Criminal & OVI/DUI Defense"
+              width={1704}
+              height={555}
+              sizes="(min-width: 1024px) 220px, 170px"
+              priority
+              className={[
+                'h-8 w-auto transition-all hover:opacity-90 lg:h-12',
+                isScrolled ? 'lg:h-10' : '',
+              ].join(' ')}
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -148,11 +134,12 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               if (link.label === 'Practice Areas') {
                 return <MegaMenu key="practice-areas-mega" variant="light" />;
               }
+              const isActive = pathname === link.href;
               return (
-                <NavLink
+                <Link
                   key={link.href}
-                  to={link.href}
-                  className={({ isActive }) => [
+                  href={link.href}
+                  className={[
                     'px-4 py-2 text-sm font-medium transition-colors',
                     isActive
                       ? 'text-brand-mangoText'
@@ -160,7 +147,7 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   ].join(' ')}
                 >
                   {link.label}
-                </NavLink>
+                </Link>
               );
             })}
           </nav>
@@ -244,8 +231,8 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
         >
           <div className="border-t border-brand-black/10 pb-4">
             <div className="container flex flex-col gap-1 pt-2">
-              <NavLink
-                to={duiMapHref}
+              <Link
+                href={duiMapHref}
                 onClick={() => {
                   setOpen(false);
                   trackCtaClick('mobile_menu_dui_checkpoints');
@@ -268,24 +255,25 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                     </div>
                   </div>
                 </div>
-              </NavLink>
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.href}
-                  to={link.href}
-                  onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                    [
+              </Link>
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={[
                       'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
                       isActive
                         ? 'bg-brand-mango/20 text-brand-mangoText'
                         : 'text-brand-black hover:bg-brand-black/5',
-                    ].join(' ')
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
+                    ].join(' ')}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
               <div className="mt-4 flex flex-col gap-3 border-t border-brand-black/10 pt-4">
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}

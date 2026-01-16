@@ -20,6 +20,46 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-01-01 14:39 EST
+Post slug and title: Strategy update | docs/technical/SEO-STRATEGY-2025.md
+Change type: minor
+Summary of change: Refresh status to reflect SSR/SSG migration + intent pages completion and document remaining cutover/monitoring tasks.
+Regression checklist:
+- Hero changed? n/a
+- Images removed? n/a
+- Links changed? n/a
+- Headings changed? yes
+- Meta/schema changed? n/a
+Approval token: n/a
+Rollback notes: docs-only update in codex/docs-nextjs-alignment
+
+Date/time: 2025-01-13 12:00 UTC
+Post slug and title: motion-practice-criminal-defense | The Power of Motion Practice in Criminal Defense
+Change type: major
+Summary of change: Expanded and refined motion practice guidance to align with the P0 motion practice update.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: motion-practice-criminal-defense -- merge content updates -- minor -- 2025-01-13T12:00:00Z
+Rollback notes: commit pending
+
+
+Date/time: 2025-01-13 12:00 UTC
+Post slug and title: refuse-field-sobriety-test-ohio | Can I Refuse Field Sobriety Tests in Ohio? Your Rights Explained
+Change type: major
+Summary of change: Rewrote the field sobriety refusal guide with structured sections on rights, test types, consequences, and local considerations; added cross-links to motion practice and lookback guidance.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: APPROVED: refuse-field-sobriety-test-ohio -- merge content updates -- minor -- 2025-01-13T12:00:00Z
+Rollback notes: commit pending
+
 Date/time: 2025-12-29 14:30 EST
 Post slug and title: what-to-do-after-ovi-arrest-ohio | What to Do After an OVI Arrest in Ohio: A Step-by-Step Guide
 Change type: major
