@@ -264,3 +264,36 @@ export const attorneySchema = {
     'NHTSA Field Sobriety Test Certification',
   ],
 };
+
+export const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  name: 'Mango Law LLC',
+  url: SITE_URL,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${SITE_URL}/search?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+export const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE_URL}/#organization`,
+  name: 'Mango Law LLC',
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/brand/mango-logo-primary-fullcolor.svg`,
+  sameAs: [
+    'https://www.linkedin.com/company/mango-law-llc',
+    'https://www.facebook.com/MangoLawLLC',
+    'https://twitter.com/MangoLawLLC',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: `+1${OFFICE_PHONE_TEL}`,
+    contactType: 'legal services',
+    availableLanguage: ['English'],
+  },
+};

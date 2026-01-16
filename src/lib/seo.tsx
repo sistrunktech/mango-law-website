@@ -12,23 +12,10 @@ import {
   type FAQEntry,
   localBusinessSchema,
   attorneySchema,
+  websiteSchema,
+  organizationSchema,
 } from './structured-data';
-
-function trackPageView(pageTitle: string) {
-  const page_location = window.location.href;
-  const page_path = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-
-  const w = window as any;
-  w.dataLayer = w.dataLayer || [];
-  if (Array.isArray(w.dataLayer)) {
-    w.dataLayer.push({
-      event: 'mango_page_view',
-      page_title: pageTitle,
-      page_location,
-      page_path,
-    });
-  }
-}
+import { trackPageView } from './analytics';
 
 export interface SEOProps {
   title?: string;
@@ -178,4 +165,4 @@ export function SEO({
   return null;
 }
 
-export { localBusinessSchema, attorneySchema };
+export { localBusinessSchema, attorneySchema, websiteSchema, organizationSchema };
