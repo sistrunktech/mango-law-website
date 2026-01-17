@@ -1,6 +1,19 @@
 import { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+const INDEXNOW_KEY = process.env.INDEXNOW_KEY || '2bda9a4cf672486daa2ab28e477568e5'
+
+async function pingIndexNow(baseUrl: string) {
+  if (!INDEXNOW_KEY) return
+  const pingUrl = `https://api.indexnow.org/indexnow?url=${encodeURIComponent(baseUrl)}&key=${INDEXNOW_KEY}`
+  try {
+    // fire-and-forget; errors are non-fatal
+    await fetch(pingUrl, { next: { revalidate: 0 } })
+  } catch (error) {
+    console.warn('IndexNow ping failed:', error)
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://mango.law'
   
   // Static pages
@@ -42,6 +55,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Combine all pages
   const allPages = [...staticPages, ...blogPosts]
+
+  // Non-blocking IndexNow ping for homepage (indexes sitemap contents)
+  pingIndexNow(baseUrl)
 
   return allPages.map((page) => ({
     url: `${baseUrl}${page}`,
