@@ -25,6 +25,21 @@ const resourceLinks = [
   { href: '/locations', label: 'Service Areas' },
 ];
 
+const featuredGuideLinks = [
+  { href: '/blog/personal-injury-claims-ohio-negligence-law', label: 'Personal Injury Claims in Ohio' },
+  { href: '/blog/white-collar-crime-defense-ohio', label: 'White Collar Crime Defense' },
+  { href: '/blog/drug-possession-vs-trafficking-ohio', label: 'Drug Possession vs. Trafficking' },
+  { href: '/blog/ex-parte-protection-orders-ohio-defense', label: 'Ex Parte Protection Orders' },
+  { href: '/blog/assault-domestic-violence-defense-ohio', label: 'Assault & Domestic Violence Defense' },
+  { href: '/blog/sex-crimes-defense-ohio-what-you-need-to-know', label: 'Sex Crimes Defense in Ohio' },
+];
+
+const featuredPageLinks = [
+  { href: '/delaware-ohio-ovi-lawyer', label: 'Delaware, OH OVI Lawyer' },
+  { href: '/holiday-ovi-enforcement-ohio', label: 'Holiday OVI Enforcement' },
+  { href: '/of-counsel', label: 'Of Counsel' },
+];
+
 const localSeoLinks = [
   { href: '/criminal-defense-delaware-oh', label: 'Delaware, OH Criminal Defense' },
   { href: '/ovi-dui-defense-delaware-oh', label: 'Delaware, OH OVI Defense' },
@@ -155,6 +170,42 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
+
+              <div className="mt-5 space-y-3 border-t border-brand-offWhite/10 pt-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
+                  Featured Guides
+                </p>
+                <ul className="space-y-3">
+                  {featuredGuideLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-5 space-y-3 border-t border-brand-offWhite/10 pt-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
+                  Featured Pages
+                </p>
+                <ul className="space-y-3">
+                  {featuredPageLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </FooterAccordion>
 
             <FooterAccordion title="Practice Areas">
@@ -232,6 +283,40 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+            <div className="mt-6">
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
+                Featured Guides
+              </p>
+              <ul className="mt-4 space-y-3">
+                {featuredGuideLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mt-6">
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
+                Featured Pages
+              </p>
+              <ul className="mt-4 space-y-3">
+                {featuredPageLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div>
