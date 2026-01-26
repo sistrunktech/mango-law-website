@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Scale, Car, Pill, ShieldAlert, Briefcase, FileWarning, Stethoscope } from 'lucide-react';
+import { Scale, Car, Pill, ShieldAlert, Briefcase, FileWarning, Stethoscope, Heart } from 'lucide-react';
 
 export type PracticeArea = {
   title: string;
@@ -80,6 +80,17 @@ export const practiceAreas: PracticeArea[] = [
     practiceAreaKey: 'protection-orders',
     orcSection: '3113.31',
     ctaText: 'Fight a protection order',
+  },
+  {
+    title: 'Domestic Violence',
+    href: '/domestic-violence-lawyer-delaware-oh',
+    summary: 'Defense for domestic violence allegations with focus on evidence, bond terms, and no-contact orders.',
+    icon: Heart,
+    imageUrl: '/images/generated/blog-assault-domestic-violence.png',
+    imageAlt: 'Domestic violence defense attorney serving Delaware County and Central Ohio',
+    practiceAreaKey: 'domestic-violence',
+    orcSection: '2919.25',
+    ctaText: 'Get help with domestic violence charges',
   },
   {
     title: 'Personal Injury',

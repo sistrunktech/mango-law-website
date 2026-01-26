@@ -1,0 +1,194 @@
+import Image from 'next/image';
+import PageHero from '../components/PageHero';
+import CTASection from '../components/CTASection';
+import FAQSection from '../components/FAQSection';
+import LegalCodeCallout from '../components/LegalCodeCallout';
+import StatuteSidebar from '../components/StatuteSidebar';
+import ServiceAreasSection from '../components/ServiceAreasSection';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { SEO } from '../lib/seo';
+
+export const domesticViolenceFaqs = [
+  {
+    question: 'What counts as domestic violence in Ohio?',
+    answer:
+      'Domestic violence charges often involve allegations of physical harm, attempted harm, threats, or certain menacing conduct involving a family or household member. The exact charge and degree depend on the facts, relationship, and any prior history. We review the allegations, evidence, and relationship element carefully before advising on next steps.',
+  },
+  {
+    question: 'Will I go to jail for a domestic violence charge?',
+    answer:
+      'Not always, but it is possible. Penalties depend on the degree of the offense, whether there are prior convictions, the presence of injuries, and whether additional charges (like violating a protection order) are involved. We focus early on bond conditions, no-contact terms, and strategies to reduce or avoid incarceration.',
+  },
+  {
+    question: 'How does a no-contact order affect me?',
+    answer:
+      'No-contact orders can restrict communication, require you to leave a shared residence, and impact parenting time. Even “friendly” contact can violate the order and create new charges. We help you understand the conditions, document compliance, and pursue modifications where appropriate.',
+  },
+  {
+    question: 'Can domestic violence charges be dismissed?',
+    answer:
+      'Sometimes. Dismissal can be possible when evidence is weak, statements change, witnesses are not credible, or there are constitutional issues with how evidence was obtained. We evaluate body cam footage, 911 calls, medical records, texts, and third-party witnesses to identify the strongest defense path.',
+  },
+  {
+    question: 'Do I need a lawyer if the other person wants to drop the charges?',
+    answer:
+      'Yes. The State controls the criminal case, and cases can move forward even if the alleged victim does not want prosecution. We build a defense based on evidence and procedure, and we coordinate with you on safe, legal ways to address no-contact orders and related protection order proceedings.',
+  },
+  {
+    question: 'Will a domestic violence case affect gun rights?',
+    answer:
+      'It can. Certain convictions and protection orders can trigger firearm restrictions under state and federal law. We assess these risks early and factor them into strategy, negotiations, and any potential resolution.',
+  },
+  {
+    question: 'What should I do right after an arrest for domestic violence?',
+    answer:
+      'Do not discuss the incident with police or anyone who may be a witness. Follow bond and no-contact conditions strictly. Preserve helpful evidence (messages, call logs, photos) and contact an attorney quickly so we can address bond conditions, deadlines, and early defense steps.',
+  },
+];
+
+export default function DomesticViolencePage() {
+  return (
+    <>
+      <SEO
+        title="Domestic Violence Lawyer Delaware, OH | Mango Law LLC"
+        description="Strategic domestic violence defense for misdemeanor and felony allegations. Former prosecutor with 26+ years of experience serving Delaware County, Franklin County, and Central Ohio."
+        image="/images/generated/blog-assault-domestic-violence.png"
+        faqs={domesticViolenceFaqs}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Practice Areas', item: '/practice-areas' },
+          { name: 'Domestic Violence', item: '/domestic-violence-lawyer-delaware-oh' },
+        ]}
+      />
+
+      <PageHero
+        eyebrow="Domestic Violence"
+        title="Clear, strategic defense when the stakes are personal"
+        description="Domestic violence allegations can move fast—bond conditions, no-contact orders, and collateral consequences. Get clear next steps and an evidence-focused defense strategy."
+        ctaLabel="Schedule a consult"
+        ctaHref="/contact"
+        showQuickActions={false}
+        alignLeft={true}
+        compact={true}
+        orcSection="2919.25"
+        phoneCtaId="domestic_violence_hero_call_office"
+      />
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-12">
+              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">
+                      Domestic Violence Defense in Delaware & Franklin County
+                    </h2>
+                    <p className="text-lg text-brand-black/70 leading-relaxed">
+                      Domestic violence cases often involve high emotion and fast timelines. The court may impose immediate
+                      conditions that impact your home, work, and family. Our approach is to get you compliant, protect your
+                      record, and challenge the evidence methodically.
+                    </p>
+                  </div>
+                  <p className="text-brand-black/70 leading-relaxed">
+                    We review body camera footage, 911 calls, medical records, messages, and third-party witnesses. We also
+                    address bond terms and no-contact orders early, so you know exactly what you can and cannot do while the
+                    case is pending.
+                  </p>
+                </div>
+
+                <Image
+                  src="/images/generated/blog-assault-domestic-violence.png"
+                  alt="Domestic violence defense strategy with careful evidence review"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+                  loading="lazy"
+                  width={1200}
+                  height={900}
+                />
+              </div>
+
+              <LegalCodeCallout section="2919.25" />
+              <LegalCodeCallout section="3113.31" />
+            </div>
+
+            <aside className="lg:col-span-1">
+              <StatuteSidebar practiceArea="domestic-violence" />
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-brand-offWhite">
+        <div className="container">
+          <div className="mb-12 text-center">
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">
+              How we approach domestic violence cases
+            </h2>
+            <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
+              Our focus is fast clarity, strict compliance, and evidence-based defense strategy.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {[
+              {
+                title: 'Stabilize the situation',
+                description:
+                  'We help you understand bond conditions and no-contact terms immediately so you avoid a second case from a technical violation.',
+              },
+              {
+                title: 'Preserve and review evidence',
+                description:
+                  'We identify key evidence early: body cam footage, 911 audio, messages, photos, and third-party witnesses.',
+              },
+              {
+                title: 'Challenge weak allegations',
+                description:
+                  'We test credibility, inconsistencies, and relationship elements, and we raise defenses like self-defense when supported by facts.',
+              },
+              {
+                title: 'Protect your record',
+                description:
+                  'We pursue resolutions that reduce collateral damage to employment, licensing, housing, and future background checks.',
+              },
+              {
+                title: 'Coordinate related matters',
+                description:
+                  'If there is a civil protection order hearing, we coordinate strategy so you don’t get boxed in across proceedings.',
+              },
+              {
+                title: 'Prepare for trial when necessary',
+                description:
+                  'If the State won’t offer a fair resolution, we prepare for trial with organized discovery review and motion practice.',
+              },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-leaf/10">
+                  <span className="text-2xl font-bold text-brand-leaf">{i + 1}</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-brand-black mb-2">{item.title}</h3>
+                  <p className="text-brand-black/70">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FAQSection faqs={domesticViolenceFaqs} title="Domestic Violence FAQs" />
+
+      <ServiceAreasSection practiceArea="Domestic Violence Defense" />
+
+      <CTASection
+        title="Need clear next steps?"
+        body="If you were arrested or contacted by police, time matters. Get advice that protects your record and your family."
+        primaryLabel="Schedule a consult"
+        primaryHref="/contact"
+        secondaryLabel={OFFICE_PHONE_DISPLAY}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="domestic_violence_cta_call_office"
+      />
+    </>
+  );
+}
