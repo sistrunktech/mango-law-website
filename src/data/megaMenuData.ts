@@ -1,4 +1,4 @@
-import { Shield, Scale, Pill, Users, Briefcase, FileWarning, HeartPulse, MapPin, MapPinned, BookOpen, MessageSquare } from 'lucide-react';
+import { Shield, Scale, Pill, Users, Briefcase, FileWarning, HeartPulse, Heart, MapPin, MapPinned, BookOpen, MessageSquare } from 'lucide-react';
 
 export const megaMenuSections = {
   practiceAreas: {
@@ -39,6 +39,12 @@ export const megaMenuSections = {
         href: '/protection-order-lawyer-delaware-oh',
         description: 'Civil protection order defense',
         icon: FileWarning,
+      },
+      {
+        title: 'Domestic Violence',
+        href: '/domestic-violence-lawyer-delaware-oh',
+        description: 'Defense for DV allegations',
+        icon: Heart,
       },
       {
         title: 'Personal Injury',
