@@ -271,11 +271,6 @@ export const websiteSchema = {
   '@id': `${SITE_URL}/#website`,
   name: 'Mango Law LLC',
   url: SITE_URL,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${SITE_URL}/search?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
 };
 
 export const websiteGraphNode = {
@@ -283,11 +278,6 @@ export const websiteGraphNode = {
   '@id': `${SITE_URL}/#website`,
   name: 'Mango Law LLC',
   url: SITE_URL,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${SITE_URL}/search?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
 };
 
 export const organizationSchema = {

@@ -15,6 +15,7 @@ import DeferredSection from '../components/DeferredSection';
 import { SEO, localBusinessSchema } from '../lib/seo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { organizationGraphNode, websiteGraphNode } from '../lib/structured-data';
 
 const whyChooseUs = [
   {
@@ -40,12 +41,17 @@ const whyChooseUs = [
 ];
 
 export default function HomePage() {
+  const homeStructuredData = {
+    ...localBusinessSchema,
+    '@graph': [...(localBusinessSchema as any)['@graph'], websiteGraphNode, organizationGraphNode],
+  };
+
   return (
     <>
       <SEO
         title="Criminal Defense & OVI Attorney Delaware, OH"
         description="Experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI/DUI, drug crimes, assault, sex crimes, and white collar cases. Former prosecutor."
-        structuredData={localBusinessSchema}
+        structuredData={homeStructuredData}
       />
       <PageHero
         eyebrow="Central Ohio OVI/DUI & Criminal Defense"
