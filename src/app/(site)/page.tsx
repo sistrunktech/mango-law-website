@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import HomePage from '@/views/HomePage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
-import { localBusinessSchema } from '@/lib/structured-data';
+import { localBusinessSchema, organizationGraphNode, websiteGraphNode } from '@/lib/structured-data';
 
 const seo = {
-  title: 'Criminal Defense & OVI Attorney Delaware, OH | Mango Law LLC',
+  title: 'Criminal Defense & OVI Attorney Delaware, OH',
   description:
     'Experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI/DUI, drug crimes, assault, sex crimes, and white collar cases. Former prosecutor.',
   url: '/',
@@ -13,10 +13,15 @@ const seo = {
 
 export const metadata: Metadata = buildMetadata(seo);
 
+const homeStructuredData = {
+  ...localBusinessSchema,
+  '@graph': [...(localBusinessSchema as any)['@graph'], websiteGraphNode, organizationGraphNode],
+};
+
 export default function Page() {
   return (
     <>
-      <StructuredData structuredData={localBusinessSchema} url={seo.url} />
+      <StructuredData structuredData={homeStructuredData} url={seo.url} />
       <HomePage />
     </>
   );
