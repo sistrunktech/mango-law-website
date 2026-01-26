@@ -20,6 +20,32 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-01-26 12:55 EST
+Post slug and title: first-ovi-court-date-delaware-county-ohio | Your First OVI Court Date in Delaware County, Ohio: What Happens and How to Prepare
+Change type: major
+Summary of change: Added new post for week-1 publishing cadence (planned publish date 2026-01-27) covering first OVI court date expectations, bond conditions, and ALS vs court suspension concepts; includes ORC sources and visual marker.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week1-2026-01
+
+Date/time: 2026-01-26 12:55 EST
+Post slug and title: no-contact-order-vs-civil-protection-order-ohio | No-Contact Orders vs Civil Protection Orders in Ohio: What’s the Difference?
+Change type: major
+Summary of change: Added new post for week-1 publishing cadence (planned publish date 2026-01-29) explaining criminal no-contact bond conditions vs civil protection orders (CPO), compliance rules, and ORC sources; includes protection-order visuals.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week1-2026-01
+
 Date/time: 2026-01-01 14:39 EST
 Post slug and title: Strategy update | docs/technical/SEO-STRATEGY-2025.md
 Change type: minor

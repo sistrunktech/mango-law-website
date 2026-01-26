@@ -1946,11 +1946,11 @@ This article is for educational purposes and does not constitute legal advice. O
     ],
   },
   {
-	    slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
-	    title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
-	    excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
-	    imageUrl: '/images/generated/blog-sex-crimes-defense.png',
-	    content: `Sex crime allegations carry high stakes, and the process can move quickly. This guide explains the core Ohio statutes, how registration works, and why early legal review matters.
+    slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
+    title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
+    excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
+    imageUrl: '/images/generated/blog-sex-crimes-defense.png',
+    content: `Sex crime allegations carry high stakes, and the process can move quickly. This guide explains the core Ohio statutes, how registration works, and why early legal review matters.
 
 ## Ohio’s sex offense statutes (overview)
 
@@ -2785,7 +2785,7 @@ This article is for educational purposes and does not constitute legal advice. C
   {
     slug: 'physical-control-parked-car-ohio-kevin-mcguff',
     title: 'Physical Control of a Parked Car in Ohio: What the Kevin McGuff Case Teaches About ORC 4511.194',
-    excerpt: 'Ohio State coach Kevin McGuff was charged with physical control while parked in his driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
+    excerpt: 'Ohio State coach Kevin McGuff was charged with physical control after being found asleep in his parked car in his own driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
     imageUrl: '/images/generated/blog-physical-control-parked-car.png',
     content: `Ohio State women's basketball coach Kevin McGuff made headlines when he was charged with physical control after being found asleep in his parked car in his own driveway. The case resolved with a plea to a reduced charge of disorderly conduct, but it raises important questions about Ohio's physical control statute and what it means for everyday drivers.
 
@@ -2961,6 +2961,249 @@ If you're facing physical control charges in Delaware or Franklin County, the sp
         label: 'WOSU: Kevin McGuff case reporting',
         url: 'https://www.wosu.org/',
         type: 'secondary',
+      },
+    ],
+  },
+  {
+    slug: 'first-ovi-court-date-delaware-county-ohio',
+    title: 'Your First OVI Court Date in Delaware County, Ohio: What Happens and How to Prepare',
+    excerpt:
+      'If you have an OVI court date coming up, this guide explains what typically happens at the first appearance, what to bring, and how to avoid mistakes that can make the case worse.',
+    imageUrl: '/images/generated/ovi-dui-defense-hero.png',
+    content: `Getting charged with OVI in Ohio is stressful, and the first court date can feel confusing—especially if you’ve never been in court before. This guide explains what the first appearance usually covers, what to bring, and what to avoid.
+
+If you want case-specific advice, start here: [OVI/DUI Defense](/ovi-dui-defense-delaware-oh) or [contact us](/contact).
+
+## What is the “first court date” in an OVI case?
+
+Depending on the court and how the case is filed, your first appearance may be called an **arraignment**, **initial appearance**, or **first hearing**. The specific flow varies by court, but the first date is usually about:
+
+- confirming your identity and contact information
+- advising you of the charge(s)
+- confirming bond and bond conditions
+- setting the next dates (pretrial, motions, trial)
+- connecting you with counsel if you don’t have a lawyer yet
+
+## What to bring and how to prepare
+
+Bring:
+
+- a government-issued ID
+- any paperwork you received (citation, summons, bond paperwork)
+- a pen and notes (write down next dates and requirements)
+
+Plan to arrive early. Court calendars can be crowded and the line through security can take time.
+
+## Will the judge talk about jail or penalties at the first appearance?
+
+Usually, the first appearance is not where the court “sentences” you. Most OVI cases take multiple court settings (pretrial conferences, motion hearings, etc.) before any resolution.
+
+That said, bond conditions and compliance can have immediate real-world consequences (e.g., alcohol monitoring, driving restrictions, no-contact provisions if another charge is involved).
+
+## Bond and bond conditions (what the court is focused on)
+
+Ohio courts have authority to impose bond and **non-financial conditions** designed to ensure you return to court and protect public safety. Courts commonly evaluate release factors under [ORC 2937.222](https://codes.ohio.gov/ohio-revised-code/section-2937.222).
+
+Common OVI-related bond conditions can include:
+
+- not operating a vehicle if your license is under suspension
+- no alcohol or drug use (sometimes monitored)
+- compliance with court dates and check-ins
+
+## Administrative License Suspension (ALS) vs court suspension
+
+One of the most confusing parts of early OVI cases is that your license may be restricted **before** the case is resolved.
+
+[VISUAL:SUSPENSION_COMPARISON]
+
+In Ohio, an ALS is tied to chemical testing and implied consent. The framework is governed by [ORC 4511.191](https://codes.ohio.gov/ohio-revised-code/section-4511.191) and related OVI statutes.
+
+## What typically happens next (pretrial and evidence review)
+
+After the first appearance, most OVI cases move into a stage where counsel evaluates evidence and negotiates with the prosecutor. This often includes:
+
+- requesting and reviewing body camera footage
+- examining the basis for the stop and any expansion of the stop
+- reviewing field sobriety tests and the officer’s training/administration
+- reviewing breath/blood/urine testing records and chain of custody
+
+The “OVI” statute itself is [ORC 4511.19](https://codes.ohio.gov/ohio-revised-code/section-4511.19). The defense strategy depends on what evidence the state has and whether there are legal issues with how it was obtained.
+
+## What to avoid between now and the next court date
+
+The easiest way to make an OVI case worse is to create a second case or violate court/BMV requirements. Avoid:
+
+- driving while suspended
+- missing court dates
+- discussing the incident publicly (including social media)
+- contacting witnesses or trying to “fix the story”
+
+If you were arrested recently, you may also want this checklist: [What to Do After an OVI Arrest in Ohio](/blog/what-to-do-after-ovi-arrest-ohio).
+
+## FAQ
+
+### Do I need a lawyer for the first court date?
+
+You can appear without a lawyer, but OVI cases have fast timelines and technical evidence. Having counsel early helps you preserve defenses, request evidence promptly, and avoid preventable compliance problems.
+
+### Will my case be dismissed at the first hearing?
+
+It’s uncommon. Dismissals typically happen after evidence review and legal motions, or if the prosecutor cannot proceed.
+
+### What if I can’t make the court date?
+
+Missing court can lead to a warrant. If something truly prevents attendance, you should address it immediately and proactively through counsel.
+
+## Conclusion
+
+The first OVI court date is usually about **bond, scheduling, and getting counsel in place**. The real work of an OVI defense often happens after evidence is obtained and reviewed. If you have an upcoming court date in Delaware County or Central Ohio, contact Mango Law to discuss next steps.
+
+---
+
+*This article is for educational purposes and does not constitute legal advice. OVI procedures vary by county and court. Consult with a qualified Ohio attorney about your situation.*`,
+    category: 'OVI/DUI Defense',
+    date: '2026-01-27',
+    author: 'Dominic Mango',
+    lastVerified: '2026-01-27',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.191 (Implied consent; ALS)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2937.222 (Bail factors)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.222',
+        type: 'primary',
+      },
+    ],
+  },
+  {
+    slug: 'no-contact-order-vs-civil-protection-order-ohio',
+    title: 'No-Contact Orders vs Civil Protection Orders in Ohio: What’s the Difference?',
+    excerpt:
+      'People often use “no-contact order” and “protection order” interchangeably. In Ohio they can be very different. This guide explains what each one is, what rules apply, and how to avoid a violation charge.',
+    imageUrl: '/images/generated/protection-order-defense-hero.png',
+    content: `When a case involves alleged domestic violence or threats, courts often issue immediate restrictions. People commonly refer to all restrictions as “a protection order,” but in Ohio, there are different types of orders with different rules.
+
+This guide explains the difference between:
+
+- a **criminal no-contact order** (often issued as a bond condition in a criminal case)
+- a **civil protection order** (CPO), typically under Ohio’s domestic violence civil protection order statute
+
+If you need help quickly, see: [Protection Order Defense](/protection-order-lawyer-delaware-oh) or [contact us](/contact).
+
+## 1) What is a criminal no-contact order?
+
+A “no-contact order” in a criminal case is usually a **bond condition**. It may be issued at arraignment/initial appearance, sometimes immediately after arrest.
+
+Bond conditions are designed to ensure court appearance and protect safety. Courts commonly evaluate conditions under [ORC 2937.222](https://codes.ohio.gov/ohio-revised-code/section-2937.222).
+
+### What it can restrict
+
+Even without a civil case, a criminal no-contact condition can restrict:
+
+- direct contact (calls, texts, social messages)
+- indirect contact (messages through friends/family)
+- presence at a home, workplace, school, or other locations
+
+If you’re unsure what counts as “contact,” assume it includes **any attempt to communicate**.
+
+## 2) What is a civil protection order (CPO) in Ohio?
+
+A civil protection order is a separate civil court process. A common type is a **Domestic Violence Civil Protection Order** under [ORC 3113.31](https://codes.ohio.gov/ohio-revised-code/section-3113.31).
+
+Civil protection orders can include broad relief, including stay-away zones, temporary custody provisions, and firearm surrender provisions depending on the order.
+
+### Ex parte vs full hearing
+
+Many CPO cases begin with an **ex parte** (temporary) order based on initial filings, followed by a **full hearing**.
+
+[VISUAL:CPO_TIMELINE]
+
+[VISUAL:HEARING_TIMELINE]
+
+## 3) Why this distinction matters (big risks)
+
+### Violations can be separate crimes
+
+Violating certain protection orders can lead to new criminal charges, commonly charged under [ORC 2919.27](https://codes.ohio.gov/ohio-revised-code/section-2919.27) (Violating a protection order).
+
+That means even if the underlying case is weak, a violation can create a **second, separate case**.
+
+### “But they contacted me first” is not a defense
+
+Many violations happen because the protected person reaches out and the respondent replies. Even “friendly” contact can still be a violation.
+
+If the order says no contact, the safe approach is:
+
+- do not respond
+- document the contact attempt
+- speak with counsel about modifying the order through court
+
+## 4) Can orders be modified?
+
+Sometimes. But modification must be done through the court process, not by agreement between the parties.
+
+If you need modifications for:
+
+- shared housing
+- parenting exchanges
+- retrieving property
+
+…those are typically handled by **court-approved carve-outs** (specific times/locations/third-party exchange terms).
+
+## 5) Practical compliance rules (avoid accidental violations)
+
+[VISUAL:CPO_DOS_DONTS]
+
+General best practices:
+
+- Treat “no contact” as **zero contact** (direct or indirect).
+- Don’t use third parties to communicate.
+- Avoid “quick conversations” at the grocery store or workplace.
+- If you share a child, use only court-approved channels and do not discuss the underlying allegations.
+
+## 6) How a defense lawyer helps in protection order situations
+
+Protection order problems often overlap with criminal cases. Our job is to help you:
+
+- understand exactly what the order prohibits
+- comply while the case is pending
+- prepare for hearings (civil) and motion practice (criminal)
+- avoid collateral consequences that follow from “technical” violations
+
+## Conclusion
+
+In Ohio, a criminal no-contact order and a civil protection order can look similar day-to-day, but they often come from different courts and carry different procedures. The safest move is strict compliance and prompt legal guidance—especially if you need modifications for housing, parenting, or property.
+
+---
+
+*This article is for educational purposes and does not constitute legal advice. Protection order procedures vary by county and court. Consult with a qualified Ohio attorney about your situation.*`,
+    category: 'Protection Orders',
+    date: '2026-01-29',
+    author: 'Dominic Mango',
+    lastVerified: '2026-01-29',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 3113.31 (Domestic violence civil protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.27 (Violating a protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2937.222 (Bail factors; bond conditions)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.222',
+        type: 'primary',
       },
     ],
   },
