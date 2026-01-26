@@ -3,18 +3,53 @@ import type { TrustSource, TrustSourceType } from './trust';
 export type BlogSourceType = TrustSourceType;
 export type BlogSource = TrustSource;
 
+export type BlogScope =
+  | 'ovi_dui'
+  | 'criminal_defense'
+  | 'drug_crimes'
+  | 'sex_crimes'
+  | 'protection_orders'
+  | 'white_collar'
+  | 'personal_injury'
+  | 'domestic_violence'
+  | 'general';
+
 export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
   content: string;
   category: string;
+  scope?: BlogScope;
   date: string;
   author: string;
   lastVerified: string;
   sources: TrustSource[];
   imageUrl?: string;
 };
+
+export function resolveBlogScope(post: BlogPost): BlogScope {
+  if (post.scope) return post.scope;
+
+  switch (post.category) {
+    case 'OVI/DUI Defense':
+      return 'ovi_dui';
+    case 'Criminal Defense':
+      return 'criminal_defense';
+    case 'Drug Crimes':
+      return 'drug_crimes';
+    case 'Sex Crimes':
+      return 'sex_crimes';
+    case 'Protection Orders':
+      return 'protection_orders';
+    case 'White Collar Crimes':
+      return 'white_collar';
+    case 'Personal Injury':
+      return 'personal_injury';
+    default:
+      return 'general';
+  }
+}
 
 export const blogPosts: BlogPost[] = [
   {
