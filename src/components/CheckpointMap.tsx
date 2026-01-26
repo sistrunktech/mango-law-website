@@ -47,6 +47,12 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
+    if (!mapboxgl.supported()) {
+      setMapError('Your browser does not support WebGL (required for the interactive map).');
+      setIsLoading(false);
+      return;
+    }
+
     const token =
       process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN || process.env.VITE_MAPBOX_PUBLIC_TOKEN;
     const styleUrl =
@@ -59,7 +65,17 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
     }
 
     try {
+      mapContainer.current.innerHTML = '';
       mapboxgl.accessToken = token;
+
+      let didLoad = false;
+      const loadTimeout = window.setTimeout(() => {
+        if (didLoad) return;
+        setMapError('Failed to load map');
+        setIsLoading(false);
+        map.current?.remove();
+        map.current = null;
+      }, 15000);
 
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
@@ -72,18 +88,27 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       map.current.addControl(new mapboxgl.ScaleControl(), 'bottom-right');
 
       map.current.on('load', () => {
+        didLoad = true;
+        window.clearTimeout(loadTimeout);
         setIsLoading(false);
       });
 
       map.current.on('error', (e) => {
         console.error('Mapbox error:', e);
-        setMapError('Failed to load map');
-        setIsLoading(false);
+        if (!didLoad) {
+          setMapError('Failed to load map');
+          setIsLoading(false);
+          window.clearTimeout(loadTimeout);
+          map.current?.remove();
+          map.current = null;
+        }
       });
     } catch (error) {
       console.error('Map initialization error:', error);
       setMapError('Failed to initialize map');
       setIsLoading(false);
+      map.current?.remove();
+      map.current = null;
     }
 
     return () => {

@@ -1,6 +1,28 @@
 import { supabase } from './supabaseClient';
 import type { DUICheckpoint, CheckpointStatus } from '../data/checkpoints';
 
+function coerceCoordinate(value: unknown): number | null {
+  if (value === null || value === undefined) return null;
+  if (typeof value === 'number') return Number.isFinite(value) ? value : null;
+  if (typeof value === 'string') {
+    const n = Number.parseFloat(value);
+    return Number.isFinite(n) ? n : null;
+  }
+  return null;
+}
+
+function normalizeCheckpoint(row: any): DUICheckpoint {
+  return {
+    ...(row as DUICheckpoint),
+    latitude: coerceCoordinate((row as any).latitude),
+    longitude: coerceCoordinate((row as any).longitude),
+  };
+}
+
+function normalizeCheckpoints(rows: any[] | null): DUICheckpoint[] {
+  return (rows || []).map(normalizeCheckpoint);
+}
+
 export interface CheckpointFilters {
   county?: string;
   status?: CheckpointStatus;
@@ -41,7 +63,7 @@ export async function getCheckpoints(filters?: CheckpointFilters): Promise<DUICh
     throw new Error('Failed to fetch checkpoints');
   }
 
-  return data || [];
+  return normalizeCheckpoints(data);
 }
 
 export async function getUpcomingCheckpoints(): Promise<DUICheckpoint[]> {
@@ -62,7 +84,7 @@ export async function getUpcomingCheckpoints(): Promise<DUICheckpoint[]> {
     throw new Error('Failed to fetch upcoming checkpoints');
   }
 
-  return data || [];
+  return normalizeCheckpoints(data);
 }
 
 export async function getCheckpointById(id: string): Promise<DUICheckpoint | null> {
@@ -81,7 +103,7 @@ export async function getCheckpointById(id: string): Promise<DUICheckpoint | nul
     throw new Error('Failed to fetch checkpoint');
   }
 
-  return data;
+  return data ? normalizeCheckpoint(data) : null;
 }
 
 export async function incrementCheckpointViews(id: string): Promise<void> {
@@ -116,7 +138,7 @@ export async function createCheckpoint(checkpoint: Partial<DUICheckpoint>): Prom
     throw new Error('Failed to create checkpoint');
   }
 
-  return data;
+  return normalizeCheckpoint(data);
 }
 
 export async function updateCheckpoint(id: string, updates: Partial<DUICheckpoint>): Promise<DUICheckpoint> {
@@ -136,7 +158,7 @@ export async function updateCheckpoint(id: string, updates: Partial<DUICheckpoin
     throw new Error('Failed to update checkpoint');
   }
 
-  return data;
+  return normalizeCheckpoint(data);
 }
 
 export async function deleteCheckpoint(id: string): Promise<void> {
@@ -202,7 +224,7 @@ export async function getRecentCheckpoints(
     throw new Error('Failed to fetch recent checkpoints');
   }
 
-  return data || [];
+  return normalizeCheckpoints(data);
 }
 
 export interface CheckpointHotspot {
