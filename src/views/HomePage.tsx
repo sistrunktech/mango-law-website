@@ -43,7 +43,7 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="Criminal Defense & OVI Attorney Delaware, OH | Mango Law LLC"
+        title="Criminal Defense & OVI Attorney Delaware, OH"
         description="Experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI/DUI, drug crimes, assault, sex crimes, and white collar cases. Former prosecutor."
         structuredData={localBusinessSchema}
       />
