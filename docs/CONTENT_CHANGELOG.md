@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-01-26 12:30 EST
+Post slug and title: blogPosts model | Add optional scope field
+Change type: minor
+Summary of change: Added an optional `scope` metadata field + helper to classify posts by practice-area topic without changing existing post content or the public blog UI.
+Regression checklist:
+- Hero changed? n/a
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: n/a
+Rollback notes: codex/blog-scopes
+
 Date/time: 2026-01-01 14:39 EST
 Post slug and title: Strategy update | docs/technical/SEO-STRATEGY-2025.md
 Change type: minor
