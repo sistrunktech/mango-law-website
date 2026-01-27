@@ -1,5 +1,40 @@
 # Changelog
 
+## 2026-01-27
+
+### Client Reporting (Admin)
+- Document Google Search Console indexing review and URL inspection/validation workflow in the private client report page.
+- Document client report auth env vars in `.env.example` and README.
+
+## 2026-01-26
+
+### Blog Scheduling + Public Indexing Controls
+- Add publish-date gating for blog content so future/scheduled posts are hidden from public blog routes and excluded from `sitemap.xml`.
+- Add authenticated admin preview route for draft/scheduled posts at `/admin/blog/preview/[slug]`.
+
+### SEO / Schema Reliability
+- Stabilize homepage structured data rendering to prevent JSON-LD graph changes after hydration.
+
+### Lead Intake Email Automation
+- Ensure all lead entrypoints send both internal notifications and prospect confirmations.
+- Add support for notification CC recipients via `CONTACT_NOTIFY_CC` and wire `cc`/`bcc` fields in Resend requests.
+- Update `.env.example` and README env var list to reflect new notification recipient configuration.
+
+## 2026-01-25
+
+### SEO / Structured Data
+- Stabilize homepage title metadata and add `WebSite` + `Organization` schema nodes (homepage JSON-LD graph).
+
+## 2026-01-17
+
+### SEO / Indexing
+- Add best-effort IndexNow ping automation in `sitemap.xml` route to accelerate discovery.
+
+## 2026-01-16
+
+### SEO / Discovery Surfaces
+- Serve `llms.txt` as an app route and align crawler controls with Next.js route-based `robots.txt` + `sitemap.xml`.
+
 ## 2026-01-03
 
 ### Pending PRs (Staged)

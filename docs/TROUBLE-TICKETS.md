@@ -390,9 +390,9 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 - "URL inspection" in GSC reflects faster discovery for new posts compared to current baseline.
 
 ### Current MVP implementation
-- `robots.txt` already references `https://mango.law/sitemap.xml`.
-- `node scripts/generate-sitemap.mjs` writes `public/sitemap.xml` (run in the deploy pipeline).
-- The sitemap includes all static marketing routes plus `/blog/:slug` entries sourced from `src/data/blogPosts.ts`.
+- `robots.txt` is served by Next.js via `src/app/robots.ts` and references `https://mango.law/sitemap.xml`.
+- `sitemap.xml` is served by Next.js via `src/app/sitemap.ts` (MetadataRoute).
+- The sitemap includes all static marketing routes plus `/blog/:slug` entries sourced from `src/lib/blogPostsRepo.ts` (CMS + legacy), excluding future-dated/scheduled content.
 
 ### Status / Notes
 - Next.js migration (TICKET-029) supersedes this phased Vite prerender plan; keep as fallback if migration pauses.
@@ -413,7 +413,8 @@ SPA pages can be crawled slower and updates can take longer to surface in Search
 - The publish pipeline was not deploying a generated sitemap reliably.
 
 ### Fix (implemented)
-- `scripts/generate-sitemap.mjs` now writes `public/sitemap.xml` and should run as part of the Next.js deploy pipeline.
+- Current: `sitemap.xml` is served by Next.js (`src/app/sitemap.ts`) and returns XML via the MetadataRoute.
+- Legacy note: older builds used `scripts/generate-sitemap.mjs` to write a static file; keep that script approach only if you ever move away from Next's MetadataRoute.
 
 ### Verification
 - After publish, `https://mango.law/sitemap.xml` starts with `<?xml` and has `Content-Type: application/xml` (or `text/xml`).
