@@ -75,7 +75,8 @@ Use `mango-law-website/.env.example` as the authoritative list. Keep it updated 
 Commonly required values:
 - Frontend: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - Supabase custom domain (OAuth branding): `NEXT_PUBLIC_SUPABASE_CUSTOM_DOMAIN=https://api.mango.law`
-- Forms + email delivery (Edge Functions): `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`
+- Forms + email delivery (Edge Functions): `RESEND_API_KEY`, `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_CC`, `CONTACT_NOTIFY_BCC`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `ORIGIN_ALLOWLIST`
+- Private client report page: `CLIENT_REPORT_PASSWORD`, `CLIENT_REPORT_COOKIE_SECRET`, `CLIENT_REPORT_SESSION_DAYS`
 - Turnstile (optional): `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
 - Email theme config: `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`
 - Search Intelligence: `SERPER_API_KEY`
