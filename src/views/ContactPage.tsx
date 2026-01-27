@@ -4,7 +4,6 @@ import { CheckCircle, Shield, Clock, MapPin } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 import PageHero from '../components/PageHero';
 import LocationBlock from '../components/LocationBlock';
-import { SEO } from '../lib/seo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import {
   OFFICE_PHONE_DISPLAY,
@@ -16,14 +15,6 @@ import {
 export default function ContactPage() {
   return (
     <>
-      <SEO
-        title="Contact Mango Law LLC | Delaware, OH Criminal Defense Attorney"
-        description={`Schedule a consultation with experienced criminal defense attorney Dominic "Nick" Mango. Located in Delaware, OH. Call or text ${OFFICE_PHONE_DISPLAY} or email office@mango.law.`}
-        breadcrumbs={[
-          { name: 'Home', item: '/' },
-          { name: 'Contact', item: '/contact' },
-        ]}
-      />
       <PageHero
         eyebrow="Contact"
         title="Schedule a consult with Mango Law."

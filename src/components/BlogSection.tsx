@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
-import { blogPosts, type BlogPost } from '../data/blogPosts';
+import type { BlogPost } from '../data/blogPosts';
 
 function getRecentDiversePosts(posts: BlogPost[], count: number): BlogPost[] {
   const sorted = [...posts].sort(
@@ -33,8 +33,8 @@ function getRecentDiversePosts(posts: BlogPost[], count: number): BlogPost[] {
   );
 }
 
-export default function BlogSection() {
-  const recentPosts = getRecentDiversePosts(blogPosts, 3);
+export default function BlogSection({ posts }: { posts: BlogPost[] }) {
+  const recentPosts = getRecentDiversePosts(posts, 3);
 
   return (
     <section className="section bg-brand-offWhite">

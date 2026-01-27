@@ -3,18 +3,16 @@ import { notFound } from 'next/navigation';
 import BlogPostPage from '@/views/BlogPostPage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
-import { blogPosts } from '@/data/blogPosts';
+import { getPublicBlogPostBySlug, getPublicBlogPosts } from '@/lib/blogPostsRepo';
 
 type PageProps = {
   params: { slug: string };
 };
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
-}
+export const revalidate = 300;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const post = blogPosts.find((item) => item.slug === params.slug);
+  const post = await getPublicBlogPostBySlug({ slug: params.slug });
   if (!post) {
     return buildMetadata({
       title: 'Blog Post Not Found | Mango Law',
@@ -37,11 +35,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-export default function Page({ params }: PageProps) {
-  const post = blogPosts.find((item) => item.slug === params.slug);
-  if (!post) {
-    notFound();
-  }
+export default async function Page({ params }: PageProps) {
+  const post = await getPublicBlogPostBySlug({ slug: params.slug });
+  if (!post) notFound();
+
+  const allPosts = await getPublicBlogPosts();
+  const relatedPosts = allPosts
+    .filter((p) => p.slug !== post.slug && p.category === post.category)
+    .slice(0, 2);
 
   const breadcrumbs = [
     { name: 'Home', item: '/' },
@@ -63,7 +64,7 @@ export default function Page({ params }: PageProps) {
         image={post.imageUrl}
         url={`/blog/${post.slug}`}
       />
-      <BlogPostPage />
+      <BlogPostPage post={post} relatedPosts={relatedPosts} />
     </>
   );
 }

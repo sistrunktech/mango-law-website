@@ -306,7 +306,20 @@ Deno.serve(async (req: Request) => {
     const fromEmail = formatFrom(Deno.env.get("FROM_EMAIL") || "noreply@example.com");
     const chatNotifyTo = parseEmailList(Deno.env.get("CHAT_LEAD_NOTIFY_TO") || Deno.env.get("CONTACT_NOTIFY_TO")) ||
       ["admin@example.com"];
-    const chatNotifyBcc = parseEmailList(Deno.env.get("CHAT_LEAD_NOTIFY_BCC") || Deno.env.get("CHAT_LEAD_NOTIFY_CC"));
+    const rawChatNotifyCc = parseEmailList(
+      Deno.env.get("CHAT_LEAD_NOTIFY_CC") || Deno.env.get("CONTACT_NOTIFY_CC"),
+    );
+    const rawChatNotifyBcc = parseEmailList(
+      Deno.env.get("CHAT_LEAD_NOTIFY_BCC") || Deno.env.get("CONTACT_NOTIFY_BCC"),
+    );
+    const chatNotifyCc = rawChatNotifyBcc.length === 0 && rawChatNotifyCc.length > 0 && !Deno.env.get("CHAT_LEAD_NOTIFY_BCC")
+      ? []
+      : rawChatNotifyCc;
+    const chatNotifyBcc = rawChatNotifyBcc.length
+      ? rawChatNotifyBcc
+      : rawChatNotifyCc.length > 0 && !Deno.env.get("CHAT_LEAD_NOTIFY_BCC")
+        ? rawChatNotifyCc
+        : [];
     const sourceLabel = Deno.env.get("CHAT_LEAD_SOURCE_LABEL") || "Chat Widget";
     const enableSmsAlerts = Deno.env.get("ENABLE_SMS_LEAD_ALERTS") === "true";
     const smsGatewayOffice = Deno.env.get("SMS_GATEWAY_OFFICE");
@@ -336,6 +349,7 @@ Deno.serve(async (req: Request) => {
           body: JSON.stringify({
             from: fromEmail,
             to: chatNotifyTo.length ? chatNotifyTo : ["admin@example.com"],
+            cc: chatNotifyCc.length ? chatNotifyCc : undefined,
             bcc: chatNotifyBcc.length ? chatNotifyBcc : undefined,
             reply_to: intakeData.email.trim().toLowerCase(),
             subject: `New ${sourceLabel} Lead — ${intakeData.name}`,
