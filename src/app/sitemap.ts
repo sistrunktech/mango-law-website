@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
+import { getAllBlogSlugsForSitemap } from '@/lib/blogPostsRepo'
 
-const INDEXNOW_KEY = process.env.INDEXNOW_KEY || '2bda9a4cf672486daa2ab28e477568e5'
+const INDEXNOW_KEY = process.env.INDEXNOW_KEY || ''
 
 async function pingIndexNow(baseUrl: string) {
   if (!INDEXNOW_KEY) return
@@ -27,7 +28,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/sex-crime-defense-lawyer-delaware-oh',
     '/white-collar-crimes-attorney-delaware-oh',
     '/protection-order-lawyer-delaware-oh',
-    '/domestic-violence-lawyer-delaware-oh',
     '/personal-injury-lawyer-delaware-oh',
     '/reviews',
     '/contact',
@@ -43,13 +43,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/terms',
   ]
 
-  // Blog posts - dynamically generate from blogPosts data
+  // Blog posts - include only publishable posts (CMS + legacy), excluding future-dated content
   let blogPosts: string[] = []
   try {
-    const blogData = require('@/data/blogPosts')
-    if (blogData?.blogPosts && Array.isArray(blogData.blogPosts)) {
-      blogPosts = blogData.blogPosts.map((post: any) => `/blog/${post.slug}`)
-    }
+    const slugs = await getAllBlogSlugsForSitemap()
+    blogPosts = slugs.map((slug) => `/blog/${slug}`)
   } catch (error) {
     console.warn('Could not load blog posts for sitemap:', error)
   }

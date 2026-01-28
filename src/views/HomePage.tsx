@@ -12,10 +12,9 @@ import PageHero from '../components/PageHero';
 import ProcessSteps from '../components/ProcessSteps';
 import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
 import DeferredSection from '../components/DeferredSection';
-import { SEO, localBusinessSchema } from '../lib/seo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
-import { organizationGraphNode, websiteGraphNode } from '../lib/structured-data';
+import type { BlogPost } from '../data/blogPosts';
 
 const whyChooseUs = [
   {
@@ -40,19 +39,9 @@ const whyChooseUs = [
   },
 ];
 
-export default function HomePage() {
-  const homeStructuredData = {
-    ...localBusinessSchema,
-    '@graph': [...(localBusinessSchema as any)['@graph'], websiteGraphNode, organizationGraphNode],
-  };
-
+export default function HomePage({ posts }: { posts: BlogPost[] }) {
   return (
     <>
-      <SEO
-        title="Criminal Defense & OVI Attorney Delaware, OH"
-        description="Experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI/DUI, drug crimes, assault, sex crimes, and white collar cases. Former prosecutor."
-        structuredData={homeStructuredData}
-      />
       <PageHero
         eyebrow="Central Ohio OVI/DUI & Criminal Defense"
         subtitle="Nick Mango | Delaware, OH | 26+ Years | Former Prosecutor"
@@ -174,7 +163,7 @@ export default function HomePage() {
       </section>
 
       <DeferredSection minHeight={520}>
-        <BlogSection />
+        <BlogSection posts={posts} />
       </DeferredSection>
 
       <DeferredSection minHeight={420}>

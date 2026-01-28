@@ -303,9 +303,8 @@ Deno.serve(async (req: Request) => {
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     const fromEmail = formatFrom(Deno.env.get("FROM_EMAIL") || "noreply@example.com");
     const notifyTo = parseEmailList(Deno.env.get("CONTACT_NOTIFY_TO")) || ["admin@example.com"];
-    const notifyBcc = parseEmailList(
-      Deno.env.get("CONTACT_NOTIFY_BCC") || Deno.env.get("CHAT_LEAD_NOTIFY_CC"),
-    );
+    const notifyCc = parseEmailList(Deno.env.get("CONTACT_NOTIFY_CC") || Deno.env.get("CHAT_LEAD_NOTIFY_CC"));
+    const notifyBcc = parseEmailList(Deno.env.get("CONTACT_NOTIFY_BCC") || Deno.env.get("CHAT_LEAD_NOTIFY_BCC"));
 
     if (resendApiKey) {
       try {
@@ -329,6 +328,7 @@ Deno.serve(async (req: Request) => {
           body: JSON.stringify({
             from: fromEmail,
             to: notifyTo.length ? notifyTo : ["admin@example.com"],
+            cc: notifyCc.length ? notifyCc : undefined,
             bcc: notifyBcc.length ? notifyBcc : undefined,
             reply_to: email,
             subject: `New consultation request — ${payload.name.trim()}`,

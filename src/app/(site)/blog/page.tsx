@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import BlogPage from '@/views/BlogPage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
+import { getPublicBlogPosts } from '@/lib/blogPostsRepo';
 
 const seo = {
   title: 'Mango Law Blog | Legal Insights & Ohio Criminal Defense Updates',
@@ -17,11 +18,13 @@ const breadcrumbs = [
 
 export const metadata: Metadata = buildMetadata(seo);
 
-export default function Page() {
+export default async function Page() {
+  const posts = await getPublicBlogPosts();
+
   return (
     <>
       <StructuredData breadcrumbs={breadcrumbs} url={seo.url} />
-      <BlogPage />
+      <BlogPage posts={posts} />
     </>
   );
 }

@@ -98,6 +98,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 4510.14', url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.14', type: 'primary' },
     ],
   },
+  '4510.13': {
+    id: 'occupational-driving-privileges',
+    section: '4510.13',
+    title: 'Limited Driving Privileges',
+    shortTitle: 'Driving Privileges',
+    definition: 'Authorizes courts to grant limited driving privileges in certain suspension situations, typically for essential purposes such as work, school, medical care, and childcare, subject to conditions and waiting periods set by statute and local court practice.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4510.13',
+    practiceAreas: ['ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['4510.11', '4510.14', '4511.19', '4511.191'],
+    lastVerified: '2026-02-05',
+    sources: [
+      { label: 'Ohio Revised Code § 4510.13', url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.13', type: 'primary' },
+    ],
+  },
   '4510.11': {
     id: 'driving-under-suspension',
     section: '4510.11',
@@ -820,7 +834,7 @@ export const ohioStatutes: Record<string, OhioStatute> = {
 };
 
 export const practiceAreaStatutes = {
-  'ovi-dui': ['4511.19', '4511.191', '4511.194', '4510.14', '4511.203'],
+  'ovi-dui': ['4511.19', '4511.191', '4511.194', '4510.14', '4510.13', '4511.203'],
   'protection-orders': ['3113.31', '2919.27', '2903.214', '2903.211'],
   'criminal-defense': ['2903.13', '2919.25', '2903.11', '2913.02', '2921.13'],
   'domestic-violence': ['2919.25', '2903.13', '2903.11', '3113.31', '2903.21'],

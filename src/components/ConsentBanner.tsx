@@ -33,85 +33,85 @@ export default function ConsentBanner(props: { onVisibilityChange?: (visible: bo
     setStored(next);
   };
 
+  const buttonBase =
+    'inline-flex h-10 items-center justify-center rounded-lg px-4 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40';
+  const buttonSecondary = `${buttonBase} border border-brand-black/10 bg-white text-brand-black/80 hover:bg-brand-black/5`;
+  const buttonPrimary = `${buttonBase} bg-brand-mango text-brand-black hover:bg-brand-mangoLight`;
+
   return (
     <div
       className="fixed inset-x-0 bottom-0 z-[60] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-4"
       role="dialog"
       aria-label="Cookie consent"
     >
-      <div className="mx-auto max-w-[980px] rounded-2xl border border-brand-black/10 bg-white text-brand-black shadow-soft">
+      <div className="mx-auto max-w-[980px] overflow-hidden rounded-2xl border border-brand-black/10 bg-white text-brand-black shadow-soft">
         <div className="p-4 sm:p-5">
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-leaf">
-                Privacy
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="rounded-full bg-brand-offWhite px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-leaf">
+                  Privacy
+                </div>
+                <a
+                  href="/privacy"
+                  className="rounded-md px-2 py-1 text-[12px] font-semibold text-brand-black/70 hover:bg-brand-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40"
+                >
+                  Privacy Policy
+                </a>
               </div>
-              <a
-                href="/privacy"
-                className="rounded-md px-2 py-1 text-[11px] font-semibold text-brand-black/70 hover:bg-brand-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40"
-              >
-                Privacy Policy
-              </a>
+              <p className="mt-2 max-w-[70ch] text-sm leading-snug text-brand-black/75">
+                We use cookies to measure site performance and improve your experience. Choose what’s allowed.
+              </p>
             </div>
-            <p className="text-xs text-brand-black/70 sm:text-sm">
-              We use cookies to measure site performance. Choose what’s allowed.
-            </p>
-          </div>
 
-          <div className="mt-3 flex flex-wrap gap-2 sm:justify-end">
-            {view !== 'customize' ? (
-              <button
-                type="button"
-                className="inline-flex h-9 items-center justify-center rounded-lg border border-brand-black/10 bg-white px-3 text-xs font-semibold text-brand-black/70 hover:bg-brand-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40"
-                onClick={() => setView('customize')}
-              >
-                Customize
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="inline-flex h-9 items-center justify-center rounded-lg border border-brand-black/10 bg-white px-3 text-xs font-semibold text-brand-black/70 hover:bg-brand-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40"
-                onClick={() => setView('collapsed')}
-              >
-                Back
-              </button>
-            )}
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:justify-end">
+              {view !== 'customize' ? (
+                <button type="button" className={buttonSecondary} onClick={() => setView('customize')}>
+                  Customize
+                </button>
+              ) : (
+                <button type="button" className={buttonSecondary} onClick={() => setView('collapsed')}>
+                  Back
+                </button>
+              )}
 
-            <button
-              type="button"
-              className="inline-flex h-9 items-center justify-center rounded-lg border border-brand-black/10 bg-white px-3 text-xs font-semibold text-brand-black/70 hover:bg-brand-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40"
-              onClick={() => apply(rejectAllConsent())}
-            >
-              Reject all
-            </button>
+              <button type="button" className={buttonSecondary} onClick={() => apply(rejectAllConsent())}>
+                Reject all
+              </button>
 
-            {view === 'customize' ? (
-              <button
-                type="button"
-                className="inline-flex h-9 items-center justify-center rounded-lg bg-brand-mango px-3 text-xs font-semibold text-brand-black hover:bg-brand-mangoLight focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40"
-                onClick={() => apply(draft)}
-              >
-                Save choices
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="inline-flex h-9 items-center justify-center rounded-lg bg-brand-mango px-3 text-xs font-semibold text-brand-black hover:bg-brand-mangoLight focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40"
-                onClick={() => apply(acceptAllConsent())}
-              >
-                Accept all
-              </button>
-            )}
+              {view === 'customize' ? (
+                <button
+                  type="button"
+                  className={`${buttonPrimary} col-span-2 sm:col-auto`}
+                  onClick={() => apply(draft)}
+                >
+                  Save choices
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={`${buttonPrimary} col-span-2 sm:col-auto`}
+                  onClick={() => apply(acceptAllConsent())}
+                >
+                  Accept all
+                </button>
+              )}
+            </div>
           </div>
 
           {view === 'customize' ? (
             <div className="mt-4 rounded-xl border border-brand-black/10 bg-brand-offWhite p-4">
-              <div className="text-sm font-semibold text-brand-black">Customize</div>
+              <div className="flex items-center justify-between gap-4">
+                <div className="text-sm font-semibold text-brand-black">Cookie preferences</div>
+                <div className="text-[12px] font-semibold text-brand-black/60">Optional</div>
+              </div>
               <div className="mt-3 space-y-3">
-                <label className="flex cursor-pointer items-start justify-between gap-4">
+                <label className="flex cursor-pointer items-start justify-between gap-4 rounded-lg bg-white/60 p-3">
                   <div>
                     <div className="text-sm font-semibold text-brand-black">Analytics</div>
-                    <div className="text-xs text-brand-black/60">Helps us understand traffic and improve the site.</div>
+                    <div className="text-xs leading-snug text-brand-black/60">
+                      Helps us understand traffic and improve the site.
+                    </div>
                   </div>
                   <input
                     type="checkbox"
@@ -126,10 +126,10 @@ export default function ConsentBanner(props: { onVisibilityChange?: (visible: bo
                   />
                 </label>
 
-                <label className="flex cursor-pointer items-start justify-between gap-4">
+                <label className="flex cursor-pointer items-start justify-between gap-4 rounded-lg bg-white/60 p-3">
                   <div>
                     <div className="text-sm font-semibold text-brand-black">Advertising</div>
-                    <div className="text-xs text-brand-black/60">
+                    <div className="text-xs leading-snug text-brand-black/60">
                       Allows ad-related measurement and personalization signals.
                     </div>
                   </div>
@@ -152,7 +152,7 @@ export default function ConsentBanner(props: { onVisibilityChange?: (visible: bo
             </div>
           ) : null}
 
-          <div className="mt-3 text-[11px] text-brand-black/50">
+          <div className="mt-3 text-[11px] leading-snug text-brand-black/50">
             You can change choices anytime by clearing cookies for this site.
           </div>
         </div>

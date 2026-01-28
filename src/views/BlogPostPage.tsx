@@ -1,7 +1,6 @@
 'use client';
 
 import { Children, isValidElement, type ReactNode } from 'react';
-import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -11,10 +10,9 @@ import {
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { blogPosts } from '../data/blogPosts';
+import type { BlogPost } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
 import RelatedPosts from '../components/RelatedPosts';
-import { SEO } from '../lib/seo';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import {
   PenaltyGrid,
@@ -32,12 +30,6 @@ function estimateReadingTime(content: string): number {
   const wordsPerMinute = 200;
   const wordCount = content.split(/\s+/).length;
   return Math.ceil(wordCount / wordsPerMinute);
-}
-
-function getRelatedPosts(currentSlug: string, category: string, limit = 3) {
-  return blogPosts
-    .filter((p) => p.slug !== currentSlug && p.category === category)
-    .slice(0, limit);
 }
 
 function slugifyHeading(title: string) {
@@ -80,25 +72,13 @@ function extractTOCItems(content: string): { id: string; title: string; level: n
 }
 
 
-export default function BlogPostPage() {
-  const params = useParams<{ slug: string | string[] }>();
-  const slug = params?.slug;
-  const slugValue = Array.isArray(slug) ? slug[0] : slug;
-  const post = blogPosts.find((p) => p.slug === slugValue);
-
-  if (!post) {
-    return (
-      <div className="container py-20">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-brand-black">Post Not Found</h1>
-          <p className="mt-4 text-brand-black/60">The blog post you're looking for doesn't exist.</p>
-          <Link href="/blog" className="btn btn-primary mt-8 inline-block">
-            Back to Blog
-          </Link>
-        </div>
-      </div>
-    );
-  }
+export default function BlogPostPage({
+  post,
+  relatedPosts,
+}: {
+  post: BlogPost;
+  relatedPosts: BlogPost[];
+}) {
 
   const hasVisuals = post.content.includes('[VISUAL:');
   const hasMidCta = post.content.includes('[VISUAL:MID_ARTICLE_CTA]');
@@ -132,19 +112,6 @@ export default function BlogPostPage() {
 
   return (
     <>
-      <SEO
-        title={`${post.title} | Mango Law Blog`}
-        description={post.excerpt}
-        image={post.imageUrl}
-        type="article"
-        article={{
-          headline: post.title,
-          author: post.author,
-          datePublished: post.date,
-          dateModified: post.lastVerified,
-          image: post.imageUrl,
-        }}
-      />
       <section className="bg-brand-offWhite py-16">
         <div className="container max-w-7xl">
           <Link
@@ -1419,7 +1386,7 @@ export default function BlogPostPage() {
               </footer>
 
               <div className="mt-16">
-                <RelatedPosts posts={getRelatedPosts(post.slug, post.category, 2)} />
+                <RelatedPosts posts={relatedPosts} />
               </div>
             </div>
 
