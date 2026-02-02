@@ -58,10 +58,10 @@ export default function GlossaryEntry({
         <a
           href={statute.orcLink}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow"
           className="inline-flex items-center gap-2 rounded-lg bg-brand-leaf px-4 py-2 text-sm font-bold text-white transition-all hover:bg-brand-forest"
         >
-          Read full statute
+          Read ORC § {statute.section} full text
           <ExternalLink className="h-4 w-4" />
         </a>
       </div>
@@ -91,7 +91,7 @@ export default function GlossaryEntry({
                   <a
                     href={source.url}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer nofollow"
                     className="font-medium text-brand-mangoText underline-offset-2 hover:text-brand-leaf hover:underline"
                   >
                     {source.label}

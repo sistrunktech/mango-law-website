@@ -114,10 +114,10 @@ export default function ORCLabel({
           <a
             href={statute.orcLink}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black/60 transition-colors hover:text-brand-leaf"
           >
-            Read full statute
+            Read ORC § {statute.section} full text
             <span aria-hidden="true">↗</span>
           </a>
         </div>
