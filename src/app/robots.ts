@@ -11,6 +11,8 @@ export default function robots(): MetadataRoute.Robots {
           '/admin/',
           '/brand-guidelines',
           '/brand-guide',
+          '/client-updates',
+          '/client-updates/',
           '/docs/admin-guide',
           '/handoff/',
         ],
