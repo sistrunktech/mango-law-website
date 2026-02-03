@@ -97,7 +97,7 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
           <a
             href={checkpoint.source_url!}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             className="inline-flex items-center gap-2 rounded-lg border border-brand-mango/20 bg-brand-mango/5 px-4 py-2.5 text-sm font-semibold text-brand-mango transition-all hover:border-brand-mango/40 hover:bg-brand-mango/10 hover:text-brand-leaf"
             onClick={(e) => e.stopPropagation()}
           >

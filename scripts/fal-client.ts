@@ -1,15 +1,10 @@
 import { fal } from "@fal-ai/client";
 
-const falKey =
-  process.env.FAL_KEY ||
-  process.env.FAL_API_KEY ||
-  process.env.FALAI_API_KEY;
-
-export const falEnabled = Boolean(falKey);
-
-if (falEnabled) {
-  fal.config({ credentials: falKey });
+function getFalKey() {
+  return process.env.FAL_KEY || process.env.FAL_API_KEY || process.env.FALAI_API_KEY;
 }
+
+export const falEnabled = Boolean(getFalKey());
 
 export async function generateImage({
   prompt,
@@ -24,9 +19,10 @@ export async function generateImage({
   seed?: number;
   model?: string;
 }) {
-  if (!falEnabled) {
-    throw new Error("fal.ai is not configured (missing FAL_KEY)");
-  }
+  const falKey = getFalKey();
+  if (!falKey) throw new Error("fal.ai is not configured (missing FAL_KEY)");
+
+  fal.config({ credentials: falKey });
 
   const result = await fal.run(model, {
     input: { prompt, width, height, seed },

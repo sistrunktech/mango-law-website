@@ -60,7 +60,7 @@ export default function GoogleMap({
       <a
         href={mapUrl}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener noreferrer nofollow"
         className="inline-flex items-center gap-2 text-sm font-medium text-brand-goldText hover:text-brand-goldText/80 transition-colors"
       >
         <ExternalLink className="h-4 w-4" />

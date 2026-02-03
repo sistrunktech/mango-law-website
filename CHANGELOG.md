@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-02-02
+
+### SEO / Outgoing Link Policy
+- Default external links to `rel="noopener noreferrer nofollow"` to reduce unintended outbound endorsement and preserve link equity.
+- Allow up to 2 dofollow citations to `.gov`/`.edu` domains in blog post “Sources” panels (remaining citations stay `nofollow`).
+
+### Client Reporting
+- Add February 2026 client update report doc (`docs/client-updates/2026-02.md`).
+
 ## 2026-01-27
 
 ### Client Reporting (Admin)

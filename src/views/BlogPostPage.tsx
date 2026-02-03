@@ -56,6 +56,17 @@ function getHeadingId(children: ReactNode): string {
   return slugifyHeading(getHeadingText(children));
 }
 
+function isHighAuthorityCitationUrl(href?: string): boolean {
+  if (!href) return false;
+
+  try {
+    const hostname = new URL(href).hostname.toLowerCase();
+    return hostname.endsWith('.gov') || hostname.endsWith('.edu');
+  } catch {
+    return false;
+  }
+}
+
 function extractTOCItems(content: string): { id: string; title: string; level: number }[] {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const items: { id: string; title: string; level: number }[] = [];
@@ -221,23 +232,36 @@ export default function BlogPostPage({
                     Visual summaries and timelines are simplified. Use these sources to confirm current law and details.
                   </p>
                   <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                    {post.sources.map((source) => (
-                      <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                        <a
-                          href={source.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-medium text-brand-leaf underline-offset-2 hover:text-brand-leafLight hover:underline"
-                        >
-                          {source.label}
-                        </a>
-                        {source.type && (
-                          <span className="rounded-full bg-brand-black/5 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
-                            {source.type}
-                          </span>
-                        )}
-                      </li>
-                    ))}
+                    {(() => {
+                      let dofollowBudget = 2;
+
+                      return post.sources.map((source) => {
+                        const allowDofollow = dofollowBudget > 0 && isHighAuthorityCitationUrl(source.url);
+                        if (allowDofollow) dofollowBudget -= 1;
+
+                        const rel = allowDofollow
+                          ? 'noopener noreferrer'
+                          : 'noopener noreferrer nofollow';
+
+                        return (
+                          <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel={rel}
+                              className="font-medium text-brand-leaf underline-offset-2 hover:text-brand-leafLight hover:underline"
+                            >
+                              {source.label}
+                            </a>
+                            {source.type && (
+                              <span className="rounded-full bg-brand-black/5 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
+                                {source.type}
+                              </span>
+                            )}
+                          </li>
+                        );
+                      });
+                    })()}
                   </ul>
                 </div>
               )}
@@ -1298,7 +1322,7 @@ export default function BlogPostPage({
                                   {...props}
                                   className="font-medium text-brand-leaf no-underline hover:text-brand-leafLight hover:underline"
                                   target={isExternal ? '_blank' : undefined}
-                                  rel={isExternal ? 'noopener noreferrer' : undefined}
+                                  rel={isExternal ? 'noopener noreferrer nofollow' : undefined}
                                 />
                               );
                             },

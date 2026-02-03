@@ -396,3 +396,17 @@ Regression checklist:
 - Meta/schema changed? no
 Approval token: APPROVED: bond-jail-information-delaware-county-ohio -- restore depth + visuals + EEAT -- major -- 2025-12-27T20:03-0500
 Rollback notes: commit pending
+
+
+Date/time: 2026-01-27 22:10 EST
+Post slug and title: blogPosts imageUrl | Regenerate unique featured images for all blog posts
+Change type: major
+Summary of change: Generated a unique, no-text featured image per blog post slug and updated `src/data/blogPosts.ts` `imageUrl` fields to `/images/generated/blog-<slug>.png` to eliminate duplicate images and keep hero/thumbnail/OG consistent.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: pending
+Rollback notes: revert `src/data/blogPosts.ts` imageUrl changes and remove `public/images/generated/blog-*.png`

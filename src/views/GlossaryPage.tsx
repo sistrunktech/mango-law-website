@@ -192,7 +192,7 @@ export default function GlossaryPage() {
               </p>
 
               <p className="text-brand-black/80">
-                For official statute text, click the "Read full statute" link on any entry to
+                For official statute text, click the "Read ORC § ___ full text" link on any entry to
                 view the complete legal language on codes.ohio.gov.
               </p>
             </div>

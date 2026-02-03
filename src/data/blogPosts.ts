@@ -21,7 +21,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'bond-jail-information-delaware-county-ohio',
     title: 'Bond & Jail Information in Delaware County, Ohio',
     excerpt: 'If someone is arrested for OVI or another charge in Delaware County, this guide explains how bail works in Ohio and how to post bond to secure a release.',
-    imageUrl: '/images/generated/criminal-defense-hero.png',
+    imageUrl: '/images/generated/blog-bond-jail-information-delaware-county-ohio.png',
     content: `Delaware County residents often ask what happens after an arrest and how bond is set. This guide explains the difference between bail and bond, how Ohio courts decide release conditions, and where to post bond in Delaware County.
 
 ## Bail vs bond
@@ -159,7 +159,7 @@ This article is for educational purposes and does not constitute legal advice. C
     slug: 'what-to-do-after-ovi-arrest-ohio',
     title: 'What to Do After an OVI Arrest in Ohio: A Step-by-Step Guide',
     excerpt: 'The first 48 hours after an OVI arrest are critical. Learn about the 30-day license appeal deadline, how to request driving privileges, and what to expect at your first court appearance.',
-    imageUrl: '/images/generated/blog-ovi-charges.png',
+    imageUrl: '/images/generated/blog-what-to-do-after-ovi-arrest-ohio.png',
     category: 'OVI/DUI Defense',
     date: '2025-12-29',
     author: 'Dominic Mango',
@@ -242,7 +242,7 @@ This guide is for educational purposes and does not constitute legal advice.`,
     slug: 'understanding-ovi-dui-charges-ohio',
     title: 'Understanding OVI/DUI Charges in Ohio: What You Need to Know',
     excerpt: 'Complete guide to Ohio OVI charges including penalties, defense strategies, and how to protect your record. Learn about ORC § 4511.19 and what to do if arrested.',
-	    imageUrl: '/images/generated/blog-ovi-charges.png',
+	    imageUrl: '/images/generated/blog-understanding-ovi-dui-charges-ohio.png',
     content: `## Introduction
 
 Operating a vehicle while impaired (OVI) is the Ohio term for what many states call DUI. Ohio uses OVI to cover alcohol, drugs, or a combination of both. This guide explains how Ohio defines OVI, how cases are built, and what tends to vary by court so you can verify the law and make informed decisions.
@@ -581,7 +581,7 @@ If you need help in Delaware or Franklin County, contact Mango Law for a confide
     slug: 'motion-practice-criminal-defense',
     title: 'The Power of Motion Practice in Criminal Defense',
     excerpt: 'How strategic pre-trial motions can challenge evidence and shape outcomes—often before trial even begins.',
-    imageUrl: '/images/generated/blog-motion-practice.png',
+    imageUrl: '/images/generated/blog-motion-practice-criminal-defense.png',
     content: `Motion practice is one of the most powerful—and underutilized—tools in criminal defense. Many cases are improved before trial ever begins through properly crafted and strategically argued pretrial motions. Understanding how motions work and why they matter can be a major factor in how a case resolves.
 
 ## What Are Pre-Trial Motions?
@@ -877,7 +877,7 @@ If you're facing criminal charges in Delaware or Franklin County, don't wait. Ea
     slug: 'drug-possession-vs-trafficking-ohio',
     title: 'Drug Possession vs. Trafficking: Understanding Ohio Drug Crime Charges',
     excerpt: 'Learn the critical differences between possession and trafficking charges in Ohio, and how these distinctions affect your defense strategy.',
-    imageUrl: '/images/generated/blog-drug-possession-trafficking.png',
+    imageUrl: '/images/generated/blog-drug-possession-vs-trafficking-ohio.png',
     content: `Ohio drug cases often turn on one core question: is the evidence consistent with personal possession, or does it indicate trafficking? The answer changes the charge level, penalties, and defense strategy.
 
 ## Possession vs trafficking (overview)
@@ -1025,7 +1025,7 @@ This article is for educational purposes and does not constitute legal advice. C
     slug: 'white-collar-crime-defense-ohio',
     title: 'White Collar Crime Defense: What You Need to Know',
     excerpt: 'Facing fraud, embezzlement, or other white collar charges? Learn about defense strategies and how to protect your professional reputation.',
-    imageUrl: '/images/generated/blog-white-collar-defense.png',
+    imageUrl: '/images/generated/blog-white-collar-crime-defense-ohio.png',
     content: `White collar investigations often involve complex records, long timelines, and financial detail. This guide explains common Ohio statutes, typical evidence issues, and how defense strategy is built.
 
 ## Common Ohio white collar statutes
@@ -1184,7 +1184,7 @@ This article is for educational purposes and does not constitute legal advice. C
     slug: 'refuse-field-sobriety-test-ohio',
     title: 'Can I Refuse Field Sobriety Tests in Ohio? Your Rights Explained',
     excerpt: 'Learn your rights regarding field sobriety tests in Ohio, the consequences of refusal, and how this decision affects your OVI defense strategy.',
-    imageUrl: '/images/generated/blog-field-sobriety-refusal.png',
+    imageUrl: '/images/generated/blog-refuse-field-sobriety-test-ohio.png',
     content: `If you've been pulled over for suspected OVI/DUI in Ohio, one of the most important decisions you'll make is whether to perform field sobriety tests. Unlike chemical tests, **you have the right to refuse field sobriety tests in Ohio**—but understanding the implications is critical.
 
 ## What Are Field Sobriety Tests?
@@ -1309,7 +1309,7 @@ Contact us at **(740) 602-2155** for a confidential case evaluation.`,
     slug: 'ohio-dui-lookback-period',
     title: 'Ohio DUI Lookback Period: How Prior Convictions Can Affect Your Case',
     excerpt: 'Understand how Ohio’s OVI lookback rules work, what can count as a prior, and what varies by county, court, and the facts of your case.',
-    imageUrl: '/images/generated/blog-dui-lookback-period.png',
+    imageUrl: '/images/generated/blog-ohio-dui-lookback-period.png',
     content: `If you are facing an OVI and have any prior history, the lookback analysis is one of the first things to confirm. Whether a prior counts can change the charge level, sentencing range, and license consequences.
 
 **Updated for 2025 law changes:** Ohio’s OVI statute was updated effective April 9, 2025 (HB 37). Minimum fines and reinstatement fees changed, so verify the current statute and BMV schedule before relying on older summaries.
@@ -1563,7 +1563,7 @@ This article is for educational purposes and does not constitute legal advice. O
     slug: 'ex-parte-protection-orders-ohio-defense',
     title: 'Ex Parte Protection Orders in Ohio: What to Do When Accused Without Notice',
     excerpt: 'What an ex parte protection order is in Ohio, what varies by case, and practical next steps before the full hearing.',
-    imageUrl: '/images/generated/blog-ex-parte-protection-orders.png',
+    imageUrl: '/images/generated/blog-ex-parte-protection-orders-ohio-defense.png',
     content: `Ex parte protection orders in Ohio can be issued quickly and without the respondent present. This guide explains how these orders work, what restrictions are common, and how the full hearing process typically unfolds.
 
 **Quick reality check + 60-second plan**
@@ -1811,7 +1811,7 @@ This article is for educational purposes and does not constitute legal advice. C
     slug: 'ohio-weapons-charges-ccw-defense',
     title: 'Ohio Weapons Charges: CCW, Improper Handling, and Weapons Disability Defense',
     excerpt: 'A conservative overview of Ohio weapons allegations, including concealed-carry, weapons-under-disability, and vehicle-transport issues under ORC Chapter 2923.',
-    imageUrl: '/images/generated/blog-ohio-weapons-charges.png',
+    imageUrl: '/images/generated/blog-ohio-weapons-charges-ccw-defense.png',
     content: `Ohio weapons cases often turn on technical statutory definitions (concealed vs open, transport rules, location restrictions, and disability status). A charge can arise even when someone believed they were being careful. This guide focuses on Ohio law under ORC Chapter 2923 and the fact-specific issues that commonly drive outcomes.
 
 ## Key statutes and definitions
@@ -1946,6 +1946,11 @@ This article is for educational purposes and does not constitute legal advice. O
     ],
   },
   {
+	    slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
+	    title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
+	    excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
+	    imageUrl: '/images/generated/blog-sex-crimes-defense-ohio-what-you-need-to-know.png',
+	    content: `Sex crime allegations carry high stakes, and the process can move quickly. This guide explains the core Ohio statutes, how registration works, and why early legal review matters.
     slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
     title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
     excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
@@ -2117,7 +2122,7 @@ This article is for educational purposes and does not constitute legal advice. C
     slug: 'personal-injury-claims-ohio-negligence-law',
     title: 'Personal Injury Claims in Ohio: Understanding Negligence, Damages, and Your Legal Rights',
     excerpt: 'A conservative overview of Ohio negligence claims: what varies, how comparative fault works, and where to verify deadlines and damages rules.',
-    imageUrl: '/images/generated/blog-personal-injury-claims.png',
+    imageUrl: '/images/generated/blog-personal-injury-claims-ohio-negligence-law.png',
     content: `Ohio personal injury claims are governed by negligence principles. This guide explains the core elements, common case types, and why timing and documentation matter.
 
 ## The basic elements of negligence
@@ -2269,7 +2274,7 @@ This article is for educational purposes and does not constitute legal advice. C
     slug: 'assault-domestic-violence-defense-ohio',
     title: 'Assault and Domestic Violence Defense in Ohio: Understanding ORC sections 2903.13, 2919.25, and Protection Orders',
     excerpt: 'A conservative overview of Ohio assault and domestic violence allegations: what varies by case, common statutes involved, and how protection orders can affect strategy.',
-    imageUrl: '/images/generated/blog-assault-domestic-violence.png',
+    imageUrl: '/images/generated/blog-assault-domestic-violence-defense-ohio.png',
     content: `Assault and domestic violence allegations in Ohio can move fast. A single report can lead to arrest, bond conditions, and a protection order within days. This guide explains the statutes involved, the differences between assault and domestic violence, and the issues that often shape outcomes.
 
 ## Ohio assault statutes (overview)
@@ -2446,7 +2451,7 @@ This article is for educational purposes and does not constitute legal advice. C
     slug: 'ohio-dui-checkpoint-hotspots',
     title: 'Ohio DUI Checkpoints: Legality, What to Expect, and Your Rights',
     excerpt: 'A conservative, rights-focused guide to sobriety checkpoints in Ohio: when they’re legal, what the process looks like, and how to protect yourself.',
-    imageUrl: '/images/generated/blog-checkpoint-hotspots.png',
+    imageUrl: '/images/generated/blog-ohio-dui-checkpoint-hotspots.png',
     content: `## Introduction
 
 Sobriety checkpoints (sometimes called DUI/OVI checkpoints) are planned stops where officers briefly screen drivers for impairment. Practices vary by agency, and not every checkpoint is announced in advance.
@@ -2594,7 +2599,7 @@ Checkpoint practices change and vary by agency. Focus on safety, keep the intera
     slug: 'holiday-ovi-enforcement-ohio-delaware-dublin-columbus',
     title: 'Holiday OVI Enforcement in Ohio: What Drivers in Delaware, Dublin, and Central Ohio Should Expect',
     excerpt: 'Ohio\'s holiday enforcement wave ramps up from mid-December through New Year\'s Day. Here\'s what\'s changing, what police are looking for, and what to do if a traffic stop turns into an OVI investigation.',
-    imageUrl: '/images/generated/blog-ohio-holiday-ovi-enforcement.png',
+    imageUrl: '/images/generated/blog-holiday-ovi-enforcement-ohio-delaware-dublin-columbus.png',
     content: `Holiday travel in Central Ohio means more traffic and, in many areas, more patrol activity. If you are traveling through Delaware, Dublin, Powell, Lewis Center, Westerville, Worthington, or into Columbus, expect more visible enforcement during holiday windows.
 
 This post covers what tends to change during holiday enforcement, what officers look for, and how to respond if a routine stop starts turning into an OVI investigation.
@@ -2785,6 +2790,8 @@ This article is for educational purposes and does not constitute legal advice. C
   {
     slug: 'physical-control-parked-car-ohio-kevin-mcguff',
     title: 'Physical Control of a Parked Car in Ohio: What the Kevin McGuff Case Teaches About ORC 4511.194',
+    excerpt: 'Ohio State coach Kevin McGuff was charged with physical control while parked in his driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
+    imageUrl: '/images/generated/blog-physical-control-parked-car-ohio-kevin-mcguff.png',
     excerpt: 'Ohio State coach Kevin McGuff was charged with physical control after being found asleep in his parked car in his own driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
     imageUrl: '/images/generated/blog-physical-control-parked-car.png',
     content: `Ohio State women's basketball coach Kevin McGuff made headlines when he was charged with physical control after being found asleep in his parked car in his own driveway. The case resolved with a plea to a reduced charge of disorderly conduct, but it raises important questions about Ohio's physical control statute and what it means for everyday drivers.

@@ -1,8 +1,14 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import { createClient } from "npm:@supabase/supabase-js@2.48.0";
 import { buildAdminEmailHtml, buildClientConfirmationHtml } from "../_shared/email/templates.ts";
 import { formatFrom, formatPhoneForDisplay, formatTimestampForEmail, isTruthyEnv, normalizePhoneForStorage, parseEmailList } from "../_shared/email/utils.ts";
 import type { EmailSeason, EmailTheme } from "../_shared/email/tokens.ts";
+
+type CreateClient = typeof import("@supabase/supabase-js")["createClient"];
+
+declare const Deno: {
+  env: { get: (key: string) => string | undefined };
+  serve: (handler: (req: Request) => Response | Promise<Response>) => void;
+};
 
 interface ChatIntakeData {
   name: string;
@@ -21,7 +27,7 @@ interface ChatIntakeData {
 
 interface LogContext {
   endpoint: string;
-  method: string;
+  method?: string;
   ip?: string;
   userAgent?: string;
   status?: number;
@@ -42,7 +48,7 @@ function log(level: string, message: string, context?: LogContext) {
 }
 
 function getSecurityHeaders(origin?: string): Record<string, string> {
-  const baseHeaders = {
+  const baseHeaders: Record<string, string> = {
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY",
     "X-XSS-Protection": "1; mode=block",
@@ -161,7 +167,7 @@ Deno.serve(async (req: Request) => {
   const startTime = Date.now();
   const origin = req.headers.get("origin");
   const originAllowlist = Deno.env.get("ORIGIN_ALLOWLIST") || "*";
-  const allowedOrigin = isOriginAllowed(origin, originAllowlist) ? origin : undefined;
+  const allowedOrigin = origin && isOriginAllowed(origin, originAllowlist) ? origin : undefined;
   const ip = getClientIp(req);
   const userAgent = req.headers.get("user-agent") || "unknown";
 
@@ -192,6 +198,9 @@ Deno.serve(async (req: Request) => {
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("SERVICE_ROLE_KEY")!;
+    const { createClient } = await import("npm:" + "@supabase/supabase-js@2.48.0") as unknown as {
+      createClient: CreateClient;
+    };
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const rateLimit = await checkRateLimit(supabase, ip, "/chat-intake", 1, 20);

@@ -457,7 +457,7 @@ export default function Footer() {
             <a
               href="https://sistrunktech.com"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="transition-colors hover:text-brand-leaf"
             >
               Built and hosted by Sistrunk Tech in Columbus, Ohio.
