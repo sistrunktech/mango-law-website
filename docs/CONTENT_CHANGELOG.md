@@ -20,18 +20,57 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
-Date/time: 2026-01-26 12:30 EST
-Post slug and title: blogPosts model | Add optional scope field
-Change type: minor
-Summary of change: Added an optional `scope` metadata field + helper to classify posts by practice-area topic without changing existing post content or the public blog UI.
+Date/time: 2026-01-26 14:05 EST
+Post slug and title: drug-possession-charge-ohio-what-to-do-next | Charged With Drug Possession in Ohio? What to Do Next and What the State Must Prove
+Change type: major
+Summary of change: Added new post for week-2 publishing cadence (planned publish date 2026-02-03) covering what the state must prove for drug possession under ORC 2925.11, common search-and-seizure issues, and practical next steps; includes internal links to drug-crimes practice area and trust sources.
 Regression checklist:
-- Hero changed? n/a
+- Hero changed? no
 - Images removed? no
-- Links changed? no
-- Headings changed? no
-- Meta/schema changed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
 Approval token: n/a
-Rollback notes: codex/blog-scopes
+Rollback notes: codex/blog-week2-2026-02
+
+Date/time: 2026-01-26 14:05 EST
+Post slug and title: ohio-ovi-driving-privileges-als | Ohio OVI Driving Privileges and ALS: How License Suspensions Work and What Options You May Have
+Change type: major
+Summary of change: Added new post for week-2 publishing cadence (planned publish date 2026-02-05) explaining ALS under ORC 4511.191, how ALS differs from court suspensions, and practical driving-privileges guidance; includes internal link to OVI practice area and related week-1 first-court-date post.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week2-2026-02
+
+Date/time: 2026-01-26 12:55 EST
+Post slug and title: first-ovi-court-date-delaware-county-ohio | Your First OVI Court Date in Delaware County, Ohio: What Happens and How to Prepare
+Change type: major
+Summary of change: Added new post for week-1 publishing cadence (planned publish date 2026-01-27) covering first OVI court date expectations, bond conditions, and ALS vs court suspension concepts; includes ORC sources and visual marker.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week1-2026-01
+
+Date/time: 2026-01-26 12:55 EST
+Post slug and title: no-contact-order-vs-civil-protection-order-ohio | No-Contact Orders vs Civil Protection Orders in Ohio: What’s the Difference?
+Change type: major
+Summary of change: Added new post for week-1 publishing cadence (planned publish date 2026-01-29) explaining criminal no-contact bond conditions vs civil protection orders (CPO), compliance rules, and ORC sources; includes protection-order visuals.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week1-2026-01
 
 Date/time: 2026-01-01 14:39 EST
 Post slug and title: Strategy update | docs/technical/SEO-STRATEGY-2025.md

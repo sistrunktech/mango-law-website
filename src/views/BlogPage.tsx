@@ -7,9 +7,8 @@ import { ArrowRight, Calendar, Clock, Search, X } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import BlogSidebar from '../components/BlogSidebar';
 import CTASection from '../components/CTASection';
-import { blogPosts } from '../data/blogPosts';
+import type { BlogPost } from '../data/blogPosts';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
-import { SEO } from '../lib/seo';
 
 const categories = [
   'All Posts',
@@ -28,11 +27,13 @@ function estimateReadTime(content: string): number {
   return Math.ceil(wordCount / wordsPerMinute);
 }
 
-const sortedBlogPosts = [...blogPosts].sort(
-  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-);
+export default function BlogPage({ posts }: { posts: BlogPost[] }) {
+  const sortedBlogPosts = useMemo(
+    () =>
+      [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+    [posts]
+  );
 
-export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('All Posts');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -55,7 +56,7 @@ export default function BlogPage() {
     }
 
     return posts;
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, sortedBlogPosts]);
 
   const handleClearSearch = () => {
     setSearchQuery('');
@@ -63,14 +64,6 @@ export default function BlogPage() {
 
   return (
     <>
-      <SEO
-        title="Mango Law Blog | Legal Insights & Ohio Criminal Defense Updates"
-        description="Stay informed with articles about criminal defense, OVI/DUI law, and your rights in Ohio courts from attorney Dominic Mango."
-        breadcrumbs={[
-          { name: 'Home', item: '/' },
-          { name: 'Blog', item: '/blog' },
-        ]}
-      />
       <PageHero
         eyebrow="Insights"
         title="Legal insights and updates"
