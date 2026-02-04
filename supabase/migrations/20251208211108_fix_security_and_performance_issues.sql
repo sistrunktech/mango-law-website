@@ -91,18 +91,28 @@ $$;
 -- ============================================================================
 
 -- Drop and recreate admin_users policies with optimized auth checks
-DROP POLICY IF EXISTS "Admins can view all admin users" ON admin_users;
-CREATE POLICY "Admins can view all admin users"
-  ON admin_users FOR SELECT
-  TO authenticated
-  USING ((select auth.uid()) IS NOT NULL);
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables
+    WHERE table_schema = 'public'
+      AND table_name = 'admin_users'
+  ) THEN
+    DROP POLICY IF EXISTS "Admins can view all admin users" ON admin_users;
+    CREATE POLICY "Admins can view all admin users"
+      ON admin_users FOR SELECT
+      TO authenticated
+      USING ((select auth.uid()) IS NOT NULL);
 
-DROP POLICY IF EXISTS "Admins can update their own profile" ON admin_users;
-CREATE POLICY "Admins can update their own profile"
-  ON admin_users FOR UPDATE
-  TO authenticated
-  USING (id = (select auth.uid()))
-  WITH CHECK (id = (select auth.uid()));
+    DROP POLICY IF EXISTS "Admins can update their own profile" ON admin_users;
+    CREATE POLICY "Admins can update their own profile"
+      ON admin_users FOR UPDATE
+      TO authenticated
+      USING (id = (select auth.uid()))
+      WITH CHECK (id = (select auth.uid()));
+  END IF;
+END;
+$$;
 
 -- ============================================================================
 -- 3. OPTIMIZE RLS POLICIES - BLOG POSTS TABLE
