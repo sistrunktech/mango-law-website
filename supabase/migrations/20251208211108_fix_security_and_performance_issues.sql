@@ -51,8 +51,19 @@ CREATE INDEX IF NOT EXISTS idx_contact_submissions_assigned_to
   ON contact_submissions(assigned_to);
 
 -- dui_checkpoints foreign key indexes
-CREATE INDEX IF NOT EXISTS idx_dui_checkpoints_duplicate_of 
-  ON dui_checkpoints(duplicate_of);
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'dui_checkpoints'
+      AND column_name = 'duplicate_of'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_dui_checkpoints_duplicate_of 
+      ON public.dui_checkpoints(duplicate_of);
+  END IF;
+END;
+$$;
 
 -- handoff_document_versions foreign key indexes
 CREATE INDEX IF NOT EXISTS idx_handoff_document_versions_created_by 

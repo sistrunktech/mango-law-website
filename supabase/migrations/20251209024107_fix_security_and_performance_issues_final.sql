@@ -74,7 +74,19 @@ CREATE INDEX IF NOT EXISTS idx_contact_submissions_assigned_to ON contact_submis
 CREATE INDEX IF NOT EXISTS idx_content_feedback_created_by ON content_feedback(created_by);
 
 -- Add indexes for foreign keys in dui_checkpoints
-CREATE INDEX IF NOT EXISTS idx_dui_checkpoints_duplicate_of ON dui_checkpoints(duplicate_of);
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'dui_checkpoints'
+      AND column_name = 'duplicate_of'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_dui_checkpoints_duplicate_of
+      ON public.dui_checkpoints(duplicate_of);
+  END IF;
+END;
+$$;
 
 -- Add indexes for foreign keys in google_reviews
 CREATE INDEX IF NOT EXISTS idx_google_reviews_client_id ON google_reviews(client_id);
