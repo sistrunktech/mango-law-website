@@ -1946,11 +1946,6 @@ This article is for educational purposes and does not constitute legal advice. O
     ],
   },
   {
-	    slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
-	    title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
-	    excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
-	    imageUrl: '/images/generated/blog-sex-crimes-defense-ohio-what-you-need-to-know.png',
-	    content: `Sex crime allegations carry high stakes, and the process can move quickly. This guide explains the core Ohio statutes, how registration works, and why early legal review matters.
     slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
     title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
     excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
