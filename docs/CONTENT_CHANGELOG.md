@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-02-04
+Post slug and title: sex-crimes-defense-ohio-what-you-need-to-know | Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights
+Change type: minor
+Summary of change: Repaired a syntax/parsing issue in the file-based blog post data where duplicated fields were accidentally embedded in the post content string; no intended editorial change.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: n/a
+Rollback notes: fix/blogPosts parse error (commit 1fe130f)
+
 Date/time: 2026-01-26 14:05 EST
 Post slug and title: drug-possession-charge-ohio-what-to-do-next | Charged With Drug Possession in Ohio? What to Do Next and What the State Must Prove
 Change type: major

@@ -58,8 +58,17 @@
 
 -- Add index on reviews.invitation_id foreign key
 -- This improves performance of JOINs and foreign key constraint checks
-CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id 
-  ON public.reviews (invitation_id);
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables
+    WHERE table_schema = 'public' AND table_name = 'reviews'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id 
+      ON public.reviews(invitation_id);
+  END IF;
+END;
+$$;
 
 -- ============================================================================
 -- 2. REMOVE UNUSED INDEXES

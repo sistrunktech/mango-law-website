@@ -3,6 +3,17 @@ import type { TrustSource, TrustSourceType } from './trust';
 export type BlogSourceType = TrustSourceType;
 export type BlogSource = TrustSource;
 
+export type BlogScope =
+  | 'ovi_dui'
+  | 'criminal_defense'
+  | 'drug_crimes'
+  | 'sex_crimes'
+  | 'protection_orders'
+  | 'white_collar'
+  | 'personal_injury'
+  | 'domestic_violence'
+  | 'general';
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -15,6 +26,21 @@ export type BlogPost = {
   sources: TrustSource[];
   imageUrl?: string;
 };
+
+export function resolveBlogScope(post: BlogPost): BlogScope {
+  const category = post.category.toLowerCase();
+
+  if (category.includes('ovi') || category.includes('dui')) return 'ovi_dui';
+  if (category.includes('drug')) return 'drug_crimes';
+  if (category.includes('sex')) return 'sex_crimes';
+  if (category.includes('protection')) return 'protection_orders';
+  if (category.includes('white collar')) return 'white_collar';
+  if (category.includes('personal injury')) return 'personal_injury';
+  if (category.includes('domestic')) return 'domestic_violence';
+  if (category.includes('criminal')) return 'criminal_defense';
+
+  return 'general';
+}
 
 export const blogPosts: BlogPost[] = [
   {
@@ -1946,11 +1972,6 @@ This article is for educational purposes and does not constitute legal advice. O
     ],
   },
   {
-	    slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
-	    title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
-	    excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
-	    imageUrl: '/images/generated/blog-sex-crimes-defense-ohio-what-you-need-to-know.png',
-	    content: `Sex crime allegations carry high stakes, and the process can move quickly. This guide explains the core Ohio statutes, how registration works, and why early legal review matters.
     slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
     title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
     excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
@@ -2792,8 +2813,6 @@ This article is for educational purposes and does not constitute legal advice. C
     title: 'Physical Control of a Parked Car in Ohio: What the Kevin McGuff Case Teaches About ORC 4511.194',
     excerpt: 'Ohio State coach Kevin McGuff was charged with physical control while parked in his driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
     imageUrl: '/images/generated/blog-physical-control-parked-car-ohio-kevin-mcguff.png',
-    excerpt: 'Ohio State coach Kevin McGuff was charged with physical control after being found asleep in his parked car in his own driveway. Learn what this offense means, how it differs from OVI, and why "sleeping it off" can still lead to charges.',
-    imageUrl: '/images/generated/blog-physical-control-parked-car.png',
     content: `Ohio State women's basketball coach Kevin McGuff made headlines when he was charged with physical control after being found asleep in his parked car in his own driveway. The case resolved with a plea to a reduced charge of disorderly conduct, but it raises important questions about Ohio's physical control statute and what it means for everyday drivers.
 
 Case reporting is cited in the sources below; outcomes can differ in other cases based on facts, record history, and local practice.
