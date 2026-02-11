@@ -1,6 +1,9 @@
 interface RawCheckpoint {
   title: string;
   location: string;
+  locationAddress?: string;
+  locationCity?: string;
+  locationCounty?: string;
   startDate: string;
   endDate: string;
   description?: string;
@@ -351,6 +354,9 @@ export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
       checkpoints.push({
         title,
         location,
+        locationAddress: locationText,
+        locationCity: city || county,
+        locationCounty: county,
         startDate: start,
         endDate: end,
         description: locationText,
@@ -415,6 +421,9 @@ async function scrapeOVICheckpointHomepage(url: string): Promise<RawCheckpoint[]
     checkpoints.push({
       title,
       location,
+      locationAddress: locationText,
+      locationCity: city || county,
+      locationCounty: county,
       startDate: start,
       endDate: end,
       description: locationText,
