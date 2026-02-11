@@ -42,6 +42,7 @@ Applies to:
   - `APPROVED: <slug> -- <what changed> -- <minor|major> -- <timestamp>`
 
 ## Required Files and References
+- Master agent PRD: `docs/technical/MASTER_PRD_AGENT_OPERATIONS.md`
 - Content governance rules: `docs/CONTENT_GOVERNANCE.md`
 - Protected content registry: `docs/PROTECTED_CONTENT.md`
 - Content change log: `docs/CONTENT_CHANGELOG.md`

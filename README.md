@@ -90,6 +90,8 @@ Commonly required values:
 - **Protected content registry:** [`docs/PROTECTED_CONTENT.md`](docs/PROTECTED_CONTENT.md)
 - **Content change log:** [`docs/CONTENT_CHANGELOG.md`](docs/CONTENT_CHANGELOG.md)
 - **SEO strategy:** [`docs/technical/SEO-STRATEGY-2025.md`](docs/technical/SEO-STRATEGY-2025.md)
+- **Master agent PRD:** [`docs/technical/MASTER_PRD_AGENT_OPERATIONS.md`](docs/technical/MASTER_PRD_AGENT_OPERATIONS.md)
+- **PRD acceptance gates:** [`docs/technical/ANNEX_ACCEPTANCE_GATES.md`](docs/technical/ANNEX_ACCEPTANCE_GATES.md)
 - **SEO crawl strategy:** [`docs/technical/SEO-CRAWL-STRATEGY.md`](docs/technical/SEO-CRAWL-STRATEGY.md)
 - **Research inputs (legacy):** [`docs/legacy/RESEARCH-INPUTS-2025.md`](docs/legacy/RESEARCH-INPUTS-2025.md)
 - **Agent guardrails:** [`docs/AGENT_GUARDRAILS.md`](docs/AGENT_GUARDRAILS.md)

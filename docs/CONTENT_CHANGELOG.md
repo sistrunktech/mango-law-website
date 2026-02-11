@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-02-11 20:05 EST
+Post slug and title: Governance update | Master PRD + no-drift agent operating controls
+Change type: major
+Summary of change: Added canonical PRD + annex set, introduced structured-data/SEO/parity CI gates, expanded protected-content checks for schema and firm-fact-sensitive files, and normalized review-response contact references to canonical phone values.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: Revert PRD annex docs and gate scripts (`check-structured-data.mjs`, `seo-smoke.mjs`, `check-prd-doc-parity.mjs`) plus related workflow/script wiring.
+
 Date/time: 2026-02-04
 Post slug and title: sex-crimes-defense-ohio-what-you-need-to-know | Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights
 Change type: minor

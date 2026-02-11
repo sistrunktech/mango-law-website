@@ -34,6 +34,15 @@ jobs:
       - name: Content governance check
         run: npm run content:check
 
+      - name: Structured data gate
+        run: npm run check:structured-data
+
+      - name: SEO smoke check
+        run: npm run seo:smoke
+
+      - name: PRD parity check
+        run: npm run docs:parity
+
       - name: Lint
         run: npm run lint
 
