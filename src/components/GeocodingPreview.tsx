@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { MapPin, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { getMapboxPublicToken } from '../lib/mapbox';
 
 interface GeocodingPreviewProps {
   address: string;
@@ -40,8 +41,7 @@ export default function GeocodingPreview({
         setError(null);
 
         try {
-          const mapboxToken =
-            process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN || process.env.VITE_MAPBOX_PUBLIC_TOKEN;
+          const mapboxToken = getMapboxPublicToken();
           if (!mapboxToken) {
             throw new Error('Mapbox token not configured');
           }

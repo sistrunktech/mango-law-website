@@ -5,6 +5,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Navigation } from 'lucide-react';
 import { getDisplayStatus, isAggregatorSourceName, type DUICheckpoint } from '../data/checkpoints';
+import { getMapboxPublicToken, getMapboxStyleUrl } from '../lib/mapbox';
 
 type Props = {
   checkpoints: DUICheckpoint[];
@@ -53,13 +54,11 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       return;
     }
 
-    const token =
-      process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN || process.env.VITE_MAPBOX_PUBLIC_TOKEN;
-    const styleUrl =
-      process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL || process.env.VITE_MAPBOX_STYLE_URL;
+    const token = getMapboxPublicToken();
+    const styleUrl = getMapboxStyleUrl();
 
     if (!token) {
-      setMapError('Mapbox token not configured');
+      setMapError('Map temporarily unavailable. Checkpoint details are still available below.');
       setIsLoading(false);
       return;
     }
@@ -79,7 +78,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
 
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: styleUrl || 'mapbox://styles/mapbox/streets-v12',
+        style: styleUrl,
         center: [-82.9988, 39.9612], // Columbus, OH
         zoom: 8,
       });
