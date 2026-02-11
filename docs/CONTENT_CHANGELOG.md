@@ -20,18 +20,109 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
-Date/time: 2026-01-26 12:30 EST
-Post slug and title: blogPosts model | Add optional scope field
-Change type: minor
-Summary of change: Added an optional `scope` metadata field + helper to classify posts by practice-area topic without changing existing post content or the public blog UI.
+Date/time: 2026-02-11 20:05 EST
+Post slug and title: Governance update | Master PRD + no-drift agent operating controls
+Change type: major
+Summary of change: Added canonical PRD + annex set, introduced structured-data/SEO/parity CI gates, expanded protected-content checks for schema and firm-fact-sensitive files, and normalized review-response contact references to canonical phone values.
 Regression checklist:
-- Hero changed? n/a
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: Revert PRD annex docs and gate scripts (`check-structured-data.mjs`, `seo-smoke.mjs`, `check-prd-doc-parity.mjs`) plus related workflow/script wiring.
+
+Date/time: 2026-02-11 13:28 EST
+Post slug and title: blogPosts imageUrl | Enforce per-slug unique featured images + regenerate missing image assets
+Change type: major
+Summary of change: Removed non-slug and repeated featured image assignments (including reuse of `/images/generated/ovi-dui-defense-hero.png`), switched affected posts to strict `/images/generated/blog-<slug>.png` paths, generated missing slug images for four posts, and added automated audit checks to block duplicate/non-compliant blog image mappings.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: revert `src/data/blogPosts.ts` imageUrl edits and delete generated files `public/images/generated/blog-first-ovi-court-date-delaware-county-ohio.png`, `public/images/generated/blog-no-contact-order-vs-civil-protection-order-ohio.png`, `public/images/generated/blog-drug-possession-charge-ohio-what-to-do-next.png`, `public/images/generated/blog-ohio-ovi-driving-privileges-als.png`
+
+Date/time: 2026-02-08
+Post slug and title: super-bowl-dui-checkpoints-ohio | Super Bowl Sunday DUI/OVI Checkpoints in Ohio: What to Know
+Change type: major
+Summary of change: Added a Super Bowl Sunday DUI/OVI checkpoint awareness post with links to the DUI checkpoint map, OVI explainer, and field sobriety guidance; includes NHTSA sources and a new featured image.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: n/a (new post)
+
+Date/time: 2026-02-04
+Post slug and title: sex-crimes-defense-ohio-what-you-need-to-know | Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights
+Change type: minor
+Summary of change: Repaired a syntax/parsing issue in the file-based blog post data where duplicated fields were accidentally embedded in the post content string; no intended editorial change.
+Regression checklist:
+- Hero changed? no
 - Images removed? no
 - Links changed? no
 - Headings changed? no
 - Meta/schema changed? no
 Approval token: n/a
-Rollback notes: codex/blog-scopes
+Rollback notes: fix/blogPosts parse error (commit 1fe130f)
+
+Date/time: 2026-01-26 14:05 EST
+Post slug and title: drug-possession-charge-ohio-what-to-do-next | Charged With Drug Possession in Ohio? What to Do Next and What the State Must Prove
+Change type: major
+Summary of change: Added new post for week-2 publishing cadence (planned publish date 2026-02-03) covering what the state must prove for drug possession under ORC 2925.11, common search-and-seizure issues, and practical next steps; includes internal links to drug-crimes practice area and trust sources.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week2-2026-02
+
+Date/time: 2026-01-26 14:05 EST
+Post slug and title: ohio-ovi-driving-privileges-als | Ohio OVI Driving Privileges and ALS: How License Suspensions Work and What Options You May Have
+Change type: major
+Summary of change: Added new post for week-2 publishing cadence (planned publish date 2026-02-05) explaining ALS under ORC 4511.191, how ALS differs from court suspensions, and practical driving-privileges guidance; includes internal link to OVI practice area and related week-1 first-court-date post.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week2-2026-02
+
+Date/time: 2026-01-26 12:55 EST
+Post slug and title: first-ovi-court-date-delaware-county-ohio | Your First OVI Court Date in Delaware County, Ohio: What Happens and How to Prepare
+Change type: major
+Summary of change: Added new post for week-1 publishing cadence (planned publish date 2026-01-27) covering first OVI court date expectations, bond conditions, and ALS vs court suspension concepts; includes ORC sources and visual marker.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week1-2026-01
+
+Date/time: 2026-01-26 12:55 EST
+Post slug and title: no-contact-order-vs-civil-protection-order-ohio | No-Contact Orders vs Civil Protection Orders in Ohio: What’s the Difference?
+Change type: major
+Summary of change: Added new post for week-1 publishing cadence (planned publish date 2026-01-29) explaining criminal no-contact bond conditions vs civil protection orders (CPO), compliance rules, and ORC sources; includes protection-order visuals.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: codex/blog-week1-2026-01
 
 Date/time: 2026-01-01 14:39 EST
 Post slug and title: Strategy update | docs/technical/SEO-STRATEGY-2025.md
@@ -357,3 +448,17 @@ Regression checklist:
 - Meta/schema changed? no
 Approval token: APPROVED: bond-jail-information-delaware-county-ohio -- restore depth + visuals + EEAT -- major -- 2025-12-27T20:03-0500
 Rollback notes: commit pending
+
+
+Date/time: 2026-01-27 22:10 EST
+Post slug and title: blogPosts imageUrl | Regenerate unique featured images for all blog posts
+Change type: major
+Summary of change: Generated a unique, no-text featured image per blog post slug and updated `src/data/blogPosts.ts` `imageUrl` fields to `/images/generated/blog-<slug>.png` to eliminate duplicate images and keep hero/thumbnail/OG consistent.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: pending
+Rollback notes: revert `src/data/blogPosts.ts` imageUrl changes and remove `public/images/generated/blog-*.png`

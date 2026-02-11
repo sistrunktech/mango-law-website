@@ -9,6 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SITE_URL: "https://example.com"
+      NEXT_PUBLIC_SUPABASE_URL: "https://example.supabase.co"
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: "dummy_key"
+      NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN: "pk.test"
+      NEXT_PUBLIC_MAPBOX_STYLE_URL: "mapbox://styles/mapbox/streets-v11"
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: "dummy_key"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,6 +33,21 @@ jobs:
 
       - name: Content governance check
         run: npm run content:check
+
+      - name: Structured data gate
+        run: npm run check:structured-data
+
+      - name: SEO smoke check
+        run: npm run seo:smoke
+
+      - name: PRD parity check
+        run: npm run docs:parity
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
 
       - name: Build
         run: npm run build

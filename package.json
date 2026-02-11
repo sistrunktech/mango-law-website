@@ -6,14 +6,21 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/check-filenames.mjs && node scripts/check-orc-references.mjs && node scripts/check-protected-content.mjs",
+    "prebuild": "node scripts/check-filenames.mjs && node scripts/check-orc-references.mjs && node scripts/check-protected-content.mjs && node scripts/check-structured-data.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "typecheck": "tsc --noEmit",
     "test": "TS_NODE_TRANSPILE_ONLY=1 node --experimental-specifier-resolution=node test/run-tests.mjs",
+    "seo:smoke": "node scripts/seo-smoke.mjs",
+    "seo:smoke:live": "bash scripts/check-indexing-surface.sh",
+    "check:structured-data": "node scripts/check-structured-data.mjs",
+    "docs:parity": "node scripts/check-prd-doc-parity.mjs",
     "optimize:practice-images": "node scripts/optimize-practice-images.mjs",
     "generate:image": "node scripts/generateImage.js",
-    "content:check": "node scripts/check-protected-content.mjs"
+    "blog:images:audit": "TS_NODE_TRANSPILE_ONLY=1 node --loader ts-node/esm scripts/audit-blog-images.ts",
+    "blog:images:generate": "TS_NODE_TRANSPILE_ONLY=1 node --loader ts-node/esm scripts/generate-blog-featured-images.ts",
+    "content:check": "node scripts/check-protected-content.mjs && node scripts/check-structured-data.mjs && node scripts/check-prd-doc-parity.mjs && npm run blog:images:audit"
   },
   "dependencies": {
     "@fal-ai/client": "^1.7.2",
