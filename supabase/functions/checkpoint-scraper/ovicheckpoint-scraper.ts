@@ -29,6 +29,8 @@ function normalizeTimeString(input: string): string {
     .replace(/\u00a0/g, ' ')
     .replace(/[•·]/g, '|')
     .replace(/[—–]/g, '-')
+    .replace(/\bA\.?\s*M\.?\b/gi, 'AM')
+    .replace(/\bP\.?\s*M\.?\b/gi, 'PM')
     .replace(/\s+-\s+/g, ' - ')
     .replace(/\s+/g, ' ')
     .trim();
@@ -99,9 +101,10 @@ export function parseDateTime(timeStr: string): { start: string; end: string } |
       re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+),\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
       kind: 'from_to',
     },
+    // "Friday, October 18, 2024 , from 8 PM to 2 AM"
     // "Friday, August 22, 2025 From 10 PM to 2 AM"
     {
-      re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s+From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
+      re: /(\w+),\s+(\w+)\.?\s+(\d+),\s*(\d+)\s*,?\s*From\s+(\d+(?:\:\d+)?)\s*(AM|PM)\s+to\s+(\d+(?:\:\d+)?)\s*(AM|PM)/i,
       kind: 'from_to',
     },
     // "August 9, 2025 – 6:00 PM to 8:30 PM"
@@ -162,6 +165,12 @@ export function parseDateTime(timeStr: string): { start: string; end: string } |
     // "Friday, September 19, 2025"
     {
       re: /(\w+),\s+(\w+)\s+(\d+),\s+(\d+)\s*$/i,
+      kind: 'date_only',
+    },
+    // "Sunday February 11, 2024 Super Bowl 2024"
+    // "Friday February 9, 2024 Holiday Weekend"
+    {
+      re: /^(?!.*\b(?:AM|PM)\b)(?!.*\d{1,2}:\d{2})(\w+),?\s+(\w+)\.?\s+(\d+),\s*(\d{4})\b\s+.+$/i,
       kind: 'date_only',
     },
     // "Saturday, March 29" (missing year)
