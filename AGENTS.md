@@ -4,6 +4,55 @@ To help Codex, Copilot, and other AI contributors ship high-quality, reviewable 
 
 ---
 
+## Agent Operating Rules (Codex/Windsurf)
+
+These rules are mandatory for any agent-driven work in this repo.
+
+### Preflight (required, prevents workspace-root incidents)
+
+Before any task: print working directory and git root.
+
+```bash
+pwd
+git rev-parse --show-toplevel
+```
+
+If `git rev-parse --show-toplevel` resolves to `$HOME` (or `/Users/sistech_tim`), STOP. Do not run agent tasks from your home directory or any parent folder.
+
+### Where To Run Commands
+
+- Run commands only from the repo root or an active worktree root.
+- Never run from a parent folder. Never run from `$HOME`.
+
+### Worktrees + Conversations (Operating Model)
+
+- One conversation per worktree.
+- Existing PR continuation work uses a worktree named `pr-<id>-<slug>`.
+- No pileups: if scope changes, create a new worktree and start a new conversation.
+
+### Worktree Helpers
+
+Create a new worktree + branch:
+
+```bash
+./scripts/new-wt.sh <type> <slug>
+```
+
+This creates:
+- Worktree: `../<repo>.wt/<type>-<slug>`
+- Branch: `<type>/<slug>`
+
+Close a worktree (removes the worktree directory; does not delete branches):
+
+```bash
+./scripts/close-wt.sh ../<repo>.wt/<type>-<slug>
+```
+
+### Playwright Rule (Cloud vs Local)
+
+- Use Playwright cloud only for: deployed URL + headless + no localhost + no local profile + not VPN-only.
+- Use Playwright locally for: localhost flows, profile-dependent flows, or VPN-only/internal-only flows.
+
 ## Autonomous PR & Branch Policy
 
 - **Do not open PRs manually.** When local tests pass, **push** to `codex/{feature}` or `copilot/{feature}` (e.g. `codex/fix-lint`).
