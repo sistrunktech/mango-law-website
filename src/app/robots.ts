@@ -15,6 +15,7 @@ export default function robots(): MetadataRoute.Robots {
           '/client-updates/',
           '/docs/admin-guide',
           '/handoff/',
+          '/handoff-preview/',
         ],
       },
     ],
