@@ -203,9 +203,12 @@ Deno.serve(async (req: Request) => {
 
     for (const raw of rawCheckpoints) {
       try {
-        const { address, city, county } = parseAddress(raw.location);
+        const fallback = parseAddress(raw.location);
+        const address = (raw.locationAddress || fallback.address || '').trim();
+        const city = (raw.locationCity || fallback.city || '').trim();
+        const county = (raw.locationCounty || fallback.county || '').replace(/\s+County$/i, '').trim() || 'Unknown';
 
-        const fullAddress = `${address}, ${city}, Ohio`;
+        const fullAddress = `${address}, ${city}, ${county} County, Ohio`;
         const geocoded = await geocodeAddress(fullAddress, supabase, mapboxToken);
 
         if (!geocoded) {
