@@ -1,0 +1,106 @@
+name: PR Standardize
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  standardize:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Standardize PR title and body
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+              owner,
+              repo,
+              pull_number: pr.number,
+              per_page: 100,
+            });
+
+            const commitSubjects = commits.map(c => c.commit.message.split('\n')[0]).filter(Boolean);
+            const commitBodies = commits.map(c => c.commit.message).join('\n\n');
+            const currentBody = pr.body || '';
+            const combinedText = `${currentBody}\n\n${commitBodies}`;
+
+            const pick = (re, fallback = '') => {
+              const m = combinedText.match(re);
+              return m?.[1]?.trim() || fallback;
+            };
+
+            const contextText = pick(/(?:^|\n)Context:\s*(.+)/i, 'N/A');
+            const changeText = pick(/(?:^|\n)Change:\s*(.+)/i, 'N/A');
+            const riskText = pick(/(?:^|\n)Risk:\s*(.+)/i, 'medium');
+            const testPlanText = pick(/(?:^|\n)Test plan:\s*(.+)/i, 'Run lint, build, and typecheck.');
+
+            const conventionalTitle = /^(feat|fix|chore|docs|refactor|perf|test|build|ci|revert)(\([a-z0-9._-]+\))?:\s.+/i;
+            let nextTitle = pr.title;
+            if (!conventionalTitle.test(pr.title)) {
+              const branchScope = (pr.head.ref.split('/')[1] || 'automation')
+                .toLowerCase()
+                .replace(/[^a-z0-9._-]/g, '-')
+                .slice(0, 32);
+              const subject = (commitSubjects[0] || 'standardize pull request')
+                .replace(/^[a-z]+\([^)]+\):\s*/i, '')
+                .trim()
+                .replace(/[\r\n]+/g, ' ')
+                .slice(0, 72);
+              nextTitle = `chore(${branchScope}): ${subject || 'standardize pull request'}`;
+            }
+
+            const marker = '<!-- managed-by: pr-standardize -->';
+            const shouldManageBody = context.payload.action !== 'synchronize' || currentBody.includes(marker);
+
+            let nextBody = currentBody;
+            if (shouldManageBody) {
+              nextBody = `${marker}
+# Summary
+${changeText !== 'N/A' ? changeText : 'Describe what changed and why.'}
+
+# Context
+${contextText}
+
+# Changes
+## UI / UX
+- 
+
+## Code
+- 
+
+# QA
+- [ ] \`npm run lint\`
+- [ ] \`npm run build\`
+- [ ] \`npm run typecheck\`
+
+## Playwright smoke (if present)
+- [ ] \`npm run test:smoke\`
+
+# Screenshots
+Desktop/mobile screenshots if UI changes.
+
+# Risk / Rollback
+- **Risk:** ${riskText}
+- **Rollback:** revert this PR
+
+# Notes
+- ${testPlanText}
+`;
+            }
+
+            await github.rest.pulls.update({
+              owner,
+              repo,
+              pull_number: pr.number,
+              title: nextTitle,
+              body: nextBody,
+            });

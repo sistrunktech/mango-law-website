@@ -20,6 +20,45 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-02-11 20:05 EST
+Post slug and title: Governance update | Master PRD + no-drift agent operating controls
+Change type: major
+Summary of change: Added canonical PRD + annex set, introduced structured-data/SEO/parity CI gates, expanded protected-content checks for schema and firm-fact-sensitive files, and normalized review-response contact references to canonical phone values.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: Revert PRD annex docs and gate scripts (`check-structured-data.mjs`, `seo-smoke.mjs`, `check-prd-doc-parity.mjs`) plus related workflow/script wiring.
+
+Date/time: 2026-02-11 13:28 EST
+Post slug and title: blogPosts imageUrl | Enforce per-slug unique featured images + regenerate missing image assets
+Change type: major
+Summary of change: Removed non-slug and repeated featured image assignments (including reuse of `/images/generated/ovi-dui-defense-hero.png`), switched affected posts to strict `/images/generated/blog-<slug>.png` paths, generated missing slug images for four posts, and added automated audit checks to block duplicate/non-compliant blog image mappings.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: revert `src/data/blogPosts.ts` imageUrl edits and delete generated files `public/images/generated/blog-first-ovi-court-date-delaware-county-ohio.png`, `public/images/generated/blog-no-contact-order-vs-civil-protection-order-ohio.png`, `public/images/generated/blog-drug-possession-charge-ohio-what-to-do-next.png`, `public/images/generated/blog-ohio-ovi-driving-privileges-als.png`
+
+Date/time: 2026-02-08
+Post slug and title: super-bowl-dui-checkpoints-ohio | Super Bowl Sunday DUI/OVI Checkpoints in Ohio: What to Know
+Change type: major
+Summary of change: Added a Super Bowl Sunday DUI/OVI checkpoint awareness post with links to the DUI checkpoint map, OVI explainer, and field sobriety guidance; includes NHTSA sources and a new featured image.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? n/a
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: n/a (new post)
+
 Date/time: 2026-02-04
 Post slug and title: sex-crimes-defense-ohio-what-you-need-to-know | Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights
 Change type: minor

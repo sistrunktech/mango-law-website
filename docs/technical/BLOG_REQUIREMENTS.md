@@ -30,7 +30,16 @@ Applies to:
 - Do not include hard numeric claims in visuals unless sourced and verified.
 - See the visual component guide for allowed components and examples.
 
-5) Accuracy and maintenance
+5) Featured image policy
+- Every post must use a unique per-slug image path:
+  - `/images/generated/blog-<slug>.png`
+- Do not reuse practice-area hero images for blog posts.
+- Featured images must avoid prohibited device motifs:
+  - breathalyzer-like devices, vape/e-cigarette devices, handheld gadget closeups
+- Featured images must be editorial and non-sensational:
+  - no visible faces, no readable text/signage, no logos/watermarks.
+
+6) Accuracy and maintenance
 - Follow the "no drift" language rules for penalties, costs, and timelines.
 - Use conservative phrasing and note variability by county/court when applicable.
 - If legal facts change, update sources + `lastVerified` and log the change.
@@ -42,6 +51,7 @@ Applies to:
   - `APPROVED: <slug> -- <what changed> -- <minor|major> -- <timestamp>`
 
 ## Required Files and References
+- Master agent PRD: `docs/technical/MASTER_PRD_AGENT_OPERATIONS.md`
 - Content governance rules: `docs/CONTENT_GOVERNANCE.md`
 - Protected content registry: `docs/PROTECTED_CONTENT.md`
 - Content change log: `docs/CONTENT_CHANGELOG.md`
@@ -51,6 +61,7 @@ Applies to:
 ## Automated Checks
 - `scripts/check-protected-content.mjs` enforces changelog entries for protected content edits.
 - `scripts/check-orc-references.mjs` checks ORC link usage for content changes.
+- `npm run blog:images:audit` enforces featured image uniqueness + policy compliance.
 
 ## When in doubt
 - Do not remove images, links, headings, or metadata without calling it out in the change log.

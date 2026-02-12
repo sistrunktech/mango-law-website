@@ -16,6 +16,11 @@ interface ReviewResponseRequest {
   useModel?: string;
 }
 
+const REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY =
+  Deno.env.get("REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY") || "(740) 417-6191";
+const REVIEW_RESPONSE_CONTACT_PHONE_TEL =
+  Deno.env.get("REVIEW_RESPONSE_CONTACT_PHONE_TEL") || "7404176191";
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, {
@@ -33,7 +38,12 @@ Deno.serve(async (req: Request) => {
 
     if (!openaiApiKey) {
       console.warn("No OpenAI API key found, using fallback mock response");
-      const mockResponse = generateMockResponse(rating, authorName, reviewText);
+      const mockResponse = generateMockResponse(
+        rating,
+        authorName,
+        reviewText,
+        REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY,
+      );
       return new Response(
         JSON.stringify({
           reviewId,
@@ -77,7 +87,7 @@ Guidelines:
 - Be authentic and genuine
 - For positive reviews: Express gratitude and highlight specific positive points mentioned
 - For neutral reviews: Thank them and offer to discuss concerns
-- For negative reviews: Apologize sincerely, take responsibility, and provide direct contact info (740) 201-1444
+- For negative reviews: Apologize sincerely, take responsibility, and provide direct contact info (${REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY})
 - Always maintain professionalism
 - Reference the firm's commitment to client service
 - Do NOT make promises you can't keep
@@ -124,7 +134,7 @@ Generate ONLY the response text, no preamble or explanation.`;
     if (wordCount > 180) {
       suggestedEdits.push("Consider shortening for better readability");
     }
-    if (rating <= 2 && !generatedResponse.includes("740")) {
+    if (rating <= 2 && !generatedResponse.includes(REVIEW_RESPONSE_CONTACT_PHONE_TEL.slice(0, 3))) {
       suggestedEdits.push("Add direct contact number for urgent cases");
     }
 
@@ -172,12 +182,17 @@ Generate ONLY the response text, no preamble or explanation.`;
   }
 });
 
-function generateMockResponse(rating: number, authorName: string, reviewText: string): string {
+function generateMockResponse(
+  rating: number,
+  authorName: string,
+  reviewText: string,
+  contactPhoneDisplay: string,
+): string {
   if (rating >= 4) {
     return `Thank you so much for taking the time to share your positive experience, ${authorName}! We're thrilled that we could help you achieve a favorable outcome in your case. Your trust in our legal team means everything to us. At Mango Law, we're committed to providing exceptional representation and personalized attention to every client. If you ever need our services again or have questions, please don't hesitate to reach out. We're here for you!`;
   } else if (rating === 3) {
-    return `Thank you for your feedback, ${authorName}. We appreciate you taking the time to share your experience with our firm. We're always looking to improve our services and would welcome the opportunity to discuss your concerns in more detail. Your satisfaction is important to us, and we'd like to ensure any issues are addressed properly. Please feel free to contact our office directly at (740) 201-1444 so we can work together to resolve any outstanding matters.`;
+    return `Thank you for your feedback, ${authorName}. We appreciate you taking the time to share your experience with our firm. We're always looking to improve our services and would welcome the opportunity to discuss your concerns in more detail. Your satisfaction is important to us, and we'd like to ensure any issues are addressed properly. Please feel free to contact our office directly at ${contactPhoneDisplay} so we can work together to resolve any outstanding matters.`;
   } else {
-    return `${authorName}, thank you for bringing this to our attention. We take all feedback seriously and are genuinely sorry to hear that your experience with Mango Law didn't meet your expectations. This is not the standard of service we strive to provide. We'd like the opportunity to discuss this with you directly and work toward a resolution. Please contact our office at (740) 201-1444 at your earliest convenience. Your concerns matter to us, and we're committed to making this right.`;
+    return `${authorName}, thank you for bringing this to our attention. We take all feedback seriously and are genuinely sorry to hear that your experience with Mango Law didn't meet your expectations. This is not the standard of service we strive to provide. We'd like the opportunity to discuss this with you directly and work toward a resolution. Please contact our office at ${contactPhoneDisplay} at your earliest convenience. Your concerns matter to us, and we're committed to making this right.`;
   }
 }
