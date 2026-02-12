@@ -55,10 +55,10 @@ export default function LegalCodeCallout({
         <a
           href={statute.orcLink}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow"
           className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-black/10 bg-white px-5 py-3 text-sm font-bold text-brand-black transition-all hover:border-brand-leaf hover:bg-brand-offWhite"
         >
-          Read full statute
+          Read ORC § {statute.section} full text
           <ExternalLink className="h-4 w-4" />
         </a>
       </div>

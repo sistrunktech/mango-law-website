@@ -876,7 +876,7 @@ export default function ConnectionsPage() {
                           className="inline-flex items-center gap-2 px-3 py-2 bg-[#232323] hover:bg-[#2A2A2A] text-white rounded-lg text-sm transition"
                           href={ACCESS_ROLE_COPY[type].link}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer nofollow"
                         >
                           <ExternalLink className="w-4 h-4" />
                           Open {ACCESS_ROLE_COPY[type].product}

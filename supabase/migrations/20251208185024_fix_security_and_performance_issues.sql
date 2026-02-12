@@ -25,8 +25,17 @@
 -- 1. ADD MISSING FOREIGN KEY INDEX
 -- ============================================================================
 
-CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id 
-  ON reviews(invitation_id);
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables 
+    WHERE table_schema = 'public' AND table_name = 'reviews'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_reviews_invitation_id 
+      ON public.reviews(invitation_id);
+  END IF;
+END;
+$$;
 
 -- ============================================================================
 -- 2. DROP UNUSED INDEXES

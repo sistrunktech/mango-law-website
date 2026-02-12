@@ -41,6 +41,15 @@ function run() {
   const commaBeforeFrom = parseOVICheckpointDateTime('June 13, 2025, From 11:00 PM to 3:00 AM');
   assert.ok(commaBeforeFrom);
   assert.ok(new Date(commaBeforeFrom.end).getTime() > new Date(commaBeforeFrom.start).getTime());
+
+  const lowerCaseFromWithComma = parseOVICheckpointDateTime('Friday, October 18, 2024 , from 8 PM to 2 AM');
+  assert.ok(lowerCaseFromWithComma);
+  assert.ok(new Date(lowerCaseFromWithComma.end).getTime() > new Date(lowerCaseFromWithComma.start).getTime());
+
+  const superBowlLabel = parseOVICheckpointDateTime('Sunday February 11, 2024 Super Bowl 2024');
+  assert.ok(superBowlLabel);
+  const superBowlDurationMs = new Date(superBowlLabel.end).getTime() - new Date(superBowlLabel.start).getTime();
+  assert.equal(superBowlDurationMs, 3 * 60 * 60 * 1000);
 }
 
 run();

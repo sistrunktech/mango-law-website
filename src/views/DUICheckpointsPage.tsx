@@ -330,7 +330,7 @@ export default function DUICheckpointsPage() {
                       <a
                         href={a.source_url}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer nofollow"
                         className="mt-2 inline-flex text-xs font-semibold text-brand-mangoText hover:text-brand-leaf"
                       >
                         View source →

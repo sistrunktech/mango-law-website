@@ -1,8 +1,81 @@
 # Contribution Guidelines for AI Assistants
 
+## Release Gate Checklist (fast preflight)
+If git rev-parse --show-toplevel resolves to $HOME, STOP.
+Run these before pushing or creating a PR.
+
+1) Confirm you are in the right place:
+   pwd
+   git rev-parse --show-toplevel
+
+2) Confirm the remote points where you think it does:
+   git remote get-url origin
+
+3) Confirm working tree is clean:
+   git status --porcelain
+
+4) Confirm you are up to date:
+   git fetch origin --prune
+   git remote show origin | sed -n '/HEAD branch/s/.*: //p'
+   # Optional: show your branch vs base
+   git log --oneline --decorate --max-count=3
+
+5) If you will open/merge a PR:
+   # (gh required) check current PR status/checks before merging
+   gh pr status || true
+
 To help Codex, Copilot, and other AI contributors ship high-quality, reviewable PRs without wasting tokens/credits, follow these rules.
 
 ---
+
+## Agent Operating Rules (Codex/Windsurf)
+
+These rules are mandatory for any agent-driven work in this repo.
+
+### Preflight (required, prevents workspace-root incidents)
+
+Before any task: print working directory and git root.
+
+```bash
+pwd
+git rev-parse --show-toplevel
+```
+
+If `git rev-parse --show-toplevel` resolves to `$HOME` (or `/Users/sistech_tim`), STOP. Do not run agent tasks from your home directory or any parent folder.
+
+### Where To Run Commands
+
+- Run commands only from the repo root or an active worktree root.
+- Never run from a parent folder. Never run from `$HOME`.
+
+### Worktrees + Conversations (Operating Model)
+
+- One conversation per worktree.
+- Existing PR continuation work uses a worktree named `pr-<id>-<slug>`.
+- No pileups: if scope changes, create a new worktree and start a new conversation.
+
+### Worktree Helpers
+
+Create a new worktree + branch:
+
+```bash
+./scripts/new-wt.sh <type> <slug>
+```
+
+This creates:
+- Worktree: `../<repo>.wt/<type>-<slug>`
+- Branch: `<type>/<slug>`
+
+Close a worktree (removes the worktree directory; does not delete branches):
+
+```bash
+./scripts/close-wt.sh ../<repo>.wt/<type>-<slug>
+```
+
+### Playwright Rule (Cloud vs Local)
+
+- Use Playwright cloud only for: deployed URL + headless + no localhost + no local profile + not VPN-only.
+- Use Playwright locally for: localhost flows, profile-dependent flows, or VPN-only/internal-only flows.
 
 ## Autonomous PR & Branch Policy
 

@@ -3,6 +3,7 @@ import HomePage from '@/views/HomePage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 import { localBusinessSchema, organizationGraphNode, websiteGraphNode } from '@/lib/structured-data';
+import { getPublicBlogPosts } from '@/lib/blogPostsRepo';
 
 const seo = {
   title: 'Criminal Defense & OVI Attorney Delaware, OH',
@@ -18,11 +19,13 @@ const homeStructuredData = {
   '@graph': [...(localBusinessSchema as any)['@graph'], websiteGraphNode, organizationGraphNode],
 };
 
-export default function Page() {
+export default async function Page() {
+  const posts = await getPublicBlogPosts();
+
   return (
     <>
       <StructuredData structuredData={homeStructuredData} url={seo.url} />
-      <HomePage />
+      <HomePage posts={posts} />
     </>
   );
 }

@@ -30,7 +30,7 @@ export function getThemeTokens(theme: EmailTheme): EmailThemeTokens {
       muted: "#4B5563",
       muted2: "#6B7280",
       border: "rgba(17,24,39,.10)",
-      consoleBg: "#0B0F14",
+      consoleBg: "#F9FAFB",
       consoleBorder: "rgba(17,24,39,.10)",
       link: "#0F6E63",
     };

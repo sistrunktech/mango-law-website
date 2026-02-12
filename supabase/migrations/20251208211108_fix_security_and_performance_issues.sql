@@ -51,8 +51,19 @@ CREATE INDEX IF NOT EXISTS idx_contact_submissions_assigned_to
   ON contact_submissions(assigned_to);
 
 -- dui_checkpoints foreign key indexes
-CREATE INDEX IF NOT EXISTS idx_dui_checkpoints_duplicate_of 
-  ON dui_checkpoints(duplicate_of);
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'dui_checkpoints'
+      AND column_name = 'duplicate_of'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_dui_checkpoints_duplicate_of 
+      ON public.dui_checkpoints(duplicate_of);
+  END IF;
+END;
+$$;
 
 -- handoff_document_versions foreign key indexes
 CREATE INDEX IF NOT EXISTS idx_handoff_document_versions_created_by 
@@ -80,18 +91,28 @@ $$;
 -- ============================================================================
 
 -- Drop and recreate admin_users policies with optimized auth checks
-DROP POLICY IF EXISTS "Admins can view all admin users" ON admin_users;
-CREATE POLICY "Admins can view all admin users"
-  ON admin_users FOR SELECT
-  TO authenticated
-  USING ((select auth.uid()) IS NOT NULL);
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables
+    WHERE table_schema = 'public'
+      AND table_name = 'admin_users'
+  ) THEN
+    DROP POLICY IF EXISTS "Admins can view all admin users" ON admin_users;
+    CREATE POLICY "Admins can view all admin users"
+      ON admin_users FOR SELECT
+      TO authenticated
+      USING ((select auth.uid()) IS NOT NULL);
 
-DROP POLICY IF EXISTS "Admins can update their own profile" ON admin_users;
-CREATE POLICY "Admins can update their own profile"
-  ON admin_users FOR UPDATE
-  TO authenticated
-  USING (id = (select auth.uid()))
-  WITH CHECK (id = (select auth.uid()));
+    DROP POLICY IF EXISTS "Admins can update their own profile" ON admin_users;
+    CREATE POLICY "Admins can update their own profile"
+      ON admin_users FOR UPDATE
+      TO authenticated
+      USING (id = (select auth.uid()))
+      WITH CHECK (id = (select auth.uid()));
+  END IF;
+END;
+$$;
 
 -- ============================================================================
 -- 3. OPTIMIZE RLS POLICIES - BLOG POSTS TABLE

@@ -3,6 +3,10 @@ import { scrapeOVICheckpoint } from './ovicheckpoint-scraper.ts';
 import { geocodeAddress, parseAddress } from './geocoding.ts';
 import { loadMasterRssSources, loadSeedSources } from './rss-sources.ts';
 import { scrapeRssSources, scrapeSeedSources } from './rss-scraper.ts';
+import {
+  loadCuratedAnnouncementSeeds,
+  type CuratedAnnouncementSeed,
+} from './curated-announcements.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -147,6 +151,140 @@ async function upsertAnnouncement(
   const { error: insertError } = await supabase.from('dui_checkpoint_announcements').insert(payload);
   if (insertError) return { ok: false, error: insertError.message };
   return { ok: true };
+}
+
+function stripUrlHash(sourceUrl: string): string {
+  try {
+    const parsed = new URL(sourceUrl);
+    parsed.hash = '';
+    return parsed.toString();
+  } catch {
+    return sourceUrl.split('#')[0] || sourceUrl;
+  }
+}
+
+async function upsertCuratedCheckpoint(
+  supabase: ReturnType<typeof createClient>,
+  mapboxToken: string | undefined,
+  seed: CuratedAnnouncementSeed,
+  stats: ScraperStats
+): Promise<void> {
+  if (
+    !seed.startDate ||
+    !seed.endDate ||
+    !seed.locationText ||
+    !seed.locationCity ||
+    !seed.locationCounty
+  ) {
+    return;
+  }
+
+  const fullAddress = `${seed.locationText}, ${seed.locationCity}, ${seed.locationCounty} County, Ohio`;
+  const geocoded = await geocodeAddress(fullAddress, supabase, mapboxToken);
+
+  const checkpointData = {
+    title: seed.checkpointTitle ?? seed.title,
+    location_address: seed.locationText,
+    location_city: seed.locationCity,
+    location_county: seed.locationCounty,
+    latitude: geocoded?.latitude ?? null,
+    longitude: geocoded?.longitude ?? null,
+    start_date: seed.startDate,
+    end_date: seed.endDate,
+    status: determineStatus(seed.startDate, seed.endDate),
+    source_url: stripUrlHash(seed.sourceUrl),
+    source_name: seed.sourceName,
+    description: seed.rawText || null,
+    updated_at: new Date().toISOString(),
+    geocoding_confidence: geocoded?.confidence || 'none',
+    last_geocoded_at: geocoded ? new Date().toISOString() : null,
+  };
+
+  const { data: existing, error: selectError } = await supabase
+    .from('dui_checkpoints')
+    .select('id')
+    .eq('location_address', seed.locationText)
+    .eq('location_city', seed.locationCity)
+    .eq('start_date', seed.startDate)
+    .maybeSingle();
+
+  if (selectError) throw selectError;
+
+  if (existing?.id) {
+    const { error: updateError } = await supabase
+      .from('dui_checkpoints')
+      .update(checkpointData)
+      .eq('id', existing.id);
+    if (updateError) throw updateError;
+    stats.checkpointsUpdated++;
+  } else {
+    const { error: insertError } = await supabase.from('dui_checkpoints').insert(checkpointData);
+    if (insertError) {
+      if (insertError.message.includes('unique_checkpoint_event')) {
+        stats.checkpointsSkipped++;
+        return;
+      }
+      throw insertError;
+    }
+    stats.checkpointsNew++;
+  }
+
+  if (!geocoded) {
+    stats.checkpointsSkipped++;
+    stats.errors.push({
+      checkpoint: seed.title,
+      error: 'Geocoding failed (saved without coordinates)',
+    });
+  }
+}
+
+async function ingestCuratedAnnouncements(
+  supabase: ReturnType<typeof createClient>,
+  mapboxToken: string | undefined,
+  stats: ScraperStats
+): Promise<void> {
+  const seeds = loadCuratedAnnouncementSeeds();
+
+  for (const seed of seeds) {
+    stats.announcementsFound++;
+
+    const payload = {
+      title: seed.title,
+      source_url: seed.sourceUrl,
+      source_name: seed.sourceName,
+      announcement_date: seed.announcementDate,
+      event_date: seed.eventDate,
+      start_date: seed.startDate,
+      end_date: seed.endDate,
+      location_text: seed.locationText,
+      location_city: seed.locationCity,
+      location_county: seed.locationCounty,
+      status: seed.status,
+      last_checked_at: new Date().toISOString(),
+      raw_text: seed.rawText,
+    };
+
+    const announcementResult = await upsertAnnouncement(supabase, payload);
+    if (!announcementResult.ok) {
+      stats.errors.push({
+        checkpoint: `Curated announcement upsert: ${seed.title}`,
+        error: announcementResult.error,
+      });
+      continue;
+    }
+    stats.announcementsUpserted++;
+
+    if (!seed.promoteToCheckpoint) continue;
+
+    try {
+      await upsertCuratedCheckpoint(supabase, mapboxToken, seed, stats);
+    } catch (error) {
+      stats.errors.push({
+        checkpoint: `Curated checkpoint upsert: ${seed.title}`,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
 }
 
 Deno.serve(async (req: Request) => {
@@ -367,6 +505,10 @@ Deno.serve(async (req: Request) => {
             }
           }
         }
+      }
+
+      if (mode === 'core') {
+        await ingestCuratedAnnouncements(supabase, mapboxToken, stats);
       }
     } catch (e) {
       stats.errors.push({

@@ -72,3 +72,9 @@ Category: Technical SEO / Indexing (GSC)
 Summary: Reviewed Search Console indexing status, ran URL Inspection (including Test Live URL) on key pages, and submitted fix validation + manual indexing requests where available.
 Files: (GSC console actions)
 Notes: Search Console still reporting ~6 indexed URLs; continue monitoring Pages report + sitemap processing and test representative URLs until discovery/crawl/indexing bottleneck is identified.
+
+Date/time: 2026-02-02
+Category: SEO / Outgoing link policy
+Summary: Implemented a conservative outbound linking policy (default nofollow) with a small dofollow “trust budget” for high-authority `.gov`/`.edu` citations in blog Sources panels; documented the February client plan.
+Files: src/components/ExternalLink.tsx; src/views/BlogPostPage.tsx; src/components/Footer.tsx; src/components/GlossaryEntry.tsx; src/components/StatuteSidebar.tsx; docs/client-updates/2026-02.md
+Notes: Goal is to reduce unintended outbound endorsement while preserving editorial citation value; validate live HTML after merge.

@@ -42,7 +42,6 @@ jobs:
 
       - name: PRD parity check
         run: npm run docs:parity
-
       - name: Lint
         run: npm run lint
 

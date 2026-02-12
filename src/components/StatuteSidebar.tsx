@@ -61,9 +61,10 @@ export default function StatuteSidebar({
               <a
                 href={statute.orcLink}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="text-brand-black/40 transition-colors hover:text-brand-leaf"
-                title="View full statute text"
+                title={`View ORC § ${statute.section} full text`}
+                aria-label={`View ORC § ${statute.section} full text`}
               >
                 <ExternalLink className="h-4 w-4" />
               </a>
