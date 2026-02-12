@@ -1,13 +1,30 @@
-## Summary
-- [ ] Clear, concise summary of the change
-- [ ] Links to any relevant issues or tickets
+# Summary
+<!-- 1–3 sentences: what changed + why. -->
 
-## Testing
+# Context
+<!-- Background, links, tickets, screenshots of the problem, etc. -->
+
+# Changes
+## UI / UX
+- 
+
+## Code
+- 
+
+# QA
+- [ ] `npm run lint`
 - [ ] `npm run build`
-- [ ] Additional notes (if any)
+- [ ] `npm run typecheck`
 
-## Checks
-- [ ] Brand tokens and Inter typography preserved
-- [ ] No unintended dependency additions
-- [ ] Forms continue to point to Supabase Edge Functions
-- [ ] URLs and routes align with sitemap (Delaware, OH focus)
+## Playwright smoke (if present)
+- [ ] `npm run test:smoke`
+
+# Screenshots
+<!-- Desktop + mobile; before/after if helpful. -->
+
+# Risk / Rollback
+- **Risk:** low / medium / high
+- **Rollback:** revert this PR
+
+# Notes
+<!-- Follow-ups, tradeoffs, flags, rollout notes, etc. -->
