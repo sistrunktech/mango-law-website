@@ -29,7 +29,9 @@ export default function FooterAccordion({ title, children, defaultOpen = false }
       <h4 className="eyebrow hidden text-brand-gold lg:block">{title}</h4>
       <div
         className={`overflow-hidden transition-all duration-200 lg:mt-5 lg:block ${
-          isOpen ? 'max-h-[500px] pb-4' : 'max-h-0 lg:max-h-none'
+          isOpen
+            ? 'max-h-[70vh] pb-4 overflow-y-auto lg:max-h-none lg:overflow-visible'
+            : 'max-h-0 lg:max-h-none'
         }`}
       >
         {children}

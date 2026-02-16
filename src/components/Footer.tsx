@@ -271,51 +271,57 @@ export default function Footer() {
 
           <div>
             <h4 className="eyebrow text-brand-gold">Resources</h4>
-            <ul className="mt-5 space-y-3">
-              {resourceLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6">
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                Featured Guides
-              </p>
-              <ul className="mt-4 space-y-3">
-                {featuredGuideLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="mt-6">
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                Featured Pages
-              </p>
-              <ul className="mt-4 space-y-3">
-                {featuredPageLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-5 grid gap-6 lg:grid-cols-2">
+              <div className="space-y-6">
+                <ul className="space-y-2">
+                  {resourceLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
+                    Featured Guides
+                  </p>
+                  <ul className="mt-4 space-y-2">
+                    {featuredGuideLinks.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
+                    Featured Pages
+                  </p>
+                  <ul className="mt-4 space-y-2">
+                    {featuredPageLinks.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
