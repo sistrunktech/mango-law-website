@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-02-17 17:23 EST
+Post slug and title: first-ovi-court-date-delaware-county-ohio | Image URL dedupe for audit gate
+Change type: minor
+Summary of change: Updated the post featured image reference from a shared hero asset to a unique generated asset path to satisfy duplicate image governance checks and unblock CI for unrelated UI deployment.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: n/a
+Rollback notes: revert commit `fix(content): dedupe blog image URL for audit gate`
+
 Date/time: 2026-02-11 20:05 EST
 Post slug and title: Governance update | Master PRD + no-drift agent operating controls
 Change type: major
