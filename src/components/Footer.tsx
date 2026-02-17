@@ -47,6 +47,8 @@ const localSeoLinks = [
   { href: '/locations', label: 'Service Areas' },
 ];
 
+const footerPracticeAreaLinks = practiceAreaLinks.slice(0, 10);
+
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-brand-forest text-brand-offWhite" role="contentinfo">
@@ -210,7 +212,7 @@ export default function Footer() {
 
             <FooterAccordion title="Practice Areas">
               <ul className="space-y-3">
-                {practiceAreaLinks.map((link) => (
+                {footerPracticeAreaLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
@@ -328,7 +330,7 @@ export default function Footer() {
           <div>
             <h4 className="eyebrow text-brand-gold">Practice Areas</h4>
             <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2">
-              {practiceAreaLinks.map((link) => (
+              {footerPracticeAreaLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
