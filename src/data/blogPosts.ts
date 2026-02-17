@@ -2995,7 +2995,7 @@ If you're facing physical control charges in Delaware or Franklin County, the sp
     title: 'Your First OVI Court Date in Delaware County, Ohio: What Happens and How to Prepare',
     excerpt:
       'If you have an OVI court date coming up, this guide explains what typically happens at the first appearance, what to bring, and how to avoid mistakes that can make the case worse.',
-    imageUrl: '/images/generated/ovi-dui-defense-hero.png',
+    imageUrl: '/images/generated/ovi-case-strategy.png',
     content: `Getting charged with OVI in Ohio is stressful, and the first court date can feel confusing—especially if you’ve never been in court before. This guide explains what the first appearance usually covers, what to bring, and what to avoid.
 
 If you want case-specific advice, start here: [OVI/DUI Defense](/ovi-dui-defense-delaware-oh) or [contact us](/contact).
