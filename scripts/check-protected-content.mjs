@@ -69,7 +69,11 @@ function getAddedLines(path) {
   try {
     outputs.push(run(`git diff --unified=0 ${baseRef}...HEAD -- ${path}`));
   } catch (error) {
-    // Ignore
+    try {
+      outputs.push(run(`git diff --unified=0 HEAD~1...HEAD -- ${path}`));
+    } catch (fallbackError) {
+      // Ignore
+    }
   }
   try {
     outputs.push(run(`git diff --unified=0 -- ${path}`));
