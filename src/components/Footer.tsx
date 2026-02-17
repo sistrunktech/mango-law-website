@@ -49,6 +49,9 @@ const localSeoLinks = [
 
 const footerPracticeAreaLinks = practiceAreaLinks.slice(0, 6);
 const footerGuideLinks = featuredGuideLinks.slice(0, 4);
+const footerResourceLinkSplitAt = Math.ceil(resourceLinks.length / 2);
+const footerResourceLinksColumnOne = resourceLinks.slice(0, footerResourceLinkSplitAt);
+const footerResourceLinksColumnTwo = resourceLinks.slice(footerResourceLinkSplitAt);
 
 export default function Footer() {
   return (
@@ -277,7 +280,7 @@ export default function Footer() {
             <div className="mt-5 grid gap-6 lg:grid-cols-2">
               <div className="space-y-6">
                 <ul className="space-y-2">
-                  {resourceLinks.map((link) => (
+                  {footerResourceLinksColumnOne.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
@@ -307,6 +310,18 @@ export default function Footer() {
                 </div>
               </div>
               <div className="space-y-6">
+                <ul className="space-y-2">
+                  {footerResourceLinksColumnTwo.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
                     More
