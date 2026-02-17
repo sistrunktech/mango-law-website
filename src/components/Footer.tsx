@@ -47,7 +47,8 @@ const localSeoLinks = [
   { href: '/locations', label: 'Service Areas' },
 ];
 
-const footerPracticeAreaLinks = practiceAreaLinks.slice(0, 10);
+const footerPracticeAreaLinks = practiceAreaLinks.slice(0, 6);
+const footerGuideLinks = featuredGuideLinks.slice(0, 4);
 
 export default function Footer() {
   return (
@@ -160,7 +161,7 @@ export default function Footer() {
             </FooterAccordion>
 
             <FooterAccordion title="Resources">
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {resourceLinks.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -173,12 +174,12 @@ export default function Footer() {
                 ))}
               </ul>
 
-              <div className="mt-5 space-y-3 border-t border-brand-offWhite/10 pt-4">
+              <div className="mt-5 space-y-2 border-t border-brand-offWhite/10 pt-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                  Featured Guides
+                  Top Guides
                 </p>
-                <ul className="space-y-3">
-                  {featuredGuideLinks.map((link) => (
+                <ul className="space-y-2">
+                  {footerGuideLinks.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
@@ -191,11 +192,11 @@ export default function Footer() {
                 </ul>
               </div>
 
-              <div className="mt-5 space-y-3 border-t border-brand-offWhite/10 pt-4">
+              <div className="mt-5 space-y-2 border-t border-brand-offWhite/10 pt-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                  Featured Pages
+                  More
                 </p>
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {featuredPageLinks.map((link) => (
                     <li key={link.href}>
                       <Link
@@ -235,7 +236,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="hidden lg:grid lg:grid-cols-[1.3fr_1fr_1fr_1.2fr_1.1fr] lg:gap-8">
+        <div className="hidden lg:grid lg:grid-cols-[1.3fr_0.9fr_1.2fr_1fr_1.1fr] lg:gap-8">
           <div className="space-y-5">
             <Link href="/" className="inline-block">
               <Image
@@ -289,10 +290,10 @@ export default function Footer() {
                 </ul>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                    Featured Guides
+                    Top Guides
                   </p>
                   <ul className="mt-4 space-y-2">
-                    {featuredGuideLinks.map((link) => (
+                    {footerGuideLinks.map((link) => (
                       <li key={link.href}>
                         <Link
                           href={link.href}
@@ -308,7 +309,7 @@ export default function Footer() {
               <div className="space-y-6">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                    Featured Pages
+                    More
                   </p>
                   <ul className="mt-4 space-y-2">
                     {featuredPageLinks.map((link) => (
