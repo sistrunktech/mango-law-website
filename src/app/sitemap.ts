@@ -28,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/sex-crime-defense-lawyer-delaware-oh',
     '/white-collar-crimes-attorney-delaware-oh',
     '/protection-order-lawyer-delaware-oh',
+    '/domestic-violence-lawyer-delaware-oh',
     '/personal-injury-lawyer-delaware-oh',
     '/reviews',
     '/contact',

@@ -23,13 +23,13 @@ const firmFactSensitiveFiles = [
   'src/lib/structured-data.ts',
 ];
 const changelogFile = 'docs/CONTENT_CHANGELOG.md';
+const baseRef = process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : 'origin/main';
 
 function run(cmd) {
   return execSync(cmd, { cwd: repoRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
 }
 
 function getDiffFiles() {
-  const baseRef = process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : 'origin/main';
   const files = new Set();
   try {
     const output = run(`git diff --name-only ${baseRef}...HEAD`);
@@ -66,6 +66,11 @@ function hasChangelogSlugEntry(content) {
 
 function getAddedLines(path) {
   const outputs = [];
+  try {
+    outputs.push(run(`git diff --unified=0 ${baseRef}...HEAD -- ${path}`));
+  } catch (error) {
+    // Ignore
+  }
   try {
     outputs.push(run(`git diff --unified=0 -- ${path}`));
   } catch (error) {
