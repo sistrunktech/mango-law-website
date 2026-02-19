@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, MapPinned } from 'lucide-react';
+import { Menu, X, Phone, MapPinned, ChevronDown } from 'lucide-react';
 import { navLinks } from '../data/navigation';
 import MegaMenu from './MegaMenu';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
@@ -39,6 +39,10 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
       setShowDuiMapBanner(true);
     }
   }, []);
+
+  const aboutLink = navLinks.find((link) => link.label === 'About');
+  const aboutChildHrefs = aboutLink?.children?.map((child) => child.href) ?? [];
+  const isAboutActive = pathname === '/about' || aboutChildHrefs.includes(pathname);
 
   return (
     <header
@@ -134,6 +138,49 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               if (link.label === 'Practice Areas') {
                 return <MegaMenu key="practice-areas-mega" variant="light" />;
               }
+
+              if (link.label === 'About' && link.children?.length) {
+                return (
+                  <div key="about-menu" className="group relative">
+                    <button
+                      type="button"
+                      className={[
+                        'flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors',
+                        isAboutActive
+                          ? 'text-brand-mangoText'
+                          : 'text-brand-black/70 hover:text-brand-mangoText',
+                      ].join(' ')}
+                      aria-expanded={false}
+                    >
+                      About
+                      <ChevronDown className={`h-4 w-4 transition-transform group-hover:rotate-180`} />
+                    </button>
+
+                    <div className="pointer-events-none absolute left-0 top-full z-40 mt-1 w-60 rounded-lg border border-brand-black/10 bg-white opacity-0 shadow-soft transition-all duration-150 group-hover:pointer-events-auto group-hover:opacity-100">
+                      <div className="space-y-1 p-2">
+                        {link.children.map((child) => {
+                          const isChildActive = pathname === child.href;
+                          return (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className={[
+                                'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                                isChildActive
+                                  ? 'bg-brand-mango/15 text-brand-mangoText'
+                                  : 'text-brand-black/70 hover:bg-brand-mango/10 hover:text-brand-mangoText',
+                              ].join(' ')}
+                            >
+                              {child.label}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
               const isActive = pathname === link.href;
               return (
                 <Link
@@ -256,11 +303,48 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                   </div>
                 </div>
               </Link>
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
+                {navLinks.map((link) => {
+                  if (link.label === 'About' && link.children?.length) {
+                    return (
+                      <div key={`${link.href}-mobile-group`} className="flex flex-col gap-1">
+                        <Link
+                          href={link.href}
+                          onClick={() => setOpen(false)}
+                          className={[
+                            'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
+                            isAboutActive
+                              ? 'bg-brand-mango/20 text-brand-mangoText'
+                              : 'text-brand-black hover:bg-brand-black/5',
+                          ].join(' ')}
+                        >
+                          {link.label}
+                        </Link>
+                        {link.children.map((child) => {
+                          const isChildActive = pathname === child.href;
+                          return (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              onClick={() => setOpen(false)}
+                              className={[
+                                'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
+                                isChildActive
+                                  ? 'bg-brand-mango/20 text-brand-mangoText'
+                                  : 'text-brand-black/70 hover:bg-brand-black/5',
+                              ].join(' ')}
+                            >
+                              {child.label}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    );
+                  }
+
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className={[

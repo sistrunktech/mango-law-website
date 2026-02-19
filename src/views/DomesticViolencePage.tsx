@@ -7,6 +7,7 @@ import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
+import Link from 'next/link';
 
 export const domesticViolenceFaqs = [
   {
@@ -170,6 +171,47 @@ export default function DomesticViolencePage() {
                   <h3 className="text-xl font-bold text-brand-black mb-2">{item.title}</h3>
                   <p className="text-brand-black/70">{item.description}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mb-8 text-center">
+            <h2 className="font-display text-display-sm md:text-display-md mb-3">Related domestic violence resources</h2>
+            <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
+              Understand no-contact restrictions, civil protection order procedure, and related defense strategy.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: 'No-contact order vs CPO',
+                description: 'Key differences, compliance risks, and how each order impacts your case.',
+                href: '/blog/no-contact-order-vs-civil-protection-order-ohio',
+              },
+              {
+                title: 'Protection order defense',
+                description: 'How hearings work and how to contest allegations effectively.',
+                href: '/protection-order-lawyer-delaware-oh',
+              },
+              {
+                title: 'Ex parte order defense guide',
+                description: 'What to do immediately after a temporary order is filed.',
+                href: '/blog/ex-parte-protection-orders-ohio-defense',
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6">
+                <h3 className="text-xl font-bold text-brand-black">{item.title}</h3>
+                <p className="mt-2 text-brand-black/70">{item.description}</p>
+                <Link
+                  href={item.href}
+                  className="mt-4 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf"
+                >
+                  Explore resource
+                </Link>
               </div>
             ))}
           </div>

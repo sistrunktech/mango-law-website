@@ -1,4 +1,4 @@
-import { Shield, Scale, Pill, Users, Briefcase, FileWarning, HeartPulse, MapPin, MapPinned, BookOpen, MessageSquare } from 'lucide-react';
+import { Shield, Scale, Pill, Users, Briefcase, FileWarning, HeartPulse, Heart, MapPin, MapPinned, BookOpen, MessageSquare } from 'lucide-react';
 
 export const megaMenuSections = {
   practiceAreas: {
@@ -17,6 +17,18 @@ export const megaMenuSections = {
         icon: Scale,
       },
       {
+        title: 'Domestic Violence',
+        href: '/domestic-violence-lawyer-delaware-oh',
+        description: 'Defense for DV allegations',
+        icon: Heart,
+      },
+      {
+        title: 'Protection Orders',
+        href: '/protection-order-lawyer-delaware-oh',
+        description: 'Civil protection order defense',
+        icon: FileWarning,
+      },
+      {
         title: 'Drug Crimes',
         href: '/drug-crime-lawyer-delaware-oh',
         description: 'Possession, trafficking, paraphernalia',
@@ -33,12 +45,6 @@ export const megaMenuSections = {
         href: '/white-collar-crimes-attorney-delaware-oh',
         description: 'Fraud, embezzlement, securities',
         icon: Briefcase,
-      },
-      {
-        title: 'Protection Orders',
-        href: '/protection-order-lawyer-delaware-oh',
-        description: 'Civil protection order defense',
-        icon: FileWarning,
       },
       {
         title: 'Personal Injury',

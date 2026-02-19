@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Scale, Car, Pill, ShieldAlert, Briefcase, FileWarning, Stethoscope } from 'lucide-react';
+import { Scale, Car, Pill, ShieldAlert, Briefcase, FileWarning, Stethoscope, Heart } from 'lucide-react';
 
 export type PracticeArea = {
   title: string;
@@ -38,6 +38,28 @@ export const practiceAreas: PracticeArea[] = [
     ctaText: 'Get help with OVI charges',
   },
   {
+    title: 'Domestic Violence',
+    href: '/domestic-violence-lawyer-delaware-oh',
+    summary: 'Defense for domestic violence allegations with focus on evidence, bond terms, and no-contact orders.',
+    icon: Heart,
+    imageUrl: '/images/generated/blog-assault-domestic-violence.png',
+    imageAlt: 'Domestic violence defense attorney serving Delaware County and Central Ohio',
+    practiceAreaKey: 'domestic-violence',
+    orcSection: '2919.25',
+    ctaText: 'Get help with domestic violence charges',
+  },
+  {
+    title: 'Protection Orders',
+    href: '/protection-order-lawyer-delaware-oh',
+    summary: 'Defense in civil protection order matters with focus on evidence, procedure, and collateral risks.',
+    icon: FileWarning,
+    imageUrl: '/images/generated/protection-order-defense-hero.png',
+    imageAlt: 'Protection order defense lawyer in Delaware Ohio',
+    practiceAreaKey: 'protection-orders',
+    orcSection: '3113.31',
+    ctaText: 'Fight a protection order',
+  },
+  {
     title: 'Drug Crimes',
     href: '/drug-crime-lawyer-delaware-oh',
     summary: 'Possession, trafficking, paraphernalia, and diversion issues with an eye on treatment options.',
@@ -69,17 +91,6 @@ export const practiceAreas: PracticeArea[] = [
     practiceAreaKey: 'white-collar',
     orcSection: '2913.42',
     ctaText: 'Discuss fraud or embezzlement charges',
-  },
-  {
-    title: 'Protection Orders',
-    href: '/protection-order-lawyer-delaware-oh',
-    summary: 'Defense in civil protection order matters with focus on evidence, procedure, and collateral risks.',
-    icon: FileWarning,
-    imageUrl: '/images/generated/protection-order-defense-hero.png',
-    imageAlt: 'Protection order defense lawyer in Delaware Ohio',
-    practiceAreaKey: 'protection-orders',
-    orcSection: '3113.31',
-    ctaText: 'Fight a protection order',
   },
   {
     title: 'Personal Injury',
