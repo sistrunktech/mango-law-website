@@ -6,6 +6,7 @@ import CTASection from '../components/CTASection';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
+import ExternalLink from '../components/ExternalLink';
 
 export default function OfCounselPage() {
   return (
@@ -94,6 +95,10 @@ export default function OfCounselPage() {
                   Before being admitted to the Ohio Bar, Geoffrey clerked with Attorney Dominic Mango, gaining hands-on
                   experience in criminal defense strategy, motion practice, and client representation. This close working
                   relationship continues today as part of our collaborative approach to criminal defense.
+                </p>
+                <p className="text-lg text-brand-black/80 leading-relaxed">
+                  Learn more about Geoffrey on{' '}
+                  <ExternalLink href="https://bettercallspall.com">bettercallspall.com</ExternalLink>.
                 </p>
               </div>
 
