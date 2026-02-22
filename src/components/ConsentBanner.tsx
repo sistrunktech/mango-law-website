@@ -10,6 +10,7 @@ function isConsentChosen(consent: ConsentStateV2 | null) {
 }
 
 export default function ConsentBanner(props: { onVisibilityChange?: (visible: boolean) => void }) {
+  const [isReady, setIsReady] = useState(false);
   const [stored, setStored] = useState<ConsentStateV2 | null>(null);
   const [view, setView] = useState<ViewState>('collapsed');
   const [draft, setDraft] = useState<ConsentStateV2>(rejectAllConsent());
@@ -18,9 +19,10 @@ export default function ConsentBanner(props: { onVisibilityChange?: (visible: bo
     const v = getStoredConsent();
     setStored(v);
     setDraft(v ?? rejectAllConsent());
+    setIsReady(true);
   }, []);
 
-  const visible = useMemo(() => !isConsentChosen(stored), [stored]);
+  const visible = useMemo(() => isReady && !isConsentChosen(stored), [isReady, stored]);
 
   useEffect(() => {
     props.onVisibilityChange?.(visible);
