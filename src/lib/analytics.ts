@@ -69,6 +69,22 @@ export function trackCtaClick(cta: string, extra?: Record<string, unknown>) {
   });
 }
 
+export function trackExperimentExposure(
+  experiment_id: string,
+  variant: 'A' | 'B',
+  extra?: Record<string, unknown>
+) {
+  if (typeof window === 'undefined') return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'experiment_exposure',
+    experiment_id,
+    variant,
+    ...extra,
+  });
+}
+
 export function trackLeadModalOpen(trigger: string) {
   trackCtaClick('lead_modal_open', { trigger });
 }

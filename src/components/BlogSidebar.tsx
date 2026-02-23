@@ -21,6 +21,43 @@ const quickPracticeAreas = [
   { name: 'White Collar', href: '/white-collar-crimes-attorney-delaware-oh' },
 ];
 
+const featuredGuides = [
+  {
+    label: 'Ohio DUI checkpoint hotspots',
+    href: '/blog/ohio-dui-checkpoint-hotspots',
+  },
+  {
+    label: 'Holiday OVI enforcement in Central Ohio',
+    href: '/blog/holiday-ovi-enforcement-ohio-delaware-dublin-columbus',
+  },
+  {
+    label: 'Physical control vs OVI in Ohio',
+    href: '/blog/physical-control-parked-car-ohio-kevin-mcguff',
+  },
+  {
+    label: 'No-contact order vs protection order',
+    href: '/blog/no-contact-order-vs-civil-protection-order-ohio',
+  },
+  {
+    label: 'Drug possession charge: what to do next',
+    href: '/blog/drug-possession-charge-ohio-what-to-do-next',
+  },
+];
+
+const highIntentServicePages = [
+  { label: 'First offense OVI in Ohio', href: '/first-offense-ovi-ohio' },
+  { label: 'Felony OVI defense', href: '/felony-ovi-lawyer-ohio' },
+  { label: 'OVI test refusal defense', href: '/ovi-test-refusal-lawyer-ohio' },
+  { label: 'ALS license suspension defense', href: '/als-license-suspension-ohio' },
+  { label: 'Motion to suppress OVI evidence', href: '/motion-to-suppress-ovi-ohio' },
+  {
+    label: 'First-offense domestic violence defense',
+    href: '/domestic-violence-first-offense-ohio-defense',
+  },
+  { label: 'Civil protection order defense', href: '/civil-protection-order-defense-ohio' },
+  { label: 'Drug possession vs trafficking defense', href: '/drug-possession-vs-trafficking-ohio-defense' },
+];
+
 export default function BlogSidebar() {
   const featuredTestimonial = testimonials[0];
 
@@ -122,6 +159,46 @@ export default function BlogSidebar() {
           Read more reviews
           <span aria-hidden="true">→</span>
         </Link>
+      </div>
+
+      <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-6">
+        <h3 className="mb-4 font-display text-lg font-bold text-brand-black">
+          Priority Legal Guides
+        </h3>
+        <div className="space-y-2">
+          {featuredGuides.map((guide) => (
+            <Link
+              key={guide.href}
+              href={guide.href}
+              className="group flex items-center justify-between rounded-lg bg-white px-4 py-3 text-sm font-medium text-brand-black transition-all hover:shadow-sm hover:text-brand-leaf"
+            >
+              {guide.label}
+              <span className="text-brand-leaf transition-transform group-hover:translate-x-1" aria-hidden="true">
+                →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-brand-black/10 bg-white p-6 shadow-soft">
+        <h3 className="mb-4 font-display text-lg font-bold text-brand-black">
+          High-Intent Service Pages
+        </h3>
+        <div className="space-y-2">
+          {highIntentServicePages.map((page) => (
+            <Link
+              key={page.href}
+              href={page.href}
+              className="group flex items-center justify-between rounded-lg bg-brand-offWhite px-4 py-3 text-sm font-medium text-brand-black transition-all hover:shadow-sm hover:text-brand-leaf"
+            >
+              {page.label}
+              <span className="text-brand-leaf transition-transform group-hover:translate-x-1" aria-hidden="true">
+                →
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-6">

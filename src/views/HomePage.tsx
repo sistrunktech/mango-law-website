@@ -12,6 +12,7 @@ import PageHero from '../components/PageHero';
 import ProcessSteps from '../components/ProcessSteps';
 import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
 import DeferredSection from '../components/DeferredSection';
+import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
 import { SEO, localBusinessSchema } from '../lib/seo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
@@ -172,6 +173,53 @@ export default function HomePage() {
           </DeferredSection>
         </div>
       </section>
+
+      <RelatedDefenseGuides
+        title="High-intent defense guides"
+        description="Direct paths to OVI, criminal, domestic, protection-order, and drug-defense pages."
+        links={[
+          {
+            title: 'First offense OVI in Ohio',
+            description: 'Immediate action plan for first-offense OVI cases.',
+            href: '/first-offense-ovi-ohio',
+          },
+          {
+            title: 'Felony OVI defense',
+            description: 'High-risk OVI strategy and evidence-focused planning.',
+            href: '/felony-ovi-lawyer-ohio',
+          },
+          {
+            title: 'OVI refusal defense',
+            description: 'Test refusal strategy across court and ALS tracks.',
+            href: '/ovi-test-refusal-lawyer-ohio',
+          },
+          {
+            title: 'ALS license suspension defense',
+            description: 'Administrative suspension timeline and tactical options.',
+            href: '/als-license-suspension-ohio',
+          },
+          {
+            title: 'Motion to suppress OVI evidence',
+            description: 'Suppression-focused OVI defense strategy.',
+            href: '/motion-to-suppress-ovi-ohio',
+          },
+          {
+            title: 'Domestic violence first-offense defense',
+            description: 'Fast-response planning for first-offense domestic allegations.',
+            href: '/domestic-violence-first-offense-ohio-defense',
+          },
+          {
+            title: 'Civil protection order defense',
+            description: 'Hearing-focused defense for Ohio protection-order cases.',
+            href: '/civil-protection-order-defense-ohio',
+          },
+          {
+            title: 'Drug possession vs trafficking defense',
+            description: 'Charge distinction and evidence strategy in drug cases.',
+            href: '/drug-possession-vs-trafficking-ohio-defense',
+          },
+        ]}
+      />
 
       <DeferredSection minHeight={520}>
         <BlogSection />

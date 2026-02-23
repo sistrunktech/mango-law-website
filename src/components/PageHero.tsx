@@ -1,11 +1,19 @@
 'use client';
 
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
 import ORCLabel from './ORCLabel';
 import { OFFICE_PHONE_DISPLAY } from '../lib/contactInfo';
-import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { trackCtaClick, trackExperimentExposure, trackLeadSubmitted } from '../lib/analytics';
+import {
+  ACTIVE_HERO_EXPERIMENT,
+  EXPERIMENT_ENABLEMENT,
+  EXPERIMENT_IDS,
+  useExperimentVariant,
+} from '../lib/experiments';
 
 type Props = {
   eyebrow?: string;
@@ -75,7 +83,61 @@ export default function PageHero({
   orcDefinition,
   orcLink,
 }: Props) {
+  const pathname = usePathname() || '';
   const isDark = variant === 'dark';
+  const isServiceIntentPage = [
+    '/ovi-dui-defense-delaware-oh',
+    '/criminal-defense-delaware-oh',
+    '/domestic-violence-lawyer-delaware-oh',
+    '/protection-order-lawyer-delaware-oh',
+    '/drug-crime-lawyer-delaware-oh',
+    '/first-offense-ovi-ohio',
+    '/felony-ovi-lawyer-ohio',
+    '/ovi-test-refusal-lawyer-ohio',
+    '/als-license-suspension-ohio',
+    '/motion-to-suppress-ovi-ohio',
+    '/domestic-violence-first-offense-ohio-defense',
+    '/civil-protection-order-defense-ohio',
+    '/drug-possession-vs-trafficking-ohio-defense',
+  ].includes(pathname);
+
+  const t1Enabled =
+    isServiceIntentPage &&
+    ACTIVE_HERO_EXPERIMENT === EXPERIMENT_IDS.t1HeroCtaClarity &&
+    EXPERIMENT_ENABLEMENT[EXPERIMENT_IDS.t1HeroCtaClarity];
+  const t2Enabled =
+    isServiceIntentPage &&
+    ACTIVE_HERO_EXPERIMENT === EXPERIMENT_IDS.t2TrustBlockNearCta &&
+    EXPERIMENT_ENABLEMENT[EXPERIMENT_IDS.t2TrustBlockNearCta];
+
+  const t1Variant = useExperimentVariant(EXPERIMENT_IDS.t1HeroCtaClarity, {
+    enabled: t1Enabled,
+    queryParamKey: 'exp_t1',
+  });
+  const t2Variant = useExperimentVariant(EXPERIMENT_IDS.t2TrustBlockNearCta, {
+    enabled: t2Enabled,
+    queryParamKey: 'exp_t2',
+  });
+  const resolvedPrimaryCtaLabel =
+    t1Enabled && ctaLabel && t1Variant === 'B' ? 'Request case review today' : ctaLabel;
+
+  useEffect(() => {
+    if (!isServiceIntentPage) return;
+
+    if (t1Enabled) {
+      trackExperimentExposure(EXPERIMENT_IDS.t1HeroCtaClarity, t1Variant, {
+        placement: 'hero_primary_cta',
+        pathname,
+      });
+    }
+
+    if (t2Enabled) {
+      trackExperimentExposure(EXPERIMENT_IDS.t2TrustBlockNearCta, t2Variant, {
+        placement: 'hero_trust_block',
+        pathname,
+      });
+    }
+  }, [isServiceIntentPage, pathname, t1Enabled, t1Variant, t2Enabled, t2Variant]);
 
   return (
     <section className="relative">
@@ -185,12 +247,12 @@ export default function PageHero({
               'relative z-20 mt-8 flex flex-col gap-4 sm:flex-row',
               alignLeft ? 'items-start justify-start' : 'items-center justify-center',
             ].join(' ')}>
-              {ctaLabel && ctaHref && (
+              {resolvedPrimaryCtaLabel && ctaHref && (
                 <Link
                   href={ctaHref}
                   className="group inline-flex items-center gap-2 rounded-lg bg-brand-mango px-8 py-4 text-lg font-bold text-brand-black shadow-lg transition-all hover:bg-brand-gold hover:shadow-xl hover:-translate-y-0.5"
                 >
-                  {ctaLabel}
+                  {resolvedPrimaryCtaLabel}
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               )}
@@ -210,6 +272,17 @@ export default function PageHero({
                 <span>Call/Text {phoneNumber}</span>
               </a>
             </div>
+
+            {t2Enabled && t2Variant === 'B' && (
+              <div
+                className={[
+                  'mt-5 inline-flex rounded-lg border border-brand-offWhite/20 bg-brand-black/30 px-4 py-2 text-sm text-brand-offWhite/90',
+                  alignLeft ? '' : 'mx-auto',
+                ].join(' ')}
+              >
+                Direct attorney case review. Confidential. Ohio-only criminal defense focus.
+              </div>
+            )}
 
             {/* Trust badges - clean, consistent green icons */}
             {!compact && (

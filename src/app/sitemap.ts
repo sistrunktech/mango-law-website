@@ -15,6 +15,7 @@ async function pingIndexNow(baseUrl: string) {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://mango.law'
+  const privatePrefixes = ['/client-updates', '/admin', '/handoff']
   
   // Static pages
   const staticPages = [
@@ -39,6 +40,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/ovi-checkpoints-ohio',
     '/delaware-ohio-ovi-lawyer',
     '/holiday-ovi-enforcement-ohio',
+    '/first-offense-ovi-ohio',
+    '/felony-ovi-lawyer-ohio',
+    '/ovi-test-refusal-lawyer-ohio',
+    '/als-license-suspension-ohio',
+    '/motion-to-suppress-ovi-ohio',
+    '/domestic-violence-first-offense-ohio-defense',
+    '/civil-protection-order-defense-ohio',
+    '/drug-possession-vs-trafficking-ohio-defense',
     '/privacy',
     '/terms',
   ]
@@ -47,15 +56,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let blogPosts: string[] = []
   try {
     const blogData = require('@/data/blogPosts')
+    const publishing = require('@/lib/blogPublishing')
     if (blogData?.blogPosts && Array.isArray(blogData.blogPosts)) {
-      blogPosts = blogData.blogPosts.map((post: any) => `/blog/${post.slug}`)
+      const publishablePosts =
+        typeof publishing?.getPublishableBlogPosts === 'function'
+          ? publishing.getPublishableBlogPosts(blogData.blogPosts)
+          : blogData.blogPosts
+      blogPosts = publishablePosts.map((post: any) => `/blog/${post.slug}`)
     }
   } catch (error) {
     console.warn('Could not load blog posts for sitemap:', error)
   }
 
   // Combine all pages
-  const allPages = [...staticPages, ...blogPosts]
+  const allPages = [...staticPages, ...blogPosts].filter((page) => {
+    return !privatePrefixes.some((prefix) => page === prefix || page.startsWith(`${prefix}/`))
+  })
 
   // Non-blocking IndexNow ping for homepage (indexes sitemap contents)
   pingIndexNow(baseUrl)

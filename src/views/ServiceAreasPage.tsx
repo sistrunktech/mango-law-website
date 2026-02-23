@@ -9,13 +9,14 @@ import { majorCities, surroundingCities, townships, counties } from '../data/ser
 import { MapPin, Phone } from 'lucide-react';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import Link from 'next/link';
 
 export default function ServiceAreasPage() {
   return (
     <>
       <SEO
-        title="Areas We Serve | Criminal Defense Attorney in Delaware & Franklin Counties, Ohio"
-        description="Mango Law LLC serves clients throughout Delaware County, Franklin County, and Central Ohio. Experienced criminal defense representation in Columbus, Dublin, Westerville, and surrounding communities."
+        title="Areas We Serve in Central Ohio | Mango Law"
+        description="Criminal defense and OVI representation across Delaware County, Franklin County, Columbus, Dublin, Westerville, and nearby Central Ohio courts."
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Service Areas', item: '/locations' },
@@ -121,6 +122,93 @@ export default function ServiceAreasPage() {
                   >
                     {OFFICE_PHONE_DISPLAY}
                   </a>
+                </div>
+              </section>
+
+              <section className="mt-8 rounded-xl border border-brand-black/10 bg-white p-8">
+                <h2 className="text-2xl font-bold text-brand-black">Local legal guides for Central Ohio</h2>
+                <p className="mt-3 text-brand-black/75">
+                  Use these guides for enforcement trends, OVI strategy, and first-step planning after a charge.
+                </p>
+                <div className="mt-5 grid gap-3 md:grid-cols-2">
+                  {[
+                    {
+                      label: 'OVI / DUI defense in Delaware County',
+                      href: '/ovi-dui-defense-delaware-oh',
+                    },
+                    {
+                      label: 'Criminal defense in Delaware County',
+                      href: '/criminal-defense-delaware-oh',
+                    },
+                    {
+                      label: 'Domestic violence defense',
+                      href: '/domestic-violence-lawyer-delaware-oh',
+                    },
+                    {
+                      label: 'Protection order defense',
+                      href: '/protection-order-lawyer-delaware-oh',
+                    },
+                    {
+                      label: 'Drug crimes defense',
+                      href: '/drug-crime-lawyer-delaware-oh',
+                    },
+                    {
+                      label: 'Ohio DUI checkpoint hotspots',
+                      href: '/blog/ohio-dui-checkpoint-hotspots',
+                    },
+                    {
+                      label: 'Holiday OVI enforcement in Delaware, Dublin, and Columbus',
+                      href: '/blog/holiday-ovi-enforcement-ohio-delaware-dublin-columbus',
+                    },
+                    {
+                      label: 'Physical control vs OVI in Ohio',
+                      href: '/blog/physical-control-parked-car-ohio-kevin-mcguff',
+                    },
+                    {
+                      label: 'Drug possession charge: what to do next',
+                      href: '/blog/drug-possession-charge-ohio-what-to-do-next',
+                    },
+                    {
+                      label: 'First offense OVI in Ohio',
+                      href: '/first-offense-ovi-ohio',
+                    },
+                    {
+                      label: 'Felony OVI defense in Ohio',
+                      href: '/felony-ovi-lawyer-ohio',
+                    },
+                    {
+                      label: 'OVI test refusal defense',
+                      href: '/ovi-test-refusal-lawyer-ohio',
+                    },
+                    {
+                      label: 'ALS license suspension defense',
+                      href: '/als-license-suspension-ohio',
+                    },
+                    {
+                      label: 'Motion to suppress OVI evidence',
+                      href: '/motion-to-suppress-ovi-ohio',
+                    },
+                    {
+                      label: 'First-offense domestic violence defense',
+                      href: '/domestic-violence-first-offense-ohio-defense',
+                    },
+                    {
+                      label: 'Civil protection order defense in Ohio',
+                      href: '/civil-protection-order-defense-ohio',
+                    },
+                    {
+                      label: 'Drug possession vs trafficking defense',
+                      href: '/drug-possession-vs-trafficking-ohio-defense',
+                    },
+                  ].map((guide) => (
+                    <Link
+                      key={guide.href}
+                      href={guide.href}
+                      className="rounded-lg border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:border-brand-mango hover:text-brand-mango"
+                    >
+                      {guide.label}
+                    </Link>
+                  ))}
                 </div>
               </section>
             </div>

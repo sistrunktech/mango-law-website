@@ -6,6 +6,8 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
+import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 
@@ -213,6 +215,54 @@ export default function CriminalDefensePage() {
           </div>
         </div>
       </section>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mx-auto max-w-4xl">
+            <MidPageCtaExperiment
+              contextLabel="criminal defense"
+              ctaIdPrefix="criminal_defense_midpage"
+            />
+          </div>
+        </div>
+      </section>
+
+      <RelatedDefenseGuides
+        title="Related criminal defense guides"
+        description="Use these guides to compare OVI, drug, domestic, and protection-order defense pathways."
+        links={[
+          {
+            title: 'OVI / DUI defense',
+            description: 'Core OVI strategy page covering testing, suppression, and timeline control.',
+            href: '/ovi-dui-defense-delaware-oh',
+          },
+          {
+            title: 'Domestic violence first-offense defense',
+            description: 'Immediate compliance and evidence priorities in first-offense DV cases.',
+            href: '/domestic-violence-first-offense-ohio-defense',
+          },
+          {
+            title: 'Civil protection order defense',
+            description: 'Hearing-focused strategy for Ohio protection-order cases.',
+            href: '/civil-protection-order-defense-ohio',
+          },
+          {
+            title: 'Drug possession vs trafficking defense',
+            description: 'How charge framing and evidence can alter drug-case exposure.',
+            href: '/drug-possession-vs-trafficking-ohio-defense',
+          },
+          {
+            title: 'Motion practice in criminal defense',
+            description: 'Educational guide to pretrial motions and suppression leverage.',
+            href: '/blog/motion-practice-criminal-defense',
+          },
+          {
+            title: 'Drug crimes defense',
+            description: 'Broader strategy for possession, trafficking, and search-related litigation.',
+            href: '/drug-crime-lawyer-delaware-oh',
+          },
+        ]}
+      />
 
       <FAQSection faqs={criminalDefenseFaqs} title="Criminal Defense FAQs" />
 

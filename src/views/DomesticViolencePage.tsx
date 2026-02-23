@@ -5,8 +5,11 @@ import FAQSection from '../components/FAQSection';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
+import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
+import Link from 'next/link';
 
 export const domesticViolenceFaqs = [
   {
@@ -175,6 +178,95 @@ export default function DomesticViolencePage() {
           </div>
         </div>
       </section>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mb-8 text-center">
+            <h2 className="font-display text-display-sm md:text-display-md mb-3">Related domestic violence resources</h2>
+            <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
+              Understand no-contact restrictions, civil protection order procedure, and related defense strategy.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: 'No-contact order vs CPO',
+                description: 'Key differences, compliance risks, and how each order impacts your case.',
+                href: '/blog/no-contact-order-vs-civil-protection-order-ohio',
+              },
+              {
+                title: 'Protection order defense',
+                description: 'How hearings work and how to contest allegations effectively.',
+                href: '/protection-order-lawyer-delaware-oh',
+              },
+              {
+                title: 'Ex parte order defense guide',
+                description: 'What to do immediately after a temporary order is filed.',
+                href: '/blog/ex-parte-protection-orders-ohio-defense',
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6">
+                <h3 className="text-xl font-bold text-brand-black">{item.title}</h3>
+                <p className="mt-2 text-brand-black/70">{item.description}</p>
+                <Link
+                  href={item.href}
+                  className="mt-4 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf"
+                >
+                  Explore resource
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mx-auto max-w-4xl">
+            <MidPageCtaExperiment
+              contextLabel="domestic violence defense"
+              ctaIdPrefix="domestic_violence_midpage"
+            />
+          </div>
+        </div>
+      </section>
+
+      <RelatedDefenseGuides
+        title="Related domestic-defense guides"
+        description="These pages help coordinate criminal allegations, no-contact terms, and protection-order hearings."
+        links={[
+          {
+            title: 'First-offense domestic violence defense',
+            description: 'Immediate priority plan for first-offense domestic violence allegations in Ohio.',
+            href: '/domestic-violence-first-offense-ohio-defense',
+          },
+          {
+            title: 'Protection order defense',
+            description: 'Civil-order strategy when protection-order proceedings overlap with criminal allegations.',
+            href: '/protection-order-lawyer-delaware-oh',
+          },
+          {
+            title: 'Civil protection order defense (Ohio)',
+            description: 'Hearing-stage preparation for respondents in CPO cases.',
+            href: '/civil-protection-order-defense-ohio',
+          },
+          {
+            title: 'No-contact vs CPO guide',
+            description: 'Educational guide explaining differences and compliance risks.',
+            href: '/blog/no-contact-order-vs-civil-protection-order-ohio',
+          },
+          {
+            title: 'Ex parte order defense guide',
+            description: 'How to respond when temporary orders are entered before full hearing.',
+            href: '/blog/ex-parte-protection-orders-ohio-defense',
+          },
+          {
+            title: 'Criminal defense overview',
+            description: 'Broader case-strategy context for related misdemeanor/felony exposure.',
+            href: '/criminal-defense-delaware-oh',
+          },
+        ]}
+      />
 
       <FAQSection faqs={domesticViolenceFaqs} title="Domestic Violence FAQs" />
 

@@ -6,8 +6,11 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
+import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
+import Link from 'next/link';
 
 export const drugCrimeFaqs = [
   {
@@ -211,6 +214,95 @@ export default function DrugCrimePage() {
           </div>
         </div>
       </section>
+
+      <section className="section bg-brand-offWhite">
+        <div className="container">
+          <div className="mb-8 text-center">
+            <h2 className="font-display text-display-sm md:text-display-md mb-3">Drug charge resources</h2>
+            <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
+              Practical guides on possession, trafficking distinctions, and immediate defense steps after an arrest.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: 'Drug possession: what to do next',
+                description: 'Immediate steps to protect your case after a possession arrest in Ohio.',
+                href: '/blog/drug-possession-charge-ohio-what-to-do-next',
+              },
+              {
+                title: 'Possession vs trafficking',
+                description: 'How Ohio distinguishes personal-use allegations from distribution cases.',
+                href: '/blog/drug-possession-vs-trafficking-ohio',
+              },
+              {
+                title: 'Criminal defense overview',
+                description: 'See broader defense strategy for related felony and misdemeanor exposure.',
+                href: '/criminal-defense-delaware-oh',
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-white p-6">
+                <h3 className="text-xl font-bold text-brand-black">{item.title}</h3>
+                <p className="mt-2 text-brand-black/70">{item.description}</p>
+                <Link
+                  href={item.href}
+                  className="mt-4 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf"
+                >
+                  Explore resource
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mx-auto max-w-4xl">
+            <MidPageCtaExperiment
+              contextLabel="drug charge defense"
+              ctaIdPrefix="drug_crime_midpage"
+            />
+          </div>
+        </div>
+      </section>
+
+      <RelatedDefenseGuides
+        title="Related drug-defense guides"
+        description="Use these pages to compare possession/trafficking allegations and align strategy with broader criminal defense."
+        links={[
+          {
+            title: 'Drug possession vs trafficking defense',
+            description: 'High-intent strategy page focused on charge distinction and evidence structure.',
+            href: '/drug-possession-vs-trafficking-ohio-defense',
+          },
+          {
+            title: 'Drug possession vs trafficking (blog)',
+            description: 'Educational guide on Ohio charge differences and practical implications.',
+            href: '/blog/drug-possession-vs-trafficking-ohio',
+          },
+          {
+            title: 'Drug possession: what to do next',
+            description: 'Immediate first-step checklist after a possession arrest.',
+            href: '/blog/drug-possession-charge-ohio-what-to-do-next',
+          },
+          {
+            title: 'Criminal defense overview',
+            description: 'Broader litigation strategy for felony and misdemeanor criminal cases.',
+            href: '/criminal-defense-delaware-oh',
+          },
+          {
+            title: 'Motion practice guide',
+            description: 'Pretrial motion strategy for search, seizure, and evidence disputes.',
+            href: '/blog/motion-practice-criminal-defense',
+          },
+          {
+            title: 'OVI / DUI defense',
+            description: 'Related strategy for overlapping OVI and drug-impairment allegations.',
+            href: '/ovi-dui-defense-delaware-oh',
+          },
+        ]}
+      />
 
       <FAQSection faqs={drugCrimeFaqs} title="Drug Crime FAQs" />
 
