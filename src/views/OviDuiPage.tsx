@@ -7,6 +7,8 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
+import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
+import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import Link from 'next/link';
@@ -67,8 +69,8 @@ export default function OviDuiPage() {
   return (
     <>
       <SEO
-        title="OVI/DUI Defense Lawyer Delaware, OH | Mango Law LLC"
-        description="Experienced OVI/DUI defense attorney in Delaware County. Challenge traffic stops, field sobriety tests, and breathalyzer results. Certified in BAC DataMaster and NHTSA testing."
+        title="OVI Defense Lawyer in Delaware, Ohio | Mango Law"
+        description="Experienced OVI defense in Delaware County, Ohio. Challenge stops, field sobriety tests, and breath or blood evidence with trial-ready strategy."
         image="/images/generated/ovi-dui-defense-hero.png"
         faqs={oviDuiFaqs}
         breadcrumbs={[
@@ -257,6 +259,54 @@ export default function OviDuiPage() {
         </div>
       </section>
 
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mx-auto max-w-4xl">
+            <MidPageCtaExperiment
+              contextLabel="OVI defense"
+              ctaIdPrefix="ovi_dui_midpage"
+            />
+          </div>
+        </div>
+      </section>
+
+      <RelatedDefenseGuides
+        title="Related OVI defense guides"
+        description="These pages cover first-offense timelines, refusal strategy, ALS issues, and motion practice."
+        links={[
+          {
+            title: 'First offense OVI in Ohio',
+            description: 'Step-by-step priorities for the first 72 hours after an OVI arrest.',
+            href: '/first-offense-ovi-ohio',
+          },
+          {
+            title: 'Felony OVI defense',
+            description: 'High-risk OVI strategy when exposure escalates beyond a misdemeanor baseline.',
+            href: '/felony-ovi-lawyer-ohio',
+          },
+          {
+            title: 'OVI test refusal defense',
+            description: 'How refusal-related issues affect both court strategy and license risk.',
+            href: '/ovi-test-refusal-lawyer-ohio',
+          },
+          {
+            title: 'ALS license suspension defense',
+            description: 'Administrative suspension workflow and timing-sensitive actions.',
+            href: '/als-license-suspension-ohio',
+          },
+          {
+            title: 'Motion to suppress OVI evidence',
+            description: 'When suppression litigation can change negotiation and trial posture.',
+            href: '/motion-to-suppress-ovi-ohio',
+          },
+          {
+            title: 'Criminal defense overview',
+            description: 'Broader felony and misdemeanor defense strategy across Ohio courts.',
+            href: '/criminal-defense-delaware-oh',
+          },
+        ]}
+      />
+
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-8 text-center">
@@ -265,7 +315,7 @@ export default function OviDuiPage() {
               Practical guidance for checkpoints, holiday enforcement, and Delaware County representation.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
             {[
               {
                 title: 'Ohio OVI checkpoints',
@@ -281,6 +331,16 @@ export default function OviDuiPage() {
                 title: 'Delaware OVI lawyer',
                 description: 'Local defense strategy built for Delaware County courts.',
                 href: '/delaware-ohio-ovi-lawyer',
+              },
+              {
+                title: 'Checkpoint hotspots',
+                description: 'High-frequency checkpoint corridors and enforcement patterns in Ohio cities.',
+                href: '/blog/ohio-dui-checkpoint-hotspots',
+              },
+              {
+                title: 'Physical control guide',
+                description: 'Understand physical control exposure when not actively driving.',
+                href: '/blog/physical-control-parked-car-ohio-kevin-mcguff',
               },
             ].map((item) => (
               <div key={item.title} className="card bg-white border border-brand-black/5 p-6">

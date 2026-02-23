@@ -38,6 +38,17 @@ const featuredPageLinks = [
   { href: '/delaware-ohio-ovi-lawyer', label: 'Delaware, OH OVI Lawyer' },
   { href: '/holiday-ovi-enforcement-ohio', label: 'Holiday OVI Enforcement' },
   { href: '/of-counsel', label: 'Of Counsel' },
+  { href: '/first-offense-ovi-ohio', label: 'First Offense OVI in Ohio' },
+  { href: '/felony-ovi-lawyer-ohio', label: 'Felony OVI Defense' },
+  { href: '/ovi-test-refusal-lawyer-ohio', label: 'OVI Test Refusal Defense' },
+  { href: '/als-license-suspension-ohio', label: 'ALS License Suspension Defense' },
+  { href: '/motion-to-suppress-ovi-ohio', label: 'Motion to Suppress OVI Evidence' },
+  {
+    href: '/domestic-violence-first-offense-ohio-defense',
+    label: 'First-Offense Domestic Violence Defense',
+  },
+  { href: '/civil-protection-order-defense-ohio', label: 'Civil Protection Order Defense' },
+  { href: '/drug-possession-vs-trafficking-ohio-defense', label: 'Drug Possession vs Trafficking Defense' },
 ];
 
 const localSeoLinks = [

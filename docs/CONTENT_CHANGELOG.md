@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-03-06 13:35 EST
+Post slug and title: Ohio statute glossary | Add ORC 2919.26 entry required by high-intent protection-order pages
+Change type: minor
+Summary of change: Added a missing Ohio statute glossary entry for ORC 2919.26 so the high-intent civil protection order rollout can pass protected-content validation and build cleanly.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: n/a
+Rollback notes: Revert the ORC 2919.26 entry in `src/data/statutes.ts` and this changelog line if the page rollout is withdrawn.
+
 Date/time: 2026-02-17 17:23 EST
 Post slug and title: first-ovi-court-date-delaware-county-ohio | Image URL dedupe for audit gate
 Change type: minor
