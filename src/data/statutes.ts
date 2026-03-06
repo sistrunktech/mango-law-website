@@ -154,6 +154,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 3113.31', url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31', type: 'primary' },
     ],
   },
+  '2919.26': {
+    id: 'temporary-protection-order',
+    section: '2919.26',
+    title: 'Motion for and Hearing on Temporary Protection Order',
+    shortTitle: 'Temporary Protection Order',
+    definition: 'Allows a temporary protection order to be requested in certain criminal cases involving family or household members and permits the court to impose safety-focused restrictions as a pretrial condition of release after a prompt hearing.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2919.26',
+    practiceAreas: ['protection-orders', 'criminal-defense', 'domestic-violence'],
+    relatedStatutes: ['3113.31', '2919.25', '2919.27'],
+    lastVerified: '2026-03-06',
+    sources: [
+      { label: 'Ohio Revised Code § 2919.26', url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.26', type: 'primary' },
+    ],
+  },
   '2919.27': {
     id: 'violating-protection-order',
     section: '2919.27',

@@ -16,6 +16,7 @@ async function pingIndexNow(baseUrl: string) {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://mango.law'
+  const privatePrefixes = ['/client-updates', '/admin', '/handoff']
   
   // Static pages
   const staticPages = [
@@ -40,6 +41,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/ovi-checkpoints-ohio',
     '/delaware-ohio-ovi-lawyer',
     '/holiday-ovi-enforcement-ohio',
+    '/first-offense-ovi-ohio',
+    '/felony-ovi-lawyer-ohio',
+    '/ovi-test-refusal-lawyer-ohio',
+    '/als-license-suspension-ohio',
+    '/motion-to-suppress-ovi-ohio',
+    '/domestic-violence-first-offense-ohio-defense',
+    '/civil-protection-order-defense-ohio',
+    '/drug-possession-vs-trafficking-ohio-defense',
     '/privacy',
     '/terms',
   ]
@@ -54,7 +63,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Combine all pages
-  const allPages = [...staticPages, ...blogPosts]
+  const allPages = [...staticPages, ...blogPosts].filter((page) => {
+    return !privatePrefixes.some((prefix) => page === prefix || page.startsWith(`${prefix}/`))
+  })
 
   // Non-blocking IndexNow ping for homepage (indexes sitemap contents)
   pingIndexNow(baseUrl)
