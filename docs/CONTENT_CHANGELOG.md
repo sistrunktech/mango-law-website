@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-03-24 19:10 EDT
+Post slug and title: Sitemap and OVI checkpoint signals | Consolidate Delaware OVI intent and align checkpoint metadata
+Change type: minor
+Summary of change: Redirected the redundant Delaware OVI page to the primary OVI pillar, removed the duplicate URL from the sitemap, stabilized sitemap lastmod values, and updated checkpoint page metadata/FAQ content to match the announced-checkpoint positioning.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: Revert the sitemap, checkpoint page, and Delaware OVI redirect changes in `fix(seo): consolidate ovi intent and tighten checkpoint indexing signals`.
+
 Date/time: 2026-03-06 13:35 EST
 Post slug and title: Ohio statute glossary | Add ORC 2919.26 entry required by high-intent protection-order pages
 Change type: minor

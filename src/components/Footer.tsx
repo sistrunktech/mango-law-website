@@ -35,7 +35,7 @@ const featuredGuideLinks = [
 ];
 
 const featuredPageLinks = [
-  { href: '/delaware-ohio-ovi-lawyer', label: 'Delaware, OH OVI Lawyer' },
+  { href: '/ovi-checkpoints-ohio', label: 'Ohio OVI Checkpoint Rights' },
   { href: '/holiday-ovi-enforcement-ohio', label: 'Holiday OVI Enforcement' },
   { href: '/of-counsel', label: 'Of Counsel' },
   { href: '/first-offense-ovi-ohio', label: 'First Offense OVI in Ohio' },

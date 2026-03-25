@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllBlogSlugsForSitemap } from '@/lib/blogPostsRepo'
 
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY || ''
+const STATIC_LASTMOD = new Date('2026-03-24T00:00:00.000Z')
 
 async function pingIndexNow(baseUrl: string) {
   if (!INDEXNOW_KEY) return
@@ -39,7 +40,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/locations',
     '/resources/dui-checkpoints',
     '/ovi-checkpoints-ohio',
-    '/delaware-ohio-ovi-lawyer',
     '/holiday-ovi-enforcement-ohio',
     '/first-offense-ovi-ohio',
     '/felony-ovi-lawyer-ohio',
@@ -72,6 +72,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return allPages.map((page) => ({
     url: `${baseUrl}${page}`,
-    lastModified: new Date(),
+    lastModified: STATIC_LASTMOD,
   }))
 }

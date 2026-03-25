@@ -243,7 +243,7 @@ export default function OviDuiPage() {
                     Ohio DUI Checkpoint Map
                   </h2>
                   <p className="text-brand-black/70 leading-relaxed mb-4">
-                    View real-time locations of sobriety checkpoints across Ohio. Know your rights, plan your route, and stay informed about upcoming checkpoints in your area.
+                    Browse announced checkpoints across Ohio, understand what the map does and does not show, and review what a checkpoint stop can involve.
                   </p>
                   <Link
                     href="/resources/dui-checkpoints"
@@ -328,9 +328,9 @@ export default function OviDuiPage() {
                 href: '/holiday-ovi-enforcement-ohio',
               },
               {
-                title: 'Delaware OVI lawyer',
-                description: 'Local defense strategy built for Delaware County courts.',
-                href: '/delaware-ohio-ovi-lawyer',
+                title: 'First-offense OVI guide',
+                description: 'What to do in the first 72 hours after an Ohio OVI arrest.',
+                href: '/first-offense-ovi-ohio',
               },
               {
                 title: 'Checkpoint hotspots',
