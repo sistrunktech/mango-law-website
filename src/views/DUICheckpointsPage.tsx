@@ -9,8 +9,10 @@ import CheckpointHotspots from '../components/CheckpointHotspots';
 import HotspotTeaser from '../components/HotspotTeaser';
 import CTASection from '../components/CTASection';
 import BlogSidebar from '../components/BlogSidebar';
+import FAQSection from '../components/FAQSection';
 import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
+import { duiCheckpointMapFaqs } from '../data/duiCheckpointMapFaqs';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
@@ -122,8 +124,8 @@ export default function DUICheckpointsPage() {
   return (
     <>
       <SEO
-        title="Ohio DUI Checkpoint Map | Real-Time Sobriety Checkpoints"
-        description="View real-time locations of sobriety checkpoints across Ohio. Know your rights, plan your route, and stay informed about upcoming checkpoints."
+        title="Ohio DUI Checkpoint Map and Guide | Announced Checkpoints"
+        description="Browse announced Ohio DUI checkpoints, understand how checkpoint stops work, and review your rights after an OVI checkpoint stop."
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'DUI Checkpoints', item: '/resources/dui-checkpoints' },
@@ -132,7 +134,7 @@ export default function DUICheckpointsPage() {
       <PageHero
         eyebrow="DUI Resources"
         title="Ohio DUI Checkpoint Map"
-        description="Real-time information about sobriety checkpoints across Ohio. Know your rights and plan accordingly."
+        description="Publicly announced checkpoint activity, checkpoint-stop guidance, and next-step legal information for Ohio drivers."
         ctaLabel="Know Your Rights"
         ctaHref="/ovi-dui-defense-delaware-oh"
         variant="light"
@@ -465,7 +467,7 @@ export default function DUICheckpointsPage() {
                       </h3>
                       <p className="text-sm text-brand-black/80 max-w-md mx-auto">
                         {selectedCounty === 'all'
-                          ? 'We have not detected any officially announced OVI checkpoints scheduled for this period. Please check back later or follow local law enforcement for real-time updates.'
+                          ? 'We have not detected any officially announced OVI checkpoints scheduled for this period. Please check back later or monitor local law enforcement announcements for new notices.'
                           : `There are currently no scheduled checkpoints detected in ${selectedCounty} County.`}
                       </p>
                       <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -509,6 +511,8 @@ export default function DUICheckpointsPage() {
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
         secondaryCtaId="dui_checkpoints_cta_call_office"
       />
+
+      <FAQSection faqs={duiCheckpointMapFaqs} title="Ohio DUI checkpoint map FAQ" />
 
       <LeadCaptureModal
         isOpen={isLeadModalOpen}
