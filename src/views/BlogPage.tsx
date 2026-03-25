@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import Image from 'next/image';
+import { useDeferredValue, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Calendar, Clock, Search, X } from 'lucide-react';
 import PageHero from '../components/PageHero';
@@ -9,6 +8,8 @@ import BlogSidebar from '../components/BlogSidebar';
 import CTASection from '../components/CTASection';
 import type { BlogPost } from '../data/blogPosts';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import BlogCoverArt from '../components/BlogCoverArt';
+import { formatCalendarDate } from '../lib/formatting';
 
 const categories = [
   'All Posts',
@@ -36,6 +37,7 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
 
   const [selectedCategory, setSelectedCategory] = useState('All Posts');
   const [searchQuery, setSearchQuery] = useState('');
+  const deferredSearchQuery = useDeferredValue(searchQuery);
 
   const filteredPosts = useMemo(() => {
     let posts = sortedBlogPosts;
@@ -44,8 +46,8 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
       posts = posts.filter((post) => post.category === selectedCategory);
     }
 
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase().trim();
+    if (deferredSearchQuery.trim()) {
+      const query = deferredSearchQuery.toLowerCase().trim();
       posts = posts.filter(
         (post) =>
           post.title.toLowerCase().includes(query) ||
@@ -56,26 +58,85 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
     }
 
     return posts;
-  }, [selectedCategory, searchQuery, sortedBlogPosts]);
+  }, [deferredSearchQuery, selectedCategory, sortedBlogPosts]);
 
   const handleClearSearch = () => {
     setSearchQuery('');
   };
 
+  const featuredPost = sortedBlogPosts[0];
+  const postsToRender =
+    featuredPost && selectedCategory === 'All Posts' && !searchQuery.trim()
+      ? filteredPosts.filter((post) => post.slug !== featuredPost.slug)
+      : filteredPosts;
+
   return (
     <>
       <PageHero
-        eyebrow="Insights"
-        title="Legal insights and updates"
-        description="Stay informed with articles about criminal defense, OVI/DUI law, and your rights in Ohio courts."
-        ctaLabel="Free Consultation"
+        eyebrow="Mango Law Articles"
+        title="Answers for the part people are usually most unsure about."
+        description="Use the blog to understand deadlines, license issues, court steps, and how Ohio criminal and OVI cases usually move."
+        ctaLabel="Talk Through Your Case"
         ctaHref="/contact"
         variant="light"
+        compact
+        showQuickActions={false}
         phoneCtaId="blog_hero_call_office"
       />
 
       <section className="section bg-white">
         <div className="container">
+          {featuredPost && (
+            <div className="mb-10 grid gap-6 rounded-[2rem] border border-brand-black/10 bg-brand-offWhite/55 p-5 shadow-soft lg:grid-cols-[1.15fr_0.85fr] lg:p-6">
+              <Link
+                href={`/blog/${featuredPost.slug}`}
+                className="group overflow-hidden rounded-[1.5rem]"
+              >
+                <BlogCoverArt
+                  post={featuredPost}
+                  variant="hero"
+                  contentMode="minimal"
+                  className="transition-transform duration-300 group-hover:scale-[1.01]"
+                />
+              </Link>
+              <div className="flex flex-col justify-between gap-5 rounded-[1.5rem] bg-white p-6">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-goldText">
+                    Latest guide
+                  </p>
+                  <h2 className="mt-3 text-2xl font-bold leading-tight text-brand-black">
+                    {featuredPost.title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-brand-black/65">
+                    {featuredPost.excerpt}
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center gap-4 text-xs text-brand-black/60">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-mango/12 px-3 py-1 font-semibold text-brand-mangoText">
+                      {featuredPost.category}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5" />
+                      {formatCalendarDate(featuredPost.date)}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock className="h-3.5 w-3.5" />
+                      {estimateReadTime(featuredPost.content)} min read
+                    </span>
+                  </div>
+                  <Link
+                    href={`/blog/${featuredPost.slug}`}
+                    className="inline-flex items-center gap-2 text-sm font-bold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                  >
+                    Read the latest article
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="mb-6">
             <div className="relative max-w-md">
               <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-brand-black/40" />
@@ -131,39 +192,19 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <div className="grid gap-8 md:grid-cols-2">
-                {filteredPosts.map((post) => (
+                {postsToRender.map((post) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="group overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-soft-lg"
+                    className="group overflow-hidden rounded-[1.5rem] border border-brand-black/10 bg-white shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-soft-lg"
                   >
-                    {post.imageUrl && (
-                      <div className="relative aspect-video overflow-hidden bg-brand-offWhite">
-                        <Image
-                          src={post.imageUrl}
-                          alt={post.title}
-                          fill
-                          sizes="(min-width: 1024px) 50vw, (min-width: 768px) 50vw, 100vw"
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                        <div className="absolute left-4 top-4">
-                          <span className="inline-block rounded-full bg-brand-mango px-3 py-1 text-xs font-semibold text-brand-black shadow-soft">
-                            {post.category}
-                          </span>
-                        </div>
-                      </div>
-                    )}
+                    <BlogCoverArt post={post} />
 
                     <div className="p-6">
                       <div className="flex items-center gap-4 text-xs text-brand-black/60">
                         <div className="flex items-center gap-1.5">
                           <Calendar className="h-3.5 w-3.5" />
-                          {new Date(post.date).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric',
-                          })}
+                          {formatCalendarDate(post.date)}
                         </div>
                         <div className="flex items-center gap-1.5">
                           <Clock className="h-3.5 w-3.5" />
@@ -228,9 +269,9 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
 
       <CTASection
         eyebrow="Need Legal Help?"
-        title="Get a free case evaluation"
-        body="Don't wait to protect your rights. Contact us today for a confidential consultation about your case."
-        primaryLabel="Schedule Consultation"
+        title="Still unsure how your case is likely to play out?"
+        body="Use the articles for orientation, then reach out when you want advice tied to the actual facts of your stop, charge, or court date."
+        primaryLabel="Request Case Review"
         primaryHref="/contact"
         secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
         secondaryHref={`tel:${OFFICE_PHONE_TEL}`}

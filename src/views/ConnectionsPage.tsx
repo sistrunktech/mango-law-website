@@ -676,10 +676,7 @@ export default function ConnectionsPage() {
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-white mb-2">Google Integrations</h2>
           <p className="text-slate-400">
-            Connect your Google accounts to enable review syncing, analytics, and more.
-          </p>
-          <p className="mt-2 text-xs text-slate-500">
-            Supabase project: <span className="font-mono text-slate-300">{supabaseUrl}</span>
+            Connect the correct Google accounts and save the production mango.law resources for each tool.
           </p>
         </div>
 

@@ -10,6 +10,7 @@ import {
   isAggregatorSourceUrl,
   type DUICheckpoint,
 } from '../data/checkpoints';
+import { formatCalendarDate } from '../lib/formatting';
 
 type Props = {
   checkpoint: DUICheckpoint;
@@ -69,7 +70,7 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
         {checkpoint.announcement_date && (
           <div className="flex items-center gap-2 text-xs text-brand-black/50 italic">
             <Clock className="h-3 w-3" />
-            <span>Announced on {new Date(checkpoint.announcement_date).toLocaleDateString()}</span>
+            <span>Announced on {formatCalendarDate(checkpoint.announcement_date)}</span>
           </div>
         )}
 

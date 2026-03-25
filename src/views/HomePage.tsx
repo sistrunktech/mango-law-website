@@ -6,10 +6,9 @@ import TestimonialsList from '../components/TestimonialsList';
 import CTASection from '../components/CTASection';
 import LocationBlock from '../components/LocationBlock';
 import QuickIntakeForm from '../components/QuickIntakeForm';
-import { CheckCircle, FileText, Users, Clock, Quote } from 'lucide-react';
+import { CheckCircle, FileText, Mail, Phone, Users, Clock } from 'lucide-react';
 import Link from 'next/link';
 import PageHero from '../components/PageHero';
-import ProcessSteps from '../components/ProcessSteps';
 import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
 import DeferredSection from '../components/DeferredSection';
 import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
@@ -46,15 +45,14 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
       <PageHero
         eyebrow="Central Ohio OVI/DUI & Criminal Defense"
         subtitle="Nick Mango | Delaware, OH | 26+ Years | Former Prosecutor"
-        title="Arrested? Get Clear Next Steps Today."
-        description="Confidential consultation. Available 24/7 for urgent OVI, DUI, and criminal defense matters in Delaware and Franklin Counties."
+        title="Charged, arrested, or under investigation? Get calm next steps today."
+        description="Talk through what happened, what matters first, and how to protect your license, record, and court position in Delaware and Franklin Counties."
         ctaLabel="Free Case Review"
         ctaHref="/contact"
         phoneNumber={OFFICE_PHONE_DISPLAY}
+        showQuickActions={false}
         phoneCtaId="home_hero_call_office"
       />
-
-      <ProcessSteps />
 
       {/* Why Choose Us Section */}
       <section className="section bg-white">
@@ -67,11 +65,11 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
 	                  <div className="accent-line" />
 	                  <p className="eyebrow text-brand-goldText">Why Mango Law</p>
 	                </div>
-	                <h2 className="text-display-sm md:text-display-md">
-	                  Direct answers. Steady communication.
+                <h2 className="text-display-sm md:text-display-md">
+	                  Direct answers. Smart case planning. No unnecessary fog.
 	                </h2>
 	                <p className="text-lg text-brand-black/60">
-	                  Nick Mango focuses on defense that respects your time: precise updates, smart motions, and outcomes that protect your record and future.
+	                  Nick Mango focuses on the part clients care about most: what happened, what the court is likely to care about next, and where a defense strategy can actually change the outcome.
 	                </p>
                   <Link
                     href="/about"
@@ -133,27 +131,52 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
 
       <PracticeAreaCardGrid />
 
-      {/* Stats/Trust Section */}
-      <section className="relative overflow-hidden py-20">
-        <div className="absolute inset-0 bg-forest-emerald" />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/20 to-transparent" />
-
-        <div className="container relative">
-          <div className="grid gap-10 text-center md:grid-cols-4">
-            {[
-              { value: '26+', label: 'Years Experience' },
-              { value: '1000+', label: 'Cases Handled' },
-              { value: '24/7', label: 'Availability' },
-              { value: 'Former', label: 'Prosecutor' },
-            ].map((stat, i) => (
-              <div key={i} className="space-y-3">
-                <p className="text-display-md font-black text-white">{stat.value}</p>
-                <p className="text-sm font-semibold uppercase tracking-wider text-brand-offWhite">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RelatedDefenseGuides
+        title="Start with the page that sounds most like your situation."
+        description="If you already know the issue driving the case, use one of these direct paths instead of digging through broad overviews first."
+        links={[
+          {
+            title: 'First offense OVI in Ohio',
+            description: 'What to expect after a first OVI arrest, including court, license, and immediate next steps.',
+            href: '/first-offense-ovi-ohio',
+          },
+          {
+            title: 'Felony OVI defense',
+            description: 'Where repeat offenses, higher stakes, and evidence challenges change the defense plan.',
+            href: '/felony-ovi-lawyer-ohio',
+          },
+          {
+            title: 'OVI refusal defense',
+            description: 'How refusal allegations affect the ALS side and what usually matters in court.',
+            href: '/ovi-test-refusal-lawyer-ohio',
+          },
+          {
+            title: 'ALS license suspension defense',
+            description: 'A clearer look at the suspension timeline, driving privileges, and pressure points.',
+            href: '/als-license-suspension-ohio',
+          },
+          {
+            title: 'Motion to suppress OVI evidence',
+            description: 'The stop, testing, and search issues that often decide whether evidence stays in.',
+            href: '/motion-to-suppress-ovi-ohio',
+          },
+          {
+            title: 'Domestic violence first-offense defense',
+            description: 'A first-step guide for allegations that can affect criminal court and family life at once.',
+            href: '/domestic-violence-first-offense-ohio-defense',
+          },
+          {
+            title: 'Civil protection order defense',
+            description: 'How to get ready for the hearing, the evidence fight, and the practical fallout.',
+            href: '/civil-protection-order-defense-ohio',
+          },
+          {
+            title: 'Drug possession vs trafficking defense',
+            description: 'Why the charge distinction matters and where the evidence usually gets challenged.',
+            href: '/drug-possession-vs-trafficking-ohio-defense',
+          },
+        ]}
+      />
 
       <section className="section bg-white">
         <div className="container">
@@ -163,83 +186,28 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
-      <RelatedDefenseGuides
-        title="High-intent defense guides"
-        description="Direct paths to OVI, criminal, domestic, protection-order, and drug-defense pages."
-        links={[
-          {
-            title: 'First offense OVI in Ohio',
-            description: 'Immediate action plan for first-offense OVI cases.',
-            href: '/first-offense-ovi-ohio',
-          },
-          {
-            title: 'Felony OVI defense',
-            description: 'High-risk OVI strategy and evidence-focused planning.',
-            href: '/felony-ovi-lawyer-ohio',
-          },
-          {
-            title: 'OVI refusal defense',
-            description: 'Test refusal strategy across court and ALS tracks.',
-            href: '/ovi-test-refusal-lawyer-ohio',
-          },
-          {
-            title: 'ALS license suspension defense',
-            description: 'Administrative suspension timeline and tactical options.',
-            href: '/als-license-suspension-ohio',
-          },
-          {
-            title: 'Motion to suppress OVI evidence',
-            description: 'Suppression-focused OVI defense strategy.',
-            href: '/motion-to-suppress-ovi-ohio',
-          },
-          {
-            title: 'Domestic violence first-offense defense',
-            description: 'Fast-response planning for first-offense domestic allegations.',
-            href: '/domestic-violence-first-offense-ohio-defense',
-          },
-          {
-            title: 'Civil protection order defense',
-            description: 'Hearing-focused defense for Ohio protection-order cases.',
-            href: '/civil-protection-order-defense-ohio',
-          },
-          {
-            title: 'Drug possession vs trafficking defense',
-            description: 'Charge distinction and evidence strategy in drug cases.',
-            href: '/drug-possession-vs-trafficking-ohio-defense',
-          },
-        ]}
-      />
-
-      <DeferredSection minHeight={520}>
-        <BlogSection posts={posts} />
-      </DeferredSection>
-
-      <DeferredSection minHeight={420}>
-        <LocationBlock />
-      </DeferredSection>
-
       {/* Contact Section */}
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <div className="space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="accent-line" />
-                  <p className="eyebrow text-brand-goldText">Get Started</p>
+                  <p className="eyebrow text-brand-goldText">Request a Case Review</p>
                 </div>
                 <h2 className="text-display-sm md:text-display-md">
-                  Request Your Free Case Review
+                  Tell us what happened and we’ll help you sort the urgent part first.
                 </h2>
                 <p className="text-lg text-brand-black/60">
-                  Tell us what happened. Nick responds promptly with clear next steps.
+                  Reach out if you need a quick read on license issues, bond conditions, the next court date, or how serious the charge really is.
                 </p>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <a
                   href={`tel:${OFFICE_PHONE_TEL}`}
-                  className="group card card-interactive flex items-center gap-4 p-5"
+                  className="group rounded-[1.5rem] border border-brand-black/10 bg-brand-offWhite/45 p-5 shadow-soft transition-all hover:-translate-y-1 hover:shadow-soft-lg"
                   data-cta="home_contact_call_office"
                   onClick={() => {
                     trackCtaClick('home_contact_call_office');
@@ -248,17 +216,18 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
                     });
                   }}
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-mango/10 transition-all group-hover:bg-brand-mango/20 group-hover:scale-110">
-                    <span className="text-2xl">📞</span>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-mango/12 text-brand-mangoText transition-colors group-hover:bg-brand-mango/18">
+                    <Phone className="h-5 w-5" />
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-brand-black/60">Prefer to talk?</p>
-                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">{OFFICE_PHONE_DISPLAY}</p>
-                  </div>
+                  <p className="mt-4 text-sm font-medium text-brand-black/60">Need the fastest response?</p>
+                  <p className="mt-1 text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
+                    Call or text {OFFICE_PHONE_DISPLAY}
+                  </p>
                 </a>
+
                 <a
                   href={`mailto:${OFFICE_EMAIL}`}
-                  className="group card card-interactive flex items-center gap-4 p-5"
+                  className="group rounded-[1.5rem] border border-brand-black/10 bg-brand-offWhite/45 p-5 shadow-soft transition-all hover:-translate-y-1 hover:shadow-soft-lg"
                   data-cta="home_contact_email_office"
                   onClick={() => {
                     trackCtaClick('home_contact_email_office');
@@ -267,14 +236,32 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
                     });
                   }}
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-leaf/10 transition-all group-hover:bg-brand-leaf/20 group-hover:scale-110">
-                    <span className="text-2xl">✉️</span>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-leaf/12 text-brand-leaf transition-colors group-hover:bg-brand-leaf/18">
+                    <Mail className="h-5 w-5" />
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-brand-black/60">Email us</p>
-                    <p className="font-bold text-brand-black transition-colors group-hover:text-brand-leaf">{OFFICE_EMAIL}</p>
-                  </div>
+                  <p className="mt-4 text-sm font-medium text-brand-black/60">Prefer to send details first?</p>
+                  <p className="mt-1 text-lg font-bold text-brand-black transition-colors group-hover:text-brand-leaf">
+                    Email {OFFICE_EMAIL}
+                  </p>
                 </a>
+              </div>
+
+              <div className="rounded-[1.75rem] border border-brand-black/10 bg-brand-offWhite/55 p-6">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-goldText">What happens next</p>
+                <ol className="mt-4 space-y-3 text-sm text-brand-black/70">
+                  <li className="flex gap-3">
+                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mangoText">1</span>
+                    <span>We review the facts you send over and identify the first real priority.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mangoText">2</span>
+                    <span>You get a prompt reply with clearer next steps and a recommendation on the best follow-up.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mangoText">3</span>
+                    <span>If it makes sense to move forward, we schedule the strategy conversation and case review.</span>
+                  </li>
+                </ol>
               </div>
             </div>
 
@@ -287,10 +274,18 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
+      <DeferredSection minHeight={520}>
+        <BlogSection posts={posts} />
+      </DeferredSection>
+
+      <DeferredSection minHeight={420}>
+        <LocationBlock />
+      </DeferredSection>
+
       <DeferredSection minHeight={260}>
         <CTASection
-          title="Need counsel now? Let's talk today."
-          body="Fast-moving situations deserve prompt, informed action. Schedule a consult or call to discuss your options."
+          title="Need counsel now? Start with the conversation that clears up the next move."
+          body="If the charge is fresh, the paperwork is confusing, or the court date is close, reach out now instead of guessing at the timeline."
           primaryLabel="Free Case Review"
           primaryHref="/contact"
           secondaryLabel={OFFICE_PHONE_DISPLAY}

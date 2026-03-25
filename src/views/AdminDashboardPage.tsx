@@ -1,21 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState, type ComponentType } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../contexts/AuthContext';
 import {
+  BookOpen,
   FileText,
+  HelpCircle,
+  Link2,
+  LogOut,
   Mail,
   MapPin,
-  LogOut,
-  Plus,
-  HelpCircle,
-  BookOpen,
-  Star,
   Send,
+  Star,
   Users,
-  Link2
 } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 import BlogManager from '../components/admin/BlogManager';
 import ContactManager from '../components/admin/ContactManager';
 import CheckpointManager from '../components/admin/CheckpointManager';
@@ -25,24 +24,93 @@ import ReviewManager from '../components/admin/ReviewManager';
 import SocialMediaManager from '../components/admin/SocialMediaManager';
 import SEORankManager from '../components/admin/SEORankManager';
 
+import { SEO } from '../lib/seo';
+
 type Tab = 'blog' | 'contacts' | 'checkpoints' | 'docs' | 'campaigns' | 'reviews' | 'social' | 'seo';
 
-import { SEO } from '../lib/seo';
+const tabMeta: Record<
+  Tab,
+  {
+    label: string;
+    description: string;
+    icon: ComponentType<{ className?: string }>;
+    group: 'daily' | 'growth' | 'ops';
+  }
+> = {
+  contacts: {
+    label: 'New Leads',
+    description: 'Review new intake, update status, and follow up quickly.',
+    icon: Mail,
+    group: 'daily',
+  },
+  blog: {
+    label: 'Publishing',
+    description: 'Draft, revise, and publish articles and content updates.',
+    icon: FileText,
+    group: 'daily',
+  },
+  campaigns: {
+    label: 'Review Campaigns',
+    description: 'Manage outreach and monitor invitation activity.',
+    icon: Users,
+    group: 'daily',
+  },
+  reviews: {
+    label: 'Google Reviews',
+    description: 'Monitor incoming reviews and prepare responses.',
+    icon: Star,
+    group: 'daily',
+  },
+  seo: {
+    label: 'Search Visibility',
+    description: 'Track rankings, indexing, and the search execution queue.',
+    icon: Link2,
+    group: 'growth',
+  },
+  social: {
+    label: 'Social Posts',
+    description: 'Plan and manage social promotion tied to new content.',
+    icon: Send,
+    group: 'growth',
+  },
+  checkpoints: {
+    label: 'Checkpoint Data',
+    description: 'Review announced checkpoint records and supporting inputs.',
+    icon: MapPin,
+    group: 'growth',
+  },
+  docs: {
+    label: 'Handoff Docs',
+    description: 'Generate, review, and share client-facing documents.',
+    icon: BookOpen,
+    group: 'ops',
+  },
+};
+
+const tabGroups = [
+  { key: 'daily' as const, label: 'Daily work' },
+  { key: 'growth' as const, label: 'Growth & reporting' },
+  { key: 'ops' as const, label: 'Operations' },
+];
+
+const quickActionTabs: Tab[] = ['contacts', 'blog', 'seo', 'campaigns'];
 
 export default function AdminDashboardPage() {
   const { user, loading, signOut } = useAuth();
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<Tab>('blog');
+  const [activeTab, setActiveTab] = useState<Tab>('contacts');
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/admin/login');
     }
-  }, [user, loading, router]);
+  }, [loading, router, user]);
+
+  const activeTabMeta = useMemo(() => tabMeta[activeTab], [activeTab]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#0F0F0F]">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );
@@ -57,98 +125,138 @@ export default function AdminDashboardPage() {
     router.push('/admin/login');
   };
 
-  const tabs = [
-    { id: 'blog' as Tab, label: 'Blog Posts', icon: FileText },
-    { id: 'seo' as Tab, label: 'Search Intelligence', icon: Link2 },
-    { id: 'social' as Tab, label: 'Social Media', icon: Send },
-    { id: 'campaigns' as Tab, label: 'Review Campaigns', icon: Users },
-    { id: 'reviews' as Tab, label: 'Google Reviews', icon: Star },
-    { id: 'contacts' as Tab, label: 'Contact Leads', icon: Mail },
-    { id: 'checkpoints' as Tab, label: 'DUI Checkpoints', icon: MapPin },
-    { id: 'docs' as Tab, label: 'Handoff Docs', icon: BookOpen },
-  ];
-
   return (
     <div className="min-h-screen bg-[#0F0F0F]">
       <SEO title="Admin Dashboard | Mango Law LLC" noindex={true} />
-      <header className="bg-[#1A1A1A] border-b border-[#2A2A2A] sticky top-0 z-50 shadow-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">ML</span>
+
+      <header className="sticky top-0 z-50 border-b border-[#2A2A2A] bg-[#101010]/95 backdrop-blur">
+        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] text-lg font-bold text-white shadow-lg">
+                ML
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">Mango Law CMS</h1>
-                <p className="text-xs text-slate-400">Admin Dashboard</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#E8A33C]">
+                  Mango Law Admin
+                </p>
+                <h1 className="mt-1 text-2xl font-bold text-white">Daily publishing, leads, and search operations</h1>
+                <p className="mt-2 max-w-2xl text-sm text-slate-400">
+                  Use this dashboard for the work that changes the live site and the client-facing reporting first. Configuration and docs stay in secondary actions.
+                </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => router.push('/admin/connections')}
-                className="flex items-center gap-2 px-3 py-2 text-slate-400 hover:text-white hover:bg-[#232323] rounded-lg transition"
-                title="Connections & Integrations"
+                className="inline-flex items-center gap-2 rounded-full border border-[#2A2A2A] bg-[#1A1A1A] px-4 py-2.5 text-sm font-medium text-slate-200 transition hover:border-[#E8A33C]/30 hover:text-white"
               >
-                <Link2 className="w-5 h-5" />
-                <span className="hidden sm:inline">Connections</span>
+                <Link2 className="h-4 w-4" />
+                Connections
               </button>
-
               <button
                 onClick={() => window.open('/docs/admin-guide', '_blank')}
-                className="flex items-center gap-2 px-3 py-2 text-slate-400 hover:text-white hover:bg-[#232323] rounded-lg transition"
-                title="Help & Documentation"
+                className="inline-flex items-center gap-2 rounded-full border border-[#2A2A2A] bg-[#1A1A1A] px-4 py-2.5 text-sm font-medium text-slate-200 transition hover:border-[#E8A33C]/30 hover:text-white"
               >
-                <HelpCircle className="w-5 h-5" />
-                <span className="hidden sm:inline">Help</span>
+                <HelpCircle className="h-4 w-4" />
+                Guide
               </button>
-
-              <div className="flex items-center gap-3 px-3 py-2 bg-[#232323] rounded-lg border border-[#2A2A2A]">
-                <div className="w-8 h-8 bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-md">
+              <div className="inline-flex items-center gap-3 rounded-full border border-[#2A2A2A] bg-[#1A1A1A] px-3 py-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] text-sm font-semibold text-white">
                   {user.email?.[0].toUpperCase()}
                 </div>
-                <span className="text-sm text-slate-300 hidden sm:inline">{user.email}</span>
+                <span className="hidden text-sm text-slate-300 sm:inline">{user.email}</span>
               </div>
-
               <button
                 onClick={handleSignOut}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition shadow-md"
+                className="inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700"
               >
-                <LogOut className="w-4 h-4" />
-                <span className="hidden sm:inline">Sign Out</span>
+                <LogOut className="h-4 w-4" />
+                Sign out
               </button>
             </div>
           </div>
 
-          <nav className="flex gap-1 -mb-px overflow-x-auto scrollbar-hide">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
+          <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {quickActionTabs.map((tab) => {
+              const meta = tabMeta[tab];
+              const Icon = meta.icon;
+
               return (
                 <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-3 font-medium text-sm transition whitespace-nowrap ${
-                    activeTab === tab.id
-                      ? 'text-[#E8A33C] border-b-2 border-[#E8A33C] bg-[#232323]/50'
-                      : 'text-slate-400 hover:text-white hover:bg-[#232323]/30'
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`rounded-[1.25rem] border p-4 text-left transition ${
+                    activeTab === tab
+                      ? 'border-[#E8A33C]/40 bg-[#2A2418] shadow-lg'
+                      : 'border-[#2A2A2A] bg-[#171717] hover:border-[#E8A33C]/20 hover:bg-[#1D1D1D]'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
-                  {tab.label}
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8A33C]/12 text-[#E8A33C]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">{meta.label}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-400">{meta.description}</p>
+                    </div>
+                  </div>
                 </button>
               );
             })}
-          </nav>
+          </div>
+
+          <div className="mt-6 space-y-4">
+            {tabGroups.map((group) => (
+              <div key={group.key}>
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+                  {group.label}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {(Object.keys(tabMeta) as Tab[])
+                    .filter((tab) => tabMeta[tab].group === group.key)
+                    .map((tab) => {
+                      const meta = tabMeta[tab];
+                      const Icon = meta.icon;
+
+                      return (
+                        <button
+                          key={tab}
+                          onClick={() => setActiveTab(tab)}
+                          className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
+                            activeTab === tab
+                              ? 'border-[#E8A33C]/40 bg-[#E8A33C]/10 text-[#F3C26E]'
+                              : 'border-[#2A2A2A] bg-[#171717] text-slate-300 hover:border-[#E8A33C]/20 hover:text-white'
+                          }`}
+                        >
+                          <Icon className="h-4 w-4" />
+                          {meta.label}
+                        </button>
+                      );
+                    })}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mb-6 rounded-[1.5rem] border border-[#2A2A2A] bg-[#171717] px-5 py-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8A33C]">
+            Active workspace
+          </p>
+          <h2 className="mt-2 text-xl font-bold text-white">{activeTabMeta.label}</h2>
+          <p className="mt-1 text-sm text-slate-400">{activeTabMeta.description}</p>
+        </div>
+
+        {activeTab === 'contacts' && <ContactManager />}
         {activeTab === 'blog' && <BlogManager />}
-        {activeTab === 'seo' && <SEORankManager />}
-        {activeTab === 'social' && <SocialMediaManager />}
         {activeTab === 'campaigns' && <ReviewCampaignManager />}
         {activeTab === 'reviews' && <ReviewManager />}
-        {activeTab === 'contacts' && <ContactManager />}
+        {activeTab === 'seo' && <SEORankManager />}
+        {activeTab === 'social' && <SocialMediaManager />}
         {activeTab === 'checkpoints' && <CheckpointManager />}
         {activeTab === 'docs' && <HandoffDocManager />}
       </main>

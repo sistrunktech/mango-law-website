@@ -33,7 +33,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 
 ## Environment Variables
 - Client-exposed (`NEXT_PUBLIC_`): `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`, `NEXT_PUBLIC_MAPBOX_STYLE_URL` (optional).
-- Optional client config: `NEXT_PUBLIC_SUPABASE_CUSTOM_DOMAIN` (recommended for OAuth branding; use an HTTPS Supabase custom domain like `https://api.mango.law`).
+- Optional client config: `NEXT_PUBLIC_SUPABASE_CUSTOM_DOMAIN` (only if a current, approved custom domain exists for this Supabase project; do not revive retired hosts such as `api.mango.law`).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional), `SERPER_API_KEY` (Search Intelligence).
 - Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_CC`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY`, `REVIEW_RESPONSE_CONTACT_PHONE_TEL`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (optional).
 - SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
@@ -210,23 +210,14 @@ Use `/admin/connections` to connect and *select the correct resources* for each 
 - Consolidated blog rules live in `docs/technical/BLOG_REQUIREMENTS.md` (word count, ORC links, visuals, trust metadata).
 - Current content sources: file-based (`src/data/blogPosts.ts`) + DB (`blog_posts`). Long term, migrate fully to DB-driven content.
 
-### OAuth Branding (Avoid “project-id.supabase.co” on the Google consent screen)
-By default, Supabase-hosted OAuth redirects and Edge Functions use the Supabase project domain (e.g., `https://<project-id>.supabase.co/...`).
-Google may display that domain on the consent screen (unprofessional / untrusted).
+### OAuth Branding (Avoid stale custom-domain guidance)
+By default, Supabase-hosted OAuth redirects and Edge Functions use the Supabase project domain (for example, `https://<project-id>.supabase.co/...`).
+Google may display that domain on the consent screen, but the connectors can still work correctly.
 
-Recommended fix: configure a **Supabase Custom Domain** (now using `api.mango.law`) and update Google OAuth redirect URIs to use it.
-
-High-level steps:
-1. Supabase Dashboard → Custom Domains:
-   - Add a custom domain (commonly `api.mango.law`).
-   - Verify DNS + TLS is active.
-2. Update Google Cloud Console OAuth Client:
-   - Authorized redirect URI(s) should include the new callback URL:
-     - `https://api.mango.law/functions/v1/google-oauth-callback`
-   - Keep the old Supabase URL temporarily during migration if needed, then remove it later.
-3. Ensure the site uses the custom domain consistently for Supabase endpoints (Auth + Functions) to avoid mixed-domain flows.
-
-If you don’t do this, the connectors can still work — they’ll just show the Supabase domain during OAuth.
+Important:
+1. Do **not** recreate retired hosts such as `api.mango.law` just to change the domain shown during OAuth.
+2. If you already have an approved, current Supabase custom domain for this project, document it here and update Google OAuth redirect URIs deliberately.
+3. If no approved custom domain exists, keep the Supabase project URL and focus on correct Google account/resource selection instead.
 
 ## Supabase Auth Security
 - Enable **Leaked Password Protection** in Supabase Dashboard → Auth → Providers → Email.

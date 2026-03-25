@@ -10,8 +10,7 @@ import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 function useMinWidthQuery(minWidthPx: number): boolean {
-  const getMatches = () => (typeof window === 'undefined' ? true : window.matchMedia(`(min-width: ${minWidthPx}px)`).matches);
-  const [matches, setMatches] = useState(getMatches);
+  const [matches, setMatches] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;

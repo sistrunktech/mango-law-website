@@ -1,463 +1,337 @@
+import type { ReactNode } from 'react';
 import {
+  AlertCircle,
+  BookOpen,
+  CheckCircle,
   FileText,
-  Mail,
-  MapPin,
   Link2,
   LogIn,
-  Edit2,
-  Plus,
-  Trash2,
-  Eye,
-  Save,
-  Filter,
-  Search,
-  Clock,
-  CheckCircle,
-  AlertCircle
+  Mail,
+  MapPin,
 } from 'lucide-react';
 
 import { SEO } from '../lib/seo';
 
+const quickLinks = [
+  { href: '#getting-started', label: 'Getting started' },
+  { href: '#daily-work', label: 'Daily work' },
+  { href: '#publishing', label: 'Publishing' },
+  { href: '#leads', label: 'Leads' },
+  { href: '#google-connections', label: 'Google connections' },
+  { href: '#checkpoints', label: 'Checkpoint workflow' },
+  { href: '#troubleshooting', label: 'Troubleshooting' },
+];
+
+function Section({
+  id,
+  icon,
+  title,
+  description,
+  children,
+}: {
+  id: string;
+  icon: ReactNode;
+  title: string;
+  description: string;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} className="scroll-mt-24 rounded-[2rem] border border-brand-black/10 bg-white p-8 shadow-soft">
+      <div className="flex items-start gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-mango/12 text-brand-mangoText">
+          {icon}
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-brand-black">{title}</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-brand-black/65">{description}</p>
+        </div>
+      </div>
+      <div className="mt-6 space-y-6">{children}</div>
+    </section>
+  );
+}
+
+function StepList({
+  title,
+  steps,
+}: {
+  title: string;
+  steps: string[];
+}) {
+  return (
+    <div className="rounded-[1.5rem] border border-brand-black/8 bg-brand-offWhite/55 p-5">
+      <h3 className="text-lg font-semibold text-brand-black">{title}</h3>
+      <ol className="mt-4 space-y-3 text-sm text-brand-black/68">
+        {steps.map((step, index) => (
+          <li key={step} className="flex gap-3">
+            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-xs font-bold text-brand-mangoText">
+              {index + 1}
+            </span>
+            <span>{step}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function Note({
+  tone = 'info',
+  children,
+}: {
+  tone?: 'info' | 'warning' | 'success';
+  children: ReactNode;
+}) {
+  const toneClasses =
+    tone === 'warning'
+      ? 'border-amber-500/30 bg-amber-50 text-amber-950'
+      : tone === 'success'
+      ? 'border-brand-leaf/25 bg-brand-leaf/8 text-brand-black'
+      : 'border-brand-black/10 bg-white text-brand-black/72';
+
+  return <div className={`rounded-[1.25rem] border p-4 text-sm leading-relaxed ${toneClasses}`}>{children}</div>;
+}
+
 export default function AdminGuidePage() {
   return (
-    <div className="min-h-screen bg-slate-900 py-12">
+    <div className="min-h-screen bg-brand-offWhite py-12">
       <SEO title="Admin Guide | Mango Law LLC" noindex={true} />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden">
-          <div className="bg-gradient-to-r from-amber-500 to-orange-600 p-8 text-white">
-            <h1 className="text-4xl font-bold mb-2">Mango Law CMS Admin Guide</h1>
-            <p className="text-amber-100">Complete guide to managing your website content</p>
+
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
+        <div className="overflow-hidden rounded-[2rem] border border-brand-black/10 bg-gradient-to-br from-brand-black via-[#153023] to-brand-forest px-8 py-10 text-white shadow-soft-lg">
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-brand-mango">Admin Guide</p>
+          <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight">
+            The current workflow for content, leads, search connections, and checkpoint updates.
+          </h1>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/75">
+            This guide is organized around the work that happens most often. Start with the daily tasks, then use the connection and troubleshooting sections when something needs setup or attention.
+          </p>
+
+          <div className="mt-8 grid gap-3 md:grid-cols-3">
+            {quickLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/88 transition hover:bg-white/10"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <Section
+          id="getting-started"
+          icon={<LogIn className="h-6 w-6" />}
+          title="Getting started"
+          description="Use the admin area for operational work only. The login and dashboard are internal tools and should not expose infrastructure details or old environment-specific instructions."
+        >
+          <StepList
+            title="Sign in"
+            steps={[
+              'Go to /admin/login and sign in with your authorized Mango Law account.',
+              'After sign-in, you land on the dashboard with the daily-work tabs first.',
+              'Use the dashboard for publishing, lead review, search visibility, and handoff docs. Use /admin/connections only when you need to connect or re-check Google tools.',
+            ]}
+          />
+
+          <Note tone="success">
+            The dashboard is organized by daily work first: new leads, publishing, search visibility, review outreach, then secondary operations.
+          </Note>
+        </Section>
+
+        <Section
+          id="daily-work"
+          icon={<BookOpen className="h-6 w-6" />}
+          title="Daily work"
+          description="The most important day-to-day tasks are lead follow-up, publishing, and visibility checks. Those should happen before configuration cleanup or documentation work."
+        >
+          <div className="grid gap-6 lg:grid-cols-2">
+            <StepList
+              title="Recommended order each day"
+              steps={[
+                'Review new leads first and update statuses so nothing urgent sits untouched.',
+                'Check the search/SEO workspace for indexing, ranking, or connector issues that need immediate action.',
+                'Publish or revise content once the lead and visibility work is stable.',
+                'Use review campaigns, reviews, and social promotion after the core intake and content work is under control.',
+              ]}
+            />
+            <StepList
+              title="Quick navigation"
+              steps={[
+                'New Leads: triage inbound inquiries and update status.',
+                'Publishing: create, edit, and publish blog content.',
+                'Search Visibility: check Search Console-connected data, ranking snapshots, and SEO tasks.',
+                'Review Campaigns / Google Reviews: manage client-review workflows and responses.',
+              ]}
+            />
+          </div>
+        </Section>
+
+        <Section
+          id="publishing"
+          icon={<FileText className="h-6 w-6" />}
+          title="Publishing and content updates"
+          description="The publishing flow should be simple: draft, review, publish, then confirm the post or page is actually live and linked where it needs to be."
+        >
+          <div className="grid gap-6 lg:grid-cols-2">
+            <StepList
+              title="Publish a new article"
+              steps={[
+                'Open the Publishing workspace and create or edit the article.',
+                'Fill in the title, slug, excerpt, body, category, and any required review metadata.',
+                'Publish only after the page reads cleanly, links are correct, and the live route is the intended one.',
+                'After publishing, verify the public page and confirm it appears in the blog index or supporting link modules where expected.',
+              ]}
+            />
+            <StepList
+              title="When revising existing content"
+              steps={[
+                'Keep the live URL stable unless there is an explicit redirect plan.',
+                'Use the article/page to solve a visitor problem first, then make sure the supporting SEO elements still align.',
+                'If the change affects approved/protected content, log it in the content changelog before wrapping up.',
+              ]}
+            />
           </div>
 
-          <div className="p-8 space-y-12">
+          <Note>
+            The admin guide should reinforce current live workflows, not legacy setup assumptions. If a route, page type, or publishing rule changes, update this guide alongside the interface.
+          </Note>
+        </Section>
 
-            <Section
-              icon={<LogIn className="w-6 h-6" />}
-              title="Getting Started"
-              id="getting-started"
-            >
-              <p className="text-slate-300 mb-4">
-                To access the admin dashboard, navigate to <code className="px-2 py-1 bg-slate-700 rounded text-amber-400">/admin/login</code> and sign in with your credentials.
-              </p>
+        <Section
+          id="leads"
+          icon={<Mail className="h-6 w-6" />}
+          title="Lead review and intake follow-up"
+          description="The lead workspace is for fast triage. Keep statuses accurate, add notes where useful, and make sure the next action is obvious."
+        >
+          <div className="grid gap-6 lg:grid-cols-2">
+            <StepList
+              title="Lead handling"
+              steps={[
+                'Open New Leads first and review the most recent submissions.',
+                'Update the status after the first real follow-up attempt so the queue stays current.',
+                'Use internal notes for details that matter to follow-up, not for public-facing copy.',
+                'Close or qualify leads only when the outcome is clear enough that another team member could understand the record.',
+              ]}
+            />
+            <div className="space-y-4">
+              <Note tone="success">
+                Prioritize lead speed over dashboard perfection. The point of the CRM view is to avoid dropped inquiries and keep the follow-up queue honest.
+              </Note>
+              <Note>
+                If a lead seems tied to a content or tracking problem, check the Search Visibility or Publishing workspace after the intake step is covered.
+              </Note>
+            </div>
+          </div>
+        </Section>
 
-              <StepBox
-                number={1}
-                title="Navigate to Login Page"
-                description="Go to yourdomain.com/admin/login"
-              />
-              <StepBox
-                number={2}
-                title="Enter Credentials"
-                description="Use your authorized email and password"
-              />
-              <StepBox
-                number={3}
-                title="Access Dashboard"
-                description="You'll be redirected to the admin dashboard"
-              />
+        <Section
+          id="google-connections"
+          icon={<Link2 className="h-6 w-6" />}
+          title="Google connections"
+          description="Use the Connections page to connect Google Business Profile, Analytics, Search Console, and Tag Manager, then save the correct account/resource for mango.law."
+        >
+          <div className="grid gap-6 lg:grid-cols-2">
+            <StepList
+              title="Connect or reconnect a Google tool"
+              steps={[
+                'Open /admin/connections and choose Connect or Reconnect for the product you need.',
+                'Complete the Google consent flow using the account that actually owns or has access to the resource.',
+                'Run Check status to load the accounts, properties, containers, or sites available to that connection.',
+                'Select the correct resource and click Save before leaving the page.',
+              ]}
+            />
+            <StepList
+              title="Resource selection defaults"
+              steps={[
+                'Search Console: prefer sc-domain:mango.law when available; use https://mango.law/ as the fallback.',
+                'Analytics: choose the production GA4 property for mango.law, not a stale test property.',
+                'Tag Manager: choose the production web container for mango.law.',
+                'Business Profile: choose the Mango Law LLC location tied to the live office listing.',
+              ]}
+            />
+          </div>
 
-              <InfoBox type="info">
-                If you don't have login credentials, contact your system administrator to set up your account.
-              </InfoBox>
-            </Section>
+          <Note tone="warning">
+            If the Google consent screen shows the Supabase project domain, the connection can still work. Do not recreate retired hostnames such as <code>api.mango.law</code> just to change the label on the consent screen.
+          </Note>
 
-            <Section
-              icon={<FileText className="w-6 h-6" />}
-              title="Managing Blog Posts"
-              id="blog-posts"
-            >
-              <p className="text-slate-300 mb-6">
-                The Blog Manager allows you to create, edit, and publish blog posts for your website.
-              </p>
+          <Note>
+            When something looks empty, the usual causes are the wrong Google user, missing permissions, or a resource that has not been created yet. Reconnect with the correct account, then run Check status again.
+          </Note>
+        </Section>
 
-              <SubSection title="Creating a New Post">
-                <ol className="list-decimal list-inside space-y-3 text-slate-300">
-                  <li>Click the <IconButton icon={<Plus />} label="New Post" /> button</li>
-                  <li>Fill in the required fields:
-                    <ul className="list-disc list-inside ml-6 mt-2 space-y-1 text-slate-400">
-                      <li><strong className="text-slate-300">Title:</strong> The main headline of your post</li>
-                      <li><strong className="text-slate-300">Slug:</strong> URL-friendly version (auto-generated from title)</li>
-                      <li><strong className="text-slate-300">Excerpt:</strong> Brief 1-2 sentence summary</li>
-                      <li><strong className="text-slate-300">Content:</strong> Full post content (supports Markdown)</li>
-                      <li><strong className="text-slate-300">Category:</strong> Organize by topic (e.g., "Criminal Defense")</li>
-                      <li><strong className="text-slate-300">Tags:</strong> Comma-separated keywords</li>
-                    </ul>
-                  </li>
-                  <li>Check "Published" to make it live, or leave unchecked to save as draft</li>
-                  <li>Click <IconButton icon={<Save />} label="Save Post" /> to save</li>
-                </ol>
-              </SubSection>
+        <Section
+          id="checkpoints"
+          icon={<MapPin className="h-6 w-6" />}
+          title="Checkpoint workflow"
+          description="Checkpoint management is for announced/public notice content, not speculation. The public page should stay accurate about what was announced and how visitors should use the information."
+        >
+          <div className="grid gap-6 lg:grid-cols-2">
+            <StepList
+              title="Checkpoint updates"
+              steps={[
+                'Review announced notices, source URLs, county/city details, and dates before marking anything verified.',
+                'Keep the public-facing framing focused on announced checkpoints and rights guidance, not real-time prediction.',
+                'If you edit checkpoint copy or related FAQ guidance, verify the public page still reads as a legal guide rather than a utility feed.',
+              ]}
+            />
+            <div className="space-y-4">
+              <Note tone="success">
+                The checkpoint page works best when the map, list, and rights guidance support each other. If one module becomes noisy or speculative, simplify it instead of adding more layers.
+              </Note>
+              <Note>
+                Save the source and announcement details whenever possible so the public page can explain where a notice came from.
+              </Note>
+            </div>
+          </div>
+        </Section>
 
-              <SubSection title="Editing Existing Posts">
-                <p className="text-slate-300 mb-3">
-                  To edit a post, click the <IconButton icon={<Edit2 />} label="Edit" color="blue" /> button next to any post in the list.
-                </p>
-              </SubSection>
+        <Section
+          id="troubleshooting"
+          icon={<AlertCircle className="h-6 w-6" />}
+          title="Troubleshooting"
+          description="Use these checks before assuming a code change is required."
+        >
+          <div className="grid gap-6 lg:grid-cols-2">
+            <StepList
+              title="If a Google integration looks wrong"
+              steps={[
+                'Reconnect with the correct Google user.',
+                'Run Check status again after permissions are granted.',
+                'Verify the selected resource is the production mango.law resource, not a stale or preview property.',
+              ]}
+            />
+            <StepList
+              title="If a content change is not visible"
+              steps={[
+                'Confirm the item is actually published and linked where expected.',
+                'Verify the public route itself instead of relying only on the dashboard state.',
+                'If the live page is missing, treat it as a deploy or release-path issue before assuming the content is gone.',
+              ]}
+            />
+          </div>
 
-              <SubSection title="Publishing & Unpublishing">
-                <p className="text-slate-300 mb-3">
-                  Use the <IconButton icon={<Eye />} label="" color="slate" /> button to quickly toggle between published and draft status.
-                </p>
-                <InfoBox type="success">
-                  Published posts appear immediately on your public website at /blog
-                </InfoBox>
-              </SubSection>
+          <Note>
+            When the issue is operational rather than editorial, document what happened in the appropriate runbook or ticket so the next person is not reconstructing context from scratch.
+          </Note>
+        </Section>
 
-              <SubSection title="Deleting Posts">
-                <p className="text-slate-300 mb-3">
-                  Click the <IconButton icon={<Trash2 />} label="" color="red" /> button to delete a post. You'll be asked to confirm.
-                </p>
-                <InfoBox type="warning">
-                  Deleted posts cannot be recovered. Make sure you have a backup if needed.
-                </InfoBox>
-              </SubSection>
-            </Section>
-
-            <Section
-              icon={<Mail className="w-6 h-6" />}
-              title="Managing Contact Leads"
-              id="contact-leads"
-            >
-              <p className="text-slate-300 mb-6">
-                The Contact Manager helps you track and respond to inquiries from potential clients.
-              </p>
-
-              <SubSection title="Viewing Leads">
-                <p className="text-slate-300 mb-4">
-                  All contact form submissions appear in the Contact Leads tab. Each lead shows:
-                </p>
-                <ul className="list-disc list-inside space-y-2 text-slate-300 ml-4">
-                  <li>Name and contact information</li>
-                  <li>Message content</li>
-                  <li>Case type (if provided)</li>
-                  <li>Submission date</li>
-                  <li>Current status</li>
-                </ul>
-              </SubSection>
-
-              <SubSection title="Lead Statuses">
-                <div className="grid sm:grid-cols-2 gap-3 mb-4">
-                  <StatusBadge status="new" label="New" description="Unread submission" />
-                  <StatusBadge status="contacted" label="Contacted" description="Initial contact made" />
-                  <StatusBadge status="qualified" label="Qualified" description="Potential client qualified" />
-                  <StatusBadge status="closed" label="Closed" description="No longer active" />
-                </div>
-              </SubSection>
-
-              <SubSection title="Managing a Lead">
-                <ol className="list-decimal list-inside space-y-3 text-slate-300">
-                  <li>Click on any lead to view full details</li>
-                  <li>Update the status dropdown to track progress</li>
-                  <li>Add internal notes in the notes field (private, not visible to client)</li>
-                  <li>Click email or phone to quickly contact the lead</li>
-                </ol>
-              </SubSection>
-
-              <SubSection title="Filtering Leads">
-                <p className="text-slate-300 mb-3">
-                  Use the dropdown filter to view leads by status (All, New, Contacted, Qualified, Closed).
-                </p>
-              </SubSection>
-            </Section>
-
-            <Section
-              icon={<MapPin className="w-6 h-6" />}
-              title="Managing DUI Checkpoints"
-              id="checkpoints"
-            >
-              <p className="text-slate-300 mb-6">
-                Track and display DUI checkpoint locations and schedules across Ohio.
-              </p>
-
-              <SubSection title="Adding a Checkpoint">
-                <ol className="list-decimal list-inside space-y-3 text-slate-300">
-                  <li>Click <IconButton icon={<Plus />} label="New Checkpoint" /></li>
-                  <li>Fill in the checkpoint details:
-                    <ul className="list-disc list-inside ml-6 mt-2 space-y-1 text-slate-400">
-                      <li><strong className="text-slate-300">Title:</strong> Brief name (e.g., "I-71 Northbound Checkpoint")</li>
-                      <li><strong className="text-slate-300">Location Address:</strong> Specific intersection or mile marker</li>
-                      <li><strong className="text-slate-300">City & County:</strong> Location details</li>
-                      <li><strong className="text-slate-300">Coordinates:</strong> Latitude and longitude for map display</li>
-                      <li><strong className="text-slate-300">Start/End Date:</strong> Checkpoint schedule</li>
-                      <li><strong className="text-slate-300">Status:</strong> Upcoming, Active, Completed, or Cancelled</li>
-                      <li><strong className="text-slate-300">Source:</strong> Information source (e.g., "Columbus PD")</li>
-                    </ul>
-                  </li>
-                  <li>Check "Verified" if confirmed by official source</li>
-                  <li>Click Save Checkpoint</li>
-                </ol>
-              </SubSection>
-
-              <SubSection title="Checkpoint Statuses">
-                <div className="grid sm:grid-cols-2 gap-3 mb-4">
-                  <StatusBadge status="upcoming" label="Upcoming" description="Scheduled for future date" />
-                  <StatusBadge status="active" label="Active" description="Currently happening" />
-                  <StatusBadge status="completed" label="Completed" description="Past checkpoint" />
-                  <StatusBadge status="cancelled" label="Cancelled" description="No longer happening" />
-                </div>
-              </SubSection>
-
-              <SubSection title="Finding Coordinates">
-                <p className="text-slate-300 mb-3">
-                  To find latitude and longitude for a location:
-                </p>
-                <ol className="list-decimal list-inside space-y-2 text-slate-300">
-                  <li>Go to Google Maps</li>
-                  <li>Right-click on the exact location</li>
-                  <li>Click on the coordinates that appear</li>
-                  <li>Copy and paste into the checkpoint form</li>
-                </ol>
-              </SubSection>
-
-              <SubSection title="Search & Filter">
-                <p className="text-slate-300 mb-3">
-                  Use the search box to find checkpoints by city, address, or title. Filter by status to view only upcoming, active, completed, or cancelled checkpoints.
-                </p>
-              </SubSection>
-            </Section>
-
-            <Section
-              icon={<AlertCircle className="w-6 h-6" />}
-              title="Best Practices"
-              id="best-practices"
-            >
-              <BestPractice
-                title="Regular Updates"
-                description="Check the dashboard daily for new contact submissions and update checkpoint information as it becomes available."
-              />
-              <BestPractice
-                title="Clear Communication"
-                description="Update lead statuses promptly and add notes to track all interactions with potential clients."
-              />
-              <BestPractice
-                title="Content Quality"
-                description="Write clear, helpful blog posts that answer common questions. Use proper formatting and check for errors before publishing."
-              />
-              <BestPractice
-                title="Verify Information"
-                description="Always verify checkpoint information from official sources before marking as verified."
-              />
-              <BestPractice
-                title="Security"
-                description="Never share your admin credentials. Log out when finished, especially on shared computers."
-              />
-            </Section>
-
-            <Section
-              icon={<Link2 className="w-6 h-6" />}
-              title="Google Integrations (GA4 / GSC / GTM)"
-              id="google-integrations"
-            >
-              <p className="text-slate-300 mb-4">
-                Use the Connections hub to link your Google tools and select the correct account/resources for <strong className="text-white">mango.law</strong>.
-              </p>
-
-              <StepBox
-                number={1}
-                title="Open Connections"
-                description="Go to /admin/connections"
-              />
-              <StepBox
-                number={2}
-                title="Connect a Google tool"
-                description="Click Connect (or Reconnect) for Analytics, Search Console, or Tag Manager, then complete the Google consent screen."
-              />
-              <StepBox
-                number={3}
-                title="Run “Check status”"
-                description="This loads the accounts/resources your Google connection can see."
-              />
-              <StepBox
-                number={4}
-                title="Select the correct Account + Resource"
-                description="If you have multiple Google accounts, choose the correct one, then choose the GA4 Property / GSC Property / GTM Container and click Save."
-              />
-
-              <InfoBox type="info">
-                Search Console typically works best with the <strong className="text-white">domain property</strong> (<code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">sc-domain:mango.law</code>). If you only have URL-prefix properties, choose <code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">https://mango.law/</code>.
-              </InfoBox>
-              <InfoBox type="warning">
-                If you picked the wrong signed-in Google user during OAuth, use Reconnect and sign in with the correct Google account, then re-run “Check status”.
-              </InfoBox>
-              <InfoBox type="info">
-                If the Google consent screen shows a Supabase project URL (like <code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">https://&lt;project-id&gt;.supabase.co</code>), the connectors can still work — but for a more professional experience, set up a Supabase custom domain (example: <code className="px-1 py-0.5 bg-slate-700 rounded text-amber-300">api.mango.law</code>) and update the OAuth redirect URI.
-              </InfoBox>
-              <InfoBox type="info">
-                If something feels “stuck”, expand the <strong className="text-white">Debug payload</strong> on the Connections page to confirm what Google returned (accounts/properties/containers/sites) before changing settings.
-              </InfoBox>
-            </Section>
-
-            <Section
-              icon={<CheckCircle className="w-6 h-6" />}
-              title="Quick Reference"
-              id="quick-reference"
-            >
-              <div className="bg-slate-700 rounded-lg p-6 space-y-4">
-                <h4 className="font-semibold text-white mb-4">Common Actions</h4>
-                <QuickRefItem action="Create blog post" shortcut="Blog Posts → New Post" />
-                <QuickRefItem action="View new leads" shortcut="Contact Leads → Filter: New" />
-                <QuickRefItem action="Add checkpoint" shortcut="DUI Checkpoints → New Checkpoint" />
-                <QuickRefItem action="Publish draft" shortcut="Click eye icon on draft post" />
-                <QuickRefItem action="Update lead status" shortcut="Select lead → Change status dropdown" />
-              </div>
-            </Section>
-
-            <Section
-              icon={<AlertCircle className="w-6 h-6" />}
-              title="Troubleshooting"
-              id="troubleshooting"
-            >
-              <TroubleshootItem
-                problem="Can't log in"
-                solution="Verify your email and password. If you've forgotten your password, contact your system administrator."
-              />
-              <TroubleshootItem
-                problem="Changes not appearing on website"
-                solution="Make sure the blog post is marked as 'Published'. Clear your browser cache and refresh the page."
-              />
-              <TroubleshootItem
-                problem="Lost unsaved work"
-                solution="The CMS does not auto-save. Click Save frequently when editing content."
-              />
-              <TroubleshootItem
-                problem="Can't delete item"
-                solution="Make sure you're logged in. Some items may have restrictions. Contact support if the issue persists."
-              />
-            </Section>
-
-            <div className="bg-gradient-to-r from-amber-500/20 to-orange-600/20 border border-amber-500/30 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-amber-400 mb-3">Need Help?</h3>
-              <p className="text-slate-300">
-                If you have questions or encounter issues not covered in this guide, please contact technical support or your system administrator.
+        <div className="rounded-[1.75rem] border border-brand-black/10 bg-white px-6 py-5 shadow-soft">
+          <div className="flex items-start gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-mango/12 text-brand-mangoText">
+              <CheckCircle className="h-5 w-5" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-brand-black">Keep the guide current</h2>
+              <p className="mt-2 text-sm leading-relaxed text-brand-black/68">
+                This page should mirror the actual admin workflow. If the dashboard, connections flow, or publishing rules change, update this guide in the same pass so the visible documentation does not drift from the live system.
               </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function Section({ icon, title, id, children }: { icon: React.ReactNode; title: string; id: string; children: React.ReactNode }) {
-  return (
-    <section id={id} className="scroll-mt-8">
-      <div className="flex items-center gap-3 mb-6 pb-3 border-b border-slate-700">
-        <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center text-white">
-          {icon}
-        </div>
-        <h2 className="text-2xl font-bold text-white">{title}</h2>
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="mb-6">
-      <h3 className="text-lg font-semibold text-amber-400 mb-3">{title}</h3>
-      {children}
-    </div>
-  );
-}
-
-function StepBox({ number, title, description }: { number: number; title: string; description: string }) {
-  return (
-    <div className="flex gap-4 mb-4 bg-slate-700/50 rounded-lg p-4">
-      <div className="flex-shrink-0 w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold">
-        {number}
-      </div>
-      <div>
-        <h4 className="font-semibold text-white mb-1">{title}</h4>
-        <p className="text-sm text-slate-400">{description}</p>
-      </div>
-    </div>
-  );
-}
-
-function InfoBox({ type, children }: { type: 'info' | 'warning' | 'success'; children: React.ReactNode }) {
-  const styles = {
-    info: 'bg-blue-500/20 border-blue-500/50 text-blue-200',
-    warning: 'bg-orange-500/20 border-orange-500/50 text-orange-200',
-    success: 'bg-green-500/20 border-green-500/50 text-green-200',
-  };
-
-  return (
-    <div className={`mt-4 p-4 rounded-lg border ${styles[type]}`}>
-      {children}
-    </div>
-  );
-}
-
-function IconButton({ icon, label, color = 'amber' }: { icon: React.ReactNode; label?: string; color?: string }) {
-  const colors = {
-    amber: 'bg-gradient-to-r from-amber-500 to-orange-600',
-    blue: 'bg-blue-600',
-    red: 'bg-red-600',
-    slate: 'bg-slate-600',
-  };
-
-  return (
-    <span className={`inline-flex items-center gap-1 px-2 py-1 ${colors[color as keyof typeof colors]} text-white text-xs rounded`}>
-      {icon}
-      {label}
-    </span>
-  );
-}
-
-function StatusBadge({ status, label, description }: { status: string; label: string; description: string }) {
-  const colors = {
-    new: 'bg-blue-600',
-    contacted: 'bg-yellow-600',
-    qualified: 'bg-green-600',
-    closed: 'bg-slate-600',
-    upcoming: 'bg-blue-600',
-    active: 'bg-green-600',
-    completed: 'bg-slate-600',
-    cancelled: 'bg-red-600',
-  };
-
-  return (
-    <div className="bg-slate-700 rounded-lg p-3">
-      <div className="flex items-center gap-2 mb-1">
-        <span className={`px-2 py-1 ${colors[status as keyof typeof colors]} text-white text-xs font-medium rounded`}>
-          {label}
-        </span>
-      </div>
-      <p className="text-xs text-slate-400">{description}</p>
-    </div>
-  );
-}
-
-function BestPractice({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="flex gap-4 mb-4">
-      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-      <div>
-        <h4 className="font-semibold text-white mb-1">{title}</h4>
-        <p className="text-sm text-slate-400">{description}</p>
-      </div>
-    </div>
-  );
-}
-
-function QuickRefItem({ action, shortcut }: { action: string; shortcut: string }) {
-  return (
-    <div className="flex items-center justify-between text-sm">
-      <span className="text-slate-300">{action}</span>
-      <code className="px-2 py-1 bg-slate-800 text-amber-400 rounded text-xs">{shortcut}</code>
-    </div>
-  );
-}
-
-function TroubleshootItem({ problem, solution }: { problem: string; solution: string }) {
-  return (
-    <div className="mb-4 bg-slate-700 rounded-lg p-4">
-      <div className="flex items-start gap-2 mb-2">
-        <AlertCircle className="w-4 h-4 text-orange-400 flex-shrink-0 mt-0.5" />
-        <h4 className="font-semibold text-white">{problem}</h4>
-      </div>
-      <p className="text-sm text-slate-300 ml-6">{solution}</p>
     </div>
   );
 }

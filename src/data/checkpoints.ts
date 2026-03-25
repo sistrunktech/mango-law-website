@@ -1,3 +1,5 @@
+import { formatCalendarDate, formatEasternTime } from '@/lib/formatting';
+
 export type CheckpointStatus = 'upcoming' | 'active' | 'completed' | 'cancelled';
 
 export interface DUICheckpoint {
@@ -99,8 +101,7 @@ export function getDisplayStatus(checkpoint: Pick<DUICheckpoint, 'start_date' | 
 }
 
 export function formatCheckpointDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
+  return formatCalendarDate(dateString, {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
@@ -109,8 +110,7 @@ export function formatCheckpointDate(dateString: string): string {
 }
 
 export function formatCheckpointTime(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleTimeString('en-US', {
+  return formatEasternTime(dateString, {
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,
@@ -118,9 +118,6 @@ export function formatCheckpointTime(dateString: string): string {
 }
 
 export function formatCheckpointDateRange(startDate: string, endDate: string): string {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-
   const dateStr = formatCheckpointDate(startDate);
   const startTime = formatCheckpointTime(startDate);
   const endTime = formatCheckpointTime(endDate);

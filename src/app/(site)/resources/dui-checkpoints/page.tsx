@@ -22,7 +22,7 @@ export default function Page() {
   return (
     <>
       <StructuredData breadcrumbs={breadcrumbs} faqs={duiCheckpointMapFaqs} url={seo.url} />
-      <DUICheckpointsPage />
+      <DUICheckpointsPage renderedAt={new Date().toISOString()} />
     </>
   );
 }
