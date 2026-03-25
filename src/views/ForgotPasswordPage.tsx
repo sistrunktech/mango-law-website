@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Mail, ArrowLeft, CheckCircle } from 'lucide-react';
-import { supabase, supabaseProjectRef } from '../lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient';
 import MangoIcon from '../components/MangoIcon';
 
 import { SEO } from '../lib/seo';
@@ -69,9 +69,7 @@ export default function ForgotPasswordPage() {
                 <li>Enter your new password</li>
               </ol>
               <p className="mt-3 text-xs text-slate-300">
-                If no email arrives within a couple minutes, your admin user may not exist in this auth backend (
-                <span className="font-mono text-slate-100">{supabaseProjectRef ?? 'unconfigured'}</span>). Create/invite
-                the user in Supabase Dashboard → Authentication → Users.
+                If no email arrives within a couple minutes, your admin user may not exist yet or may be using a different email. Confirm the user exists in the authentication provider before retrying.
               </p>
             </div>
 
@@ -130,6 +128,7 @@ export default function ForgotPasswordPage() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
                   placeholder="admin@example.com"
                   required
                   className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E8A33C] focus:border-transparent"
@@ -159,9 +158,6 @@ export default function ForgotPasswordPage() {
 
         <div className="mt-6 text-center text-sm text-slate-300">
           <p>Only admin users can reset their password</p>
-          <p className="mt-2 text-xs text-slate-400">
-            Auth backend: <span className="font-mono text-slate-200">{supabaseProjectRef ?? 'unconfigured'}</span>
-          </p>
         </div>
       </div>
     </div>

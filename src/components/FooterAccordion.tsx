@@ -11,6 +11,7 @@ interface FooterAccordionProps {
 
 export default function FooterAccordion({ title, children, defaultOpen = false }: FooterAccordionProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const contentId = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-footer-panel`;
 
   return (
     <div className="border-b border-brand-offWhite/10 lg:border-none">
@@ -18,6 +19,7 @@ export default function FooterAccordion({ title, children, defaultOpen = false }
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between py-4 text-left lg:hidden"
         aria-expanded={isOpen}
+        aria-controls={contentId}
       >
         <span className="eyebrow text-brand-gold">{title}</span>
         <ChevronDown
@@ -27,15 +29,14 @@ export default function FooterAccordion({ title, children, defaultOpen = false }
         />
       </button>
       <h4 className="eyebrow hidden text-brand-gold lg:block">{title}</h4>
-      <div
-        className={`overflow-hidden transition-all duration-200 lg:mt-5 lg:block ${
-          isOpen
-            ? 'max-h-[70vh] pb-4 overflow-y-auto lg:max-h-none lg:overflow-visible'
-            : 'max-h-0 lg:max-h-none'
-        }`}
-      >
+      <div className="hidden lg:mt-5 lg:block">
         {children}
       </div>
+      {isOpen && (
+        <div id={contentId} className="overflow-hidden pb-4 lg:hidden">
+          {children}
+        </div>
+      )}
     </div>
   );
 }

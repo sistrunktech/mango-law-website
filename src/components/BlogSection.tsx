@@ -1,7 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
 import type { BlogPost } from '../data/blogPosts';
+import BlogCoverArt from './BlogCoverArt';
+import { formatCalendarDate } from '../lib/formatting';
 
 function getRecentDiversePosts(posts: BlogPost[], count: number): BlogPost[] {
   const sorted = [...posts].sort(
@@ -41,15 +42,15 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
       <div className="container">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-              <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3">
               <div className="accent-line" />
-              <p className="eyebrow text-brand-goldText">Know Your Rights</p>
+              <p className="eyebrow text-brand-goldText">Start Here</p>
             </div>
             <h2 className="font-display text-display-sm md:text-display-md">
-              Arrested in Ohio? Start Here.
+              Useful answers before the next phone call, court date, or license deadline.
             </h2>
             <p className="max-w-xl text-brand-black/60">
-              Understand your situation, your rights, and your options with guidance from an Ohio defense attorney.
+              These are the articles people read when they want the practical version first: what happened, what matters next, and where the case usually turns.
             </p>
           </div>
           <Link
@@ -66,21 +67,9 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group card card-hover p-0 overflow-hidden"
+              className="group overflow-hidden rounded-[1.5rem] border border-brand-black/10 bg-white shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-soft-lg"
             >
-                {post.imageUrl && (
-                  <div className="relative aspect-[16/9] overflow-hidden bg-brand-offWhite">
-                    <Image
-                      src={post.imageUrl}
-                      alt={post.title}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                  </div>
-                )}
+              <BlogCoverArt post={post} />
               <div className="p-6">
                 <div className="mb-4 flex items-center gap-3 text-xs">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-leaf/10 px-3 py-1 font-semibold text-brand-leaf">
@@ -89,11 +78,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
                   </span>
                   <span className="flex items-center gap-1.5 text-brand-black/60">
                     <Calendar className="h-3 w-3" />
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric',
-                    })}
+                    {formatCalendarDate(post.date)}
                   </span>
                 </div>
 

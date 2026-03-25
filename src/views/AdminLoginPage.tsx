@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../contexts/AuthContext';
 import { Shield, AlertCircle } from 'lucide-react';
-import { supabaseProjectRef } from '../lib/supabaseClient';
 
 import { SEO } from '../lib/seo';
 
@@ -36,14 +35,14 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center p-4">
       <SEO title="Admin Login | Mango Law LLC" noindex={true} />
       <div className="max-w-md w-full">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/20">
+        <div className="bg-white/10 backdrop-blur-lg rounded-[1.75rem] shadow-2xl p-8 border border-white/20">
           <div className="flex flex-col items-center mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-[#E8A33C] to-[#FFB84D] rounded-full flex items-center justify-center mb-4 shadow-lg">
               <Shield className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-2">Admin Login</h1>
+            <h1 className="text-3xl font-bold text-white mb-2">Admin access</h1>
             <p className="text-slate-200 text-center">
-              Sign in to access the CMS dashboard
+              Sign in to manage content, leads, search reporting, and internal operations.
             </p>
           </div>
 
@@ -64,6 +63,7 @@ export default function AdminLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
                 required
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C] focus:border-transparent transition"
                 placeholder="admin@example.com"
@@ -87,6 +87,7 @@ export default function AdminLoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
                 required
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33C] focus:border-transparent transition"
                 placeholder="••••••••"
@@ -103,12 +104,9 @@ export default function AdminLoginPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-slate-300 text-sm">
-              Authorized personnel only
-            </p>
-            <p className="mt-2 text-xs text-slate-400">
-              Auth backend: <span className="font-mono text-slate-200">{supabaseProjectRef ?? 'unconfigured'}</span>
-            </p>
+            <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-slate-300">
+              Authorized personnel only. Use your assigned Mango Law admin credentials and keep this access separate from client-facing logins.
+            </div>
           </div>
         </div>
       </div>

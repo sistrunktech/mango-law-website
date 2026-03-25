@@ -1,209 +1,236 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, MapPinned, ChevronDown } from 'lucide-react';
-import { navLinks } from '../data/navigation';
-import MegaMenu from './MegaMenu';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { ChevronDown, Menu, Phone, X } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { navLinks, type NavLink } from '../data/navigation';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import type { LeadSource } from './LeadCaptureModal';
 
 interface SiteHeaderProps {
   onOpenLeadModal?: (trigger: LeadSource) => void;
 }
 
+function joinClasses(...values: Array<string | false | null | undefined>) {
+  return values.filter(Boolean).join(' ');
+}
+
+function isLinkActive(pathname: string, link: NavLink) {
+  return (
+    pathname === link.href ||
+    pathname.startsWith(`${link.href}/`) ||
+    link.children.some(
+      (child) => pathname === child.href || pathname.startsWith(`${child.href}/`),
+    )
+  );
+}
+
+function DesktopDropdown({
+  link,
+  isOpen,
+  isActive,
+  onToggle,
+  onClose,
+}: {
+  link: NavLink;
+  isOpen: boolean;
+  isActive: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+}) {
+  return (
+    <div
+      className="relative"
+    >
+      <div
+        className={joinClasses(
+          'flex items-center rounded-full border px-1 py-1 transition-all',
+          isActive || isOpen
+            ? 'border-brand-mango/25 bg-brand-mango/8 shadow-sm'
+            : 'border-transparent hover:border-brand-black/10 hover:bg-white',
+        )}
+      >
+        <Link
+          href={link.href}
+          className={joinClasses(
+            'rounded-full px-3 py-2 text-sm font-semibold transition-colors',
+            isActive || isOpen
+              ? 'text-brand-mangoText'
+              : 'text-brand-black/75 hover:text-brand-mangoText',
+          )}
+          onClick={onClose}
+        >
+          {link.label}
+        </Link>
+        <button
+          type="button"
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
+          aria-label={`${isOpen ? 'Close' : 'Open'} ${link.label} menu`}
+          onClick={onToggle}
+          className={joinClasses(
+            'rounded-full p-2 transition-colors',
+            isActive || isOpen
+              ? 'text-brand-mangoText hover:bg-brand-mango/12'
+              : 'text-brand-black/55 hover:bg-brand-black/5 hover:text-brand-mangoText',
+          )}
+        >
+          <ChevronDown className={joinClasses('h-4 w-4 transition-transform', isOpen ? 'rotate-180' : '')} />
+        </button>
+      </div>
+
+      {isOpen && (
+        <div
+          className="absolute left-0 top-full z-50 mt-3 w-[23rem] overflow-hidden rounded-[1.5rem] border border-brand-black/10 bg-white shadow-[0_24px_80px_rgba(16,24,20,0.16)]"
+          role="menu"
+          aria-label={`${link.label} menu`}
+        >
+          <div className="border-b border-brand-black/8 bg-brand-offWhite/70 px-5 py-4">
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-goldText">
+              {link.label}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-brand-black/65">{link.summary}</p>
+            <Link
+              href={link.href}
+              className="mt-3 inline-flex text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+              onClick={onClose}
+            >
+              View overview
+            </Link>
+          </div>
+
+          <div className="space-y-1 p-3">
+            {link.children.map((child) => (
+              <Link
+                key={child.href}
+                href={child.href}
+                onClick={onClose}
+                className="block rounded-2xl px-4 py-3 transition-colors hover:bg-brand-mango/8"
+              >
+                <div className="text-sm font-semibold text-brand-black">{child.label}</div>
+                <div className="mt-1 text-xs leading-relaxed text-brand-black/60">{child.description}</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
   const pathname = usePathname() ?? '';
-  const [open, setOpen] = useState(false);
+  const shellRef = useRef<HTMLDivElement>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopMenu, setDesktopMenu] = useState<string | null>(null);
+  const [mobileSection, setMobileSection] = useState<string | null>(navLinks[0]?.label ?? null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showDuiMapBanner, setShowDuiMapBanner] = useState(false);
+
   const logoFallbackSrc = '/images/brand/mango-logo-primary-fullcolor-tagline-480w.png';
-  const duiMapHref = '/resources/dui-checkpoints';
-  const duiMapBannerStorageKey = 'mango_dui_map_banner_dismissed_v1';
+
+  const activeLabels = useMemo(
+    () => navLinks.filter((link) => isLinkActive(pathname, link)).map((link) => link.label),
+    [pathname],
+  );
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 12);
+    setMobileOpen(false);
+    setDesktopMenu(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      window.requestAnimationFrame(() => {
+        const nextY = window.scrollY;
+        setIsScrolled((current) => (current ? nextY > 10 : nextY > 28));
+        setDesktopMenu(null);
+        ticking = false;
+      });
+    };
+
     onScroll();
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    try {
-      const dismissed = window.localStorage.getItem(duiMapBannerStorageKey);
-      setShowDuiMapBanner(!dismissed);
-    } catch {
-      setShowDuiMapBanner(true);
-    }
-  }, []);
+    const onPointerDown = (event: MouseEvent) => {
+      if (!shellRef.current?.contains(event.target as Node)) {
+        setDesktopMenu(null);
+        setMobileOpen(false);
+      }
+    };
 
-  const aboutLink = navLinks.find((link) => link.label === 'About');
-  const aboutChildHrefs = aboutLink?.children?.map((child) => child.href) ?? [];
-  const isAboutActive = pathname === '/about' || aboutChildHrefs.includes(pathname);
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDesktopMenu(null);
+        setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('keydown', onEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      document.removeEventListener('keydown', onEscape);
+    };
+  }, []);
 
   return (
     <header
-      className={[
-        'sticky top-0 z-50 transition-all',
-        isScrolled
-          ? [
-              'lg:border-b lg:shadow-sm lg:backdrop-blur-sm',
-              'lg:bg-white/95 lg:border-brand-black/10',
-            ].join(' ')
-          : '',
-      ].join(' ')}
+      ref={shellRef}
+      className={joinClasses(
+        'sticky top-0 z-50 border-b border-brand-black/10 bg-brand-offWhite/95 backdrop-blur',
+        isScrolled ? 'shadow-sm' : '',
+      )}
       role="banner"
     >
-      {!isScrolled && (
-        <div className="hidden border-b border-brand-black/10 bg-brand-leaf text-white lg:block">
-          <div className="container flex flex-wrap items-center gap-3 py-1.5">
-            <a
-              href={`tel:${OFFICE_PHONE_TEL}`}
-              className="inline-flex items-center gap-2 text-xs font-semibold text-white/95 transition-opacity hover:opacity-90"
-              data-cta="header_topbar_call"
-              onClick={() => {
-                trackCtaClick('header_topbar_call');
-                trackLeadSubmitted('phone', 'header_topbar_call', {
-                  target_number: OFFICE_PHONE_TEL,
-                });
-              }}
-            >
-              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
-              <span>Call/Text Nick {OFFICE_PHONE_DISPLAY}</span>
-            </a>
-          </div>
-        </div>
-      )}
-
-      {!isScrolled && showDuiMapBanner && (
-        <div className="border-b border-brand-black/10 bg-brand-leaf/90 text-white lg:hidden">
-          <div className="container flex items-center justify-between gap-2 py-1">
-            <Link
-              href={duiMapHref}
-              className="flex min-w-0 items-center gap-1.5 text-xs font-semibold"
-              data-cta="mobile_dui_map_banner"
-              onClick={() => trackCtaClick('mobile_dui_map_banner')}
-            >
-              <MapPinned className="h-3.5 w-3.5 shrink-0 text-brand-mango" aria-hidden="true" />
-              <span className="truncate">Live DUI Checkpoint Map</span>
-              <span className="shrink-0 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-semibold text-white">
-                View
-              </span>
-            </Link>
-            <button
-              type="button"
-              className="inline-flex h-7 w-7 items-center justify-center rounded-md text-white/90 transition-colors hover:bg-white/10 hover:text-white"
-              aria-label="Dismiss DUI checkpoint map banner"
-              onClick={() => {
-                setShowDuiMapBanner(false);
-                try {
-                  window.localStorage.setItem(duiMapBannerStorageKey, '1');
-                } catch {
-                  // ignore
-                }
-              }}
-            >
-              <X className="h-3.5 w-3.5" aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-      )}
-      {/* Main navigation bar */}
-      <div className="bg-brand-offWhite border-b border-brand-black/10">
-        <div
-          className={`container flex items-center justify-between py-3 transition-all ${isScrolled ? 'lg:py-2' : 'lg:py-3'}`}
-        >
-          {/* Logo */}
-          <Link href="/" className="group flex items-center gap-3">
+      <div className="container">
+        <div className={joinClasses('flex items-center justify-between gap-3 transition-all', isScrolled ? 'py-3' : 'py-4')}>
+          <Link href="/" className="group flex items-center gap-3" onClick={() => setDesktopMenu(null)}>
             <Image
               src={logoFallbackSrc}
               alt="Mango Law LLC - Criminal & OVI/DUI Defense"
               width={1704}
               height={555}
-              sizes="(min-width: 1024px) 220px, 170px"
+              sizes="(min-width: 1024px) 240px, 170px"
               priority
-              className={[
-                'h-8 w-auto transition-all hover:opacity-90 lg:h-12',
-                isScrolled ? 'lg:h-10' : '',
-              ].join(' ')}
+              className={joinClasses('h-8 w-auto transition-all group-hover:opacity-90 lg:h-12', isScrolled ? 'lg:h-10' : '')}
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-2 lg:flex" aria-label="Primary">
             {navLinks.map((link) => {
-              if (link.label === 'Practice Areas') {
-                return <MegaMenu key="practice-areas-mega" variant="light" />;
-              }
+              const isActive = activeLabels.includes(link.label);
+              const isOpen = desktopMenu === link.label;
 
-              if (link.label === 'About' && link.children?.length) {
-                return (
-                  <div key="about-menu" className="group relative">
-                    <button
-                      type="button"
-                      className={[
-                        'flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors',
-                        isAboutActive
-                          ? 'text-brand-mangoText'
-                          : 'text-brand-black/70 hover:text-brand-mangoText',
-                      ].join(' ')}
-                      aria-expanded={false}
-                    >
-                      About
-                      <ChevronDown className={`h-4 w-4 transition-transform group-hover:rotate-180`} />
-                    </button>
-
-                    <div className="pointer-events-none absolute left-0 top-full z-40 mt-1 w-60 rounded-lg border border-brand-black/10 bg-white opacity-0 shadow-soft transition-all duration-150 group-hover:pointer-events-auto group-hover:opacity-100">
-                      <div className="space-y-1 p-2">
-                        {link.children.map((child) => {
-                          const isChildActive = pathname === child.href;
-                          return (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className={[
-                                'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                                isChildActive
-                                  ? 'bg-brand-mango/15 text-brand-mangoText'
-                                  : 'text-brand-black/70 hover:bg-brand-mango/10 hover:text-brand-mangoText',
-                              ].join(' ')}
-                            >
-                              {child.label}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              const isActive = pathname === link.href;
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={[
-                    'px-4 py-2 text-sm font-medium transition-colors',
-                    isActive
-                      ? 'text-brand-mangoText'
-                      : 'text-brand-black/70 hover:text-brand-mangoText',
-                  ].join(' ')}
-                >
-                  {link.label}
-                </Link>
+                <DesktopDropdown
+                  key={link.label}
+                  link={link}
+                  isActive={isActive}
+                  isOpen={isOpen}
+                  onToggle={() => setDesktopMenu((current) => (current === link.label ? null : link.label))}
+                  onClose={() => setDesktopMenu(null)}
+                />
               );
             })}
           </nav>
 
-          {/* Desktop CTA */}
           <div className="hidden items-center gap-3 lg:flex">
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
-              className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-leaf bg-brand-leaf/10 px-4 py-2.5 text-sm font-bold text-brand-forest transition-all hover:bg-brand-leaf hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full border border-brand-leaf/25 bg-white px-4 py-2.5 text-sm font-semibold text-brand-forest transition-all hover:border-brand-leaf hover:bg-brand-leaf hover:text-white"
               data-cta="header_call"
               onClick={() => {
                 trackCtaClick('header_call');
@@ -213,11 +240,11 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
               }}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
-              Call Now
+              Call {OFFICE_PHONE_DISPLAY}
             </a>
             <button
               type="button"
-              className="rounded-lg bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black shadow-sm transition-all hover:bg-brand-gold hover:shadow-md"
+              className="rounded-full bg-brand-mango px-5 py-2.5 text-sm font-bold text-brand-black shadow-sm transition-all hover:bg-brand-gold hover:shadow-md"
               data-cta="header_free_consult"
               onClick={() => {
                 trackCtaClick('header_free_consult');
@@ -228,23 +255,11 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             </button>
           </div>
 
-          {/* Mobile menu button (center) */}
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            className="inline-flex items-center justify-center rounded-lg p-2 text-brand-black transition-colors hover:bg-brand-black/5 lg:hidden"
-          >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-
-          {/* Mobile phone + consult (right) */}
           <div className="flex items-center gap-2 lg:hidden">
             <a
               href={`tel:${OFFICE_PHONE_TEL}`}
-              className="inline-flex items-center justify-center rounded-lg border-2 border-brand-leaf bg-brand-leaf/10 p-2 text-brand-forest transition-all hover:bg-brand-leaf hover:text-white"
-              aria-label="Call Now"
+              className="inline-flex items-center justify-center rounded-full border border-brand-leaf/25 bg-white p-2.5 text-brand-forest transition-colors hover:border-brand-leaf hover:bg-brand-leaf hover:text-white"
+              aria-label="Call Mango Law"
               data-cta="mobile_header_call"
               onClick={() => {
                 trackCtaClick('mobile_header_call');
@@ -257,141 +272,98 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
             </a>
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-3 py-2 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
-              onClick={() => {
-                trackCtaClick('mobile_header_free_consult');
-                onOpenLeadModal?.('header_cta');
-              }}
-              data-cta="mobile_header_free_consult"
+              onClick={() => setMobileOpen((current) => !current)}
+              aria-expanded={mobileOpen}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              className="inline-flex items-center justify-center rounded-full border border-brand-black/10 bg-white p-2.5 text-brand-black transition-colors hover:bg-brand-black/5"
             >
-              Free Review
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile menu */}
-        <div
-          className={[
-            'overflow-hidden transition-all duration-300 lg:hidden',
-            open ? 'max-h-[650px] opacity-100' : 'max-h-0 opacity-0',
-          ].join(' ')}
-        >
-          <div className="border-t border-brand-black/10 pb-4">
-            <div className="container flex flex-col gap-1 pt-2">
-              <Link
-                href={duiMapHref}
-                onClick={() => {
-                  setOpen(false);
-                  trackCtaClick('mobile_menu_dui_checkpoints');
-                }}
-                className="mb-2 rounded-xl border border-brand-mango/30 bg-brand-mango/10 px-4 py-3 transition-colors hover:bg-brand-mango/20"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-mango text-brand-black">
-                    <MapPinned className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="truncate text-sm font-bold text-brand-black">DUI Checkpoint Map</span>
-                      <span className="shrink-0 rounded-full bg-brand-black/5 px-2 py-0.5 text-xs font-semibold text-brand-black/70">
-                        Live
-                      </span>
+      {mobileOpen && (
+        <div className="border-t border-brand-black/8 lg:hidden">
+          <div className="container space-y-3 py-4">
+            {navLinks.map((link) => {
+              const isActive = activeLabels.includes(link.label);
+              const isOpen = mobileSection === link.label;
+
+              return (
+                <div key={link.label} className="rounded-[1.25rem] border border-brand-black/10 bg-white shadow-soft">
+                  <div className="flex items-center justify-between gap-3 px-4 py-4">
+                    <div className="min-w-0">
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={joinClasses('text-sm font-semibold', isActive ? 'text-brand-mangoText' : 'text-brand-black')}
+                      >
+                        {link.label}
+                      </Link>
+                      <p className="mt-1 text-xs leading-relaxed text-brand-black/60">{link.summary}</p>
                     </div>
-                    <div className="mt-0.5 text-xs text-brand-black/70">
-                      Ohio checkpoint locations + hotspots
-                    </div>
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-label={`${isOpen ? 'Close' : 'Open'} ${link.label} section`}
+                      onClick={() => setMobileSection((current) => (current === link.label ? null : link.label))}
+                      className="rounded-full p-2 text-brand-black/60 transition-colors hover:bg-brand-black/5 hover:text-brand-mangoText"
+                    >
+                      <ChevronDown className={joinClasses('h-4 w-4 transition-transform', isOpen ? 'rotate-180' : '')} />
+                    </button>
                   </div>
-                </div>
-              </Link>
-                {navLinks.map((link) => {
-                  if (link.label === 'About' && link.children?.length) {
-                    return (
-                      <div key={`${link.href}-mobile-group`} className="flex flex-col gap-1">
+
+                  {isOpen && (
+                    <div className="space-y-1 border-t border-brand-black/8 px-3 py-3">
+                      {link.children.map((child) => (
                         <Link
-                          href={link.href}
-                          onClick={() => setOpen(false)}
-                          className={[
-                            'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
-                            isAboutActive
-                              ? 'bg-brand-mango/20 text-brand-mangoText'
-                              : 'text-brand-black hover:bg-brand-black/5',
-                          ].join(' ')}
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="block rounded-2xl px-3 py-3 transition-colors hover:bg-brand-mango/8"
                         >
-                          {link.label}
+                          <div className="text-sm font-semibold text-brand-black">{child.label}</div>
+                          <div className="mt-1 text-xs leading-relaxed text-brand-black/60">{child.description}</div>
                         </Link>
-                        {link.children.map((child) => {
-                          const isChildActive = pathname === child.href;
-                          return (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              onClick={() => setOpen(false)}
-                              className={[
-                                'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
-                                isChildActive
-                                  ? 'bg-brand-mango/20 text-brand-mangoText'
-                                  : 'text-brand-black/70 hover:bg-brand-black/5',
-                              ].join(' ')}
-                            >
-                              {child.label}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    );
-                  }
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
 
-                  const isActive = pathname === link.href;
-                  return (
-                    <Link
-                      key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className={[
-                      'rounded-lg px-4 py-3 text-sm font-medium transition-colors',
-                      isActive
-                        ? 'bg-brand-mango/20 text-brand-mangoText'
-                        : 'text-brand-black hover:bg-brand-black/5',
-                    ].join(' ')}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-              <div className="mt-4 flex flex-col gap-3 border-t border-brand-black/10 pt-4">
-                <a
-                  href={`tel:${OFFICE_PHONE_TEL}`}
-                  className="flex items-center gap-2 px-4 text-sm font-medium text-brand-black"
-                  data-cta="mobile_menu_call"
-                  onClick={() => {
-                    trackCtaClick('mobile_menu_call');
-                    trackLeadSubmitted('phone', 'mobile_menu_call', {
-                      target_number: OFFICE_PHONE_TEL,
-                    });
-                  }}
-                >
-	                  <Phone className="h-4 w-4 text-brand-mangoText" />
-	                  <span className="text-xs opacity-70">Call/Text Nick direct:</span>
-	                  {OFFICE_PHONE_DISPLAY}
-	                </a>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOpen(false);
-                    trackCtaClick('mobile_menu_free_consult');
-                    onOpenLeadModal?.('mobile_menu');
-                  }}
-                  className="mx-4 rounded-lg bg-brand-mango px-5 py-3 text-center text-sm font-bold text-brand-black"
-                  data-cta="mobile_menu_free_consult"
-                  aria-label="Open free case review form"
-                >
-                  Free Case Review
-                </button>
-              </div>
+            <div className="grid gap-3 pt-2">
+              <button
+                type="button"
+                className="w-full rounded-full bg-brand-mango px-5 py-3 text-sm font-bold text-brand-black shadow-sm transition-colors hover:bg-brand-gold"
+                onClick={() => {
+                  setMobileOpen(false);
+                  trackCtaClick('mobile_header_free_consult');
+                  onOpenLeadModal?.('header_cta');
+                }}
+                data-cta="mobile_header_free_consult"
+              >
+                Start Free Case Review
+              </button>
+              <a
+                href={`tel:${OFFICE_PHONE_TEL}`}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-leaf/25 bg-white px-5 py-3 text-sm font-semibold text-brand-forest transition-colors hover:border-brand-leaf hover:bg-brand-leaf hover:text-white"
+                data-cta="mobile_header_call_secondary"
+                onClick={() => {
+                  trackCtaClick('mobile_header_call_secondary');
+                  trackLeadSubmitted('phone', 'mobile_header_call_secondary', {
+                    target_number: OFFICE_PHONE_TEL,
+                  });
+                }}
+              >
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                Call/Text {OFFICE_PHONE_DISPLAY}
+              </a>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

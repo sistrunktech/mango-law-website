@@ -14,6 +14,8 @@ import type { BlogPost } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
 import RelatedPosts from '../components/RelatedPosts';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import BlogCoverArt from '../components/BlogCoverArt';
+import { formatCalendarDate } from '../lib/formatting';
 import {
   PenaltyGrid,
   CostBreakdown,
@@ -94,6 +96,7 @@ export default function BlogPostPage({
   const hasVisuals = post.content.includes('[VISUAL:');
   const hasMidCta = post.content.includes('[VISUAL:MID_ARTICLE_CTA]');
   const tocItems = extractTOCItems(post.content);
+  const readingTime = estimateReadingTime(post.content);
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -134,32 +137,33 @@ export default function BlogPostPage({
           </Link>
 
           <header className="mt-10 max-w-3xl">
+            <div className="mb-5 flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-brand-black/55">
+              <span className="rounded-full bg-brand-mango/12 px-3 py-1 text-brand-mangoText">
+                {post.category}
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Calendar className="h-3.5 w-3.5" />
+                {formatCalendarDate(post.date)}
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="h-3.5 w-3.5" />
+                {readingTime} min read
+              </span>
+            </div>
             <h1 className="text-4xl font-bold leading-tight text-brand-black md:text-5xl">
               {post.title}
             </h1>
+            <p className="mt-5 text-base leading-relaxed text-brand-black/68 md:text-lg">
+              {post.excerpt}
+            </p>
           </header>
         </div>
 
-        {post.imageUrl && (
-          <div className="mt-12">
-            <div className="container max-w-7xl">
-              <figure className="relative w-full aspect-[21/9] overflow-hidden bg-brand-black">
-                <Image
-                  src={post.imageUrl}
-                  alt={`Editorial image for ${post.title}`}
-                  fill
-                  sizes="100vw"
-                  className="object-cover"
-                  priority
-                />
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-brand-black/60 via-transparent to-transparent"
-                  aria-hidden="true"
-                />
-              </figure>
-            </div>
+        <div className="mt-12">
+          <div className="container max-w-7xl">
+            <BlogCoverArt post={post} variant="hero" contentMode="minimal" />
           </div>
-        )}
+        </div>
 
         {tocItems.length > 0 && (
           <div className="container mt-8 max-w-7xl lg:hidden">
@@ -190,12 +194,6 @@ export default function BlogPostPage({
         <div className="container max-w-7xl">
           <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_288px]">
             <div className="max-w-2xl">
-              {post.excerpt && (
-                <p className="mb-6 text-base text-gray-600">
-                  {post.excerpt}
-                </p>
-              )}
-
               <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-5 text-sm text-brand-black/70">
                 <strong>Legal Disclaimer:</strong> This article is for educational purposes only and
                 does not constitute legal advice. Criminal defense and personal injury law are complex
@@ -213,7 +211,7 @@ export default function BlogPostPage({
                     Sources
                   </a>
                   . Last verified{' '}
-                  {new Date(post.lastVerified).toLocaleDateString('en-US', {
+                  {formatCalendarDate(post.lastVerified, {
                     month: 'long',
                     day: 'numeric',
                     year: 'numeric',

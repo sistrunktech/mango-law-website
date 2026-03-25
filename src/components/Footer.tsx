@@ -2,256 +2,60 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, Mail, MapPin } from 'lucide-react';
-import { navLinks, practiceAreaLinks } from '../data/navigation';
-import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import FooterAccordion from './FooterAccordion';
 import {
-  OFFICE_PHONE_DISPLAY,
-  OFFICE_PHONE_TEL,
+  footerOviGuideLinks,
+  footerResourceLinks,
+  footerServiceLinks,
+} from '../data/navigation';
+import {
   GENERAL_OFFICE_PHONE_DISPLAY,
   GENERAL_OFFICE_PHONE_TEL,
-  OFFICE_EMAIL,
-  OFFICE_ADDRESS_STREET,
   OFFICE_ADDRESS_CITY_STATE_ZIP,
+  OFFICE_ADDRESS_STREET,
+  OFFICE_EMAIL,
+  OFFICE_PHONE_DISPLAY,
+  OFFICE_PHONE_TEL,
 } from '../lib/contactInfo';
 import { getCopyrightText, COMPANY_START_YEAR } from '../lib/legalDocuments';
-import FooterAccordion from './FooterAccordion';
+import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
-const resourceLinks = [
-  { href: '/resources/dui-checkpoints', label: 'DUI Checkpoint Map' },
-  { href: '/glossary', label: 'Legal Glossary' },
-  { href: '/blog/bond-jail-information-delaware-county-ohio', label: 'Bond and Jail Information' },
-  { href: '/blog/what-to-do-after-ovi-arrest-ohio', label: 'What to Do After an OVI Arrest' },
-  { href: '/locations', label: 'Service Areas' },
-];
-
-const featuredGuideLinks = [
-  { href: '/blog/personal-injury-claims-ohio-negligence-law', label: 'Personal Injury Claims in Ohio' },
-  { href: '/blog/white-collar-crime-defense-ohio', label: 'White Collar Crime Defense' },
-  { href: '/blog/drug-possession-vs-trafficking-ohio', label: 'Drug Possession vs. Trafficking' },
-  { href: '/blog/ex-parte-protection-orders-ohio-defense', label: 'Ex Parte Protection Orders' },
-  { href: '/blog/assault-domestic-violence-defense-ohio', label: 'Assault & Domestic Violence Defense' },
-  { href: '/blog/sex-crimes-defense-ohio-what-you-need-to-know', label: 'Sex Crimes Defense in Ohio' },
-];
-
-const featuredPageLinks = [
-  { href: '/ovi-checkpoints-ohio', label: 'Ohio OVI Checkpoint Rights' },
-  { href: '/holiday-ovi-enforcement-ohio', label: 'Holiday OVI Enforcement' },
-  { href: '/of-counsel', label: 'Of Counsel' },
-  { href: '/first-offense-ovi-ohio', label: 'First Offense OVI in Ohio' },
-  { href: '/felony-ovi-lawyer-ohio', label: 'Felony OVI Defense' },
-  { href: '/ovi-test-refusal-lawyer-ohio', label: 'OVI Test Refusal Defense' },
-  { href: '/als-license-suspension-ohio', label: 'ALS License Suspension Defense' },
-  { href: '/motion-to-suppress-ovi-ohio', label: 'Motion to Suppress OVI Evidence' },
-  {
-    href: '/domestic-violence-first-offense-ohio-defense',
-    label: 'First-Offense Domestic Violence Defense',
-  },
-  { href: '/civil-protection-order-defense-ohio', label: 'Civil Protection Order Defense' },
-  { href: '/drug-possession-vs-trafficking-ohio-defense', label: 'Drug Possession vs Trafficking Defense' },
-];
-
-const localSeoLinks = [
-  { href: '/criminal-defense-delaware-oh', label: 'Delaware, OH Criminal Defense' },
-  { href: '/ovi-dui-defense-delaware-oh', label: 'Delaware, OH OVI Defense' },
-  { href: '/practice-areas', label: 'Central Ohio Criminal Defense' },
-  { href: '/locations', label: 'Service Areas' },
-];
-
-const footerPracticeAreaLinks = practiceAreaLinks.slice(0, 6);
-const footerGuideLinks = featuredGuideLinks.slice(0, 4);
-const footerResourceLinkSplitAt = Math.ceil(resourceLinks.length / 2);
-const footerResourceLinksColumnOne = resourceLinks.slice(0, footerResourceLinkSplitAt);
-const footerResourceLinksColumnTwo = resourceLinks.slice(footerResourceLinkSplitAt);
+function FooterLinkList({
+  links,
+  compact = false,
+}: {
+  links: Array<{ label: string; href: string }>;
+  compact?: boolean;
+}) {
+  return (
+    <ul className={compact ? 'space-y-2' : 'space-y-3'}>
+      {links.map((link) => (
+        <li key={link.href}>
+          <Link
+            href={link.href}
+            className={compact ? 'text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf' : 'text-sm text-brand-offWhite/72 transition-colors hover:text-brand-leaf'}
+          >
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-brand-forest text-brand-offWhite" role="contentinfo">
-      <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-brand-leaf via-brand-mango to-brand-leaf" />
-      <div className="pointer-events-none absolute -right-40 top-0 h-[400px] w-[400px] rounded-full bg-brand-mango/5 blur-3xl" />
+    <footer
+      className="relative overflow-hidden bg-gradient-to-br from-[#0A0A0A] via-[#11221A] to-brand-forest text-brand-offWhite"
+      role="contentinfo"
+    >
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-leaf via-brand-mango to-brand-gold" />
+      <div className="pointer-events-none absolute -right-32 top-0 h-[320px] w-[320px] rounded-full bg-brand-mango/8 blur-3xl" />
 
       <div className="container relative py-12 lg:py-16">
-        <div className="pt-4 lg:hidden">
-          <div className="mb-8">
-            <Link href="/" className="mb-4 inline-block">
-              <Image
-                src="/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png"
-                alt="Mango Law LLC"
-                width={1704}
-                height={555}
-                className="h-16 w-auto transition-opacity group-hover:opacity-90"
-                loading="lazy"
-              />
-            </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-brand-offWhite/60">
-              Criminal defense for Delaware, Ohio. Clear guidance, assertive advocacy, and steady communication when it matters most.
-            </p>
-          </div>
-
-          <div className="mb-8 space-y-4">
-            <a
-              href={`tel:${OFFICE_PHONE_TEL}`}
-              className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
-              data-cta="footer_mobile_call_office"
-              onClick={() => {
-                trackCtaClick('footer_mobile_call_office');
-                trackLeadSubmitted('phone', 'footer_mobile_call_office', {
-                  target_number: OFFICE_PHONE_TEL,
-                });
-              }}
-            >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-mango/10">
-                <Phone className="h-4 w-4 text-brand-mango" />
-              </div>
-              <div>
-                <div className="text-xs text-brand-offWhite/50">Call/Text (Direct)</div>
-                <div className="font-medium">{OFFICE_PHONE_DISPLAY}</div>
-              </div>
-            </a>
-            <a
-              href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
-              className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
-              data-cta="footer_mobile_call_secondary"
-              onClick={() => {
-                trackCtaClick('footer_mobile_call_secondary');
-                trackLeadSubmitted('phone', 'footer_mobile_call_secondary', {
-                  target_number: GENERAL_OFFICE_PHONE_TEL,
-                });
-              }}
-            >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-leaf/20">
-                <Phone className="h-4 w-4 text-brand-leaf" />
-              </div>
-              <div>
-                <div className="text-xs text-brand-offWhite/50">Office</div>
-                <div className="font-medium">{GENERAL_OFFICE_PHONE_DISPLAY}</div>
-              </div>
-            </a>
-            <a
-              href={`mailto:${OFFICE_EMAIL}`}
-              className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
-              data-cta="footer_mobile_email_office"
-              onClick={() => {
-                trackCtaClick('footer_mobile_email_office');
-                trackLeadSubmitted('email', 'footer_mobile_email_office', {
-                  target_email: OFFICE_EMAIL,
-                });
-              }}
-            >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-mango/10">
-                <Mail className="h-4 w-4 text-brand-mango" />
-              </div>
-              <div>
-                <div className="text-xs text-brand-offWhite/50">Email</div>
-                <div className="font-medium">{OFFICE_EMAIL}</div>
-              </div>
-            </a>
-            <div className="flex items-center gap-3 text-sm text-brand-offWhite/80">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-offWhite/5">
-                <MapPin className="h-4 w-4 text-brand-mango" />
-              </div>
-              <div>
-                <div className="text-xs text-brand-offWhite/50">Office</div>
-                <div className="font-medium">{OFFICE_ADDRESS_STREET}</div>
-                <div className="text-brand-offWhite/60">{OFFICE_ADDRESS_CITY_STATE_ZIP}</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-brand-offWhite/10 pt-6">
-            <FooterAccordion title="Navigation">
-              <ul className="space-y-3">
-                {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </FooterAccordion>
-
-            <FooterAccordion title="Resources">
-              <ul className="space-y-2">
-                {resourceLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-5 space-y-2 border-t border-brand-offWhite/10 pt-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                  Top Guides
-                </p>
-                <ul className="space-y-2">
-                  {footerGuideLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-5 space-y-2 border-t border-brand-offWhite/10 pt-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                  More
-                </p>
-                <ul className="space-y-2">
-                  {featuredPageLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FooterAccordion>
-
-            <FooterAccordion title="Practice Areas">
-              <ul className="space-y-3">
-                {footerPracticeAreaLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link
-                    href="/practice-areas"
-                    className="text-sm font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
-                  >
-                    View all practice areas
-                  </Link>
-                </li>
-              </ul>
-            </FooterAccordion>
-          </div>
-        </div>
-
-        <div className="hidden lg:grid lg:grid-cols-[1.3fr_0.9fr_1.2fr_1fr_1.1fr] lg:gap-8">
-          <div className="space-y-5">
+        <div className="space-y-8 lg:hidden">
+          <div className="rounded-[1.75rem] border border-brand-offWhite/10 bg-white/5 p-6">
             <Link href="/" className="inline-block">
               <Image
                 src="/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png"
@@ -262,125 +66,100 @@ export default function Footer() {
                 loading="lazy"
               />
             </Link>
-            <p className="max-w-[220px] text-sm leading-relaxed text-brand-offWhite/60">
-              Criminal defense for Delaware, Ohio. Clear guidance, assertive advocacy, and steady communication when it matters most.
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-brand-offWhite/68">
+              Straight answers, steady communication, and a defense plan that fits the charge in front of you.
             </p>
-            <p className="text-xs text-brand-offWhite/50">
-              Serving Delaware, Ohio and surrounding Central Ohio communities.
-            </p>
-          </div>
 
-          <div>
-            <h4 className="eyebrow text-brand-gold">Navigation</h4>
-            <ul className="mt-5 space-y-3">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="eyebrow text-brand-gold">Resources</h4>
-            <div className="mt-5 grid gap-6 lg:grid-cols-2">
-              <div className="space-y-6">
-                <ul className="space-y-2">
-                  {footerResourceLinksColumnOne.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-xs text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                    Top Guides
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    {footerGuideLinks.map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="text-xs text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+            <div className="mt-6 space-y-3">
+              <a
+                href={`tel:${OFFICE_PHONE_TEL}`}
+                className="flex items-center gap-3 text-sm text-brand-offWhite/85 transition-colors hover:text-brand-leaf"
+                data-cta="footer_mobile_call_office"
+                onClick={() => {
+                  trackCtaClick('footer_mobile_call_office');
+                  trackLeadSubmitted('phone', 'footer_mobile_call_office', {
+                    target_number: OFFICE_PHONE_TEL,
+                  });
+                }}
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-mango/12">
+                  <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
-              </div>
-              <div className="space-y-6">
-                <ul className="space-y-2">
-                  {footerResourceLinksColumnTwo.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-xs text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-offWhite/60">
-                    More
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    {featuredPageLinks.map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="text-xs text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="text-xs text-brand-offWhite/50">Call or text Nick</div>
+                  <div className="font-semibold">{OFFICE_PHONE_DISPLAY}</div>
+                </div>
+              </a>
+
+              <a
+                href={`mailto:${OFFICE_EMAIL}`}
+                className="flex items-center gap-3 text-sm text-brand-offWhite/85 transition-colors hover:text-brand-leaf"
+                data-cta="footer_mobile_email_office"
+                onClick={() => {
+                  trackCtaClick('footer_mobile_email_office');
+                  trackLeadSubmitted('email', 'footer_mobile_email_office', {
+                    target_email: OFFICE_EMAIL,
+                  });
+                }}
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-leaf/14">
+                  <Mail className="h-4 w-4 text-brand-leaf" />
+                </div>
+                <div>
+                  <div className="text-xs text-brand-offWhite/50">Email</div>
+                  <div className="font-semibold">{OFFICE_EMAIL}</div>
+                </div>
+              </a>
+
+              <div className="flex items-center gap-3 text-sm text-brand-offWhite/80">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/8">
+                  <MapPin className="h-4 w-4 text-brand-mango" />
+                </div>
+                <div>
+                  <div className="font-semibold">{OFFICE_ADDRESS_STREET}</div>
+                  <div className="text-brand-offWhite/58">{OFFICE_ADDRESS_CITY_STATE_ZIP}</div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div>
-            <h4 className="eyebrow text-brand-gold">Practice Areas</h4>
-            <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2">
-              {footerPracticeAreaLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-xs text-brand-offWhite/70 transition-colors hover:text-brand-leaf"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/practice-areas"
-              className="mt-4 inline-block text-xs font-semibold text-brand-leaf transition-colors hover:text-brand-mango"
-            >
-              View all practice areas
+            <Link href="/contact" className="btn btn-primary mt-6 w-full text-center">
+              Start Free Case Review
             </Link>
           </div>
 
-          <div className="space-y-5">
-            <div className="space-y-3">
+          <div className="rounded-[1.5rem] border border-brand-offWhite/10 bg-white/5 px-5">
+            <FooterAccordion title="Core Services">
+              <FooterLinkList links={footerServiceLinks} compact />
+            </FooterAccordion>
+            <FooterAccordion title="OVI Defense Guides">
+              <FooterLinkList links={footerOviGuideLinks} compact />
+            </FooterAccordion>
+            <FooterAccordion title="Resources & Firm">
+              <FooterLinkList links={footerResourceLinks} compact />
+            </FooterAccordion>
+          </div>
+        </div>
+
+        <div className="hidden gap-8 lg:grid lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.9fr]">
+          <div className="rounded-[1.75rem] border border-brand-offWhite/10 bg-white/5 p-6">
+            <Link href="/" className="inline-block">
+              <Image
+                src="/images/brand/mango-logo-primary-fullcolor-tagline-cropped-to-content.png"
+                alt="Mango Law LLC"
+                width={1704}
+                height={555}
+                className="h-14 w-auto"
+                loading="lazy"
+              />
+            </Link>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-brand-offWhite/68">
+              Criminal and OVI defense rooted in clear advice, careful preparation, and calm communication when the stakes are high.
+            </p>
+
+            <div className="mt-6 space-y-3">
               <a
                 href={`tel:${OFFICE_PHONE_TEL}`}
-                className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+                className="flex items-center gap-3 text-sm text-brand-offWhite/84 transition-colors hover:text-brand-leaf"
                 data-cta="footer_call_office"
                 onClick={() => {
                   trackCtaClick('footer_call_office');
@@ -389,17 +168,18 @@ export default function Footer() {
                   });
                 }}
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-mango/12">
                   <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/60">Call/Text (Direct)</div>
-                  <div>{OFFICE_PHONE_DISPLAY}</div>
+                  <div className="text-xs text-brand-offWhite/50">Direct line</div>
+                  <div className="font-semibold">{OFFICE_PHONE_DISPLAY}</div>
                 </div>
               </a>
+
               <a
                 href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
-                className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+                className="flex items-center gap-3 text-sm text-brand-offWhite/84 transition-colors hover:text-brand-leaf"
                 data-cta="footer_call_secondary"
                 onClick={() => {
                   trackCtaClick('footer_call_secondary');
@@ -408,17 +188,18 @@ export default function Footer() {
                   });
                 }}
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-leaf/20">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-leaf/14">
                   <Phone className="h-4 w-4 text-brand-leaf" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/60">Office</div>
-                  <div>{GENERAL_OFFICE_PHONE_DISPLAY}</div>
+                  <div className="text-xs text-brand-offWhite/50">Office</div>
+                  <div className="font-semibold">{GENERAL_OFFICE_PHONE_DISPLAY}</div>
                 </div>
               </a>
+
               <a
                 href={`mailto:${OFFICE_EMAIL}`}
-                className="flex items-center gap-3 text-sm text-brand-offWhite/80 transition-colors hover:text-brand-leaf"
+                className="flex items-center gap-3 text-sm text-brand-offWhite/84 transition-colors hover:text-brand-leaf"
                 data-cta="footer_email_office"
                 onClick={() => {
                   trackCtaClick('footer_email_office');
@@ -427,51 +208,50 @@ export default function Footer() {
                   });
                 }}
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-mango/10">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/8">
                   <Mail className="h-4 w-4 text-brand-mango" />
                 </div>
-                {OFFICE_EMAIL}
+                <div>
+                  <div className="text-xs text-brand-offWhite/50">Email</div>
+                  <div className="font-semibold">{OFFICE_EMAIL}</div>
+                </div>
               </a>
-              <div className="flex items-center gap-3 text-sm text-brand-offWhite/80">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-offWhite/5">
+
+              <div className="flex items-center gap-3 text-sm text-brand-offWhite/78">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/8">
                   <MapPin className="h-4 w-4 text-brand-mango" />
                 </div>
                 <div>
-                  <div>{OFFICE_ADDRESS_STREET}</div>
-                  <div className="text-brand-offWhite/60">{OFFICE_ADDRESS_CITY_STATE_ZIP}</div>
+                  <div className="font-semibold">{OFFICE_ADDRESS_STREET}</div>
+                  <div className="text-brand-offWhite/56">{OFFICE_ADDRESS_CITY_STATE_ZIP}</div>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-xl border border-brand-offWhite/10 bg-brand-offWhite/5 p-4">
-              <p className="eyebrow mb-2 text-brand-gold">Get Started</p>
-              <p className="mb-3 text-xs text-brand-offWhite/60">
-                Facing charges? Get clear answers today.
-              </p>
-              <Link href="/contact" className="btn btn-primary w-full text-center text-sm">
-                Free Case Review
-              </Link>
+            <Link href="/contact" className="btn btn-primary mt-6 inline-flex">
+              Start Free Case Review
+            </Link>
+          </div>
+
+          <div>
+            <h4 className="eyebrow text-brand-gold">Core Services</h4>
+            <div className="mt-5">
+              <FooterLinkList links={footerServiceLinks} />
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="border-t border-brand-offWhite/10">
-        <div className="container py-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-brand-offWhite/40">
-            {localSeoLinks.map((link, index) => (
-              <span key={link.href} className="flex items-center">
-                <Link
-                  href={link.href}
-                  className="transition-colors hover:text-brand-leaf"
-                >
-                  {link.label}
-                </Link>
-                {index < localSeoLinks.length - 1 && (
-                  <span className="ml-2 text-brand-offWhite/20">•</span>
-                )}
-              </span>
-            ))}
+          <div>
+            <h4 className="eyebrow text-brand-gold">OVI Defense Guides</h4>
+            <div className="mt-5">
+              <FooterLinkList links={footerOviGuideLinks} />
+            </div>
+          </div>
+
+          <div>
+            <h4 className="eyebrow text-brand-gold">Resources & Firm</h4>
+            <div className="mt-5">
+              <FooterLinkList links={footerResourceLinks} />
+            </div>
           </div>
         </div>
       </div>
@@ -480,7 +260,9 @@ export default function Footer() {
         <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-brand-offWhite/50 sm:flex-row">
           <div className="flex flex-col items-center gap-1 sm:items-start">
             <span>© {getCopyrightText(COMPANY_START_YEAR)} Mango Law LLC. All rights reserved.</span>
-            <span className="text-brand-offWhite/40">Dominic N. Mango | Ohio Supreme Court Registration No. 0071238</span>
+            <span className="text-brand-offWhite/40">
+              Dominic N. Mango | Ohio Supreme Court Registration No. 0071238
+            </span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <Link href="/privacy" className="transition-colors hover:text-brand-leaf">

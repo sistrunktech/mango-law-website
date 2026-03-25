@@ -1,7 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock } from 'lucide-react';
 import { BlogPost } from '../data/blogPosts';
+import BlogCoverArt from './BlogCoverArt';
+import { formatCalendarDate } from '../lib/formatting';
 
 interface RelatedPostsProps {
   posts: BlogPost[];
@@ -24,20 +25,9 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group block overflow-hidden rounded-xl border border-brand-black/10 bg-white transition-all hover:border-brand-mango hover:shadow-lg"
+            className="group block overflow-hidden rounded-[1.5rem] border border-brand-black/10 bg-white transition-all hover:border-brand-mango hover:shadow-lg"
           >
-            {post.imageUrl && (
-              <div className="relative aspect-video w-full overflow-hidden">
-                <Image
-                  src={post.imageUrl}
-                  alt={post.title}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-            )}
+            <BlogCoverArt post={post} />
             <div className="p-5">
               <div className="mb-2 inline-block rounded-full bg-brand-mango/10 px-3 py-1 text-xs font-semibold text-brand-mangoText">
                 {post.category}
@@ -49,11 +39,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
               <div className="flex items-center gap-4 text-xs text-brand-black/60">
                 <div className="flex items-center gap-1">
                   <Calendar className="h-3 w-3" />
-                  {new Date(post.date).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric',
-                  })}
+                  {formatCalendarDate(post.date)}
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
