@@ -177,25 +177,54 @@ export function parseAddress(locationString: string): {
   city: string;
   county: string;
 } {
-  const parts = locationString.split(',').map((p) => p.trim());
+  const parts = locationString
+    .split(',')
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  const isOhioStateZipToken = (value: string): boolean =>
+    /^(?:OH(?:IO)?)?\s*\d{5}(?:-\d{4})?$/i.test(value) || /^OH$/i.test(value);
+  const normalizeCounty = (value: string): string => value.replace(/\s+County$/i, '').trim();
+  const nonStateZipParts = parts.filter((part) => !isOhioStateZipToken(part));
+  const countyIndex = parts.findIndex((part) => /\bCounty$/i.test(part));
 
   let address = '';
   let city = '';
   let county = '';
 
-  if (parts.length >= 3) {
-    address = parts[0];
-    city = parts[1];
-    county = parts[2].replace(/\s+County$/i, '');
+  if (countyIndex !== -1) {
+    county = normalizeCounty(parts[countyIndex]!);
+
+    const prefixParts = parts.slice(0, countyIndex).filter((part) => !isOhioStateZipToken(part));
+
+    if (prefixParts.length >= 2) {
+      city = prefixParts[prefixParts.length - 1]!;
+      address = prefixParts.slice(0, -1).join(', ').trim() || city;
+    } else if (prefixParts.length === 1) {
+      address = prefixParts[0]!;
+      city = prefixParts[0]!;
+    }
+  } else if (nonStateZipParts.length >= 3) {
+    address = nonStateZipParts.slice(0, -2).join(', ').trim() || nonStateZipParts[0]!;
+    city = nonStateZipParts[nonStateZipParts.length - 2]!;
+    county = normalizeCounty(nonStateZipParts[nonStateZipParts.length - 1]!);
+  } else if (parts.length >= 3) {
+    address = parts[0]!;
+    city = parts[1]!;
+    county = normalizeCounty(parts[2]!);
   } else if (parts.length === 2) {
-    address = parts[0];
-    city = parts[1];
-    county = parts[1];
+    address = parts[0]!;
+    city = parts[1]!;
+    county = normalizeCounty(parts[1]!);
   } else {
     address = locationString;
     city = locationString;
     county = 'Unknown';
   }
+
+  if (!address && city) address = city;
+  if (!city && address) city = address;
+  if (!county) county = 'Unknown';
 
   return { address, city, county };
 }

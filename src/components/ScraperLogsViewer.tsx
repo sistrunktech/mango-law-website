@@ -66,6 +66,7 @@ export default function ScraperLogsViewer() {
           'Authorization': `Bearer ${supabaseAnonKey}`,
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ trigger: 'manual' }),
       });
 
       if (!response.ok) {
@@ -107,6 +108,9 @@ export default function ScraperLogsViewer() {
           <div>
             <h2 className="text-xl font-bold text-brand-black">Scraper Activity</h2>
             <p className="text-sm text-brand-black/60">Recent checkpoint scraper runs</p>
+            <p className="text-xs text-brand-black/50">
+              Known dead RSS endpoints are skipped in source until verified replacements are added.
+            </p>
           </div>
         </div>
         <div className="flex gap-2">

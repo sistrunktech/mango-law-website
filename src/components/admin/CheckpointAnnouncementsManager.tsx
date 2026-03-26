@@ -22,6 +22,21 @@ const emptyForm: Partial<CheckpointAnnouncement> = {
   raw_text: '',
 };
 
+function toDateTimeLocalValue(value: string | null | undefined): string {
+  if (!value) return '';
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return '';
+  const tzOffsetMs = parsed.getTimezoneOffset() * 60_000;
+  return new Date(parsed.getTime() - tzOffsetMs).toISOString().slice(0, 16);
+}
+
+function fromDateTimeLocalValue(value: string): string | null {
+  if (!value) return null;
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return parsed.toISOString();
+}
+
 export default function CheckpointAnnouncementsManager() {
   const [announcements, setAnnouncements] = useState<CheckpointAnnouncement[]>([]);
   const [loading, setLoading] = useState(true);
@@ -94,7 +109,8 @@ export default function CheckpointAnnouncementsManager() {
         <div>
           <h2 className="text-xl font-bold text-brand-black">Checkpoint Announcements</h2>
           <p className="mt-1 text-sm text-brand-black/60">
-            Pending items show on the public page as “details to be announced”. ({pendingCount} pending)
+            Pending items show on the public page as “details to be announced”. Use this for holiday/weekend notices before exact
+            locations are released. ({pendingCount} pending)
           </p>
         </div>
         {!showForm && (
@@ -154,6 +170,36 @@ export default function CheckpointAnnouncementsManager() {
             </div>
 
             <div>
+              <label className="mb-1 block text-sm font-semibold text-brand-black">Announcement time</label>
+              <input
+                type="datetime-local"
+                value={toDateTimeLocalValue(form.announcement_date)}
+                onChange={(e) => setForm({ ...form, announcement_date: fromDateTimeLocalValue(e.target.value) })}
+                className="w-full rounded-lg border border-brand-black/20 bg-white px-4 py-2 focus:border-brand-mango focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-brand-black">Start time</label>
+              <input
+                type="datetime-local"
+                value={toDateTimeLocalValue(form.start_date)}
+                onChange={(e) => setForm({ ...form, start_date: fromDateTimeLocalValue(e.target.value) })}
+                className="w-full rounded-lg border border-brand-black/20 bg-white px-4 py-2 focus:border-brand-mango focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-brand-black">End time</label>
+              <input
+                type="datetime-local"
+                value={toDateTimeLocalValue(form.end_date)}
+                onChange={(e) => setForm({ ...form, end_date: fromDateTimeLocalValue(e.target.value) })}
+                className="w-full rounded-lg border border-brand-black/20 bg-white px-4 py-2 focus:border-brand-mango focus:outline-none"
+              />
+            </div>
+
+            <div>
               <label className="mb-1 block text-sm font-semibold text-brand-black">County</label>
               <input
                 value={form.location_county || ''}
@@ -170,6 +216,16 @@ export default function CheckpointAnnouncementsManager() {
                 onChange={(e) => setForm({ ...form, location_city: e.target.value })}
                 className="w-full rounded-lg border border-brand-black/20 bg-white px-4 py-2 focus:border-brand-mango focus:outline-none"
                 placeholder="e.g., Columbus"
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="mb-1 block text-sm font-semibold text-brand-black">Location text</label>
+              <input
+                value={form.location_text || ''}
+                onChange={(e) => setForm({ ...form, location_text: e.target.value })}
+                className="w-full rounded-lg border border-brand-black/20 bg-white px-4 py-2 focus:border-brand-mango focus:outline-none"
+                placeholder="e.g., Downtown Columbus corridor, exact location pending"
               />
             </div>
 
@@ -262,4 +318,3 @@ export default function CheckpointAnnouncementsManager() {
     </div>
   );
 }
-

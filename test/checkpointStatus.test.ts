@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { getDisplayStatus, type DUICheckpoint } from '../src/data/checkpoints.ts';
 import { parseDateTime as parseOVICheckpointDateTime } from '../supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts';
+import { parseAddress } from '../supabase/functions/checkpoint-scraper/geocoding.ts';
 
 function run() {
   const checkpoint = {
@@ -50,6 +51,24 @@ function run() {
   assert.ok(superBowlLabel);
   const superBowlDurationMs = new Date(superBowlLabel.end).getTime() - new Date(superBowlLabel.start).getTime();
   assert.equal(superBowlDurationMs, 3 * 60 * 60 * 1000);
+
+  assert.deepEqual(
+    parseAddress('Dixie Highway, OH 45011, Fairfield, Butler County'),
+    {
+      address: 'Dixie Highway',
+      city: 'Fairfield',
+      county: 'Butler',
+    }
+  );
+
+  assert.deepEqual(
+    parseAddress('Pearl Road, Brunswick, Medina County'),
+    {
+      address: 'Pearl Road',
+      city: 'Brunswick',
+      county: 'Medina',
+    }
+  );
 }
 
 run();
