@@ -17,6 +17,7 @@ import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type Checkpoi
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { SEO } from '../lib/seo';
+import { formatCalendarDate } from '../lib/formatting';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -100,7 +101,7 @@ function formatDisplayDate(value: string | null | undefined): string | null {
   if (!value) return null;
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return null;
-  return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  return formatCalendarDate(parsed);
 }
 
 export default function DUICheckpointsPage() {
@@ -117,10 +118,11 @@ export default function DUICheckpointsPage() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific'>('emergency_banner');
   const [leadModalCheckpointId, setLeadModalCheckpointId] = useState<string | undefined>();
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState<Date | undefined>(undefined);
   const itemsPerPage = 15;
 
   useEffect(() => {
+    setNow(new Date());
     const id = window.setInterval(() => setNow(new Date()), 60_000);
     return () => window.clearInterval(id);
   }, []);
@@ -516,7 +518,7 @@ export default function DUICheckpointsPage() {
                       </span>
                     </div>
                     <div className="mt-1 text-xs text-brand-black/60">
-                      {a.event_date ? `Event date: ${new Date(a.event_date).toLocaleDateString()}` : 'Event date: TBD'}
+                      {a.event_date ? `Event date: ${formatCalendarDate(a.event_date)}` : 'Event date: TBD'}
                       {a.location_county ? ` • ${a.location_county} County` : ''}
                       {a.location_city ? ` • ${a.location_city}` : ''}
                     </div>
@@ -555,7 +557,7 @@ export default function DUICheckpointsPage() {
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div className="font-semibold text-brand-black">{item.title}</div>
                       <span className="rounded-full bg-brand-black/5 px-2.5 py-1 text-xs font-semibold text-brand-black/70">
-                        {new Date(item.publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        {formatCalendarDate(item.publishedDate)}
                       </span>
                     </div>
                     <div className="mt-1 text-xs text-brand-black/60">
