@@ -1,62 +1,109 @@
 'use client';
 
-import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
-import {
-  AlertTriangle,
-  Calendar,
-  Clock,
-  Filter,
-  Info,
-  MapPinned,
-  Shield,
-} from 'lucide-react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import dynamic from 'next/dynamic';
+import { AlertTriangle, Filter, MapPinned, Shield, Info, Calendar, Clock } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import CheckpointCard from '../components/CheckpointCard';
-import CheckpointMap from '../components/CheckpointMap';
-import CheckpointHotspots from '../components/CheckpointHotspots';
+import HotspotTeaser from '../components/HotspotTeaser';
+import CTASection from '../components/CTASection';
+import BlogSidebar from '../components/BlogSidebar';
 import FAQSection from '../components/FAQSection';
-import LeadCaptureModal from '../components/LeadCaptureModal';
-import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
 import { duiCheckpointMapFaqs } from '../data/duiCheckpointMapFaqs';
+import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
-import {
-  getCheckpointAnnouncements,
-  isAnnouncementFreshForPublic,
-  type CheckpointAnnouncement,
-} from '../lib/checkpointAnnouncementsService';
-import { formatCalendarDate } from '../lib/formatting';
+import LeadCaptureModal from '../components/LeadCaptureModal';
+import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { SEO } from '../lib/seo';
 
 type ViewMode = 'upcoming' | 'all';
 
-const relatedResources = [
+const CheckpointMap = dynamic(() => import('../components/CheckpointMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full items-center justify-center rounded-2xl border border-brand-black/10 bg-brand-offWhite px-6 text-center text-sm text-brand-black/70">
+      Loading interactive checkpoint map...
+    </div>
+  ),
+});
+
+const CheckpointHotspots = dynamic(() => import('../components/CheckpointHotspots'), {
+  ssr: false,
+  loading: () => (
+    <div className="mb-6 rounded-xl border border-brand-black/10 bg-brand-offWhite p-4">
+      <div className="flex items-center gap-2">
+        <div className="h-4 w-4 animate-pulse rounded bg-brand-black/10" />
+        <div className="h-4 w-32 animate-pulse rounded bg-brand-black/10" />
+      </div>
+    </div>
+  ),
+});
+
+const checkpointNewsReferences: Array<{
+  title: string;
+  sourceName: string;
+  sourceUrl: string;
+  publishedDate: string; // YYYY-MM-DD
+  locationCity?: string;
+  locationCounty?: string;
+  note?: string;
+}> = [
   {
-    label: 'OVI / DUI defense overview',
-    href: '/ovi-dui-defense-delaware-oh',
-    description: 'Start with the broad overview if you need to understand the full case path.',
+    title: 'WHIO (Mar 25, 2020): OVI checkpoint underway in Dayton (video)',
+    sourceName: 'WHIO-TV',
+    sourceUrl: 'https://www.whio.com/news/local/ovi-checkpoint-underway-dayton-tonight/lPthnDi1lKWALWucIhNisL/',
+    publishedDate: '2020-03-25',
+    locationCity: 'Dayton',
+    locationCounty: 'Montgomery',
+    note: 'Media reference only; exact checkpoint time/location details are not provided in the source page.',
   },
   {
-    label: 'Refusing field sobriety tests',
-    href: '/blog/refuse-field-sobriety-test-ohio',
-    description: 'A practical guide to roadside tests and what officers are looking for.',
+    title: 'OVICheckpoint listing (Feb 11, 2024): Super Bowl enforcement included Dayton (Montgomery County)',
+    sourceName: 'OVICheckpoint',
+    sourceUrl: 'https://www.ovicheckpoint.com/',
+    publishedDate: '2024-02-11',
+    locationCity: 'Dayton',
+    locationCounty: 'Montgomery',
+    note: 'Listing described enhanced enforcement with an undisclosed location in Dayton on Super Bowl Sunday.',
   },
   {
-    label: 'Ohio checkpoint hotspots',
-    href: '/blog/ohio-dui-checkpoint-hotspots',
-    description: 'Context on where checkpoints tend to be announced and how patterns usually look.',
+    title: "OVICheckpoint listing (Mar 17, 2026): St. Patrick's Day-period OVI enforcement in Stark, Summit, and Montgomery counties",
+    sourceName: 'OVICheckpoint',
+    sourceUrl: 'https://www.ovicheckpoint.com/',
+    publishedDate: '2026-03-17',
+    note: "Captured during the March 26 refresh after the holiday window had passed; useful as a historical/source-of-record reference for St. Patrick's Day enforcement coverage.",
   },
 ];
 
-const stopChecklist = [
-  'Save the paperwork, especially the citation and any BMV suspension forms.',
-  'Write down what happened while the timing and officer instructions are still fresh.',
-  'Do not assume the checkpoint stop itself makes the charge automatic or unbeatable.',
+const seasonalEnforcementWindows = [
+  {
+    title: "St. Patrick's Day",
+    description: 'A frequent spring enforcement window because daytime drinking, downtown traffic, and late-night rides home all increase.',
+  },
+  {
+    title: 'Memorial Day to July 4th',
+    description: 'Warm-weather travel and lake/weekend traffic often bring heavier patrol activity and more roadside enforcement messaging.',
+  },
+  {
+    title: 'Labor Day and fall football weekends',
+    description: 'Game-day traffic and holiday travel can make these weekends more active for OVI patrols and checkpoint publicity.',
+  },
+  {
+    title: "Thanksgiving through New Year's",
+    description: 'This is usually the strongest seasonal enforcement stretch, with parties, long-distance travel, and grant-funded overtime.',
+  },
 ];
 
-export default function DUICheckpointsPage({ renderedAt }: { renderedAt: string }) {
+function formatDisplayDate(value: string | null | undefined): string | null {
+  if (!value) return null;
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+export default function DUICheckpointsPage() {
   const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
   const [announcements, setAnnouncements] = useState<CheckpointAnnouncement[]>([]);
   const [filteredCheckpoints, setFilteredCheckpoints] = useState<DUICheckpoint[]>([]);
@@ -64,54 +111,47 @@ export default function DUICheckpointsPage({ renderedAt }: { renderedAt: string 
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<DUICheckpoint | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<ViewMode>('all');
+  const [viewMode, setViewMode] = useState<ViewMode>('upcoming');
   const [dateRange, setDateRange] = useState<DateRangeOption>('90d');
   const [currentPage, setCurrentPage] = useState(1);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
-  const [leadModalTrigger, setLeadModalTrigger] = useState<
-    'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific'
-  >('emergency_banner');
+  const [leadModalTrigger, setLeadModalTrigger] = useState<'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific'>('emergency_banner');
   const [leadModalCheckpointId, setLeadModalCheckpointId] = useState<string | undefined>();
-  const [now, setNow] = useState<Date>(() => new Date(renderedAt));
-
+  const [now, setNow] = useState(() => new Date());
   const itemsPerPage = 15;
 
   useEffect(() => {
-    setNow(new Date());
-
-    const intervalId = window.setInterval(() => {
-      setNow(new Date());
-    }, 60_000);
-
-    return () => window.clearInterval(intervalId);
-  }, [renderedAt]);
+    const id = window.setInterval(() => setNow(new Date()), 60_000);
+    return () => window.clearInterval(id);
+  }, []);
 
   const filterPublicCheckpoints = useCallback((data: DUICheckpoint[]) => {
-    return data.filter((checkpoint) => Boolean(checkpoint.source_url));
+    // Public page should only show checkpoints with a real upstream source URL.
+    // This prevents demo/seed rows from appearing as “real” checkpoints.
+    return data.filter((c) => Boolean(c.source_url));
   }, []);
 
   const loadCheckpoints = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-
       try {
         const announcementsData = await getCheckpointAnnouncements();
         setAnnouncements(announcementsData);
-      } catch (announcementError) {
-        console.warn('Unable to load checkpoint announcements (continuing):', announcementError);
+      } catch (e) {
+        console.warn('Unable to load checkpoint announcements (continuing):', e);
         setAnnouncements([]);
       }
-
-      const data =
-        viewMode === 'upcoming'
-          ? await getUpcomingCheckpoints()
-          : await getRecentCheckpoints(dateRange);
-
-      setCheckpoints(filterPublicCheckpoints(data));
-    } catch (loadError) {
-      console.error('Failed to load checkpoints:', loadError);
-      setError('Unable to load checkpoint data right now. Please try again in a few minutes.');
+      if (viewMode === 'upcoming') {
+        const data = await getUpcomingCheckpoints();
+        setCheckpoints(filterPublicCheckpoints(data));
+      } else {
+        const data = await getRecentCheckpoints(dateRange);
+        setCheckpoints(filterPublicCheckpoints(data));
+      }
+    } catch (error) {
+      console.error('Failed to load checkpoints:', error);
+      setError('Unable to load checkpoint data. Please try again later.');
       setCheckpoints([]);
       setAnnouncements([]);
     } finally {
@@ -120,51 +160,85 @@ export default function DUICheckpointsPage({ renderedAt }: { renderedAt: string 
   }, [dateRange, filterPublicCheckpoints, viewMode]);
 
   const filterCheckpoints = useCallback(() => {
-    let next = checkpoints;
+    let filtered = checkpoints;
 
     if (selectedCounty !== 'all') {
-      next = next.filter((checkpoint) => checkpoint.location_county === selectedCounty);
+      filtered = filtered.filter(c => c.location_county === selectedCounty);
     }
 
-    setFilteredCheckpoints(next);
-    setCurrentPage(1);
+    setFilteredCheckpoints(filtered);
+    setCurrentPage(1); // Reset to first page when filters change
   }, [checkpoints, selectedCounty]);
 
   useEffect(() => {
-    void loadCheckpoints();
+    loadCheckpoints();
   }, [loadCheckpoints]);
 
   useEffect(() => {
     filterCheckpoints();
   }, [filterCheckpoints]);
 
+  // Calculate pagination
   const totalPages = Math.ceil(filteredCheckpoints.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedCheckpoints = filteredCheckpoints.slice(startIndex, endIndex);
 
-  const pendingAnnouncements = announcements.filter(
-    (announcement) =>
-      announcement.status === 'pending_details' && isAnnouncementFreshForPublic(announcement),
-  );
+  const handleHotspotClick = (city: string, county: string) => {
+    setSelectedCounty(county);
+    setViewMode('all');
+  };
 
   const countiesWithCheckpoints = Array.from(
-    new Set(checkpoints.map((checkpoint) => checkpoint.location_county)),
+    new Set(checkpoints.map(c => c.location_county))
   ).sort();
 
-  const openLeadModal = (
-    trigger: typeof leadModalTrigger,
-    checkpointId?: string,
-  ) => {
+  const openLeadModal = (trigger: typeof leadModalTrigger, checkpointId?: string) => {
     setLeadModalTrigger(trigger);
     setLeadModalCheckpointId(checkpointId);
     setIsLeadModalOpen(true);
   };
 
-  const handleHotspotClick = (_city: string, county: string) => {
-    setSelectedCounty(county);
-    setViewMode('all');
-  };
+  const pendingAnnouncements = announcements.filter(
+    (a) => a.status === 'pending_details' && isAnnouncementFreshForPublic(a)
+  );
+
+  const latestAnnouncement = useMemo(() => {
+    return [...announcements].sort((a, b) => {
+      const aTime = new Date(a.announcement_date || a.created_at).getTime();
+      const bTime = new Date(b.announcement_date || b.created_at).getTime();
+      return bTime - aTime;
+    })[0] ?? null;
+  }, [announcements]);
+
+  const latestConfirmedCheckpoint = useMemo(() => {
+    return [...checkpoints].sort((a, b) => {
+      const aTime = new Date(a.start_date || a.created_at || 0).getTime();
+      const bTime = new Date(b.start_date || b.created_at || 0).getTime();
+      return bTime - aTime;
+    })[0] ?? null;
+  }, [checkpoints]);
+
+  const currentStatusSummary = useMemo(() => {
+    if (pendingAnnouncements.length > 0 || checkpoints.length > 0) {
+      if (pendingAnnouncements.length > 0) {
+        return {
+          heading: 'Current public signal',
+          body: `${pendingAnnouncements.length} pending announcement${pendingAnnouncements.length !== 1 ? 's are' : ' is'} published right now, even if some locations are still being finalized.`,
+        };
+      }
+
+      return {
+        heading: 'Current public signal',
+        body: `${checkpoints.length} announced checkpoint${checkpoints.length !== 1 ? 's are' : ' is'} currently visible in the selected view.`,
+      };
+    }
+
+    return {
+      heading: 'Current public signal',
+      body: 'There are no currently announced checkpoints in the live feed right now, so this page is functioning more as a watchlist and legal guide than a live map.',
+    };
+  }, [checkpoints.length, pendingAnnouncements.length]);
 
   return (
     <>
@@ -176,160 +250,240 @@ export default function DUICheckpointsPage({ renderedAt }: { renderedAt: string 
           { name: 'DUI Checkpoints', item: '/resources/dui-checkpoints' },
         ]}
       />
-
       <PageHero
-        eyebrow="Ohio DUI Checkpoint Guide"
-        title="Announced checkpoints, practical context, and what to do if you were stopped."
-        description="Use this page to review public checkpoint notices, understand how Ohio checkpoint stops work, and get oriented before you decide what needs attention next."
-        ctaLabel="Talk Through Your Stop"
-        ctaHref="/contact"
+        eyebrow="DUI Resources"
+        title="Ohio DUI Checkpoint Map"
+        description="Announced checkpoints, public-source references, and practical guidance on what a checkpoint stop can involve."
+        ctaLabel="Know Your Rights"
+        ctaHref="/ovi-dui-defense-delaware-oh"
         variant="light"
-        compact
-        showQuickActions={false}
         phoneCtaId="dui_checkpoints_hero_call_office"
       />
 
-      <section className="bg-white">
-        <div className="container grid gap-6 py-10 lg:grid-cols-[1.15fr_0.85fr] lg:py-12">
-          <div className="rounded-[1.75rem] border border-brand-black/10 bg-brand-offWhite/55 p-6 shadow-soft">
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mb-8 rounded-2xl border border-brand-mango/20 bg-brand-mango/5 p-6">
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-brand-mangoText">
-                <Info className="h-6 w-6" />
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-mango/20">
+                <AlertTriangle className="h-6 w-6 text-brand-mango" />
               </div>
-              <div>
-                <h2 className="text-xl font-bold text-brand-black">What this page is for</h2>
-                <p className="mt-3 text-sm leading-relaxed text-brand-black/72">
-                  This guide shows <strong>publicly announced Ohio OVI checkpoints</strong> gathered from official notices and other public reporting. It is meant to help you understand the context around a stop, not to predict future enforcement or speculate about unannounced checkpoints.
+              <div className="flex-1">
+                <h2 className="mb-2 text-lg font-bold text-brand-black">
+                  About Ohio DUI Checkpoint Data
+                </h2>
+                <p className="mb-3 text-sm text-brand-black/80">
+                  This map shows <strong>only publicly announced OVI checkpoints</strong> in Ohio from verified sources. Data is compiled from official law enforcement announcements, news outlets, and verified public sources. Not all checkpoints are announced in advance, and this map does not predict or speculate about unannounced locations.
                 </p>
-                <div className="mt-4 rounded-2xl border border-amber-500/25 bg-amber-50 p-4 text-sm text-amber-950">
-                  Checkpoints can be lawful in Ohio when they follow the required procedures. This page is educational, not legal advice, and it should not be treated as a live enforcement alert system.
+                <div className="mb-3 rounded-lg border border-amber-600/20 bg-amber-50 p-3">
+                  <p className="text-xs text-amber-900">
+                    <strong>Important:</strong> This information is for educational purposes only. DUI checkpoints in Ohio are legal when properly conducted with advance notice, neutral selection methods, and clear markings. Always drive sober and follow traffic laws.
+                  </p>
                 </div>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <Link
+                <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+                  <a
+                    href={`tel:${OFFICE_PHONE_TEL}`}
+                    onClick={() => {
+                      trackCtaClick('checkpoint_banner_call');
+                      trackLeadSubmitted('phone', 'checkpoint_banner_call', {
+                        target_number: OFFICE_PHONE_TEL,
+                      });
+                    }}
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10"
+                    data-cta="checkpoint_banner_call"
+                    aria-label={`Call: ${OFFICE_PHONE_DISPLAY}`}
+                  >
+                    Call {OFFICE_PHONE_DISPLAY}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      trackCtaClick('checkpoint_banner_free_consult');
+                      openLeadModal('emergency_banner');
+                    }}
+                    className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-brand-mango px-4 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
+                    data-cta="checkpoint_banner_free_consult"
+                  >
+                    Free consult
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-4 text-sm">
+                  <a
                     href="/ovi-dui-defense-delaware-oh"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-brand-mangoText shadow-soft transition-colors hover:bg-brand-mango/10"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
                   >
                     <Shield className="h-4 w-4" />
-                    OVI defense overview
-                  </Link>
-                  <Link
+                    Know Your Rights
+                  </a>
+                  <a
                     href="/blog/refuse-field-sobriety-test-ohio"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-brand-mangoText shadow-soft transition-colors hover:bg-brand-mango/10"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
                   >
                     <Info className="h-4 w-4" />
-                    Field sobriety guide
-                  </Link>
+                    Field Sobriety Tests
+                  </a>
+                  <a
+                    href="/als-license-suspension-ohio"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                  >
+                    <Calendar className="h-4 w-4" />
+                    ALS License Issues
+                  </a>
+                  <a
+                    href="/first-offense-ovi-ohio"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                  >
+                    <Shield className="h-4 w-4" />
+                    First Offense OVI
+                  </a>
+                  <a
+                    href="/blog/ohio-dui-checkpoint-hotspots"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                  >
+                    <MapPinned className="h-4 w-4" />
+                    Common Checkpoint Hotspots
+                  </a>
+                  <a
+                    href="/blog/super-bowl-dui-checkpoints-ohio"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                  >
+                    <Calendar className="h-4 w-4" />
+                    Super Bowl Sunday guide
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="rounded-[1.75rem] border border-brand-black/10 bg-white p-6 shadow-soft">
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-goldText">
-              If you were stopped
-            </p>
-            <h2 className="mt-3 text-xl font-bold text-brand-black">Focus on the details that will matter later.</h2>
-            <ul className="mt-5 space-y-3 text-sm leading-relaxed text-brand-black/68">
-              {stopChecklist.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-mango/15 text-[11px] font-bold text-brand-mangoText">
-                    ✓
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 grid gap-3">
+          <div className="mb-8 grid gap-4 lg:grid-cols-[1.25fr,0.75fr]">
+            <div className="rounded-2xl border border-brand-black/10 bg-white p-5">
+              <div className="text-sm font-semibold text-brand-black">{currentStatusSummary.heading}</div>
+              <p className="mt-2 text-sm text-brand-black/75">{currentStatusSummary.body}</p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3">
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-black/55">Latest announcement</div>
+                  <div className="mt-1 font-semibold text-brand-black">
+                    {latestAnnouncement?.title || 'No recent public announcement captured'}
+                  </div>
+                  <div className="mt-1 text-xs text-brand-black/60">
+                    {latestAnnouncement
+                      ? `${formatDisplayDate(latestAnnouncement.event_date || latestAnnouncement.announcement_date || latestAnnouncement.created_at) || 'Date unavailable'}${latestAnnouncement.source_name ? ` • ${latestAnnouncement.source_name}` : ''}`
+                      : 'If agencies publish an announced checkpoint, it should appear here first.'}
+                  </div>
+                </div>
+                <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3">
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-black/55">Recent confirmed checkpoint</div>
+                  <div className="mt-1 font-semibold text-brand-black">
+                    {latestConfirmedCheckpoint?.title || 'No current confirmed checkpoint in this view'}
+                  </div>
+                  <div className="mt-1 text-xs text-brand-black/60">
+                    {latestConfirmedCheckpoint
+                      ? `${formatDisplayDate(latestConfirmedCheckpoint.start_date) || 'Date unavailable'}${latestConfirmedCheckpoint.location_county ? ` • ${latestConfirmedCheckpoint.location_county} County` : ''}`
+                      : 'Switch to recent history if you want to browse earlier announced checkpoints.'}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
+              <div className="text-sm font-semibold text-brand-black">Seasonal enforcement watch</div>
+              <p className="mt-2 text-sm text-brand-black/70">
+                The best checkpoint opportunities usually cluster around a few repeat holiday windows. St. Patrick&apos;s Day was one of the March windows we should have covered more aggressively.
+              </p>
+              <div className="mt-4 space-y-3">
+                {seasonalEnforcementWindows.map((item) => (
+                  <div key={item.title} className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
+                    <div className="font-semibold text-brand-black">{item.title}</div>
+                    <div className="mt-1 text-sm text-brand-black/65">{item.description}</div>
+                  </div>
+                ))}
+              </div>
               <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
-                onClick={() => {
-                  trackCtaClick('checkpoint_banner_call');
-                  trackLeadSubmitted('phone', 'checkpoint_banner_call', {
-                    target_number: OFFICE_PHONE_TEL,
-                  });
-                }}
-                className="inline-flex items-center justify-center rounded-full border border-brand-leaf/25 bg-white px-4 py-3 text-sm font-semibold text-brand-forest transition-colors hover:border-brand-leaf hover:bg-brand-leaf hover:text-white"
-                data-cta="checkpoint_banner_call"
+                href="/holiday-ovi-enforcement-ohio"
+                className="mt-4 inline-flex text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
               >
-                Call/Text {OFFICE_PHONE_DISPLAY}
+                View the holiday enforcement guide →
               </a>
+            </div>
+          </div>
+
+          <CheckpointHotspots onCityClick={handleHotspotClick} />
+
+          <HotspotTeaser />
+
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
               <button
-                type="button"
-                onClick={() => {
-                  trackCtaClick('checkpoint_banner_free_consult');
-                  openLeadModal('emergency_banner');
-                }}
-                className="rounded-full bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
-                data-cta="checkpoint_banner_free_consult"
+                onClick={() => setViewMode('upcoming')}
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
+                  viewMode === 'upcoming'
+                    ? 'bg-white text-brand-mangoText shadow-sm'
+                    : 'text-brand-black/70 hover:text-brand-mangoText'
+                }`}
               >
-                Request a case review
+                <Clock className="h-3.5 w-3.5" />
+                Upcoming
+              </button>
+              <button
+                onClick={() => setViewMode('all')}
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
+                  viewMode === 'all'
+                    ? 'bg-white text-brand-mangoText shadow-sm'
+                    : 'text-brand-black/70 hover:text-brand-mangoText'
+                }`}
+              >
+                <Calendar className="h-3.5 w-3.5" />
+                Recent history
               </button>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="section bg-brand-offWhite/45">
-        <div className="container">
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-2">
-              <div className="flex gap-1 rounded-full border border-brand-black/10 bg-white p-1 shadow-soft">
+            {viewMode === 'all' && (
+              <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
                 <button
-                  onClick={() => setViewMode('upcoming')}
-                  className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
-                    viewMode === 'upcoming'
-                      ? 'bg-brand-mango text-brand-black shadow-sm'
+                  onClick={() => setDateRange('30d')}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                    dateRange === '30d'
+                      ? 'bg-white text-brand-mangoText shadow-sm'
                       : 'text-brand-black/70 hover:text-brand-mangoText'
                   }`}
                 >
-                  <Clock className="h-3.5 w-3.5" />
-                  Upcoming
+                  30 Days
                 </button>
                 <button
-                  onClick={() => setViewMode('all')}
-                  className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
-                    viewMode === 'all'
-                      ? 'bg-brand-mango text-brand-black shadow-sm'
+                  onClick={() => setDateRange('90d')}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                    dateRange === '90d'
+                      ? 'bg-white text-brand-mangoText shadow-sm'
                       : 'text-brand-black/70 hover:text-brand-mangoText'
                   }`}
                 >
-                  <Calendar className="h-3.5 w-3.5" />
-                  All notices
+                  90 Days
+                </button>
+                <button
+                  onClick={() => setDateRange('all')}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                    dateRange === 'all'
+                      ? 'bg-white text-brand-mangoText shadow-sm'
+                      : 'text-brand-black/70 hover:text-brand-mangoText'
+                  }`}
+                >
+                  All Time
                 </button>
               </div>
+            )}
+          </div>
 
-              {viewMode === 'all' && (
-                <div className="flex gap-1 rounded-full border border-brand-black/10 bg-white p-1 shadow-soft">
-                  {(['30d', '90d', 'all'] as const).map((range) => (
-                    <button
-                      key={range}
-                      onClick={() => setDateRange(range)}
-                      className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                        dateRange === range
-                          ? 'bg-brand-black text-white'
-                          : 'text-brand-black/70 hover:text-brand-mangoText'
-                      }`}
-                    >
-                      {range === 'all' ? 'All time' : range === '30d' ? '30 days' : '90 days'}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 rounded-full border border-brand-black/10 bg-white px-4 py-2 shadow-soft">
+              <div className="flex items-center gap-2 rounded-lg border border-brand-black/10 bg-brand-offWhite px-4 py-2">
                 <Filter className="h-4 w-4 text-brand-mango" />
                 <select
                   value={selectedCounty}
-                  onChange={(event) => setSelectedCounty(event.target.value)}
-                  className="border-none bg-transparent pr-6 text-sm font-medium text-brand-black focus:outline-none focus:ring-0"
+                  onChange={(e) => setSelectedCounty(e.target.value)}
+                  className="border-none bg-transparent text-sm font-medium text-brand-black focus:outline-none focus:ring-0"
                 >
-                  <option value="all">
-                    {loading ? 'All Counties' : `All Counties (${checkpoints.length})`}
-                  </option>
+                  <option value="all">All Counties ({checkpoints.length})</option>
                   {countiesWithCheckpoints.map((county) => {
-                    const count = checkpoints.filter((checkpoint) => checkpoint.location_county === county).length;
+                    const count = checkpoints.filter(c => c.location_county === county).length;
                     return (
                       <option key={county} value={county}>
                         {county} County ({count})
@@ -338,44 +492,40 @@ export default function DUICheckpointsPage({ renderedAt }: { renderedAt: string 
                   })}
                 </select>
               </div>
-              <div className="text-sm text-brand-black/60">
-                {loading
-                  ? 'Loading checkpoint notices...'
-                  : `${filteredCheckpoints.length} announced checkpoint${filteredCheckpoints.length === 1 ? '' : 's'} shown`}
-              </div>
+            </div>
+            <div className="text-sm text-brand-black/60">
+              Showing {filteredCheckpoints.length} checkpoint{filteredCheckpoints.length !== 1 ? 's' : ''}
+              {pendingAnnouncements.length > 0
+                ? ` • ${pendingAnnouncements.length} pending announcement${pendingAnnouncements.length !== 1 ? 's' : ''}`
+                : ''}
             </div>
           </div>
 
           {pendingAnnouncements.length > 0 && (
-            <div className="mb-6 rounded-[1.5rem] border border-brand-black/10 bg-white p-5 shadow-soft">
-              <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
-                <AlertTriangle className="h-4 w-4 text-brand-mangoText" />
-                Pending public announcements
+            <div className="mb-8 rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
+              <div className="mb-3 text-sm font-semibold text-brand-black">
+                Pending checkpoint announcements (details to be announced)
               </div>
-              <div className="mt-4 grid gap-3 md:grid-cols-2">
-                {pendingAnnouncements.slice(0, 6).map((announcement) => (
-                  <div key={announcement.id} className="rounded-2xl border border-brand-black/8 bg-brand-offWhite/45 px-4 py-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="text-sm font-semibold text-brand-black">{announcement.title}</p>
-                        <p className="mt-1 text-xs text-brand-black/58">
-                          {announcement.event_date
-                            ? `Event date: ${formatCalendarDate(announcement.event_date)}`
-                            : 'Event date: To be announced'}
-                          {announcement.location_county ? ` • ${announcement.location_county} County` : ''}
-                          {announcement.location_city ? ` • ${announcement.location_city}` : ''}
-                        </p>
-                      </div>
-                      <span className="rounded-full bg-brand-mango/14 px-2.5 py-1 text-[11px] font-semibold text-brand-mangoText">
+              <div className="space-y-3">
+                {pendingAnnouncements.slice(0, 8).map((a) => (
+                  <div key={a.id} className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="font-semibold text-brand-black">{a.title}</div>
+                      <span className="rounded-full bg-brand-mango/15 px-2.5 py-1 text-xs font-semibold text-brand-mangoText">
                         Pending details
                       </span>
                     </div>
-                    {announcement.source_url && (
+                    <div className="mt-1 text-xs text-brand-black/60">
+                      {a.event_date ? `Event date: ${new Date(a.event_date).toLocaleDateString()}` : 'Event date: TBD'}
+                      {a.location_county ? ` • ${a.location_county} County` : ''}
+                      {a.location_city ? ` • ${a.location_city}` : ''}
+                    </div>
+                    {a.source_url && (
                       <a
-                        href={announcement.source_url}
+                        href={a.source_url}
                         target="_blank"
                         rel="noopener noreferrer nofollow"
-                        className="mt-3 inline-flex text-xs font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                        className="mt-2 inline-flex text-xs font-semibold text-brand-mangoText hover:text-brand-leaf"
                       >
                         View source →
                       </a>
@@ -383,216 +533,271 @@ export default function DUICheckpointsPage({ renderedAt }: { renderedAt: string 
                   </div>
                 ))}
               </div>
+              {pendingAnnouncements.length > 8 && (
+                <div className="mt-3 text-xs text-brand-black/60">
+                  Showing 8 of {pendingAnnouncements.length}. More will appear as details are confirmed.
+                </div>
+              )}
             </div>
           )}
 
-          <div className="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
-            <div className="space-y-6">
-              <div className="overflow-hidden rounded-[1.75rem] border border-brand-black/10 bg-white shadow-soft">
-                <div className="border-b border-brand-black/8 px-5 py-4">
-                  <h2 className="text-lg font-bold text-brand-black">Checkpoint map and notice list</h2>
-                  <p className="mt-1 text-sm text-brand-black/62">
-                    Use the map for context, then scroll the list for dates, counties, sources, and related stop details.
-                  </p>
-                </div>
-                <div className="h-[420px]">
-                  <CheckpointMap
-                    checkpoints={filteredCheckpoints}
-                    selectedCheckpoint={selectedCheckpoint}
-                    onCheckpointSelect={setSelectedCheckpoint}
-                    now={now}
-                  />
-                </div>
+          {checkpointNewsReferences.length > 0 && (
+            <div className="mb-8 rounded-2xl border border-brand-black/10 bg-white p-5">
+              <div className="mb-1 text-sm font-semibold text-brand-black">
+                Checkpoint references in the news (historical/context)
+              </div>
+              <p className="mb-4 text-xs text-brand-black/60">
+                These links are for context and awareness. They may be historical and are not used to predict or speculate about unannounced checkpoints.
+              </p>
+              <div className="space-y-3">
+                {checkpointNewsReferences.map((item) => (
+                  <div key={item.sourceUrl} className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3">
+                    <div className="flex flex-wrap items-start justify-between gap-2">
+                      <div className="font-semibold text-brand-black">{item.title}</div>
+                      <span className="rounded-full bg-brand-black/5 px-2.5 py-1 text-xs font-semibold text-brand-black/70">
+                        {new Date(item.publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                    </div>
+                    <div className="mt-1 text-xs text-brand-black/60">
+                      Source: {item.sourceName}
+                      {item.locationCounty ? ` • ${item.locationCounty} County` : ''}
+                      {item.locationCity ? ` • ${item.locationCity}` : ''}
+                    </div>
+                    {item.note && (
+                      <div className="mt-1 text-xs text-brand-black/60">
+                        {item.note}
+                      </div>
+                    )}
+                    <a
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="mt-2 inline-flex text-xs font-semibold text-brand-mangoText hover:text-brand-leaf"
+                    >
+                      View source →
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="mb-8 rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
+            <div className="mb-2 text-sm font-semibold text-brand-black">
+              Start with the guide that matches what happened at the stop
+            </div>
+            <p className="mb-4 text-sm text-brand-black/70">
+              Checkpoint cases usually turn on one of a few issues first: the stop itself, what you did at roadside,
+              your license situation, or what happens next in court.
+            </p>
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+              {[
+                {
+                  href: '/ovi-dui-defense-delaware-oh',
+                  title: 'OVI rights and defense',
+                  description: 'Use this if you need the broad legal picture first.',
+                },
+                {
+                  href: '/first-offense-ovi-ohio',
+                  title: 'First-offense OVI guide',
+                  description: 'Best starting point when this is your first OVI charge.',
+                },
+                {
+                  href: '/als-license-suspension-ohio',
+                  title: 'ALS license suspension',
+                  description: 'Focus here if driving privileges are the immediate problem.',
+                },
+                {
+                  href: '/motion-to-suppress-ovi-ohio',
+                  title: 'Motion to suppress issues',
+                  description: 'Use this when the stop, testing, or search looks questionable.',
+                },
+              ].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-xl border border-brand-black/10 bg-white px-4 py-4 transition-colors hover:border-brand-mango/40 hover:bg-brand-mango/5"
+                >
+                  <div className="font-semibold text-brand-black">{item.title}</div>
+                  <div className="mt-1 text-sm text-brand-black/65">{item.description}</div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <div className="mb-6 h-[400px] lg:h-[400px]">
+                <CheckpointMap
+                  checkpoints={filteredCheckpoints}
+                  selectedCheckpoint={selectedCheckpoint}
+                  onCheckpointSelect={setSelectedCheckpoint}
+                  now={now}
+                />
               </div>
 
-              <div className="rounded-[1.75rem] border border-brand-black/10 bg-white p-5 shadow-soft">
-                <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-                  <div>
-                    <h3 className="text-lg font-bold text-brand-black">
-                      {viewMode === 'upcoming' ? 'Upcoming checkpoint notices' : 'Announced checkpoint archive'}
-                    </h3>
-                    <p className="mt-1 text-sm text-brand-black/62">
-                      Review the announced locations, keep the source, and note anything that stands out about the stop or timing.
-                    </p>
-                  </div>
-                  {!loading && filteredCheckpoints.length > 0 && (
-                    <div className="text-sm text-brand-black/58">
-                      Showing {startIndex + 1}-{Math.min(endIndex, filteredCheckpoints.length)} of {filteredCheckpoints.length}
+              <div className="mt-6">
+                <h3 className="mb-4 text-lg font-bold text-brand-black">
+                  {viewMode === 'upcoming' ? 'Currently announced checkpoints' : 'Recent checkpoint history'}
+                </h3>
+                <div>
+                  {loading ? (
+                    <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-12 text-center">
+                      <div className="inline-flex h-12 w-12 animate-spin items-center justify-center rounded-full border-4 border-brand-mango/20 border-t-brand-mango" />
+                      <p className="mt-4 text-sm text-brand-black/70">Loading checkpoints...</p>
+                    </div>
+                  ) : error ? (
+                    <div className="rounded-2xl border border-red-200 bg-red-50 p-12 text-center">
+                      <div className="mb-4 flex justify-center">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
+                          <AlertTriangle className="h-8 w-8 text-red-600" />
+                        </div>
+                      </div>
+                      <h3 className="mb-2 text-lg font-bold text-brand-black">
+                        Error Loading Checkpoints
+                      </h3>
+                      <p className="mb-4 text-sm text-brand-black/70">{error}</p>
+                      <button
+                        onClick={loadCheckpoints}
+                        className="rounded-lg bg-brand-mango px-6 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-leaf hover:text-white"
+                      >
+                        Try Again
+                      </button>
+                    </div>
+                  ) : filteredCheckpoints.length > 0 ? (
+                    <>
+                      <div className="mb-4 text-sm text-brand-black/60">
+                        Showing {startIndex + 1}-{Math.min(endIndex, filteredCheckpoints.length)} of {filteredCheckpoints.length}
+                      </div>
+                      <div className="grid gap-6">
+                        {paginatedCheckpoints.map((checkpoint) => (
+                          <CheckpointCard
+                            key={checkpoint.id}
+                            checkpoint={checkpoint}
+                            onClick={() => setSelectedCheckpoint(checkpoint)}
+                            onOpenLeadModal={openLeadModal}
+                            now={now}
+                          />
+                        ))}
+                      </div>
+                      {totalPages > 1 && (
+                        <div className="mt-8 flex items-center justify-center gap-2">
+                          <button
+                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                            disabled={currentPage === 1}
+                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-brand-black disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
+                          >
+                            Previous
+                          </button>
+                          <div className="flex gap-1">
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                              // Show first page, last page, current page, and pages around current
+                              const showPage = page === 1 ||
+                                              page === totalPages ||
+                                              (page >= currentPage - 1 && page <= currentPage + 1);
+
+                              if (!showPage && page === 2) {
+                                return <span key={page} className="px-2 text-brand-black/40">...</span>;
+                              }
+                              if (!showPage && page === totalPages - 1) {
+                                return <span key={page} className="px-2 text-brand-black/40">...</span>;
+                              }
+                              if (!showPage) {
+                                return null;
+                              }
+
+                              return (
+                                <button
+                                  key={page}
+                                  onClick={() => setCurrentPage(page)}
+                                  className={`h-10 w-10 rounded-lg text-sm font-semibold transition-all ${
+                                    currentPage === page
+                                      ? 'bg-brand-mango text-brand-black shadow-sm'
+                                      : 'border border-brand-black/10 bg-white text-brand-black hover:bg-brand-mango/10'
+                                  }`}
+                                >
+                                  {page}
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <button
+                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                            disabled={currentPage === totalPages}
+                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-brand-black disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
+                          >
+                            Next
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-12 text-center">
+                      <div className="mb-4 flex justify-center">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-leaf/10">
+                          <MapPinned className="h-8 w-8 text-brand-leaf" />
+                        </div>
+                      </div>
+                      <h3 className="mb-2 text-lg font-bold text-brand-black">
+                        No announced checkpoints at this time
+                      </h3>
+                      <p className="text-sm text-brand-black/80 max-w-md mx-auto">
+                        {selectedCounty === 'all'
+                          ? 'We have not detected any officially announced OVI checkpoints scheduled for this period. Please check back later or follow local law enforcement for real-time updates.'
+                          : `There are currently no scheduled checkpoints detected in ${selectedCounty} County.`}
+                      </p>
+                      <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                        {viewMode === 'upcoming' && (
+                          <button
+                            type="button"
+                            onClick={() => setViewMode('all')}
+                            className="rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10"
+                          >
+                            View recent checkpoint history
+                          </button>
+                        )}
+                        {selectedCounty !== 'all' && (
+                          <button
+                            onClick={() => setSelectedCounty('all')}
+                            className="text-sm font-semibold text-brand-mango hover:text-brand-leaf transition-colors"
+                          >
+                            View all counties
+                          </button>
+                        )}
+                        <a 
+                          href="/contact" 
+                          className="text-sm font-semibold bg-brand-mango/10 text-brand-mangoText px-4 py-2 rounded-lg hover:bg-brand-mango/20 transition-colors"
+                        >
+                          Contact office for legal help
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>
-
-                {loading ? (
-                  <div className="rounded-[1.5rem] border border-brand-black/8 bg-brand-offWhite/55 p-12 text-center">
-                    <div className="inline-flex h-12 w-12 animate-spin items-center justify-center rounded-full border-4 border-brand-mango/20 border-t-brand-mango" />
-                    <p className="mt-4 text-sm text-brand-black/65">Loading announced checkpoint data...</p>
-                  </div>
-                ) : error ? (
-                  <div className="rounded-[1.5rem] border border-red-200 bg-red-50 p-12 text-center">
-                    <div className="mb-4 flex justify-center">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
-                        <AlertTriangle className="h-8 w-8 text-red-600" />
-                      </div>
-                    </div>
-                    <h3 className="mb-2 text-lg font-bold text-brand-black">Error loading checkpoint notices</h3>
-                    <p className="mb-4 text-sm text-brand-black/70">{error}</p>
-                    <button
-                      onClick={loadCheckpoints}
-                      className="rounded-full bg-brand-mango px-6 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
-                    >
-                      Try again
-                    </button>
-                  </div>
-                ) : filteredCheckpoints.length > 0 ? (
-                  <>
-                    <div className="grid gap-5">
-                      {paginatedCheckpoints.map((checkpoint) => (
-                        <CheckpointCard
-                          key={checkpoint.id}
-                          checkpoint={checkpoint}
-                          now={now}
-                          onClick={() => setSelectedCheckpoint(checkpoint)}
-                          onOpenLeadModal={openLeadModal}
-                        />
-                      ))}
-                    </div>
-
-                    {totalPages > 1 && (
-                      <div className="mt-8 flex items-center justify-center gap-2">
-                        <button
-                          onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-                          disabled={currentPage === 1}
-                          className="rounded-full border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-brand-black disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
-                        >
-                          Previous
-                        </button>
-
-                        <div className="flex gap-1">
-                          {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => {
-                            const showPage =
-                              page === 1 ||
-                              page === totalPages ||
-                              (page >= currentPage - 1 && page <= currentPage + 1);
-
-                            if (!showPage && page === 2) {
-                              return (
-                                <span key={page} className="px-2 text-brand-black/40">
-                                  ...
-                                </span>
-                              );
-                            }
-
-                            if (!showPage && page === totalPages - 1) {
-                              return (
-                                <span key={page} className="px-2 text-brand-black/40">
-                                  ...
-                                </span>
-                              );
-                            }
-
-                            if (!showPage) return null;
-
-                            return (
-                              <button
-                                key={page}
-                                onClick={() => setCurrentPage(page)}
-                                className={`h-10 w-10 rounded-full text-sm font-semibold transition-all ${
-                                  currentPage === page
-                                    ? 'bg-brand-mango text-brand-black shadow-sm'
-                                    : 'border border-brand-black/10 bg-white text-brand-black hover:bg-brand-mango/10'
-                                }`}
-                              >
-                                {page}
-                              </button>
-                            );
-                          })}
-                        </div>
-
-                        <button
-                          onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
-                          disabled={currentPage === totalPages}
-                          className="rounded-full border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-all hover:bg-brand-mango hover:text-brand-black disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-brand-black"
-                        >
-                          Next
-                        </button>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <div className="rounded-[1.5rem] border border-brand-black/8 bg-brand-offWhite/55 p-12 text-center">
-                    <div className="mb-4 flex justify-center">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-leaf/10">
-                        <MapPinned className="h-8 w-8 text-brand-leaf" />
-                      </div>
-                    </div>
-                    <h3 className="mb-2 text-lg font-bold text-brand-black">No announced checkpoints right now</h3>
-                    <p className="mx-auto max-w-md text-sm text-brand-black/72">
-                      {selectedCounty === 'all'
-                        ? 'There are no public checkpoint notices matching this time window. Check back later or follow local reporting for new announcements.'
-                        : `There are no current notices matching ${selectedCounty} County.`}
-                    </p>
-                    <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                      {selectedCounty !== 'all' && (
-                        <button
-                          onClick={() => setSelectedCounty('all')}
-                          className="text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
-                        >
-                          View all counties
-                        </button>
-                      )}
-                      <Link
-                        href="/contact"
-                        className="rounded-full bg-brand-mango/12 px-4 py-2 text-sm font-semibold text-brand-mangoText transition-colors hover:bg-brand-mango/20"
-                      >
-                        Contact the office
-                      </Link>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
 
-            <div className="space-y-6 lg:sticky lg:top-24">
-              <div className="rounded-[1.75rem] border border-brand-black/10 bg-white p-6 shadow-soft">
-                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-goldText">
-                  Use this page for
-                </p>
-                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-brand-black/68">
-                  <li>Checking whether a checkpoint notice appears to have been publicly announced.</li>
-                  <li>Saving the source and timing details before they disappear from local coverage.</li>
-                  <li>Getting to the right OVI resources faster if the stop already happened.</li>
-                </ul>
-              </div>
-
-              <div className="rounded-[1.75rem] border border-brand-black/10 bg-white p-6 shadow-soft">
-                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-goldText">
-                  Related OVI resources
-                </p>
-                <div className="mt-4 space-y-3">
-                  {relatedResources.map((resource) => (
-                    <Link
-                      key={resource.href}
-                      href={resource.href}
-                      className="block rounded-2xl border border-brand-black/8 bg-brand-offWhite/45 px-4 py-3 transition-colors hover:bg-brand-mango/8"
-                    >
-                      <div className="text-sm font-semibold text-brand-black">{resource.label}</div>
-                      <div className="mt-1 text-xs leading-relaxed text-brand-black/60">{resource.description}</div>
-                    </Link>
-                  ))}
-                </div>
+            <div className="lg:col-span-1">
+              <div className="lg:sticky lg:top-8">
+                <BlogSidebar />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section bg-white">
-        <div className="container">
-          <CheckpointHotspots onCityClick={handleHotspotClick} />
-        </div>
-      </section>
+      <CTASection
+        eyebrow="Facing OVI Charges?"
+        title="Experienced DUI defense attorney"
+        body="If you've been charged with OVI/DUI, don't face it alone. Contact Mango Law for experienced defense representation."
+        primaryLabel="Free Case Evaluation"
+        primaryHref="/contact"
+        secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
+        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryCtaId="dui_checkpoints_cta_call_office"
+      />
 
-      <FAQSection faqs={duiCheckpointMapFaqs} title="Ohio DUI checkpoint guide FAQ" />
+      <FAQSection faqs={duiCheckpointMapFaqs} title="Ohio DUI checkpoint map FAQ" />
 
       <LeadCaptureModal
         isOpen={isLeadModalOpen}

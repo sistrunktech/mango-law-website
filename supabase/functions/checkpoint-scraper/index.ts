@@ -321,16 +321,20 @@ Deno.serve(async (req: Request) => {
     const requestBody = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
     const mode = requestBody?.mode === 'discovery' ? 'discovery' : 'core';
     const seedRow = typeof requestBody?.seedRow === 'number' ? requestBody.seedRow : undefined;
+    const trigger =
+      requestBody?.trigger === 'scheduler' || requestBody?.trigger === 'manual'
+        ? requestBody.trigger
+        : 'manual';
 
     const logId = crypto.randomUUID();
     const logStartTime = new Date().toISOString();
 
     await supabase.from('scraper_logs').insert({
       id: logId,
-      scraper_name: 'ovicheckpoint',
+      scraper_name: 'checkpoint-scraper',
       status: 'partial',
       started_at: logStartTime,
-      metadata: { trigger: 'manual', mode, seedRow },
+      metadata: { trigger, mode, seedRow, source: 'OVICheckpoint + RSS + curated' },
     });
 
     console.log('Starting OVICheckpoint.com scraper...');
@@ -532,7 +536,7 @@ Deno.serve(async (req: Request) => {
         checkpoints_updated: stats.checkpointsUpdated,
         errors: stats.errors,
         metadata: {
-          trigger: 'manual',
+          trigger,
           skipped: stats.checkpointsSkipped,
           announcements_found: stats.announcementsFound,
           announcements_upserted: stats.announcementsUpserted,

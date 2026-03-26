@@ -8,7 +8,7 @@ import { SEO } from '../lib/seo';
 export const holidayOviFaqs = [
   {
     question: 'When does Ohio increase OVI enforcement?',
-    answer: 'Enforcement typically increases around major holidays and high travel weekends, but schedules vary by agency.',
+    answer: "Enforcement typically increases around major holidays and high-travel weekends such as New Year's, Super Bowl weekend, St. Patrick's Day, Memorial Day, July 4th, Labor Day, and Thanksgiving.",
   },
   {
     question: 'Are holiday checkpoints announced?',
@@ -65,19 +65,28 @@ export default function HolidayOviEnforcementOhioPage() {
                 <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">
                   Why holiday enforcement feels different
                 </h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
+              <p className="text-lg text-brand-black/70 leading-relaxed">
                   Agencies often increase patrols, checkpoints, and public messaging around holiday weekends. The goal is to
-                  deter impaired driving through visibility and extra staffing.
-                </p>
+                  deter impaired driving through visibility and extra staffing, especially when a holiday combines bar traffic,
+                  event traffic, and late-night rides home.
+              </p>
               </div>
               <p className="text-brand-black/70 leading-relaxed">
-                Increased visibility can mean more stops and a quicker escalation when officers believe impairment is present.
-                Staying calm and understanding your rights can help you navigate the encounter.
+                That is why dates like St. Patrick&apos;s Day, Super Bowl Sunday, Memorial Day weekend, and New Year&apos;s Eve can
+                feel different on the road. Increased visibility can mean more stops and a quicker escalation when officers
+                believe impairment is present.
               </p>
               <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-5">
                 <p className="text-sm font-semibold text-brand-black">Plan ahead</p>
                 <p className="mt-2 text-sm text-brand-black/70">
                   Arrange a ride, designate a driver, or use a rideshare if you plan to drink. Avoid driving if you are unsure.
+                </p>
+              </div>
+              <div className="rounded-xl border border-brand-black/10 bg-white p-5">
+                <p className="text-sm font-semibold text-brand-black">High-watch holidays</p>
+                <p className="mt-2 text-sm text-brand-black/70">
+                  In Ohio, the most common enforcement windows tend to be New Year&apos;s, Super Bowl weekend, St. Patrick&apos;s Day,
+                  Memorial Day, July 4th, Labor Day, and Thanksgiving through Christmas.
                 </p>
               </div>
             </div>
