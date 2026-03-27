@@ -1,5 +1,14 @@
 import Link from 'next/link';
-import { CalendarDays, Shield, Siren, Route } from 'lucide-react';
+import {
+  CalendarDays,
+  Eye,
+  FileText,
+  MessageSquare,
+  PhoneCall,
+  Route,
+  Shield,
+  Siren,
+} from 'lucide-react';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
@@ -36,19 +45,19 @@ export const holidayOviFaqs = [
 const holidayWindows = [
   {
     title: "St. Patrick's Day",
-    description: 'Daytime drinking, downtown foot traffic, and late rides home make this one of the clearest March enforcement windows.',
+    description: 'Downtown celebrations, daytime drinking, and late rides home make this a reliable March watch point.',
   },
   {
     title: 'Memorial Day through July 4th',
-    description: 'Warm-weather travel, parties, and lake or festival weekends tend to bring heavier visibility and more traffic stops.',
+    description: 'Travel weekends, parties, and lake or festival traffic usually raise patrol visibility fast.',
   },
   {
     title: 'Labor Day and football weekends',
-    description: 'Game-day traffic and holiday travel create the same mix of late-night driving and stepped-up patrols.',
+    description: 'Game-day traffic and long weekends bring the same late-night mix of traffic and visible patrols.',
   },
   {
     title: "Thanksgiving through New Year's",
-    description: 'This is usually the longest sustained stretch for overtime patrols, holiday messaging, and high-visibility enforcement.',
+    description: 'This is usually the longest sustained stretch for overtime patrols, holiday messaging, and roadside visibility.',
   },
 ];
 
@@ -62,47 +71,77 @@ const holidayStopChecklist = [
 const holidayGuideHighlights = [
   {
     title: 'Most watched windows',
-    body: 'St. Patrick’s Day, holiday weekends, and the Thanksgiving-to-New-Year stretch are the clearest repeat enforcement periods.',
+    body: 'Watch the repeat windows first: St. Patrick’s Day, summer holidays, football weekends, and the winter holiday stretch.',
     icon: CalendarDays,
   },
   {
     title: 'What changes on the road',
-    body: 'More visible patrols, more public messaging, and more stops that escalate quickly once impairment is suspected.',
+    body: 'The pattern is usually more visible patrols, faster stops, and quicker escalation once impairment is suspected.',
     icon: Siren,
   },
   {
     title: 'What helps most',
-    body: 'Plan a ride before drinking, and if a stop turns serious, shift quickly from explanation mode to lawyer mode.',
+    body: 'Plan a ride before drinking, and if a stop turns serious, move from explanation mode to lawyer mode quickly.',
     icon: Shield,
   },
 ];
 
 const seasonalPlaybook = [
   {
-    key: 'spring',
+    key: 'spring' as const,
     label: 'Spring',
     window: "St. Patrick's Day and March event weekends",
-    body: 'Best for tracking downtown celebrations, daytime drinking, and the first warm-weather enforcement pushes.',
+    body: 'Downtown celebrations and the first warm-weather weekends tend to raise visibility first.',
   },
   {
-    key: 'summer',
+    key: 'summer' as const,
     label: 'Summer',
     window: 'Memorial Day through Labor Day',
-    body: 'Travel weekends, lake traffic, festivals, and fireworks bring the broadest mix of stops and checkpoint chatter.',
+    body: 'Travel weekends, lake traffic, and festivals create the broadest mix of stops and checkpoint chatter.',
   },
   {
-    key: 'fall',
+    key: 'fall' as const,
     label: 'Fall',
     window: 'Labor Day through football season',
-    body: 'Game-day traffic, late nights, and cooler-weather bar traffic keep fall weekends active even without a major holiday.',
+    body: 'Game days and cooler late nights keep weekends active even without a major holiday.',
   },
   {
-    key: 'winter',
+    key: 'winter' as const,
     label: 'Winter',
     window: "Thanksgiving through New Year's",
     body: 'The longest sustained enforcement stretch, driven by parties, travel, and winter-night road conditions.',
   },
 ];
+
+const roadsideSteps = [
+  {
+    title: 'Document check',
+    description: 'Hand over license, registration, and proof of insurance without adding extra commentary.',
+    icon: FileText,
+  },
+  {
+    title: 'Questions',
+    description: 'Answer basic identification questions, then keep responses short and factual.',
+    icon: MessageSquare,
+  },
+  {
+    title: 'Observations',
+    description: 'Expect officers to watch closely for signs they associate with impairment.',
+    icon: Eye,
+  },
+  {
+    title: 'Next steps',
+    description: 'If the stop escalates, shift quickly to protecting your rights and contacting counsel.',
+    icon: PhoneCall,
+  },
+];
+
+const seasonalAccentClasses: Record<'spring' | 'summer' | 'fall' | 'winter', string> = {
+  spring: 'border-t-4 border-t-emerald-400/80',
+  summer: 'border-t-4 border-t-sky-400/80',
+  fall: 'border-t-4 border-t-orange-400/80',
+  winter: 'border-t-4 border-t-slate-300/90',
+};
 
 function getCurrentSeasonKey(month: number): 'spring' | 'summer' | 'fall' | 'winter' {
   if (month >= 2 && month <= 4) return 'spring';
@@ -140,49 +179,60 @@ export default function HolidayOviEnforcementOhioPage() {
 
       <section className="section bg-[radial-gradient(circle_at_top_right,rgba(255,176,52,0.10),transparent_28%),linear-gradient(180deg,#ffffff_0%,#f7f4ed_100%)]">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">
+          <div className="grid gap-10 lg:grid-cols-[0.96fr_1.04fr] lg:items-start">
+            <div className="space-y-5 lg:pt-2">
+              <div className="max-w-xl">
+                <h2 className="mb-4 font-display text-display-sm font-bold text-brand-black">
                   Why holiday enforcement feels different
                 </h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
+                <p className="text-lg leading-relaxed text-brand-black/70">
                   Agencies often increase patrols, checkpoints, and public messaging around holiday weekends. The goal is to
                   deter impaired driving through visibility and extra staffing, especially when a holiday combines bar traffic,
                   event traffic, and late-night rides home.
                 </p>
               </div>
-              <p className="text-brand-black/70 leading-relaxed">
+              <p className="leading-relaxed text-brand-black/70">
                 That is why dates like St. Patrick&apos;s Day, Super Bowl Sunday, Memorial Day weekend, and New Year&apos;s Eve can
                 feel different on the road. Increased visibility can mean more stops and a quicker escalation when officers
                 believe impairment is present.
               </p>
-              <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-5">
-                <p className="text-sm font-semibold text-brand-black">Plan ahead</p>
-                <p className="mt-2 text-sm text-brand-black/70">
-                  Arrange a ride, designate a driver, or use a rideshare if you plan to drink. Avoid driving if you are unsure.
-                </p>
-              </div>
-              <div className="rounded-xl border border-brand-black/10 bg-white p-5">
-                <p className="text-sm font-semibold text-brand-black">High-watch holidays</p>
-                <p className="mt-2 text-sm text-brand-black/70">
-                  In Ohio, the most common enforcement windows tend to be New Year&apos;s, Super Bowl weekend, St. Patrick&apos;s Day,
-                  Memorial Day, July 4th, Labor Day, and Thanksgiving through Christmas.
-                </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5 shadow-[0_12px_30px_rgba(15,23,42,0.04)]">
+                  <p className="text-sm font-semibold text-brand-black">Plan ahead</p>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-black/70">
+                    Arrange a ride, designate a driver, or use a rideshare before the day gets busy.
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-[0_12px_30px_rgba(15,23,42,0.04)]">
+                  <p className="text-sm font-semibold text-brand-black">Repeat windows</p>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-black/70">
+                    The same calendar moments tend to get louder every year, even when the exact tactics vary.
+                  </p>
+                </div>
               </div>
               <div className="rounded-2xl border border-brand-black/10 bg-brand-black px-5 py-5 text-white shadow-[0_18px_50px_rgba(15,23,42,0.18)]">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mango">Use this page for pattern, not panic</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mango">Read this page like a forecast</p>
                 <p className="mt-3 text-sm leading-relaxed text-white/80">
-                  This is the planning page: it shows when enforcement usually gets louder, where public messaging tends to increase,
-                  and when it makes sense to check the live map more closely.
+                  Holiday enforcement follows patterns before it shows up in a headline. Use this page to understand those
+                  patterns, then confirm specific activity on the live map before assuming what is happening tonight.
                 </p>
               </div>
             </div>
+
             <div className="space-y-4">
               <SeasonalEnforcementVisual />
+
               <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Holiday windows to watch</p>
-                <div className="mt-4 space-y-3">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Holiday windows to watch</p>
+                    <h3 className="mt-2 text-lg font-semibold text-brand-black">The repeat periods worth checking first</h3>
+                  </div>
+                  <p className="max-w-xs text-sm leading-relaxed text-brand-black/60">
+                    These are the dates when public messaging and roadside visibility tend to rise first.
+                  </p>
+                </div>
+                <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-1">
                   {holidayWindows.map((item) => (
                     <div key={item.title} className="rounded-xl border border-brand-black/10 bg-white p-4">
                       <h3 className="text-base font-semibold text-brand-black">{item.title}</h3>
@@ -190,14 +240,7 @@ export default function HolidayOviEnforcementOhioPage() {
                     </div>
                   ))}
                 </div>
-              </div>
-              <div className="rounded-2xl border border-brand-black/10 bg-white p-6">
-                <p className="text-sm font-semibold text-brand-black">Best use of this page</p>
-                <p className="mt-2 text-sm leading-relaxed text-brand-black/70">
-                  Use this page to understand the pattern behind holiday enforcement. Then check the live
-                  checkpoint map for announced activity and the OVI defense page if a stop or arrest already happened.
-                </p>
-                <div className="mt-4 flex flex-wrap gap-3">
+                <div className="mt-4 flex flex-wrap gap-3 border-t border-brand-black/10 pt-4">
                   <Link
                     href="/resources/dui-checkpoints"
                     className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
@@ -221,7 +264,7 @@ export default function HolidayOviEnforcementOhioPage() {
               return (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-brand-black/10 bg-brand-offWhite px-5 py-5 shadow-[0_16px_40px_rgba(15,23,42,0.04)]"
+                  className="rounded-2xl border border-brand-black/10 bg-brand-offWhite px-5 py-5 shadow-[0_12px_30px_rgba(15,23,42,0.04)]"
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-mango/15 text-brand-mangoText">
@@ -250,24 +293,28 @@ export default function HolidayOviEnforcementOhioPage() {
             <div className="mt-6 grid gap-4 lg:grid-cols-4">
               {seasonalPlaybook.map((item) => {
                 const isCurrent = item.key === currentSeasonKey;
+
                 return (
                   <div
                     key={item.key}
-                    className={`rounded-2xl border px-5 py-5 transition-colors ${
+                    className={`rounded-2xl border bg-white px-5 py-5 transition-colors ${seasonalAccentClasses[item.key]} ${
                       isCurrent
-                        ? 'border-brand-mango/40 bg-brand-mango/8 shadow-[0_16px_40px_rgba(255,176,52,0.10)]'
-                        : 'border-brand-black/10 bg-brand-offWhite'
+                        ? 'border-brand-mango/40 shadow-[0_16px_40px_rgba(255,176,52,0.10)]'
+                        : 'border-brand-black/10'
                     }`}
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <p className="text-base font-semibold text-brand-black">{item.label}</p>
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-black/45">Season</p>
+                        <p className="mt-2 text-base font-semibold text-brand-black">{item.label}</p>
+                      </div>
                       {isCurrent && (
                         <span className="rounded-full bg-brand-mango px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-brand-black">
                           Current
                         </span>
                       )}
                     </div>
-                    <p className="mt-3 text-sm font-medium text-brand-black/80">{item.window}</p>
+                    <p className="mt-4 text-sm font-medium text-brand-black/82">{item.window}</p>
                     <p className="mt-3 text-sm leading-relaxed text-brand-black/65">{item.body}</p>
                   </div>
                 );
@@ -279,11 +326,11 @@ export default function HolidayOviEnforcementOhioPage() {
 
       <section className="section bg-[linear-gradient(180deg,#f7f4ed_0%,#ffffff_100%)]">
         <div className="container">
-          <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+          <div className="grid gap-7 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
             <div className="space-y-6">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">At the roadside</p>
-                <h2 className="mt-2 font-display text-display-sm md:text-display-md text-brand-black">
+                <h2 className="mt-2 font-display text-display-sm text-brand-black md:text-display-md">
                   What to expect if you are stopped
                 </h2>
                 <p className="mt-4 text-lg leading-relaxed text-brand-black/65">
@@ -292,7 +339,7 @@ export default function HolidayOviEnforcementOhioPage() {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-brand-black/10 bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
+              <div className="rounded-[24px] border border-brand-black/10 bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-leaf/10 text-brand-leaf">
                     <Route className="h-5 w-5" />
@@ -310,35 +357,27 @@ export default function HolidayOviEnforcementOhioPage() {
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
-              {[
-                {
-                  title: 'Document check',
-                  description: 'Have license, registration, and proof of insurance ready.',
-                },
-                {
-                  title: 'Questions',
-                  description: 'Keep responses brief and avoid volunteering extra details.',
-                },
-                {
-                  title: 'Observations',
-                  description: 'Officers note signs of impairment and may request tests.',
-                },
-                {
-                  title: 'Next steps',
-                  description: 'If arrested, chemical testing and booking follow.',
-                },
-              ].map((item, index) => (
-                <div
-                  key={item.title}
-                  className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-[0_14px_32px_rgba(15,23,42,0.04)]"
-                >
-                  <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">
-                    Step {index + 1}
+              {roadsideSteps.map((item, index) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.title}
+                    className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-[0_14px_32px_rgba(15,23,42,0.04)]"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">
+                        Step {index + 1}
+                      </div>
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-mango/12 text-brand-mangoText">
+                        <Icon className="h-4 w-4" />
+                      </div>
+                    </div>
+                    <h3 className="mt-3 text-lg font-semibold text-brand-black">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-brand-black/70">{item.description}</p>
                   </div>
-                  <h3 className="mt-3 text-lg font-semibold text-brand-black">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-brand-black/70">{item.description}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -346,52 +385,68 @@ export default function HolidayOviEnforcementOhioPage() {
 
       <section className="section bg-white">
         <div className="container">
-          <div className="grid gap-10 lg:grid-cols-[1.55fr,1fr] lg:items-start">
-            <div className="space-y-6">
-              <h2 className="font-display text-display-sm font-bold text-brand-black">
-                Stay informed during holiday campaigns
-              </h2>
-              <p className="text-lg text-brand-black/70 leading-relaxed">
-                Holiday enforcement announcements vary by agency, and many are not published far in advance. Use the checkpoint
-                map for announced activity, and treat this page as the broader context for why certain weekends feel more active.
-              </p>
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
-                  <p className="text-sm font-semibold text-brand-black">Check the live map first</p>
-                  <p className="mt-2 text-sm leading-relaxed text-brand-black/70">
-                    Use the checkpoint map when you want the current public picture, recent history, and county-level hotspot context.
-                  </p>
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Next step hub</p>
+            <h2 className="mt-2 font-display text-display-sm font-bold text-brand-black">
+              Stay informed during holiday campaigns
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-brand-black/70">
+              Holiday enforcement announcements vary by agency, and many are not published far in advance. Use the live map for the
+              current public picture, and use the guides below when a stop has already turned serious.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-5 lg:grid-cols-[1.35fr,0.95fr] lg:items-stretch">
+            <div className="grid gap-5 md:grid-cols-[1.15fr,0.85fr]">
+              <div className="rounded-[28px] border border-brand-black/10 bg-brand-offWhite p-6 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Primary next step</p>
+                <h3 className="mt-3 text-xl font-semibold text-brand-black">Check the live map first</h3>
+                <p className="mt-3 text-sm leading-relaxed text-brand-black/72">
+                  Use the checkpoint map when you want the current public picture, recent history, and county-level hotspot context.
+                  This is the fastest way to confirm whether a holiday weekend is producing public notices right now.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
                   <Link
                     href="/resources/dui-checkpoints"
-                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
+                    className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
                   >
                     View checkpoint map
                   </Link>
-                </div>
-                <div className="rounded-2xl border border-brand-black/10 bg-white p-5">
-                  <p className="text-sm font-semibold text-brand-black">Use the rights guide if the stop already happened</p>
-                  <p className="mt-2 text-sm leading-relaxed text-brand-black/70">
-                    Move from watch mode to defense mode quickly if a checkpoint stop turns into field testing, chemical testing, or arrest.
-                  </p>
                   <Link
                     href="/ovi-checkpoints-ohio"
-                    className="mt-4 inline-flex items-center gap-2 rounded-lg border border-brand-black/10 px-4 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:border-brand-mango hover:text-brand-mango"
+                    className="inline-flex items-center gap-2 rounded-lg border border-brand-black/10 px-4 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:border-brand-mango hover:text-brand-mango"
                   >
-                    Know your checkpoint rights
+                    Know checkpoint rights
                   </Link>
                 </div>
               </div>
+
+              <div className="rounded-[24px] border border-brand-black/10 bg-white p-5 shadow-[0_14px_32px_rgba(15,23,42,0.04)]">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">If the stop already happened</p>
+                <h3 className="mt-3 text-lg font-semibold text-brand-black">Move from watch mode to defense mode quickly</h3>
+                <p className="mt-3 text-sm leading-relaxed text-brand-black/70">
+                  Once a checkpoint or patrol stop leads to field testing, chemical testing, or arrest, the better reference point
+                  is your rights and next deadlines.
+                </p>
+                <Link
+                  href="/ovi-checkpoints-ohio"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-mango"
+                >
+                  Read the rights guide
+                </Link>
+              </div>
             </div>
+
             <div className="rounded-[28px] border border-brand-black/10 bg-brand-black p-6 text-white shadow-[0_24px_60px_rgba(15,23,42,0.16)]">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mango">If you are arrested</p>
-              <p className="mt-4 text-lg font-semibold text-white">Treat the holiday context as noise, not an excuse to wait.</p>
+              <p className="mt-4 text-lg font-semibold text-white">Treat the holiday context as noise, not a reason to wait.</p>
               <p className="mt-3 text-sm leading-relaxed text-white/75">
                 Ask for a lawyer, avoid making statements without counsel, and move quickly on license and evidence issues. Early deadlines matter in holiday OVI cases just as much as any other case.
               </p>
               <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/60">Fastest useful next step</p>
                 <p className="mt-2 text-sm leading-relaxed text-white/78">
-                  Save the arrest paperwork, write down what happened while it is fresh, and get legal advice before you start explaining the stop to everyone else.
+                  Save the paperwork, write down what happened while it is fresh, and get legal advice before you start explaining the stop to everyone else.
                 </p>
               </div>
               <Link href="/contact" className="mt-5 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-gold">
@@ -402,7 +457,19 @@ export default function HolidayOviEnforcementOhioPage() {
         </div>
       </section>
 
-      <FAQSection faqs={holidayOviFaqs} title="Holiday enforcement FAQ" />
+      <div className="bg-brand-offWhite pt-10">
+        <div className="container max-w-3xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Common questions</p>
+          <p className="mt-3 text-base leading-relaxed text-brand-black/65">
+            Most holiday OVI questions come down to the same practical issues: what changes on the roadside, what remains the same,
+            and what to do quickly if a stop turns into a case.
+          </p>
+        </div>
+      </div>
+
+      <div className="bg-brand-offWhite [&>section]:pt-8 [&>section]:md:pt-10">
+        <FAQSection faqs={holidayOviFaqs} title="Holiday enforcement FAQ" />
+      </div>
 
       <CTASection
         title="Need guidance after a holiday stop?"
