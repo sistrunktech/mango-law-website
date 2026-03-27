@@ -384,10 +384,133 @@ export default function DUICheckpointsPage() {
             </div>
           </div>
 
-          <div className="mb-8 grid gap-4 lg:grid-cols-[1.25fr,0.75fr]">
-            <div className="rounded-2xl border border-brand-black/10 bg-white p-5">
-              <div className="text-sm font-semibold text-brand-black">{currentStatusSummary.heading}</div>
-              <p className="mt-2 text-sm text-brand-black/75">{currentStatusSummary.body}</p>
+          <div className="mb-8 grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
+            <div className="rounded-[28px] border border-brand-black/10 bg-white p-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] sm:p-6">
+              <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                <div className="max-w-2xl">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Featured surface</p>
+                  <h2 className="mt-2 font-display text-2xl font-bold text-brand-black sm:text-3xl">
+                    Live checkpoint map and recent history
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-black/70 sm:text-base">
+                    This is the main working surface on the page. If no public checkpoint notice is live right now,
+                    the map automatically falls back to recent history so you can still see where activity was recently announced.
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-brand-mango/20 bg-brand-mango/5 px-4 py-3">
+                  <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-mangoText">Current view</div>
+                  <div className="mt-1 text-sm font-semibold text-brand-black">
+                    {viewMode === 'upcoming' ? 'Upcoming public notices' : dateRange === 'all' ? 'All available history' : 'Recent public checkpoint history'}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-5 flex flex-wrap items-center gap-2">
+                <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
+                  <button
+                    onClick={() => setViewMode('upcoming')}
+                    className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
+                      viewMode === 'upcoming'
+                        ? 'bg-white text-brand-mangoText shadow-sm'
+                        : 'text-brand-black/70 hover:text-brand-mangoText'
+                    }`}
+                  >
+                    <Clock className="h-3.5 w-3.5" />
+                    Upcoming
+                  </button>
+                  <button
+                    onClick={() => setViewMode('all')}
+                    className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
+                      viewMode === 'all'
+                        ? 'bg-white text-brand-mangoText shadow-sm'
+                        : 'text-brand-black/70 hover:text-brand-mangoText'
+                    }`}
+                  >
+                    <Calendar className="h-3.5 w-3.5" />
+                    Recent history
+                  </button>
+                </div>
+
+                {viewMode === 'all' && (
+                  <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
+                    <button
+                      onClick={() => setDateRange('30d')}
+                      className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                        dateRange === '30d'
+                          ? 'bg-white text-brand-mangoText shadow-sm'
+                          : 'text-brand-black/70 hover:text-brand-mangoText'
+                      }`}
+                    >
+                      30 Days
+                    </button>
+                    <button
+                      onClick={() => setDateRange('90d')}
+                      className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                        dateRange === '90d'
+                          ? 'bg-white text-brand-mangoText shadow-sm'
+                          : 'text-brand-black/70 hover:text-brand-mangoText'
+                      }`}
+                    >
+                      90 Days
+                    </button>
+                    <button
+                      onClick={() => setDateRange('all')}
+                      className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
+                        dateRange === 'all'
+                          ? 'bg-white text-brand-mangoText shadow-sm'
+                          : 'text-brand-black/70 hover:text-brand-mangoText'
+                      }`}
+                    >
+                      All Time
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {usedHistoryFallback && viewMode === 'all' && (
+                <div className="mb-4 rounded-xl border border-brand-mango/20 bg-brand-mango/5 px-4 py-3 text-sm text-brand-black/75">
+                  No current public checkpoint notice is live right now, so the page has automatically switched to recent history to keep the map and list useful.
+                </div>
+              )}
+
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 rounded-lg border border-brand-black/10 bg-brand-offWhite px-4 py-2">
+                    <Filter className="h-4 w-4 text-brand-mango" />
+                    <select
+                      value={selectedCounty}
+                      onChange={(e) => setSelectedCounty(e.target.value)}
+                      className="border-none bg-transparent text-sm font-medium text-brand-black focus:outline-none focus:ring-0"
+                    >
+                      <option value="all">All Counties ({checkpoints.length})</option>
+                      {countiesWithCheckpoints.map((county) => {
+                        const count = checkpoints.filter(c => c.location_county === county).length;
+                        return (
+                          <option key={county} value={county}>
+                            {county} County ({count})
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </div>
+                <div className="text-sm text-brand-black/60">
+                  Showing {filteredCheckpoints.length} checkpoint{filteredCheckpoints.length !== 1 ? 's' : ''}
+                  {pendingAnnouncements.length > 0
+                    ? ` • ${pendingAnnouncements.length} pending announcement${pendingAnnouncements.length !== 1 ? 's' : ''}`
+                    : ''}
+                </div>
+              </div>
+
+              <div className="h-[360px] overflow-hidden rounded-[24px] border border-brand-black/10 bg-brand-offWhite sm:h-[420px]">
+                <CheckpointMap
+                  checkpoints={filteredCheckpoints}
+                  selectedCheckpoint={selectedCheckpoint}
+                  onCheckpointSelect={setSelectedCheckpoint}
+                  now={now}
+                />
+              </div>
+
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3">
                   <div className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-black/55">Latest announcement</div>
@@ -414,126 +537,52 @@ export default function DUICheckpointsPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
-              <div className="text-sm font-semibold text-brand-black">Seasonal enforcement watch</div>
-              <p className="mt-2 text-sm text-brand-black/70">
-                Public checkpoint notices tend to cluster around a few repeat holiday windows. If there is nothing live today, these are still the dates most worth watching.
-              </p>
-              <div className="mt-4 space-y-3">
-                {seasonalEnforcementWindows.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
-                    <div className="font-semibold text-brand-black">{item.title}</div>
-                    <div className="mt-1 text-sm text-brand-black/65">{item.description}</div>
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
+                <div className="text-sm font-semibold text-brand-black">{currentStatusSummary.heading}</div>
+                <p className="mt-2 text-sm leading-relaxed text-brand-black/75">{currentStatusSummary.body}</p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+                  <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
+                    <div className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-black/55">What this means</div>
+                    <div className="mt-1 text-sm text-brand-black/70">
+                      {viewMode === 'upcoming'
+                        ? 'If a checkpoint is publicly announced, it should appear in the map first. Otherwise the page pivots into watchlist mode.'
+                        : 'History view is the better way to study recent enforcement patterns by county, city, and holiday window.'}
+                    </div>
                   </div>
-                ))}
+                  <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
+                    <div className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-black/55">Best next step</div>
+                    <div className="mt-1 text-sm text-brand-black/70">
+                      Use the map to spot the most recent public activity, then go straight to the rights and defense guides if a stop already happened.
+                    </div>
+                  </div>
+                </div>
               </div>
-              <a
-                href="/holiday-ovi-enforcement-ohio"
-                className="mt-4 inline-flex text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
-              >
-                View the holiday enforcement guide →
-              </a>
+
+              <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
+                <div className="text-sm font-semibold text-brand-black">Seasonal enforcement watch</div>
+                <p className="mt-2 text-sm text-brand-black/70">
+                  Public checkpoint notices tend to cluster around a few repeat holiday windows. If there is nothing live today, these are still the dates most worth watching.
+                </p>
+                <div className="mt-4 space-y-3">
+                  {seasonalEnforcementWindows.map((item) => (
+                    <div key={item.title} className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
+                      <div className="font-semibold text-brand-black">{item.title}</div>
+                      <div className="mt-1 text-sm text-brand-black/65">{item.description}</div>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="/holiday-ovi-enforcement-ohio"
+                  className="mt-4 inline-flex text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                >
+                  View the holiday enforcement guide →
+                </a>
+              </div>
             </div>
           </div>
 
           <CheckpointHotspots onCityClick={handleHotspotClick} />
-
-          <div className="mb-4 flex flex-wrap items-center gap-2">
-            <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
-              <button
-                onClick={() => setViewMode('upcoming')}
-                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
-                  viewMode === 'upcoming'
-                    ? 'bg-white text-brand-mangoText shadow-sm'
-                    : 'text-brand-black/70 hover:text-brand-mangoText'
-                }`}
-              >
-                <Clock className="h-3.5 w-3.5" />
-                Upcoming
-              </button>
-              <button
-                onClick={() => setViewMode('all')}
-                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
-                  viewMode === 'all'
-                    ? 'bg-white text-brand-mangoText shadow-sm'
-                    : 'text-brand-black/70 hover:text-brand-mangoText'
-                }`}
-              >
-                <Calendar className="h-3.5 w-3.5" />
-                Recent history
-              </button>
-            </div>
-
-            {viewMode === 'all' && (
-              <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
-                <button
-                  onClick={() => setDateRange('30d')}
-                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
-                    dateRange === '30d'
-                      ? 'bg-white text-brand-mangoText shadow-sm'
-                      : 'text-brand-black/70 hover:text-brand-mangoText'
-                  }`}
-                >
-                  30 Days
-                </button>
-                <button
-                  onClick={() => setDateRange('90d')}
-                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
-                    dateRange === '90d'
-                      ? 'bg-white text-brand-mangoText shadow-sm'
-                      : 'text-brand-black/70 hover:text-brand-mangoText'
-                  }`}
-                >
-                  90 Days
-                </button>
-                <button
-                  onClick={() => setDateRange('all')}
-                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
-                    dateRange === 'all'
-                      ? 'bg-white text-brand-mangoText shadow-sm'
-                      : 'text-brand-black/70 hover:text-brand-mangoText'
-                  }`}
-                >
-                  All Time
-                </button>
-              </div>
-            )}
-          </div>
-
-          {usedHistoryFallback && viewMode === 'all' && (
-            <div className="mb-4 rounded-xl border border-brand-mango/20 bg-brand-mango/5 px-4 py-3 text-sm text-brand-black/75">
-              No current public checkpoint notice is live right now, so the page has automatically switched to recent history to keep the map and list useful.
-            </div>
-          )}
-
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 rounded-lg border border-brand-black/10 bg-brand-offWhite px-4 py-2">
-                <Filter className="h-4 w-4 text-brand-mango" />
-                <select
-                  value={selectedCounty}
-                  onChange={(e) => setSelectedCounty(e.target.value)}
-                  className="border-none bg-transparent text-sm font-medium text-brand-black focus:outline-none focus:ring-0"
-                >
-                  <option value="all">All Counties ({checkpoints.length})</option>
-                  {countiesWithCheckpoints.map((county) => {
-                    const count = checkpoints.filter(c => c.location_county === county).length;
-                    return (
-                      <option key={county} value={county}>
-                        {county} County ({count})
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
-            <div className="text-sm text-brand-black/60">
-              Showing {filteredCheckpoints.length} checkpoint{filteredCheckpoints.length !== 1 ? 's' : ''}
-              {pendingAnnouncements.length > 0
-                ? ` • ${pendingAnnouncements.length} pending announcement${pendingAnnouncements.length !== 1 ? 's' : ''}`
-                : ''}
-            </div>
-          </div>
 
           {pendingAnnouncements.length > 0 && (
             <div className="mb-8 rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
@@ -661,15 +710,6 @@ export default function DUICheckpointsPage() {
 
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              <div className="mb-6 h-[400px] lg:h-[400px]">
-                <CheckpointMap
-                  checkpoints={filteredCheckpoints}
-                  selectedCheckpoint={selectedCheckpoint}
-                  onCheckpointSelect={setSelectedCheckpoint}
-                  now={now}
-                />
-              </div>
-
               <div className="mt-6">
                 <h3 className="mb-4 text-lg font-bold text-brand-black">
                   {viewMode === 'upcoming' ? 'Currently announced checkpoints' : 'Recent checkpoint history'}
