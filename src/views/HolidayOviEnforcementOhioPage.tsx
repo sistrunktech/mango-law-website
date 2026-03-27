@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CalendarDays, Shield, Siren, Route } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
@@ -56,6 +57,24 @@ const holidayStopChecklist = [
   'Keep answers short and factual instead of trying to talk your way out of the stop.',
   'Do not guess about what you drank, when you last drank, or whether you are “okay to drive.”',
   'If the stop turns into an arrest, ask for a lawyer and stop volunteering information.',
+];
+
+const holidayGuideHighlights = [
+  {
+    title: 'Most watched windows',
+    body: 'St. Patrick’s Day, holiday weekends, and the Thanksgiving-to-New-Year stretch are the clearest repeat enforcement periods.',
+    icon: CalendarDays,
+  },
+  {
+    title: 'What changes on the road',
+    body: 'More visible patrols, more public messaging, and more stops that escalate quickly once impairment is suspected.',
+    icon: Siren,
+  },
+  {
+    title: 'What helps most',
+    body: 'Plan a ride before drinking, and if a stop turns serious, shift quickly from explanation mode to lawyer mode.',
+    icon: Shield,
+  },
 ];
 
 export default function HolidayOviEnforcementOhioPage() {
@@ -152,52 +171,92 @@ export default function HolidayOviEnforcementOhioPage() {
               </div>
             </div>
           </div>
+
+          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+            {holidayGuideHighlights.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-brand-black/10 bg-brand-offWhite px-5 py-5 shadow-[0_16px_40px_rgba(15,23,42,0.04)]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-mango/15 text-brand-mangoText">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="text-base font-semibold text-brand-black">{item.title}</h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-brand-black/70">{item.body}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      <section className="section bg-brand-offWhite">
+      <section className="section bg-[linear-gradient(180deg,#f7f4ed_0%,#ffffff_100%)]">
         <div className="container">
-          <div className="mb-10 text-center">
-            <h2 className="font-display text-display-sm md:text-display-md mb-4">What to expect if you are stopped</h2>
-            <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
-              Holiday stops tend to follow the same process as other OVI investigations, but officers may be more visible and
-              proactive.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: 'Document check',
-                description: 'Have license, registration, and proof of insurance ready.',
-              },
-              {
-                title: 'Questions',
-                description: 'Keep responses brief and avoid volunteering extra details.',
-              },
-              {
-                title: 'Observations',
-                description: 'Officers note signs of impairment and may request tests.',
-              },
-              {
-                title: 'Next steps',
-                description: 'If arrested, chemical testing and booking follow.',
-              },
-            ].map((item) => (
-              <div key={item.title} className="card bg-white border border-brand-black/5 p-5">
-                <h3 className="font-semibold text-brand-black">{item.title}</h3>
-                <p className="mt-2 text-sm text-brand-black/70">{item.description}</p>
+          <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+            <div className="space-y-6">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">At the roadside</p>
+                <h2 className="mt-2 font-display text-display-sm md:text-display-md text-brand-black">
+                  What to expect if you are stopped
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed text-brand-black/65">
+                  Holiday stops tend to follow the same process as other OVI investigations, but officers may be more visible and
+                  proactive. The fastest way to help yourself is to stay calm, keep the interaction simple, and avoid filling the silence.
+                </p>
               </div>
-            ))}
-          </div>
-          <div className="mt-8 rounded-2xl border border-brand-black/10 bg-white p-6">
-            <p className="text-sm font-semibold text-brand-black">If the stop starts moving toward an OVI investigation</p>
-            <ul className="mt-4 grid gap-3 md:grid-cols-2">
-              {holidayStopChecklist.map((item) => (
-                <li key={item} className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-sm leading-relaxed text-brand-black/75">
-                  {item}
-                </li>
+
+              <div className="rounded-2xl border border-brand-black/10 bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-leaf/10 text-brand-leaf">
+                    <Route className="h-5 w-5" />
+                  </div>
+                  <p className="text-sm font-semibold text-brand-black">If the stop starts moving toward an OVI investigation</p>
+                </div>
+                <ul className="mt-4 grid gap-3">
+                  {holidayStopChecklist.map((item) => (
+                    <li key={item} className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-sm leading-relaxed text-brand-black/75">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2">
+              {[
+                {
+                  title: 'Document check',
+                  description: 'Have license, registration, and proof of insurance ready.',
+                },
+                {
+                  title: 'Questions',
+                  description: 'Keep responses brief and avoid volunteering extra details.',
+                },
+                {
+                  title: 'Observations',
+                  description: 'Officers note signs of impairment and may request tests.',
+                },
+                {
+                  title: 'Next steps',
+                  description: 'If arrested, chemical testing and booking follow.',
+                },
+              ].map((item, index) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-[0_14px_32px_rgba(15,23,42,0.04)]"
+                >
+                  <div className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">
+                    Step {index + 1}
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold text-brand-black">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-black/70">{item.description}</p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>

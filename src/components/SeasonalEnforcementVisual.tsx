@@ -94,8 +94,11 @@ export default function SeasonalEnforcementVisual() {
     <div className="relative overflow-hidden rounded-[28px] border border-brand-black/10 bg-slate-950 p-6 text-white shadow-[0_28px_80px_rgba(15,23,42,0.32)]">
       <div className={`absolute inset-0 bg-gradient-to-br ${theme.backgroundClass}`} />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.15),_transparent_45%)]" />
+      <div className="absolute inset-x-[12%] bottom-0 h-36 rounded-t-[999px] bg-white/6 blur-2xl" />
       <div className={`absolute -left-8 top-8 h-40 w-40 rounded-full blur-3xl ${theme.leftGlowClass}`} />
       <div className={`absolute -right-10 top-16 h-44 w-44 rounded-full blur-3xl ${theme.rightGlowClass}`} />
+      <div className="absolute left-[14%] top-[36%] h-24 w-[52%] rotate-[-18deg] rounded-full bg-white/8 blur-3xl" />
+      <div className="absolute right-[12%] top-[44%] h-20 w-[42%] rotate-[12deg] rounded-full bg-white/8 blur-3xl" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/65 to-transparent" />
 
       {particlePositions.map((position, index) => (
@@ -107,6 +110,12 @@ export default function SeasonalEnforcementVisual() {
       ))}
 
       <div className="absolute bottom-8 left-1/2 h-12 w-[82%] -translate-x-1/2 rounded-full bg-black/45 blur-2xl" />
+      <div className="absolute bottom-14 left-1/2 h-[2px] w-[56%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+      <div className="absolute bottom-[84px] left-1/2 flex -translate-x-1/2 gap-4 opacity-65">
+        <span className="h-2 w-8 rounded-full bg-amber-100/70" />
+        <span className="h-2 w-8 rounded-full bg-amber-100/70" />
+        <span className="h-2 w-8 rounded-full bg-amber-100/70" />
+      </div>
       <div className="absolute bottom-12 left-1/2 h-16 w-44 -translate-x-1/2 rounded-[28px] border border-white/10 bg-slate-950/80 shadow-[0_20px_40px_rgba(15,23,42,0.45)]">
         <div className="absolute -top-3 left-1/2 h-4 w-24 -translate-x-1/2 overflow-hidden rounded-full bg-white/10 backdrop-blur">
           <div className={`absolute inset-0 bg-gradient-to-r ${theme.pulseClass} blur-[2px]`} />
@@ -116,7 +125,7 @@ export default function SeasonalEnforcementVisual() {
       </div>
       <div className={`absolute bottom-20 right-10 h-10 w-10 rounded-full blur-xl ${theme.accentClass}`} />
 
-      <div className="relative z-10 flex h-full min-h-[340px] flex-col justify-between">
+      <div className="relative z-10 flex h-full min-h-[380px] flex-col justify-between">
         <div className="space-y-3">
           <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
             Current seasonal focus
