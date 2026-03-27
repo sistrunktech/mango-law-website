@@ -2,7 +2,6 @@ import Link from 'next/link';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
-import ImagePlaceholder from '../components/ImagePlaceholder';
 import { SEO } from '../lib/seo';
 
 export const holidayOviFaqs = [
@@ -32,6 +31,32 @@ export const holidayOviFaqs = [
   },
 ];
 
+const holidayWindows = [
+  {
+    title: "St. Patrick's Day",
+    description: 'Daytime drinking, downtown foot traffic, and late rides home make this one of the clearest March enforcement windows.',
+  },
+  {
+    title: 'Memorial Day through July 4th',
+    description: 'Warm-weather travel, parties, and lake or festival weekends tend to bring heavier visibility and more traffic stops.',
+  },
+  {
+    title: 'Labor Day and football weekends',
+    description: 'Game-day traffic and holiday travel create the same mix of late-night driving and stepped-up patrols.',
+  },
+  {
+    title: "Thanksgiving through New Year's",
+    description: 'This is usually the longest sustained stretch for overtime patrols, holiday messaging, and high-visibility enforcement.',
+  },
+];
+
+const holidayStopChecklist = [
+  'Have license, registration, and proof of insurance ready before reaching for anything else.',
+  'Keep answers short and factual instead of trying to talk your way out of the stop.',
+  'Do not guess about what you drank, when you last drank, or whether you are “okay to drive.”',
+  'If the stop turns into an arrest, ask for a lawyer and stop volunteering information.',
+];
+
 export default function HolidayOviEnforcementOhioPage() {
   return (
     <>
@@ -48,7 +73,7 @@ export default function HolidayOviEnforcementOhioPage() {
       <PageHero
         eyebrow="Seasonal Enforcement"
         title="Holiday OVI enforcement in Ohio"
-        description="Know what changes during holiday patrols and how to respond if you are stopped."
+        description="Common holiday windows, what changes during high-visibility patrols, and what to do if a routine stop turns into an OVI investigation."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -90,11 +115,40 @@ export default function HolidayOviEnforcementOhioPage() {
                 </p>
               </div>
             </div>
-            <ImagePlaceholder
-              aspectRatio="4:3"
-              label="Holiday enforcement patrol scene"
-              promptHint="Nighttime Ohio roadway with patrol vehicles and holiday lighting, safe traffic scene, documentary style"
-            />
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Holiday windows to watch</p>
+                <div className="mt-4 space-y-3">
+                  {holidayWindows.map((item) => (
+                    <div key={item.title} className="rounded-xl border border-brand-black/10 bg-white p-4">
+                      <h3 className="text-base font-semibold text-brand-black">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-black/70">{item.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-2xl border border-brand-black/10 bg-white p-6">
+                <p className="text-sm font-semibold text-brand-black">Best use of this page</p>
+                <p className="mt-2 text-sm leading-relaxed text-brand-black/70">
+                  Use this page to understand the pattern behind holiday enforcement. Then check the live
+                  checkpoint map for announced activity and the OVI defense page if a stop or arrest already happened.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link
+                    href="/resources/dui-checkpoints"
+                    className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
+                  >
+                    View checkpoint map
+                  </Link>
+                  <Link
+                    href="/ovi-dui-defense-delaware-oh"
+                    className="inline-flex items-center gap-2 rounded-lg border border-brand-black/10 px-4 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:border-brand-mango hover:text-brand-mango"
+                  >
+                    OVI defense guide
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -133,6 +187,16 @@ export default function HolidayOviEnforcementOhioPage() {
               </div>
             ))}
           </div>
+          <div className="mt-8 rounded-2xl border border-brand-black/10 bg-white p-6">
+            <p className="text-sm font-semibold text-brand-black">If the stop starts moving toward an OVI investigation</p>
+            <ul className="mt-4 grid gap-3 md:grid-cols-2">
+              {holidayStopChecklist.map((item) => (
+                <li key={item} className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-sm leading-relaxed text-brand-black/75">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -144,28 +208,28 @@ export default function HolidayOviEnforcementOhioPage() {
                 Stay informed during holiday campaigns
               </h2>
               <p className="text-lg text-brand-black/70 leading-relaxed">
-                Holiday enforcement announcements vary by agency. Check official releases and the checkpoint map to see
-                announced activity. If you are concerned about a stop or arrest, contact counsel quickly.
+                Holiday enforcement announcements vary by agency, and many are not published far in advance. Use the checkpoint
+                map for announced activity, and treat this page as the broader context for why certain weekends feel more active.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/ovi-checkpoints-ohio"
+                  href="/resources/dui-checkpoints"
                   className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-5 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold"
                 >
-                  Ohio checkpoint guidance
+                  View checkpoint map
                 </Link>
                 <Link
-                  href="/blog/holiday-ovi-enforcement-ohio-delaware-dublin-columbus"
+                  href="/ovi-checkpoints-ohio"
                   className="inline-flex items-center gap-2 rounded-lg border border-brand-black/10 px-5 py-3 text-sm font-semibold text-brand-black transition-colors hover:border-brand-mango hover:text-brand-mango"
                 >
-                  Read the holiday enforcement guide
+                  Know your checkpoint rights
                 </Link>
               </div>
             </div>
             <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6">
               <p className="text-sm font-semibold text-brand-black">If you are arrested</p>
               <p className="mt-3 text-sm text-brand-black/70">
-                Ask for a lawyer and avoid making statements without counsel. Evidence timing matters in OVI cases.
+                Ask for a lawyer, avoid making statements without counsel, and move quickly on license and evidence issues. Early deadlines matter in holiday OVI cases just as much as any other case.
               </p>
               <Link href="/contact" className="mt-4 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf">
                 Request a consult
