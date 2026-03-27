@@ -113,6 +113,7 @@ export default function DUICheckpointsPage() {
   const [error, setError] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<ViewMode>('upcoming');
   const [dateRange, setDateRange] = useState<DateRangeOption>('90d');
+  const [usedHistoryFallback, setUsedHistoryFallback] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific'>('emergency_banner');
@@ -136,16 +137,37 @@ export default function DUICheckpointsPage() {
     try {
       setLoading(true);
       setError(null);
+      let announcementsData: CheckpointAnnouncement[] = [];
+
       try {
-        const announcementsData = await getCheckpointAnnouncements();
+        announcementsData = await getCheckpointAnnouncements();
         setAnnouncements(announcementsData);
       } catch (e) {
         console.warn('Unable to load checkpoint announcements (continuing):', e);
         setAnnouncements([]);
       }
+
+      const freshPendingAnnouncementsCount = announcementsData.filter(
+        (a) => a.status === 'pending_details' && isAnnouncementFreshForPublic(a)
+      ).length;
+
       if (viewMode === 'upcoming') {
         const data = await getUpcomingCheckpoints();
-        setCheckpoints(filterPublicCheckpoints(data));
+        const upcomingCheckpoints = filterPublicCheckpoints(data);
+
+        if (upcomingCheckpoints.length === 0 && freshPendingAnnouncementsCount === 0 && !usedHistoryFallback) {
+          const recentHistory = filterPublicCheckpoints(await getRecentCheckpoints('90d'));
+          const allHistory = recentHistory.length > 0 ? recentHistory : filterPublicCheckpoints(await getRecentCheckpoints('all'));
+          const fallbackRange = recentHistory.length > 0 ? '90d' : 'all';
+
+          setCheckpoints(allHistory);
+          setDateRange(fallbackRange);
+          setUsedHistoryFallback(true);
+          setViewMode('all');
+          return;
+        }
+
+        setCheckpoints(upcomingCheckpoints);
       } else {
         const data = await getRecentCheckpoints(dateRange);
         setCheckpoints(filterPublicCheckpoints(data));
@@ -158,7 +180,7 @@ export default function DUICheckpointsPage() {
     } finally {
       setLoading(false);
     }
-  }, [dateRange, filterPublicCheckpoints, viewMode]);
+  }, [dateRange, filterPublicCheckpoints, usedHistoryFallback, viewMode]);
 
   const filterCheckpoints = useCallback(() => {
     let filtered = checkpoints;
@@ -229,6 +251,13 @@ export default function DUICheckpointsPage() {
         };
       }
 
+      if (usedHistoryFallback && viewMode === 'all') {
+        return {
+          heading: 'Current public signal',
+          body: `There are no currently announced checkpoints in the live feed right now, so this page is showing ${dateRange === 'all' ? 'available public checkpoint history' : 'the last 90 days of public checkpoint history'} instead.`,
+        };
+      }
+
       return {
         heading: 'Current public signal',
         body: `${checkpoints.length} announced checkpoint${checkpoints.length !== 1 ? 's are' : ' is'} currently visible in the selected view.`,
@@ -239,7 +268,7 @@ export default function DUICheckpointsPage() {
       heading: 'Current public signal',
       body: 'There are no currently announced checkpoints in the live feed right now. Check recent history below, and monitor this page more closely around major holiday and travel weekends when public notices are more common.',
     };
-  }, [checkpoints.length, pendingAnnouncements.length]);
+  }, [checkpoints.length, dateRange, pendingAnnouncements.length, usedHistoryFallback, viewMode]);
 
   return (
     <>
@@ -470,6 +499,12 @@ export default function DUICheckpointsPage() {
               </div>
             )}
           </div>
+
+          {usedHistoryFallback && viewMode === 'all' && (
+            <div className="mb-4 rounded-xl border border-brand-mango/20 bg-brand-mango/5 px-4 py-3 text-sm text-brand-black/75">
+              No current public checkpoint notice is live right now, so the page has automatically switched to recent history to keep the map and list useful.
+            </div>
+          )}
 
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">

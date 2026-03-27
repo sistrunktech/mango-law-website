@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import SeasonalEnforcementVisual from '../components/SeasonalEnforcementVisual';
 import { SEO } from '../lib/seo';
 
 export const holidayOviFaqs = [
@@ -90,11 +91,11 @@ export default function HolidayOviEnforcementOhioPage() {
                 <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">
                   Why holiday enforcement feels different
                 </h2>
-              <p className="text-lg text-brand-black/70 leading-relaxed">
+                <p className="text-lg text-brand-black/70 leading-relaxed">
                   Agencies often increase patrols, checkpoints, and public messaging around holiday weekends. The goal is to
                   deter impaired driving through visibility and extra staffing, especially when a holiday combines bar traffic,
                   event traffic, and late-night rides home.
-              </p>
+                </p>
               </div>
               <p className="text-brand-black/70 leading-relaxed">
                 That is why dates like St. Patrick&apos;s Day, Super Bowl Sunday, Memorial Day weekend, and New Year&apos;s Eve can
@@ -116,6 +117,7 @@ export default function HolidayOviEnforcementOhioPage() {
               </div>
             </div>
             <div className="space-y-4">
+              <SeasonalEnforcementVisual />
               <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Holiday windows to watch</p>
                 <div className="mt-4 space-y-3">
