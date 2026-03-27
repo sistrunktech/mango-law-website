@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import { AlertTriangle, Filter, MapPinned, Shield, Info, Calendar, Clock } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import CheckpointCard from '../components/CheckpointCard';
-import HotspotTeaser from '../components/HotspotTeaser';
 import CTASection from '../components/CTASection';
 import BlogSidebar from '../components/BlogSidebar';
 import FAQSection from '../components/FAQSection';
@@ -74,7 +73,7 @@ const checkpointNewsReferences: Array<{
     sourceName: 'OVICheckpoint',
     sourceUrl: 'https://www.ovicheckpoint.com/',
     publishedDate: '2026-03-17',
-    note: "Captured during the March 26 refresh after the holiday window had passed; useful as a historical/source-of-record reference for St. Patrick's Day enforcement coverage.",
+    note: "Historical reference showing St. Patrick's Day-period enforcement activity in Stark, Summit, and Montgomery counties.",
   },
 ];
 
@@ -238,7 +237,7 @@ export default function DUICheckpointsPage() {
 
     return {
       heading: 'Current public signal',
-      body: 'There are no currently announced checkpoints in the live feed right now, so this page is functioning more as a watchlist and legal guide than a live map.',
+      body: 'There are no currently announced checkpoints in the live feed right now. Check recent history below, and monitor this page more closely around major holiday and travel weekends when public notices are more common.',
     };
   }, [checkpoints.length, pendingAnnouncements.length]);
 
@@ -389,7 +388,7 @@ export default function DUICheckpointsPage() {
             <div className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
               <div className="text-sm font-semibold text-brand-black">Seasonal enforcement watch</div>
               <p className="mt-2 text-sm text-brand-black/70">
-                The best checkpoint opportunities usually cluster around a few repeat holiday windows. St. Patrick&apos;s Day was one of the March windows we should have covered more aggressively.
+                Public checkpoint notices tend to cluster around a few repeat holiday windows. If there is nothing live today, these are still the dates most worth watching.
               </p>
               <div className="mt-4 space-y-3">
                 {seasonalEnforcementWindows.map((item) => (
@@ -409,8 +408,6 @@ export default function DUICheckpointsPage() {
           </div>
 
           <CheckpointHotspots onCityClick={handleHotspotClick} />
-
-          <HotspotTeaser />
 
           <div className="mb-4 flex flex-wrap items-center gap-2">
             <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">
@@ -546,7 +543,7 @@ export default function DUICheckpointsPage() {
           {checkpointNewsReferences.length > 0 && (
             <div className="mb-8 rounded-2xl border border-brand-black/10 bg-white p-5">
               <div className="mb-1 text-sm font-semibold text-brand-black">
-                Checkpoint references in the news (historical/context)
+                Public references and news coverage
               </div>
               <p className="mb-4 text-xs text-brand-black/60">
                 These links are for context and awareness. They may be historical and are not used to predict or speculate about unannounced checkpoints.

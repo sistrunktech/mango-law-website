@@ -3,7 +3,6 @@ import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
-import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
@@ -12,7 +11,7 @@ import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import Link from 'next/link';
-import { MapPinned, AlertTriangle } from 'lucide-react';
+import { AlertTriangle, MapPinned } from 'lucide-react';
 
 export const oviDuiFaqs = [
   {
@@ -71,7 +70,7 @@ export default function OviDuiPage() {
       <SEO
         title="OVI Defense Lawyer in Delaware, Ohio | Mango Law"
         description="Experienced OVI defense in Delaware County, Ohio. Challenge stops, field sobriety tests, and breath or blood evidence with trial-ready strategy."
-        image="/images/generated/ovi-dui-defense-hero.png"
+        image="/images/headshots/nick-mango-standing-profile-court-steps.png"
         faqs={oviDuiFaqs}
         breadcrumbs={[
           { name: 'Home', item: '/' },
@@ -112,14 +111,23 @@ export default function OviDuiPage() {
                     We know what it takes to win OVI cases in Delaware County.
                   </p>
                 </div>
-                <Image
-                  src="/images/generated/ovi-dui-defense-hero.png"
-                  alt="Professional OVI/DUI defense consultation with legal documents and breathalyzer equipment"
-                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
-                  loading="lazy"
-                  width={1200}
-                  height={900}
-                />
+                <div className="overflow-hidden rounded-2xl border border-brand-black/10 bg-brand-offWhite shadow-lg">
+                  <Image
+                    src="/images/headshots/nick-mango-standing-profile-court-steps.png"
+                    alt="Attorney Nick Mango outside the courthouse in Delaware, Ohio"
+                    className="aspect-[4/5] w-full object-cover object-top"
+                    loading="lazy"
+                    width={1200}
+                    height={1500}
+                  />
+                  <div className="space-y-2 border-t border-brand-black/10 bg-white p-6">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Local OVI defense</p>
+                    <p className="text-lg font-semibold text-brand-black">Focused on what changes the case first</p>
+                    <p className="text-sm leading-relaxed text-brand-black/70">
+                      License risk, stop validity, testing issues, and early motion opportunities usually decide the next move faster than generic legal advice.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <LegalCodeCallout section="4511.19" />
@@ -202,14 +210,30 @@ export default function OviDuiPage() {
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="order-2 lg:order-1">
-              <Image
-                src="/images/generated/ovi-case-strategy.png"
-                alt="Attorney reviewing OVI case evidence and developing defense strategy"
-                className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
-                loading="lazy"
-                width={1200}
-                height={900}
-              />
+              <div className="rounded-2xl border border-brand-black/10 bg-white p-6 shadow-lg md:p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Early case priorities</p>
+                <div className="mt-5 space-y-4">
+                  {[
+                    {
+                      title: 'Protect the ALS timeline',
+                      body: 'Administrative suspension deadlines move quickly, and that license issue often matters before the court case is fully underway.',
+                    },
+                    {
+                      title: 'Lock down the evidence',
+                      body: 'Bodycam, dashcam, testing records, dispatch logs, and calibration history are more useful when requested early.',
+                    },
+                    {
+                      title: 'Set the negotiation posture',
+                      body: 'A strong early read on stop validity, field testing, and chemical evidence often changes what the prosecution will realistically discuss.',
+                    },
+                  ].map((item) => (
+                    <div key={item.title} className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-4">
+                      <h3 className="text-base font-semibold text-brand-black">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-black/70">{item.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="space-y-6 order-1 lg:order-2">
               <h2 className="font-display text-display-sm font-bold text-brand-black">Time Is Critical</h2>
@@ -221,6 +245,18 @@ export default function OviDuiPage() {
               <p className="text-brand-black/70 leading-relaxed">
                 Don't wait. Contact Mango Law immediately to protect your rights, your license, and your future.
               </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  '30-day ALS appeal window',
+                  'Driving privilege strategy',
+                  'Video and testing preservation',
+                  'Court-date and plea-position planning',
+                ].map((item) => (
+                  <div key={item} className="rounded-xl border border-brand-black/10 bg-brand-mango/5 px-4 py-3 text-sm font-semibold text-brand-black">
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
