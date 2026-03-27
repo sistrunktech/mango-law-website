@@ -41,42 +41,6 @@ const CheckpointHotspots = dynamic(() => import('../components/CheckpointHotspot
   ),
 });
 
-const checkpointNewsReferences: Array<{
-  title: string;
-  sourceName: string;
-  sourceUrl: string;
-  publishedDate: string; // YYYY-MM-DD
-  locationCity?: string;
-  locationCounty?: string;
-  note?: string;
-}> = [
-  {
-    title: 'WHIO (Mar 25, 2020): OVI checkpoint underway in Dayton (video)',
-    sourceName: 'WHIO-TV',
-    sourceUrl: 'https://www.whio.com/news/local/ovi-checkpoint-underway-dayton-tonight/lPthnDi1lKWALWucIhNisL/',
-    publishedDate: '2020-03-25',
-    locationCity: 'Dayton',
-    locationCounty: 'Montgomery',
-    note: 'Media reference only; exact checkpoint time/location details are not provided in the source page.',
-  },
-  {
-    title: 'OVICheckpoint listing (Feb 11, 2024): Super Bowl enforcement included Dayton (Montgomery County)',
-    sourceName: 'OVICheckpoint',
-    sourceUrl: 'https://www.ovicheckpoint.com/',
-    publishedDate: '2024-02-11',
-    locationCity: 'Dayton',
-    locationCounty: 'Montgomery',
-    note: 'Listing described enhanced enforcement with an undisclosed location in Dayton on Super Bowl Sunday.',
-  },
-  {
-    title: "OVICheckpoint listing (Mar 17, 2026): St. Patrick's Day-period OVI enforcement in Stark, Summit, and Montgomery counties",
-    sourceName: 'OVICheckpoint',
-    sourceUrl: 'https://www.ovicheckpoint.com/',
-    publishedDate: '2026-03-17',
-    note: "Historical reference showing St. Patrick's Day-period enforcement activity in Stark, Summit, and Montgomery counties.",
-  },
-];
-
 const seasonalEnforcementWindows = [
   {
     title: "St. Patrick's Day",
@@ -102,6 +66,45 @@ function formatDisplayDate(value: string | null | undefined): string | null {
   if (Number.isNaN(parsed.getTime())) return null;
   return formatCalendarDate(value);
 }
+
+function parseTimestamp(value: string | null | undefined): number | null {
+  if (!value) return null;
+  const parsed = new Date(value).getTime();
+  return Number.isNaN(parsed) ? null : parsed;
+}
+
+function buildLocationLabel(city?: string | null, county?: string | null): string | null {
+  const normalizedCity = city?.trim() || null;
+  const normalizedCounty = county?.trim() || null;
+  const cityLooksRedundant =
+    normalizedCity &&
+    normalizedCounty &&
+    normalizedCity.toLowerCase() === normalizedCounty.toLowerCase();
+
+  const parts = [
+    normalizedCounty ? `${normalizedCounty} County` : null,
+    cityLooksRedundant ? null : normalizedCity,
+  ].filter(Boolean);
+
+  return parts.length > 0 ? parts.join(' • ') : null;
+}
+
+function normalizeSourceLabel(sourceName: string | null | undefined): string {
+  if (!sourceName) return 'Public checkpoint source';
+  if (/ovicheckpoint/i.test(sourceName)) return 'Public checkpoint listing';
+  if (/duiblock/i.test(sourceName)) return 'Checkpoint watch source';
+  return sourceName;
+}
+
+type PublicSourceSnapshot = {
+  key: string;
+  title: string;
+  sourceName: string;
+  sourceUrl: string;
+  publishedDate: string;
+  locationLabel: string | null;
+  note: string;
+};
 
 export default function DUICheckpointsPage() {
   const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
@@ -241,6 +244,93 @@ export default function DUICheckpointsPage() {
       return bTime - aTime;
     })[0] ?? null;
   }, [checkpoints]);
+
+  const recentPublicReferences = useMemo<PublicSourceSnapshot[]>(() => {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 120);
+    const cutoffTime = cutoff.getTime();
+
+    const announcementSnapshots: PublicSourceSnapshot[] = announcements
+      .filter((announcement) => Boolean(announcement.source_url))
+      .flatMap((announcement) => {
+        const publishedDate =
+          announcement.event_date ||
+          announcement.announcement_date ||
+          announcement.created_at;
+        const publishedTime = parseTimestamp(publishedDate);
+
+        if (!publishedDate || publishedTime === null || publishedTime < cutoffTime) {
+          return [];
+        }
+
+        const locationLabel = buildLocationLabel(announcement.location_city, announcement.location_county);
+        const sourceName = normalizeSourceLabel(announcement.source_name);
+        const note = announcement.status === 'pending_details'
+          ? 'Public notice captured before full checkpoint details were published.'
+          : locationLabel
+            ? `Publicly posted checkpoint reference tied to ${locationLabel}.`
+            : 'Publicly posted checkpoint reference captured from a recent source.';
+
+        return [{
+          key: `announcement-${announcement.id}`,
+          title: announcement.title,
+          sourceName,
+          sourceUrl: announcement.source_url!,
+          publishedDate,
+          locationLabel,
+          note,
+        }];
+      });
+
+    const checkpointSnapshots: PublicSourceSnapshot[] = checkpoints
+      .filter((checkpoint) => Boolean(checkpoint.source_url))
+      .flatMap((checkpoint) => {
+        const publishedDate = checkpoint.start_date;
+        const publishedTime = parseTimestamp(publishedDate);
+
+        if (!publishedDate || publishedTime === null || publishedTime < cutoffTime) {
+          return [];
+        }
+
+        const locationLabel = buildLocationLabel(checkpoint.location_city, checkpoint.location_county);
+        const sourceName = normalizeSourceLabel(checkpoint.source_name);
+        const title =
+          checkpoint.title ||
+          (locationLabel ? `Recent checkpoint notice in ${locationLabel}` : 'Recent checkpoint notice');
+        const note = checkpoint.description?.trim()
+          ? checkpoint.description.trim()
+          : locationLabel
+            ? `Checkpoint notice captured for ${locationLabel}.`
+            : 'Recent checkpoint notice captured from a public source.';
+
+        return [{
+          key: `checkpoint-${checkpoint.id}`,
+          title,
+          sourceName,
+          sourceUrl: checkpoint.source_url!,
+          publishedDate,
+          locationLabel,
+          note,
+        }];
+      });
+
+    const deduped = new Map<string, PublicSourceSnapshot>();
+
+    [...announcementSnapshots, ...checkpointSnapshots]
+      .sort((a, b) => {
+        const aTime = parseTimestamp(a.publishedDate) ?? 0;
+        const bTime = parseTimestamp(b.publishedDate) ?? 0;
+        return bTime - aTime;
+      })
+      .forEach((item) => {
+        const dedupeKey = `${item.sourceUrl}|${item.title}|${item.publishedDate}`;
+        if (!deduped.has(dedupeKey)) {
+          deduped.set(dedupeKey, item);
+        }
+      });
+
+    return Array.from(deduped.values()).slice(0, 4);
+  }, [announcements, checkpoints]);
 
   const currentStatusSummary = useMemo(() => {
     if (pendingAnnouncements.length > 0 || checkpoints.length > 0) {
@@ -624,17 +714,17 @@ export default function DUICheckpointsPage() {
             </div>
           )}
 
-          {checkpointNewsReferences.length > 0 && (
+          {recentPublicReferences.length > 0 && (
             <div className="mb-8 rounded-2xl border border-brand-black/10 bg-white p-5">
               <div className="mb-1 text-sm font-semibold text-brand-black">
-                Public references and news coverage
+                Recent public-source snapshots
               </div>
               <p className="mb-4 text-xs text-brand-black/60">
-                These links are for context and awareness. They may be historical and are not used to predict or speculate about unannounced checkpoints.
+                Only recent public references are shown here. Older archive examples were removed so this section stays tied to current enforcement windows instead of stale one-off clips.
               </p>
               <div className="space-y-3">
-                {checkpointNewsReferences.map((item) => (
-                  <div key={item.sourceUrl} className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3">
+                {recentPublicReferences.map((item) => (
+                  <div key={item.key} className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3">
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div className="font-semibold text-brand-black">{item.title}</div>
                       <span className="rounded-full bg-brand-black/5 px-2.5 py-1 text-xs font-semibold text-brand-black/70">
@@ -643,8 +733,7 @@ export default function DUICheckpointsPage() {
                     </div>
                     <div className="mt-1 text-xs text-brand-black/60">
                       Source: {item.sourceName}
-                      {item.locationCounty ? ` • ${item.locationCounty} County` : ''}
-                      {item.locationCity ? ` • ${item.locationCity}` : ''}
+                      {item.locationLabel ? ` • ${item.locationLabel}` : ''}
                     </div>
                     {item.note && (
                       <div className="mt-1 text-xs text-brand-black/60">

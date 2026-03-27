@@ -8,6 +8,9 @@ type SeasonalTheme = {
   badge: string;
   title: string;
   description: string;
+  detailLabel: string;
+  detailBody: string;
+  signalLabels: string[];
   backgroundClass: string;
   leftGlowClass: string;
   rightGlowClass: string;
@@ -20,7 +23,10 @@ const themes: Record<SeasonalThemeKey, SeasonalTheme> = {
   spring: {
     badge: 'Spring / St. Patrick’s watch',
     title: 'Downtown traffic, late rides home, and early-season patrol visibility',
-    description: 'A blurred spring-night scene that fits St. Patrick’s Day and the first run of warm-weather enforcement weekends.',
+    description: 'Spring enforcement tends to cluster around downtown celebrations, daytime drinking, and the first stretch of warm-weather weekends.',
+    detailLabel: 'What usually changes',
+    detailBody: 'Expect more visible patrol presence near entertainment districts, event corridors, and late-evening traffic as crowds spill out.',
+    signalLabels: ['Downtown events', 'Late rides home', 'More visible patrols'],
     backgroundClass: 'from-emerald-950 via-slate-950 to-slate-900',
     leftGlowClass: 'bg-emerald-400/40',
     rightGlowClass: 'bg-brand-mango/35',
@@ -31,7 +37,10 @@ const themes: Record<SeasonalThemeKey, SeasonalTheme> = {
   summer: {
     badge: 'Summer travel watch',
     title: 'Holiday weekends, warm-weather travel, and late-night traffic',
-    description: 'Built for Memorial Day through Labor Day when festival traffic and summer travel create heavier enforcement windows.',
+    description: 'Memorial Day, July 4th, and lake-or-festival weekends tend to bring heavier traffic, more stops, and more safety messaging.',
+    detailLabel: 'What usually changes',
+    detailBody: 'Long travel weekends increase roadside volume, especially around bar districts, event venues, and return-home traffic after dark.',
+    signalLabels: ['Festival traffic', 'Weekend travel', 'Late-night stops'],
     backgroundClass: 'from-slate-950 via-sky-950 to-brand-black',
     leftGlowClass: 'bg-sky-400/35',
     rightGlowClass: 'bg-orange-300/35',
@@ -42,7 +51,10 @@ const themes: Record<SeasonalThemeKey, SeasonalTheme> = {
   fall: {
     badge: 'Fall weekend watch',
     title: 'Game-day traffic, cooler nights, and football-weekend patrols',
-    description: 'A warmer night scene for Labor Day, early football weekends, and the fall run of checkpoint-related coverage.',
+    description: 'Labor Day, early football weekends, and cooler late nights create a steady mix of event traffic and visible enforcement.',
+    detailLabel: 'What usually changes',
+    detailBody: 'The pattern shifts toward stadium traffic, campus-adjacent stops, and holiday-weekend patrols that stay visible after the game or event.',
+    signalLabels: ['Game-day traffic', 'Campus corridors', 'Late-night patrols'],
     backgroundClass: 'from-stone-950 via-red-950 to-slate-950',
     leftGlowClass: 'bg-red-500/35',
     rightGlowClass: 'bg-orange-300/35',
@@ -53,7 +65,10 @@ const themes: Record<SeasonalThemeKey, SeasonalTheme> = {
   winter: {
     badge: 'Holiday season watch',
     title: 'Snowy roads, holiday lights, and winter enforcement visibility',
-    description: 'A colder scene for Thanksgiving through New Year’s when night driving, parties, and weather all change the roadside picture.',
+    description: 'Thanksgiving through New Year’s is usually the strongest sustained enforcement stretch because parties, travel, and weather all change the roadside picture.',
+    detailLabel: 'What usually changes',
+    detailBody: 'Look for more public messaging, winter-night patrol visibility, and faster escalation when officers think alcohol is part of the stop.',
+    signalLabels: ['Holiday parties', 'Winter roads', 'Overtime patrols'],
     backgroundClass: 'from-slate-950 via-indigo-950 to-slate-900',
     leftGlowClass: 'bg-sky-300/35',
     rightGlowClass: 'bg-rose-300/30',
@@ -138,10 +153,20 @@ export default function SeasonalEnforcementVisual() {
         </div>
 
         <div className="rounded-2xl border border-white/12 bg-white/8 p-4 backdrop-blur-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/65">Visual cue</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/65">{theme.detailLabel}</p>
           <p className="mt-2 text-sm leading-relaxed text-white/80">
-            This page tracks the holiday windows when checkpoint notices and high-visibility OVI patrols are most likely to show up.
+            {theme.detailBody}
           </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {theme.signalLabels.map((label) => (
+              <span
+                key={label}
+                className="rounded-full border border-white/12 bg-black/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/80"
+              >
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
