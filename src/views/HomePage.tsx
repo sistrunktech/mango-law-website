@@ -161,6 +161,11 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
             href: '/motion-to-suppress-ovi-ohio',
           },
           {
+            title: 'Ohio DUI checkpoint map',
+            description: 'Track announced checkpoint activity, recent history, and the Ohio areas that show up most often.',
+            href: '/resources/dui-checkpoints',
+          },
+          {
             title: 'Domestic violence first-offense defense',
             description: 'A first-step guide for allegations that can affect criminal court and family life at once.',
             href: '/domestic-violence-first-offense-ohio-defense',
