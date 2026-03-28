@@ -163,6 +163,57 @@ export default function OviCheckpointsOhioPage() {
               </Link>
             </div>
           </div>
+
+          <div className="mt-10 rounded-[1.75rem] border border-brand-black/10 bg-brand-offWhite p-6 shadow-soft">
+            <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-goldText">
+                  Related OVI issues
+                </p>
+                <h2 className="mt-2 text-2xl font-bold leading-tight text-brand-black">
+                  The stop is only one part of the OVI case.
+                </h2>
+              </div>
+              <p className="max-w-xl text-sm leading-relaxed text-brand-black/60">
+                These guides cover the issues that tend to matter right after a checkpoint or patrol stop: refusal,
+                license suspension, and the motions that challenge the evidence itself.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {[
+                {
+                  title: 'OVI test refusal defense',
+                  description: 'How refusal allegations change the license side and the court side of the case.',
+                  href: '/ovi-test-refusal-lawyer-ohio',
+                },
+                {
+                  title: 'ALS license suspension defense',
+                  description: 'The suspension timeline, limited driving privileges, and where timing matters most.',
+                  href: '/als-license-suspension-ohio',
+                },
+                {
+                  title: 'Motion to suppress OVI evidence',
+                  description: 'When the stop, testing, or search becomes the pressure point in the case.',
+                  href: '/motion-to-suppress-ovi-ohio',
+                },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="group rounded-[1.25rem] border border-brand-black/10 bg-white p-5 transition-all hover:-translate-y-1 hover:shadow-soft"
+                >
+                  <h3 className="text-lg font-semibold text-brand-black transition-colors group-hover:text-brand-mangoText">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-black/70">{item.description}</p>
+                  <span className="mt-4 inline-flex text-sm font-semibold text-brand-mango transition-colors group-hover:text-brand-leaf">
+                    Explore guide
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

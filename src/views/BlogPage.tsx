@@ -137,6 +137,65 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
             </div>
           )}
 
+          <div className="mb-10 rounded-[1.75rem] border border-brand-black/10 bg-white p-6 shadow-soft">
+            <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-goldText">
+                  OVI fast paths
+                </p>
+                <h2 className="mt-2 text-2xl font-bold leading-tight text-brand-black">
+                  Start with the OVI page that matches the question in front of you.
+                </h2>
+              </div>
+              <p className="max-w-xl text-sm leading-relaxed text-brand-black/60">
+                These are the pages people usually need first when the question is about checkpoints, license pressure,
+                immediate next steps, or the bigger OVI defense picture.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {[
+                {
+                  title: 'Ohio DUI checkpoint map',
+                  description: 'Recent announced checkpoints, hotspot context, and public-source activity.',
+                  href: '/resources/dui-checkpoints',
+                },
+                {
+                  title: 'OVI / DUI defense overview',
+                  description: 'The broad strategy page for stops, testing, negotiations, and court posture.',
+                  href: '/ovi-dui-defense-delaware-oh',
+                },
+                {
+                  title: 'Driving privileges after an OVI',
+                  description: 'How ALS and limited driving privileges usually work after an arrest.',
+                  href: '/blog/ohio-ovi-driving-privileges-als',
+                },
+                {
+                  title: 'Drug possession charge: what to do next',
+                  description: 'A practical first-step guide when the issue is a possession arrest rather than OVI.',
+                  href: '/blog/drug-possession-charge-ohio-what-to-do-next',
+                },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="group rounded-[1.25rem] border border-brand-black/10 bg-brand-offWhite/45 p-5 transition-all hover:-translate-y-1 hover:shadow-soft"
+                >
+                  <h3 className="text-base font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-black/65">
+                    {item.description}
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors group-hover:text-brand-leaf">
+                    Open guide
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <div className="mb-6">
             <div className="relative max-w-md">
               <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-brand-black/40" />
