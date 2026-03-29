@@ -92,10 +92,7 @@ export default function OviCheckpointsOhioPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-black/70 via-brand-black/20 to-transparent" />
               <div className="absolute inset-x-4 bottom-4 rounded-xl border border-white/10 bg-brand-black/55 px-4 py-3 backdrop-blur-sm">
-                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-gold">
-                  Illustrative scene
-                </p>
-                <p className="mt-1 text-sm text-brand-offWhite/88">
+                <p className="text-sm text-brand-offWhite/88">
                   A checkpoint stop is usually brief at first, then expands only if an officer claims to see signs of impairment.
                 </p>
               </div>
