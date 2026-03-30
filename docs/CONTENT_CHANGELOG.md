@@ -501,3 +501,16 @@ Regression checklist:
 - Meta/schema changed? yes
 Approval token: pending
 Rollback notes: revert `src/data/blogPosts.ts` imageUrl changes and remove `public/images/generated/blog-*.png`
+
+Date/time: 2026-03-30 17:45 EDT
+Post slug and title: ohio-ovi-driving-privileges-als, drug-possession-charge-ohio-what-to-do-next | Strengthen discovery links and cluster pathways
+Change type: minor
+Summary of change: Added clearer service-page pathways and cluster-specific internal links inside the ALS explainer and drug-possession explainer so both posts connect more directly to the OVI and drug-crime service clusters during the current indexing recovery pass.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: pending
+Rollback notes: revert the new internal-link sentences in `src/data/blogPosts.ts` for the ALS and drug-possession articles.

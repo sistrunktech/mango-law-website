@@ -23,12 +23,12 @@ const quickPracticeAreas = [
 
 const featuredGuides = [
   {
-    label: 'Ohio DUI checkpoint hotspots',
-    href: '/blog/ohio-dui-checkpoint-hotspots',
+    label: 'Ohio OVI driving privileges and ALS',
+    href: '/blog/ohio-ovi-driving-privileges-als',
   },
   {
-    label: 'Holiday OVI enforcement in Central Ohio',
-    href: '/blog/holiday-ovi-enforcement-ohio-delaware-dublin-columbus',
+    label: 'Ohio DUI checkpoint hotspots',
+    href: '/blog/ohio-dui-checkpoint-hotspots',
   },
   {
     label: 'Physical control vs OVI in Ohio',

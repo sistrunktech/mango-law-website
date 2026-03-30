@@ -4,6 +4,12 @@ import type { BlogPost } from '../data/blogPosts';
 import BlogCoverArt from './BlogCoverArt';
 import { formatCalendarDate } from '../lib/formatting';
 
+const recoveryPrioritySlugs = [
+  'ohio-ovi-driving-privileges-als',
+  'drug-possession-charge-ohio-what-to-do-next',
+  'first-ovi-court-date-delaware-county-ohio',
+];
+
 function getRecentDiversePosts(posts: BlogPost[], count: number): BlogPost[] {
   const sorted = [...posts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -11,6 +17,13 @@ function getRecentDiversePosts(posts: BlogPost[], count: number): BlogPost[] {
 
   const selected: BlogPost[] = [];
   const usedCategories = new Set<string>();
+
+  for (const slug of recoveryPrioritySlugs) {
+    const match = sorted.find((post) => post.slug === slug);
+    if (!match || selected.includes(match) || selected.length >= count) continue;
+    selected.push(match);
+    usedCategories.add(match.category);
+  }
 
   for (const post of sorted) {
     if (selected.length >= count) break;

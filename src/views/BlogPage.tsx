@@ -153,7 +153,7 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
               </p>
             </div>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {[
                 {
                   title: 'Ohio DUI checkpoint map',
@@ -169,6 +169,16 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
                   title: 'Driving privileges after an OVI',
                   description: 'How ALS and limited driving privileges usually work after an arrest.',
                   href: '/blog/ohio-ovi-driving-privileges-als',
+                },
+                {
+                  title: 'OVI test refusal defense',
+                  description: 'The refusal-specific page for the administrative track, court posture, and early strategy.',
+                  href: '/ovi-test-refusal-lawyer-ohio',
+                },
+                {
+                  title: 'Motion to suppress OVI evidence',
+                  description: 'Where stop legality, detention scope, and testing problems become the core defense issue.',
+                  href: '/motion-to-suppress-ovi-ohio',
                 },
                 {
                   title: 'Drug possession charge: what to do next',

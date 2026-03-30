@@ -3241,7 +3241,7 @@ In Ohio, a criminal no-contact order and a civil protection order can look simil
     imageUrl: '/images/generated/blog-drug-possession-trafficking.png',
     content: `Drug charges can be overwhelming because they often involve multiple issues at once: the traffic stop or contact that started the case, the search, who “possessed” the substance, lab testing, and (sometimes) allegations that the drugs were for sale.
 
-If you want help quickly, start here: [Drug Crime Defense](/drug-crime-lawyer-delaware-oh) or [contact us](/contact).
+If you want help quickly, start here: [Drug Crime Defense](/drug-crime-lawyer-delaware-oh), [Drug Possession vs Trafficking Defense](/drug-possession-vs-trafficking-ohio-defense), or [contact us](/contact).
 
 ## The core charge: drug possession in Ohio
 
@@ -3291,6 +3291,8 @@ Early steps can protect you:
 - **Write down your timeline** while it’s fresh (where you were, who was present, what was said).
 - **Avoid new charges** (probation violations, driving issues, or a second incident can change the leverage).
 
+If the case started with a car stop or search, compare this article with [Motion Practice in Criminal Defense](/blog/motion-practice-criminal-defense) so you know where suppression issues can change the leverage.
+
 ## Diversion and treatment-based outcomes
 
 Some defendants may be eligible for treatment-oriented outcomes, including intervention in lieu of conviction under [ORC 2951.041](https://codes.ohio.gov/ohio-revised-code/section-2951.041). Eligibility depends on the charge, your record, and the facts.
@@ -3310,9 +3312,11 @@ Drug cases are evidence cases. A typical defense workflow includes:
 
 If you also have related allegations (like weapons, probation, or a traffic offense), the strategy needs to be coordinated across all exposure.
 
+For the broader defense framework behind possession and trafficking cases, use [Drug Possession vs Trafficking Defense](/drug-possession-vs-trafficking-ohio-defense) alongside this article.
+
 ## Conclusion
 
-A possession charge is not just about “what was found.” It’s about **how it was found, who the state can prove possessed it, and what defenses exist under the Fourth Amendment and Ohio law**. If you’ve been charged in Delaware County or Central Ohio, get counsel early so the search issues and evidence timeline are preserved.
+A possession charge is not just about “what was found.” It’s about **how it was found, who the state can prove possessed it, and what defenses exist under the Fourth Amendment and Ohio law**. If you’ve been charged in Delaware County or Central Ohio, get counsel early so the search issues and evidence timeline are preserved. If you are still sorting out whether the state is treating the case as possession or trafficking, start with [Drug Possession vs Trafficking Defense](/drug-possession-vs-trafficking-ohio-defense).
 
 ---
 
@@ -3355,7 +3359,7 @@ A possession charge is not just about “what was found.” It’s about **how i
 - an **Administrative License Suspension (ALS)** tied to chemical testing and implied consent
 - a **court suspension** that may be imposed later through the criminal case
 
-If you want case-specific advice, start here: [OVI/DUI Defense](/ovi-dui-defense-delaware-oh) or [contact us](/contact).
+If you want case-specific advice, start here: [OVI/DUI Defense](/ovi-dui-defense-delaware-oh), [ALS License Suspension Defense](/als-license-suspension-ohio), or [contact us](/contact).
 
 ## Administrative License Suspension (ALS) vs court suspension
 
@@ -3372,6 +3376,8 @@ ALS is commonly triggered when:
 
 The exact consequences depend on your history (prior OVI/OVI-related events) and the test category.
 
+If the immediate issue is a refusal allegation rather than a test-over result, compare this page with [OVI Test Refusal Defense](/ovi-test-refusal-lawyer-ohio).
+
 ## What most people need to know early (practical checklist)
 
 - **Keep your paperwork** (including the “yellow sheet”/BMV paperwork if provided).
@@ -3384,6 +3390,8 @@ If you’re preparing for the first appearance, see: [Your First OVI Court Date 
 
 Driving privileges are fact-specific and depend on the type of suspension, waiting periods, and the court’s procedures. In many cases, limited privileges are handled through the court process as the case moves forward.
 
+For the service-page version of this issue set, see [ALS License Suspension Defense](/als-license-suspension-ohio). If you are dealing with the first few days after arrest, [First Offense OVI in Ohio](/first-offense-ovi-ohio) gives the broader early timeline.
+
 Occupational driving privileges and related procedures are often addressed under [ORC 4510.13](https://codes.ohio.gov/ohio-revised-code/section-4510.13) (driving under suspension; occupational driving privileges) and related sections.
 
 Common purposes that can be relevant include:
@@ -3395,11 +3403,11 @@ Common purposes that can be relevant include:
 
 ## What can go wrong (and create a new case)
 
-The most common way an OVI case becomes much worse is a second charge while the suspension is active—especially **driving under suspension**. Even if your original case has defenses, the new charge can change the posture quickly.
+The most common way an OVI case becomes much worse is a second charge while the suspension is active—especially **driving under suspension**. Even if your original case has defenses, the new charge can change the posture quickly. When the stop itself or the testing process looks questionable, review [Motion to Suppress OVI Evidence](/motion-to-suppress-ovi-ohio) as the next step.
 
 ## Conclusion
 
-ALS and court suspensions are not the same thing, and the timeline matters. If you were arrested for OVI, the safest move is to get legal advice early, preserve the paperwork, and address driving privileges through the proper court process.
+ALS and court suspensions are not the same thing, and the timeline matters. If you were arrested for OVI, the safest move is to get legal advice early, preserve the paperwork, and address driving privileges through the proper court process. For the broader defense picture, pair this article with [OVI/DUI Defense](/ovi-dui-defense-delaware-oh) and [OVI Test Refusal Defense](/ovi-test-refusal-lawyer-ohio) when refusal or immediate suspension issues are part of the case.
 
 ---
 
