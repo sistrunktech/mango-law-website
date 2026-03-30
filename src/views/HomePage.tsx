@@ -166,6 +166,11 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
             href: '/resources/dui-checkpoints',
           },
           {
+            title: 'Ohio OVI driving privileges and ALS',
+            description: 'A practical explainer on license suspension timing, driving privileges, and the paperwork that matters early.',
+            href: '/blog/ohio-ovi-driving-privileges-als',
+          },
+          {
             title: 'Domestic violence first-offense defense',
             description: 'A first-step guide for allegations that can affect criminal court and family life at once.',
             href: '/domestic-violence-first-offense-ohio-defense',
@@ -179,6 +184,11 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
             title: 'Drug possession vs trafficking defense',
             description: 'Why the charge distinction matters and where the evidence usually gets challenged.',
             href: '/drug-possession-vs-trafficking-ohio-defense',
+          },
+          {
+            title: 'Charged with drug possession in Ohio?',
+            description: 'A practical first-step article on search issues, what the state must prove, and what to do next.',
+            href: '/blog/drug-possession-charge-ohio-what-to-do-next',
           },
         ]}
       />

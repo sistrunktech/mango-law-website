@@ -130,6 +130,71 @@ export default function OviDuiPage() {
                 </div>
               </div>
 
+              <div className="rounded-[1.75rem] border border-brand-black/10 bg-brand-offWhite/55 p-6 shadow-soft">
+                <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-goldText">
+                      Use the narrower OVI page when the issue is more specific
+                    </p>
+                    <h3 className="mt-2 text-2xl font-bold leading-tight text-brand-black">
+                      This page is the broad strategy overview. These guides handle the pressure points that usually decide what happens next.
+                    </h3>
+                  </div>
+                  <p className="max-w-xl text-sm leading-relaxed text-brand-black/65">
+                    License suspension, refusal, checkpoint activity, and suppression issues often need a more focused read than a general OVI defense page.
+                  </p>
+                </div>
+
+                <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {[
+                    {
+                      title: 'First offense OVI in Ohio',
+                      description: 'The first 72 hours, court timing, and what to preserve immediately.',
+                      href: '/first-offense-ovi-ohio',
+                    },
+                    {
+                      title: 'OVI test refusal defense',
+                      description: 'How refusal changes the administrative track and the court strategy.',
+                      href: '/ovi-test-refusal-lawyer-ohio',
+                    },
+                    {
+                      title: 'ALS license suspension defense',
+                      description: 'The page focused on suspension timing, driving privileges, and early paperwork.',
+                      href: '/als-license-suspension-ohio',
+                    },
+                    {
+                      title: 'Motion to suppress OVI evidence',
+                      description: 'Where the stop, detention, or testing process becomes the legal battleground.',
+                      href: '/motion-to-suppress-ovi-ohio',
+                    },
+                    {
+                      title: 'Ohio DUI checkpoint map',
+                      description: 'Public checkpoint activity, recent history, and checkpoint-specific next steps.',
+                      href: '/resources/dui-checkpoints',
+                    },
+                    {
+                      title: 'Driving privileges and ALS article',
+                      description: 'A practical explainer for license questions that come up right after an arrest.',
+                      href: '/blog/ohio-ovi-driving-privileges-als',
+                    },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="group rounded-[1.25rem] border border-brand-black/10 bg-white p-5 transition-all hover:-translate-y-1 hover:shadow-soft"
+                    >
+                      <h3 className="text-base font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-black/65">{item.description}</p>
+                      <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors group-hover:text-brand-leaf">
+                        Open guide
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               <LegalCodeCallout section="4511.19" />
             </div>
 
