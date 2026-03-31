@@ -267,7 +267,7 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
                     href={`/blog/${post.slug}`}
                     className="group overflow-hidden rounded-[1.5rem] border border-brand-black/10 bg-white shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-soft-lg"
                   >
-                    <BlogCoverArt post={post} />
+                    <BlogCoverArt post={post} contentMode="minimal" />
 
                     <div className="p-6">
                       <div className="flex items-center gap-4 text-xs text-brand-black/60">
