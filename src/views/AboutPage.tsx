@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import { SEO, attorneySchema } from '../lib/seo';
@@ -218,6 +219,47 @@ export default function AboutPage() {
                     <span>Respectful, discreet handling of sensitive matters</span>
                   </li>
                 </ul>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Common starting points for OVI cases</h3>
+                <p className="text-brand-black/80 leading-relaxed">
+                  If your case involves an OVI arrest, license issue, or checkpoint stop, these are usually the fastest pages
+                  to review before a consultation.
+                </p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {[
+                    {
+                      title: 'OVI / DUI defense overview',
+                      href: '/ovi-dui-defense-delaware-oh',
+                      description: 'Broad strategy, penalties, and defense issues in Ohio OVI cases.',
+                    },
+                    {
+                      title: 'First-offense OVI guide',
+                      href: '/first-offense-ovi-ohio',
+                      description: 'What to do in the first 72 hours after an arrest.',
+                    },
+                    {
+                      title: 'ALS license suspension defense',
+                      href: '/als-license-suspension-ohio',
+                      description: 'How the suspension timeline works and when privileges may be available.',
+                    },
+                    {
+                      title: 'Ohio DUI checkpoint map',
+                      href: '/resources/dui-checkpoints',
+                      description: 'Announced checkpoints, recent activity, and what a stop can involve.',
+                    },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="rounded-2xl border border-brand-black/10 bg-brand-offWhite/50 p-5 transition-colors hover:border-brand-mango/40 hover:bg-white"
+                    >
+                      <p className="font-semibold text-brand-black">{item.title}</p>
+                      <p className="mt-2 text-sm text-brand-black/65">{item.description}</p>
+                    </Link>
+                  ))}
+                </div>
               </div>
 
               <div className="space-y-4">

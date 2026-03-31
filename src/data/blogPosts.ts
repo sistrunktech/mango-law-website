@@ -3314,6 +3314,13 @@ If you also have related allegations (like weapons, probation, or a traffic offe
 
 For the broader defense framework behind possession and trafficking cases, use [Drug Possession vs Trafficking Defense](/drug-possession-vs-trafficking-ohio-defense) alongside this article.
 
+## Related defense guides
+
+- [Drug Crime Defense](/drug-crime-lawyer-delaware-oh)
+- [Drug Possession vs Trafficking Defense](/drug-possession-vs-trafficking-ohio-defense)
+- [Criminal Defense in Delaware, Ohio](/criminal-defense-delaware-oh)
+- [Contact Mango Law](/contact)
+
 ## Conclusion
 
 A possession charge is not just about “what was found.” It’s about **how it was found, who the state can prove possessed it, and what defenses exist under the Fourth Amendment and Ohio law**. If you’ve been charged in Delaware County or Central Ohio, get counsel early so the search issues and evidence timeline are preserved. If you are still sorting out whether the state is treating the case as possession or trafficking, start with [Drug Possession vs Trafficking Defense](/drug-possession-vs-trafficking-ohio-defense).
@@ -3404,6 +3411,13 @@ Common purposes that can be relevant include:
 ## What can go wrong (and create a new case)
 
 The most common way an OVI case becomes much worse is a second charge while the suspension is active—especially **driving under suspension**. Even if your original case has defenses, the new charge can change the posture quickly. When the stop itself or the testing process looks questionable, review [Motion to Suppress OVI Evidence](/motion-to-suppress-ovi-ohio) as the next step.
+
+## Related Ohio OVI guides
+
+- [OVI / DUI Defense](/ovi-dui-defense-delaware-oh)
+- [ALS License Suspension Defense](/als-license-suspension-ohio)
+- [OVI Test Refusal Defense](/ovi-test-refusal-lawyer-ohio)
+- [First Offense OVI in Ohio](/first-offense-ovi-ohio)
 
 ## Conclusion
 

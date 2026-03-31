@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-03-31 14:05 EDT
+Post slug and title: drug-possession-charge-ohio-what-to-do-next; ohio-ovi-driving-privileges-als | Internal-link reinforcement for March indexing recovery
+Change type: minor
+Summary of change: Added short related-guide sections to the drug-possession and ALS posts so both pages expose clearer in-body pathways to their matching service pages and supporting guides during the March indexing recovery push.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: n/a
+Rollback notes: Remove the new related-guide sections in `src/data/blogPosts.ts` if the recovery pass is rolled back.
+
 Date/time: 2026-03-24 19:10 EDT
 Post slug and title: Sitemap and OVI checkpoint signals | Consolidate Delaware OVI intent and align checkpoint metadata
 Change type: minor
