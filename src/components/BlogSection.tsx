@@ -82,7 +82,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
               href={`/blog/${post.slug}`}
               className="group overflow-hidden rounded-[1.5rem] border border-brand-black/10 bg-white shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-soft-lg"
             >
-              <BlogCoverArt post={post} />
+              <BlogCoverArt post={post} contentMode="minimal" />
               <div className="p-6">
                 <div className="mb-4 flex items-center gap-3 text-xs">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-leaf/10 px-3 py-1 font-semibold text-brand-leaf">

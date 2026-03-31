@@ -27,7 +27,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
             href={`/blog/${post.slug}`}
             className="group block overflow-hidden rounded-[1.5rem] border border-brand-black/10 bg-white transition-all hover:border-brand-mango hover:shadow-lg"
           >
-            <BlogCoverArt post={post} />
+            <BlogCoverArt post={post} contentMode="minimal" />
             <div className="p-5">
               <div className="mb-2 inline-block rounded-full bg-brand-mango/10 px-3 py-1 text-xs font-semibold text-brand-mangoText">
                 {post.category}

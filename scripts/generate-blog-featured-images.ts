@@ -49,74 +49,139 @@ function buildSafetyConstraints() {
   ].join(', ');
 }
 
+function buildNegativePrompt() {
+  return [
+    'photorealism',
+    'hyper realistic face',
+    '3d render',
+    'cgi',
+    'claymation',
+    'plastic toy look',
+    'comic-book style',
+    'neon cyberpunk',
+    'text overlay',
+    'logo',
+    'watermark',
+    'legible writing',
+    'handwriting',
+    'paper with writing',
+    'labeled folders',
+    'book cover text',
+    'document text',
+    'notebook',
+    'clipboard',
+    'forms',
+    'wall plaque',
+    'mail slot',
+    'church lettering',
+    'facade lettering',
+    'printed signs',
+    'engraved plaques',
+    'ribbon text',
+    'breathalyzer device',
+    'LED-lit gadget on desk',
+    'sensationalized police action',
+  ].join(', ');
+}
+
 function buildBrandStyle() {
   return [
-    'professional legal editorial photography',
-    'cinematic lighting',
-    'photo-realistic',
-    'high detail',
-    'clean composition',
-    'warm mango-gold accent lighting',
-    'deep forest background tones',
-    'subtle teal highlights',
-    'Delaware County Ohio atmosphere',
+    'editorial watercolor illustration',
+    'ink-and-wash sketch detail',
+    'soft gouache texture on warm paper',
+    'tasteful legal storytelling art',
+    'clean composition with one clear focal subject',
+    'restrained mango-gold, forest-green, charcoal, and parchment palette',
+    'grounded and human',
+    'not abstract and not photorealistic',
+    'quiet Ohio legal atmosphere',
   ].join(', ');
 }
 
 function buildTopicPrompt(post: BlogPost) {
+  const slug = post.slug.toLowerCase();
   const title = post.title.toLowerCase();
   const category = post.category.toLowerCase();
 
+  if (slug.includes('first-ovi-court-date')) {
+    return 'Ohio courthouse hallway, an empty wooden bench, doorway light, and a simple closed case folder with no markings';
+  }
+  if (slug.includes('driving-privileges') || slug.includes('als')) {
+    return 'sunlit courthouse window framing an Ohio road at dawn with car keys on the wood sill, no papers, no notebooks, no books, and no visible lettering or building signs';
+  }
+  if (slug.includes('no-contact-order')) {
+    return 'split watercolor scene with a warm stone colonnade on one side and a clean residential doorway on the other, divided by a subtle legal boundary line, with no lamps, no plaques, no wall signs, and no mail slot';
+  }
+  if (slug.includes('drug-possession-charge')) {
+    return 'defense consultation silhouettes beneath courthouse columns with restrained amber light and no shelves, no bottles, and no labeled objects';
+  }
+
   if (category.includes('ovi') || title.includes('ovi') || title.includes('dui')) {
     if (title.includes('after') && title.includes('arrest')) {
-      return 'Ohio traffic citation paperwork, courthouse steps in the background, car keys on a wooden table, law book, night street bokeh police lights far in the distance';
+      return 'dim Ohio roadside at night leading toward a lit courthouse, with only the edge of a dashboard silhouette in frame and no objects resting on it';
     }
     if (title.includes('lookback')) {
-      return 'Ohio law book and a clean abstract timeline graphic made of simple shapes, paperwork stack, calendar page without numbers, professional desk scene';
+      return 'layered calendar shapes, soft timeline ribbon, and an Ohio courthouse outline with no numbers or labels';
     }
     if (title.includes('field sobriety')) {
-      return 'night roadside scene with blurred police lights in the distance, notebook and pen on dashboard, Ohio traffic law book, calm professional mood';
+      return 'night roadside shoulder, faint patrol lights, measured roadside markers, and a dashboard silhouette';
     }
     if (title.includes('checkpoint')) {
-      return 'Ohio highway at night, distant checkpoint lights blurred, road cones out of focus, clean cinematic composition';
+      return 'Ohio roadway with cones, checkpoint shapes, and distant patrol lights in watercolor haze';
     }
     if (title.includes('physical control')) {
-      return 'parked car interior at night, keys on center console, court document folder, subtle blue/red bokeh far away, calm scene';
+      return 'parked car interior at night, keys on the console, and quiet dashboard lighting with no readable displays';
     }
-    return 'Ohio traffic law books, courtroom gavel, legal documents on a desk, subtle night street bokeh';
+    return 'Ohio roadway, courthouse architectural shapes, car keys, and restrained dusk lighting';
   }
 
   if (category.includes('drug')) {
-    return 'Ohio criminal statutes book open on a desk, evidence folder, laboratory report paperwork, professional legal office scene';
+    return 'evidence locker silhouette, courthouse architecture, and a measured amber-and-charcoal legal atmosphere';
   }
 
   if (category.includes('sex')) {
-    return 'confidential legal consultation room, closed file folder, warm dramatic lighting, privacy-forward professional scene';
+    return 'private consultation room, muted lamp light, closed door, and privacy-forward composition with no documents visible';
   }
 
   if (category.includes('protection')) {
-    return 'civil protection order paperwork on a desk, courthouse hallway background, legal folder and pen, professional legal setting';
+    return 'courthouse hallway, home doorway, and subtle legal-boundary motif with restrained directional markers';
   }
 
   if (category.includes('white collar')) {
-    return 'financial documents, ledger, legal file folders, professional corporate office desk scene';
+    return 'corporate boardroom table, abstract financial chart lines without labels, and restrained legal atmosphere';
   }
 
   if (category.includes('personal injury')) {
-    return 'accident report paperwork, medical records folder, legal file on desk, warm professional lighting';
+    return 'car silhouette, medical cross motif, courthouse outline, and calm recovery-focused composition';
   }
 
   if (category.includes('criminal defense')) {
-    return 'courtroom gavel and legal documents, file folders, law book, professional legal office';
+    return 'courtroom interior details, courthouse archway, and balanced justice motifs without books or paperwork';
   }
 
-  return 'legal documents and law book on a desk, professional legal editorial scene';
+  return 'Ohio courthouse detail, balanced justice motifs, and quiet editorial illustration atmosphere';
 }
 
 function buildPrompt(post: BlogPost) {
+  const compositions = [
+    'wide horizontal composition with breathing room',
+    'close editorial crop with balanced negative space',
+    'top-down desk composition with one dominant object cluster',
+    'angled vignette composition with paper texture visible',
+  ] as const;
+  const atmosphere = [
+    'soft spring daylight with restrained shadows',
+    'warm evening interior glow with muted edges',
+    'overcast daylight with inked contrast lines',
+    'gentle roadside dusk lighting with subdued highlights',
+  ] as const;
+  const slugHash = [...post.slug].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+
   return [
     buildTopicPrompt(post),
     buildBrandStyle(),
+    compositions[slugHash % compositions.length],
+    atmosphere[slugHash % atmosphere.length],
     buildSafetyConstraints(),
   ].join(', ');
 }
@@ -177,6 +242,9 @@ async function main() {
       width: 1200,
       height: 630,
       model: 'fal-ai/flux-pro',
+      input: {
+        negative_prompt: buildNegativePrompt(),
+      },
     });
 
     fs.writeFileSync(outPath, result.buffer);
