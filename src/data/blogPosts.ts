@@ -1975,7 +1975,7 @@ This article is for educational purposes and does not constitute legal advice. O
     slug: 'sex-crimes-defense-ohio-what-you-need-to-know',
     title: 'Sex Crimes Defense in Ohio: What You Need to Know About Sexual Battery, Registration, and Your Rights',
     excerpt: 'Accused of a sex crime in Ohio? Learn the high-level legal framework, what varies by offense, and how sex offender registration duties can apply under ORC Chapters 2907 and 2950.',
-    imageUrl: '/images/generated/blog-sex-crimes-defense.png',
+    imageUrl: '/images/generated/blog-sex-crimes-defense-ohio-what-you-need-to-know.png',
     content: `Sex crime allegations carry high stakes, and the process can move quickly. This guide explains the core Ohio statutes, how registration works, and why early legal review matters.
 
 ## Ohio’s sex offense statutes (overview)
@@ -2995,7 +2995,7 @@ If you're facing physical control charges in Delaware or Franklin County, the sp
     title: 'Your First OVI Court Date in Delaware County, Ohio: What Happens and How to Prepare',
     excerpt:
       'If you have an OVI court date coming up, this guide explains what typically happens at the first appearance, what to bring, and how to avoid mistakes that can make the case worse.',
-    imageUrl: '/images/generated/ovi-case-strategy.png',
+    imageUrl: '/images/generated/blog-first-ovi-court-date-delaware-county-ohio.png',
     content: `Getting charged with OVI in Ohio is stressful, and the first court date can feel confusing—especially if you’ve never been in court before. This guide explains what the first appearance usually covers, what to bring, and what to avoid.
 
 If you want case-specific advice, start here: [OVI/DUI Defense](/ovi-dui-defense-delaware-oh) or [contact us](/contact).
@@ -3114,7 +3114,7 @@ The first OVI court date is usually about **bond, scheduling, and getting counse
     title: 'No-Contact Orders vs Civil Protection Orders in Ohio: What’s the Difference?',
     excerpt:
       'People often use “no-contact order” and “protection order” interchangeably. In Ohio they can be very different. This guide explains what each one is, what rules apply, and how to avoid a violation charge.',
-    imageUrl: '/images/generated/protection-order-defense-hero.png',
+    imageUrl: '/images/generated/blog-no-contact-order-vs-civil-protection-order-ohio.png',
     content: `When a case involves alleged domestic violence or threats, courts often issue immediate restrictions. People commonly refer to all restrictions as “a protection order,” but in Ohio, there are different types of orders with different rules.
 
 This guide explains the difference between:
@@ -3238,7 +3238,7 @@ In Ohio, a criminal no-contact order and a civil protection order can look simil
     title: 'Charged With Drug Possession in Ohio? What to Do Next and What the State Must Prove',
     excerpt:
       'A drug possession charge can move fast. This guide explains what the state must prove under Ohio law, common search issues, and practical steps to protect yourself early in the case.',
-    imageUrl: '/images/generated/blog-drug-possession-trafficking.png',
+    imageUrl: '/images/generated/blog-drug-possession-charge-ohio-what-to-do-next.png',
     content: `Drug charges can be overwhelming because they often involve multiple issues at once: the traffic stop or contact that started the case, the search, who “possessed” the substance, lab testing, and (sometimes) allegations that the drugs were for sale.
 
 If you want help quickly, start here: [Drug Crime Defense](/drug-crime-lawyer-delaware-oh), [Drug Possession vs Trafficking Defense](/drug-possession-vs-trafficking-ohio-defense), or [contact us](/contact).
@@ -3353,7 +3353,7 @@ A possession charge is not just about “what was found.” It’s about **how i
     title: 'Ohio OVI Driving Privileges and ALS: How License Suspensions Work and What Options You May Have',
     excerpt:
       'After an OVI arrest, many people face an immediate Administrative License Suspension (ALS). This guide explains how ALS differs from court suspensions and how limited driving privileges are typically handled in Ohio.',
-    imageUrl: '/images/generated/ovi-dui-defense-hero.png',
+    imageUrl: '/images/generated/blog-ohio-ovi-driving-privileges-als.png',
     content: `One of the biggest shocks after an OVI arrest is learning that your license can be restricted **before** your case is resolved. In Ohio, two different systems can affect your ability to drive:
 
 - an **Administrative License Suspension (ALS)** tied to chemical testing and implied consent

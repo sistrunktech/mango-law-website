@@ -514,3 +514,16 @@ Regression checklist:
 - Meta/schema changed? no
 Approval token: pending
 Rollback notes: revert the new internal-link sentences in `src/data/blogPosts.ts` for the ALS and drug-possession articles.
+
+Date/time: 2026-03-30 20:28 EDT
+Post slug and title: first-ovi-court-date-delaware-county-ohio, no-contact-order-vs-civil-protection-order-ohio, drug-possession-charge-ohio-what-to-do-next, ohio-ovi-driving-privileges-als, sex-crimes-defense-ohio-what-you-need-to-know | Point stale image overrides to the new editorial illustrations
+Change type: minor
+Summary of change: Updated post-level `imageUrl` overrides in `src/data/blogPosts.ts` so these five articles use the new slug-matched watercolor illustration assets instead of older fallback covers, restoring parity between the refreshed blog art system and the actual article pages.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: pending
+Rollback notes: restore the prior `imageUrl` values in `src/data/blogPosts.ts` for the five affected posts.
