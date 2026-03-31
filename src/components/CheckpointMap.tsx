@@ -40,6 +40,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
+  const markersByCheckpointId = useRef(new Map<string, mapboxgl.Marker>());
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState<string | null>(null);
@@ -47,6 +48,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   // Initialize map
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
+    const markerLookup = markersByCheckpointId.current;
 
     if (!mapboxgl.supported()) {
       setMapError('Your browser does not support WebGL (required for the interactive map).');
@@ -113,6 +115,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
     return () => {
       markers.current.forEach((marker) => marker.remove());
       markers.current = [];
+      markerLookup.clear();
       map.current?.remove();
       map.current = null;
     };
@@ -126,6 +129,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
     // Remove existing markers
     markers.current.forEach((marker) => marker.remove());
     markers.current = [];
+    markersByCheckpointId.current.clear();
 
     const validCheckpoints = checkpoints.filter(hasCoordinates);
     const ohioCheckpoints = validCheckpoints.filter((c) => isOhioCoordinate(c.latitude, c.longitude));
@@ -228,10 +232,14 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         .addTo(map.current!);
 
       const activateMarker = () => {
+        if (selectedCheckpoint?.id === checkpoint.id) {
+          marker.togglePopup();
+          return;
+        }
+
         if (onCheckpointSelect) {
           onCheckpointSelect(checkpoint);
         }
-        marker.togglePopup();
       };
 
       el.addEventListener('click', activateMarker);
@@ -247,6 +255,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       });
 
       markers.current.push(marker);
+      markersByCheckpointId.current.set(checkpoint.id, marker);
     });
 
     // Fit bounds to markers if checkpoints exist
@@ -275,6 +284,12 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       zoom: 13,
       duration: 1500,
     });
+
+    const selectedMarker = markersByCheckpointId.current.get(selectedCheckpoint.id);
+    const selectedPopup = selectedMarker?.getPopup();
+    if (selectedMarker && selectedPopup && !selectedPopup.isOpen()) {
+      selectedPopup.addTo(map.current);
+    }
   }, [selectedCheckpoint]);
 
   // Get user location
