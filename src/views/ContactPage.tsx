@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { ArrowRight, CheckCircle, FileText, Mail, MapPin, Phone } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 import PageHero from '../components/PageHero';
@@ -140,6 +141,53 @@ export default function ContactPage() {
                 Share the version you know now. We can clarify the rest in follow-up.
               </div>
               <ContactForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-brand-offWhite/45">
+        <div className="container py-12">
+          <div className="mx-auto max-w-5xl">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Start with the closest guide</p>
+              <h2 className="mt-3 font-display text-3xl font-bold text-brand-black">If the issue is already clear, use the matching page first.</h2>
+              <p className="mt-3 text-brand-black/70">
+                These are the pages people most often need before or right after reaching out about an OVI arrest.
+              </p>
+            </div>
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {[
+                {
+                  title: 'OVI / DUI defense overview',
+                  href: '/ovi-dui-defense-delaware-oh',
+                  description: 'Start here for the broad defense picture.',
+                },
+                {
+                  title: 'First-offense OVI in Ohio',
+                  href: '/first-offense-ovi-ohio',
+                  description: 'The first 72 hours, deadlines, and early mistakes to avoid.',
+                },
+                {
+                  title: 'ALS license suspension defense',
+                  href: '/als-license-suspension-ohio',
+                  description: 'What happens to your license and when limited privileges may be available.',
+                },
+                {
+                  title: 'Ohio DUI checkpoint map',
+                  href: '/resources/dui-checkpoints',
+                  description: 'Announced checkpoints, current watch items, and stop context.',
+                },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft transition-colors hover:border-brand-mango/40"
+                >
+                  <p className="font-semibold text-brand-black">{item.title}</p>
+                  <p className="mt-2 text-sm text-brand-black/65">{item.description}</p>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
