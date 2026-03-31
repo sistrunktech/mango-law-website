@@ -95,8 +95,8 @@ export default function OviDuiPage() {
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2 space-y-12">
-              <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-                <div className="space-y-6">
+              <div className="space-y-8">
+                <div className="max-w-3xl space-y-6">
                   <div>
                     <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Aggressive OVI Defense</h2>
                     <p className="text-lg text-brand-black/70 leading-relaxed">
@@ -111,41 +111,24 @@ export default function OviDuiPage() {
                     We know what it takes to win OVI cases in Delaware County.
                   </p>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-brand-black/10 bg-brand-offWhite shadow-lg">
-                  <Image
-                    src="/images/headshots/nick-mango-standing-profile-court-steps.png"
-                    alt="Attorney Nick Mango outside the courthouse in Delaware, Ohio"
-                    className="aspect-[4/5] w-full object-cover object-top"
-                    loading="lazy"
-                    width={1200}
-                    height={1500}
-                  />
-                  <div className="space-y-2 border-t border-brand-black/10 bg-white p-6">
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Local OVI defense</p>
-                    <p className="text-lg font-semibold text-brand-black">Focused on what changes the case first</p>
-                    <p className="text-sm leading-relaxed text-brand-black/70">
-                      License risk, stop validity, testing issues, and early motion opportunities usually decide the next move faster than generic legal advice.
-                    </p>
-                  </div>
-                </div>
               </div>
 
-              <div className="rounded-[1.75rem] border border-brand-black/10 bg-brand-offWhite/55 p-6 shadow-soft">
-                <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div className="rounded-[1.75rem] border border-brand-black/10 bg-brand-offWhite/45 p-6 shadow-soft">
+                <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                   <div>
                     <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-goldText">
-                      Use the narrower OVI page when the issue is more specific
+                      Specific OVI guides
                     </p>
                     <h3 className="mt-2 text-2xl font-bold leading-tight text-brand-black">
-                      This page is the broad strategy overview. These guides handle the pressure points that usually decide what happens next.
+                      Start with the guide that matches the part of the case putting the most pressure on you.
                     </h3>
                   </div>
                   <p className="max-w-xl text-sm leading-relaxed text-brand-black/65">
-                    License suspension, refusal, checkpoint activity, and suppression issues often need a more focused read than a general OVI defense page.
+                    Use the broad OVI page for the overall defense picture, then jump into the narrower guide if the case is really about suspension timing, refusal, checkpoints, or motion practice.
                   </p>
                 </div>
 
-                <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <div className="mt-6 grid gap-3 md:grid-cols-2">
                   {[
                     {
                       title: 'First offense OVI in Ohio',
@@ -181,14 +164,18 @@ export default function OviDuiPage() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="group rounded-[1.25rem] border border-brand-black/10 bg-white p-5 transition-all hover:-translate-y-1 hover:shadow-soft"
+                      className="group rounded-[1.15rem] border border-brand-black/10 bg-white px-5 py-4 transition-colors hover:border-brand-mangoText/30 hover:bg-brand-mango/5"
                     >
-                      <h3 className="text-base font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-brand-black/65">{item.description}</p>
-                      <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors group-hover:text-brand-leaf">
-                        Open guide
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h3 className="text-base font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
+                            {item.title}
+                          </h3>
+                          <p className="mt-1.5 text-sm leading-relaxed text-brand-black/65">{item.description}</p>
+                        </div>
+                        <span className="mt-0.5 text-sm font-semibold text-brand-mangoText transition-colors group-hover:text-brand-leaf">
+                          Open
+                        </span>
                       </div>
                     </Link>
                   ))}
@@ -199,7 +186,27 @@ export default function OviDuiPage() {
             </div>
 
             <aside className="lg:col-span-1">
-              <StatuteSidebar practiceArea="ovi-dui" />
+              <div className="space-y-6">
+                <div className="overflow-hidden rounded-2xl border border-brand-black/10 bg-brand-offWhite shadow-lg">
+                  <Image
+                    src="/images/headshots/nick-mango-standing-profile-court-steps.png"
+                    alt="Attorney Nick Mango outside the courthouse in Delaware, Ohio"
+                    className="aspect-[4/5] w-full object-cover object-top"
+                    loading="lazy"
+                    width={1200}
+                    height={1500}
+                  />
+                  <div className="space-y-2 border-t border-brand-black/10 bg-white p-6">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoText">Local OVI defense</p>
+                    <p className="text-lg font-semibold text-brand-black">Focused on what changes the case first</p>
+                    <p className="text-sm leading-relaxed text-brand-black/70">
+                      License risk, stop validity, testing issues, and early motion opportunities usually decide the next move faster than generic legal advice.
+                    </p>
+                  </div>
+                </div>
+
+                <StatuteSidebar practiceArea="ovi-dui" />
+              </div>
             </aside>
           </div>
         </div>
