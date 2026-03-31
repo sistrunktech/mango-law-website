@@ -1,4 +1,5 @@
 import { ExternalLink } from 'lucide-react';
+import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '../lib/businessProfile';
 
 interface GoogleMapProps {
   businessName?: string;
@@ -10,8 +11,8 @@ interface GoogleMapProps {
 
 export default function GoogleMap({
   businessName = "Mango Law LLC",
-  rating = 4.9,
-  reviewCount = 45,
+  rating = GOOGLE_RATING,
+  reviewCount = GOOGLE_REVIEW_COUNT,
   placeId = "0x0:0x5c800d103881fc5c",
   height = 350,
 }: GoogleMapProps) {

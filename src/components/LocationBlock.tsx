@@ -3,6 +3,7 @@
 import GoogleMap from './GoogleMap';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '../lib/businessProfile';
 
 type Props = {
   eyebrow?: string;
@@ -43,8 +44,8 @@ export default function LocationBlock({
         <div>
           <GoogleMap
             businessName="Mango Law LLC"
-            rating={4.9}
-            reviewCount={45}
+            rating={GOOGLE_RATING}
+            reviewCount={GOOGLE_REVIEW_COUNT}
             placeId="0x0:0x5c800d103881fc5c"
             height={mapHeight}
           />
