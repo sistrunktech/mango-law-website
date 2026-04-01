@@ -11,12 +11,127 @@ interface CachedResult extends GeocodingResult {
   cached: true;
 }
 
+export type CheckpointGeocodingConfidence =
+  | 'exact_high'
+  | 'exact_medium'
+  | 'exact_low'
+  | 'city_centroid'
+  | 'county_centroid'
+  | 'undisclosed'
+  | 'none';
+
+export interface CheckpointLocationInput {
+  address: string;
+  city: string;
+  county: string;
+}
+
+export interface CheckpointGeocodingResult {
+  latitude: number;
+  longitude: number;
+  formatted_address: string;
+  confidence: CheckpointGeocodingConfidence;
+  provider: string;
+}
+
 const OHIO_BOUNDS = {
   minLatitude: 38.4032,
   maxLatitude: 41.9773,
   minLongitude: -84.8203,
   maxLongitude: -80.5189,
 };
+
+const UNDISCLOSED_LOCATION_PATTERNS = [
+  /\bundisclosed\b/i,
+  /\bconfidential\b/i,
+  /\bcountywide\b/i,
+  /\bdetails?\s+(?:to\s+be\s+)?announced\b/i,
+  /\blocation\s+(?:to\s+be\s+)?announced\b/i,
+  /\bexact checkpoints?\s+undisclosed\b/i,
+  /\bmultiple locations\b/i,
+  /\bvarious locations\b/i,
+  /\bthroughout the county\b/i,
+] as const;
+
+const EXACT_LOCATION_SPLIT_PATTERNS = [
+  /\s+officers?\b/i,
+  /\s+police\b/i,
+  /\s+expect delays?\b/i,
+  /\s+be prepared\b/i,
+  /\s+drivers?\b/i,
+  /\s+with assistance from\b/i,
+  /\s+this location is\b/i,
+  /\s+close to\b/i,
+] as const;
+
+const STREET_LEVEL_HINT_PATTERNS = [
+  /\b\d{2,5}\b/,
+  /\b(?:street|st|avenue|ave|road|rd|boulevard|blvd|highway|hwy|route|rt|lane|ln|drive|dr|way|parkway|pkwy|court|ct)\b/i,
+  /\bblock\b/i,
+  /\bnear\b/i,
+  /\bat\b/i,
+  /&/,
+] as const;
+
+function normalizeText(value: string | null | undefined): string {
+  return value?.trim() || '';
+}
+
+function cityLooksRedundant(city: string, county: string): boolean {
+  return city.trim().toLowerCase() === county.trim().toLowerCase();
+}
+
+function stripTrailingNarrative(input: string): string {
+  let sanitized = input.trim();
+
+  for (const pattern of EXACT_LOCATION_SPLIT_PATTERNS) {
+    sanitized = sanitized.split(pattern)[0]!.trim();
+  }
+
+  return sanitized.replace(/\s+/g, ' ').replace(/[,:;.-]+$/g, '').trim();
+}
+
+function buildExactQueryCandidates(input: CheckpointLocationInput): string[] {
+  const rawAddress = normalizeText(input.address);
+  if (!rawAddress) return [];
+
+  const candidates = new Set<string>();
+  const firstSentence = rawAddress.split(/[.!?]/)[0]!.trim();
+  const maybeAdd = (value: string | null | undefined) => {
+    const sanitized = stripTrailingNarrative(value || '');
+    if (!sanitized || sanitized.length < 6) return;
+    candidates.add(`${sanitized}, ${input.city}, Ohio`);
+  };
+
+  maybeAdd(firstSentence);
+
+  if (firstSentence.includes(':')) {
+    maybeAdd(firstSentence.split(':').slice(-1)[0]);
+  }
+
+  const directionalMatches = [
+    firstSentence.match(/\bat\s+(.+)$/i)?.[1],
+    firstSentence.match(/\bon\s+(.+)$/i)?.[1],
+    firstSentence.match(/\balong\s+(.+)$/i)?.[1],
+    firstSentence.match(/\bin\s+(.+)$/i)?.[1],
+  ];
+
+  directionalMatches.forEach((match) => maybeAdd(match));
+
+  return Array.from(candidates);
+}
+
+export function locationTextSuggestsUndisclosed(locationText: string | null | undefined): boolean {
+  const normalized = normalizeText(locationText);
+  if (!normalized) return false;
+  return UNDISCLOSED_LOCATION_PATTERNS.some((pattern) => pattern.test(normalized));
+}
+
+export function hasStreetLevelHint(locationText: string | null | undefined): boolean {
+  const normalized = normalizeText(locationText);
+  if (!normalized) return false;
+  return STREET_LEVEL_HINT_PATTERNS.some((pattern) => pattern.test(normalized));
+}
 
 function isOhioCoordinate(latitude: number, longitude: number): boolean {
   return (
@@ -170,6 +285,76 @@ export async function geocodeAddress(
     console.error('Geocoding error:', error);
     return null;
   }
+}
+
+export async function geocodeCheckpointLocation(
+  input: CheckpointLocationInput,
+  supabaseClient: any,
+  mapboxToken?: string
+): Promise<CheckpointGeocodingResult | null> {
+  const address = normalizeText(input.address);
+  const city = normalizeText(input.city);
+  const county = normalizeText(input.county);
+
+  if (!city && !county) {
+    return null;
+  }
+
+  const useApproximateFallback = locationTextSuggestsUndisclosed(address);
+  const canUseCityCentroid = Boolean(city) && Boolean(county) && !cityLooksRedundant(city, county);
+
+  if (!useApproximateFallback && address && city) {
+    const exactQueries = buildExactQueryCandidates({ address, city, county });
+    for (const exactQuery of exactQueries) {
+      const exactResult = await geocodeAddress(exactQuery, supabaseClient, mapboxToken);
+      if (exactResult) {
+        const exactConfidence =
+          exactResult.confidence === 'high'
+            ? 'exact_high'
+            : exactResult.confidence === 'low'
+            ? 'exact_low'
+            : 'exact_medium';
+
+        return {
+          latitude: exactResult.latitude,
+          longitude: exactResult.longitude,
+          formatted_address: exactResult.formatted_address,
+          confidence: exactConfidence,
+          provider: exactResult.provider,
+        };
+      }
+    }
+  }
+
+  if (canUseCityCentroid) {
+    const cityQuery = `${city}, ${county} County, Ohio`;
+    const cityResult = await geocodeAddress(cityQuery, supabaseClient, mapboxToken);
+    if (cityResult) {
+      return {
+        latitude: cityResult.latitude,
+        longitude: cityResult.longitude,
+        formatted_address: cityResult.formatted_address,
+        confidence: 'city_centroid',
+        provider: cityResult.provider,
+      };
+    }
+  }
+
+  if (county) {
+    const countyQuery = `${county} County, Ohio`;
+    const countyResult = await geocodeAddress(countyQuery, supabaseClient, mapboxToken);
+    if (countyResult) {
+      return {
+        latitude: countyResult.latitude,
+        longitude: countyResult.longitude,
+        formatted_address: countyResult.formatted_address,
+        confidence: 'county_centroid',
+        provider: countyResult.provider,
+      };
+    }
+  }
+
+  return null;
 }
 
 export function parseAddress(locationString: string): {
