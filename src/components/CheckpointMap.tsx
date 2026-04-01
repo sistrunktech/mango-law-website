@@ -158,52 +158,64 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       const locationGuidance = getCheckpointLocationGuidance(checkpoint);
 
       const el = document.createElement('div');
+      const core = document.createElement('div');
       const baseSize = isSelected ? 40 : 34;
+      const baseShadow = isSelected
+        ? '0 0 0 5px rgba(255,107,24,0.18), 0 4px 12px rgba(0,0,0,0.35)'
+        : '0 2px 8px rgba(0,0,0,0.3)';
+      const focusShadow = isSelected
+        ? '0 0 0 6px rgba(255,107,24,0.24), 0 5px 14px rgba(0,0,0,0.38)'
+        : '0 0 0 4px rgba(255,107,24,0.18), 0 4px 12px rgba(0,0,0,0.35)';
 
       el.style.width = `${baseSize}px`;
       el.style.height = `${baseSize}px`;
-      el.style.borderRadius = '50%';
       el.style.display = 'flex';
       el.style.alignItems = 'center';
       el.style.justifyContent = 'center';
-      el.style.backgroundColor = isApproximate ? 'rgba(255,255,255,0.96)' : color;
-      el.style.border = isApproximate
-        ? `3px solid ${color}`
-        : `3px solid ${isSelected ? '#FF6B18' : 'white'}`;
-      el.style.boxShadow = isSelected
-        ? '0 0 0 5px rgba(255,107,24,0.18), 0 4px 12px rgba(0,0,0,0.35)'
-        : '0 2px 8px rgba(0,0,0,0.3)';
       el.style.cursor = 'pointer';
-      el.style.transition = 'transform 0.2s, box-shadow 0.2s';
+      el.style.transition = 'box-shadow 0.18s ease';
       el.style.zIndex = isSelected ? '1000' : '1';
+      el.style.boxShadow = baseShadow;
+      el.style.borderRadius = '999px';
+
+      core.style.display = 'flex';
+      core.style.alignItems = 'center';
+      core.style.justifyContent = 'center';
+      core.style.width = isApproximate ? `${baseSize - 8}px` : `${baseSize}px`;
+      core.style.height = isApproximate ? `${baseSize - 8}px` : `${baseSize}px`;
+      core.style.boxSizing = 'border-box';
 
       if (isApproximate) {
+        core.style.backgroundColor = 'rgba(255,255,255,0.98)';
+        core.style.border = `3px solid ${color}`;
+        core.style.borderRadius = '10px';
+        core.style.transform = 'rotate(45deg)';
+
         const innerDot = document.createElement('div');
-        innerDot.style.width = isSelected ? '15px' : '13px';
-        innerDot.style.height = isSelected ? '15px' : '13px';
-        innerDot.style.borderRadius = '50%';
+        innerDot.style.width = isSelected ? '12px' : '10px';
+        innerDot.style.height = isSelected ? '12px' : '10px';
+        innerDot.style.borderRadius = '999px';
         innerDot.style.backgroundColor = color;
-        innerDot.style.opacity = '0.92';
-        innerDot.style.boxShadow = 'inset 0 0 0 1px rgba(255,255,255,0.2)';
-        el.appendChild(innerDot);
+        innerDot.style.boxShadow = 'inset 0 0 0 1px rgba(255,255,255,0.18)';
+        innerDot.style.transform = 'rotate(-45deg)';
+        core.appendChild(innerDot);
+      } else {
+        core.style.backgroundColor = color;
+        core.style.border = '3px solid white';
+        core.style.borderRadius = '999px';
       }
 
-      const applyHoverStyles = () => {
-        el.style.transform = 'scale(1.15)';
-        el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)';
+      const applyFocusStyles = () => {
+        el.style.boxShadow = focusShadow;
       };
 
-      const removeHoverStyles = () => {
-        el.style.transform = 'scale(1)';
-        el.style.boxShadow = isSelected
-          ? '0 0 0 5px rgba(255,107,24,0.18), 0 4px 12px rgba(0,0,0,0.35)'
-          : '0 2px 8px rgba(0,0,0,0.3)';
+      const removeFocusStyles = () => {
+        el.style.boxShadow = baseShadow;
       };
 
-      el.addEventListener('mouseenter', applyHoverStyles);
-      el.addEventListener('mouseleave', removeHoverStyles);
-      el.addEventListener('focus', applyHoverStyles);
-      el.addEventListener('blur', removeHoverStyles);
+      el.addEventListener('focus', applyFocusStyles);
+      el.addEventListener('blur', removeFocusStyles);
+      el.appendChild(core);
 
       const startDate = new Date(checkpoint.start_date);
       const endDate = new Date(checkpoint.end_date);
@@ -420,9 +432,15 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       {!isLoading && (
         <div className="absolute bottom-4 left-4 rounded-lg bg-white p-4 shadow-lg">
           <h4 className="mb-3 text-xs font-bold uppercase tracking-wide text-brand-black/60">
-            Checkpoint Status
+            Map legend
           </h4>
+          <p className="mb-3 text-[11px] leading-relaxed text-brand-black/55">
+            Color shows status. Shape shows whether the pin marks a reported location or an approximate area.
+          </p>
           <div className="space-y-2.5 text-sm">
+            <div className="pb-1 text-[11px] font-bold uppercase tracking-[0.08em] text-brand-black/45">
+              Status color
+            </div>
             <div className="flex items-center gap-2.5">
               <div className="h-4 w-4 rounded-full bg-[#FF3B30] border-2 border-white shadow-sm"></div>
               <span className="font-medium">Active Now</span>
@@ -439,11 +457,18 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
               <div className="h-4 w-4 rounded-full bg-[#8E8E93] border-2 border-white shadow-sm"></div>
               <span className="font-medium">Cancelled</span>
             </div>
+            <div className="mt-3 border-t border-brand-black/10 pt-3 text-[11px] font-bold uppercase tracking-[0.08em] text-brand-black/45">
+              Pin type
+            </div>
             <div className="flex items-center gap-2.5">
-              <div className="flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#FF9500] bg-white shadow-sm">
-                <div className="h-1.5 w-1.5 rounded-full bg-[#FF9500]"></div>
+              <div className="h-4 w-4 rounded-full border-2 border-white bg-[#1D1D1F] shadow-sm"></div>
+              <span className="font-medium">Reported location</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-4 w-4 items-center justify-center rounded-[4px] border-2 border-[#1D1D1F] bg-white shadow-sm rotate-45">
+                <div className="h-1.5 w-1.5 rounded-full bg-[#1D1D1F] -rotate-45"></div>
               </div>
-              <span className="font-medium">Approximate area</span>
+              <span className="font-medium">Approximate city/county area</span>
             </div>
           </div>
         </div>
