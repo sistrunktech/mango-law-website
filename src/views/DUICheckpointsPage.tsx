@@ -606,11 +606,76 @@ export default function DUICheckpointsPage() {
                 />
               </div>
 
-              {approximateMarkerCount > 0 && (
-                <div className="mt-4 rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-sm leading-relaxed text-brand-black/70">
-                  {approximateMarkerCount} map pin{approximateMarkerCount !== 1 ? 's are' : ' is'} showing an approximate city or county area. Solid circles mark reported locations. Outlined diamonds mark public notices that did not publish a street address, so the map centers them on the named area instead of guessing an exact stop location.
+              <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+                <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-4">
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-black/55">
+                    Map legend
+                  </div>
+                  <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-brand-black/45">
+                        Status color
+                      </div>
+                      <div className="mt-2 space-y-2 text-sm text-brand-black/75">
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-4 w-4 rounded-full border-2 border-white bg-[#FF3B30] shadow-sm" />
+                          <span>Active now</span>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-4 w-4 rounded-full border-2 border-white bg-[#FF9500] shadow-sm" />
+                          <span>Upcoming</span>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-4 w-4 rounded-full border-2 border-white bg-[#34C759] shadow-sm" />
+                          <span>Completed</span>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-4 w-4 rounded-full border-2 border-white bg-[#8E8E93] shadow-sm" />
+                          <span>Cancelled</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-brand-black/45">
+                        Pin type
+                      </div>
+                      <div className="mt-2 space-y-2 text-sm text-brand-black/75">
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-4 w-4 rounded-full border-2 border-white bg-brand-black shadow-sm" />
+                          <span>Reported location</span>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-4 w-4 rotate-45 rounded-[4px] border-[3px] border-brand-black bg-white shadow-sm" />
+                          <span>Approximate city or county area</span>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-4 w-4 rounded-full border-2 border-[#FF6B18] bg-white shadow-sm ring-2 ring-[#FF6B18]/20" />
+                          <span>Currently selected item</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              )}
+
+                <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-4 text-sm leading-relaxed text-brand-black/70">
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-black/55">
+                    How to read this map
+                  </div>
+                  <div className="mt-3 space-y-2">
+                    <p>
+                      Solid circles mark checkpoint locations that were reported with enough detail to place a street-level pin.
+                    </p>
+                    <p>
+                      Outlined diamonds mark public notices that did not publish a street address, so the map centers them on the named city or county instead of guessing an exact stop location.
+                    </p>
+                    {approximateMarkerCount > 0 && (
+                      <p className="font-medium text-brand-black/80">
+                        {approximateMarkerCount} marker{approximateMarkerCount !== 1 ? 's are' : ' is'} approximate in the current view.
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3">

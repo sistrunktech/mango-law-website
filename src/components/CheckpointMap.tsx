@@ -159,7 +159,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
 
       const el = document.createElement('div');
       const core = document.createElement('div');
-      const baseSize = isSelected ? 40 : 34;
+      const baseSize = 34;
       const baseShadow = isSelected
         ? '0 0 0 5px rgba(255,107,24,0.18), 0 4px 12px rgba(0,0,0,0.35)'
         : '0 2px 8px rgba(0,0,0,0.3)';
@@ -181,24 +181,15 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       core.style.display = 'flex';
       core.style.alignItems = 'center';
       core.style.justifyContent = 'center';
-      core.style.width = isApproximate ? `${baseSize - 8}px` : `${baseSize}px`;
-      core.style.height = isApproximate ? `${baseSize - 8}px` : `${baseSize}px`;
+      core.style.width = isApproximate ? '24px' : `${baseSize}px`;
+      core.style.height = isApproximate ? '24px' : `${baseSize}px`;
       core.style.boxSizing = 'border-box';
 
       if (isApproximate) {
-        core.style.backgroundColor = 'rgba(255,255,255,0.98)';
-        core.style.border = `3px solid ${color}`;
-        core.style.borderRadius = '10px';
+        core.style.background = 'rgba(255,255,255,0.98)';
+        core.style.border = `4px solid ${color}`;
+        core.style.borderRadius = '6px';
         core.style.transform = 'rotate(45deg)';
-
-        const innerDot = document.createElement('div');
-        innerDot.style.width = isSelected ? '12px' : '10px';
-        innerDot.style.height = isSelected ? '12px' : '10px';
-        innerDot.style.borderRadius = '999px';
-        innerDot.style.backgroundColor = color;
-        innerDot.style.boxShadow = 'inset 0 0 0 1px rgba(255,255,255,0.18)';
-        innerDot.style.transform = 'rotate(-45deg)';
-        core.appendChild(innerDot);
       } else {
         core.style.backgroundColor = color;
         core.style.border = '3px solid white';
@@ -426,52 +417,6 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
           <Navigation size={16} />
           <span className="hidden sm:inline">Find Me</span>
         </button>
-      )}
-
-      {/* Legend */}
-      {!isLoading && (
-        <div className="absolute bottom-4 left-4 rounded-lg bg-white p-4 shadow-lg">
-          <h4 className="mb-3 text-xs font-bold uppercase tracking-wide text-brand-black/60">
-            Map legend
-          </h4>
-          <p className="mb-3 text-[11px] leading-relaxed text-brand-black/55">
-            Color shows status. Shape shows whether the pin marks a reported location or an approximate area.
-          </p>
-          <div className="space-y-2.5 text-sm">
-            <div className="pb-1 text-[11px] font-bold uppercase tracking-[0.08em] text-brand-black/45">
-              Status color
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="h-4 w-4 rounded-full bg-[#FF3B30] border-2 border-white shadow-sm"></div>
-              <span className="font-medium">Active Now</span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="h-4 w-4 rounded-full bg-[#FF9500] border-2 border-white shadow-sm"></div>
-              <span className="font-medium">Upcoming</span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="h-4 w-4 rounded-full bg-[#34C759] border-2 border-white shadow-sm"></div>
-              <span className="font-medium">Completed</span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="h-4 w-4 rounded-full bg-[#8E8E93] border-2 border-white shadow-sm"></div>
-              <span className="font-medium">Cancelled</span>
-            </div>
-            <div className="mt-3 border-t border-brand-black/10 pt-3 text-[11px] font-bold uppercase tracking-[0.08em] text-brand-black/45">
-              Pin type
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="h-4 w-4 rounded-full border-2 border-white bg-[#1D1D1F] shadow-sm"></div>
-              <span className="font-medium">Reported location</span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-4 w-4 items-center justify-center rounded-[4px] border-2 border-[#1D1D1F] bg-white shadow-sm rotate-45">
-                <div className="h-1.5 w-1.5 rounded-full bg-[#1D1D1F] -rotate-45"></div>
-              </div>
-              <span className="font-medium">Approximate city/county area</span>
-            </div>
-          </div>
-        </div>
       )}
 
       {/* Empty state */}
