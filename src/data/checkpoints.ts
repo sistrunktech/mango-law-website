@@ -1,6 +1,17 @@
 import { formatCalendarDate, formatEasternTime } from '@/lib/formatting';
 
 export type CheckpointStatus = 'upcoming' | 'active' | 'completed' | 'cancelled';
+export type CheckpointLocationPrecision = 'exact' | 'city_centroid' | 'county_centroid' | 'undisclosed' | 'missing';
+
+export const checkpointGeocodingConfidenceOptions = [
+  { value: 'exact_high', label: 'Exact location · high confidence' },
+  { value: 'exact_medium', label: 'Exact location · medium confidence' },
+  { value: 'exact_low', label: 'Exact location · low confidence' },
+  { value: 'city_centroid', label: 'Approximate city center' },
+  { value: 'county_centroid', label: 'Approximate county center' },
+  { value: 'undisclosed', label: 'Undisclosed / no public street address' },
+  { value: 'none', label: 'Not geocoded yet' },
+] as const;
 
 export interface DUICheckpoint {
   id: string;
@@ -22,6 +33,149 @@ export interface DUICheckpoint {
   views_count: number;
   announcement_date?: string | null;
   geocoding_confidence?: string | null;
+}
+
+const UNDISCLOSED_LOCATION_PATTERNS = [
+  /\bundisclosed\b/i,
+  /\bconfidential\b/i,
+  /\bcountywide\b/i,
+  /\bdetails?\s+(?:to\s+be\s+)?announced\b/i,
+  /\blocation\s+(?:to\s+be\s+)?announced\b/i,
+  /\bexact checkpoints?\s+undisclosed\b/i,
+  /\bmultiple locations\b/i,
+  /\bvarious locations\b/i,
+  /\bthroughout the county\b/i,
+] as const;
+
+function normalizeText(value: string | null | undefined): string {
+  return value?.trim().toLowerCase() || '';
+}
+
+function cityLooksRedundant(city: string | null | undefined, county: string | null | undefined): boolean {
+  const normalizedCity = normalizeText(city);
+  const normalizedCounty = normalizeText(county);
+  return Boolean(normalizedCity) && normalizedCity === normalizedCounty;
+}
+
+export function locationTextSuggestsUndisclosed(locationText: string | null | undefined): boolean {
+  const normalized = normalizeText(locationText);
+  if (!normalized) return false;
+  return UNDISCLOSED_LOCATION_PATTERNS.some((pattern) => pattern.test(normalized));
+}
+
+export function checkpointHasCoordinates(
+  checkpoint: Pick<DUICheckpoint, 'latitude' | 'longitude'>
+): checkpoint is Pick<DUICheckpoint, 'latitude' | 'longitude'> & { latitude: number; longitude: number } {
+  return typeof checkpoint.latitude === 'number' && typeof checkpoint.longitude === 'number';
+}
+
+export function getCheckpointLocationPrecision(
+  checkpoint: Pick<
+    DUICheckpoint,
+    'latitude' | 'longitude' | 'location_address' | 'location_city' | 'location_county' | 'geocoding_confidence'
+  >
+): CheckpointLocationPrecision {
+  const normalizedConfidence = normalizeText(checkpoint.geocoding_confidence);
+
+  if (!checkpointHasCoordinates(checkpoint)) {
+    return normalizedConfidence === 'undisclosed' ? 'undisclosed' : 'missing';
+  }
+
+  if (normalizedConfidence.startsWith('city_centroid')) return 'city_centroid';
+  if (normalizedConfidence.startsWith('county_centroid')) return 'county_centroid';
+  if (normalizedConfidence === 'undisclosed') return 'undisclosed';
+  if (normalizedConfidence.startsWith('exact_')) return 'exact';
+  if (normalizedConfidence === 'high' || normalizedConfidence === 'medium' || normalizedConfidence === 'low') {
+    if (!locationTextSuggestsUndisclosed(checkpoint.location_address)) return 'exact';
+  }
+
+  if (locationTextSuggestsUndisclosed(checkpoint.location_address)) {
+    return cityLooksRedundant(checkpoint.location_city, checkpoint.location_county)
+      ? 'county_centroid'
+      : 'city_centroid';
+  }
+
+  if (
+    normalizeText(checkpoint.location_address) === normalizeText(checkpoint.location_city) ||
+    normalizeText(checkpoint.location_address) === normalizeText(checkpoint.location_county)
+  ) {
+    return cityLooksRedundant(checkpoint.location_city, checkpoint.location_county)
+      ? 'county_centroid'
+      : 'city_centroid';
+  }
+
+  return 'exact';
+}
+
+export function isApproximateCheckpointLocation(
+  checkpoint: Pick<
+    DUICheckpoint,
+    'latitude' | 'longitude' | 'location_address' | 'location_city' | 'location_county' | 'geocoding_confidence'
+  >
+): boolean {
+  const precision = getCheckpointLocationPrecision(checkpoint);
+  return precision === 'city_centroid' || precision === 'county_centroid' || precision === 'undisclosed';
+}
+
+export function getCheckpointLocationPrecisionLabel(
+  precision: CheckpointLocationPrecision
+): string {
+  switch (precision) {
+    case 'exact':
+      return 'Street-level location';
+    case 'city_centroid':
+      return 'Approximate city area';
+    case 'county_centroid':
+      return 'Approximate county area';
+    case 'undisclosed':
+      return 'Undisclosed location';
+    case 'missing':
+    default:
+      return 'Map point unavailable';
+  }
+}
+
+export function getCheckpointAreaLabel(
+  checkpoint: Pick<
+    DUICheckpoint,
+    'location_address' | 'location_city' | 'location_county' | 'latitude' | 'longitude' | 'geocoding_confidence'
+  >
+): string {
+  const precision = getCheckpointLocationPrecision(checkpoint);
+
+  if (precision === 'exact') {
+    return `${checkpoint.location_address}, ${checkpoint.location_city}`;
+  }
+
+  if (precision === 'city_centroid' && checkpoint.location_city) {
+    return `Approximate area near ${checkpoint.location_city}, ${checkpoint.location_county} County`;
+  }
+
+  if (checkpoint.location_county) {
+    return `Approximate area in ${checkpoint.location_county} County`;
+  }
+
+  return 'Approximate Ohio location';
+}
+
+export function getCheckpointLocationGuidance(
+  checkpoint: Pick<
+    DUICheckpoint,
+    'location_address' | 'location_city' | 'location_county' | 'latitude' | 'longitude' | 'geocoding_confidence'
+  >
+): string | null {
+  const precision = getCheckpointLocationPrecision(checkpoint);
+
+  switch (precision) {
+    case 'city_centroid':
+      return 'This pin is centered on the named city because the public source did not publish a street address.';
+    case 'county_centroid':
+      return 'This pin is centered on the county because the public source did not publish a street address.';
+    case 'undisclosed':
+      return 'The public source described enforcement activity but did not publish a precise checkpoint location.';
+    default:
+      return null;
+  }
 }
 
 export function isAggregatorSourceName(sourceName: string | null | undefined): boolean {

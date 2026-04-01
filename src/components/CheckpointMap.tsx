@@ -4,7 +4,16 @@ import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Navigation } from 'lucide-react';
-import { getDisplayStatus, isAggregatorSourceName, type DUICheckpoint } from '../data/checkpoints';
+import {
+  checkpointHasCoordinates,
+  getCheckpointAreaLabel,
+  getCheckpointLocationGuidance,
+  getCheckpointLocationPrecision,
+  getCheckpointLocationPrecisionLabel,
+  getDisplayStatus,
+  isAggregatorSourceName,
+  type DUICheckpoint,
+} from '../data/checkpoints';
 import { getMapboxPublicToken, getMapboxStyleUrl } from '../lib/mapbox';
 
 type Props = {
@@ -28,12 +37,6 @@ function isOhioCoordinate(latitude: number, longitude: number): boolean {
     longitude >= OHIO_BOUNDS.minLongitude &&
     longitude <= OHIO_BOUNDS.maxLongitude
   );
-}
-
-function hasCoordinates(
-  checkpoint: DUICheckpoint
-): checkpoint is DUICheckpoint & { latitude: number; longitude: number } {
-  return typeof checkpoint.latitude === 'number' && typeof checkpoint.longitude === 'number';
 }
 
 export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheckpointSelect, now }: Props) {
@@ -131,7 +134,10 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
     markers.current = [];
     markersByCheckpointId.current.clear();
 
-    const validCheckpoints = checkpoints.filter(hasCoordinates);
+    const validCheckpoints = checkpoints.filter(
+      (checkpoint): checkpoint is DUICheckpoint & { latitude: number; longitude: number } =>
+        checkpointHasCoordinates(checkpoint)
+    );
     const ohioCheckpoints = validCheckpoints.filter((c) => isOhioCoordinate(c.latitude, c.longitude));
 
     // Add new markers
@@ -146,36 +152,52 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       const displayStatus = getDisplayStatus(checkpoint, displayNow);
       const color = statusColors[displayStatus] || statusColors.upcoming;
       const isSelected = selectedCheckpoint?.id === checkpoint.id;
+      const precision = getCheckpointLocationPrecision(checkpoint);
+      const isApproximate = precision !== 'exact';
+      const locationLabel = getCheckpointAreaLabel(checkpoint);
+      const locationGuidance = getCheckpointLocationGuidance(checkpoint);
 
       const el = document.createElement('div');
-      const baseSize = isSelected ? 40 : 32;
+      const baseSize = isSelected ? 40 : 34;
 
       el.style.width = `${baseSize}px`;
       el.style.height = `${baseSize}px`;
       el.style.borderRadius = '50%';
-      el.style.backgroundColor = color;
-      el.style.border = isSelected ? '4px solid #FF6B18' : '3px solid white';
-      el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+      el.style.display = 'flex';
+      el.style.alignItems = 'center';
+      el.style.justifyContent = 'center';
+      el.style.backgroundColor = isApproximate ? 'rgba(255,255,255,0.96)' : color;
+      el.style.border = isApproximate
+        ? `3px solid ${color}`
+        : `3px solid ${isSelected ? '#FF6B18' : 'white'}`;
+      el.style.boxShadow = isSelected
+        ? '0 0 0 5px rgba(255,107,24,0.18), 0 4px 12px rgba(0,0,0,0.35)'
+        : '0 2px 8px rgba(0,0,0,0.3)';
       el.style.cursor = 'pointer';
-      el.style.transition = 'width 0.2s, height 0.2s, margin 0.2s, box-shadow 0.2s';
+      el.style.transition = 'transform 0.2s, box-shadow 0.2s';
       el.style.zIndex = isSelected ? '1000' : '1';
 
+      if (isApproximate) {
+        const innerDot = document.createElement('div');
+        innerDot.style.width = isSelected ? '15px' : '13px';
+        innerDot.style.height = isSelected ? '15px' : '13px';
+        innerDot.style.borderRadius = '50%';
+        innerDot.style.backgroundColor = color;
+        innerDot.style.opacity = '0.92';
+        innerDot.style.boxShadow = 'inset 0 0 0 1px rgba(255,255,255,0.2)';
+        el.appendChild(innerDot);
+      }
+
       const applyHoverStyles = () => {
-        const hoverSize = baseSize + 8;
-        const offset = -4;
-        el.style.width = `${hoverSize}px`;
-        el.style.height = `${hoverSize}px`;
-        el.style.marginLeft = `${offset}px`;
-        el.style.marginTop = `${offset}px`;
+        el.style.transform = 'scale(1.15)';
         el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)';
       };
 
       const removeHoverStyles = () => {
-        el.style.width = `${baseSize}px`;
-        el.style.height = `${baseSize}px`;
-        el.style.marginLeft = '0px';
-        el.style.marginTop = '0px';
-        el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+        el.style.transform = 'scale(1)';
+        el.style.boxShadow = isSelected
+          ? '0 0 0 5px rgba(255,107,24,0.18), 0 4px 12px rgba(0,0,0,0.35)'
+          : '0 2px 8px rgba(0,0,0,0.3)';
       };
 
       el.addEventListener('mouseenter', applyHoverStyles);
@@ -189,8 +211,9 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
 
       const label = [
         `DUI checkpoint: ${checkpoint.title}`,
-        `${checkpoint.location_city}, ${checkpoint.location_county} County`,
+        locationLabel,
         `Status: ${displayStatus}`,
+        `Map precision: ${getCheckpointLocationPrecisionLabel(precision)}`,
         `Start: ${startDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`,
         `End: ${endDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`,
         'Press Enter for details.',
@@ -206,10 +229,10 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
             <h4 style="margin: 0 0 10px 0; font-weight: 600; font-size: 15px; color: #1a1a1a;">${checkpoint.title}</h4>
             <div style="border-top: 1px solid #e5e5e5; padding-top: 8px; margin-top: 8px;">
               <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
-                <strong>Location:</strong> ${checkpoint.location_address}
+                <strong>Location:</strong> ${locationLabel}
               </p>
               <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
-                <strong>City:</strong> ${checkpoint.location_city}, ${checkpoint.location_county} County
+                <strong>Map precision:</strong> ${getCheckpointLocationPrecisionLabel(precision)}
               </p>
               <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
                 <strong>Start:</strong> ${startDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
@@ -221,6 +244,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
                 <strong>Status:</strong> <span style="color: ${color}; font-weight: 600; text-transform: capitalize;">${displayStatus}</span>
               </p>
             </div>
+            ${locationGuidance ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #666; line-height: 1.5;">${locationGuidance}</p>` : ''}
             ${checkpoint.description ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #888; line-height: 1.4;">${checkpoint.description}</p>` : ''}
             ${sourceNameForPopup ? `<p style="margin: 8px 0 0 0; font-size: 11px; color: #aaa;">Source: ${sourceNameForPopup}</p>` : ''}
           </div>
@@ -414,6 +438,12 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
             <div className="flex items-center gap-2.5">
               <div className="h-4 w-4 rounded-full bg-[#8E8E93] border-2 border-white shadow-sm"></div>
               <span className="font-medium">Cancelled</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#FF9500] bg-white shadow-sm">
+                <div className="h-1.5 w-1.5 rounded-full bg-[#FF9500]"></div>
+              </div>
+              <span className="font-medium">Approximate area</span>
             </div>
           </div>
         </div>

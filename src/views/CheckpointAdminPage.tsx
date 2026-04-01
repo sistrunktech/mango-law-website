@@ -4,7 +4,12 @@ import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Save, X, RefreshCw } from 'lucide-react';
 import { getCheckpoints, createCheckpoint, updateCheckpoint, deleteCheckpoint, updateCheckpointStatuses } from '../lib/checkpointService';
 import type { DUICheckpoint } from '../data/checkpoints';
-import { ohioCounties, getStatusLabel, formatCheckpointDateRange } from '../data/checkpoints';
+import {
+  checkpointGeocodingConfidenceOptions,
+  ohioCounties,
+  getStatusLabel,
+  formatCheckpointDateRange,
+} from '../data/checkpoints';
 import GeocodingPreview from '../components/GeocodingPreview';
 import ScraperLogsViewer from '../components/ScraperLogsViewer';
 import AdminAuth from '../components/AdminAuth';
@@ -32,6 +37,7 @@ export default function CheckpointAdminPage() {
     source_name: '',
     description: '',
     is_verified: false,
+    geocoding_confidence: 'none',
   });
 
   useEffect(() => {
@@ -99,6 +105,7 @@ export default function CheckpointAdminPage() {
       source_name: '',
       description: '',
       is_verified: false,
+      geocoding_confidence: 'none',
     });
     setEditingId(null);
     setShowForm(false);
@@ -311,6 +318,23 @@ export default function CheckpointAdminPage() {
                     className="w-full rounded-lg border border-brand-black/20 px-4 py-2 focus:border-brand-mango focus:outline-none"
                   />
                 </div>
+
+                <div>
+                  <label className="mb-1 block text-sm font-semibold text-brand-black">
+                    Map Precision
+                  </label>
+                  <select
+                    value={formData.geocoding_confidence || 'none'}
+                    onChange={(e) => setFormData({ ...formData, geocoding_confidence: e.target.value })}
+                    className="w-full rounded-lg border border-brand-black/20 px-4 py-2 focus:border-brand-mango focus:outline-none"
+                  >
+                    {checkpointGeocodingConfidenceOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               {formData.location_address && formData.location_city && (
@@ -318,8 +342,13 @@ export default function CheckpointAdminPage() {
                   address={formData.location_address}
                   city={formData.location_city}
                   county={formData.location_county || 'Delaware'}
-                  onCoordinatesFound={(lat, lng) => {
-                    setFormData({ ...formData, latitude: lat, longitude: lng });
+                  onCoordinatesFound={(lat, lng, confidence) => {
+                    setFormData({
+                      ...formData,
+                      latitude: lat,
+                      longitude: lng,
+                      geocoding_confidence: confidence || formData.geocoding_confidence || 'none',
+                    });
                   }}
                 />
               )}

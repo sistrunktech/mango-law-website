@@ -10,7 +10,7 @@ import BlogSidebar from '../components/BlogSidebar';
 import FAQSection from '../components/FAQSection';
 import { duiCheckpointMapFaqs } from '../data/duiCheckpointMapFaqs';
 import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
-import type { DUICheckpoint } from '../data/checkpoints';
+import { isApproximateCheckpointLocation, type DUICheckpoint } from '../data/checkpoints';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
@@ -244,6 +244,11 @@ export default function DUICheckpointsPage() {
       return bTime - aTime;
     })[0] ?? null;
   }, [checkpoints]);
+
+  const approximateMarkerCount = useMemo(
+    () => filteredCheckpoints.filter((checkpoint) => isApproximateCheckpointLocation(checkpoint)).length,
+    [filteredCheckpoints]
+  );
 
   const recentPublicReferences = useMemo<PublicSourceSnapshot[]>(() => {
     const cutoff = new Date();
@@ -600,6 +605,13 @@ export default function DUICheckpointsPage() {
                   now={now}
                 />
               </div>
+
+              {approximateMarkerCount > 0 && (
+                <div className="mt-4 rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-sm leading-relaxed text-brand-black/70">
+                  {approximateMarkerCount} map pin{approximateMarkerCount !== 1 ? 's are' : ' is'} approximate area marker
+                  {approximateMarkerCount !== 1 ? 's' : ''}. When a public source does not publish a street address, the map centers the pin on the named city or county instead of guessing an exact stop location.
+                </div>
+              )}
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3">

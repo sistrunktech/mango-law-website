@@ -1,7 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 import * as dotenv from 'dotenv';
+import {
+  geocodeCheckpointLocation,
+  hasStreetLevelHint,
+  locationTextSuggestsUndisclosed,
+  type CheckpointGeocodingConfidence,
+} from '../supabase/functions/checkpoint-scraper/geocoding.ts';
 
 dotenv.config();
+
+const PROD_MAPBOX_PUBLIC_TOKEN =
+  'pk.eyJ1Ijoic2lzdGVjaC10aW0iLCJhIjoiY21peGR3MHg5MDNkZDNkcHllaDlxdnY4aCJ9.ki5gsUR547d0i2rbMQvyog';
 
 const supabaseUrl =
   process.env.SUPABASE_URL ||
@@ -11,14 +20,11 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const MAPBOX_TOKEN =
   process.env.MAPBOX_PUBLIC_TOKEN ||
   process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN ||
-  process.env.VITE_MAPBOX_PUBLIC_TOKEN;
+  process.env.VITE_MAPBOX_PUBLIC_TOKEN ||
+  PROD_MAPBOX_PUBLIC_TOKEN;
 
 if (!supabaseUrl || !supabaseServiceRoleKey) {
   throw new Error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY env vars.');
-}
-
-if (!MAPBOX_TOKEN) {
-  throw new Error('Missing MAPBOX_PUBLIC_TOKEN (or NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN) env var.');
 }
 
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
@@ -34,30 +40,67 @@ if (BACKFILL_LIMIT !== null && (Number.isNaN(BACKFILL_LIMIT) || BACKFILL_LIMIT <
   throw new Error('BACKFILL_LIMIT must be a positive number if set.');
 }
 
-async function geocodeAddress(address: string): Promise<{ lat: number; lng: number } | null> {
-  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${MAPBOX_TOKEN}&country=US&limit=1`;
-  const res = await fetch(url);
+type CheckpointRow = {
+  id: string;
+  title: string;
+  location_address: string;
+  location_city: string;
+  location_county: string;
+  start_date: string;
+  latitude: number | null;
+  longitude: number | null;
+  geocoding_confidence: string | null;
+};
 
-  if (!res.ok) {
-    console.error(`Mapbox request failed (${res.status}) for address: ${address}`);
-    return null;
+function normalizeConfidence(value: string | null | undefined): string {
+  return value?.trim().toLowerCase() || 'none';
+}
+
+function cityLooksRedundant(city: string | null | undefined, county: string | null | undefined): boolean {
+  return Boolean(city) && Boolean(county) && city.trim().toLowerCase() === county.trim().toLowerCase();
+}
+
+function needsPrecisionBackfill(row: CheckpointRow): boolean {
+  const normalizedConfidence = normalizeConfidence(row.geocoding_confidence);
+  const missingCoordinates = row.latitude === null || row.longitude === null;
+
+  if (missingCoordinates) return true;
+
+  if (normalizedConfidence === 'exact_high' || normalizedConfidence === 'exact_medium' || normalizedConfidence === 'exact_low') {
+    return false;
   }
 
-  const data = await res.json();
-
-  if (data.features && data.features.length > 0) {
-    const [lng, lat] = data.features[0].center;
-    return { lat, lng };
+  if (
+    (normalizedConfidence === 'city_centroid' || normalizedConfidence === 'county_centroid') &&
+    hasStreetLevelHint(row.location_address) &&
+    !locationTextSuggestsUndisclosed(row.location_address)
+  ) {
+    return true;
   }
 
-  return null;
+  if (normalizedConfidence === 'city_centroid' || normalizedConfidence === 'county_centroid') {
+    return false;
+  }
+
+  if (locationTextSuggestsUndisclosed(row.location_address)) {
+    return normalizedConfidence !== 'county_centroid' && normalizedConfidence !== 'city_centroid';
+  }
+
+  if (
+    (normalizeConfidence(row.location_address) === normalizeConfidence(row.location_city) ||
+      normalizeConfidence(row.location_address) === normalizeConfidence(row.location_county)) &&
+    cityLooksRedundant(row.location_city, row.location_county)
+  ) {
+    return true;
+  }
+
+  return normalizedConfidence === 'none' || normalizedConfidence === 'unverified';
 }
 
 async function backfillGeocode() {
   let query = supabase
     .from('dui_checkpoints')
-    .select('id, title, location_address, location_city, location_county, start_date')
-    .or('latitude.is.null,longitude.is.null')
+    .select('id, title, location_address, location_city, location_county, start_date, latitude, longitude, geocoding_confidence')
     .order('start_date', { ascending: false });
 
   if (DAYS_BACK !== null) {
@@ -71,37 +114,74 @@ async function backfillGeocode() {
     console.log(`Limiting backfill to ${BACKFILL_LIMIT} rows`);
   }
 
-  const { data: checkpoints, error } = await query;
+  const { data: rows, error } = await query;
 
   if (error) {
     console.error('Error fetching checkpoints:', error);
     return;
   }
 
+  const checkpoints = (rows || []).filter(needsPrecisionBackfill);
   console.log(`Found ${checkpoints?.length || 0} checkpoints needing geocoding`);
 
   for (const cp of checkpoints || []) {
-    const address = cp.location_address
-      ? `${cp.location_address}, ${cp.location_city || ''}, Ohio`
-      : `${cp.location_city || cp.location_county}, Ohio`;
+    console.log(
+      `Geocoding: ${cp.title} — ${cp.location_address || cp.location_city || cp.location_county} (${cp.location_city}, ${cp.location_county})`
+    );
 
-    console.log(`Geocoding: ${cp.title} — ${address}`);
+    const geocoded = await geocodeCheckpointLocation(
+      {
+        address: cp.location_address || cp.location_city || cp.location_county,
+        city: cp.location_city || cp.location_county,
+        county: cp.location_county || cp.location_city,
+      },
+      supabase,
+      MAPBOX_TOKEN
+    );
 
-    const coords = await geocodeAddress(address);
+    if (geocoded) {
+      const updatePayload: {
+        latitude: number | null;
+        longitude: number | null;
+        geocoding_confidence: CheckpointGeocodingConfidence;
+        last_geocoded_at: string;
+      } = {
+        latitude: geocoded.latitude,
+        longitude: geocoded.longitude,
+        geocoding_confidence: geocoded.confidence,
+        last_geocoded_at: new Date().toISOString(),
+      };
 
-    if (coords) {
       const { error: updateError } = await supabase
         .from('dui_checkpoints')
-        .update({ latitude: coords.lat, longitude: coords.lng })
+        .update(updatePayload)
         .eq('id', cp.id);
 
       if (updateError) {
         console.error(`Failed to update ${cp.title}:`, updateError);
       } else {
-        console.log(`✓ Updated ${cp.title}: ${coords.lat}, ${coords.lng}`);
+        console.log(
+          `✓ Updated ${cp.title}: ${geocoded.latitude}, ${geocoded.longitude} [${geocoded.confidence}]`
+        );
       }
     } else {
-      console.warn(`✗ Could not geocode: ${cp.title}`);
+      const fallbackConfidence: CheckpointGeocodingConfidence = locationTextSuggestsUndisclosed(cp.location_address)
+        ? 'undisclosed'
+        : 'none';
+
+      const { error: updateError } = await supabase
+        .from('dui_checkpoints')
+        .update({
+          geocoding_confidence: fallbackConfidence,
+          last_geocoded_at: new Date().toISOString(),
+        })
+        .eq('id', cp.id);
+
+      if (updateError) {
+        console.error(`Failed to record unresolved precision for ${cp.title}:`, updateError);
+      } else {
+        console.warn(`✗ Could not geocode ${cp.title}; marked ${fallbackConfidence}`);
+      }
     }
 
     // Rate limit: 600 requests/min for Mapbox

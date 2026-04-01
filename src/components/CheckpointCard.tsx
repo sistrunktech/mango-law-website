@@ -3,6 +3,10 @@
 import { MapPin, Clock, Calendar, AlertCircle, ExternalLink, Shield } from 'lucide-react';
 import {
   formatCheckpointDateRange,
+  getCheckpointAreaLabel,
+  getCheckpointLocationGuidance,
+  getCheckpointLocationPrecision,
+  getCheckpointLocationPrecisionLabel,
   getDisplayStatus,
   getStatusColor,
   getStatusLabel,
@@ -23,6 +27,10 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
   const displayStatus = getDisplayStatus(checkpoint, now ?? new Date());
   const statusColor = getStatusColor(displayStatus);
   const statusLabel = getStatusLabel(displayStatus);
+  const locationPrecision = getCheckpointLocationPrecision(checkpoint);
+  const locationGuidance = getCheckpointLocationGuidance(checkpoint);
+  const locationLabel = getCheckpointAreaLabel(checkpoint);
+  const showApproximateBadge = locationPrecision !== 'exact' && locationPrecision !== 'missing';
 
   const showSourceName = Boolean(checkpoint.source_name) && !isAggregatorSourceName(checkpoint.source_name);
   const showSourceUrl = Boolean(checkpoint.source_url) && !isAggregatorSourceUrl(checkpoint.source_url);
@@ -39,7 +47,7 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
           </h3>
           <div className="mt-2 flex items-center gap-2 text-sm text-brand-black/70">
             <MapPin className="h-4 w-4 shrink-0" />
-            <span>{checkpoint.location_address}, {checkpoint.location_city}</span>
+            <span>{locationLabel}</span>
           </div>
         </div>
         <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${statusColor}`}>
@@ -60,9 +68,22 @@ export default function CheckpointCard({ checkpoint, onClick, onOpenLeadModal, n
         </div>
       </div>
 
+      {showApproximateBadge && (
+        <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-brand-mango/25 bg-brand-mango/5 px-3 py-1 text-xs font-semibold text-brand-mangoText">
+          <MapPin className="h-3.5 w-3.5" />
+          {getCheckpointLocationPrecisionLabel(locationPrecision)}
+        </div>
+      )}
+
       {checkpoint.description && (
         <p className="mt-4 text-sm text-brand-black/70 line-clamp-2">
           {checkpoint.description}
+        </p>
+      )}
+
+      {locationGuidance && (
+        <p className="mt-3 rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-xs leading-relaxed text-brand-black/65">
+          {locationGuidance}
         </p>
       )}
 

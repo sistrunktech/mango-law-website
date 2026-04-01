@@ -1,6 +1,6 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { scrapeOVICheckpoint } from './ovicheckpoint-scraper.ts';
-import { geocodeAddress, parseAddress } from './geocoding.ts';
+import { geocodeCheckpointLocation, parseAddress } from './geocoding.ts';
 import { loadMasterRssSources, loadSeedSources } from './rss-sources.ts';
 import { scrapeRssSources, scrapeSeedSources } from './rss-scraper.ts';
 import {
@@ -179,8 +179,15 @@ async function upsertCuratedCheckpoint(
     return;
   }
 
-  const fullAddress = `${seed.locationText}, ${seed.locationCity}, ${seed.locationCounty} County, Ohio`;
-  const geocoded = await geocodeAddress(fullAddress, supabase, mapboxToken);
+  const geocoded = await geocodeCheckpointLocation(
+    {
+      address: seed.locationText,
+      city: seed.locationCity,
+      county: seed.locationCounty,
+    },
+    supabase,
+    mapboxToken
+  );
 
   const checkpointData = {
     title: seed.checkpointTitle ?? seed.title,
@@ -347,8 +354,15 @@ Deno.serve(async (req: Request) => {
       try {
         const { address, city, county } = parseAddress(raw.location);
 
-        const fullAddress = `${address}, ${city}, Ohio`;
-        const geocoded = await geocodeAddress(fullAddress, supabase, mapboxToken);
+        const geocoded = await geocodeCheckpointLocation(
+          {
+            address,
+            city,
+            county,
+          },
+          supabase,
+          mapboxToken
+        );
 
         if (!geocoded) {
           console.warn(`Checkpoint has no geocode (still saving): ${raw.title}`);

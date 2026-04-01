@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase, supabaseProjectRef, supabaseUrl } from '../../lib/supabaseClient';
 import { MapPin, Plus, Edit2, Trash2, Eye, Calendar, Search } from 'lucide-react';
+import { checkpointGeocodingConfidenceOptions } from '../../data/checkpoints';
 import Tooltip from './Tooltip';
 import CheckpointAnnouncementsManager from './CheckpointAnnouncementsManager';
 
@@ -12,8 +13,9 @@ interface Checkpoint {
   location_address: string;
   location_city: string;
   location_county: string;
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
+  geocoding_confidence?: string | null;
   start_date: string;
   end_date: string;
   status: string;
@@ -58,8 +60,9 @@ export default function CheckpointManager() {
       location_address: '',
       location_city: '',
       location_county: '',
-      latitude: 0,
-      longitude: 0,
+      latitude: null,
+      longitude: null,
+      geocoding_confidence: 'none',
       start_date: '',
       end_date: '',
       status: 'upcoming',
@@ -320,6 +323,21 @@ export default function CheckpointManager() {
               <option value="active">Active</option>
               <option value="completed">Completed</option>
               <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="text-sm font-medium text-slate-200 mb-2 block">Map Precision</label>
+            <select
+              value={editForm.geocoding_confidence || 'none'}
+              onChange={(e) => setEditForm({ ...editForm, geocoding_confidence: e.target.value })}
+              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            >
+              {checkpointGeocodingConfidenceOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </div>
 
