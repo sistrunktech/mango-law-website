@@ -608,8 +608,7 @@ export default function DUICheckpointsPage() {
 
               {approximateMarkerCount > 0 && (
                 <div className="mt-4 rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-sm leading-relaxed text-brand-black/70">
-                  {approximateMarkerCount} map pin{approximateMarkerCount !== 1 ? 's are' : ' is'} approximate area marker
-                  {approximateMarkerCount !== 1 ? 's' : ''}. When a public source does not publish a street address, the map centers the pin on the named city or county instead of guessing an exact stop location.
+                  {approximateMarkerCount} map pin{approximateMarkerCount !== 1 ? 's are' : ' is'} showing an approximate city or county area. Solid circles mark reported locations. Outlined diamonds mark public notices that did not publish a street address, so the map centers them on the named area instead of guessing an exact stop location.
                 </div>
               )}
 
