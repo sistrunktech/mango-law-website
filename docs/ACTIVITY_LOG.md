@@ -168,3 +168,9 @@ Category: DUI Checkpoints / Map UX Debug
 Summary: Removed the checkpoint marker hover/fly-away animation, changed approximate markers from subtle ringed circles to clearly distinct outlined diamonds, and split the map legend into separate status-color and pin-type explanations so completed exact pins no longer look ambiguous next to completed approximate pins.
 Files: src/components/CheckpointMap.tsx; src/views/DUICheckpointsPage.tsx
 Notes: The public checkpoint page now explicitly tells users that solid circles mark reported locations while outlined diamonds mark approximate city/county areas when the public source withholds a street address.
+
+Date/time: 2026-04-04 11:35 EDT
+Category: EEAT / Attorney Trust Signal Pass
+Summary: Converted the April 4 research dossier into a sitewide attorney-profile source of truth, removed unsupported public claims about BAC DataMaster/NHTSA certifications, CLE presenting, and jury-trial counts, and pushed the verified facts into structured data, site metadata, the about page, the blog index, article author modules, the footer, and key conversion pages.
+Files: src/data/attorneyProfile.ts; src/lib/structured-data.ts; src/lib/seo-config.ts; src/app/layout.tsx; src/app/(site)/page.tsx; src/app/(site)/about/page.tsx; src/app/(site)/blog/page.tsx; src/app/(site)/ovi-dui-defense-delaware-oh/page.tsx; src/views/AboutPage.tsx; src/views/HomePage.tsx; src/views/BlogPage.tsx; src/views/BlogPostPage.tsx; src/views/ContactPage.tsx; src/components/Footer.tsx; docs/CONTENT_CHANGELOG.md
+Notes: Verified public trust markers now center on Ohio Supreme Court registration no. `0071238`, Central Ohio practice since 1999, Mango Law’s February 2009 founding date, Sixth Circuit admission dated November 10, 2014, and representative published OVI appellate matters. Default and service-page metadata were also normalized away from stale “26+ years” phrasing to “since 1999” so the trust copy no longer ages badly.

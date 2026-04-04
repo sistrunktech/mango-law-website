@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo-metadata';
 const seo = {
   title: 'Domestic Violence Lawyer Delaware, OH | Mango Law LLC',
   description:
-    'Strategic domestic violence defense for misdemeanor and felony allegations. Former prosecutor with 26+ years of experience serving Delaware County, Franklin County, and Central Ohio.',
+    'Strategic domestic violence defense for misdemeanor and felony allegations. Former prosecutor practicing criminal law in Central Ohio since 1999.',
   image: '/images/generated/blog-assault-domestic-violence.png',
   url: '/domestic-violence-lawyer-delaware-oh',
 };

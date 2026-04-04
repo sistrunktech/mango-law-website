@@ -16,6 +16,7 @@ import RelatedPosts from '../components/RelatedPosts';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import BlogCoverArt from '../components/BlogCoverArt';
 import { formatCalendarDate } from '../lib/formatting';
+import { attorneyProfile } from '../data/attorneyProfile';
 import {
   PenaltyGrid,
   CostBreakdown,
@@ -1395,14 +1396,33 @@ export default function BlogPostPage({
                   />
                   <div>
                     <p className="font-semibold text-brand-black" itemProp="name">
-                      Dominic Mango
+                      {attorneyProfile.legalName}
                     </p>
                     <p className="mb-2 text-sm text-gray-500">
-                      <span itemProp="credentials">Ohio Bar Member</span> · Criminal Defense Attorney
+                      <span itemProp="credentials">
+                        Ohio Supreme Court Registration No. {attorneyProfile.registrationNumber}
+                      </span>{' '}
+                      · {attorneyProfile.jobTitle}
                     </p>
                     <p className="text-sm text-gray-600" itemProp="description">
-                      Dominic Mango is a criminal defense and personal injury attorney serving Delaware and Franklin Counties in Ohio. With extensive courtroom experience and a client-focused approach, Dominic has successfully defended hundreds of clients facing OVI/DUI, drug crimes, assault, weapons charges, and other serious criminal allegations.
+                      {attorneyProfile.articleBio}
                     </p>
+                    <div className="mt-3 flex flex-wrap gap-3 text-sm">
+                      <Link
+                        href="/about"
+                        className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                      >
+                        Read full background
+                      </Link>
+                      <a
+                        href="https://www.opn.ca6.uscourts.gov/active_atty/rptAccountStatus_M.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-brand-leaf transition-colors hover:text-brand-mangoText"
+                      >
+                        Sixth Circuit admission
+                      </a>
+                    </div>
                   </div>
                 </div>
               </footer>

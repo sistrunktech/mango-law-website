@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo-metadata';
 const seo = {
   title: 'Sex Crime Defense Lawyer Delaware, OH | Mango Law LLC',
   description:
-    'Discreet and aggressive defense for sex crime allegations. Former prosecutor with 26+ years of experience defending clients in Delaware and Franklin Counties.',
+    'Discreet and aggressive defense for sex crime allegations. Former prosecutor practicing criminal law in Central Ohio since 1999.',
   image: '/images/generated/sex-crimes-defense-hero.png',
   url: '/sex-crime-defense-lawyer-delaware-oh',
 };

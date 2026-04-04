@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo-metadata';
 const seo = {
   title: 'Drug Crime Lawyer Delaware, OH | Mango Law LLC',
   description:
-    'Strategic drug crime defense for possession, trafficking, and paraphernalia charges. Former prosecutor with 26+ years of experience in Delaware and Franklin Counties.',
+    'Strategic drug crime defense for possession, trafficking, and paraphernalia charges. Former prosecutor practicing criminal law in Central Ohio since 1999.',
   image: '/images/generated/drug-crimes-defense-hero.png',
   url: '/drug-crime-lawyer-delaware-oh',
 };

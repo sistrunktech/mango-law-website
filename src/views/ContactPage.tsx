@@ -11,6 +11,7 @@ import {
   OFFICE_PHONE_TEL,
   OFFICE_EMAIL,
 } from '../lib/contactInfo';
+import { attorneyProfile } from '../data/attorneyProfile';
 
 export default function ContactPage() {
   return (
@@ -129,6 +130,9 @@ export default function ContactPage() {
                 <p className="text-sm font-semibold text-brand-black">Serving Delaware and nearby courts</p>
                 <p className="mt-1 text-sm text-brand-black/60">
                   Based in Delaware, Ohio and handling matters throughout Delaware and Franklin Counties.
+                </p>
+                <p className="mt-1 text-xs text-brand-black/45">
+                  Led by {attorneyProfile.legalName}, Ohio Supreme Court Registration No. {attorneyProfile.registrationNumber}.
                 </p>
               </div>
             </div>

@@ -7,6 +7,12 @@ import CTASection from '../components/CTASection';
 import { SEO, attorneySchema } from '../lib/seo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import {
+  attorneyProfile,
+  attorneyPublicRecordHighlights,
+  attorneyRepresentativeMatters,
+  attorneyTrustMetadata,
+} from '../data/attorneyProfile';
+import {
   OFFICE_PHONE_DISPLAY,
   OFFICE_PHONE_TEL,
   GENERAL_OFFICE_PHONE_DISPLAY,
@@ -19,7 +25,7 @@ export default function AboutPage() {
     <>
       <SEO
         title="About Dominic Mango | Criminal Defense Attorney Delaware, OH"
-        description="OSU Moritz College of Law graduate with 26+ years of Ohio criminal law experience. Former prosecutor with hundreds of jury trials. Certified in BAC DataMaster and NHTSA field sobriety testing."
+        description={attorneyProfile.aboutMetaDescription}
         structuredData={attorneySchema}
         breadcrumbs={[
           { name: 'Home', item: '/' },
@@ -46,7 +52,10 @@ export default function AboutPage() {
                   <div className="px-5 pb-4 pt-5">
                     <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite p-4">
                       <h3 className="text-2xl font-bold text-brand-black">Dominic &quot;Nick&quot; Mango</h3>
-                      <p className="mt-1 text-brand-black/70 font-medium">Criminal Defense Attorney</p>
+                      <p className="mt-1 text-brand-black/70 font-medium">Ohio Criminal Defense Attorney</p>
+                      <p className="mt-1 text-xs text-brand-black/55">
+                        Ohio Supreme Court Registration No. {attorneyProfile.registrationNumber}
+                      </p>
                       <div className="mt-4 flex flex-col gap-3 border-t border-brand-black/10 pt-4">
                         <a
                           href={`tel:${OFFICE_PHONE_TEL}`}
@@ -134,7 +143,10 @@ export default function AboutPage() {
                   </div>
                   <div className="space-y-3 rounded-xl border border-brand-black/10 bg-brand-offWhite p-6 shadow-soft">
                     <h3 className="text-2xl font-bold text-brand-black">Dominic &quot;Nick&quot; Mango</h3>
-                    <p className="text-brand-black/70 font-medium">Criminal Defense Attorney</p>
+                    <p className="text-brand-black/70 font-medium">Ohio Criminal Defense Attorney</p>
+                    <p className="text-xs text-brand-black/55">
+                      Ohio Supreme Court Registration No. {attorneyProfile.registrationNumber}
+                    </p>
                     <div className="flex flex-col gap-3 border-t border-brand-black/10 pt-3">
                       <a
                         href={`tel:${OFFICE_PHONE_TEL}`}
@@ -265,39 +277,75 @@ export default function AboutPage() {
               <div className="space-y-4">
                 <h3 className="font-display text-2xl font-semibold text-brand-black">Experience & Background</h3>
                 <p className="text-brand-black/80 leading-relaxed">
-                  Dominic Mango is a graduate of The Ohio State University's Moritz College of Law and has been practicing
-                  criminal law in Central Ohio since 1999. He is licensed to practice in Ohio (not the state of Delaware) and
-                  appears in all Ohio courts, including Federal Court and the Southern District of Ohio. Mango Law LLC was
-                  established in February 2009 in Delaware, Ohio. With hundreds of jury trials under his belt, Dominic has
-                  extensive experience in jury selection, trial strategy, and courtroom advocacy.
+                  {attorneyProfile.aboutIntro}
                 </p>
                 <p className="text-brand-black/80 leading-relaxed">
-                  His background includes serving as an Assistant Prosecuting Attorney in Delaware County (1999-2001), where
-                  he gained invaluable insight into how prosecutors build cases. This prosecutor's perspective, combined with
-                  over two decades of defense work, gives him a strategic advantage in identifying weaknesses and defending clients.
+                  {attorneyProfile.aboutExpanded}
+                </p>
+                <p className="text-brand-black/80 leading-relaxed">
+                  {attorneyProfile.aboutCourtAdmission}
                 </p>
               </div>
 
               <div className="space-y-4">
-                <h3 className="font-display text-2xl font-semibold text-brand-black">Certifications & Training</h3>
-                <ul className="space-y-3 text-brand-black/80">
-                  <li className="flex gap-3">
-                    <span className="text-brand-mango font-bold">•</span>
-                    <span>Certified in the operation and calibration of BAC DataMaster breath testing instruments</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-brand-mango font-bold">•</span>
-                    <span>Certified in NHTSA Standardized Field Sobriety Test administration and evaluation</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-brand-mango font-bold">•</span>
-                    <span>Regular presenter at continuing legal education (CLE) seminars on OVI defense and trial practice</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-brand-mango font-bold">•</span>
-                    <span>Speaker at OVI driver intervention programs in Franklin and Delaware Counties</span>
-                  </li>
-                </ul>
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Public record highlights</h3>
+                <p className="text-brand-black/70 leading-relaxed">
+                  These are selected public-source markers and representative credentials, not a complete case list or resume.
+                </p>
+                <p className="text-xs uppercase tracking-[0.14em] text-brand-black/45">
+                  Public-source review last updated {attorneyTrustMetadata.lastVerified}
+                </p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {attorneyPublicRecordHighlights.map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-2xl border border-brand-black/10 bg-brand-offWhite/55 p-5 shadow-soft"
+                    >
+                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-goldText">
+                        {item.label}
+                      </p>
+                      <p className="mt-2 text-xl font-bold text-brand-black">{item.value}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-black/65">{item.detail}</p>
+                      {item.sourceUrl && (
+                        <a
+                          href={item.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 inline-flex items-center text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                        >
+                          {item.sourceLabel ?? 'View public source'} →
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Representative published matters</h3>
+                <p className="text-brand-black/70 leading-relaxed">
+                  Published trial and appellate opinions are only part of a defense practice, but they do provide a public record of the kinds of OVI issues Dominic Mango has litigated.
+                </p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {attorneyRepresentativeMatters.map((matter) => (
+                    <a
+                      key={matter.title}
+                      href={matter.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-soft transition-colors hover:border-brand-mango/35"
+                    >
+                      <p className="text-sm font-semibold uppercase tracking-[0.12em] text-brand-goldText">
+                        {matter.court}
+                      </p>
+                      <p className="mt-2 text-lg font-bold text-brand-black">{matter.title}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-black/65">{matter.summary}</p>
+                      <span className="mt-4 inline-flex items-center text-sm font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                        View opinion →
+                      </span>
+                    </a>
+                  ))}
+                </div>
               </div>
 
               <div className="space-y-4">
@@ -313,7 +361,7 @@ export default function AboutPage() {
                   </div>
                   <div className="border-l-4 border-brand-teal pl-4">
                     <p className="font-semibold text-brand-black">1999 – 2001</p>
-                    <p className="text-brand-black/70">Assistant Prosecuting Attorney, Delaware County, Ohio</p>
+                    <p className="text-brand-black/70">Assistant prosecutor role, Delaware County area</p>
                   </div>
                 </div>
               </div>
