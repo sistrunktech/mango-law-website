@@ -54,7 +54,7 @@ export default function DomesticViolencePage() {
     <>
       <SEO
         title="Domestic Violence Lawyer Delaware, OH | Mango Law LLC"
-        description="Strategic domestic violence defense for misdemeanor and felony allegations. Former prosecutor with 26+ years of experience serving Delaware County, Franklin County, and Central Ohio."
+        description="Strategic domestic violence defense for misdemeanor and felony allegations. Former prosecutor practicing criminal law in Central Ohio since 1999."
         image="/images/generated/blog-assault-domestic-violence.png"
         faqs={domesticViolenceFaqs}
         breadcrumbs={[

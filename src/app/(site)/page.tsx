@@ -4,11 +4,11 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 import { localBusinessSchema, organizationGraphNode, websiteGraphNode } from '@/lib/structured-data';
 import { getPublicBlogPosts } from '@/lib/blogPostsRepo';
+import { attorneyProfile } from '@/data/attorneyProfile';
 
 const seo = {
   title: 'Criminal Defense & OVI Attorney Delaware, OH',
-  description:
-    'Experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI/DUI, drug crimes, assault, sex crimes, and white collar cases. Former prosecutor.',
+  description: attorneyProfile.siteDescription,
   url: '/',
 };
 

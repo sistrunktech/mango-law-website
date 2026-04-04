@@ -57,7 +57,7 @@ export default function WhiteCollarPage() {
     <>
       <SEO
         title="White Collar Crimes Attorney Delaware, OH | Mango Law LLC"
-        description="Strategic defense for fraud, embezzlement, and white collar investigations. Former prosecutor with 26+ years of experience in Delaware and Franklin Counties."
+        description="Strategic defense for fraud, embezzlement, and white collar investigations. Former prosecutor practicing criminal law in Central Ohio since 1999."
         image="/images/generated/white-collar-defense-hero.png"
         faqs={whiteCollarFaqs}
         breadcrumbs={[

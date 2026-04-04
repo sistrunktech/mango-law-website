@@ -3,6 +3,7 @@ import Script from 'next/script';
 import Providers from './providers';
 import './globals.css';
 import { SITE_URL } from '@/lib/seo-config';
+import { attorneyProfile } from '@/data/attorneyProfile';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -10,14 +11,12 @@ export const metadata: Metadata = {
     default: 'Criminal Defense - OVI Attorney in Ohio | Mango Law',
     template: '%s | Mango Law',
   },
-  description:
-    'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
+  description: attorneyProfile.siteDescription,
   openGraph: {
     type: 'website',
     siteName: 'Mango Law LLC',
     title: 'Criminal Defense - OVI Attorney in Ohio | Mango Law',
-    description:
-      'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
+    description: attorneyProfile.siteDescription,
     url: SITE_URL,
     images: [
       {
@@ -31,8 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Criminal Defense - OVI Attorney in Ohio | Mango Law',
-    description:
-      'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
+    description: attorneyProfile.siteDescription,
     images: ['/images/brand/mango-logo-primary-fullcolor.svg'],
   },
   icons: {

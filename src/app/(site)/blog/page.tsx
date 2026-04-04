@@ -3,11 +3,12 @@ import BlogPage from '@/views/BlogPage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 import { getPublicBlogPosts } from '@/lib/blogPostsRepo';
+import { attorneyProfile } from '@/data/attorneyProfile';
 
 const seo = {
   title: 'Mango Law Blog | Legal Insights & Ohio Criminal Defense Updates',
   description:
-    'Stay informed with articles about criminal defense, OVI/DUI law, and your rights in Ohio courts from attorney Dominic Mango.',
+    `Stay informed with Ohio criminal defense and OVI/DUI articles from Dominic Mango, Ohio Supreme Court registration no. ${attorneyProfile.registrationNumber}.`,
   url: '/blog',
 };
 

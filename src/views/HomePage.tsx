@@ -15,6 +15,7 @@ import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import type { BlogPost } from '../data/blogPosts';
+import { attorneyProfile } from '../data/attorneyProfile';
 
 const whyChooseUs = [
   {
@@ -44,7 +45,7 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
     <>
       <PageHero
         eyebrow="Central Ohio OVI/DUI & Criminal Defense"
-        subtitle="Nick Mango | Delaware, OH | 26+ Years | Former Prosecutor"
+        subtitle={attorneyProfile.homeSubtitle}
         title="Charged, arrested, or under investigation? Get calm next steps today."
         description="Talk through what happened, what matters first, and how to protect your license, record, and court position in Delaware and Franklin Counties."
         ctaLabel="Free Case Review"
@@ -78,6 +79,10 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
                   >
                     Meet Nick →
                   </Link>
+                  <p className="text-xs text-brand-black/48">
+                    Practicing in Central Ohio since {attorneyProfile.practiceSinceYear} · Ohio Supreme Court Registration No.{' '}
+                    {attorneyProfile.registrationNumber}
+                  </p>
 	              </div>
 
               <div className="grid gap-6 sm:grid-cols-2">

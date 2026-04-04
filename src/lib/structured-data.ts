@@ -1,6 +1,7 @@
 import { OFFICE_ADDRESS_STREET, OFFICE_PHONE_TEL } from './contactInfo';
 import { serviceAreas } from '../data/serviceAreas';
 import { SITE_URL } from './seo-config';
+import { attorneyProfile } from '../data/attorneyProfile';
 
 export type FAQEntry = { question: string; answer: string };
 export type BreadcrumbItem = { name: string; item: string };
@@ -47,14 +48,34 @@ export function mergeStructuredData(structuredData?: object, faqs?: FAQEntry[]) 
 }
 
 export function buildArticleSchema(article: ArticleData, fullUrl: string, fallbackImage: string) {
+  const isMangoAuthor = ['dominic mango', 'nick mango', 'dominic "nick" mango'].includes(
+    article.author.toLowerCase()
+  );
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.headline,
-    author: {
-      '@type': 'Person',
-      name: article.author,
-    },
+    author: isMangoAuthor
+      ? {
+          '@type': 'Person',
+          '@id': `${SITE_URL}/#dominic-mango`,
+          name: attorneyProfile.legalName,
+          alternateName: attorneyProfile.alternateName,
+          url: `${SITE_URL}/about`,
+          image: `${SITE_URL}/images/headshots/nick-mango-hero.jpg`,
+          jobTitle: attorneyProfile.jobTitle,
+          description: attorneyProfile.articleBio,
+          identifier: {
+            '@type': 'PropertyValue',
+            name: 'Ohio Supreme Court Registration Number',
+            value: attorneyProfile.registrationNumber,
+          },
+        }
+      : {
+          '@type': 'Person',
+          name: article.author,
+        },
     datePublished: article.datePublished,
     dateModified: article.dateModified,
     image: article.image || fallbackImage,
@@ -96,7 +117,7 @@ export const localBusinessSchema = {
       name: 'Mango Law LLC',
       alternateName: 'Mango Law',
       description:
-        'Criminal defense and OVI/DUI attorney serving Delaware and Franklin Counties in Ohio.',
+        'Criminal defense and OVI/DUI firm in Delaware, Ohio, founded in 2009 by attorney Dominic Mango (Ohio Supreme Court registration no. 0071238).',
       url: SITE_URL,
       logo: `${SITE_URL}/images/brand/mango-logo-primary-fullcolor.svg`,
       image: `${SITE_URL}/images/headshots/nick-mango-hero.jpg`,
@@ -182,29 +203,48 @@ export const localBusinessSchema = {
     {
       '@type': 'Person',
       '@id': `${SITE_URL}/#dominic-mango`,
-      name: 'Dominic Mango',
-      alternateName: 'Nick Mango',
-      jobTitle: 'Criminal Defense Attorney',
+      name: attorneyProfile.legalName,
+      alternateName: attorneyProfile.alternateName,
+      jobTitle: attorneyProfile.jobTitle,
+      description: `${attorneyProfile.aboutIntro} ${attorneyProfile.aboutExpanded}`,
       url: `${SITE_URL}/about`,
       image: `${SITE_URL}/images/headshots/nick-mango-hero.jpg`,
       worksFor: { '@id': `${SITE_URL}/#legalservice` },
+      identifier: {
+        '@type': 'PropertyValue',
+        name: 'Ohio Supreme Court Registration Number',
+        value: attorneyProfile.registrationNumber,
+      },
       hasOccupation: {
         '@type': 'Occupation',
         name: 'Attorney',
       },
-      hasCredential: {
-        '@type': 'EducationalOccupationalCredential',
-        name: 'Ohio Bar License',
-        credentialCategory: 'Bar Admission',
-        recognizedBy: {
-          '@type': 'Organization',
-          name: 'Supreme Court of Ohio',
+      hasCredential: [
+        {
+          '@type': 'EducationalOccupationalCredential',
+          name: 'Ohio Bar License',
+          credentialCategory: 'Bar Admission',
+          recognizedBy: {
+            '@type': 'Organization',
+            name: 'Supreme Court of Ohio',
+          },
+          identifier: attorneyProfile.registrationNumber,
+          dateIssued: String(attorneyProfile.practiceSinceYear),
         },
-        dateIssued: '1999',
-      },
+        {
+          '@type': 'EducationalOccupationalCredential',
+          name: 'Sixth Circuit Bar Admission',
+          credentialCategory: 'Court Admission',
+          recognizedBy: {
+            '@type': 'Organization',
+            name: 'United States Court of Appeals for the Sixth Circuit',
+          },
+          dateIssued: '2014-11-10',
+        },
+      ],
       alumniOf: {
         '@type': 'EducationalOrganization',
-        name: 'The Ohio State University Moritz College of Law',
+        name: attorneyProfile.lawSchool,
       },
       knowsAbout: [
         'Criminal Defense',
@@ -221,32 +261,49 @@ export const attorneySchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   '@id': `${SITE_URL}/#dominic-mango`,
-  name: 'Dominic Mango',
-  alternateName: 'Nick Mango',
-  description:
-    'Experienced criminal defense attorney with 26+ years of Ohio criminal law experience in Delaware and Franklin Counties.',
+  name: attorneyProfile.legalName,
+  alternateName: attorneyProfile.alternateName,
+  description: `${attorneyProfile.aboutIntro} ${attorneyProfile.aboutExpanded}`,
   url: `${SITE_URL}/about`,
   image: `${SITE_URL}/images/headshots/nick-mango-hero.jpg`,
   email: 'office@mango.law',
   telephone: `+1${OFFICE_PHONE_TEL}`,
   worksFor: { '@id': `${SITE_URL}/#legalservice` },
+  identifier: {
+    '@type': 'PropertyValue',
+    name: 'Ohio Supreme Court Registration Number',
+    value: attorneyProfile.registrationNumber,
+  },
   hasOccupation: {
     '@type': 'Occupation',
     name: 'Attorney',
   },
-  hasCredential: {
-    '@type': 'EducationalOccupationalCredential',
-    name: 'Ohio Bar License',
-    credentialCategory: 'Bar Admission',
-    recognizedBy: {
-      '@type': 'Organization',
-      name: 'Supreme Court of Ohio',
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Ohio Bar License',
+      credentialCategory: 'Bar Admission',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'Supreme Court of Ohio',
+      },
+      identifier: attorneyProfile.registrationNumber,
+      dateIssued: String(attorneyProfile.practiceSinceYear),
     },
-    dateIssued: '1999',
-  },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Sixth Circuit Bar Admission',
+      credentialCategory: 'Court Admission',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'United States Court of Appeals for the Sixth Circuit',
+      },
+      dateIssued: '2014-11-10',
+    },
+  ],
   alumniOf: {
     '@type': 'EducationalOrganization',
-    name: 'The Ohio State University Moritz College of Law',
+    name: attorneyProfile.lawSchool,
   },
   knowsAbout: [
     'Criminal Defense',
@@ -258,10 +315,6 @@ export const attorneySchema = {
     'Sex Crime Defense',
     'White Collar Crime Defense',
     'Protection Order Defense',
-  ],
-  award: [
-    'Certified in BAC DataMaster Operation',
-    'NHTSA Field Sobriety Test Certification',
   ],
 };
 

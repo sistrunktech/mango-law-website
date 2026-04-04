@@ -540,3 +540,16 @@ Regression checklist:
 - Meta/schema changed? no
 Approval token: pending
 Rollback notes: restore the prior `imageUrl` values in `src/data/blogPosts.ts` for the five affected posts.
+
+Date/time: 2026-04-04 11:35 EDT
+Post slug and title: about page, blog author surfaces, site metadata | Replace unsupported attorney claims with dossier-backed EEAT facts
+Change type: major
+Summary of change: Rewrote attorney background, schema, and metadata surfaces to use the publicly supported facts from the April 4 research dossier: Ohio Supreme Court registration no. `0071238`, Central Ohio practice since 1999, Mango Law founding in February 2009, Sixth Circuit admission on November 10, 2014, and published OVI appellate work. Removed unsupported public claims about BAC DataMaster/NHTSA certifications, CLE presenting, and jury-trial counts.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: pending
+Rollback notes: revert `src/data/attorneyProfile.ts` and the linked metadata/schema/about/blog/footer updates in this EEAT pass.

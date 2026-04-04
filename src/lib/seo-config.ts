@@ -1,3 +1,5 @@
+import { attorneyProfile } from '../data/attorneyProfile';
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   process.env.SITE_URL ||
@@ -9,8 +11,7 @@ export const defaultSEO = {
   primaryKeyword: 'Criminal Defense',
   secondaryModifier: 'OVI Attorney in Ohio',
   title: 'Criminal Defense - OVI Attorney in Ohio | Mango Law',
-  description:
-    'Aggressive and experienced criminal defense attorney serving Delaware and Franklin Counties. 26+ years defending OVI, drug crimes, assault, sex crimes, and white collar cases.',
+  description: attorneyProfile.siteDescription,
   image: '/images/brand/mango-logo-primary-fullcolor.svg',
   type: 'website' as const,
 };

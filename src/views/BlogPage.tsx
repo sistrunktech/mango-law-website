@@ -10,6 +10,7 @@ import type { BlogPost } from '../data/blogPosts';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import BlogCoverArt from '../components/BlogCoverArt';
 import { formatCalendarDate } from '../lib/formatting';
+import { attorneyProfile } from '../data/attorneyProfile';
 
 const categories = [
   'All Posts',
@@ -86,6 +87,10 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
 
       <section className="section bg-white">
         <div className="container">
+          <div className="mb-8 rounded-[1.5rem] border border-brand-black/10 bg-brand-offWhite/55 px-5 py-4 text-sm text-brand-black/70 shadow-soft">
+            Articles are written and reviewed by {attorneyProfile.legalName}, Ohio Supreme Court registration no.{' '}
+            {attorneyProfile.registrationNumber}, practicing in Central Ohio since {attorneyProfile.practiceSinceYear}.
+          </div>
           {featuredPost && (
             <div className="mb-10 grid gap-6 rounded-[2rem] border border-brand-black/10 bg-brand-offWhite/55 p-5 shadow-soft lg:grid-cols-[1.15fr_0.85fr] lg:p-6">
               <Link

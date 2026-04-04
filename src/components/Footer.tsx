@@ -20,6 +20,7 @@ import {
 } from '../lib/contactInfo';
 import { getCopyrightText, COMPANY_START_YEAR } from '../lib/legalDocuments';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { attorneyProfile } from '../data/attorneyProfile';
 
 function FooterLinkList({
   links,
@@ -261,7 +262,7 @@ export default function Footer() {
           <div className="flex flex-col items-center gap-1 sm:items-start">
             <span>© {getCopyrightText(COMPANY_START_YEAR)} Mango Law LLC. All rights reserved.</span>
             <span className="text-brand-offWhite/40">
-              Dominic N. Mango | Ohio Supreme Court Registration No. 0071238
+              Dominic N. Mango | Ohio Supreme Court Registration No. {attorneyProfile.registrationNumber} | Practicing in Central Ohio since {attorneyProfile.practiceSinceYear}
             </span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
