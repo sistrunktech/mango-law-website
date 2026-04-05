@@ -1,13 +1,14 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
-import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
 import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
+import { attorneyProfile } from '../data/attorneyProfile';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 
@@ -15,6 +16,10 @@ export const criminalDefenseFaqs = [
   {
     question: 'What should I do if I\'m arrested?',
     answer: 'Remain calm and polite. Do not resist arrest. Invoke your right to remain silent and request an attorney immediately. Do not answer questions or make statements without your lawyer present, even if you think it will help your case. Contact Mango Law as soon as possible.',
+  },
+  {
+    question: 'Do you handle drug charges and domestic violence cases in Delaware County?',
+    answer: 'Yes. Mango Law handles Delaware County criminal cases involving drug possession, trafficking, domestic violence, assault, theft, weapons, and related misdemeanor or felony allegations. We use the same process on every case: evidence review, motion analysis, negotiation planning, and trial preparation when needed.',
   },
   {
     question: 'Will I go to jail for a misdemeanor charge?',
@@ -58,8 +63,8 @@ export default function CriminalDefensePage() {
   return (
     <>
       <SEO
-        title="Criminal Defense Attorney Delaware, OH | Mango Law LLC"
-        description="Aggressive criminal defense for drug crimes, assault, theft, weapons charges, and more. Former prosecutor practicing criminal law in Central Ohio since 1999."
+        title="Delaware Ohio Criminal Defense Attorney | Mango Law LLC"
+        description="Delaware Ohio criminal defense attorney for drug charges, domestic violence, assault, theft, weapons, and other felony or misdemeanor cases. Practicing in Central Ohio since 1999."
         image="/images/generated/criminal-defense-hero.png"
         faqs={criminalDefenseFaqs}
         breadcrumbs={[
@@ -69,9 +74,9 @@ export default function CriminalDefensePage() {
         ]}
       />
       <PageHero
-        eyebrow="Criminal Defense"
-        title="Defense for felony and misdemeanor charges in Delaware County"
-        description="Clear communication, organized discovery review, and strategic motion practice to protect your record."
+        eyebrow="Delaware County Criminal Defense"
+        title="Delaware Ohio criminal defense lawyer for felony and misdemeanor charges"
+        description="Drug charges, domestic violence, assault, theft, weapons, and related cases with organized discovery review and strategic motion practice."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -87,18 +92,36 @@ export default function CriminalDefensePage() {
               <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
                 <div className="space-y-6">
                   <div>
-                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Comprehensive Criminal Defense</h2>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Criminal defense representation for Delaware County cases</h2>
                     <p className="text-lg text-brand-black/70 leading-relaxed">
                       Facing criminal charges is overwhelming. Your reputation, your freedom, and your future are at stake.
                       Whether you are dealing with a first-time misdemeanor or a serious felony, you need an attorney who
-                      understands the system, knows the local courts, and will fight for your rights.
+                      understands the system, knows how Delaware Municipal Court and Delaware County Common Pleas cases move, and will fight for your rights.
                     </p>
                   </div>
                   <p className="text-brand-black/70 leading-relaxed">
                     At Mango Law, we handle every aspect of criminal defense with precision and care. From the initial
                     consultation to courtroom advocacy, we are committed to protecting your record and minimizing the impact
-                    on your life.
+                    on your life. If the case overlaps with an OVI arrest, a protection-order issue, or drug-charge exposure,
+                    you should move directly into the supporting page that matches that pressure point.
                   </p>
+                  <div className="flex flex-wrap gap-3 text-sm">
+                    <Link href="/drug-crime-lawyer-delaware-oh" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Drug charges
+                    </Link>
+                    <Link href="/domestic-violence-lawyer-delaware-oh" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Domestic violence
+                    </Link>
+                    <Link href="/protection-order-lawyer-delaware-oh" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Protection orders
+                    </Link>
+                    <Link href="/ovi-dui-defense-delaware-oh" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      OVI defense
+                    </Link>
+                    <Link href="/glossary" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Criminal-defense glossary
+                    </Link>
+                  </div>
                 </div>
                 <Image
                   src="/images/generated/criminal-defense-hero.png"
@@ -108,6 +131,43 @@ export default function CriminalDefensePage() {
                   width={1200}
                   height={900}
                 />
+              </div>
+
+              <div className="rounded-[1.5rem] border border-brand-black/10 bg-brand-offWhite/65 p-6 shadow-soft">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-mangoText">
+                  Why clients hire Mango for criminal cases
+                </p>
+                <div className="mt-4 grid gap-3 md:grid-cols-3">
+                  <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-4">
+                    <div className="text-sm font-semibold text-brand-black">Former prosecutor perspective</div>
+                    <div className="mt-1 text-sm leading-relaxed text-brand-black/70">
+                      {attorneyProfile.servicePageBio} That perspective helps frame case assessment, motion strategy, and plea discussions early.
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-4">
+                    <div className="text-sm font-semibold text-brand-black">Public-record-backed credentials</div>
+                    <div className="mt-1 text-sm leading-relaxed text-brand-black/70">
+                      Ohio Supreme Court registration no. {attorneyProfile.registrationNumber}. Practicing since {attorneyProfile.practiceSinceYear}. Sixth Circuit admission dated {attorneyProfile.sixthCircuitAdmissionLabel}.
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-4">
+                    <div className="text-sm font-semibold text-brand-black">Delaware-based firm context</div>
+                    <div className="mt-1 text-sm leading-relaxed text-brand-black/70">
+                      Mango Law has operated from Delaware since {attorneyProfile.foundedFirmLabel}, which supports the local-consultation and Delaware County focus across the money pages on this site.
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-4 text-sm">
+                  <Link href="/reviews" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                    Read client reviews
+                  </Link>
+                  <Link href="/about" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                    Attorney background
+                  </Link>
+                  <Link href="/resources/dui-checkpoints" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                    Checkpoint resource
+                  </Link>
+                </div>
               </div>
 
               <LegalCodeCallout section="2903.13" />
@@ -134,8 +194,8 @@ export default function CriminalDefensePage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: 'Assault & Domestic Violence',
-                description: 'Defense for assault, domestic violence, menacing, and related charges with focus on evidence review and witness credibility.',
+                title: 'Assault and domestic violence charges',
+                description: 'Defense for assault, domestic violence, menacing, and related allegations with focus on witness credibility, 911/body-cam review, and protection-order overlap.',
               },
               {
                 title: 'Theft & Fraud',
@@ -146,8 +206,8 @@ export default function CriminalDefensePage() {
                 description: 'Defense for CCW violations, improper handling of firearms, and weapons under disability charges.',
               },
               {
-                title: 'Drug Crimes',
-                description: 'Possession, trafficking, and paraphernalia charges with attention to search and seizure issues.',
+                title: 'Drug charges and trafficking defense',
+                description: 'Possession, trafficking, and paraphernalia charges with attention to search-and-seizure issues, lab testing, and charge framing.',
               },
               {
                 title: 'Juvenile Matters',

@@ -553,3 +553,16 @@ Regression checklist:
 - Meta/schema changed? yes
 Approval token: pending
 Rollback notes: revert `src/data/attorneyProfile.ts` and the linked metadata/schema/about/blog/footer updates in this EEAT pass.
+
+Date/time: 2026-04-04 19:10 EDT
+Post slug and title: ovi-dui-defense-delaware-oh, criminal-defense-delaware-oh | Tighten April SEO recovery money pages around keyword ownership and proof
+Change type: major
+Summary of change: Reworked the canonical OVI and Delaware criminal-defense money pages to use clearer Delaware/OVI/criminal-intent language, added verified attorney proof blocks, and tightened cluster links into the OVI, drug, domestic-violence, protection-order, and glossary support pages.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: pending
+Rollback notes: revert the scoped updates in `src/app/(site)/ovi-dui-defense-delaware-oh/page.tsx`, `src/views/OviDuiPage.tsx`, `src/app/(site)/criminal-defense-delaware-oh/page.tsx`, and `src/views/CriminalDefensePage.tsx`.

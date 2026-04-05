@@ -8,6 +8,7 @@ import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
 import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
+import { attorneyProfile } from '../data/attorneyProfile';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import Link from 'next/link';
@@ -15,8 +16,16 @@ import { AlertTriangle, MapPinned } from 'lucide-react';
 
 export const oviDuiFaqs = [
   {
+    question: 'Do you handle Delaware Municipal Court OVI cases?',
+    answer: 'Yes. We handle OVI matters in Delaware Municipal Court and Delaware County Common Pleas, and we explain how local scheduling, ALS timing, motion practice, and plea posture affect the next step.',
+  },
+  {
     question: 'What is the difference between OVI and DUI?',
     answer: 'In Ohio, the charge is officially called OVI (Operating a Vehicle Impaired), not DUI (Driving Under the Influence). The terms are used interchangeably, but OVI is the correct legal term. It covers both alcohol and drug impairment, including prescription medications.',
+  },
+  {
+    question: 'What if my OVI arrest started at a checkpoint?',
+    answer: 'Checkpoint cases still turn on procedure, notice, neutral selection methods, and what happened after contact. We review the checkpoint circumstances, field sobriety testing, chemical testing, and any body-camera or dash-camera footage before recommending the next move.',
   },
   {
     question: 'Can I refuse a breathalyzer test?',
@@ -68,8 +77,8 @@ export default function OviDuiPage() {
   return (
     <>
       <SEO
-        title="OVI Defense Lawyer in Delaware, Ohio | Mango Law"
-        description="Experienced OVI defense in Delaware County, Ohio. Challenge stops, field sobriety tests, and breath or blood evidence with trial-ready strategy."
+        title="Delaware Ohio OVI Lawyer | DUI Defense | Mango Law"
+        description="Delaware Ohio OVI lawyer for DUI charges, ALS hearings, checkpoint stops, and Delaware County court defense. Practicing in Central Ohio since 1999."
         image="/images/headshots/nick-mango-standing-profile-court-steps.png"
         faqs={oviDuiFaqs}
         breadcrumbs={[
@@ -79,9 +88,9 @@ export default function OviDuiPage() {
         ]}
       />
       <PageHero
-        eyebrow="OVI / DUI Defense"
-        title="OVI and DUI defense with targeted motion practice and local insight"
-        description="High-test, felony OVI, refusals, underage DUI, and drug OVI. Clear timelines and informed negotiation, backed by detailed discovery review."
+        eyebrow="Delaware County OVI Defense"
+        title="Delaware Ohio OVI lawyer for DUI charges, ALS hearings, and checkpoint stops"
+        description="Former prosecutor with local Delaware court familiarity, targeted motion practice, and a clear defense plan from arrest through resolution."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -98,18 +107,67 @@ export default function OviDuiPage() {
               <div className="space-y-8">
                 <div className="max-w-3xl space-y-6">
                   <div>
-                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Aggressive OVI Defense</h2>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">OVI defense for Delaware Municipal Court and Delaware County Common Pleas cases</h2>
                     <p className="text-lg text-brand-black/70 leading-relaxed">
-                      An OVI arrest can feel like the end of the world. Your license, your job, your freedom, and your reputation
-                      are all on the line. But an arrest is not a conviction. With the right defense strategy, many OVI charges
-                      can be challenged, reduced, or even dismissed.
+                      An OVI arrest can put your license, your job, and your record at risk quickly. The defense work usually starts with the first decisions that affect Delaware County cases most: the ALS timeline, the stop itself, the testing evidence, and what the local court calendar requires next.
                     </p>
                   </div>
                   <p className="text-brand-black/70 leading-relaxed">
                     At Mango Law, we focus on the details that matter: challenging the traffic stop, questioning field sobriety
                     test administration, scrutinizing breathalyzer calibration and procedures, and identifying procedural errors.
-                    We know what it takes to win OVI cases in Delaware County.
+                    If the case is really about a first offense, a checkpoint stop, or a refusal-driven license issue, we route you into the narrower guide that matches that pressure point instead of leaving you on a generic DUI page.
                   </p>
+                  <div className="flex flex-wrap gap-3 text-sm">
+                    <Link href="/first-offense-ovi-ohio" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      First-offense OVI guide
+                    </Link>
+                    <Link href="/als-license-suspension-ohio" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      ALS license suspension guide
+                    </Link>
+                    <Link href="/resources/dui-checkpoints" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Ohio checkpoint map
+                    </Link>
+                    <Link href="/glossary" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      OVI glossary
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="rounded-[1.5rem] border border-brand-black/10 bg-brand-offWhite/65 p-6 shadow-soft">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-mangoText">
+                    Why clients use Mango for OVI cases
+                  </p>
+                  <div className="mt-4 grid gap-3 md:grid-cols-3">
+                    <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-4">
+                      <div className="text-sm font-semibold text-brand-black">Former prosecutor perspective</div>
+                      <div className="mt-1 text-sm leading-relaxed text-brand-black/70">
+                        {attorneyProfile.servicePageBio} That background helps frame motion, negotiation, and trial decisions realistically.
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-4">
+                      <div className="text-sm font-semibold text-brand-black">Public-record-backed experience</div>
+                      <div className="mt-1 text-sm leading-relaxed text-brand-black/70">
+                        Ohio Supreme Court registration no. {attorneyProfile.registrationNumber}. Practicing since {attorneyProfile.practiceSinceYear}. Sixth Circuit admission dated {attorneyProfile.sixthCircuitAdmissionLabel}.
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-4">
+                      <div className="text-sm font-semibold text-brand-black">Delaware-based firm context</div>
+                      <div className="mt-1 text-sm leading-relaxed text-brand-black/70">
+                        Mango Law has operated from Delaware since {attorneyProfile.foundedFirmLabel}, which supports the local-court and local-consultation focus across this page and the related OVI guides.
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-4 text-sm">
+                    <Link href="/reviews" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Read client reviews
+                    </Link>
+                    <Link href="/about" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Attorney background
+                    </Link>
+                    <Link href="/criminal-defense-delaware-oh" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Broader criminal defense page
+                    </Link>
+                  </div>
                 </div>
               </div>
 
@@ -423,7 +481,7 @@ export default function OviDuiPage() {
               Practical guidance for checkpoints, holiday enforcement, and Delaware County representation.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {[
               {
                 title: 'Ohio OVI checkpoints',
@@ -449,6 +507,11 @@ export default function OviDuiPage() {
                 title: 'Physical control guide',
                 description: 'Understand physical control exposure when not actively driving.',
                 href: '/blog/physical-control-parked-car-ohio-kevin-mcguff',
+              },
+              {
+                title: 'OVI glossary and terms',
+                description: 'Use the glossary when ALS, suppression, probable cause, or testing terms need clarification.',
+                href: '/glossary',
               },
             ].map((item) => (
               <div key={item.title} className="card bg-white border border-brand-black/5 p-6">
