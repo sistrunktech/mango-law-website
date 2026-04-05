@@ -6,15 +6,23 @@ import { getCheckpointHotspots, type CheckpointHotspot } from '../lib/checkpoint
 
 interface CheckpointHotspotsProps {
   onCityClick?: (city: string, county: string) => void;
+  initialHotspots?: CheckpointHotspot[];
 }
 
-export default function CheckpointHotspots({ onCityClick }: CheckpointHotspotsProps) {
-  const [hotspots, setHotspots] = useState<CheckpointHotspot[]>([]);
-  const [loading, setLoading] = useState(true);
+export default function CheckpointHotspots({
+  onCityClick,
+  initialHotspots = [],
+}: CheckpointHotspotsProps) {
+  const [hotspots, setHotspots] = useState<CheckpointHotspot[]>(initialHotspots);
+  const [loading, setLoading] = useState(initialHotspots.length === 0);
 
   useEffect(() => {
+    if (initialHotspots.length > 0) {
+      return;
+    }
+
     loadHotspots();
-  }, []);
+  }, [initialHotspots.length]);
 
   const loadHotspots = async () => {
     try {
