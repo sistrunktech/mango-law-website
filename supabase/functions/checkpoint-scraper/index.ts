@@ -14,6 +14,8 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Client-Info, Apikey',
 };
 
+const RSS_ANNOUNCEMENT_LOOKBACK_DAYS = 21;
+
 interface ScraperStats {
   checkpointsFound: number;
   checkpointsNew: number;
@@ -456,7 +458,10 @@ Deno.serve(async (req: Request) => {
     try {
       if (mode === 'core') {
         const sources = await loadMasterRssSources();
-        const results = await scrapeRssSources(sources, { maxSources: 25 });
+        const results = await scrapeRssSources(sources, {
+          maxSources: sources.length,
+          maxAgeDays: RSS_ANNOUNCEMENT_LOOKBACK_DAYS,
+        });
 
         for (const r of results) {
           if (r.error) {
