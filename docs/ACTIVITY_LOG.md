@@ -180,3 +180,9 @@ Category: DUI Checkpoints / Automation Freshness
 Summary: Tightened the checkpoint announcement automation by adding a statewide Google News search feed for Ohio checkpoint coverage, filtering RSS ingestion down to recent notices, and moving the scheduled scraper from once nightly to every four hours.
 Files: supabase/functions/checkpoint-scraper/rss_sources_master.csv; supabase/functions/checkpoint-scraper/rss-sources-master.csv.ts; supabase/functions/checkpoint-scraper/rss-scraper.ts; supabase/functions/checkpoint-scraper/index.ts; supabase/migrations/20260405163946_increase_checkpoint_scraper_frequency.sql; test/checkpointRssSources.test.ts; test/run-tests.mjs; docs/OPERATIONS.md
 Notes: Live verification on April 5, 2026 confirmed the statewide Google News RSS query was already surfacing fresh March/Easter-period checkpoint stories that the prior once-daily pipeline could easily miss; statewide Reddit search was tested but remained too noisy to trust as an automated source-of-record.
+
+Date/time: 2026-04-06 09:15 EDT
+Category: DUI Checkpoints / Search Discovery
+Summary: Added a Google-style search discovery layer to the checkpoint scraper so localized Ohio search results can feed fresh Reddit, Facebook, and newsroom checkpoint candidates into the pending-announcements table instead of relying only on direct RSS/newsroom feeds.
+Files: supabase/functions/checkpoint-scraper/index.ts; supabase/functions/checkpoint-scraper/search-discovery.ts; test/checkpointSearchDiscovery.test.ts; test/run-tests.mjs; docs/OPERATIONS.md
+Notes: The new discovery pass uses the existing `SERPER_API_KEY` integration with a Columbus, Ohio location bias and keeps results in `pending_details` unless stronger source confirmation exists, so search/social breadth improves without promoting unverified noise onto the public checkpoint map.
