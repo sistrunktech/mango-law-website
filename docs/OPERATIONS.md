@@ -161,7 +161,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - **Transparency**: The UI surfaces “Announced on” dates when available and displays an explicit “No announced checkpoints at this time” empty state.
 - **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
 - **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints will be inserted without `latitude/longitude` and the map will show few/no markers.
-- **Scraper Schedule**: Runs daily at 2:00 AM EST via pg_cron. Manual trigger available in admin dashboard.
+- **Scraper Schedule**: Runs every 4 hours via pg_cron. Manual trigger available in admin dashboard.
 - **One-time data repair (OVICheckpoint history)**: If historical checkpoint dates were corrupted by an earlier scraper regression, use `scripts/backfill-ovicheckpoint-dates.ts`:
   - Dry-run: `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts`
   - Apply (safe insert only): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode upsert --apply`
