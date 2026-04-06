@@ -3,6 +3,7 @@ import { scrapeOVICheckpoint } from './ovicheckpoint-scraper.ts';
 import { geocodeCheckpointLocation, parseAddress } from './geocoding.ts';
 import { loadMasterRssSources, loadSeedSources } from './rss-sources.ts';
 import { scrapeRssSources, scrapeSeedSources } from './rss-scraper.ts';
+import { discoverCheckpointAnnouncements } from './search-discovery.ts';
 import {
   loadCuratedAnnouncementSeeds,
   type CuratedAnnouncementSeed,
@@ -314,6 +315,7 @@ Deno.serve(async (req: Request) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const serperApiKey = Deno.env.get('SERPER_API_KEY');
     const mapboxToken =
       Deno.env.get('MAPBOX_PUBLIC_TOKEN') ||
       Deno.env.get('NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN') ||
@@ -341,7 +343,7 @@ Deno.serve(async (req: Request) => {
       scraper_name: 'checkpoint-scraper',
       status: 'partial',
       started_at: logStartTime,
-      metadata: { trigger, mode, seedRow, source: 'OVICheckpoint + RSS + curated' },
+      metadata: { trigger, mode, seedRow, source: 'OVICheckpoint + RSS + curated + search' },
     });
 
     console.log('Starting OVICheckpoint.com scraper...');
@@ -522,6 +524,39 @@ Deno.serve(async (req: Request) => {
               stats.announcementsUpserted++;
             }
           }
+        }
+      }
+
+      if (mode === 'core' && serperApiKey) {
+        try {
+          const searchAnnouncements = await discoverCheckpointAnnouncements(serperApiKey);
+          stats.announcementsFound += searchAnnouncements.length;
+
+          for (const candidate of searchAnnouncements) {
+            const res = await upsertAnnouncement(supabase, {
+              title: candidate.title,
+              source_url: candidate.url,
+              source_name: candidate.sourceName,
+              announcement_date: candidate.publishedAt,
+              status: 'pending_details',
+              last_checked_at: new Date().toISOString(),
+              raw_text: `Search query: ${candidate.query}\n${candidate.summary || ''}`.trim(),
+            });
+
+            if (!res.ok) {
+              stats.errors.push({
+                checkpoint: `Search announcement upsert: ${candidate.title}`,
+                error: res.error,
+              });
+            } else {
+              stats.announcementsUpserted++;
+            }
+          }
+        } catch (error) {
+          stats.errors.push({
+            checkpoint: 'Search discovery',
+            error: error instanceof Error ? error.message : String(error),
+          });
         }
       }
 
