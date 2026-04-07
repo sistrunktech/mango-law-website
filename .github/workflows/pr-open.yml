@@ -21,11 +21,13 @@ jobs:
       - name: Open PR for agent branch
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.PR_AUTOMATION_TOKEN != '' && secrets.PR_AUTOMATION_TOKEN || github.token }}
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const head = context.ref.replace('refs/heads/', '');
             const base = context.payload.repository.default_branch || 'main';
+            const hasAutomationToken = process.env.HAS_PR_AUTOMATION_TOKEN === 'true';
 
             if (head === base) {
               core.notice(`Skipping PR creation for default branch ${base}.`);
@@ -49,14 +51,29 @@ jobs:
             const commitMessage = context.payload.head_commit?.message || head;
             const title = commitMessage.split('\n')[0].trim().slice(0, 240) || head;
 
-            const result = await github.rest.pulls.create({
-              owner,
-              repo,
-              head,
-              base,
-              title,
-              body: '',
-              draft: false,
-            });
+            try {
+              const result = await github.rest.pulls.create({
+                owner,
+                repo,
+                head,
+                base,
+                title,
+                body: '',
+                draft: false,
+              });
 
-            core.notice(`Opened PR #${result.data.number} for ${head}.`);
+              core.notice(`Opened PR #${result.data.number} for ${head}.`);
+            } catch (error) {
+              const blockedByPolicy =
+                error?.status === 403 &&
+                String(error?.message || '').includes('not permitted to create or approve pull requests');
+
+              if (blockedByPolicy && !hasAutomationToken) {
+                core.warning('Enterprise policy blocks GITHUB_TOKEN from creating PRs. Add repo secret PR_AUTOMATION_TOKEN to enable auto-open.');
+                return;
+              }
+
+              throw error;
+            }
+        env:
+          HAS_PR_AUTOMATION_TOKEN: ${{ secrets.PR_AUTOMATION_TOKEN != '' }}

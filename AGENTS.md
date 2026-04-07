@@ -81,7 +81,7 @@ Close a worktree (removes the worktree directory; does not delete branches):
 
 - **Do not open PRs manually.** When local tests pass, **push** to `codex/{feature}` or `copilot/{feature}` (e.g. `codex/fix-lint`).
 - GitHub Actions will:
-  1) auto-open a PR from `codex/*` or `copilot/*` into `main`,  
+  1) auto-open a PR from `codex/*` or `copilot/*` into `main` when `PR_AUTOMATION_TOKEN` is configured,  
   2) standardize the PR title/body, and  
   3) run CI on the PR.
 - Keep diffs **small and scoped**. Use Conventional Commits (`feat(scope): …`, `fix(scope): …`, `chore(scope): …`).
@@ -196,7 +196,7 @@ npm test --if-present
 
 ```text
 Branch naming (agents): codex/{feature}, copilot/{feature}
-Do not open PRs manually; push the branch and let `pr-open.yml` create the PR
+Do not open PRs manually; push the branch and let `pr-open.yml` create the PR when `PR_AUTOMATION_TOKEN` is configured
 Keep PRs <200 lines (soft), <400 (hard), lockfiles excluded
 One intent per PR (feat/fix/refactor/chore/docs)
 Run local build/lint/test before pushing
