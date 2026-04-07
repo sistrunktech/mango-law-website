@@ -1,0 +1,79 @@
+import assert from 'node:assert/strict';
+
+import {
+  extractGa4MeasurementIdFromScripts,
+  hasGrantedAnalyticsConsent,
+  trackLeadSubmitted,
+} from '../src/lib/analytics.ts';
+
+assert.equal(
+  extractGa4MeasurementIdFromScripts([
+    'https://www.googletagmanager.com/gtag/js?id=G-NJZD79GGFG&cx=c&gtm=4e6460',
+  ]),
+  'G-NJZD79GGFG'
+);
+
+assert.equal(
+  extractGa4MeasurementIdFromScripts([
+    'https://www.googletagmanager.com/gtm.js?id=GTM-WLJQZKB5',
+    'https://example.com/app.js',
+  ]),
+  null
+);
+
+assert.equal(hasGrantedAnalyticsConsent({ analytics_storage: 'granted' }), true);
+assert.equal(hasGrantedAnalyticsConsent({ analytics_storage: 'denied' }), false);
+assert.equal(hasGrantedAnalyticsConsent(null), false);
+
+const originalWindow = globalThis.window;
+const originalDocument = globalThis.document;
+
+const gtagCalls: unknown[][] = [];
+const dataLayer: Record<string, unknown>[] = [];
+
+globalThis.window = {
+  dataLayer,
+  gtag: (...args: unknown[]) => {
+    gtagCalls.push(args);
+  },
+  __mlConsent: {
+    get: () => ({ analytics_storage: 'granted' }),
+  },
+} as typeof globalThis.window;
+
+globalThis.document = {
+  scripts: [
+    {
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-NJZD79GGFG&cx=c&gtm=4e6460',
+    },
+  ],
+} as typeof globalThis.document;
+
+try {
+  trackLeadSubmitted('form', 'contact_form_submit', { target_email: 'office@mango.law' });
+
+  assert.equal(dataLayer.length, 1);
+  assert.equal(dataLayer[0]?.event, 'lead_submitted');
+  assert.equal(dataLayer[0]?.checkpoint_id, 'contact_form_submit');
+
+  assert.equal(gtagCalls.length, 3);
+  assert.equal(gtagCalls[0]?.[0], 'js');
+  assert.equal(gtagCalls[1]?.[0], 'config');
+  assert.equal(gtagCalls[1]?.[1], 'G-NJZD79GGFG');
+  assert.deepEqual(gtagCalls[1]?.[2], { send_page_view: false });
+  assert.equal(gtagCalls[2]?.[0], 'event');
+  assert.equal(gtagCalls[2]?.[1], 'lead_submitted');
+  assert.deepEqual(gtagCalls[2]?.[2], {
+    lead_source: 'form',
+    checkpoint_id: 'contact_form_submit',
+    target_email: 'office@mango.law',
+  });
+
+  trackLeadSubmitted('phone', 'contact_page_call_office');
+  assert.equal(gtagCalls.length, 4);
+  assert.equal(gtagCalls[3]?.[0], 'event');
+  assert.equal(gtagCalls[3]?.[1], 'lead_submitted');
+} finally {
+  globalThis.window = originalWindow;
+  globalThis.document = originalDocument;
+}
