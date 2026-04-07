@@ -1,10 +1,54 @@
 type DataLayerEvent = Record<string, unknown>;
 
+type ConsentSnapshot = {
+  analytics_storage?: 'granted' | 'denied';
+};
+
 declare global {
   interface Window {
     dataLayer?: DataLayerEvent[];
     gtag?: (...args: any[]) => void;
+    __mlGa4FallbackConfiguredIds?: string[];
   }
+}
+
+function hasGrantedAnalyticsConsent(consent: ConsentSnapshot | null | undefined): boolean {
+  return consent?.analytics_storage === 'granted';
+}
+
+function extractGa4MeasurementIdFromScripts(scriptSources: string[]): string | null {
+  for (const src of scriptSources) {
+    if (!src || !src.includes('googletagmanager.com/gtag/js')) continue;
+    try {
+      const id = new URL(src).searchParams.get('id');
+      if (id) return id;
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
+function dispatchGa4FallbackEvent(eventName: string, params: Record<string, unknown>): boolean {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
+  const consent = window.__mlConsent?.get?.() as ConsentSnapshot | null | undefined;
+  if (!hasGrantedAnalyticsConsent(consent)) return false;
+  if (typeof window.gtag !== 'function') return false;
+
+  const measurementId = extractGa4MeasurementIdFromScripts(
+    Array.from(document.scripts, (script) => script.src)
+  );
+  if (!measurementId) return false;
+
+  window.__mlGa4FallbackConfiguredIds = window.__mlGa4FallbackConfiguredIds || [];
+  if (!window.__mlGa4FallbackConfiguredIds.includes(measurementId)) {
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId, { send_page_view: false });
+    window.__mlGa4FallbackConfiguredIds.push(measurementId);
+  }
+
+  window.gtag('event', eventName, params);
+  return true;
 }
 
 // AI traffic detection functions
@@ -107,4 +151,12 @@ export function trackLeadSubmitted(
     checkpoint_id,
     ...extra,
   });
+
+  dispatchGa4FallbackEvent('lead_submitted', {
+    lead_source,
+    checkpoint_id,
+    ...extra,
+  });
 }
+
+export { extractGa4MeasurementIdFromScripts, hasGrantedAnalyticsConsent };
