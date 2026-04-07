@@ -7,6 +7,13 @@ export interface RssItemCandidate {
   summary: string | null;
 }
 
+interface RssScrapeOptions {
+  keywordOverride?: string[];
+  maxSources?: number;
+  maxAgeDays?: number;
+  now?: Date;
+}
+
 const DEFAULT_KEYWORDS = [
   'sobriety checkpoint',
   'ovi checkpoint',
@@ -51,6 +58,19 @@ function textIncludesAny(text: string, keywords: string[]): boolean {
 
 function stripHtml(input: string): string {
   return input.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function isWithinAgeWindow(
+  publishedAt: string | null,
+  maxAgeDays: number | undefined,
+  now: Date
+): boolean {
+  if (!maxAgeDays || !publishedAt) return true;
+
+  const publishedTime = new Date(publishedAt).getTime();
+  if (Number.isNaN(publishedTime)) return true;
+
+  return publishedTime >= now.getTime() - maxAgeDays * 24 * 60 * 60 * 1000;
 }
 
 function decodeCdata(input: string): string {
@@ -130,10 +150,11 @@ async function fetchRss(url: string): Promise<string> {
 
 export async function scrapeRssSources(
   sources: RssSource[],
-  opts?: { keywordOverride?: string[]; maxSources?: number }
+  opts?: RssScrapeOptions
 ): Promise<Array<{ source: RssSource; items: RssItemCandidate[]; error?: string }>> {
   const maxSources = opts?.maxSources ?? sources.length;
   const keywords = opts?.keywordOverride?.length ? opts.keywordOverride : DEFAULT_KEYWORDS;
+  const now = opts?.now ?? new Date();
 
   const results: Array<{ source: RssSource; items: RssItemCandidate[]; error?: string }> = [];
   for (const source of sources.slice(0, maxSources)) {
@@ -143,6 +164,7 @@ export async function scrapeRssSources(
       for (const parsed of parseRssOrAtom(xml)) {
         const combined = `${parsed.title}\n${parsed.summary || ''}`;
         if (!textIncludesAny(combined, keywords)) continue;
+        if (!isWithinAgeWindow(parsed.pubDate, opts?.maxAgeDays, now)) continue;
 
         const normalizedUrl = canonicalizeUrl(parsed.url);
         items.push({
