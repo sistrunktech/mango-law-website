@@ -12,11 +12,13 @@ import {
   MapPin,
   Send,
   Star,
+  Target,
   Users,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import BlogManager from '../components/admin/BlogManager';
 import ContactManager from '../components/admin/ContactManager';
+import ContentOpsManager from '../components/admin/ContentOpsManager';
 import CheckpointManager from '../components/admin/CheckpointManager';
 import HandoffDocManager from '../components/admin/HandoffDocManager';
 import ReviewCampaignManager from '../components/admin/ReviewCampaignManager';
@@ -26,7 +28,7 @@ import SEORankManager from '../components/admin/SEORankManager';
 
 import { SEO } from '../lib/seo';
 
-type Tab = 'blog' | 'contacts' | 'checkpoints' | 'docs' | 'campaigns' | 'reviews' | 'social' | 'seo';
+type Tab = 'blog' | 'contacts' | 'contentOps' | 'checkpoints' | 'docs' | 'campaigns' | 'reviews' | 'social' | 'seo';
 
 const tabMeta: Record<
   Tab,
@@ -65,6 +67,12 @@ const tabMeta: Record<
     label: 'Search Visibility',
     description: 'Track rankings, indexing, and the search execution queue.',
     icon: Link2,
+    group: 'growth',
+  },
+  contentOps: {
+    label: 'Content Ops',
+    description: 'Turn search signals into prioritized opportunities and brief-ready work.',
+    icon: Target,
     group: 'growth',
   },
   social: {
@@ -256,6 +264,7 @@ export default function AdminDashboardPage() {
         {activeTab === 'campaigns' && <ReviewCampaignManager />}
         {activeTab === 'reviews' && <ReviewManager />}
         {activeTab === 'seo' && <SEORankManager />}
+        {activeTab === 'contentOps' && <ContentOpsManager />}
         {activeTab === 'social' && <SocialMediaManager />}
         {activeTab === 'checkpoints' && <CheckpointManager />}
         {activeTab === 'docs' && <HandoffDocManager />}
