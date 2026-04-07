@@ -26,5 +26,6 @@ WLWT Cincinnati,https://www.wlwt.com/-/9838586/9838828/-/format/rss_2.0/view/asF
 WSYX ABC6 Columbus,https://abc6onyourside.com/resources/rss,media,core,likely,Sinclair pattern for RSS. Verify.
 WTOL Toledo,https://feeds.feedblitz.com/wtol/news,media,core,verified,FeedBlitz feed for WTOL (per Feedspot directory).
 WTVG 13abc Toledo,https://www.13abc.com/feeds/rss/,media,supplementary,likely,Gray TV RSS path pattern. Verify.
+Google News Ohio Checkpoints,https://news.google.com/rss/search?q=%28sobriety%20checkpoint%20OR%20OVI%20checkpoint%20OR%20DUI%20checkpoint%20OR%20%22traffic%20safety%20checkpoint%22%29%20%28Ohio%20OR%20OH%29&hl=en-US&gl=US&ceid=US:en,search,core,verified,Statewide Google News RSS search for fresh Ohio checkpoint coverage.
 
 `;
