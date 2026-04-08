@@ -854,7 +854,7 @@ Motion practice can shape outcomes. Suppressed evidence, dismissed charges, and 
 
 If you're facing criminal charges in Delaware or Franklin County, don't wait. Early motion practice can change the trajectory of your case.
 
-**Contact Mango Law at (740) 602-2155** for a free consultation. We'll review your case, identify motion opportunities, and work toward the best available outcome for your situation.
+**Contact Mango Law at (740) 417-6191** for a free consultation. We'll review your case, identify motion opportunities, and work toward the best available outcome for your situation.
 
 ## Additional Resources
 
@@ -1313,7 +1313,7 @@ If you've been arrested for OVI in Delaware or Franklin County:
 
 At Mango Law, we challenge every aspect of OVI cases through strategic [motion practice](/blog/motion-practice-criminal-defense): traffic stop legality, FST administration, chemical test accuracy, and constitutional violations. If you have prior OVI convictions, understanding [Ohio's lookback period](/blog/ohio-dui-lookback-period) is critical to your defense strategy.
 
-Contact us at **(740) 602-2155** for a confidential case evaluation.`,
+Contact us at **(740) 417-6191** for a confidential case evaluation.`,
     category: 'OVI/DUI Defense',
     date: '2024-12-07',
     author: 'Dominic Mango',

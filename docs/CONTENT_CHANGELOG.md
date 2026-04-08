@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-04-08 09:15 EDT
+Post slug and title: contact surfaces | Correct public office number vs Nick direct cell
+Change type: minor
+Summary of change: Corrected the inverted phone-number source of truth after rechecking Nick's November 22, 2025 email instructions. The sitewide public office/default line is back to `(740) 417-6191`, while Nick's direct cell `(740) 602-2155` is only shown where it is explicitly labeled as direct. Supabase email/review-response defaults and public blog CTA references were brought back into alignment with that split.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: n/a
+Rollback notes: Revert the source-of-truth swap in `src/lib/contactInfo.ts`, `supabase/functions/_shared/email/templates.ts`, `supabase/functions/generate-review-response/index.ts`, and `src/data/blogPosts.ts` if newer written direction from Nick supersedes the November 22, 2025 instruction.
+
 Date/time: 2026-04-08 08:05 EDT
 Post slug and title: about | footer/contact/chat routing and public phone normalization
 Change type: minor
