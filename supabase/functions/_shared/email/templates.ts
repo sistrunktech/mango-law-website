@@ -256,7 +256,7 @@ export function buildAdminEmailHtml(type: NotificationType, data: AdminEmailData
       Quick actions:
       <a href="mailto:${escapeHtml(data.replyToEmail || "office@mango.law")}" style="color:${themeTokens.link}; font-weight:700; text-decoration:none;">Reply</a>
       ·
-      <a href="tel:${escapeHtml(data.callToPhone || "7404176191")}" style="color:${themeTokens.link}; font-weight:700; text-decoration:none;">Call/Text (740) 417-6191</a>
+      <a href="tel:${escapeHtml(data.callToPhone || "7406022155")}" style="color:${themeTokens.link}; font-weight:700; text-decoration:none;">Call/Text (740) 602-2155</a>
     </div>
   `;
 
@@ -285,8 +285,8 @@ export function buildClientConfirmationHtml(
   const safeName = escapeHtml(data.greetingName);
   const intro = escapeHtml(data.intro);
 
-  const callTextHref = `tel:7404176191`;
-  const callTextLabel = `Call/Text ${escapeHtml("(740) 417-6191")}`;
+  const callTextHref = `tel:7406022155`;
+  const callTextLabel = `Call/Text ${escapeHtml("(740) 602-2155")}`;
   const officeEmailHref = `mailto:office@mango.law`;
 
   const details = data.details && data.details.length > 0

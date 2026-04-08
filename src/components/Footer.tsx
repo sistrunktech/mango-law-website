@@ -10,8 +10,8 @@ import {
   footerServiceLinks,
 } from '../data/navigation';
 import {
-  GENERAL_OFFICE_PHONE_DISPLAY,
-  GENERAL_OFFICE_PHONE_TEL,
+  NICK_DIRECT_PHONE_DISPLAY,
+  NICK_DIRECT_PHONE_TEL,
   OFFICE_ADDRESS_CITY_STATE_ZIP,
   OFFICE_ADDRESS_STREET,
   OFFICE_EMAIL,
@@ -87,7 +87,7 @@ export default function Footer() {
                   <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/50">Call or text Nick</div>
+                  <div className="text-xs text-brand-offWhite/50">Call or text Mango Law</div>
                   <div className="font-semibold">{OFFICE_PHONE_DISPLAY}</div>
                 </div>
               </a>
@@ -173,19 +173,19 @@ export default function Footer() {
                   <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/50">Direct line</div>
+                  <div className="text-xs text-brand-offWhite/50">Office line</div>
                   <div className="font-semibold">{OFFICE_PHONE_DISPLAY}</div>
                 </div>
               </a>
 
               <a
-                href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
+                href={`tel:${NICK_DIRECT_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/84 transition-colors hover:text-brand-leaf"
                 data-cta="footer_call_secondary"
                 onClick={() => {
                   trackCtaClick('footer_call_secondary');
                   trackLeadSubmitted('phone', 'footer_call_secondary', {
-                    target_number: GENERAL_OFFICE_PHONE_TEL,
+                    target_number: NICK_DIRECT_PHONE_TEL,
                   });
                 }}
               >
@@ -193,8 +193,8 @@ export default function Footer() {
                   <Phone className="h-4 w-4 text-brand-leaf" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/50">Office</div>
-                  <div className="font-semibold">{GENERAL_OFFICE_PHONE_DISPLAY}</div>
+                  <div className="text-xs text-brand-offWhite/50">Direct line</div>
+                  <div className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</div>
                 </div>
               </a>
 

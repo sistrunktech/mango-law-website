@@ -41,9 +41,9 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - See `.env.example` for the full list; update it whenever variables change.
 - **Supabase project pinning:** the frontend is currently pinned to the production Supabase project in `src/lib/supabaseClient.ts` to prevent “split brain” data and OAuth redirect drift. If you truly need multiple environments later, reintroduce host/env-based switching carefully and update Google OAuth redirect URIs accordingly.
 
-## Contact Numbers (Do Not Swap)
-- **Primary (Call/Text):** `(740) 417-6191` (`tel:7404176191`) — default for all “Call/Text” CTAs (fastest response).
-- **Secondary (Office line):** `(740) 602-2155` (`tel:7406022155`) — show only where a second number is helpful (footer/contact/about).
+## Contact Numbers
+- **Primary public call/text line:** `(740) 602-2155` (`tel:7406022155`) — default for public CTAs, GBP, citations, and email defaults.
+- **Secondary or legacy line:** `(740) 417-6191` (`tel:7404176191`) — only show where a second number is intentionally helpful.
 
 ## Secrets Placement
 - GitHub Actions: secrets and variables have been added via `gh secret set` / `gh variable set`. Replace placeholder Supabase values (`NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `NEXT_PUBLIC_SUPABASE_URL`) with real env-specific keys.
