@@ -13,11 +13,11 @@ import {
   attorneyTrustMetadata,
 } from '../data/attorneyProfile';
 import {
+  NICK_DIRECT_PHONE_DISPLAY,
+  NICK_DIRECT_PHONE_TEL,
+  OFFICE_EMAIL,
   OFFICE_PHONE_DISPLAY,
   OFFICE_PHONE_TEL,
-  GENERAL_OFFICE_PHONE_DISPLAY,
-  GENERAL_OFFICE_PHONE_TEL,
-  OFFICE_EMAIL,
 } from '../lib/contactInfo';
 
 export default function AboutPage() {
@@ -70,25 +70,25 @@ export default function AboutPage() {
                         >
                           <span className="text-lg">📞</span>
                           <div className="flex flex-col">
-                            <span className="text-xs text-brand-black/60">Call/Text (Direct)</span>
+                            <span className="text-xs text-brand-black/60">Call/Text (Office)</span>
                             <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
                           </div>
                         </a>
                         <a
-                          href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
+                          href={`tel:${NICK_DIRECT_PHONE_TEL}`}
                           className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
                           data-cta="about_mobile_call_secondary"
                           onClick={() => {
                             trackCtaClick('about_mobile_call_secondary');
                             trackLeadSubmitted('phone', 'about_mobile_call_secondary', {
-                              target_number: GENERAL_OFFICE_PHONE_TEL,
+                              target_number: NICK_DIRECT_PHONE_TEL,
                             });
                           }}
                         >
                           <span className="text-lg">📱</span>
                           <div className="flex flex-col">
-                            <span className="text-xs text-brand-black/60">Office</span>
-                            <span className="font-semibold">{GENERAL_OFFICE_PHONE_DISPLAY}</span>
+                            <span className="text-xs text-brand-black/60">Direct line</span>
+                            <span className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</span>
                           </div>
                         </a>
                         <a
@@ -161,25 +161,25 @@ export default function AboutPage() {
                       >
                         <span className="text-lg">📞</span>
                         <div className="flex flex-col">
-                          <span className="text-xs text-brand-black/60">Call/Text (Direct)</span>
+                          <span className="text-xs text-brand-black/60">Call/Text (Office)</span>
                           <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
                         </div>
                       </a>
                       <a
-                        href={`tel:${GENERAL_OFFICE_PHONE_TEL}`}
+                        href={`tel:${NICK_DIRECT_PHONE_TEL}`}
                         className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
                         data-cta="about_call_secondary"
                         onClick={() => {
                           trackCtaClick('about_call_secondary');
                           trackLeadSubmitted('phone', 'about_call_secondary', {
-                            target_number: GENERAL_OFFICE_PHONE_TEL,
+                            target_number: NICK_DIRECT_PHONE_TEL,
                           });
                         }}
                       >
                         <span className="text-lg">📱</span>
                         <div className="flex flex-col">
-                          <span className="text-xs text-brand-black/60">Office</span>
-                          <span className="font-semibold">{GENERAL_OFFICE_PHONE_DISPLAY}</span>
+                          <span className="text-xs text-brand-black/60">Direct line</span>
+                          <span className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</span>
                         </div>
                       </a>
                       <a

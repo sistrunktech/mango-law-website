@@ -8,4 +8,5 @@ await import('./checkpointStatus.test.ts');
 await import('./checkpointRssSources.test.ts');
 await import('./checkpointSearchDiscovery.test.ts');
 await import('./analyticsFallback.test.ts');
+await import('./contactInfo.test.ts');
 await import('./emailTemplates.test.ts');

@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-04-07 22:45 EDT
+Post slug and title: Contact routing and public phone normalization
+Change type: minor
+Summary of change: Updated public contact routing so the canonical office line `(740) 602-2155` is the default sitewide call/text number, retained `(740) 417-6191` only as a secondary direct line where explicitly labeled, and aligned email/review-response defaults with the same canonical office number.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: n/a
+Rollback notes: Revert the contact constant, footer/about/chat UI, and Supabase email/review-response defaults on branch `codex/phone-canonicalization-2026-04` if the NAP decision changes.
+
 Date/time: 2026-03-31 14:05 EDT
 Post slug and title: drug-possession-charge-ohio-what-to-do-next; ohio-ovi-driving-privileges-als | Internal-link reinforcement for March indexing recovery
 Change type: minor
