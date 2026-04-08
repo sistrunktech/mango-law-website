@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import ReviewsPage from '@/views/ReviewsPage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
+import { reviewsPageMetaDescription } from '@/data/seoRoutingContent';
 
 const seo = {
-  title: 'Client Reviews | Mango Law LLC',
-  description:
-    'Read what past clients have to say about working with criminal defense attorney Dominic Mango in Delaware and Franklin Counties.',
+  title: 'Client Reviews for OVI & Criminal Defense | Mango Law LLC',
+  description: reviewsPageMetaDescription,
   url: '/reviews',
 };
 

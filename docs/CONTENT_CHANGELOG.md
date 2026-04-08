@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-04-07 17:35 EDT
+Post slug and title: about; reviews; contact; domestic-violence-lawyer-delaware-oh; drug-crime-lawyer-delaware-oh | Support-page routing and DV/drug pillar recovery
+Change type: minor
+Summary of change: Expanded About, Reviews, and Contact into stronger routing assets for OVI, criminal-defense, domestic-violence, and drug-charge journeys; tightened domestic-violence and drug-crime metadata and support-link sections to better match the April recovery priorities and current GSC/BrightLocal signals.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: n/a
+Rollback notes: Revert `fix(seo): route support pages into DV and drug recovery` if the support-page routing or pillar copy needs to be rolled back.
+
 Date/time: 2026-03-31 14:05 EDT
 Post slug and title: drug-possession-charge-ohio-what-to-do-next; ohio-ovi-driving-privileges-als | Internal-link reinforcement for March indexing recovery
 Change type: minor

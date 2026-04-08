@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import ContactPage from '@/views/ContactPage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
-import { OFFICE_PHONE_DISPLAY } from '@/lib/contactInfo';
+import { contactPageMetaDescription } from '@/data/seoRoutingContent';
 
 const seo = {
-  title: 'Contact Mango Law LLC | Delaware, OH Criminal Defense Attorney',
-  description: `Schedule a consultation with experienced criminal defense attorney Dominic "Nick" Mango. Located in Delaware, OH. Call or text ${OFFICE_PHONE_DISPLAY} or email office@mango.law.`,
+  title: 'Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney',
+  description: contactPageMetaDescription,
   url: '/contact',
 };
 
