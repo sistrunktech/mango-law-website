@@ -20,6 +20,24 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-04-08 08:05 EDT
+Post slug and title: about | footer/contact/chat routing and public phone normalization
+Change type: minor
+Summary of change: Updated the public-facing contact surfaces tied to `/about`, the shared footer/chat routing, and Supabase email/review-response defaults so the canonical call/text line `(740) 602-2155` is primary sitewide, while `(740) 417-6191` is retained only where it is explicitly labeled as secondary or legacy.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: n/a
+Rollback notes: Revert the contact constant, footer/about/chat UI, and Supabase email/review-response defaults on branch `codex/phone-canonicalization-2026-04` if the NAP decision changes.
+
+Date/time: 2026-04-07 17:35 EDT
+Post slug and title: about; reviews; contact; domestic-violence-lawyer-delaware-oh; drug-crime-lawyer-delaware-oh | Support-page routing and DV/drug pillar recovery
+Change type: minor
+Summary of change: Expanded About, Reviews, and Contact into stronger routing assets for OVI, criminal-defense, domestic-violence, and drug-charge journeys; tightened domestic-violence and drug-crime metadata and support-link sections to better match the April recovery priorities and current GSC/BrightLocal signals.
+
 Date/time: 2026-04-07 17:35 EDT
 Post slug and title: about; reviews; contact; domestic-violence-lawyer-delaware-oh; drug-crime-lawyer-delaware-oh | Support-page routing and DV/drug pillar recovery
 Change type: minor

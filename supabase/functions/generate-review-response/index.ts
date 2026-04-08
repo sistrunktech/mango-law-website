@@ -17,9 +17,9 @@ interface ReviewResponseRequest {
 }
 
 const REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY =
-  Deno.env.get("REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY") || "(740) 417-6191";
+  Deno.env.get("REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY") || "(740) 602-2155";
 const REVIEW_RESPONSE_CONTACT_PHONE_TEL =
-  Deno.env.get("REVIEW_RESPONSE_CONTACT_PHONE_TEL") || "7404176191";
+  Deno.env.get("REVIEW_RESPONSE_CONTACT_PHONE_TEL") || "7406022155";
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
