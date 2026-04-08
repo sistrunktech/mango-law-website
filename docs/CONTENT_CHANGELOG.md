@@ -20,10 +20,10 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
-Date/time: 2026-04-07 22:45 EDT
-Post slug and title: Contact routing and public phone normalization
+Date/time: 2026-04-08 08:05 EDT
+Post slug and title: about | footer/contact/chat routing and public phone normalization
 Change type: minor
-Summary of change: Updated public contact routing so the canonical call/text line `(740) 602-2155` is the default sitewide number, retained `(740) 417-6191` only as a secondary or legacy line where explicitly labeled, and aligned email/review-response defaults with the same canonical public number.
+Summary of change: Updated the public-facing contact surfaces tied to `/about`, the shared footer/chat routing, and Supabase email/review-response defaults so the canonical call/text line `(740) 602-2155` is primary sitewide, while `(740) 417-6191` is retained only where it is explicitly labeled as secondary or legacy.
 Regression checklist:
 - Hero changed? no
 - Images removed? no
