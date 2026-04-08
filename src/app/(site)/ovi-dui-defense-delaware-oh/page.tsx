@@ -4,9 +4,9 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'OVI/DUI Defense Lawyer Delaware, OH | Mango Law LLC',
+  title: 'Delaware Ohio OVI Lawyer | DUI Defense | Mango Law LLC',
   description:
-    'OVI/DUI defense attorney in Delaware County handling traffic stops, field sobriety issues, breath-test evidence, and appeals. Practicing in Central Ohio since 1999.',
+    'Delaware Ohio OVI lawyer for DUI charges, ALS hearings, checkpoint stops, and Delaware County court defense. Practicing in Central Ohio since 1999.',
   image: '/images/generated/ovi-dui-defense-hero.png',
   url: '/ovi-dui-defense-delaware-oh',
 };
