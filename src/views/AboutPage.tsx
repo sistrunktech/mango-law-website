@@ -19,13 +19,14 @@ import {
   OFFICE_PHONE_DISPLAY,
   OFFICE_PHONE_TEL,
 } from '../lib/contactInfo';
+import { aboutPageMetaDescription, aboutSupportLinks } from '../data/seoRoutingContent';
 
 export default function AboutPage() {
   return (
     <>
       <SEO
-        title="About Dominic Mango | Criminal Defense Attorney Delaware, OH"
-        description={attorneyProfile.aboutMetaDescription}
+        title="About Dominic Mango | Delaware, OH Criminal Defense & OVI Attorney"
+        description={aboutPageMetaDescription}
         structuredData={attorneySchema}
         breadcrumbs={[
           { name: 'Home', item: '/' },
@@ -35,7 +36,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="Dominic Mango — focused on clear, assertive defense in Delaware, Ohio."
-        description="A practice built on preparation, straight talk, and courtroom advocacy that respects your time and goals."
+        description="Learn how Nick Mango approaches OVI and criminal-defense matters in Central Ohio, then move into the page that best matches the charge or issue."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         variant="light"
@@ -220,11 +221,11 @@ export default function AboutPage() {
                 <ul className="space-y-3 text-brand-black/80">
                   <li className="flex gap-3">
                     <span className="text-brand-mango font-bold">•</span>
-                    <span>Delaware County focus with awareness of local court practices</span>
+                    <span>Delaware and Franklin County focus across OVI, criminal, domestic-violence, and drug-charge matters</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-brand-mango font-bold">•</span>
-                    <span>Organized discovery review to spot procedural and evidentiary gaps</span>
+                    <span>Organized discovery review to spot procedural, evidentiary, and search-related gaps</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-brand-mango font-bold">•</span>
@@ -234,34 +235,13 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="font-display text-2xl font-semibold text-brand-black">Common starting points for OVI cases</h3>
+                <h3 className="font-display text-2xl font-semibold text-brand-black">Start with the page closest to the charge or issue</h3>
                 <p className="text-brand-black/80 leading-relaxed">
-                  If your case involves an OVI arrest, license issue, or checkpoint stop, these are usually the fastest pages
-                  to review before a consultation.
+                  People who land on the about page are usually verifying experience first, then deciding which guide actually
+                  matches the allegation, hearing, or stop they are dealing with now.
                 </p>
-                <div className="grid gap-4 md:grid-cols-2">
-                  {[
-                    {
-                      title: 'OVI / DUI defense overview',
-                      href: '/ovi-dui-defense-delaware-oh',
-                      description: 'Broad strategy, penalties, and defense issues in Ohio OVI cases.',
-                    },
-                    {
-                      title: 'First-offense OVI guide',
-                      href: '/first-offense-ovi-ohio',
-                      description: 'What to do in the first 72 hours after an arrest.',
-                    },
-                    {
-                      title: 'ALS license suspension defense',
-                      href: '/als-license-suspension-ohio',
-                      description: 'How the suspension timeline works and when privileges may be available.',
-                    },
-                    {
-                      title: 'Ohio DUI checkpoint map',
-                      href: '/resources/dui-checkpoints',
-                      description: 'Announced checkpoints, recent activity, and what a stop can involve.',
-                    },
-                  ].map((item) => (
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {aboutSupportLinks.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}

@@ -12,6 +12,7 @@ import {
   OFFICE_EMAIL,
 } from '../lib/contactInfo';
 import { attorneyProfile } from '../data/attorneyProfile';
+import { contactIssueGuideLinks } from '../data/seoRoutingContent';
 
 export default function ContactPage() {
   return (
@@ -34,7 +35,8 @@ export default function ContactPage() {
             <div className="space-y-3">
               <h2 className="text-2xl font-bold text-brand-black">Choose the fastest way to reach us.</h2>
               <p className="text-sm text-brand-black/70">
-                If you already know the urgent issue, say it directly. License concerns, bond conditions, court dates, and police contact are all useful to mention up front.
+                If you already know the urgent issue, say it directly. OVI arrests, no-contact orders, search issues,
+                bond conditions, court dates, and police contact are all useful to mention up front.
               </p>
             </div>
 
@@ -115,7 +117,7 @@ export default function ContactPage() {
                   <ul className="mt-3 space-y-2 text-sm text-brand-black/65">
                     <li>Charge or allegation, if you know it</li>
                     <li>County, court date, or bond conditions</li>
-                    <li>License suspension or towing questions</li>
+                    <li>License suspension, no-contact, or search-related questions</li>
                     <li>Any immediate deadline you are worried about</li>
                   </ul>
                 </div>
@@ -129,7 +131,7 @@ export default function ContactPage() {
               <div>
                 <p className="text-sm font-semibold text-brand-black">Serving Delaware and nearby courts</p>
                 <p className="mt-1 text-sm text-brand-black/60">
-                  Based in Delaware, Ohio and handling matters throughout Delaware and Franklin Counties.
+                  Based in Delaware, Ohio and handling OVI, criminal-defense, domestic-violence, drug, and related protection-order matters throughout Delaware and Franklin Counties.
                 </p>
                 <p className="mt-1 text-xs text-brand-black/45">
                   Led by {attorneyProfile.legalName}, Ohio Supreme Court Registration No. {attorneyProfile.registrationNumber}.
@@ -157,32 +159,12 @@ export default function ContactPage() {
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-goldText">Start with the closest guide</p>
               <h2 className="mt-3 font-display text-3xl font-bold text-brand-black">If the issue is already clear, use the matching page first.</h2>
               <p className="mt-3 text-brand-black/70">
-                These are the pages people most often need before or right after reaching out about an OVI arrest.
+                These are the pages people most often need before or right after reaching out about an OVI, domestic-violence,
+                drug, protection-order, or broader criminal-defense issue.
               </p>
             </div>
-            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {[
-                {
-                  title: 'OVI / DUI defense overview',
-                  href: '/ovi-dui-defense-delaware-oh',
-                  description: 'Start here for the broad defense picture.',
-                },
-                {
-                  title: 'First-offense OVI in Ohio',
-                  href: '/first-offense-ovi-ohio',
-                  description: 'The first 72 hours, deadlines, and early mistakes to avoid.',
-                },
-                {
-                  title: 'ALS license suspension defense',
-                  href: '/als-license-suspension-ohio',
-                  description: 'What happens to your license and when limited privileges may be available.',
-                },
-                {
-                  title: 'Ohio DUI checkpoint map',
-                  href: '/resources/dui-checkpoints',
-                  description: 'Announced checkpoints, current watch items, and stop context.',
-                },
-              ].map((item) => (
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {contactIssueGuideLinks.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

@@ -63,38 +63,40 @@ jobs:
 
             let nextBody = currentBody;
             if (shouldManageBody) {
-              nextBody = `${marker}
-# Summary
-${changeText !== 'N/A' ? changeText : 'Describe what changed and why.'}
-
-# Context
-${contextText}
-
-# Changes
-## UI / UX
-- 
-
-## Code
-- 
-
-# QA
-- [ ] \`npm run lint\`
-- [ ] \`npm run build\`
-- [ ] \`npm run typecheck\`
-
-## Playwright smoke (if present)
-- [ ] \`npm run test:smoke\`
-
-# Screenshots
-Desktop/mobile screenshots if UI changes.
-
-# Risk / Rollback
-- **Risk:** ${riskText}
-- **Rollback:** revert this PR
-
-# Notes
-- ${testPlanText}
-`;
+              nextBody = [
+                marker,
+                '# Summary',
+                changeText !== 'N/A' ? changeText : 'Describe what changed and why.',
+                '',
+                '# Context',
+                contextText,
+                '',
+                '# Changes',
+                '## UI / UX',
+                '- ',
+                '',
+                '## Code',
+                '- ',
+                '',
+                '# QA',
+                '- [ ] `npm run lint`',
+                '- [ ] `npm run build`',
+                '- [ ] `npm run typecheck`',
+                '',
+                '## Playwright smoke (if present)',
+                '- [ ] `npm run test:smoke`',
+                '',
+                '# Screenshots',
+                'Desktop/mobile screenshots if UI changes.',
+                '',
+                '# Risk / Rollback',
+                `- **Risk:** ${riskText}`,
+                '- **Rollback:** revert this PR',
+                '',
+                '# Notes',
+                `- ${testPlanText}`,
+                '',
+              ].join('\n');
             }
 
             await github.rest.pulls.update({
