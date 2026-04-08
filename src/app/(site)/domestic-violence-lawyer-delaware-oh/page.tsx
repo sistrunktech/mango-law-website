@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import DomesticViolencePage, { domesticViolenceFaqs } from '@/views/DomesticViolencePage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
+import { domesticViolencePageMetaDescription } from '@/data/seoRoutingContent';
 
 const seo = {
-  title: 'Domestic Violence Lawyer Delaware, OH | Mango Law LLC',
-  description:
-    'Strategic domestic violence defense for misdemeanor and felony allegations. Former prosecutor practicing criminal law in Central Ohio since 1999.',
+  title: 'Domestic Violence Defense Attorney Delaware, OH | Mango Law LLC',
+  description: domesticViolencePageMetaDescription,
   image: '/images/generated/blog-assault-domestic-violence.png',
   url: '/domestic-violence-lawyer-delaware-oh',
 };
