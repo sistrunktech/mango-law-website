@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import DrugCrimePage, { drugCrimeFaqs } from '@/views/DrugCrimePage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
+import { drugCrimePageMetaDescription } from '@/data/seoRoutingContent';
 
 const seo = {
-  title: 'Drug Crime Lawyer Delaware, OH | Mango Law LLC',
-  description:
-    'Strategic drug crime defense for possession, trafficking, and paraphernalia charges. Former prosecutor practicing criminal law in Central Ohio since 1999.',
+  title: 'Drug Crime Lawyer Delaware, OH | Drug Charges Defense | Mango Law LLC',
+  description: drugCrimePageMetaDescription,
   image: '/images/generated/drug-crimes-defense-hero.png',
   url: '/drug-crime-lawyer-delaware-oh',
 };

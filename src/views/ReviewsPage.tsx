@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import PageHero from '../components/PageHero';
 import ReviewsSidebar from '../components/ReviewsSidebar';
 import CTASection from '../components/CTASection';
@@ -5,6 +6,7 @@ import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { Quote } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
 import { SEO } from '../lib/seo';
+import { reviewsPageMetaDescription, reviewsSupportLinks } from '../data/seoRoutingContent';
 
 export default function ReviewsPage() {
   const [featured, ...rest] = testimonials;
@@ -12,8 +14,8 @@ export default function ReviewsPage() {
   return (
     <>
       <SEO
-        title="Client Reviews | Mango Law LLC"
-        description="Read what past clients have to say about working with criminal defense attorney Dominic Mango in Delaware and Franklin Counties."
+        title="Client Reviews for OVI & Criminal Defense | Mango Law LLC"
+        description={reviewsPageMetaDescription}
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Reviews', item: '/reviews' },
@@ -22,7 +24,7 @@ export default function ReviewsPage() {
       <PageHero
         eyebrow="Reviews"
         title="What clients say about working with Mango Law."
-        description="Experiences shared by past clients. Every case is different; results are not guaranteed."
+        description="Feedback from past clients gives context on communication, preparation, and courtroom advocacy. Every case is different and results are not guaranteed."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         variant="light"
@@ -33,6 +35,29 @@ export default function ReviewsPage() {
         <div className="container">
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">
+              <div className="mb-10 rounded-3xl border border-brand-black/10 bg-white p-8 shadow-soft">
+                <p className="eyebrow text-brand-goldText">Use Reviews As Context</p>
+                <h2 className="mt-3 font-display text-3xl font-bold text-brand-black">
+                  Then go straight to the page matching the charge.
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-brand-black/70">
+                  Most people reading reviews are comparing representation for an OVI, broader criminal-defense case,
+                  domestic-violence allegation, or drug charge. These are the fastest follow-up pages to review next.
+                </p>
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  {reviewsSupportLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="rounded-2xl border border-brand-black/10 bg-brand-offWhite/55 p-5 transition-colors hover:border-brand-mango/40 hover:bg-white"
+                    >
+                      <p className="font-semibold text-brand-black">{item.title}</p>
+                      <p className="mt-2 text-sm text-brand-black/65">{item.description}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               <div className="mb-10 rounded-3xl border border-brand-black/10 bg-gradient-to-br from-brand-offWhite to-white p-8 shadow-soft-lg">
                 <div className="flex items-start justify-between gap-6">
                   <div className="space-y-4">
@@ -90,7 +115,7 @@ export default function ReviewsPage() {
       <CTASection
         eyebrow="Ready for Experienced Representation?"
         title="Let's discuss your case"
-        body="Join the clients who trusted Mango Law with their defense. Schedule a free consultation today."
+        body="If you are comparing counsel for an OVI, domestic-violence, drug, or broader criminal matter, schedule a consultation and we will help sort the first move."
         primaryLabel="Get Free Consultation"
         primaryHref="/contact"
         secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}

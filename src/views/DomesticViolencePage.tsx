@@ -10,6 +10,10 @@ import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import Link from 'next/link';
+import {
+  domesticViolencePageMetaDescription,
+  domesticViolenceSupportLinks,
+} from '../data/seoRoutingContent';
 
 export const domesticViolenceFaqs = [
   {
@@ -53,8 +57,8 @@ export default function DomesticViolencePage() {
   return (
     <>
       <SEO
-        title="Domestic Violence Lawyer Delaware, OH | Mango Law LLC"
-        description="Strategic domestic violence defense for misdemeanor and felony allegations. Former prosecutor practicing criminal law in Central Ohio since 1999."
+        title="Domestic Violence Defense Attorney Delaware, OH | Mango Law LLC"
+        description={domesticViolencePageMetaDescription}
         image="/images/generated/blog-assault-domestic-violence.png"
         faqs={domesticViolenceFaqs}
         breadcrumbs={[
@@ -66,8 +70,8 @@ export default function DomesticViolencePage() {
 
       <PageHero
         eyebrow="Domestic Violence"
-        title="Clear, strategic defense when the stakes are personal"
-        description="Domestic violence allegations can move fast—bond conditions, no-contact orders, and collateral consequences. Get clear next steps and an evidence-focused defense strategy."
+        title="Domestic violence defense with early control over bond, no-contact, and protection-order risk"
+        description="If you are looking for a domestic violence attorney in Delaware, Ohio, start here. We focus on evidence review, bond compliance, and related protection-order issues in Delaware and Franklin County cases."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -85,7 +89,7 @@ export default function DomesticViolencePage() {
                 <div className="space-y-6">
                   <div>
                     <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">
-                      Domestic Violence Defense in Delaware & Franklin County
+                      Domestic violence defense for Delaware and Franklin County cases
                     </h2>
                     <p className="text-lg text-brand-black/70 leading-relaxed">
                       Domestic violence cases often involve high emotion and fast timelines. The court may impose immediate
@@ -98,6 +102,31 @@ export default function DomesticViolencePage() {
                     address bond terms and no-contact orders early, so you know exactly what you can and cannot do while the
                     case is pending.
                   </p>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {[
+                      {
+                        title: 'Bond and no-contact conditions',
+                        description: 'We prioritize compliance so a technical violation does not create a second problem.',
+                      },
+                      {
+                        title: 'Protection-order overlap',
+                        description: 'Civil protection order claims can shape the criminal case if they are not coordinated early.',
+                      },
+                      {
+                        title: 'First-offense decision points',
+                        description: 'The early decisions in first-offense cases can affect housing, parenting, and work.',
+                      },
+                      {
+                        title: 'Record and firearm exposure',
+                        description: 'We evaluate collateral consequences early so strategy reflects more than just the next hearing.',
+                      },
+                    ].map((item) => (
+                      <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-brand-offWhite/55 p-4">
+                        <p className="font-semibold text-brand-black">{item.title}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-brand-black/65">{item.description}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <Image
@@ -182,29 +211,13 @@ export default function DomesticViolencePage() {
       <section className="section bg-white">
         <div className="container">
           <div className="mb-8 text-center">
-            <h2 className="font-display text-display-sm md:text-display-md mb-3">Related domestic violence resources</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-3">Start with the guide matching the pressure point in your case</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
-              Understand no-contact restrictions, civil protection order procedure, and related defense strategy.
+              Domestic violence charges often overlap with first-offense questions, bond restrictions, and protection-order procedure.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: 'No-contact order vs CPO',
-                description: 'Key differences, compliance risks, and how each order impacts your case.',
-                href: '/blog/no-contact-order-vs-civil-protection-order-ohio',
-              },
-              {
-                title: 'Protection order defense',
-                description: 'How hearings work and how to contest allegations effectively.',
-                href: '/protection-order-lawyer-delaware-oh',
-              },
-              {
-                title: 'Ex parte order defense guide',
-                description: 'What to do immediately after a temporary order is filed.',
-                href: '/blog/ex-parte-protection-orders-ohio-defense',
-              },
-            ].map((item) => (
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {domesticViolenceSupportLinks.map((item) => (
               <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6">
                 <h3 className="text-xl font-bold text-brand-black">{item.title}</h3>
                 <p className="mt-2 text-brand-black/70">{item.description}</p>

@@ -2,7 +2,6 @@ import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
-import ImagePlaceholder from '../components/ImagePlaceholder';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
@@ -11,6 +10,7 @@ import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import Link from 'next/link';
+import { drugCrimePageMetaDescription, drugCrimeSupportLinks } from '../data/seoRoutingContent';
 
 export const drugCrimeFaqs = [
   {
@@ -59,8 +59,8 @@ export default function DrugCrimePage() {
   return (
     <>
       <SEO
-        title="Drug Crime Lawyer Delaware, OH | Mango Law LLC"
-        description="Strategic drug crime defense for possession, trafficking, and paraphernalia charges. Former prosecutor practicing criminal law in Central Ohio since 1999."
+        title="Drug Crime Lawyer Delaware, OH | Drug Charges Defense | Mango Law LLC"
+        description={drugCrimePageMetaDescription}
         image="/images/generated/drug-crimes-defense-hero.png"
         faqs={drugCrimeFaqs}
         breadcrumbs={[
@@ -71,8 +71,8 @@ export default function DrugCrimePage() {
       />
       <PageHero
         eyebrow="Drug Crimes"
-        title="Drug crime defense with attention to testing, searches, and diversion paths"
-        description="Possession, trafficking, paraphernalia, and related allegations—handled with motion practice and practical strategies."
+        title="Drug charge defense with early focus on searches, testing, and diversion paths"
+        description="If you are looking for a drug charges attorney in Delaware, Ohio, start here. We defend possession, trafficking, paraphernalia, and related allegations with motion practice and practical strategy."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -87,29 +87,53 @@ export default function DrugCrimePage() {
           <div className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2 space-y-12">
               <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Strategic Drug Crime Defense</h2>
-                <p className="text-lg text-brand-black/70 leading-relaxed">
-                  Drug charges can derail your life. A conviction can mean prison time, loss of professional licenses, financial
-                  ruin, and a permanent criminal record that follows you for years. Whether you are facing possession, trafficking,
-                  or paraphernalia charges, you need an attorney who knows how to challenge the evidence and protect your rights.
-                </p>
-              </div>
-              <p className="text-brand-black/70 leading-relaxed">
-                At Mango Law, we scrutinize every aspect of your case: the legality of the stop, the validity of the search,
-                the chain of custody, and lab testing procedures. We explore diversion programs and treatment alternatives when
-                appropriate, always working toward the best possible outcome.
-              </p>
-            </div>
-            <Image
-              src="/images/generated/drug-crimes-defense-hero.png"
-              alt="Drug crime legal defense strategy with evidence review and lab testing documentation"
-              className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
-              loading="lazy"
-              width={1200}
-              height={900}
-            />
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Drug charge defense in Delaware and Franklin County</h2>
+                    <p className="text-lg text-brand-black/70 leading-relaxed">
+                      Drug charges can derail your life. A conviction can mean prison time, licensing issues, financial strain,
+                      and a record that follows you for years. Whether the allegation is possession, trafficking, or paraphernalia,
+                      early strategy should match the actual evidence and exposure.
+                    </p>
+                  </div>
+                  <p className="text-brand-black/70 leading-relaxed">
+                    We scrutinize the legality of the stop, the validity of the search, the chain of custody, and lab testing
+                    procedures. We also screen for diversion and treatment-based resolutions where the facts and eligibility rules support them.
+                  </p>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {[
+                      {
+                        title: 'Search and seizure review',
+                        description: 'We test the stop, search, consent, and warrant path before accepting the state’s evidence.',
+                      },
+                      {
+                        title: 'Possession vs trafficking',
+                        description: 'Charge labels often hinge on quantity, packaging, statements, and contextual facts.',
+                      },
+                      {
+                        title: 'Lab and chain-of-custody issues',
+                        description: 'We review handling and testing for reliability gaps that matter in plea talks and motion practice.',
+                      },
+                      {
+                        title: 'Diversion and record protection',
+                        description: 'When available, ILC and related options can change the long-term impact of a first-time case.',
+                      },
+                    ].map((item) => (
+                      <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-brand-offWhite/55 p-4">
+                        <p className="font-semibold text-brand-black">{item.title}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-brand-black/65">{item.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <Image
+                  src="/images/generated/drug-crimes-defense-hero.png"
+                  alt="Drug crime legal defense strategy with evidence review and lab testing documentation"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+                  loading="lazy"
+                  width={1200}
+                  height={900}
+                />
               </div>
 
               <LegalCodeCallout section="2925.11" />
@@ -218,29 +242,13 @@ export default function DrugCrimePage() {
       <section className="section bg-brand-offWhite">
         <div className="container">
           <div className="mb-8 text-center">
-            <h2 className="font-display text-display-sm md:text-display-md mb-3">Drug charge resources</h2>
+            <h2 className="font-display text-display-sm md:text-display-md mb-3">Start with the guide matching the evidence issue</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
-              Practical guides on possession, trafficking distinctions, and immediate defense steps after an arrest.
+              These pages cover the charge distinctions, motion issues, and first-step guidance people most often need after a drug arrest.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: 'Drug possession: what to do next',
-                description: 'Immediate steps to protect your case after a possession arrest in Ohio.',
-                href: '/blog/drug-possession-charge-ohio-what-to-do-next',
-              },
-              {
-                title: 'Possession vs trafficking',
-                description: 'How Ohio distinguishes personal-use allegations from distribution cases.',
-                href: '/blog/drug-possession-vs-trafficking-ohio',
-              },
-              {
-                title: 'Criminal defense overview',
-                description: 'See broader defense strategy for related felony and misdemeanor exposure.',
-                href: '/criminal-defense-delaware-oh',
-              },
-            ].map((item) => (
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {drugCrimeSupportLinks.map((item) => (
               <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-white p-6">
                 <h3 className="text-xl font-bold text-brand-black">{item.title}</h3>
                 <p className="mt-2 text-brand-black/70">{item.description}</p>
