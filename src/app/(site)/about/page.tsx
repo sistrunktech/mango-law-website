@@ -3,11 +3,11 @@ import AboutPage from '@/views/AboutPage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 import { attorneySchema } from '@/lib/structured-data';
-import { attorneyProfile } from '@/data/attorneyProfile';
+import { aboutPageMetaDescription } from '@/data/seoRoutingContent';
 
 const seo = {
-  title: 'About Dominic Mango | Criminal Defense Attorney Delaware, OH',
-  description: attorneyProfile.aboutMetaDescription,
+  title: 'About Dominic Mango | Delaware, OH Criminal Defense & OVI Attorney',
+  description: aboutPageMetaDescription,
   url: '/about',
 };
 
