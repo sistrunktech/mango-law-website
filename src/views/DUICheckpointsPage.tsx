@@ -1,15 +1,21 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { AlertTriangle, Filter, MapPinned, Shield, Info, Calendar, Clock } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import CheckpointCard from '../components/CheckpointCard';
+import CheckpointHotspots from '../components/CheckpointHotspots';
 import CTASection from '../components/CTASection';
 import BlogSidebar from '../components/BlogSidebar';
 import FAQSection from '../components/FAQSection';
 import { duiCheckpointMapFaqs } from '../data/duiCheckpointMapFaqs';
-import { getUpcomingCheckpoints, getRecentCheckpoints, type DateRangeOption } from '../lib/checkpointService';
+import {
+  getUpcomingCheckpoints,
+  getRecentCheckpoints,
+  type CheckpointHotspot,
+  type DateRangeOption,
+} from '../lib/checkpointService';
 import { isApproximateCheckpointLocation, type DUICheckpoint } from '../data/checkpoints';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
@@ -25,18 +31,6 @@ const CheckpointMap = dynamic(() => import('../components/CheckpointMap'), {
   loading: () => (
     <div className="flex h-full items-center justify-center rounded-2xl border border-brand-black/10 bg-brand-offWhite px-6 text-center text-sm text-brand-black/70">
       Loading interactive checkpoint map...
-    </div>
-  ),
-});
-
-const CheckpointHotspots = dynamic(() => import('../components/CheckpointHotspots'), {
-  ssr: false,
-  loading: () => (
-    <div className="mb-6 rounded-xl border border-brand-black/10 bg-brand-offWhite p-4">
-      <div className="flex items-center gap-2">
-        <div className="h-4 w-4 animate-pulse rounded bg-brand-black/10" />
-        <div className="h-4 w-32 animate-pulse rounded bg-brand-black/10" />
-      </div>
     </div>
   ),
 });
@@ -106,22 +100,97 @@ type PublicSourceSnapshot = {
   note: string;
 };
 
-export default function DUICheckpointsPage() {
-  const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>([]);
-  const [announcements, setAnnouncements] = useState<CheckpointAnnouncement[]>([]);
-  const [filteredCheckpoints, setFilteredCheckpoints] = useState<DUICheckpoint[]>([]);
+type DUICheckpointsPageProps = {
+  initialAnnouncements: CheckpointAnnouncement[];
+  initialCheckpoints: DUICheckpoint[];
+  initialHotspots: CheckpointHotspot[];
+  initialViewMode: ViewMode;
+  initialDateRange: DateRangeOption;
+  initialUsedHistoryFallback: boolean;
+};
+
+function DeferredRender({
+  children,
+  className,
+  minHeight = 360,
+}: {
+  children: ReactNode;
+  className?: string;
+  minHeight?: number;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    if (shouldRender) {
+      return;
+    }
+
+    const node = containerRef.current;
+    if (!node) {
+      return;
+    }
+
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setShouldRender(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) {
+          return;
+        }
+
+        setShouldRender(true);
+        observer.disconnect();
+      },
+      { rootMargin: '240px 0px' },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [shouldRender]);
+
+  return (
+    <div ref={containerRef} className={className}>
+      {shouldRender ? (
+        children
+      ) : (
+        <div
+          className="flex h-full items-center justify-center rounded-[24px] border border-brand-black/10 bg-brand-offWhite px-6 text-center text-sm text-brand-black/70"
+          style={{ minHeight }}
+        >
+          Loading interactive checkpoint map...
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function DUICheckpointsPage({
+  initialAnnouncements,
+  initialCheckpoints,
+  initialHotspots,
+  initialViewMode,
+  initialDateRange,
+  initialUsedHistoryFallback,
+}: DUICheckpointsPageProps) {
+  const [checkpoints, setCheckpoints] = useState<DUICheckpoint[]>(initialCheckpoints);
+  const [announcements, setAnnouncements] = useState<CheckpointAnnouncement[]>(initialAnnouncements);
   const [selectedCounty, setSelectedCounty] = useState<string>('all');
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<DUICheckpoint | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<ViewMode>('upcoming');
-  const [dateRange, setDateRange] = useState<DateRangeOption>('90d');
-  const [usedHistoryFallback, setUsedHistoryFallback] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>(initialViewMode);
+  const [dateRange, setDateRange] = useState<DateRangeOption>(initialDateRange);
+  const [usedHistoryFallback, setUsedHistoryFallback] = useState(initialUsedHistoryFallback);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific'>('emergency_banner');
   const [leadModalCheckpointId, setLeadModalCheckpointId] = useState<string | undefined>();
   const [now, setNow] = useState<Date | undefined>(undefined);
+  const hasHydratedRef = useRef(false);
   const itemsPerPage = 15;
 
   useEffect(() => {
@@ -140,27 +209,27 @@ export default function DUICheckpointsPage() {
     try {
       setLoading(true);
       setError(null);
-      let announcementsData: CheckpointAnnouncement[] = [];
-
-      try {
-        announcementsData = await getCheckpointAnnouncements();
-        setAnnouncements(announcementsData);
-      } catch (e) {
-        console.warn('Unable to load checkpoint announcements (continuing):', e);
-        setAnnouncements([]);
-      }
-
-      const freshPendingAnnouncementsCount = announcementsData.filter(
-        (a) => a.status === 'pending_details' && isAnnouncementFreshForPublic(a)
-      ).length;
+      const announcementsPromise = getCheckpointAnnouncements().catch((fetchError) => {
+        console.warn('Unable to load checkpoint announcements (continuing):', fetchError);
+        return [] as CheckpointAnnouncement[];
+      });
 
       if (viewMode === 'upcoming') {
-        const data = await getUpcomingCheckpoints();
+        const [announcementsData, data] = await Promise.all([announcementsPromise, getUpcomingCheckpoints()]);
+        setAnnouncements(announcementsData);
+
+        const freshPendingAnnouncementsCount = announcementsData.filter(
+          (announcement) =>
+            announcement.status === 'pending_details' && isAnnouncementFreshForPublic(announcement),
+        ).length;
         const upcomingCheckpoints = filterPublicCheckpoints(data);
 
         if (upcomingCheckpoints.length === 0 && freshPendingAnnouncementsCount === 0 && !usedHistoryFallback) {
           const recentHistory = filterPublicCheckpoints(await getRecentCheckpoints('90d'));
-          const allHistory = recentHistory.length > 0 ? recentHistory : filterPublicCheckpoints(await getRecentCheckpoints('all'));
+          const allHistory =
+            recentHistory.length > 0
+              ? recentHistory
+              : filterPublicCheckpoints(await getRecentCheckpoints('all'));
           const fallbackRange = recentHistory.length > 0 ? '90d' : 'all';
 
           setCheckpoints(allHistory);
@@ -172,7 +241,11 @@ export default function DUICheckpointsPage() {
 
         setCheckpoints(upcomingCheckpoints);
       } else {
-        const data = await getRecentCheckpoints(dateRange);
+        const [announcementsData, data] = await Promise.all([
+          announcementsPromise,
+          getRecentCheckpoints(dateRange),
+        ]);
+        setAnnouncements(announcementsData);
         setCheckpoints(filterPublicCheckpoints(data));
       }
     } catch (error) {
@@ -185,24 +258,43 @@ export default function DUICheckpointsPage() {
     }
   }, [dateRange, filterPublicCheckpoints, usedHistoryFallback, viewMode]);
 
-  const filterCheckpoints = useCallback(() => {
-    let filtered = checkpoints;
-
-    if (selectedCounty !== 'all') {
-      filtered = filtered.filter(c => c.location_county === selectedCounty);
+  useEffect(() => {
+    if (!hasHydratedRef.current) {
+      hasHydratedRef.current = true;
+      return;
     }
 
-    setFilteredCheckpoints(filtered);
-    setCurrentPage(1); // Reset to first page when filters change
-  }, [checkpoints, selectedCounty]);
-
-  useEffect(() => {
     loadCheckpoints();
   }, [loadCheckpoints]);
 
   useEffect(() => {
-    filterCheckpoints();
-  }, [filterCheckpoints]);
+    setCurrentPage(1);
+  }, [checkpoints, selectedCounty]);
+
+  const filteredCheckpoints = useMemo(() => {
+    if (selectedCounty === 'all') {
+      return checkpoints;
+    }
+
+    return checkpoints.filter((checkpoint) => checkpoint.location_county === selectedCounty);
+  }, [checkpoints, selectedCounty]);
+
+  const countyCounts = useMemo(() => {
+    return checkpoints.reduce<Record<string, number>>((counts, checkpoint) => {
+      if (!checkpoint.location_county) {
+        return counts;
+      }
+
+      counts[checkpoint.location_county] = (counts[checkpoint.location_county] ?? 0) + 1;
+      return counts;
+    }, {});
+  }, [checkpoints]);
+
+  useEffect(() => {
+    if (selectedCounty !== 'all' && !countyCounts[selectedCounty]) {
+      setSelectedCounty('all');
+    }
+  }, [countyCounts, selectedCounty]);
 
   // Calculate pagination
   const totalPages = Math.ceil(filteredCheckpoints.length / itemsPerPage);
@@ -210,14 +302,15 @@ export default function DUICheckpointsPage() {
   const endIndex = startIndex + itemsPerPage;
   const paginatedCheckpoints = filteredCheckpoints.slice(startIndex, endIndex);
 
-  const handleHotspotClick = (city: string, county: string) => {
+  const handleHotspotClick = (_city: string, county: string) => {
     setSelectedCounty(county);
     setViewMode('all');
   };
 
-  const countiesWithCheckpoints = Array.from(
-    new Set(checkpoints.map(c => c.location_county))
-  ).sort();
+  const countiesWithCheckpoints = useMemo(
+    () => Object.keys(countyCounts).sort(),
+    [countyCounts],
+  );
 
   const openLeadModal = (trigger: typeof leadModalTrigger, checkpointId?: string) => {
     setLeadModalTrigger(trigger);
@@ -579,7 +672,7 @@ export default function DUICheckpointsPage() {
                     >
                       <option value="all">All Counties ({checkpoints.length})</option>
                       {countiesWithCheckpoints.map((county) => {
-                        const count = checkpoints.filter(c => c.location_county === county).length;
+                        const count = countyCounts[county] ?? 0;
                         return (
                           <option key={county} value={county}>
                             {county} County ({count})
@@ -597,14 +690,17 @@ export default function DUICheckpointsPage() {
                 </div>
               </div>
 
-              <div className="h-[360px] overflow-hidden rounded-[24px] border border-brand-black/10 bg-brand-offWhite sm:h-[420px]">
+              <DeferredRender
+                className="h-[360px] overflow-hidden rounded-[24px] border border-brand-black/10 bg-brand-offWhite sm:h-[420px]"
+                minHeight={420}
+              >
                 <CheckpointMap
                   checkpoints={filteredCheckpoints}
                   selectedCheckpoint={selectedCheckpoint}
                   onCheckpointSelect={setSelectedCheckpoint}
                   now={now}
                 />
-              </div>
+              </DeferredRender>
 
               <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
                 <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-4">
@@ -748,7 +844,7 @@ export default function DUICheckpointsPage() {
             </div>
           </div>
 
-          <CheckpointHotspots onCityClick={handleHotspotClick} />
+          <CheckpointHotspots onCityClick={handleHotspotClick} initialHotspots={initialHotspots} />
 
           {pendingAnnouncements.length > 0 && (
             <div className="mb-8 rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
@@ -838,7 +934,7 @@ export default function DUICheckpointsPage() {
               Checkpoint cases usually turn on one of a few issues first: the stop itself, what you did at roadside,
               your license situation, or what happens next in court.
             </p>
-            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
               {[
                 {
                   href: '/ovi-dui-defense-delaware-oh',
@@ -859,6 +955,11 @@ export default function DUICheckpointsPage() {
                   href: '/motion-to-suppress-ovi-ohio',
                   title: 'Motion to suppress issues',
                   description: 'Use this when the stop, testing, or search looks questionable.',
+                },
+                {
+                  href: '/criminal-defense-delaware-oh',
+                  title: 'Criminal defense overview',
+                  description: 'Use this if the stop led to broader charges or overlapping case issues.',
                 },
               ].map((item) => (
                 <a
