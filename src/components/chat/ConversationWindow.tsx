@@ -418,11 +418,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
             <p className="font-semibold">Need immediate help?</p>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY} — Call/Text (Office)</span>
+              <span>{OFFICE_PHONE_DISPLAY} — Primary Call/Text</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{NICK_DIRECT_PHONE_DISPLAY} — Direct line</span>
+              <span>{NICK_DIRECT_PHONE_DISPLAY} — Secondary line</span>
             </div>
           </div>
         </div>
@@ -460,11 +460,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
           <div className="space-y-2 text-xs">
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{OFFICE_PHONE_DISPLAY} — Call/Text (Office)</span>
+              <span>{OFFICE_PHONE_DISPLAY} — Primary Call/Text</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone size={12} />
-              <span>{NICK_DIRECT_PHONE_DISPLAY} — Direct line</span>
+              <span>{NICK_DIRECT_PHONE_DISPLAY} — Secondary line</span>
             </div>
           </div>
         </div>

@@ -1,16 +1,16 @@
-// Primary public office line. This is the default number shown across the site.
+// Primary public call/text line. This is the default number shown across the site.
 export const PRIMARY_PHONE_DISPLAY = '(740) 602-2155';
 export const PRIMARY_PHONE_TEL = '7406022155';
 
-// General office line uses the canonical public office number.
+// General public line uses the canonical call/text number.
 export const GENERAL_OFFICE_PHONE_DISPLAY = PRIMARY_PHONE_DISPLAY;
 export const GENERAL_OFFICE_PHONE_TEL = PRIMARY_PHONE_TEL;
 
-// Back-compat aliases for the canonical public office line.
+// Back-compat aliases for the canonical public line.
 export const OFFICE_PHONE_DISPLAY = PRIMARY_PHONE_DISPLAY;
 export const OFFICE_PHONE_TEL = PRIMARY_PHONE_TEL;
 
-// Secondary direct/legacy line retained only where a second number is helpful.
+// Secondary/legacy line retained only where a second number is helpful.
 export const NICK_DIRECT_PHONE_DISPLAY = '(740) 417-6191';
 export const NICK_DIRECT_PHONE_TEL = '7404176191';
 export const OFFICE_EMAIL = 'office@mango.law';

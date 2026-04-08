@@ -70,7 +70,7 @@ export default function AboutPage() {
                         >
                           <span className="text-lg">📞</span>
                           <div className="flex flex-col">
-                            <span className="text-xs text-brand-black/60">Call/Text (Office)</span>
+                            <span className="text-xs text-brand-black/60">Primary Call/Text</span>
                             <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
                           </div>
                         </a>
@@ -87,7 +87,7 @@ export default function AboutPage() {
                         >
                           <span className="text-lg">📱</span>
                           <div className="flex flex-col">
-                            <span className="text-xs text-brand-black/60">Direct line</span>
+                            <span className="text-xs text-brand-black/60">Secondary line</span>
                             <span className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</span>
                           </div>
                         </a>
@@ -161,7 +161,7 @@ export default function AboutPage() {
                       >
                         <span className="text-lg">📞</span>
                         <div className="flex flex-col">
-                          <span className="text-xs text-brand-black/60">Call/Text (Office)</span>
+                          <span className="text-xs text-brand-black/60">Primary Call/Text</span>
                           <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
                         </div>
                       </a>
@@ -178,7 +178,7 @@ export default function AboutPage() {
                       >
                         <span className="text-lg">📱</span>
                         <div className="flex flex-col">
-                          <span className="text-xs text-brand-black/60">Direct line</span>
+                          <span className="text-xs text-brand-black/60">Secondary line</span>
                           <span className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</span>
                         </div>
                       </a>
