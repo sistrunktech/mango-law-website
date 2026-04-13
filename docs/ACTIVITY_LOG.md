@@ -186,3 +186,27 @@ Category: DUI Checkpoints / Search Discovery
 Summary: Added a Google-style search discovery layer to the checkpoint scraper so localized Ohio search results can feed fresh Reddit, Facebook, and newsroom checkpoint candidates into the pending-announcements table instead of relying only on direct RSS/newsroom feeds.
 Files: supabase/functions/checkpoint-scraper/index.ts; supabase/functions/checkpoint-scraper/search-discovery.ts; test/checkpointSearchDiscovery.test.ts; test/run-tests.mjs; docs/OPERATIONS.md
 Notes: The new discovery pass uses the existing `SERPER_API_KEY` integration with a Columbus, Ohio location bias and keeps results in `pending_details` unless stronger source confirmation exists, so search/social breadth improves without promoting unverified noise onto the public checkpoint map.
+
+Date/time: 2026-04-07 19:05 EDT
+Category: Analytics / Conversion Measurement
+Summary: Restored direct GA4 fallback tracking for lead submissions so contact, chat, and other lead events can still be recorded when GTM event wiring is incomplete, while keeping the existing dataLayer event path in place.
+Files: src/lib/analytics.ts; test/analyticsFallback.test.ts; test/run-tests.mjs
+Notes: This improves forward-looking conversion reporting accuracy. It does not backfill any lead events that were missed before the fallback was added.
+
+Date/time: 2026-04-08 08:05 EDT
+Category: SEO / Money Page Recovery
+Summary: Shipped the April recovery pass for the Delaware OVI and Delaware criminal-defense money pages, expanded support-page routing for domestic-violence and drug-charge intent, and strengthened internal links and proof sections across the affected page cluster.
+Files: src/app/(site)/ovi-dui-defense-delaware-oh/page.tsx; src/app/(site)/criminal-defense-delaware-oh/page.tsx; src/app/(site)/about/page.tsx; src/app/(site)/reviews/page.tsx; src/app/(site)/contact/page.tsx; src/app/(site)/domestic-violence-lawyer-delaware-oh/page.tsx; src/app/(site)/drug-crime-lawyer-delaware-oh/page.tsx; src/data/seoRoutingContent.ts
+Notes: These edits are live on production and were aimed at recovering slipped Delaware-area OVI, criminal-defense, domestic-violence, and drug-charge intent without inventing new firm facts or unsupported claims.
+
+Date/time: 2026-04-08 08:20 EDT
+Category: SEO / Checkpoint Resource Freshness + Performance
+Summary: Shipped the checkpoints-page refresh by preloading current checkpoint and announcement data for first render, reducing duplicate client fetching, deferring the interactive map until near viewport, and keeping the page positioned as an announced-checkpoint legal resource rather than a real-time utility.
+Files: src/app/(site)/resources/dui-checkpoints/page.tsx; src/views/DUICheckpointsPage.tsx; src/components/CheckpointMap.tsx
+Notes: The goal of this pass was to keep the page useful and indexable while reducing unnecessary load and making seasonal/holiday checkpoint coverage easier to surface.
+
+Date/time: 2026-04-08 09:15 EDT
+Category: Local SEO / NAP + Citation Source Of Truth
+Summary: Corrected the public phone-number source of truth after rechecking Nick Mango's written instruction, restored `(740) 417-6191` as the public office/default line, kept `(740) 602-2155` only where explicitly labeled as Nick's direct cell, and aligned the sitewide contact surfaces back to that split.
+Files: src/lib/contactInfo.ts; src/data/blogPosts.ts; supabase/functions/_shared/email/templates.ts; supabase/functions/generate-review-response/index.ts; docs/OPERATIONS.md; docs/CONTENT_CHANGELOG.md
+Notes: This same corrected phone split was also applied to the BrightLocal core record and the local-listing audit packet, but several downstream directory listings still need manual cleanup before local consistency work is complete.
