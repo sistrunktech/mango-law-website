@@ -47,6 +47,16 @@ function run() {
   assert.ok(lowerCaseFromWithComma);
   assert.ok(new Date(lowerCaseFromWithComma.end).getTime() > new Date(lowerCaseFromWithComma.start).getTime());
 
+  const aprilOhioLocalTime = parseOVICheckpointDateTime('Friday, April 24, 2026 | 6:30 PM to 9 PM');
+  assert.ok(aprilOhioLocalTime);
+  assert.equal(aprilOhioLocalTime.start, '2026-04-24T22:30:00.000Z');
+  assert.equal(aprilOhioLocalTime.end, '2026-04-25T01:00:00.000Z');
+
+  const decemberOhioLocalTime = parseOVICheckpointDateTime('Friday, December 5, 2025 | 10 PM to 2 AM');
+  assert.ok(decemberOhioLocalTime);
+  assert.equal(decemberOhioLocalTime.start, '2025-12-06T03:00:00.000Z');
+  assert.equal(decemberOhioLocalTime.end, '2025-12-06T07:00:00.000Z');
+
   const superBowlLabel = parseOVICheckpointDateTime('Sunday February 11, 2024 Super Bowl 2024');
   assert.ok(superBowlLabel);
   const superBowlDurationMs = new Date(superBowlLabel.end).getTime() - new Date(superBowlLabel.start).getTime();
@@ -67,6 +77,28 @@ function run() {
       address: 'Pearl Road',
       city: 'Brunswick',
       county: 'Medina',
+    }
+  );
+
+  assert.deepEqual(
+    parseAddress(
+      'In Canton, drivers can expect an OVI checkpoint at 1801 Mahoning Road NE, with enforcement extending to nearby intersections and connecting routes., Canton, Stark County'
+    ),
+    {
+      address: '1801 Mahoning Road NE',
+      city: 'Canton',
+      county: 'Stark',
+    }
+  );
+
+  assert.deepEqual(
+    parseAddress(
+      'Another OVI checkpoint will be set up near the 4800 block of Salem Avenue, impacting traffic in adjacent residential and commercial zones., Trotwood, Montgomery County'
+    ),
+    {
+      address: '4800 block of Salem Avenue',
+      city: 'Trotwood',
+      county: 'Montgomery',
     }
   );
 }

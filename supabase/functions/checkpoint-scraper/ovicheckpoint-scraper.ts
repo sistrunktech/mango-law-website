@@ -39,6 +39,52 @@ function normalizeTimeString(input: string): string {
     .trim();
 }
 
+function getTimeZoneOffsetMs(timeZone: string, date: Date): number {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    hour12: false,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  }).formatToParts(date);
+
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  const localAsUtc = Date.UTC(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    Number(values.hour),
+    Number(values.minute),
+    Number(values.second)
+  );
+
+  return localAsUtc - date.getTime();
+}
+
+function ohioLocalDateTimeToUtcIso(
+  year: number,
+  month: number,
+  day: number,
+  hour: number,
+  minute: number
+): string {
+  const localAsUtc = Date.UTC(year, month, day, hour, minute);
+  let utcDate = new Date(localAsUtc);
+
+  // Ohio checkpoint announcements are local Ohio time. Supabase Edge Functions
+  // run in UTC, so construct UTC instants explicitly instead of relying on the
+  // runtime's local timezone.
+  for (let i = 0; i < 3; i++) {
+    const offset = getTimeZoneOffsetMs('America/New_York', utcDate);
+    utcDate = new Date(localAsUtc - offset);
+  }
+
+  return utcDate.toISOString();
+}
+
 export function parseDateTime(timeStr: string): { start: string; end: string } | null {
   const s = normalizeTimeString(timeStr);
 
@@ -283,13 +329,21 @@ export function parseDateTime(timeStr: string): { start: string; end: string } |
       return null;
     }
 
-    const startDate = new Date(year, month, day, startHour, startMinute);
-    let endDate = new Date(year, month, day, endHour, endMinute);
+    const startMinutes = startHour * 60 + startMinute;
+    const endMinutes = endHour * 60 + endMinute;
+    const endDayOffset = endMinutes <= startMinutes ? 1 : 0;
+
+    const start = ohioLocalDateTimeToUtcIso(year, month, day, startHour, startMinute);
+    let end = ohioLocalDateTimeToUtcIso(year, month, day + endDayOffset, endHour, endMinute);
+
+    const startDate = new Date(start);
+    let endDate = new Date(end);
     if (endDate <= startDate) {
-      endDate = new Date(year, month, day + 1, endHour, endMinute);
+      end = ohioLocalDateTimeToUtcIso(year, month, day + 1, endHour, endMinute);
+      endDate = new Date(end);
     }
 
-    return { start: startDate.toISOString(), end: endDate.toISOString() };
+    return { start, end: endDate.toISOString() };
   }
 
   console.warn(`Could not parse checkpoint time/date: ${timeStr}`);

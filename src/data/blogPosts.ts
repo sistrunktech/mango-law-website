@@ -44,6 +44,144 @@ export function resolveBlogScope(post: BlogPost): BlogScope {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ohio-livs-law-ovi-changes',
+    title: "Ohio Liv's Law OVI Changes: Fines, Interlock, and Oral-Fluid Testing",
+    excerpt:
+      "Ohio's Liv's Law changed several OVI rules effective April 9, 2025. This guide explains what changed, what did not automatically change, and why Delaware County OVI defendants should review ALS, testing, and driving-privilege issues early.",
+    imageUrl: '/images/generated/blog-ovi-charges.png',
+    content: `Ohio's House Bill 37, commonly called Liv's Law, became effective April 9, 2025. The law changed parts of Ohio's OVI framework, including minimum financial penalties, ignition-interlock rules tied to driving privileges, and oral-fluid testing after an OVI arrest.
+
+For most people charged in Delaware County or central Ohio, the practical question is not just "what did the new law say?" It is "what does this change about my license, testing evidence, and first court decisions?"
+
+If you were recently charged, start with the main [OVI/DUI defense page](/ovi-dui-defense-delaware-oh) and get case-specific advice before making assumptions from a general article.
+
+## Quick answer
+
+Liv's Law did three things Ohio OVI defendants should understand quickly:
+
+- It increased certain OVI minimum financial penalties while reducing some reinstatement-fee amounts.
+- It changed when ignition interlock may be required as a condition of limited driving privileges.
+- It authorized oral-fluid testing after an OVI arrest as another drug-testing tool, while the Legislative Service Commission analysis explains that oral-fluid testing is evidence related to an under-the-influence charge and not a per se concentration test.
+
+The details still depend on the charge, prior OVI history, test type, alleged substance, license status, and court orders.
+
+## What changed about OVI fines?
+
+The Ohio Legislative Service Commission's final analysis says HB 37 increased minimum criminal fines for OVI by an additional $190 and lowered related driver's license reinstatement fees by $160, producing a net $30 increase in minimum financial penalties.
+
+That does not mean an OVI case only costs $30 more. Court costs, supervision fees, treatment or driver-intervention requirements, insurance consequences, immobilization, interlock costs, and license-reinstatement obligations can still matter. The safer way to read this change is:
+
+- the statutory fine/reinstatement structure changed,
+- the total case cost remains fact-specific, and
+- license and court consequences need to be reviewed together.
+
+If your immediate issue is license suspension, read [Ohio OVI driving privileges and ALS](/blog/ohio-ovi-driving-privileges-als) and the dedicated [ALS license suspension page](/als-license-suspension-ohio).
+
+## What changed about ignition interlock?
+
+Liv's Law modified when a court must condition limited driving privileges on an ignition interlock device. This matters because many OVI clients are less focused on the label of the charge than on whether they can drive to work, school, treatment, court, childcare, or medical appointments.
+
+Under Ohio law, limited driving privileges and interlock rules can be affected by:
+
+- whether the suspension is administrative, court-imposed, or both,
+- the number of prior OVI or equivalent offenses,
+- whether the case involves a high-tier alcohol test or other aggravating facts,
+- whether the requested privileges are limited or unlimited with interlock, and
+- whether the person complies with every condition of the order.
+
+Interlock is not just a device issue. A missed requirement, a violation report, or driving a vehicle that is not approved under the court order can create new problems. If the case involves a high test, review [felony and serious OVI defense issues](/felony-ovi-lawyer-ohio) and the main [OVI/DUI page](/ovi-dui-defense-delaware-oh).
+
+## What changed about oral-fluid testing?
+
+HB 37 authorized law enforcement to collect an oral-fluid sample from a person arrested for OVI and to test that sample for the presence of a drug of abuse or metabolite. The LSC final analysis also explains an important limitation: oral-fluid testing under the act is not used to establish a per se prohibited concentration, meaning it does not work the same way as a statutory blood, breath, or urine concentration limit.
+
+That distinction matters in drug-OVI cases. An oral-fluid result may become part of the evidence, but the defense still may need to examine:
+
+- the reason for the stop,
+- observations used to support probable cause,
+- field sobriety testing,
+- timing of collection,
+- chain of custody,
+- laboratory or device reliability,
+- whether the alleged drug actually impaired driving, and
+- whether another test was requested or refused.
+
+For test-related issues, see [OVI test refusal defense](/ovi-test-refusal-lawyer-ohio) and [motions to suppress OVI evidence](/motion-to-suppress-ovi-ohio).
+
+## Did Liv's Law change implied consent?
+
+Ohio's implied-consent statute is still central after an OVI arrest. ORC 4511.191 addresses administrative license suspensions tied to test refusals and positive tests. The Ohio BMV explains that, after a suspected OVI stop, an officer can take the license on the spot and the suspension can begin immediately after either a positive test or a refusal.
+
+This is why OVI cases often have two timelines:
+
+- the criminal charge in court, and
+- the administrative/license timeline through the BMV and court process.
+
+Those timelines can overlap, but they are not the same. A person who focuses only on the criminal charge may miss an ALS issue, and a person who focuses only on the license may miss a defense to the stop, arrest, or testing evidence.
+
+## What should Delaware County defendants do first?
+
+After an OVI arrest in Delaware County, the first practical steps are usually:
+
+1. Keep every citation, BMV form, ALS notice, bond paper, and court notice.
+2. Calendar the first court date and any license deadlines.
+3. Do not drive unless a valid privilege order permits it.
+4. Write down what happened before memory fades, including stop location, testing, statements, witnesses, and whether an oral-fluid, breath, blood, or urine test was discussed.
+5. Talk with an Ohio OVI lawyer before deciding whether to plead, request privileges, or challenge the ALS.
+
+If the case is a first offense, start with [first offense OVI in Ohio](/first-offense-ovi-ohio). If the case involves a refusal, start with [OVI test refusal lawyer Ohio](/ovi-test-refusal-lawyer-ohio).
+
+## Why this law-change article matters for SEO and clients
+
+People searching for "Ohio Liv's Law OVI," "Ohio OVI law changes 2025," or "oral fluid testing OVI Ohio" are usually trying to understand a recent change before a court date, license decision, or conversation with a lawyer. This article supports the main [Delaware OVI lawyer page](/ovi-dui-defense-delaware-oh) by answering the current-law question and routing readers to the correct owner pages for ALS, refusal, felony/high-tier, and suppression issues.
+
+## Bottom line
+
+Liv's Law changed Ohio OVI consequences, but it did not make every case the same. The key questions are still local and fact-specific: what test was requested, what result was claimed, whether there was a refusal, what suspension started, what driving privileges are available, and what evidence can be challenged.
+
+For help with an OVI in Delaware County or central Ohio, contact [Mango Law](/contact) before making a license or plea decision based on a general summary.
+
+---
+
+*This article is for educational purposes and does not create an attorney-client relationship. OVI law and driving-privilege orders are fact-specific. Consult a qualified Ohio attorney about your situation.*`,
+    category: 'OVI/DUI Defense',
+    date: '2026-04-25',
+    author: 'Dominic Mango',
+    lastVerified: '2026-04-25',
+    sources: [
+      {
+        label: "Ohio House Bill 37 (135th General Assembly) - Liv's Law",
+        url: 'https://www.legislature.ohio.gov/legislation/135/hb37',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Legislative Service Commission Final Analysis for H.B. 37',
+        url: 'https://www.legislature.ohio.gov/download?key=24452',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.191 (Implied consent)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4510.13 (Limited driving privileges and OVI-related restrictions)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.13',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio BMV - Administrative License Suspension (ALS)',
+        url: 'https://www.bmv.ohio.gov/susp-ad-first-offense.aspx',
+        type: 'primary',
+      },
+    ],
+  },
+  {
     slug: 'bond-jail-information-delaware-county-ohio',
     title: 'Bond & Jail Information in Delaware County, Ohio',
     excerpt: 'If someone is arrested for OVI or another charge in Delaware County, this guide explains how bail works in Ohio and how to post bond to secure a release.',

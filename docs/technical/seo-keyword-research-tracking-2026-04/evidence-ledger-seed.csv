@@ -1,0 +1,57 @@
+source,keyword,lane,owner_page,geo,avg_monthly_searches,competition,low_bid,high_bid,gsc_clicks,gsc_impressions,ahrefs_metric,decision,evidence_tier,priority,notes
+Seed,delaware ohio ovi lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P0,Primary commercial OVI owner in local docs
+Seed,dui lawyer delaware ohio,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P0,Close variant of primary OVI local intent
+Seed,ovi attorney delaware ohio,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P0,Core attorney wording for OVI lane
+Seed,delaware county ovi lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware County OH,,,,,,,,Track candidate,Unvalidated seed,P0,County modifier aligns with core market
+Seed,delaware county dui lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware County OH,,,,,,,,Track candidate,Unvalidated seed,P0,County DUI variant for same owner page
+Seed,ovi lawyer near delaware ohio,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P1,Near-me style local variant with redirected historical URL not used as owner
+Seed,columbus ovi lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Columbus OH,,,,,,,,Watchlist,Unvalidated seed,P1,Important market but page ownership should be validated before live tracking
+Seed,franklin county ovi lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Franklin County OH,,,,,,,,Watchlist,Unvalidated seed,P1,Expansion geo needs evidence or county owner fit
+Seed,ohio ovi lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Broad statewide commercial term may be difficult without local fit
+Seed,criminal defense attorney delaware ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P0,Primary criminal defense owner in local docs
+Seed,criminal lawyer delaware ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P0,Core criminal defense synonym
+Seed,delaware ohio criminal defense attorney,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P0,Exact local commercial construction from setup brief
+Seed,delaware county criminal defense attorney,Criminal defense,/criminal-defense-delaware-oh,Delaware County OH,,,,,,,,Track candidate,Unvalidated seed,P0,County core market term
+Seed,criminal defense lawyer delaware county ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware County OH,,,,,,,,Track candidate,Unvalidated seed,P1,Longer county variant for validation
+Seed,franklin county criminal defense attorney,Criminal defense,/criminal-defense-delaware-oh,Franklin County OH,,,,,,,,Watchlist,Unvalidated seed,P1,Expansion geo requires page fit or county page evidence
+Seed,columbus criminal defense attorney,Criminal defense,/criminal-defense-delaware-oh,Columbus OH,,,,,,,,Watchlist,Unvalidated seed,P1,High-value expansion term but current owner is Delaware-focused
+Seed,misdemeanor lawyer delaware ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P2,Service fit under criminal defense owner
+Seed,felony lawyer delaware ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P2,Service fit under criminal defense owner
+Seed,drug crime lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P1,Live commercial drug crimes owner
+Seed,drug possession attorney delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P1,Specific drug charge variant from setup brief
+Seed,drug trafficking lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P2,Commercial subtopic for validation
+Seed,drug possession lawyer delaware county ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware County OH,,,,,,,,Track candidate,Unvalidated seed,P2,County variant for live owner page
+Seed,drug possession vs trafficking ohio,Drug crimes,/glossary,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Informational support topic should not consume live tracker until evidence exists
+Seed,protection order lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P1,Live protection order commercial owner
+Seed,cpo defense attorney ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,,,,,,,,Track candidate,Unvalidated seed,P2,Setup brief names this as owner target
+Seed,civil protection order lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P2,Commercial local CPO variant
+Seed,no contact order lawyer ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Useful support topic but needs evidence and owner clarity
+Seed,domestic violence lawyer delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P1,Live commercial page listed in task queue
+Seed,domestic violence defense attorney delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,,,,,,,,Track candidate,Unvalidated seed,P1,Commercial DV phrase from watchlist promoted only as draft candidate
+Seed,domestic violence first offense ohio,Domestic violence,/domestic-violence-first-offense-ohio-defense,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Support owner exists but commercial ownership needs validation
+Seed,als suspension ohio lawyer,License suspension / ALS,/als-license-suspension-ohio,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,OVI support term set requires Planner or GSC support
+Seed,license suspension lawyer ohio,License suspension / ALS,/als-license-suspension-ohio,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Support-page candidate pending demand evidence
+Seed,ovi test refusal lawyer ohio,OVI test refusal,/ovi-test-refusal-lawyer-ohio,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Support page should not replace primary OVI owner
+Seed,field sobriety test refusal ohio,OVI test refusal,/ovi-test-refusal-lawyer-ohio,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Problem-aware OVI support query
+Seed,motion to suppress ovi ohio,Motion to suppress,/motion-to-suppress-ovi-ohio,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Problem-aware support page candidate
+Seed,first offense ovi ohio,First offense OVI,/first-offense-ovi-ohio,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Dedicated support page exists but live tracker use needs demand evidence
+Seed,felony ovi lawyer ohio,Felony OVI,/felony-ovi-lawyer-ohio,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,High-value support term pending evidence
+Seed,ohio dui checkpoints,Checkpoints,/resources/dui-checkpoints,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Track only while recency process is maintained
+Seed,columbus dui checkpoints,Checkpoints,/resources/dui-checkpoints,Columbus OH,,,,,,,,Watchlist,Unvalidated seed,P2,Recency-sensitive resource query
+Seed,ohio ovi checkpoints,Checkpoints,/ovi-checkpoints-ohio,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Resource owner exists but requires update cadence
+Seed,ohio ovi lookback period,Glossary / statutes,/blog/ohio-dui-lookback-period,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Informational OVI support topic
+Seed,ohio datamaster breath test,Glossary / statutes,/glossary,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Technical trust topic for OVI support
+Seed,nhtsa sfst certified attorney ohio,Glossary / statutes,/glossary,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Credential-related term needs evidence before tracking
+Seed,sex crime lawyer delaware ohio,Sex crimes,/sex-crime-defense-lawyer-delaware-oh,Delaware OH,,,,,,,,Watchlist,Unvalidated seed,P2,Sensitive lane requires strong evidence before live tracking
+Seed,sexual battery defense ohio,Sex crimes,/sex-crime-defense-lawyer-delaware-oh,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Sensitive statewide variant pending validation
+Seed,white collar crime attorney delaware ohio,White collar,/white-collar-crimes-attorney-delaware-oh,Delaware OH,,,,,,,,Watchlist,Unvalidated seed,P2,Lower-priority commercial lane unless demand appears
+Seed,theft fraud defense lawyer ohio,White collar,/white-collar-crimes-attorney-delaware-oh,Ohio,,,,,,,,Watchlist,Unvalidated seed,P2,Setup brief names as example but lower priority
+Seed,personal injury lawyer delaware ohio,Personal injury,/personal-injury-lawyer-delaware-oh,Delaware OH,,,,,,,,Watchlist,Unvalidated seed,P3,Secondary campaign only unless approved
+Seed,dublin dui lawyer,Suburb expansion,,Dublin OH,,,,,,,,Watchlist,Unvalidated seed,P3,Suburb terms deferred under no-thin-city-page rule
+Seed,powell ovi attorney,Suburb expansion,,Powell OH,,,,,,,,Watchlist,Unvalidated seed,P3,Suburb term needs demand and differentiated owner page
+Seed,westerville criminal defense lawyer,Suburb expansion,,Westerville OH,,,,,,,,Watchlist,Unvalidated seed,P3,Suburb term needs demand and county-page strategy
+Seed,new albany ovi attorney,Suburb expansion,,New Albany OH,,,,,,,,Watchlist,Unvalidated seed,P3,Suburb term needs demand and owner-page fit
+Seed,union county ovi lawyer,Rural county expansion,,Union County OH,,,,,,,,Watchlist,Unvalidated seed,P3,Future county page candidate from SEO strategy
+Seed,morrow county criminal defense attorney,Rural county expansion,,Morrow County OH,,,,,,,,Watchlist,Unvalidated seed,P3,Future county page candidate from SEO strategy
+Seed,marion county criminal defense attorney,Rural county expansion,,Marion County OH,,,,,,,,Watchlist,Unvalidated seed,P3,Future county page candidate from SEO strategy
+Seed,expungement lawyer delaware ohio,Unconfirmed service,,Delaware OH,,,,,,,,Watchlist,Unvalidated seed,P3,Deferred unless confirmed as current service priority

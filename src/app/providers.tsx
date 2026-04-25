@@ -10,7 +10,13 @@ export default function Providers({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    trackPageView(document.title || '');
+    const timeoutId = window.setTimeout(() => {
+      trackPageView(document.title || '');
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, [pathname]);
 
   return (

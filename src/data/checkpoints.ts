@@ -1,4 +1,4 @@
-import { formatCalendarDate, formatEasternTime } from '@/lib/formatting';
+import { formatCalendarDate, formatEasternTime } from '../lib/formatting';
 
 export type CheckpointStatus = 'upcoming' | 'active' | 'completed' | 'cancelled';
 export type CheckpointLocationPrecision = 'exact' | 'city_centroid' | 'county_centroid' | 'undisclosed' | 'missing';

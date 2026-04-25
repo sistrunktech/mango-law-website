@@ -177,12 +177,20 @@ function pickBestOhioFeature(features: any[]): any | null {
   return ohioFeatures.reduce((best, current) => (score(current) > score(best) ? current : best));
 }
 
+function normalizeAddressForGeocoding(address: string): string {
+  return address
+    .replace(/\b(\d{2,6})\s+block\s+of\s+/gi, '$1 ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export async function geocodeAddress(
   address: string,
   supabaseClient: any,
   mapboxToken?: string
 ): Promise<GeocodingResult | CachedResult | null> {
-  const normalizedAddress = address.trim().toLowerCase();
+  const geocodingAddress = normalizeAddressForGeocoding(address);
+  const normalizedAddress = geocodingAddress.trim().toLowerCase();
 
   try {
     const { data: cached, error: cacheError } = await supabaseClient
@@ -203,15 +211,15 @@ export async function geocodeAddress(
         console.warn('Ignoring cached geocode outside Ohio for:', address);
         await supabaseClient.from('geocoding_cache').delete().eq('id', cached.id);
       } else {
-      return {
-        latitude: cachedLatitude,
-        longitude: cachedLongitude,
-        formatted_address: cached.formatted_address,
-        confidence: cached.confidence,
-        provider: cached.provider,
-        id: cached.id,
-        cached: true,
-      };
+        return {
+          latitude: cachedLatitude,
+          longitude: cachedLongitude,
+          formatted_address: cached.formatted_address,
+          confidence: cached.confidence,
+          provider: cached.provider,
+          id: cached.id,
+          cached: true,
+        };
       }
     }
 
@@ -220,7 +228,7 @@ export async function geocodeAddress(
       return null;
     }
 
-    const encodedAddress = encodeURIComponent(address);
+    const encodedAddress = encodeURIComponent(geocodingAddress);
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${mapboxToken}&country=US&limit=5&proximity=-82.9988,39.9612`;
 
     const response = await fetch(url);
@@ -357,6 +365,25 @@ export async function geocodeCheckpointLocation(
   return null;
 }
 
+function extractStreetAddress(value: string): string {
+  const streetType = String.raw`(?:Road|Rd\.?|Street|St\.?|Avenue|Ave\.?|Boulevard|Blvd\.?|Drive|Dr\.?|Lane|Ln\.?|Highway|Hwy\.?|Route|Pike|Parkway|Way|Court|Ct\.?|Place|Pl\.?)`;
+  const directional = String.raw`(?:NE|NW|SE|SW|North|South|East|West|N|S|E|W)`;
+  const patterns = [
+    new RegExp(String.raw`\b(\d{2,6}\s+block\s+of\s+[A-Z0-9][^,.]*?\b${streetType}\b(?:\s+${directional})?)`, 'i'),
+    new RegExp(String.raw`\b(\d{2,6}\s+[A-Z0-9][^,.]*?\b${streetType}\b(?:\s+${directional})?)`, 'i'),
+    new RegExp(String.raw`\b([A-Z0-9][A-Za-z0-9'.\-\s]+?\b${streetType}\b(?:\s+(?:near|west|east|north|south|of|and|at|between)\s+[A-Z0-9][^,.]*?\b${streetType}\b)?)`, 'i'),
+  ];
+
+  for (const pattern of patterns) {
+    const match = value.match(pattern)?.[1];
+    if (match) {
+      return match.replace(/\s+/g, ' ').replace(/[.;:]$/, '').trim();
+    }
+  }
+
+  return value.trim();
+}
+
 export function parseAddress(locationString: string): {
   address: string;
   city: string;
@@ -410,6 +437,7 @@ export function parseAddress(locationString: string): {
   if (!address && city) address = city;
   if (!city && address) city = address;
   if (!county) county = 'Unknown';
+  address = extractStreetAddress(address);
 
   return { address, city, county };
 }

@@ -15,7 +15,6 @@ import {
   websiteSchema,
   organizationSchema,
 } from './structured-data';
-import { trackPageView } from './analytics';
 
 export interface SEOProps {
   title?: string;
@@ -157,10 +156,6 @@ export function SEO({
       }
     }
   }, [fullTitle, fullDescription, fullImage, fullUrl, type, noindex, structuredData, faqs, article, breadcrumbs]);
-
-  useEffect(() => {
-    trackPageView(fullTitle);
-  }, [pathname, fullTitle]);
 
   return null;
 }
