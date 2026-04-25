@@ -145,9 +145,9 @@ For help with an OVI in Delaware County or central Ohio, contact [Mango Law](/co
 
 *This article is for educational purposes and does not create an attorney-client relationship. OVI law and driving-privilege orders are fact-specific. Consult a qualified Ohio attorney about your situation.*`,
     category: 'OVI/DUI Defense',
-    date: '2026-04-25',
+    date: '2026-04-24',
     author: 'Dominic Mango',
-    lastVerified: '2026-04-25',
+    lastVerified: '2026-04-24',
     sources: [
       {
         label: "Ohio House Bill 37 (135th General Assembly) - Liv's Law",

@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-04-24 22:15 EDT
+Post slug and title: ohio-livs-law-ovi-changes | Ohio Liv's Law OVI Changes: Fines, Interlock, and Oral-Fluid Testing
+Change type: minor
+Summary of change: Changed the publish date from 2026-04-25 to 2026-04-24 so the post is visible immediately in the site timezone after production deployment.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: User instructed Codex to proceed until the remaining work is finished and live.
+Rollback notes: Restore the post `date` and `lastVerified` fields to 2026-04-25 and revert the matching workbook date notes.
+
 Date/time: 2026-04-25 00:10 EDT
 Post slug and title: ohio-livs-law-ovi-changes | Ohio Liv's Law OVI Changes: Fines, Interlock, and Oral-Fluid Testing
 Change type: major
