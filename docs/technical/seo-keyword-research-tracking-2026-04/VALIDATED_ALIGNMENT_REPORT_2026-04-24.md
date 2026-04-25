@@ -162,7 +162,7 @@ OVI checkpoint:
 
 Use `blog-publishing-plan-2026-04.csv` for the 10-post schedule.
 
-Execution note: the first planned article has been added to `src/data/blogPosts.ts` as `/blog/ohio-livs-law-ovi-changes` with a 2026-04-25 publish date so it can go live with the next production deployment.
+Execution note: the first planned article has been added to `src/data/blogPosts.ts` as `/blog/ohio-livs-law-ovi-changes` with a 2026-04-24 publish date so it can go live immediately in the site timezone.
 
 The plan intentionally favors:
 
