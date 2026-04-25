@@ -44,16 +44,45 @@ type ExistingCheckpointMatch = {
   matchKind: 'exact' | 'heuristic';
   row: {
     id: string;
+    location_address: unknown;
     source_name: unknown;
     source_url: unknown;
     is_verified: unknown;
   };
 };
 
+function normalizeLocationAddress(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/\b(street|st)\.?\b/g, 'street')
+    .replace(/\b(avenue|ave)\.?\b/g, 'avenue')
+    .replace(/\b(road|rd)\.?\b/g, 'road')
+    .replace(/\b(northwest|nw)\b/g, 'nw')
+    .replace(/\b(northeast|ne)\b/g, 'ne')
+    .replace(/\b(southwest|sw)\b/g, 'sw')
+    .replace(/\b(southeast|se)\b/g, 'se')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isSameCheckpointLocation(left: unknown, right: unknown): boolean {
+  const a = normalizeLocationAddress(left);
+  const b = normalizeLocationAddress(right);
+  if (!a || !b) return false;
+  if (a === b) return true;
+
+  const minLength = Math.min(a.length, b.length);
+  return minLength >= 18 && (a.includes(b) || b.includes(a));
+}
+
 async function findExistingCheckpointMatch(
   supabase: ReturnType<typeof createClient>,
   input: {
     title: string;
+    locationAddress: string;
     startDate: string;
     locationCounty: string;
     locationCity: string;
@@ -61,8 +90,9 @@ async function findExistingCheckpointMatch(
 ): Promise<ExistingCheckpointMatch | null> {
   const { data: exact, error: exactError } = await supabase
     .from('dui_checkpoints')
-    .select('id, source_name, source_url, is_verified')
-    .eq('title', input.title)
+    .select('id, location_address, source_name, source_url, is_verified')
+    .eq('location_address', input.locationAddress)
+    .eq('location_city', input.locationCity)
     .eq('start_date', input.startDate)
     .maybeSingle();
 
@@ -78,7 +108,7 @@ async function findExistingCheckpointMatch(
 
   const { data: candidates, error: candidateError } = await supabase
     .from('dui_checkpoints')
-    .select('id, source_name, source_url, is_verified, start_date')
+    .select('id, location_address, source_name, source_url, is_verified, start_date')
     .eq('source_name', 'OVICheckpoint.com')
     .eq('title', input.title)
     .eq('location_county', input.locationCounty)
@@ -92,6 +122,7 @@ async function findExistingCheckpointMatch(
   if (!candidates?.length) return null;
 
   const best = candidates
+    .filter((row) => isSameCheckpointLocation((row as any).location_address, input.locationAddress))
     .map((row) => ({
       row,
       distance: Math.abs(new Date((row as any).start_date as string).getTime() - startTimeMs),
@@ -104,6 +135,7 @@ async function findExistingCheckpointMatch(
     matchKind: 'heuristic',
     row: {
       id: (best.row as any).id,
+      location_address: (best.row as any).location_address,
       source_name: (best.row as any).source_name,
       source_url: (best.row as any).source_url,
       is_verified: (best.row as any).is_verified,
@@ -392,6 +424,7 @@ Deno.serve(async (req: Request) => {
 
         const match = await findExistingCheckpointMatch(supabase, {
           title: raw.title,
+          locationAddress: address,
           startDate: raw.startDate,
           locationCounty: county,
           locationCity: city,

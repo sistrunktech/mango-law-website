@@ -120,6 +120,27 @@ export default function PageHero({
   });
   const resolvedPrimaryCtaLabel =
     t1Enabled && ctaLabel && t1Variant === 'B' ? 'Request case review today' : ctaLabel;
+  const primaryCtaId = `${phoneCtaId}_primary`;
+
+  const trackHeroCta = (ctaId: string, href: string) => {
+    trackCtaClick(ctaId, {
+      target_url: href,
+      placement: 'page_hero',
+      pathname,
+    });
+
+    if (href.startsWith('tel:')) {
+      trackLeadSubmitted('phone', ctaId, {
+        target_number: href.replace(/^tel:/, '').replace(/\D/g, ''),
+      });
+    }
+
+    if (href.startsWith('mailto:')) {
+      trackLeadSubmitted('email', ctaId, {
+        target_email: href.replace(/^mailto:/, ''),
+      });
+    }
+  };
 
   useEffect(() => {
     if (!isServiceIntentPage) return;
@@ -251,6 +272,10 @@ export default function PageHero({
                 <Link
                   href={ctaHref}
                   className="group inline-flex items-center gap-2 rounded-lg bg-brand-mango px-8 py-4 text-lg font-bold text-brand-black shadow-lg transition-all hover:bg-brand-gold hover:shadow-xl hover:-translate-y-0.5"
+                  data-cta={primaryCtaId}
+                  onClick={() => {
+                    trackHeroCta(primaryCtaId, ctaHref);
+                  }}
                 >
                   {resolvedPrimaryCtaLabel}
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />

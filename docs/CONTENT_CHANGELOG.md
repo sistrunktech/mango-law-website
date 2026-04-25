@@ -20,6 +20,84 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-04-25 00:10 EDT
+Post slug and title: ohio-livs-law-ovi-changes | Ohio Liv's Law OVI Changes: Fines, Interlock, and Oral-Fluid Testing
+Change type: major
+Summary of change: Added the first SEO/EEAT blog post from the 5-week publishing plan, with official Ohio HB 37, LSC, ORC, and BMV sources plus internal links to the OVI owner, ALS, refusal, felony, suppression, first-offense, and contact pages.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User requested first blog post after keyword/tracking setup and then instructed Codex to proceed until finished and live.
+Rollback notes: Remove the `ohio-livs-law-ovi-changes` object from `src/data/blogPosts.ts`, restore the first row of the 2026-04 blog publishing plan if needed, and revert this changelog entry.
+
+Date/time: 2026-04-25 00:05 EDT
+Post slug and title: Strategy update | GSC URL Inspection pass and Google Ads payment-boundary execution
+Change type: minor
+Summary of change: Updated the SEO execution workbook to reflect the priority GSC URL Inspection pass, indexed/not-indexed owner-page results, the non-billing Google Ads setup progression to the payment-confirmation boundary, and the remaining Keyword Planner/Ads blocker.
+Regression checklist:
+- Hero changed? n/a
+- Images removed? n/a
+- Links changed? n/a
+- Headings changed? n/a
+- Meta/schema changed? n/a
+Approval token: n/a
+Rollback notes: Revert the workbook CSV/report changes and this changelog entry.
+
+Date/time: 2026-04-24 20:48 EDT
+Post slug and title: Strategy update | Tracking, keyword validation, BrightLocal/Ahrefs baseline, and reporting alignment
+Change type: minor
+Summary of change: Updated the SEO execution workbook after the authenticated account pass to reflect verified Mango GA4/GTM access, the remaining Google Ads customer blocker, GA4 generate_lead key-event creation, BrightLocal rank/citation baselines, Ahrefs zero-keyword baseline, and the source tracking patch for pageview dedupe plus hero CTA lead attribution.
+Regression checklist:
+- Hero changed? n/a
+- Images removed? n/a
+- Links changed? n/a
+- Headings changed? n/a
+- Meta/schema changed? n/a
+Approval token: n/a
+Rollback notes: Revert the workbook/reporting docs, account-status rows, tracking source patch, blog-plan link correction, and this changelog entry.
+
+Date/time: 2026-04-24 13:35 EDT
+Post slug and title: Strategy update | Google account verification, OVI checkpoint refresh, and SEO execution workbook
+Change type: minor
+Summary of change: Updated the SEO keyword/tracking workbook with authenticated GSC and GTM findings, explicit Google Ads and GA4 blockers, the 50-keyword Google Ads seed list, the 10-post/5-week publishing plan status, and the production OVI checkpoint refresh/scraper deployment notes for the Cinco de Mayo watch window.
+Regression checklist:
+- Hero changed? n/a
+- Images removed? n/a
+- Links changed? n/a
+- Headings changed? n/a
+- Meta/schema changed? n/a
+Approval token: n/a
+Rollback notes: Revert the account verification log, OVI checkpoint pass update, workbook CSV/doc updates, checkpoint scraper changes, public checkpoint seasonal-copy change, and this changelog entry.
+
+Date/time: 2026-04-24 08:59 EDT
+Post slug and title: Strategy update | docs/technical/seo-keyword-research-tracking-2026-04/
+Change type: minor
+Summary of change: Added the first no-admin SEO keyword research/tracking workbook package with CSV drafts for page ownership, seed evidence, tracked keyword candidates, watchlist, GSC indexing queue, GA4/GTM status, on-site support, off-site local SEO, account status, final tracked-keyword recommendations, validated alignment report, and a 10-post publishing plan for the next five weeks.
+Regression checklist:
+- Hero changed? n/a
+- Images removed? n/a
+- Links changed? n/a
+- Headings changed? n/a
+- Meta/schema changed? n/a
+Approval token: n/a
+Rollback notes: Revert the `docs/technical/seo-keyword-research-tracking-2026-04/` workbook package and this changelog entry.
+
+Date/time: 2026-04-24 08:48 EDT
+Post slug and title: Strategy update | docs/technical/SEO_KEYWORD_RESEARCH_TRACKING_REPORTING_SETUP_2026-04.md
+Change type: minor
+Summary of change: Added a Mango-specific execution brief and first task queue artifact for SEO keyword research, tracking, BrightLocal, Ahrefs, GSC, and GA4/GTM reporting setup, adapted from the Sistrunk Tech SOP and current Mango SEO/BrightLocal handoff docs.
+Regression checklist:
+- Hero changed? n/a
+- Images removed? n/a
+- Links changed? n/a
+- Headings changed? n/a
+- Meta/schema changed? n/a
+Approval token: n/a
+Rollback notes: Revert the docs-only strategy brief, task queue artifact, and this changelog entry.
+
 Date/time: 2026-04-08 09:15 EDT
 Post slug and title: contact surfaces | Correct public office number vs Nick direct cell
 Change type: minor

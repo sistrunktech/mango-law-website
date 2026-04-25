@@ -41,6 +41,10 @@ const seasonalEnforcementWindows = [
     description: 'A frequent spring enforcement window because daytime drinking, downtown traffic, and late-night rides home all increase.',
   },
   {
+    title: 'Cinco de Mayo and early May weekends',
+    description: 'Late-April and early-May social traffic can bring fresh checkpoint announcements, saturation patrols, and short-notice agency updates.',
+  },
+  {
     title: 'Memorial Day to July 4th',
     description: 'Warm-weather travel and lake/weekend traffic often bring heavier patrol activity and more roadside enforcement messaging.',
   },

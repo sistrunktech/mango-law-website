@@ -1,0 +1,23 @@
+keyword,lane,owner_page,geo,decision,evidence_tier,priority,notes
+delaware ohio ovi lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P0,Primary commercial OVI owner in local docs
+dui lawyer delaware ohio,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P0,Close variant of primary OVI local intent
+ovi attorney delaware ohio,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P0,Core attorney wording for OVI lane
+delaware county ovi lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware County OH,Track candidate,Unvalidated seed,P0,County modifier aligns with core market
+delaware county dui lawyer,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware County OH,Track candidate,Unvalidated seed,P0,County DUI variant for same owner page
+ovi lawyer near delaware ohio,Delaware OVI/DUI defense,/ovi-dui-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P1,Near-me style local variant with redirected historical URL not used as owner
+criminal defense attorney delaware ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P0,Primary criminal defense owner in local docs
+criminal lawyer delaware ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P0,Core criminal defense synonym
+delaware ohio criminal defense attorney,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P0,Exact local commercial construction from setup brief
+delaware county criminal defense attorney,Criminal defense,/criminal-defense-delaware-oh,Delaware County OH,Track candidate,Unvalidated seed,P0,County core market term
+criminal defense lawyer delaware county ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware County OH,Track candidate,Unvalidated seed,P1,Longer county variant for validation
+misdemeanor lawyer delaware ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P2,Service fit under criminal defense owner
+felony lawyer delaware ohio,Criminal defense,/criminal-defense-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P2,Service fit under criminal defense owner
+drug crime lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P1,Live commercial drug crimes owner
+drug possession attorney delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P1,Specific drug charge variant from setup brief
+drug trafficking lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P2,Commercial subtopic for validation
+drug possession lawyer delaware county ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware County OH,Track candidate,Unvalidated seed,P2,County variant for live owner page
+protection order lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P1,Live protection order commercial owner
+cpo defense attorney ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,Track candidate,Unvalidated seed,P2,Setup brief names this as owner target
+civil protection order lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P2,Commercial local CPO variant
+domestic violence lawyer delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P1,Live commercial page listed in task queue
+domestic violence defense attorney delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,Track candidate,Unvalidated seed,P1,Commercial DV phrase from watchlist promoted only as draft candidate
