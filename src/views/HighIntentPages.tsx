@@ -387,6 +387,11 @@ const oviTestRefusalConfig: HighIntentConfig = {
   relatedDescription: 'Use these pages for ALS details, OVI strategy, and related suppression planning.',
   relatedGuides: [
     {
+      title: 'Refusal vs. failed test guide',
+      href: '/blog/ovi-refusal-vs-failed-test-ohio',
+      description: 'How Ohio refusal and positive-test paths differ after arrest.',
+    },
+    {
       title: 'ALS license suspension defense',
       href: '/als-license-suspension-ohio',
       description: 'Administrative track detail and timing.',

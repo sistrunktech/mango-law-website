@@ -112,6 +112,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 4510.14', url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.14', type: 'primary' },
     ],
   },
+  '4510.02': {
+    id: 'driver-license-suspension-classes',
+    section: '4510.02',
+    title: 'Definite Periods of Suspension - Suspension Classes',
+    shortTitle: 'Suspension Classes',
+    definition: 'Defines Ohio driver-license suspension classes and the definite suspension periods used by courts and the BMV, including administrative suspension classes referenced in OVI and implied-consent cases.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4510.02',
+    practiceAreas: ['ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['4510.13', '4511.19', '4511.191', '4511.197'],
+    lastVerified: '2026-05-03',
+    sources: [
+      { label: 'Ohio Revised Code § 4510.02', url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.02', type: 'primary' },
+    ],
+  },
   '4510.13': {
     id: 'occupational-driving-privileges',
     section: '4510.13',

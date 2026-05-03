@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 15:47 EDT
+Post slug and title: ovi-refusal-vs-failed-test-ohio | OVI Refusal vs. Failed Test in Ohio: What Changes After an Arrest
+Change type: major
+Summary of change: Added the next keyword-aligned OVI support post for the refusal owner page, distinguishing roadside field sobriety refusal from post-arrest chemical-test refusal; grounded the article in current ORC 4511.191, 4511.192, 4511.19, 4511.197, 4510.13, 4510.021, 4510.02, Ohio BMV ALS guidance, and OAC Chapter 3701-53; added the ORC 4510.02 glossary entry required by prebuild; linked to the refusal, ALS, OVI, field-sobriety refusal, first-offense OVI, suppression, and contact paths; added a unique watercolor still-life image; and marked the queue row complete pending live inspection/GSC indexing.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked to continue keyword/tracking/content queue work after the checkpoint cleanup and confirmed publication should no longer be blocked by pending Solon/Summit details.
+Rollback notes: Remove the `ovi-refusal-vs-failed-test-ohio` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-ovi-refusal-vs-failed-test-ohio.png`, remove the related owner-page link in `src/views/HighIntentPages.tsx`, remove the ORC 4510.02 glossary entry if unused, and restore the queue row to pending.
+
 Date/time: 2026-05-03 15:25 EDT
 Post slug and title: SEO tracking | GA4 lead-event duplicate-risk hardening
 Change type: minor

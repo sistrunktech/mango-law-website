@@ -48,6 +48,215 @@ export function resolveBlogScope(post: BlogPost): BlogScope {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ovi-refusal-vs-failed-test-ohio',
+    title: 'OVI Refusal vs. Failed Test in Ohio: What Changes After an Arrest',
+    excerpt:
+      'A refusal and a failed chemical test can both create license pressure after an Ohio OVI arrest, but they affect the case in different ways. This guide explains the field-test, chemical-test, ALS, and court-strategy differences.',
+    imageUrl: '/images/generated/blog-ovi-refusal-vs-failed-test-ohio.png',
+    content: `After an Ohio OVI arrest, one of the most common questions is whether it is worse to refuse a test or fail one. The useful answer starts with a distinction that gets missed in stressful moments: refusing roadside field sobriety tests is not the same thing as refusing a post-arrest chemical test.
+
+Ohio's implied-consent law focuses on chemical testing after an arrest. That can include breath, oral fluid, whole blood, blood serum or plasma, or urine. A failed chemical test can give the state a number to use in court and can start an Administrative License Suspension. A refusal can also start an ALS and can change the way the criminal case is negotiated or litigated.
+
+If your case is in Delaware County or central Ohio, start with the main [OVI test refusal defense page](/ovi-test-refusal-lawyer-ohio) and the broader [OVI/DUI defense page](/ovi-dui-defense-delaware-oh). If your license was taken, compare this article with the [ALS license suspension page](/als-license-suspension-ohio).
+
+## Quick answer
+
+Refusal and failed testing create different problems:
+
+- A roadside field sobriety refusal is about evidence. It may be described in the police report, but it is not the same ALS trigger as refusing a chemical test.
+- A chemical-test refusal can create an immediate administrative suspension and can still leave the state with officer observations, video, driving facts, witness statements, and other evidence.
+- A failed chemical test can create an immediate administrative suspension and gives the state numerical evidence, but the stop, arrest, timing, instrument, lab, specimen handling, and admissibility still need review.
+- For many first-offense ALS scenarios, refusal is treated more seriously on the administrative-license side than a positive test, but prior history, charge subsection, and court orders matter.
+- The right defense strategy depends on what test was requested, what warnings were given, what paperwork was completed, and what evidence exists besides the test result.
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## Field sobriety refusal is different from chemical-test refusal
+
+Roadside field sobriety tests are the coordination tests people usually associate with an OVI stop: walk-and-turn, one-leg stand, horizontal gaze nystagmus, and similar observations. Ohio's OVI statute addresses field sobriety test evidence and allows the state to introduce field-test results when the required standards are met.
+
+That does not make field sobriety testing the same as implied-consent chemical testing. A person may be asked to perform field sobriety tests before arrest. Chemical testing under ORC 4511.191 is tied to an arrest and a request for a designated test of breath, oral fluid, blood/serum/plasma, or urine.
+
+This distinction matters because people often say, "I refused the test," without knowing which test the report is talking about. The defense needs to identify:
+
+- whether the alleged refusal was roadside field sobriety testing,
+- whether the alleged refusal was a post-arrest chemical test,
+- whether the officer read the required advice before the chemical-test request,
+- whether the person was given a meaningful opportunity to submit within the required timing, and
+- whether the sworn report accurately describes what happened.
+
+If the issue is only roadside testing, read the [field sobriety refusal guide](/blog/refuse-field-sobriety-test-ohio). If the issue is a chemical test, the license side is usually more urgent.
+
+## What happens after a chemical-test refusal?
+
+ORC 4511.191 says a person operating or in physical control of a vehicle on Ohio roads or public vehicular areas is deemed to have consented to chemical testing if arrested for OVI, physical control, or a substantially equivalent offense. The statute also describes administrative suspensions for refusal.
+
+ORC 4511.192 adds the advisement process. Except for certain higher-level circumstances covered by ORC 4511.191(A)(5), the officer must give written advice and read it before requesting the chemical test. The statutory advice tells the person that refusing a required chemical test will immediately suspend Ohio driving privileges and require a reinstatement fee.
+
+A refusal does not automatically make the criminal OVI case disappear. It can remove one kind of numerical evidence, but the state may still rely on:
+
+- driving behavior,
+- body-camera or cruiser video,
+- officer observations,
+- odor, speech, balance, or admission evidence,
+- field sobriety testing if performed and admissible,
+- witness testimony,
+- crash or checkpoint evidence, and
+- any blood, urine, oral-fluid, or warrant-based evidence that exists.
+
+In other words, refusal can create a license problem without ending the court problem. The defense needs to review both tracks together.
+
+## What happens after a failed chemical test?
+
+A failed or positive chemical test means the reported result is at or over a prohibited concentration listed in ORC 4511.19. The exact threshold depends on specimen type. Breath, whole blood, blood serum or plasma, urine, and controlled-substance results are not interchangeable in casual shorthand.
+
+The Ohio BMV explains that, after a suspected OVI stop, a positive test can allow the officer to take the license on the spot and begin an Administrative License Suspension. ORC 4511.191 separately describes the administrative suspension framework for test results and refusal allegations.
+
+A failed test is not the end of the legal analysis. Defense review may focus on:
+
+- whether the traffic stop or checkpoint contact was lawful,
+- whether the officer had probable cause to arrest,
+- when the sample was collected compared with the alleged driving,
+- whether the statutory and administrative testing rules were followed,
+- whether the instrument, operator, lab, or specimen records support the result,
+- whether a report or laboratory witness issue affects admissibility, and
+- whether the charged subsection matches the actual specimen and result.
+
+Ohio Administrative Code Chapter 3701-53 contains alcohol-testing rules, including breath-instrument, specimen, laboratory, permit, and record-retention requirements. Those rules do not create a defense in every case, but they give counsel concrete records to request and test against the state's proof.
+
+## Refusal vs. failed test: practical differences
+
+| Issue | Chemical-test refusal | Failed chemical test |
+|---|---|---|
+| Immediate license risk | ALS can begin immediately after the officer serves the notice | ALS can begin immediately after a prohibited result |
+| Main evidence issue | No submitted test result, but refusal and other observations may matter | Numerical result becomes central, but admissibility and reliability can be challenged |
+| Administrative class | ORC 4511.191 ties refusal suspensions to refusal history and prior OVI/equivalent offenses | ORC 4511.191 ties positive-test suspensions to prior OVI/equivalent history |
+| Common first-offense framing | Often more license-severe than a first positive-test ALS | Often shorter administratively than refusal, but conviction exposure still matters |
+| Defense focus | Advisement, request, opportunity to submit, whether a refusal actually occurred, and other evidence | Stop, arrest, timing, testing records, instrument/lab process, and statutory threshold proof |
+| Negotiation posture | State may argue consciousness-of-guilt or rely on observations; defense may challenge procedure and proof gaps | State may rely on the number; defense may challenge whether the number is admissible and reliable |
+
+This table is a starting point, not a penalty promise. Prior OVI history, prior refusals, injuries, CDL issues, companion charges, warrants, court-specific practice, and the exact charge can change the analysis.
+
+## How does this affect driving privileges?
+
+The license question is often the most urgent part of the case. The BMV summarizes Administrative License Suspension consequences this way: a positive test may require serving a suspension from 90 days up to five years, while refusal may require serving a suspension from one to five years. ORC 4510.13 and ORC 4510.021 control when limited driving privileges may be available and what conditions a court may impose.
+
+For a refusal ALS under ORC 4511.191(B), ORC 4510.13 includes hard waiting-period rules before limited driving privileges may be granted. For a first refusal category, the waiting period can be different from a first positive-test category. The court may also consider ignition interlock, restricted plates, proof of insurance, and the exact privilege purposes.
+
+Do not assume that a work need, school need, or childcare need automatically authorizes driving. Until the license status and any court order are confirmed, driving can create a separate problem.
+
+## What should be checked first?
+
+The first review should be factual and document-driven. Save:
+
+- the citation,
+- the ALS or BMV paperwork,
+- any 2255 or sworn-report paperwork,
+- bond papers and court notices,
+- the test ticket or reported result if there is one,
+- body-camera or cruiser-video request information,
+- medical details that could affect balance, speech, breath, or blood testing,
+- witness names and ride-share or receipt records, and
+- your own timeline of the stop, arrest, warnings, test request, and response.
+
+The defense should then separate the issues:
+
+1. Was this a field sobriety refusal, a chemical-test refusal, a failed chemical test, or more than one of those?
+2. Was the stop or checkpoint contact legally valid?
+3. Was there probable cause to arrest?
+4. Was the required chemical-test advice read and documented?
+5. Did the paperwork match what actually happened?
+6. Were the testing rules followed?
+7. Is the ALS appeal, privilege petition, suppression motion, or plea posture the immediate priority?
+
+If this is a first OVI charge, use the [first-offense OVI page](/first-offense-ovi-ohio) for the broader court and license sequence. If the main issue is whether the stop, arrest, warnings, or testing process can be challenged, compare the facts with the [motion to suppress OVI evidence page](/motion-to-suppress-ovi-ohio).
+
+## Bottom line
+
+A refusal can be worse than a failed test for some license purposes, especially in first-offense ALS comparisons, but it does not automatically make the criminal case better or worse. A failed test gives the state a number, but that number still has to be tied to a lawful stop, arrest, timing, testing process, and admissible proof.
+
+The real question is not "should I have refused?" after the fact. The real question is what the state can prove now, what the license paperwork says, and what deadlines are coming next.
+
+For help reviewing an Ohio OVI refusal, failed test, ALS notice, or driving-privilege issue in Delaware County or central Ohio, contact [Mango Law](/contact) before making a plea or license decision based on one test result or one line in a police report.
+
+---
+
+*This article is for educational purposes and does not create an attorney-client relationship. OVI testing, ALS, driving privileges, and court outcomes are fact-specific. Consult a qualified Ohio attorney about your situation.*`,
+    category: 'OVI/DUI Defense',
+    date: '2026-05-03',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-03',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.191 (Implied consent)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.192 (Advice to OVI arrestee)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.192',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.19 (Operating vehicle under the influence)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.197 (Appeal of implied consent suspension)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.197',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4510.13 (Limited driving privilege restrictions)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.13',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4510.02 (Suspension classes)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.02',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio BMV - Administrative License Suspension',
+        url: 'https://www.bmv.ohio.gov/susp-ad-first-offense.aspx',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Administrative Code Chapter 3701-53 (Alcohol testing)',
+        url: 'https://codes.ohio.gov/ohio-administrative-code/chapter-3701-53',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is refusing field sobriety tests the same as refusing a breath or chemical test in Ohio?',
+        answer:
+          'No. Field sobriety tests are roadside evidence-gathering tests. A post-arrest chemical-test refusal is handled under Ohio implied-consent law and can trigger an Administrative License Suspension.',
+      },
+      {
+        question: 'Can Ohio suspend my license after a chemical-test refusal?',
+        answer:
+          'Yes. ORC 4511.191 and 4511.192 describe immediate administrative suspension procedures tied to chemical-test refusals. The exact length and privilege timing depend on prior history and the specific suspension category.',
+      },
+      {
+        question: 'Does a failed breath, blood, urine, or oral-fluid test automatically prove OVI?',
+        answer:
+          'No. A failed chemical test is important evidence, but the defense may still review the stop, arrest, timing, testing rules, instrument or lab records, specimen handling, and admissibility.',
+      },
+      {
+        question: 'Is refusal always better than giving a chemical-test sample?',
+        answer:
+          'No. Refusal can create serious license consequences and the prosecution may still use other evidence. Whether refusal or a failed test creates a better defense posture depends on the facts and history.',
+      },
+      {
+        question: 'Can I get driving privileges after a refusal or failed test?',
+        answer:
+          'Possibly, but only through the correct court process and after any required waiting period. ORC 4510.13 and 4510.021 govern privilege timing and conditions, and the court order must be followed exactly.',
+      },
+    ],
+  },
+  {
     slug: 'high-tier-ovi-ohio-17-test',
     title: 'High-Tier OVI in Ohio: What a .17+ Test Can Change in Your Case',
     excerpt:
