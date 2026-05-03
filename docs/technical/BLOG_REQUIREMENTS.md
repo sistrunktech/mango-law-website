@@ -34,6 +34,12 @@ Applies to:
 - Every post must use a unique per-slug image path:
   - `/images/generated/blog-<slug>.png`
 - Do not reuse practice-area hero images for blog posts.
+- Default to Mango's current editorial watercolor legal still-life standard:
+  - neutral tabletop or close-crop legal objects, blank case folders, blank papers, pen, subtle scale/evidence/court-process cues
+  - warm paper texture, soft ink-and-wash edges, restrained mango-gold/forest-green/charcoal/parchment palette
+  - no location signal unless the article itself truly requires it
+- Avoid confusing government/location concepts:
+  - no Capitol Hill, Washington DC, domes, federal buildings, monuments, city skylines, tree-lined landmark streets, or generic courthouse exteriors unless specifically approved for that post
 - Featured images must avoid prohibited device motifs:
   - breathalyzer-like devices, vape/e-cigarette devices, handheld gadget closeups
 - Featured images must be editorial and non-sensational:

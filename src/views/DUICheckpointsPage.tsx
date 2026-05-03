@@ -316,17 +316,22 @@ export default function DUICheckpointsPage({
     setIsLeadModalOpen(true);
   };
 
-  const pendingAnnouncements = announcements.filter(
+  const publicAnnouncements = useMemo(
+    () => announcements.filter((a) => a.status !== 'pending_details' || isAnnouncementFreshForPublic(a)),
+    [announcements],
+  );
+
+  const pendingAnnouncements = publicAnnouncements.filter(
     (a) => a.status === 'pending_details' && isAnnouncementFreshForPublic(a)
   );
 
   const latestAnnouncement = useMemo(() => {
-    return [...announcements].sort((a, b) => {
+    return [...publicAnnouncements].sort((a, b) => {
       const aTime = new Date(a.announcement_date || a.created_at).getTime();
       const bTime = new Date(b.announcement_date || b.created_at).getTime();
       return bTime - aTime;
     })[0] ?? null;
-  }, [announcements]);
+  }, [publicAnnouncements]);
 
   const latestConfirmedCheckpoint = useMemo(() => {
     return [...checkpoints].sort((a, b) => {
@@ -346,7 +351,7 @@ export default function DUICheckpointsPage({
     cutoff.setDate(cutoff.getDate() - 120);
     const cutoffTime = cutoff.getTime();
 
-    const announcementSnapshots: PublicSourceSnapshot[] = announcements
+    const announcementSnapshots: PublicSourceSnapshot[] = publicAnnouncements
       .filter((announcement) => Boolean(announcement.source_url))
       .flatMap((announcement) => {
         const publishedDate =
@@ -426,7 +431,7 @@ export default function DUICheckpointsPage({
       });
 
     return Array.from(deduped.values()).slice(0, 4);
-  }, [announcements, checkpoints]);
+  }, [publicAnnouncements, checkpoints]);
 
   const currentStatusSummary = useMemo(() => {
     if (pendingAnnouncements.length > 0 || checkpoints.length > 0) {

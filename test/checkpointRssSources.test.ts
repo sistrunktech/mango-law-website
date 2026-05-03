@@ -27,6 +27,12 @@ async function run() {
             <pubDate>Mon, 01 Dec 2025 12:00:00 GMT</pubDate>
             <description>Old checkpoint article that should not be re-ingested.</description>
           </item>
+          <item>
+            <title>Security checkpoint catches unrelated suspect</title>
+            <link>https://example.com/security-checkpoint</link>
+            <pubDate>Fri, 04 Apr 2026 13:00:00 GMT</pubDate>
+            <description>Unrelated security checkpoint coverage, not an Ohio OVI notice.</description>
+          </item>
         </channel>
       </rss>`,
       {
