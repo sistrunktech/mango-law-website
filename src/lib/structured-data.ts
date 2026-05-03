@@ -13,6 +13,12 @@ export type ArticleData = {
   image?: string;
 };
 
+function absoluteUrl(value: string | undefined, fallback: string) {
+  if (!value) return fallback;
+  if (/^https?:\/\//i.test(value)) return value;
+  return `${SITE_URL}${value.startsWith('/') ? value : `/${value}`}`;
+}
+
 export function buildFaqSchema(faqs: FAQEntry[]) {
   if (!faqs.length) return null;
   return {
@@ -78,7 +84,7 @@ export function buildArticleSchema(article: ArticleData, fullUrl: string, fallba
         },
     datePublished: article.datePublished,
     dateModified: article.dateModified,
-    image: article.image || fallbackImage,
+    image: absoluteUrl(article.image, fallbackImage),
     publisher: {
       '@type': 'Organization',
       name: 'Mango Law LLC',

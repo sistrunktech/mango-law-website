@@ -16,6 +16,7 @@ const categories = [
   'All Posts',
   'OVI/DUI Defense',
   'Criminal Defense',
+  'Domestic Violence Defense',
   'Drug Crimes',
   'Sex Crimes',
   'Protection Orders',

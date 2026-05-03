@@ -167,6 +167,9 @@ export default function CriminalDefensePage() {
                   <Link href="/resources/dui-checkpoints" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
                     Checkpoint resource
                   </Link>
+                  <Link href="/blog/delaware-county-criminal-case-timeline" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                    Criminal case timeline
+                  </Link>
                 </div>
               </div>
 
@@ -291,6 +294,11 @@ export default function CriminalDefensePage() {
         title="Related criminal defense guides"
         description="Use these guides to compare OVI, drug, domestic, and protection-order defense pathways."
         links={[
+          {
+            title: 'Delaware County criminal case timeline',
+            description: 'Arraignment, bond, pretrial, discovery, motion, negotiation, and trial stages.',
+            href: '/blog/delaware-county-criminal-case-timeline',
+          },
           {
             title: 'OVI / DUI defense',
             description: 'Core OVI strategy page covering testing, suppression, and timeline control.',

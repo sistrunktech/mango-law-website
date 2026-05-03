@@ -1,8 +1,27 @@
 import { MetadataRoute } from 'next'
-import { getAllBlogSlugsForSitemap } from '@/lib/blogPostsRepo'
+import { getPublicBlogPosts } from '@/lib/blogPostsRepo'
 
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY || ''
 const STATIC_LASTMOD = new Date('2026-03-24T00:00:00.000Z')
+const ROUTE_LASTMOD: Record<string, Date> = {
+  '/blog': new Date('2026-05-03T00:00:00.000Z'),
+  '/ovi-dui-defense-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
+  '/domestic-violence-lawyer-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
+  '/criminal-defense-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
+  '/resources/dui-checkpoints': new Date('2026-05-03T00:00:00.000Z'),
+  '/ovi-checkpoints-ohio': new Date('2026-05-03T00:00:00.000Z'),
+}
+
+type SitemapEntrySeed = {
+  page: string
+  lastModified: Date
+}
+
+function parseSitemapDate(value: string | undefined) {
+  if (!value) return null
+  const parsed = new Date(value)
+  return Number.isNaN(parsed.getTime()) ? null : parsed
+}
 
 async function pingIndexNow(baseUrl: string) {
   if (!INDEXNOW_KEY) return
@@ -54,24 +73,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   // Blog posts - include only publishable posts (CMS + legacy), excluding future-dated content
-  let blogPosts: string[] = []
+  let blogPosts: SitemapEntrySeed[] = []
   try {
-    const slugs = await getAllBlogSlugsForSitemap()
-    blogPosts = slugs.map((slug) => `/blog/${slug}`)
+    const posts = await getPublicBlogPosts()
+    blogPosts = posts.map((post) => ({
+      page: `/blog/${post.slug}`,
+      lastModified: parseSitemapDate(post.lastVerified) ?? parseSitemapDate(post.date) ?? STATIC_LASTMOD,
+    }))
   } catch (error) {
     console.warn('Could not load blog posts for sitemap:', error)
   }
 
   // Combine all pages
-  const allPages = [...staticPages, ...blogPosts].filter((page) => {
+  const allPages = [
+    ...staticPages.map((page) => ({
+      page,
+      lastModified: ROUTE_LASTMOD[page] ?? STATIC_LASTMOD,
+    })),
+    ...blogPosts,
+  ].filter(({ page }) => {
     return !privatePrefixes.some((prefix) => page === prefix || page.startsWith(`${prefix}/`))
   })
 
   // Non-blocking IndexNow ping for homepage (indexes sitemap contents)
   pingIndexNow(baseUrl)
 
-  return allPages.map((page) => ({
+  return allPages.map(({ page, lastModified }) => ({
     url: `${baseUrl}${page}`,
-    lastModified: STATIC_LASTMOD,
+    lastModified,
   }))
 }

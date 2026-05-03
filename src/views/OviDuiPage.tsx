@@ -127,6 +127,9 @@ export default function OviDuiPage() {
                     <Link href="/resources/dui-checkpoints" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
                       Ohio checkpoint map
                     </Link>
+                    <Link href="/blog/high-tier-ovi-ohio-17-test" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      High-tier OVI guide
+                    </Link>
                     <Link href="/glossary" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
                       OVI glossary
                     </Link>
@@ -207,6 +210,11 @@ export default function OviDuiPage() {
                       title: 'Motion to suppress OVI evidence',
                       description: 'Where the stop, detention, or testing process becomes the legal battleground.',
                       href: '/motion-to-suppress-ovi-ohio',
+                    },
+                    {
+                      title: 'High-tier OVI in Ohio',
+                      description: 'What a .17+ alcohol-test allegation can change in jail, license, and evidence review.',
+                      href: '/blog/high-tier-ovi-ohio-17-test',
                     },
                     {
                       title: 'Ohio DUI checkpoint map',
@@ -449,6 +457,11 @@ export default function OviDuiPage() {
             title: 'Felony OVI defense',
             description: 'High-risk OVI strategy when exposure escalates beyond a misdemeanor baseline.',
             href: '/felony-ovi-lawyer-ohio',
+          },
+          {
+            title: 'High-tier OVI in Ohio',
+            description: 'How a .17+ test allegation changes defense priorities and license planning.',
+            href: '/blog/high-tier-ovi-ohio-17-test',
           },
           {
             title: 'OVI test refusal defense',
