@@ -186,8 +186,8 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white"
                 data-cta="lead_success_call"
                 onClick={() => {
-                  trackCtaClick('lead_success_call');
-                  trackLeadSubmitted('phone', 'lead_success_call', {
+                  trackCtaClick('lead_success_call', {
+                    lead_followup_after_form: true,
                     target_number: OFFICE_PHONE_TEL,
                   });
                 }}

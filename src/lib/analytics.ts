@@ -152,7 +152,7 @@ export function trackLeadSubmitted(
     ...extra,
   });
 
-  dispatchGa4FallbackEvent('lead_submitted', {
+  dispatchGa4FallbackEvent('generate_lead', {
     lead_source,
     checkpoint_id,
     ...extra,

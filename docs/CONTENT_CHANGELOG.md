@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 15:25 EDT
+Post slug and title: SEO tracking | GA4 lead-event duplicate-risk hardening
+Change type: minor
+Summary of change: Hardened source tracking before the next content push by aligning the conditional direct GA4 fallback event to `generate_lead` and changing the lead-modal success-screen phone CTA to support `cta_click` telemetry instead of a second `lead_submitted` event after the same form submission; updated the May 3 GA4/GTM validation docs and onsite queue to reflect remaining real-path QA and GA4 enhanced-measurement page-view cleanup.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: User asked to continue keyword/tracking/content work after checkpoint cleanup and before further publication.
+Rollback notes: Restore the prior `lead_submitted` fallback event name in `src/lib/analytics.ts`, restore `trackLeadSubmitted('phone', 'lead_success_call')` in `src/components/LeadCaptureModal.tsx`, and revert the related GA4/GTM docs updates.
+
 Date/time: 2026-05-03 15:08 EDT
 Post slug and title: DUI checkpoint data | Server-rendered pending-announcement payload cleanup
 Change type: minor

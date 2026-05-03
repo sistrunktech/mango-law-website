@@ -23,7 +23,9 @@ Source context: April `ga4-gtm-status.csv` confirmed source instrumentation and 
 | Click email link on contact/about/footer | `lead_submitted` with `lead_source=email` | `generate_lead` | Yes | Pending real-path QA |  | Confirm target email and no duplicate optional mailto trigger. |
 | Open lead modal | `cta_click` with `cta=lead_modal_open` | `cta_click` | No | Pending secondary QA |  | Treat as funnel interaction only. |
 | Open chat launcher | `cta_click` with `cta=chat_open` | `cta_click` | No | Pending secondary QA |  | Treat as assisted conversion context. |
+| Click post-form success phone CTA | `cta_click` with `lead_followup_after_form=true` | `cta_click` | No | Source hardened | `ga4-real-path-duplicate-risk-qa-2026-05-03.md` | Source no longer emits a second `lead_submitted` after the same modal form success. |
+| Direct GA4 fallback event name | fallback `trackLeadSubmitted()` call when standalone `gtag/js` exists | `generate_lead` | Yes | Source hardened | `analyticsFallback.test.ts` | Fallback is conditional and should remain secondary to GTM, but it now matches the GA4 key-event name. |
 
 ## Decision Gate
 
-The GTM-to-GA4 mapping is live and validated. Use organic lead counts cautiously until at least one real user-visible `lead_submitted` path is observed as GA4 `generate_lead` and the phone/form/chat/email paths are checked for duplicate counting risk.
+The GTM-to-GA4 mapping is live and validated. Source hardening now reduces two known duplicate/naming risks: standalone fallback events use `generate_lead`, and post-form success phone clicks stay as support `cta_click` telemetry. Use organic lead counts cautiously until at least one real user-visible form, phone, email, and chat path is observed in GA4 `generate_lead` and the GA4 enhanced-measurement/history page-view duplicate is resolved in the GA4/GTM configuration.
