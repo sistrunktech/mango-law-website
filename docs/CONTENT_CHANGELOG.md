@@ -883,3 +883,16 @@ Regression checklist:
 - Meta/schema changed? yes
 Approval token: APPROVED: continue keyword/tracking/content queue after checkpoint cleanup no longer blocking publication -- 2026-05-03
 Rollback notes: revert the scoped updates in `src/app/(site)/drug-crime-lawyer-delaware-oh/page.tsx`, `src/views/DrugCrimePage.tsx`, `src/data/seoRoutingContent.ts`, `src/data/statutes.ts`, and `src/app/sitemap.ts`.
+
+Date/time: 2026-05-03 16:13 EDT
+Post slug and title: protection-order-lawyer-delaware-oh | Protection-order owner-page keyword and legal-language cleanup
+Change type: minor
+Summary of change: Updated the protection-order owner page title, metadata, hero, intro, FAQ language, contextual copy, and support links for the six validated CPO/protection-order tracker terms; softened overbroad firearm and counter-petition claims against current official sources; and refreshed sitemap lastmod before GSC submission.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: APPROVED: continue keyword/tracking/content queue after checkpoint cleanup no longer blocking publication -- 2026-05-03
+Rollback notes: revert the scoped updates in `src/app/(site)/protection-order-lawyer-delaware-oh/page.tsx`, `src/views/ProtectionOrderPage.tsx`, `src/views/HighIntentPages.tsx`, `src/data/blogPosts.ts`, `src/data/statutes.ts`, and `src/app/sitemap.ts`.
