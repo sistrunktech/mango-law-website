@@ -70,6 +70,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 4511.192', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.192', type: 'primary' },
     ],
   },
+  '3701.143': {
+    id: 'chemical-analysis-authority',
+    section: '3701.143',
+    title: 'Chemical Tests to Determine Alcohol or Drug Content',
+    shortTitle: 'Chemical Analysis Rules',
+    definition: 'Authorizes the Ohio Director of Health to determine techniques or methods for chemically analyzing blood, urine, breath, oral fluid, or other bodily substances for alcohol, drugs of abuse, controlled substances, metabolites, and related OVI testing purposes.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-3701.143',
+    practiceAreas: ['ovi-dui', 'criminal-defense', 'drug-crimes'],
+    relatedStatutes: ['4511.19', '4511.191', '4511.192'],
+    lastVerified: '2026-05-03',
+    sources: [
+      { label: 'Ohio Revised Code § 3701.143', url: 'https://codes.ohio.gov/ohio-revised-code/section-3701.143', type: 'primary' },
+    ],
+  },
   '4511.194': {
     id: 'physical-control',
     section: '4511.194',
@@ -766,6 +780,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 2925.11', url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.11', type: 'primary' },
     ],
   },
+  '3796.221': {
+    id: 'adult-use-cannabis-rights',
+    section: '3796.221',
+    title: 'Rights of Adult Use Consumers',
+    shortTitle: 'Adult-Use Cannabis Limits',
+    definition: 'Addresses certain rights and limits for adult-use cannabis consumers in Ohio, including that adult-use provisions do not authorize operating a vehicle, streetcar, trackless trolley, bike, watercraft, or aircraft while under the influence of marihuana.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-3796.221',
+    practiceAreas: ['ovi-dui', 'drug-crimes', 'criminal-defense'],
+    relatedStatutes: ['4511.19', '4511.191', '2925.11'],
+    lastVerified: '2026-05-03',
+    sources: [
+      { label: 'Ohio Revised Code § 3796.221', url: 'https://codes.ohio.gov/ohio-revised-code/section-3796.221', type: 'primary' },
+    ],
+  },
   '2925.14': {
     id: 'drug-paraphernalia',
     section: '2925.14',
@@ -1002,13 +1030,13 @@ export const ohioStatutes: Record<string, OhioStatute> = {
 };
 
 export const practiceAreaStatutes = {
-  'ovi-dui': ['4511.19', '4511.191', '4511.197', '4511.194', '4510.14', '4510.13', '4510.021', '4510.022', '4511.203'],
+  'ovi-dui': ['4511.19', '4511.191', '4511.197', '4511.194', '3701.143', '3796.221', '4510.14', '4510.13', '4510.021', '4510.022', '4511.203'],
   'protection-orders': ['3113.31', '2919.27', '2903.214', '2903.211'],
   'criminal-defense': ['2901.02', '1901.20', '2903.13', '2919.25', '2903.11', '2913.02', '2921.13'],
   'domestic-violence': ['2919.25', '2903.13', '2903.11', '3113.31', '2903.21'],
   'sex-crimes': ['2907.02', '2907.03', '2907.04', '2907.07', '2903.214'],
   'weapons': ['2923.12', '2923.13', '2923.16'],
-  'drug-crimes': ['2925.11', '2925.03', '2925.14'],
+  'drug-crimes': ['2925.11', '2925.03', '2925.14', '3796.221'],
   'white-collar': ['2913.42', '2913.02', '2921.13'],
   'personal-injury': ['2315.33', '2305.10', '2315.18'],
 };

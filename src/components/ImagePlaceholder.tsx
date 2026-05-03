@@ -35,13 +35,12 @@ const aspectRatioClasses: Record<AspectRatio, string> = {
  * - Practice area cards: 1:1 or 4:3 for icons/illustrations
  * - About page: 3:4 or 2:3 for attorney portraits
  * - CTA sections: 21:9 for background textures
- * - Location blocks: 16:9 for courthouse/skyline imagery
+ * - Location blocks: 16:9 for verified, location-specific imagery only
  * 
  * Example prompts for Mango Law:
- * - "Professional courthouse exterior, Delaware Ohio, golden hour lighting, architectural photography"
- * - "Abstract legal scales of justice, mango and teal color palette, modern minimalist illustration"
- * - "Franklin County courthouse skyline, Ohio, professional photography, warm tones"
- * - "Criminal defense attorney consultation, professional office setting, warm lighting"
+ * - "Neutral watercolor legal tabletop, blank case folders, pen, restrained mango-gold and forest-green accents"
+ * - "Editorial ink-and-wash legal documents, sealed envelope, car keys, warm paper texture, no text or logos"
+ * - "Professional close-crop case review scene, blank paperwork, no faces, no courthouse or skyline"
  */
 export default function ImagePlaceholder({
   aspectRatio = '4:3',

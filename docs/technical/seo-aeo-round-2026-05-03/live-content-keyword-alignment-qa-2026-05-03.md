@@ -104,7 +104,7 @@ Suggested next order:
 | 5 | Publish "Delaware County Criminal Case Timeline..." | Move earlier if only one criminal-defense support piece can be produced. |
 | 6 | Publish "Misdemeanor vs. Felony Charges in Delaware County..." | Supports strong criminal-defense cluster. |
 | 7 | Publish "OVI Refusal vs. Failed Test in Ohio..." | Keep, but after measured first-offense/criminal/checkpoint work. |
-| 8 | Publish "Drug OVI in Ohio..." | Useful bridge, but no measured row-level keyword in current 50 set. |
+| 8 | Publish "Drug OVI in Ohio..." | Completed 2026-05-03 as a bridge between OVI, drug-defense, suppression, refusal, ALS, and oral-fluid testing topics. |
 | 9 | Publish "Civil Protection Order Hearing in Delaware County..." | Keep unless Planner/GSC later shows stronger CPO demand. |
 | 10 | Publish "Drug Possession in a Car in Ohio..." | Keep as later support for drug owner. |
 

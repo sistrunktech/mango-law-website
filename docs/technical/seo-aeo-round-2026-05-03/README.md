@@ -78,6 +78,14 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Optimized `/domestic-violence-lawyer-delaware-oh` for the validated local DV owner terms, added exact "domestic violence lawyer in Delaware, Ohio" phrasing to the visible hero/intro, added a defense-review section linking arrest/no-contact/protection-order support, routed glossary DV links to the DV owner, and tightened ORC 2919.25/firearm language against official sources.
 - Added `/blog/ovi-refusal-vs-failed-test-ohio` and `/blog/domestic-violence-arrest-delaware-county-ohio` to the GSC indexing submission log so the admin-browser queue matches the latest live content.
 
+## 2026-05-03 Drug-OVI Support Article Result
+
+- Added `/blog/drug-ovi-ohio` for the validated `drug ovi ohio`, marijuana OVI, prescription-drug OVI, blood/urine testing, and oral-fluid testing query lane.
+- Grounded the article in current ORC 4511.19, ORC 4511.191, ORC 4511.192, ORC 4511.197, ORC 3701.143, OAC Chapter 3701-53, Ohio BMV ALS guidance, ORC 3796.221, and the H.B. 37 final analysis.
+- Linked the post from `/ovi-dui-defense-delaware-oh`, `/drug-crime-lawyer-delaware-oh` support links, and the Liv's Law oral-fluid section; the article links back to OVI, drug-crime, suppression, refusal, ALS, first-offense, Liv's Law, drug possession, and contact paths.
+- Added a matching watercolor legal-tabletop image at `/images/generated/blog-drug-ovi-ohio.png` and updated image-generation guidance so future blog assets avoid DC/courthouse/location drift.
+- Added `/blog/drug-ovi-ohio` to the GSC indexing submission log for post-deployment live inspection.
+
 ## Execution Rules
 
 - Do not submit billing, payment, paid campaign, subscription, or spend actions in Google Ads.

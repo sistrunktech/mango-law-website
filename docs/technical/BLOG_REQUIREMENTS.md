@@ -38,6 +38,10 @@ Applies to:
   - neutral tabletop or close-crop legal objects, blank case folders, blank papers, pen, subtle scale/evidence/court-process cues
   - warm paper texture, soft ink-and-wash edges, restrained mango-gold/forest-green/charcoal/parchment palette
   - no location signal unless the article itself truly requires it
+- Match the approved May 2026 direction:
+  - use calm legal-tabletop concepts like the high-tier OVI, refusal-vs-failed-test, and drug-OVI images
+  - favor case files, paper texture, lab/report abstractions, keys, pens, envelopes, and restrained color cues over literal location scenes
+  - if a location is not central to the post, avoid trying to depict Delaware, Ohio at all
 - Avoid confusing government/location concepts:
   - no Capitol Hill, Washington DC, domes, federal buildings, monuments, city skylines, tree-lined landmark streets, or generic courthouse exteriors unless specifically approved for that post
 - Featured images must avoid prohibited device motifs:

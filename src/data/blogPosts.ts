@@ -48,6 +48,235 @@ export function resolveBlogScope(post: BlogPost): BlogScope {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'drug-ovi-ohio',
+    title: 'Drug OVI in Ohio: Marijuana, Prescription Drugs, and Blood or Urine Testing',
+    excerpt:
+      'Drug OVI cases can turn on impairment observations, toxicology timing, prescription context, and whether blood, urine, or oral-fluid evidence actually fits the charge. This guide explains what to review early.',
+    imageUrl: '/images/generated/blog-drug-ovi-ohio.png',
+    content: `A drug OVI charge in Ohio is not the same thing as a drug possession charge, and it is not always proved the same way as an alcohol-test OVI. The state may focus on officer observations, driving behavior, field sobriety evidence, admissions, prescription-medication context, and chemical or toxicology testing from blood, urine, or oral fluid.
+
+That makes the first review very practical. What substance is alleged? What test was requested? When was the specimen collected compared with driving? Was the case charged as impaired driving, a prohibited-concentration case, or both? Were the Ohio testing rules followed closely enough for the result to be used?
+
+If the case is in Delaware County or central Ohio, start with the main [OVI/DUI defense page](/ovi-dui-defense-delaware-oh). If the same facts also involve possession, trafficking, or a search issue, compare the OVI charge with the [drug crime defense page](/drug-crime-lawyer-delaware-oh) and the [motion to suppress OVI evidence page](/motion-to-suppress-ovi-ohio).
+
+## Quick answer
+
+Ohio drug OVI cases usually need a charge-by-charge review:
+
+- ORC 4511.19 can cover operating under the influence of a drug of abuse, alcohol, or a combination of them.
+- The statute also lists prohibited concentrations for certain controlled substances or metabolites in whole blood, blood serum or plasma, and urine.
+- A prescription or lawful possession does not automatically defeat an impairment-based OVI allegation.
+- Ohio adult-use marijuana law does not authorize operating a vehicle while under the influence of marijuana.
+- A positive drug screen is not the whole case. Timing, specimen type, collection, confirmation testing, chain of custody, lab records, and officer observations can all matter.
+- Oral-fluid testing is now part of Ohio's implied-consent and testing framework, but it should not be casually treated as the same thing as every blood or urine per se threshold.
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## What counts as drug OVI in Ohio?
+
+The broad drug-OVI charge is operating a vehicle while under the influence of a drug of abuse, alcohol, or a combination of them. That is different from saying the person possessed drugs. OVI focuses on operating or being in physical control of a vehicle and on the state's proof of impairment or prohibited concentration.
+
+ORC 4511.19 also includes controlled-substance and metabolite thresholds for certain specimens. The details matter because blood, blood serum or plasma, urine, and oral-fluid references are not interchangeable. A case that sounds simple in a police report can become more complicated once the actual charge subsection, specimen type, timing, and lab report are reviewed.
+
+This is why a drug-OVI defense review should not stop at the phrase "tested positive." It should identify:
+
+- the exact ORC 4511.19 subsection charged,
+- whether the state is alleging impairment, prohibited concentration, or both,
+- the alleged substance or metabolite,
+- the specimen type,
+- when the specimen was collected,
+- whether the report matches the charged threshold, and
+- whether the officer observations and video actually support impairment at the time of driving.
+
+## Marijuana OVI is not just a cannabis-possession question
+
+Ohio's adult-use marijuana law does not make impaired driving legal. ORC 3796.221 expressly preserves the rule that adult-use rights do not authorize operating a vehicle while under the influence of marijuana.
+
+That said, marijuana OVI cases still require careful proof review. The legal issue may be impairment, a listed concentration, or a combination of impairment observations and testing. The statute treats marijuana and marijuana metabolite results with specific threshold language, so the defense needs to know what was measured and in what specimen.
+
+Common review questions include:
+
+- Was the person actually impaired at the time of driving, or is the case relying heavily on a test result?
+- Was the alleged result for THC, a metabolite, or both?
+- Was the specimen whole blood, serum or plasma, urine, oral fluid, or something else?
+- Was the specimen collected close enough in time to the alleged driving to support the charged theory?
+- Did the officer's report, body camera, and field testing match the allegation?
+
+Do not assume that a medical card, lawful adult-use possession, or a positive screen answers the OVI question by itself. Those facts may matter, but they do not replace the statutory proof questions.
+
+## Prescription-drug OVI can happen even with a valid prescription
+
+Prescription-medication OVI cases are often misunderstood. A medication can be lawfully prescribed and still become part of an OVI allegation if the state claims the driver was impaired by it. ORC 4511.19 has a prescription-related provision, but it is narrow and does not automatically defeat an under-the-influence theory.
+
+The defense should look for the practical context:
+
+- Was the medication taken as prescribed?
+- Were there dosage changes, warnings, or interactions with alcohol or another substance?
+- Did the officer assume impairment from medication names rather than actual driving or observation evidence?
+- Do medical conditions explain speech, balance, eyes, fatigue, or coordination findings?
+- Did the toxicology report identify the right substance and concentration?
+
+Prescription context can be important mitigation and evidence, but it should be handled carefully. The goal is to separate lawful medical use from the state's burden to prove impaired driving or the charged test-based violation.
+
+## Blood, urine, and oral-fluid testing: what needs to be checked?
+
+Ohio Revised Code section 3701.143 authorizes the Ohio Department of Health to approve techniques and methods for chemical analysis. Ohio Administrative Code Chapter 3701-53 then provides rules for testing, collection, handling, lab practices, permits, records, and related procedures.
+
+In drug-OVI cases, the testing review may include:
+
+| Issue | Why it matters |
+|---|---|
+| Specimen type | Blood, serum/plasma, urine, and oral fluid can support different evidentiary points. |
+| Timing | A result collected later has to be connected back to the time of operation. |
+| Collection | Rule compliance can affect whether the sample was properly collected, labeled, sealed, stored, and handled. |
+| Confirmation | Positive drug results may require confirmatory testing under Ohio's testing rules. |
+| Chain of custody | The lab and law-enforcement records should show who handled the sample and when. |
+| Lab procedures | Method, calibration, procedure manuals, proficiency records, and personnel qualifications can matter. |
+| Report/service issues | The state may need to comply with statutory report and witness procedures before relying on a lab result. |
+
+Oral-fluid testing deserves special care. Ohio's implied-consent statute now references oral fluid, and the administrative code includes oral-fluid rules. But a lawyer should still match the charge to the statute, the specimen, and the purpose for which the result is being offered. A shorthand statement that "oral fluid proves drug OVI" skips too much.
+
+For broader test-request and refusal issues, compare this guide with [OVI refusal vs. failed test in Ohio](/blog/ovi-refusal-vs-failed-test-ohio), [OVI test refusal defense](/ovi-test-refusal-lawyer-ohio), and [ALS license suspension defense](/als-license-suspension-ohio).
+
+## ALS and implied-consent issues are separate from the criminal case
+
+A drug-OVI arrest can also create an Administrative License Suspension. ORC 4511.191 says Ohio drivers are deemed to have consented to certain chemical tests after an OVI arrest, including blood, serum or plasma, breath, oral fluid, and urine testing. ORC 4511.192 covers the advice process before the requested test in many cases.
+
+The Ohio BMV explains that a positive test or refusal can trigger an administrative suspension before the criminal case is resolved. ORC 4511.197 provides the implied-consent suspension appeal framework, including limited appeal issues.
+
+Keep these tracks separate:
+
+- The criminal OVI case is about the charge, evidence, plea posture, trial risk, and sentencing exposure.
+- The ALS track is about license status, suspension class, appeal timing, and driving privileges.
+- The same test request or refusal allegation can affect both tracks, but winning one issue does not always automatically resolve the other.
+
+If your license was taken after a drug-OVI arrest, preserve every BMV and court paper immediately. License deadlines can move faster than the broader criminal-case strategy.
+
+## Defense checklist for a drug OVI case
+
+Early case review should be document-driven. Save the citation, ALS paperwork, bond paperwork, police report if available, medical and prescription information, receipts or location records, and any messages or timeline notes from before and after the stop.
+
+Then review:
+
+1. The reason for the stop, checkpoint contact, crash response, or welfare check.
+2. Whether the officer had probable cause to arrest for OVI.
+3. The exact ORC subsection and specimen type listed in the complaint or citation.
+4. The timing between alleged driving, arrest, advisement, and specimen collection.
+5. Body-camera and cruiser-video evidence.
+6. Field sobriety testing and whether it was administered and interpreted properly.
+7. Drug-recognition or impairment observations, if used.
+8. Prescription, medical, fatigue, injury, or disability context.
+9. Collection, sealing, labeling, refrigeration, chain of custody, and lab records.
+10. Whether the facts support a [motion to suppress OVI evidence](/motion-to-suppress-ovi-ohio).
+
+If a separate drug possession or trafficking charge was filed, the search and possession issues need their own review. The [drug possession vs. trafficking guide](/blog/drug-possession-vs-trafficking-ohio) and [drug possession charge checklist](/blog/drug-possession-charge-ohio-what-to-do-next) explain that side of the case.
+
+## How this article fits Mango Law's OVI and drug-defense pages
+
+This guide supports the main OVI owner page because drug impairment, testing, refusal, ALS, and suppression questions often decide the first week of an OVI case. It also supports the drug-crime owner page because a traffic stop can create both OVI and drug-possession exposure.
+
+The right next page depends on the pressure point:
+
+- Start with [OVI/DUI defense in Delaware, Ohio](/ovi-dui-defense-delaware-oh) for the overall impaired-driving defense path.
+- Use [drug crimes defense in Delaware, Ohio](/drug-crime-lawyer-delaware-oh) if possession, trafficking, paraphernalia, or search issues are also charged.
+- Use [motion to suppress OVI evidence](/motion-to-suppress-ovi-ohio) if the stop, arrest, test request, or specimen handling may affect admissibility.
+- Use [first-offense OVI in Ohio](/first-offense-ovi-ohio) if this is a first OVI and the immediate questions are court timing, ALS, and privileges.
+- Use [Ohio Liv's Law OVI changes](/blog/ohio-livs-law-ovi-changes) for the broader 2025 oral-fluid and penalty-change context.
+
+## Bottom line
+
+A drug OVI case is not won or lost just because a substance appears in a report. The key questions are what Ohio law required for the charge, what the officer actually observed, what the test can reliably show, and whether the state can connect that evidence to operating a vehicle while impaired or to a listed prohibited concentration.
+
+For help reviewing a marijuana, prescription-drug, blood-test, urine-test, oral-fluid, or refusal issue in a Delaware County or central Ohio OVI case, contact [Mango Law](/contact) before making a plea or license decision based on one line in a lab report.
+
+---
+
+*This article is for educational purposes and does not create an attorney-client relationship. Drug OVI, ALS, testing, and suppression issues are fact-specific. Consult a qualified Ohio attorney about your situation.*`,
+    category: 'OVI/DUI Defense',
+    date: '2026-05-03',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-03',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.19 (Operating vehicle under the influence)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.191 (Implied consent)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.192 (Advice to OVI arrestee)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.192',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.197 (Appeal of implied consent suspension)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.197',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 3701.143 (Chemical analysis authority)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3701.143',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Administrative Code Chapter 3701-53 (Alcohol and drug testing rules)',
+        url: 'https://codes.ohio.gov/ohio-administrative-code/chapter-3701-53',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Administrative Code Rule 3701-53-06 (Specimen collection and handling)',
+        url: 'https://codes.ohio.gov/ohio-administrative-code/rule-3701-53-06',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio BMV - Administrative License Suspension',
+        url: 'https://www.bmv.ohio.gov/susp-ad-first-offense.aspx',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 3796.221 (Adult-use cannabis rights and limits)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3796.221',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Legislative Service Commission Final Analysis for H.B. 37',
+        url: 'https://www.legislature.ohio.gov/download?key=24452',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is drug OVI the same as a drug possession charge?',
+        answer:
+          'No. Drug OVI focuses on operating a vehicle while impaired or with a prohibited concentration. Possession, trafficking, and paraphernalia charges focus on separate drug-control facts, although the same traffic stop can create both kinds of charges.',
+      },
+      {
+        question: 'Can I be charged with OVI for prescription medication in Ohio?',
+        answer:
+          'Yes. A valid prescription can matter, but it does not automatically defeat an impairment-based OVI allegation. The defense should review dosage, timing, warnings, medical conditions, officer observations, and any toxicology result.',
+      },
+      {
+        question: 'Does a positive marijuana test prove drug OVI?',
+        answer:
+          'Not by itself. The charge, specimen type, timing, statutory threshold, officer observations, and admissibility of the test all matter. Ohio law also does not allow driving while under the influence of marijuana just because adult-use possession may be lawful.',
+      },
+      {
+        question: 'Can refusing a drug test suspend my license?',
+        answer:
+          'A refusal after an OVI arrest can trigger an Administrative License Suspension under Ohio implied-consent law. The exact suspension category, appeal issue, and driving-privilege timing depend on the paperwork and prior history.',
+      },
+      {
+        question: 'What evidence should be reviewed in a drug OVI case?',
+        answer:
+          'Review the stop, probable cause, body-camera video, field sobriety testing, medical and prescription context, specimen type, collection time, lab records, chain of custody, confirmation testing, ALS paperwork, and whether suppression issues exist.',
+      },
+    ],
+  },
+  {
     slug: 'ovi-refusal-vs-failed-test-ohio',
     title: 'OVI Refusal vs. Failed Test in Ohio: What Changes After an Arrest',
     excerpt:
@@ -1197,7 +1426,7 @@ That distinction matters in drug-OVI cases. An oral-fluid result may become part
 - whether the alleged drug actually impaired driving, and
 - whether another test was requested or refused.
 
-For test-related issues, see [OVI test refusal defense](/ovi-test-refusal-lawyer-ohio) and [motions to suppress OVI evidence](/motion-to-suppress-ovi-ohio).
+For test-related issues, see [drug OVI in Ohio](/blog/drug-ovi-ohio), [OVI test refusal defense](/ovi-test-refusal-lawyer-ohio), and [motions to suppress OVI evidence](/motion-to-suppress-ovi-ohio).
 
 ## Did Liv's Law change implied consent?
 
