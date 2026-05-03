@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 15:08 EDT
+Post slug and title: DUI checkpoint data | Server-rendered pending-announcement payload cleanup
+Change type: minor
+Summary of change: Follow-up production QA found the hydrated checkpoint page was clean but the server-rendered Next payload still serialized stale/noisy pending-announcement rows. Filtered `initialAnnouncements` on the server before passing data to the client so crawlers and page source receive the same public-safe announcement set as hydrated users.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: User asked to review live changes, correct issues, and iterate on improvements.
+Rollback notes: Restore the prior unfiltered `initialAnnouncements = announcementsResult.data ?? []` assignment in `src/app/(site)/resources/dui-checkpoints/page.tsx`.
+
 Date/time: 2026-05-03 14:41 EDT
 Post slug and title: DUI checkpoint data | Summit County May pending announcement and blog image-generation standard
 Change type: minor

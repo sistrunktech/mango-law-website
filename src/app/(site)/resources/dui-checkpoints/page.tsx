@@ -116,7 +116,10 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
     if (upcomingResult.error) throw upcomingResult.error;
     if (hotspotsResult.error) throw hotspotsResult.error;
 
-    const initialAnnouncements = announcementsResult.data ?? [];
+    const initialAnnouncements = (announcementsResult.data ?? []).filter(
+      (announcement) =>
+        announcement.status !== 'pending_details' || isAnnouncementFreshForPublic(announcement, now),
+    );
     const freshPendingAnnouncementsCount = initialAnnouncements.filter(
       (announcement) =>
         announcement.status === 'pending_details' && isAnnouncementFreshForPublic(announcement),
