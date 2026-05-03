@@ -75,6 +75,7 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 
 - Optimized `/drug-crime-lawyer-delaware-oh` for the seven validated drug-crime tracker terms, tightened current Ohio drug-law wording, added the possession-vs-trafficking blog support link, and refreshed sitemap `lastmod`.
 - Optimized `/protection-order-lawyer-delaware-oh` for the six validated protection-order/CPO tracker terms, tightened CPO/firearm/counter-petition legal language against official sources, added stronger CPO/no-contact/DV support links, and refreshed sitemap `lastmod`.
+- Optimized `/domestic-violence-lawyer-delaware-oh` for the validated local DV owner terms, added exact "domestic violence lawyer in Delaware, Ohio" phrasing to the visible hero/intro, added a defense-review section linking arrest/no-contact/protection-order support, routed glossary DV links to the DV owner, and tightened ORC 2919.25/firearm language against official sources.
 - Added `/blog/ovi-refusal-vs-failed-test-ohio` and `/blog/domestic-violence-arrest-delaware-county-ohio` to the GSC indexing submission log so the admin-browser queue matches the latest live content.
 
 ## Execution Rules
