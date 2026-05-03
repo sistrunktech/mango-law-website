@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {
   Calendar, ArrowLeft, Clock, Scale, AlertTriangle, TrendingUp,
   Shield, Gavel, FileText, Ban, DollarSign, Users,
-  Timer, CheckCircle, Briefcase, Home, List
+  Timer, CheckCircle, Briefcase, Home, List, HelpCircle
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -1378,6 +1378,27 @@ export default function BlogPostPage({
                   return sections;
                 })()}
               </div>
+
+              {post.faqs && post.faqs.length > 0 && (
+                <section
+                  id="common-questions"
+                  className="mt-12 rounded-xl border border-brand-black/10 bg-brand-offWhite p-6"
+                  aria-label="Common questions"
+                >
+                  <div className="mb-5 flex items-center gap-2 text-sm font-semibold text-brand-black">
+                    <HelpCircle className="h-4 w-4 text-brand-leaf" />
+                    Common questions
+                  </div>
+                  <div className="space-y-5">
+                    {post.faqs.map((faq) => (
+                      <div key={faq.question}>
+                        <h2 className="text-lg font-semibold text-brand-black">{faq.question}</h2>
+                        <p className="mt-2 text-sm leading-relaxed text-gray-700">{faq.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               <footer className="mt-16 border-t border-gray-200 pt-8">
                 <div

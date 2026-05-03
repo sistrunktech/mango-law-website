@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 09:15 EDT
+Post slug and title: high-tier-ovi-ohio-17-test | High-Tier OVI in Ohio: What a .17+ Test Can Change in Your Case
+Change type: major
+Summary of change: Added the second SEO/EEAT blog post from the 5-week publishing plan, with official Ohio ORC, BMV, Administrative Code, and LSC sources; added visible blog FAQ support and FAQ schema for posts that define FAQ entries.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User requested the next SEO/AEO round and instructed Codex to proceed with the outlined onsite content, optimizations, and implementations.
+Rollback notes: Remove the `high-tier-ovi-ohio-17-test` object from `src/data/blogPosts.ts`, remove the matching generated image, remove blog FAQ schema/rendering changes if not used elsewhere, restore the second row of the publishing plan, and revert this changelog entry.
+
 Date/time: 2026-04-24 22:15 EDT
 Post slug and title: ohio-livs-law-ovi-changes | Ohio Liv's Law OVI Changes: Fines, Interlock, and Oral-Fluid Testing
 Change type: minor

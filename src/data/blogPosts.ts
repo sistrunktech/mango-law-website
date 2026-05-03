@@ -24,6 +24,10 @@ export type BlogPost = {
   author: string;
   lastVerified: string;
   sources: TrustSource[];
+  faqs?: {
+    question: string;
+    answer: string;
+  }[];
   imageUrl?: string;
 };
 
@@ -43,6 +47,181 @@ export function resolveBlogScope(post: BlogPost): BlogScope {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: 'high-tier-ovi-ohio-17-test',
+    title: 'High-Tier OVI in Ohio: What a .17+ Test Can Change in Your Case',
+    excerpt:
+      'A high-tier OVI allegation can change jail exposure, driving-privilege planning, and the evidence that must be reviewed. This guide explains what .17+ means in Ohio and what defendants should examine early.',
+    imageUrl: '/images/generated/blog-high-tier-ovi-ohio-17-test.png',
+    content: `Ohio law treats some alcohol-test results differently from a standard OVI. In common defense shorthand, a "high-tier" OVI usually means a test result at or above the higher concentration thresholds in ORC 4511.19, including a breath result of .17 grams per 210 liters of breath or higher.
+
+That number can matter, but it does not answer every question in the case. A high-tier allegation still depends on the stop, arrest, test timing, instrument or lab process, prior OVI history, license status, and the exact charge filed in court.
+
+If you were charged in Delaware County or central Ohio, start with the main [OVI/DUI defense page](/ovi-dui-defense-delaware-oh) and get advice before assuming a test result tells the whole story.
+
+## Quick answer
+
+A .17+ OVI allegation can change the case in several practical ways:
+
+- It can trigger a different sentencing track than a lower alcohol-test OVI.
+- It can affect jail or driver-intervention-program planning, especially for a first offense.
+- It can make limited driving privileges, ignition interlock, and restricted-plate issues more important.
+- It can make the test process itself a central defense issue.
+- It does not eliminate defenses to the stop, arrest, timing, testing procedure, or admissibility of evidence.
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## What is high-tier OVI in Ohio?
+
+Ohio's OVI statute lists multiple prohibited alcohol concentrations. The lower adult alcohol-test ranges include .08 or more but less than .17 for whole blood and .08 grams or more but less than .17 grams per 210 liters for breath. The higher tier begins at .17 for whole blood, .17 grams per 210 liters for breath, .204 for blood serum or plasma, and .238 for urine.
+
+Those numbers are not interchangeable in casual conversation. Breath, whole blood, blood serum or plasma, and urine are measured differently, and the statute treats each specimen type separately. When reviewing a charge, confirm:
+
+- which specimen was tested,
+- what exact result is alleged,
+- when the sample was taken,
+- what charge subsection was filed, and
+- whether the case also alleges impairment under the broader "under the influence" language.
+
+## Standard OVI vs. high-tier OVI
+
+| Issue | Standard alcohol-test OVI | High-tier alcohol-test OVI |
+|---|---|---|
+| Common shorthand | .08 to under .17 | .17 or higher |
+| Statutory source | ORC 4511.19(A)(1)(b)-(e) | ORC 4511.19(A)(1)(f)-(i) |
+| First-offense jail/DIP planning | Often framed around three days jail or a certified driver-intervention program | Can require a different jail plus program analysis under the statute |
+| Defense focus | Stop, probable cause, test timing, calibration/lab process, admissibility | Same issues, plus closer attention to high-tier threshold proof |
+| License planning | ALS and court suspension timelines still matter | ALS, court suspension, privileges, interlock, and plate conditions may need earlier review |
+
+This table is a starting point, not a sentencing promise. Prior offenses, refusals, injuries, companion charges, and local court orders can change the analysis.
+
+## Does .17+ always mean jail?
+
+High-tier OVI can make jail exposure more serious, but the precise consequence depends on the charge and history. For a first offense, ORC 4511.19 separates lower-tier alcohol-test violations from higher-tier alcohol-test violations and describes different mandatory jail and driver-intervention-program structures.
+
+In practical terms, a high-tier first offense may require the defense to plan around:
+
+- whether the case can be reduced below the high-tier allegation,
+- whether the driver-intervention-program option is available and appropriate,
+- whether the court views treatment or monitoring conditions as necessary,
+- whether the client needs driving privileges immediately, and
+- whether the test result can be challenged before plea negotiations.
+
+If there are prior OVI convictions or equivalent offenses, the case can move into repeat-offense or felony-risk territory. Use the dedicated [felony OVI lawyer page](/felony-ovi-lawyer-ohio) for that track.
+
+## How can a high-tier result affect driving privileges?
+
+An OVI arrest can create both an administrative license suspension and a court case. The Ohio BMV explains that, after a suspected OVI stop, a positive test or a refusal can allow the officer to take the license on the spot and start an immediate suspension.
+
+That is separate from the court suspension that may follow a conviction. Limited driving privileges are governed by court order and can be affected by waiting periods, prior history, whether the arrest was alcohol-related or drug-related, ignition interlock conditions, and restricted-license-plate rules.
+
+If your immediate concern is driving, review:
+
+- [ALS license suspension in Ohio](/als-license-suspension-ohio),
+- [first-offense OVI in Ohio](/first-offense-ovi-ohio), and
+- [OVI test refusal defense](/ovi-test-refusal-lawyer-ohio).
+
+## What can still be challenged?
+
+A high number does not make the evidence automatic. The defense may still need to examine whether the state can prove the result and use it in court.
+
+Common review points include:
+
+- the reason for the traffic stop,
+- whether the officer had probable cause to arrest,
+- field sobriety testing and how it was administered,
+- the time between driving and sample collection,
+- whether the result falls within the statutory three-hour evidence window,
+- the instrument, lab, or specimen-handling process,
+- whether the required report or laboratory witness issues were handled properly, and
+- whether an independent test opportunity was requested or discussed.
+
+Ohio Administrative Code Chapter 3701-53 contains rules for breath testing, specimen collection, handling, laboratory requirements, calibration, and record retention. Those rules do not create a defense in every case, but they give counsel a concrete checklist for reviewing whether the testing evidence is reliable and admissible.
+
+## What should you do after a high-tier OVI charge?
+
+Take the first week seriously. A high-tier allegation can affect both the license timeline and negotiation posture.
+
+1. Save every citation, BMV form, ALS notice, bond paper, and court notice.
+2. Write down the stop location, time, driving facts, officer statements, tests requested, and tests taken.
+3. Do not drive unless you have a valid privilege order.
+4. Preserve ride-share, phone, receipt, medical, and witness information.
+5. Talk with an Ohio OVI lawyer before deciding whether to plead or challenge the ALS.
+
+## What varies by county and court?
+
+Ohio statutes set the framework, but local procedure still matters. Delaware Municipal Court scheduling, privilege-order practice, treatment requirements, monitoring conditions, and plea posture can differ from another county's routine.
+
+That is why two people with similar test numbers may face different practical decisions. The better question is not only "what does .17 mean?" It is "what does this charge, in this court, with this test record and this license status, require next?"
+
+## Bottom line
+
+A .17+ OVI allegation is serious because it can change sentencing exposure, license planning, and negotiation strategy. It is not the end of the analysis. The defense still needs to review the stop, arrest, timing, testing records, statutory threshold, and any administrative-license issues.
+
+For help with a high-tier OVI in Delaware County or central Ohio, contact [Mango Law](/contact) before making a plea or license decision based only on a number.
+
+---
+
+*This article is for educational purposes and does not create an attorney-client relationship. OVI law, testing rules, driving privileges, and sentencing are fact-specific. Consult a qualified Ohio attorney about your situation.*`,
+    category: 'OVI/DUI Defense',
+    date: '2026-05-03',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-03',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4510.13 (Limited driving privileges and restrictions)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.13',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio BMV - Administrative License Suspension (ALS)',
+        url: 'https://www.bmv.ohio.gov/susp-ad-first-offense.aspx',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Administrative Code Chapter 3701-53 (Alcohol and drug testing rules)',
+        url: 'https://codes.ohio.gov/ohio-administrative-code/chapter-3701-53',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Legislative Service Commission Final Analysis for H.B. 37',
+        url: 'https://www.legislature.ohio.gov/download?key=24452',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is high-tier OVI in Ohio?',
+        answer:
+          'High-tier OVI usually refers to an alcohol-test result at or above the higher ORC 4511.19 thresholds, including .17 for whole blood or .17 grams per 210 liters for breath. The exact threshold depends on the specimen type.',
+      },
+      {
+        question: 'Does a .17+ test result automatically prove the case?',
+        answer:
+          'No. The defense can still review the stop, probable cause, timing, testing process, calibration or lab records, report admissibility, and whether the state can prove the correct statutory threshold.',
+      },
+      {
+        question: 'Can I get driving privileges after a high-tier OVI charge?',
+        answer:
+          'Possibly, but privileges depend on the type of suspension, prior history, waiting periods, court orders, and any ignition-interlock or restricted-plate conditions. Do not drive unless a valid privilege order allows it.',
+      },
+      {
+        question: 'Is high-tier OVI the same as felony OVI?',
+        answer:
+          'Not by itself. A high-tier test can increase consequences, but felony OVI usually depends on prior OVI history or other aggravating facts. Repeat-offense cases need separate felony-risk review.',
+      },
+      {
+        question: 'What should I preserve after a high-tier OVI arrest?',
+        answer:
+          'Keep citations, BMV paperwork, court notices, test paperwork, receipts, phone records, ride-share records, witness names, and a written timeline of the stop, arrest, and testing process.',
+      },
+    ],
+  },
   {
     slug: 'ohio-livs-law-ovi-changes',
     title: "Ohio Liv's Law OVI Changes: Fines, Interlock, and Oral-Fluid Testing",
