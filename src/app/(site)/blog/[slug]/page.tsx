@@ -53,6 +53,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <>
       <StructuredData
+        faqs={post.faqs}
         article={{
           headline: post.title,
           author: post.author,
