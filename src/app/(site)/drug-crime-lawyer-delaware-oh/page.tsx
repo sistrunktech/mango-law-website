@@ -5,7 +5,7 @@ import { buildMetadata } from '@/lib/seo-metadata';
 import { drugCrimePageMetaDescription } from '@/data/seoRoutingContent';
 
 const seo = {
-  title: 'Drug Crime Lawyer Delaware, OH | Drug Charges Defense | Mango Law LLC',
+  title: 'Drug Crime Lawyer Delaware Ohio | Possession & Trafficking Defense | Mango Law LLC',
   description: drugCrimePageMetaDescription,
   image: '/images/generated/drug-crimes-defense-hero.png',
   url: '/drug-crime-lawyer-delaware-oh',

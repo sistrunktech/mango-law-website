@@ -870,3 +870,16 @@ Regression checklist:
 - Meta/schema changed? yes
 Approval token: pending
 Rollback notes: revert the scoped updates in `src/app/(site)/ovi-dui-defense-delaware-oh/page.tsx`, `src/views/OviDuiPage.tsx`, `src/app/(site)/criminal-defense-delaware-oh/page.tsx`, and `src/views/CriminalDefensePage.tsx`.
+
+Date/time: 2026-05-03 15:58 EDT
+Post slug and title: drug-crime-lawyer-delaware-oh | Drug crime owner-page keyword and indexing prep
+Change type: minor
+Summary of change: Updated the drug-crime owner page title, metadata, hero, intro, support links, and body copy to align with the seven validated drug-crime tracker terms; added a trafficking statute callout; tightened trafficking/paraphernalia legal claims against current Ohio sources; and refreshed sitemap lastmod before GSC submission.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: APPROVED: continue keyword/tracking/content queue after checkpoint cleanup no longer blocking publication -- 2026-05-03
+Rollback notes: revert the scoped updates in `src/app/(site)/drug-crime-lawyer-delaware-oh/page.tsx`, `src/views/DrugCrimePage.tsx`, `src/data/seoRoutingContent.ts`, `src/data/statutes.ts`, and `src/app/sitemap.ts`.
