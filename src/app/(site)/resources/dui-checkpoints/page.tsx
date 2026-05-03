@@ -43,6 +43,9 @@ export const metadata: Metadata = buildMetadata(seo);
 function createCheckpointClient() {
   return createClient(supabaseUrl, supabaseAnonKey, {
     auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      fetch: (input, init) => fetch(input, { ...init, cache: 'no-store' }),
+    },
   });
 }
 

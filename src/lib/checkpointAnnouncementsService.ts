@@ -1,4 +1,5 @@
-import { supabase } from './supabaseClient';
+import { createClient } from '@supabase/supabase-js';
+import { supabase, supabaseAnonKey, supabaseUrl } from './supabaseClient';
 
 export type AnnouncementStatus = 'pending_details' | 'confirmed' | 'cancelled';
 
@@ -22,6 +23,25 @@ export interface CheckpointAnnouncement {
   updated_at: string;
 }
 
+const CHECKPOINT_PUBLIC_SIGNAL_PATTERNS = [
+  /\bsobriety checkpoints?\b/i,
+  /\bovi checkpoints?\b/i,
+  /\bdui checkpoints?\b/i,
+  /\bimpaired[-\s]driving checkpoints?\b/i,
+  /\btraffic safety checkpoints?\b/i,
+  /\bovi task force\b/i,
+  /\bdui task force\b/i,
+  /\bdrive sober\b/i,
+];
+
+const CHECKPOINT_PUBLIC_NOISE_PATTERNS = [
+  /\bsecurity checkpoints?\b/i,
+  /\bairport checkpoints?\b/i,
+  /\bborder checkpoints?\b/i,
+  /\bcheckpoint inhibitor\b/i,
+  /\bcorrespondents'? dinner\b/i,
+];
+
 function parseIsoDate(value: unknown): Date | null {
   if (typeof value !== 'string' || !value.trim()) return null;
   const d = new Date(value);
@@ -36,8 +56,30 @@ function parseDateOnlyToUtc(value: unknown): Date | null {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
+function hasCheckpointPublicSignal(announcement: CheckpointAnnouncement): boolean {
+  const text = [announcement.title, announcement.location_text, announcement.raw_text]
+    .filter(Boolean)
+    .join('\n');
+
+  if (CHECKPOINT_PUBLIC_NOISE_PATTERNS.some((pattern) => pattern.test(text))) {
+    return false;
+  }
+
+  return CHECKPOINT_PUBLIC_SIGNAL_PATTERNS.some((pattern) => pattern.test(text));
+}
+
+function createCheckpointAnnouncementsClient() {
+  return createClient(supabaseUrl, supabaseAnonKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      fetch: (input, init) => fetch(input, { ...init, cache: 'no-store' }),
+    },
+  });
+}
+
 export function isAnnouncementFreshForPublic(announcement: CheckpointAnnouncement, now: Date = new Date()): boolean {
   if (announcement.status !== 'pending_details') return true;
+  if (!hasCheckpointPublicSignal(announcement)) return false;
 
   const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
@@ -46,13 +88,19 @@ export function isAnnouncementFreshForPublic(announcement: CheckpointAnnouncemen
   const startDate = parseIsoDate(announcement.start_date);
   const announcementDate = parseIsoDate(announcement.announcement_date);
   const createdAt = parseIsoDate(announcement.created_at);
+  const hasLocationContext = Boolean(
+    announcement.location_city?.trim() ||
+      announcement.location_county?.trim() ||
+      announcement.location_text?.trim()
+  );
 
   if (eventDate && eventDate >= oneDayAgo) return true;
   if (startDate && startDate >= oneDayAgo) return true;
-  if (announcementDate && announcementDate >= fourteenDaysAgo) return true;
+  if (hasLocationContext && announcementDate && announcementDate >= fourteenDaysAgo) return true;
+  if (!hasLocationContext && announcementDate && announcementDate >= oneDayAgo) return true;
 
   // Only fall back to created_at when we don't have an upstream announcement date.
-  if (!announcementDate && createdAt && createdAt >= fourteenDaysAgo) return true;
+  if (!announcementDate && createdAt && createdAt >= (hasLocationContext ? fourteenDaysAgo : oneDayAgo)) return true;
 
   return false;
 }
@@ -104,8 +152,9 @@ function buildAnnouncementPayload(
 
 export async function getCheckpointAnnouncements(): Promise<CheckpointAnnouncement[]> {
   if (!supabase) throw new Error('Supabase client is not initialized');
+  const checkpointAnnouncementsClient = createCheckpointAnnouncementsClient();
 
-  const { data, error } = await supabase
+  const { data, error } = await checkpointAnnouncementsClient
     .from('dui_checkpoint_announcements')
     .select('*')
     .order('event_date', { ascending: true, nullsFirst: false })

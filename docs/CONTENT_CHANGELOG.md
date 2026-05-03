@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 14:41 EDT
+Post slug and title: DUI checkpoint data | Summit County May pending announcement and blog image-generation standard
+Change type: minor
+Summary of change: Added a curated checkpoint-scraper seed for the Cleveland19/WOIO Summit County May sobriety-checkpoint notice as a pending announcement because exact city, time, and street-level details were not published; rechecked the existing Solon/Cinco de Mayo source and kept it pending because the source still only identifies the Aurora Road area; tightened the public pending-announcement filter and RSS noise filter so unrelated/security-checkpoint or stale unlocated rows do not inflate the hydrated pending count; updated the blog featured-image standard and generator prompts to preserve the successful neutral watercolor legal still-life direction and avoid Capitol Hill, Washington DC, landmark, skyline, and generic courthouse-location drift.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: User clarified the checkpoint-page pending announcement question and asked to keep the new image style while updating image-generation standards.
+Rollback notes: Remove the Summit County seed from `supabase/functions/checkpoint-scraper/curated-announcements.ts`, restore the prior checkpoint announcement freshness/RSS filtering behavior, and restore the previous featured-image prompt language in `docs/technical/BLOG_REQUIREMENTS.md` and `scripts/generate-blog-featured-images.ts`.
+
 Date/time: 2026-05-03 13:35 EDT
 Post slug and title: ohio-misdemeanor-vs-felony-charges-delaware-county | Ohio Misdemeanor vs. Felony Charges: Delaware County Defense Guide
 Change type: major

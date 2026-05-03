@@ -46,6 +46,12 @@ function buildSafetyConstraints() {
     'no identifiable people',
     'no license plates readable',
     'no street names readable',
+    'no Capitol Hill',
+    'no Washington DC landmarks',
+    'no capitol domes',
+    'no monuments',
+    'no city skylines',
+    'no tree-lined landmark streets',
   ].join(', ');
 }
 
@@ -71,6 +77,14 @@ function buildNegativePrompt() {
     'notebook',
     'clipboard',
     'forms',
+    'Capitol Hill',
+    'Washington DC',
+    'capitol dome',
+    'federal building',
+    'monument',
+    'city skyline',
+    'tree-lined ceremonial street',
+    'generic courthouse exterior',
     'wall plaque',
     'mail slot',
     'church lettering',
@@ -86,15 +100,15 @@ function buildNegativePrompt() {
 
 function buildBrandStyle() {
   return [
-    'editorial watercolor illustration',
-    'ink-and-wash sketch detail',
-    'soft gouache texture on warm paper',
+    'editorial watercolor legal still-life illustration',
+    'traditional ink-and-wash sketch detail',
+    'soft gouache texture on warm paper with natural wash edges',
     'tasteful legal storytelling art',
-    'clean composition with one clear focal subject',
+    'neutral tabletop or close editorial crop with one clear focal subject',
     'restrained mango-gold, forest-green, charcoal, and parchment palette',
     'grounded and human',
     'not abstract and not photorealistic',
-    'quiet Ohio legal atmosphere',
+    'quiet Ohio legal atmosphere without location landmarks',
   ].join(', ');
 }
 
@@ -104,39 +118,39 @@ function buildTopicPrompt(post: BlogPost) {
   const category = post.category.toLowerCase();
 
   if (slug.includes('first-ovi-court-date')) {
-    return 'Ohio courthouse hallway, an empty wooden bench, doorway light, and a simple closed case folder with no markings';
+    return 'neutral legal tabletop with a blank case folder, simple calendar page without numbers, pen, and soft doorway light';
   }
   if (slug.includes('driving-privileges') || slug.includes('als')) {
-    return 'sunlit courthouse window framing an Ohio road at dawn with car keys on the wood sill, no papers, no notebooks, no books, and no visible lettering or building signs';
+    return 'neutral legal desk with car keys, a blank license-sized card, blank filing papers, and soft dawn window light';
   }
   if (slug.includes('no-contact-order')) {
-    return 'split watercolor scene with a warm stone colonnade on one side and a clean residential doorway on the other, divided by a subtle legal boundary line, with no lamps, no plaques, no wall signs, and no mail slot';
+    return 'neutral tabletop with two separated blank case folders, a subtle boundary line, pen, and soft warm light';
   }
   if (slug.includes('drug-possession-charge')) {
-    return 'defense consultation silhouettes beneath courthouse columns with restrained amber light and no shelves, no bottles, and no labeled objects';
+    return 'neutral legal desk with a sealed blank evidence envelope, blank case folder, pen, and restrained amber light';
   }
 
   if (category.includes('ovi') || title.includes('ovi') || title.includes('dui')) {
     if (title.includes('after') && title.includes('arrest')) {
-      return 'dim Ohio roadside at night leading toward a lit courthouse, with only the edge of a dashboard silhouette in frame and no objects resting on it';
+      return 'neutral legal desk after an OVI arrest with blank citation papers, car keys, a pen, and subdued roadside light through a window';
     }
     if (title.includes('lookback')) {
-      return 'layered calendar shapes, soft timeline ribbon, and an Ohio courthouse outline with no numbers or labels';
+      return 'top-down legal desk with layered blank calendar pages, timeline ribbon, case folder, and no numbers or labels';
     }
     if (title.includes('field sobriety')) {
-      return 'night roadside shoulder, faint patrol lights, measured roadside markers, and a dashboard silhouette';
+      return 'neutral legal tabletop with blank field notes, measured line markers, car keys, and faint roadside color in the background';
     }
     if (title.includes('checkpoint')) {
-      return 'Ohio roadway with cones, checkpoint shapes, and distant patrol lights in watercolor haze';
+      return 'watercolor roadside checkpoint concept with cones and distant lights, no readable signs, no police action, and no location landmarks';
     }
     if (title.includes('physical control')) {
       return 'parked car interior at night, keys on the console, and quiet dashboard lighting with no readable displays';
     }
-    return 'Ohio roadway, courthouse architectural shapes, car keys, and restrained dusk lighting';
+    return 'neutral legal desk with blank case papers, car keys, pen, subtle evidence tab, and restrained dusk lighting';
   }
 
   if (category.includes('drug')) {
-    return 'evidence locker silhouette, courthouse architecture, and a measured amber-and-charcoal legal atmosphere';
+    return 'neutral legal tabletop with a sealed blank evidence envelope, blank case folder, pen, and measured amber-and-charcoal atmosphere';
   }
 
   if (category.includes('sex')) {
@@ -144,7 +158,7 @@ function buildTopicPrompt(post: BlogPost) {
   }
 
   if (category.includes('protection')) {
-    return 'courthouse hallway, home doorway, and subtle legal-boundary motif with restrained directional markers';
+    return 'neutral tabletop with separated blank folders, soft boundary motif, and restrained directional markers';
   }
 
   if (category.includes('white collar')) {
@@ -156,10 +170,10 @@ function buildTopicPrompt(post: BlogPost) {
   }
 
   if (category.includes('criminal defense')) {
-    return 'courtroom interior details, courthouse archway, and balanced justice motifs without books or paperwork';
+    return 'neutral legal tabletop with two blank case folders, pen, subtle scale of justice, and balanced defense-process cues';
   }
 
-  return 'Ohio courthouse detail, balanced justice motifs, and quiet editorial illustration atmosphere';
+  return 'neutral legal tabletop with blank case folders, pen, subtle scale of justice, and quiet editorial illustration atmosphere';
 }
 
 function buildPrompt(post: BlogPost) {

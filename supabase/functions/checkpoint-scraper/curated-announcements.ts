@@ -39,6 +39,23 @@ const CURATED_ANNOUNCEMENT_SEEDS: CuratedAnnouncementSeed[] = [
     promoteToCheckpoint: false,
   },
   {
+    id: '2026-05-05-summit-county-may-checkpoints-pending',
+    title: 'Summit County OVI Task Force announced May sobriety checkpoints',
+    sourceUrl: 'https://www.cleveland19.com/2026/05/01/summit-county-conduct-may-sobriety-checkpoints/',
+    sourceName: 'Cleveland19/WOIO',
+    announcementDate: '2026-05-01T17:16:00-04:00',
+    eventDate: '2026-05-05',
+    startDate: null,
+    endDate: null,
+    locationText: 'Summit County; exact checkpoint city, location, and time details not published in source',
+    locationCity: null,
+    locationCounty: 'Summit',
+    status: 'pending_details',
+    rawText:
+      'Cleveland19/WOIO reported that the Summit County Sheriff’s Office announced Summit County OVI Task Force sobriety checkpoints next week, beginning Tuesday and continuing into early Wednesday morning. Source does not publish exact checkpoint cities, time windows, or street-level locations.',
+    promoteToCheckpoint: false,
+  },
+  {
     id: '2025-08-29-brunswick-pearl-road-checkpoint',
     title: 'Sobriety checkpoint planned on Pearl Road in Brunswick',
     checkpointTitle: 'OVI Checkpoint - Brunswick, Medina County',
