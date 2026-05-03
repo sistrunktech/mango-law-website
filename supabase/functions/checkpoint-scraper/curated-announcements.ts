@@ -22,6 +22,23 @@ export interface CuratedAnnouncementSeed {
 // Keep sourceUrl values unique per item because announcements are deduped by source_url.
 const CURATED_ANNOUNCEMENT_SEEDS: CuratedAnnouncementSeed[] = [
   {
+    id: '2026-05-05-solon-cinco-de-mayo-aurora-road-pending',
+    title: 'Solon Police announced Cinco de Mayo sobriety checkpoints in the Aurora Road area',
+    sourceUrl: 'https://www.cleveland19.com/2026/05/02/solon-police-conduct-sobriety-checkpoints-cinco-de-mayo/',
+    sourceName: 'Cleveland19/WOIO',
+    announcementDate: '2026-05-02T00:00:00-04:00',
+    eventDate: '2026-05-05',
+    startDate: null,
+    endDate: null,
+    locationText: 'Aurora Road area; exact checkpoint time and location details not published in source',
+    locationCity: 'Solon',
+    locationCounty: 'Cuyahoga',
+    status: 'pending_details',
+    rawText:
+      'Cleveland19/WOIO reported that Solon Police announced sobriety checkpoints for Tuesday, May 5, 2026, in the Aurora Road area. Source does not publish an exact time window or street-level checkpoint point.',
+    promoteToCheckpoint: false,
+  },
+  {
     id: '2025-08-29-brunswick-pearl-road-checkpoint',
     title: 'Sobriety checkpoint planned on Pearl Road in Brunswick',
     checkpointTitle: 'OVI Checkpoint - Brunswick, Medina County',

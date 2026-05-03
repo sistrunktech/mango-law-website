@@ -63,8 +63,8 @@ export default function CriminalDefensePage() {
   return (
     <>
       <SEO
-        title="Delaware Ohio Criminal Defense Attorney | Mango Law LLC"
-        description="Delaware Ohio criminal defense attorney for drug charges, domestic violence, assault, theft, weapons, and other felony or misdemeanor cases. Practicing in Central Ohio since 1999."
+        title="Delaware County Criminal Defense Attorney | Mango Law LLC"
+        description="Delaware County criminal defense attorney for drug charges, domestic violence, assault, theft, weapons, and felony or misdemeanor cases in Delaware, Ohio."
         image="/images/generated/criminal-defense-hero.png"
         faqs={criminalDefenseFaqs}
         breadcrumbs={[
@@ -75,8 +75,8 @@ export default function CriminalDefensePage() {
       />
       <PageHero
         eyebrow="Delaware County Criminal Defense"
-        title="Delaware Ohio criminal defense lawyer for felony and misdemeanor charges"
-        description="Drug charges, domestic violence, assault, theft, weapons, and related cases with organized discovery review and strategic motion practice."
+        title="Delaware County criminal defense attorney for felony and misdemeanor charges"
+        description="Drug charges, domestic violence, assault, theft, weapons, and related Delaware County criminal cases with organized discovery review and strategic motion practice."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -95,7 +95,7 @@ export default function CriminalDefensePage() {
                     <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Criminal defense representation for Delaware County cases</h2>
                     <p className="text-lg text-brand-black/70 leading-relaxed">
                       Facing criminal charges is overwhelming. Your reputation, your freedom, and your future are at stake.
-                      Whether you are dealing with a first-time misdemeanor or a serious felony, you need an attorney who
+                      Whether you are searching for a Delaware County criminal defense attorney after a first-time misdemeanor or a serious felony, you need an attorney who
                       understands the system, knows how Delaware Municipal Court and Delaware County Common Pleas cases move, and will fight for your rights.
                     </p>
                   </div>

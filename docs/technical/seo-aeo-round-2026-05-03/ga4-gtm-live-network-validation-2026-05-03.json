@@ -1,0 +1,1234 @@
+{
+  "captured_at": "2026-05-03T15:10:40.351Z",
+  "method": "Headless Chrome/Puppeteer live-site network capture after GTM Version 5 publish; consent cookie granted; no contact form submitted; synthetic lead_submitted dataLayer event sent only to validate GTM generate_lead mapping.",
+  "site": "https://mango.law",
+  "gtm_container_expected": "GTM-WLJQZKB5",
+  "gtm_published_version_observed_in_browser": "Version 5 - Fix Mango GA4 event tags 2026-05-03, live as of 2026-05-03 11:09 EDT",
+  "resourceEvents": [
+    {
+      "type": "gtm_js",
+      "url": "https://www.googletagmanager.com/gtm.js?id=GTM-WLJQZKB5"
+    },
+    {
+      "type": "gtm_js",
+      "url": "https://www.googletagmanager.com/gtm.js?id=GTM-WLJQZKB5"
+    }
+  ],
+  "steps": [
+    {
+      "name": "homepage_loaded_after_consent",
+      "url": "https://mango.law/",
+      "sourceEvents": [
+        {
+          "0": "consent",
+          "1": "default",
+          "2": {
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          "index": 0
+        },
+        {
+          "0": "consent",
+          "1": "update",
+          "2": {
+            "analytics_storage": "granted",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          "index": 1
+        },
+        {
+          "index": 2,
+          "gtm.start": 1777821043943,
+          "event": "gtm.js",
+          "gtm.uniqueEventId": 5
+        },
+        {
+          "index": 3,
+          "event": "mango_page_view",
+          "page_title": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+          "page_location": "https://mango.law/",
+          "page_path": "/",
+          "traffic_origin_type": "direct",
+          "traffic_origin_source": "direct",
+          "gtm.uniqueEventId": 6
+        },
+        {
+          "index": 4,
+          "event": "gtm.dom",
+          "gtm.uniqueEventId": 7
+        },
+        {
+          "index": 5,
+          "event": "gtm.load",
+          "gtm.uniqueEventId": 8
+        }
+      ],
+      "collectEvents": [
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/",
+          "page_title": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821043943&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGA&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=1&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115938465~115938468~116363098&dt=Criminal%20Defense%20%26%20OVI%20Attorney%20Delaware%2C%20OH%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2F&dp=%2F&sid=1777821044&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=707",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821043943",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGA",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "1",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "1",
+            "tag_exp": "0~115938465~115938468~116363098",
+            "dt": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+            "dl": "https://mango.law/",
+            "dp": "/",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "0",
+            "en": "page_view",
+            "_fv": "1",
+            "_nsi": "1",
+            "_ss": "1",
+            "tfd": "707"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ovi_owner_loaded_after_consent",
+      "url": "https://mango.law/ovi-dui-defense-delaware-oh",
+      "sourceEvents": [
+        {
+          "0": "consent",
+          "1": "default",
+          "2": {
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          "index": 0
+        },
+        {
+          "0": "consent",
+          "1": "update",
+          "2": {
+            "analytics_storage": "granted",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          "index": 1
+        },
+        {
+          "index": 2,
+          "gtm.start": 1777821047818,
+          "event": "gtm.js",
+          "gtm.uniqueEventId": 5
+        },
+        {
+          "index": 3,
+          "event": "experiment_exposure",
+          "experiment_id": "t1-hero-cta-clarity",
+          "variant": "A",
+          "placement": "hero_primary_cta",
+          "pathname": "/ovi-dui-defense-delaware-oh",
+          "gtm.uniqueEventId": 6
+        },
+        {
+          "index": 4,
+          "event": "experiment_exposure",
+          "experiment_id": "t3-midpage-cta-context",
+          "variant": "A",
+          "placement": "mid_page",
+          "context": "OVI defense",
+          "gtm.uniqueEventId": 7
+        },
+        {
+          "index": 5,
+          "event": "mango_page_view",
+          "page_title": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+          "page_location": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "page_path": "/ovi-dui-defense-delaware-oh",
+          "traffic_origin_type": "direct",
+          "traffic_origin_source": "direct",
+          "gtm.uniqueEventId": 8
+        },
+        {
+          "index": 6,
+          "event": "experiment_exposure",
+          "experiment_id": "t1-hero-cta-clarity",
+          "variant": "B",
+          "placement": "hero_primary_cta",
+          "pathname": "/ovi-dui-defense-delaware-oh",
+          "gtm.uniqueEventId": 9
+        },
+        {
+          "index": 7,
+          "event": "experiment_exposure",
+          "experiment_id": "t3-midpage-cta-context",
+          "variant": "B",
+          "placement": "mid_page",
+          "context": "OVI defense",
+          "gtm.uniqueEventId": 10
+        },
+        {
+          "index": 8,
+          "event": "gtm.dom",
+          "gtm.uniqueEventId": 11
+        },
+        {
+          "index": 9,
+          "event": "gtm.load",
+          "gtm.uniqueEventId": 17
+        }
+      ],
+      "collectEvents": [
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/",
+          "page_title": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821043943&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGA&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=1&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115938465~115938468~116363098&dt=Criminal%20Defense%20%26%20OVI%20Attorney%20Delaware%2C%20OH%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2F&dp=%2F&sid=1777821044&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=707",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821043943",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGA",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "1",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "1",
+            "tag_exp": "0~115938465~115938468~116363098",
+            "dt": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+            "dl": "https://mango.law/",
+            "dp": "/",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "0",
+            "en": "page_view",
+            "_fv": "1",
+            "_nsi": "1",
+            "_ss": "1",
+            "tfd": "707"
+          }
+        },
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "page_title": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGQ&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115616986~115938465~115938469~118289195&dt=Delaware%20Ohio%20OVI%20Lawyer%20%7C%20DUI%20Defense%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2Fovi-dui-defense-delaware-oh&dp=%2Fovi-dui-defense-delaware-oh&sid=1777821044&sct=1&seg=1&en=page_view&_et=1&tfd=126",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGQ",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "1",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "dt": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+            "dl": "https://mango.law/ovi-dui-defense-delaware-oh",
+            "dp": "/ovi-dui-defense-delaware-oh",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "en": "page_view",
+            "_et": "1",
+            "tfd": "126"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ovi_primary_cta_clicked_to_contact",
+      "url": "https://mango.law/contact",
+      "sourceEvents": [
+        {
+          "0": "consent",
+          "1": "default",
+          "2": {
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          "index": 0
+        },
+        {
+          "0": "consent",
+          "1": "update",
+          "2": {
+            "analytics_storage": "granted",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          "index": 1
+        },
+        {
+          "index": 2,
+          "gtm.start": 1777821047818,
+          "event": "gtm.js",
+          "gtm.uniqueEventId": 5
+        },
+        {
+          "index": 3,
+          "event": "experiment_exposure",
+          "experiment_id": "t1-hero-cta-clarity",
+          "variant": "A",
+          "placement": "hero_primary_cta",
+          "pathname": "/ovi-dui-defense-delaware-oh",
+          "gtm.uniqueEventId": 6
+        },
+        {
+          "index": 4,
+          "event": "experiment_exposure",
+          "experiment_id": "t3-midpage-cta-context",
+          "variant": "A",
+          "placement": "mid_page",
+          "context": "OVI defense",
+          "gtm.uniqueEventId": 7
+        },
+        {
+          "index": 5,
+          "event": "mango_page_view",
+          "page_title": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+          "page_location": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "page_path": "/ovi-dui-defense-delaware-oh",
+          "traffic_origin_type": "direct",
+          "traffic_origin_source": "direct",
+          "gtm.uniqueEventId": 8
+        },
+        {
+          "index": 6,
+          "event": "experiment_exposure",
+          "experiment_id": "t1-hero-cta-clarity",
+          "variant": "B",
+          "placement": "hero_primary_cta",
+          "pathname": "/ovi-dui-defense-delaware-oh",
+          "gtm.uniqueEventId": 9
+        },
+        {
+          "index": 7,
+          "event": "experiment_exposure",
+          "experiment_id": "t3-midpage-cta-context",
+          "variant": "B",
+          "placement": "mid_page",
+          "context": "OVI defense",
+          "gtm.uniqueEventId": 10
+        },
+        {
+          "index": 8,
+          "event": "gtm.dom",
+          "gtm.uniqueEventId": 11
+        },
+        {
+          "index": 9,
+          "event": "gtm.load",
+          "gtm.uniqueEventId": 17
+        },
+        {
+          "index": 10,
+          "event": "cta_click",
+          "cta": "ovi_dui_hero_call_office_primary",
+          "target_url": "/contact",
+          "placement": "page_hero",
+          "pathname": "/ovi-dui-defense-delaware-oh",
+          "gtm.uniqueEventId": 18
+        },
+        {
+          "index": 11,
+          "event": "mango_page_view",
+          "page_title": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+          "page_location": "https://mango.law/contact",
+          "page_path": "/contact",
+          "traffic_origin_type": "direct",
+          "traffic_origin_source": "direct",
+          "gtm.uniqueEventId": 19
+        },
+        {
+          "index": 12,
+          "event": "gtm.historyChange-v2",
+          "gtm.historyChangeSource": "pushState",
+          "gtm.oldUrlFragment": "",
+          "gtm.newUrlFragment": "",
+          "gtm.oldHistoryState": {
+            "__NA": true,
+            "__PRIVATE_NEXTJS_INTERNALS_TREE": [
+              "",
+              {
+                "children": [
+                  "(site)",
+                  {
+                    "children": [
+                      "ovi-dui-defense-delaware-oh",
+                      {
+                        "children": [
+                          "__PAGE__",
+                          {},
+                          "/ovi-dui-defense-delaware-oh",
+                          "refresh"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              null,
+              null,
+              true
+            ]
+          },
+          "gtm.newHistoryState": {
+            "__NA": true,
+            "__PRIVATE_NEXTJS_INTERNALS_TREE": [
+              "",
+              {
+                "children": [
+                  "(site)",
+                  {
+                    "children": [
+                      "contact",
+                      {
+                        "children": [
+                          "__PAGE__",
+                          {},
+                          "/contact",
+                          "refresh"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              null,
+              null,
+              true
+            ]
+          },
+          "gtm.oldUrl": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "gtm.newUrl": "https://mango.law/contact",
+          "gtm.triggers": "14",
+          "gtm.uniqueEventId": 20
+        }
+      ],
+      "collectEvents": [
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/",
+          "page_title": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821043943&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGA&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=1&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115938465~115938468~116363098&dt=Criminal%20Defense%20%26%20OVI%20Attorney%20Delaware%2C%20OH%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2F&dp=%2F&sid=1777821044&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=707",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821043943",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGA",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "1",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "1",
+            "tag_exp": "0~115938465~115938468~116363098",
+            "dt": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+            "dl": "https://mango.law/",
+            "dp": "/",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "0",
+            "en": "page_view",
+            "_fv": "1",
+            "_nsi": "1",
+            "_ss": "1",
+            "tfd": "707"
+          }
+        },
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "page_title": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGQ&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115616986~115938465~115938469~118289195&dt=Delaware%20Ohio%20OVI%20Lawyer%20%7C%20DUI%20Defense%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2Fovi-dui-defense-delaware-oh&dp=%2Fovi-dui-defense-delaware-oh&sid=1777821044&sct=1&seg=1&en=page_view&_et=1&tfd=126",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGQ",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "1",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "dt": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+            "dl": "https://mango.law/ovi-dui-defense-delaware-oh",
+            "dp": "/ovi-dui-defense-delaware-oh",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "en": "page_view",
+            "_et": "1",
+            "tfd": "126"
+          }
+        },
+        {
+          "event_name": "cta_click",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "page_title": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGQ&are=1&cid=1013414601.1777821044&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=2&tag_exp=0~115616986~115938465~115938469~118289195&sid=1777821044&sct=1&seg=1&dl=https%3A%2F%2Fmango.law%2Fovi-dui-defense-delaware-oh&dt=Delaware%20Ohio%20OVI%20Lawyer%20%7C%20DUI%20Defense%20%7C%20Mango%20Law&en=cta_click&ep.cta=ovi_dui_hero_call_office_primary&_et=3436&tfd=3601",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGQ",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "2",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "dl": "https://mango.law/ovi-dui-defense-delaware-oh",
+            "dt": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+            "en": "cta_click",
+            "ep.cta": "ovi_dui_hero_call_office_primary",
+            "_et": "3436",
+            "tfd": "3601"
+          }
+        },
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/contact",
+          "page_title": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGQ&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=3&tag_exp=0~115616986~115938465~115938469~118289195&dt=Contact%20Mango%20Law%20%7C%20Delaware%2C%20OH%20OVI%20%26%20Criminal%20Defense%20Attorney%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2Fcontact&dp=%2Fcontact&sid=1777821044&sct=1&seg=1&en=page_view&_et=33&tfd=3603",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGQ",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "3",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "dt": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+            "dl": "https://mango.law/contact",
+            "dp": "/contact",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "en": "page_view",
+            "_et": "33",
+            "tfd": "3603"
+          }
+        },
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/contact",
+          "page_title": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AEAAAGQ&ae=a&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=4&tag_exp=0~115616986~115938465~115938469~118289195&dl=https%3A%2F%2Fmango.law%2Fcontact&dr=https%3A%2F%2Fmango.law%2Fovi-dui-defense-delaware-oh&sid=1777821044&sct=1&seg=1&dt=Contact%20Mango%20Law%20%7C%20Delaware%2C%20OH%20OVI%20%26%20Criminal%20Defense%20Attorney%20%7C%20Mango%20Law&en=page_view&_et=979&tfd=4582",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AEAAAGQ",
+            "ae": "a",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "4",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "dl": "https://mango.law/contact",
+            "dr": "https://mango.law/ovi-dui-defense-delaware-oh",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "dt": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+            "en": "page_view",
+            "_et": "979",
+            "tfd": "4582"
+          }
+        }
+      ]
+    },
+    {
+      "name": "synthetic_lead_submitted_event_no_form_submit",
+      "url": "https://mango.law/contact",
+      "sourceEvents": [
+        {
+          "0": "consent",
+          "1": "default",
+          "2": {
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          "index": 0
+        },
+        {
+          "0": "consent",
+          "1": "update",
+          "2": {
+            "analytics_storage": "granted",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          "index": 1
+        },
+        {
+          "index": 2,
+          "gtm.start": 1777821047818,
+          "event": "gtm.js",
+          "gtm.uniqueEventId": 5
+        },
+        {
+          "index": 3,
+          "event": "experiment_exposure",
+          "experiment_id": "t1-hero-cta-clarity",
+          "variant": "A",
+          "placement": "hero_primary_cta",
+          "pathname": "/ovi-dui-defense-delaware-oh",
+          "gtm.uniqueEventId": 6
+        },
+        {
+          "index": 4,
+          "event": "experiment_exposure",
+          "experiment_id": "t3-midpage-cta-context",
+          "variant": "A",
+          "placement": "mid_page",
+          "context": "OVI defense",
+          "gtm.uniqueEventId": 7
+        },
+        {
+          "index": 5,
+          "event": "mango_page_view",
+          "page_title": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+          "page_location": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "page_path": "/ovi-dui-defense-delaware-oh",
+          "traffic_origin_type": "direct",
+          "traffic_origin_source": "direct",
+          "gtm.uniqueEventId": 8
+        },
+        {
+          "index": 6,
+          "event": "experiment_exposure",
+          "experiment_id": "t1-hero-cta-clarity",
+          "variant": "B",
+          "placement": "hero_primary_cta",
+          "pathname": "/ovi-dui-defense-delaware-oh",
+          "gtm.uniqueEventId": 9
+        },
+        {
+          "index": 7,
+          "event": "experiment_exposure",
+          "experiment_id": "t3-midpage-cta-context",
+          "variant": "B",
+          "placement": "mid_page",
+          "context": "OVI defense",
+          "gtm.uniqueEventId": 10
+        },
+        {
+          "index": 8,
+          "event": "gtm.dom",
+          "gtm.uniqueEventId": 11
+        },
+        {
+          "index": 9,
+          "event": "gtm.load",
+          "gtm.uniqueEventId": 17
+        },
+        {
+          "index": 10,
+          "event": "cta_click",
+          "cta": "ovi_dui_hero_call_office_primary",
+          "target_url": "/contact",
+          "placement": "page_hero",
+          "pathname": "/ovi-dui-defense-delaware-oh",
+          "gtm.uniqueEventId": 18
+        },
+        {
+          "index": 11,
+          "event": "mango_page_view",
+          "page_title": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+          "page_location": "https://mango.law/contact",
+          "page_path": "/contact",
+          "traffic_origin_type": "direct",
+          "traffic_origin_source": "direct",
+          "gtm.uniqueEventId": 19
+        },
+        {
+          "index": 12,
+          "event": "gtm.historyChange-v2",
+          "gtm.historyChangeSource": "pushState",
+          "gtm.oldUrlFragment": "",
+          "gtm.newUrlFragment": "",
+          "gtm.oldHistoryState": {
+            "__NA": true,
+            "__PRIVATE_NEXTJS_INTERNALS_TREE": [
+              "",
+              {
+                "children": [
+                  "(site)",
+                  {
+                    "children": [
+                      "ovi-dui-defense-delaware-oh",
+                      {
+                        "children": [
+                          "__PAGE__",
+                          {},
+                          "/ovi-dui-defense-delaware-oh",
+                          "refresh"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              null,
+              null,
+              true
+            ]
+          },
+          "gtm.newHistoryState": {
+            "__NA": true,
+            "__PRIVATE_NEXTJS_INTERNALS_TREE": [
+              "",
+              {
+                "children": [
+                  "(site)",
+                  {
+                    "children": [
+                      "contact",
+                      {
+                        "children": [
+                          "__PAGE__",
+                          {},
+                          "/contact",
+                          "refresh"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              null,
+              null,
+              true
+            ]
+          },
+          "gtm.oldUrl": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "gtm.newUrl": "https://mango.law/contact",
+          "gtm.triggers": "14",
+          "gtm.uniqueEventId": 20
+        },
+        {
+          "index": 13,
+          "event": "lead_submitted",
+          "lead_source": "synthetic_validation",
+          "checkpoint_id": "gtm_generate_lead_validation_2026_05_03",
+          "target_number": "7404176191",
+          "gtm.uniqueEventId": 21
+        }
+      ],
+      "collectEvents": [
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/",
+          "page_title": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821043943&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGA&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=1&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115938465~115938468~116363098&dt=Criminal%20Defense%20%26%20OVI%20Attorney%20Delaware%2C%20OH%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2F&dp=%2F&sid=1777821044&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=707",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821043943",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGA",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "1",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "1",
+            "tag_exp": "0~115938465~115938468~116363098",
+            "dt": "Criminal Defense & OVI Attorney Delaware, OH | Mango Law",
+            "dl": "https://mango.law/",
+            "dp": "/",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "0",
+            "en": "page_view",
+            "_fv": "1",
+            "_nsi": "1",
+            "_ss": "1",
+            "tfd": "707"
+          }
+        },
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "page_title": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGQ&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115616986~115938465~115938469~118289195&dt=Delaware%20Ohio%20OVI%20Lawyer%20%7C%20DUI%20Defense%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2Fovi-dui-defense-delaware-oh&dp=%2Fovi-dui-defense-delaware-oh&sid=1777821044&sct=1&seg=1&en=page_view&_et=1&tfd=126",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGQ",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "1",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "dt": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+            "dl": "https://mango.law/ovi-dui-defense-delaware-oh",
+            "dp": "/ovi-dui-defense-delaware-oh",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "en": "page_view",
+            "_et": "1",
+            "tfd": "126"
+          }
+        },
+        {
+          "event_name": "cta_click",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/ovi-dui-defense-delaware-oh",
+          "page_title": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGQ&are=1&cid=1013414601.1777821044&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=2&tag_exp=0~115616986~115938465~115938469~118289195&sid=1777821044&sct=1&seg=1&dl=https%3A%2F%2Fmango.law%2Fovi-dui-defense-delaware-oh&dt=Delaware%20Ohio%20OVI%20Lawyer%20%7C%20DUI%20Defense%20%7C%20Mango%20Law&en=cta_click&ep.cta=ovi_dui_hero_call_office_primary&_et=3436&tfd=3601",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGQ",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "2",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "dl": "https://mango.law/ovi-dui-defense-delaware-oh",
+            "dt": "Delaware Ohio OVI Lawyer | DUI Defense | Mango Law",
+            "en": "cta_click",
+            "ep.cta": "ovi_dui_hero_call_office_primary",
+            "_et": "3436",
+            "tfd": "3601"
+          }
+        },
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/contact",
+          "page_title": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGQ&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=3&tag_exp=0~115616986~115938465~115938469~118289195&dt=Contact%20Mango%20Law%20%7C%20Delaware%2C%20OH%20OVI%20%26%20Criminal%20Defense%20Attorney%20%7C%20Mango%20Law&dl=https%3A%2F%2Fmango.law%2Fcontact&dp=%2Fcontact&sid=1777821044&sct=1&seg=1&en=page_view&_et=33&tfd=3603",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGQ",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "3",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "dt": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+            "dl": "https://mango.law/contact",
+            "dp": "/contact",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "en": "page_view",
+            "_et": "33",
+            "tfd": "3603"
+          }
+        },
+        {
+          "event_name": "page_view",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/contact",
+          "page_title": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AEAAAGQ&ae=a&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=4&tag_exp=0~115616986~115938465~115938469~118289195&dl=https%3A%2F%2Fmango.law%2Fcontact&dr=https%3A%2F%2Fmango.law%2Fovi-dui-defense-delaware-oh&sid=1777821044&sct=1&seg=1&dt=Contact%20Mango%20Law%20%7C%20Delaware%2C%20OH%20OVI%20%26%20Criminal%20Defense%20Attorney%20%7C%20Mango%20Law&en=page_view&_et=979&tfd=4582",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AEAAAGQ",
+            "ae": "a",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "4",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "dl": "https://mango.law/contact",
+            "dr": "https://mango.law/ovi-dui-defense-delaware-oh",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "dt": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+            "en": "page_view",
+            "_et": "979",
+            "tfd": "4582"
+          }
+        },
+        {
+          "event_name": "generate_lead",
+          "measurement_id": "G-NJZD79GGFG",
+          "page_location": "https://mango.law/contact",
+          "page_title": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+          "source_url": "https://www.google-analytics.com/g/collect?v=2&tid=G-NJZD79GGFG&gtm=45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186&_p=1777821047818&gcs=G101&gcd=13q3r3q3q5l1&npa=1&dma_cps=-&dma=0&ecid=674693165&_eu=AAAAAGQ&are=1&cid=1013414601.1777821044&ec_mode=a&frm=0&pscdl=denied&rcb=18&sr=800x600&uaa=arm&uab=64&uafvl=Chromium%3B143.0.7499.169%7CNot%2520A(Brand%3B24.0.0.0&uam=&uamb=0&uap=macOS&uapv=26.4.1&uaw=0&ul=en-us&gaf=2&_s=5&tag_exp=0~115616986~115938465~115938469~118289195&sid=1777821044&sct=1&seg=1&dl=https%3A%2F%2Fmango.law%2Fcontact&dr=https%3A%2F%2Fmango.law%2Fovi-dui-defense-delaware-oh&dt=Contact%20Mango%20Law%20%7C%20Delaware%2C%20OH%20OVI%20%26%20Criminal%20Defense%20Attorney%20%7C%20Mango%20Law&en=generate_lead&_c=1&ep.lead_source=synthetic_validation&ep.checkpoint_id=gtm_generate_lead_validation_2026_05_03&ep.target_number=7404176191&_et=4613&tfd=9197",
+          "params": {
+            "v": "2",
+            "tid": "G-NJZD79GGFG",
+            "gtm": "45je64t1v9238416953z89238390186za20gzb9238390186zd9238390186",
+            "_p": "1777821047818",
+            "gcs": "G101",
+            "gcd": "13q3r3q3q5l1",
+            "npa": "1",
+            "dma_cps": "-",
+            "dma": "0",
+            "ecid": "674693165",
+            "_eu": "AAAAAGQ",
+            "are": "1",
+            "cid": "1013414601.1777821044",
+            "ec_mode": "a",
+            "frm": "0",
+            "pscdl": "denied",
+            "rcb": "18",
+            "sr": "800x600",
+            "uaa": "arm",
+            "uab": "64",
+            "uafvl": "Chromium;143.0.7499.169|Not%20A(Brand;24.0.0.0",
+            "uam": "",
+            "uamb": "0",
+            "uap": "macOS",
+            "uapv": "26.4.1",
+            "uaw": "0",
+            "ul": "en-us",
+            "gaf": "2",
+            "_s": "5",
+            "tag_exp": "0~115616986~115938465~115938469~118289195",
+            "sid": "1777821044",
+            "sct": "1",
+            "seg": "1",
+            "dl": "https://mango.law/contact",
+            "dr": "https://mango.law/ovi-dui-defense-delaware-oh",
+            "dt": "Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney | Mango Law",
+            "en": "generate_lead",
+            "_c": "1",
+            "ep.lead_source": "synthetic_validation",
+            "ep.checkpoint_id": "gtm_generate_lead_validation_2026_05_03",
+            "ep.target_number": "7404176191",
+            "_et": "4613",
+            "tfd": "9197"
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "gtm_loaded": true,
+    "source_event_names": [
+      "gtm.js",
+      "mango_page_view",
+      "gtm.dom",
+      "gtm.load",
+      "experiment_exposure",
+      "cta_click",
+      "gtm.historyChange-v2",
+      "lead_submitted"
+    ],
+    "ga4_collect_event_names": [
+      "page_view",
+      "cta_click",
+      "generate_lead"
+    ],
+    "collect_event_count": 6,
+    "page_view_collect_seen": true,
+    "cta_click_collect_seen": true,
+    "generate_lead_collect_seen": true,
+    "validation_boundary": "generate_lead was validated through a synthetic dataLayer lead_submitted event, not by submitting a live contact form, phone call, email, or chat lead."
+  }
+}

@@ -20,6 +20,71 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 12:36 EDT
+Post slug and title: DUI checkpoint data | Solon Cinco de Mayo pending announcement
+Change type: minor
+Summary of change: Added a curated production checkpoint-scraper seed for the Cleveland19/WOIO Solon Police Cinco de Mayo public notice; deployed the `checkpoint-scraper` Edge Function and triggered it so production DB contains the Solon/Aurora Road item as a pending announcement rather than an over-specific checkpoint row.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: User requested an OVI checkpoint pass and asked that the map/database be kept up to date for the Cinco de Mayo window.
+Rollback notes: Remove the curated Solon seed from `supabase/functions/checkpoint-scraper/curated-announcements.ts`, redeploy `checkpoint-scraper`, and delete or cancel the matching `dui_checkpoint_announcements` row if the public source is retracted.
+
+Date/time: 2026-05-03 12:26 EDT
+Post slug and title: domestic-violence-arrest-delaware-county-ohio | What Happens After a Domestic Violence Arrest in Delaware County, Ohio?
+Change type: major
+Summary of change: Added the next Planner-aligned SEO/AEO support post for the domestic-violence lane, with official Ohio ORC, Delaware County Sheriff, Delaware Municipal Court bail schedule, and Supreme Court of Ohio protection-order sources; added a neutral watercolor case-file image; updated the domestic-violence owner page and support links toward the validated "domestic violence lawyer Delaware Ohio" phrase.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked to proceed with the next long-run onsite SEO/AEO content, optimizations, and implementations after keyword/tracking validation.
+Rollback notes: Remove the `domestic-violence-arrest-delaware-county-ohio` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-domestic-violence-arrest-delaware-county-ohio.png`, restore the prior domestic-violence owner-page title/hero/meta/support links, and revert the matching planning rows.
+
+Date/time: 2026-05-03 11:36 EDT
+Post slug and title: high-tier-ovi-ohio-17-test | High-Tier OVI in Ohio: What a .17+ Test Can Change in Your Case
+Change type: minor
+Summary of change: Replaced the location/courthouse-style watercolor with a neutral case-file tabletop watercolor image so the post no longer risks suggesting Washington DC, Capitol Hill, a courthouse, or a specific landmark location.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: User clarified that location signaling is less important than avoiding confusing imagery or concepts.
+Rollback notes: Restore the prior `public/images/generated/blog-high-tier-ovi-ohio-17-test.png` from the previous local version if needed.
+
+Date/time: 2026-05-03 11:12 EDT
+Post slug and title: SEO owner-page optimization | Criminal defense, first-offense OVI, and high-tier OVI support
+Change type: minor
+Summary of change: Applied Planner-backed onsite optimization after live keyword QA: updated `/criminal-defense-delaware-oh` metadata/hero/intro toward "Delaware County criminal defense attorney", updated `/first-offense-ovi-ohio` metadata/intro toward "first offense OVI in Ohio", and added a contextual `/motion-to-suppress-ovi-ohio` link inside the high-tier OVI testing/admissibility section.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User requested keyword research/tracking to be completed before publishing and asked for live content QA to align content with keyword/tracking updates.
+Rollback notes: Restore the prior metadata/hero copy in `src/app/(site)/criminal-defense-delaware-oh/page.tsx`, `src/app/(site)/first-offense-ovi-ohio/page.tsx`, `src/views/CriminalDefensePage.tsx`, and `src/views/HighIntentPages.tsx`; remove the added suppression sentence from `src/data/blogPosts.ts`.
+
+Date/time: 2026-05-03 10:56 EDT
+Post slug and title: high-tier-ovi-ohio-17-test | High-Tier OVI in Ohio: What a .17+ Test Can Change in Your Case
+Change type: minor
+Summary of change: Replaced the prior watercolor image after QA found it read as Washington DC/Capitol imagery; new image uses a local Ohio roadway/courthouse-square watercolor treatment instead.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: User flagged the Capitol Hill/Washington DC mismatch and asked why a Delaware, Ohio OVI article used that image.
+Rollback notes: Restore the previous `public/images/generated/blog-high-tier-ovi-ohio-17-test.png` version from the prior commit if needed.
+
 Date/time: 2026-05-03 10:10 EDT
 Post slug and title: high-tier-ovi-ohio-17-test | High-Tier OVI in Ohio: What a .17+ Test Can Change in Your Case
 Change type: minor

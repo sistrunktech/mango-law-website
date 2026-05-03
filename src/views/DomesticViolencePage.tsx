@@ -57,7 +57,7 @@ export default function DomesticViolencePage() {
   return (
     <>
       <SEO
-        title="Domestic Violence Defense Attorney Delaware, OH | Mango Law LLC"
+        title="Domestic Violence Lawyer Delaware, OH | Mango Law LLC"
         description={domesticViolencePageMetaDescription}
         image="/images/generated/blog-assault-domestic-violence.png"
         faqs={domesticViolenceFaqs}
@@ -71,7 +71,7 @@ export default function DomesticViolencePage() {
       <PageHero
         eyebrow="Domestic Violence"
         title="Domestic violence defense with early control over bond, no-contact, and protection-order risk"
-        description="If you are looking for a domestic violence attorney in Delaware, Ohio, start here. We focus on evidence review, bond compliance, and related protection-order issues in Delaware and Franklin County cases."
+        description="If you are looking for a domestic violence lawyer in Delaware, Ohio, start here. We focus on evidence review, bond compliance, and related protection-order issues in Delaware and Franklin County cases."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -94,7 +94,8 @@ export default function DomesticViolencePage() {
                     <p className="text-lg text-brand-black/70 leading-relaxed">
                       Domestic violence cases often involve high emotion and fast timelines. The court may impose immediate
                       conditions that impact your home, work, and family. Our approach is to get you compliant, protect your
-                      record, and challenge the evidence methodically.
+                      record, and challenge the evidence methodically as a Delaware domestic violence lawyer focused on
+                      criminal-defense and protection-order overlap.
                     </p>
                   </div>
                   <p className="text-brand-black/70 leading-relaxed">
@@ -248,6 +249,11 @@ export default function DomesticViolencePage() {
         title="Related domestic-defense guides"
         description="These pages help coordinate criminal allegations, no-contact terms, and protection-order hearings."
         links={[
+          {
+            title: 'After a domestic violence arrest',
+            description: 'Delaware County first steps for booking, bond, no-contact, and protection-order issues.',
+            href: '/blog/domestic-violence-arrest-delaware-county-ohio',
+          },
           {
             title: 'First-offense domestic violence defense',
             description: 'Immediate priority plan for first-offense domestic violence allegations in Ohio.',

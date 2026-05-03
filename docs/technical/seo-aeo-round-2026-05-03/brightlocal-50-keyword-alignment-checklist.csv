@@ -1,51 +1,51 @@
-keyword,expected_tracking_group,expected_owner_page,expected_geo,priority,current_brightlocal_status,action_after_admin_write_approval,qa_status,notes
-delaware ohio ovi lawyer,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Primary commercial OVI term.
-dui lawyer delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,DUI wording variant.
-ovi attorney delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Attorney wording variant.
-delaware county ovi lawyer,Core OVI,/ovi-dui-defense-delaware-oh,Delaware County OH,P0,,Add/retain exact keyword and owner URL,,County OVI modifier.
-delaware county dui lawyer,Core OVI,/ovi-dui-defense-delaware-oh,Delaware County OH,P0,,Add/retain exact keyword and owner URL,,County DUI modifier.
-ovi lawyer near delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Near-me style variant.
-delaware ohio dui attorney,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,DUI attorney phrasing.
-dui attorney delaware county ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware County OH,P1,,Add/retain exact keyword and owner URL,,County attorney phrasing.
-ovi defense lawyer delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Defense modifier.
-first offense ovi lawyer delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,First-offense commercial query.
-criminal defense attorney delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Primary criminal-defense term.
-criminal lawyer delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Short-form synonym.
-delaware ohio criminal defense attorney,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Exact local construction.
-delaware county criminal defense attorney,Core criminal defense,/criminal-defense-delaware-oh,Delaware County OH,P0,,Add/retain exact keyword and owner URL,,County modifier.
-criminal defense lawyer delaware county ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware County OH,P1,,Add/retain exact keyword and owner URL,,Long-form county variant.
-misdemeanor lawyer delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Service subtopic.
-felony lawyer delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,High-value charge modifier.
-criminal attorney delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Common shorthand.
-criminal defense lawyer delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Lawyer wording.
-delaware county criminal lawyer,Core criminal defense,/criminal-defense-delaware-oh,Delaware County OH,P1,,Add/retain exact keyword and owner URL,,County shorthand.
-drug crime lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Drug-crime owner term.
-drug possession attorney delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Possession variant.
-drug possession lawyer delaware county ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware County OH,P1,,Add/retain exact keyword and owner URL,,County possession variant.
-drug trafficking lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Trafficking subtopic.
-drug charges lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Broad drug-charge wording.
-drug defense attorney delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Attorney wording.
-drug possession defense lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Possession defense wording.
-protection order lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Commercial protection-order owner.
-civil protection order lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,CPO local phrase.
-cpo defense attorney ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Statewide support phrase.
-cpo lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Short CPO local variant.
-protection order defense attorney ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Statewide defense wording.
-no contact order lawyer ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Related no-contact query.
-domestic violence lawyer delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Local commercial DV term.
-domestic violence defense attorney delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,High-intent defense wording.
-domestic violence attorney delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Attorney shorthand.
-domestic violence defense lawyer delaware county ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware County OH,P2,,Add/retain exact keyword and owner URL,,County DV variant.
-first offense domestic violence ohio,Domestic violence,/domestic-violence-first-offense-ohio-defense,Ohio,P2,,Add/retain exact keyword and owner URL,,Dedicated support owner.
-ovi test refusal lawyer ohio,OVI support,/ovi-test-refusal-lawyer-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Refusal support term.
-als suspension ohio lawyer,OVI support,/als-license-suspension-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,ALS support term.
-license suspension lawyer ohio,OVI support,/als-license-suspension-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,License-suspension variant.
-field sobriety test refusal ohio,OVI support,/ovi-test-refusal-lawyer-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Problem-aware refusal query.
-breath test refusal lawyer ohio,OVI support,/ovi-test-refusal-lawyer-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Breath-test variant.
-motion to suppress ovi ohio,OVI support,/motion-to-suppress-ovi-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Suppression support query.
-first offense ovi ohio,OVI support,/first-offense-ovi-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Dedicated support page.
-felony ovi lawyer ohio,OVI support,/felony-ovi-lawyer-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,High-value support term.
-high tier ovi ohio,OVI support,/ovi-dui-defense-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Keep on OVI pillar unless dedicated owner is created.
-ohio liv's law ovi,OVI support,/ovi-dui-defense-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Fresh law-change term.
-ohio dui checkpoints,Resource,/resources/dui-checkpoints,Ohio,P2,,Add/retain exact keyword and owner URL,,Resource visibility term.
-ohio ovi checkpoints,Resource,/ovi-checkpoints-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Checkpoint support term.
+keyword,expected_tracking_group,expected_owner_page,expected_geo,priority,current_brightlocal_status,action_after_admin_write_approval,qa_status,notes,planner_avg_monthly_searches,planner_competition,planner_bid_low,planner_bid_high,planner_metric_status
+delaware ohio ovi lawyer,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Primary commercial OVI term.,50,High,"","",captured_with_volume
+dui lawyer delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,DUI wording variant.,"","","","",captured_no_row_volume
+ovi attorney delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Attorney wording variant.,"","","","",captured_no_row_volume
+delaware county ovi lawyer,Core OVI,/ovi-dui-defense-delaware-oh,Delaware County OH,P0,,Add/retain exact keyword and owner URL,,County OVI modifier.,"","","","",captured_no_row_volume
+delaware county dui lawyer,Core OVI,/ovi-dui-defense-delaware-oh,Delaware County OH,P0,,Add/retain exact keyword and owner URL,,County DUI modifier.,50,Medium,10.51,46.15,captured_with_volume
+ovi lawyer near delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Near-me style variant.,"","","","",captured_no_row_volume
+delaware ohio dui attorney,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,DUI attorney phrasing.,"","","","",captured_no_row_volume
+dui attorney delaware county ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware County OH,P1,,Add/retain exact keyword and owner URL,,County attorney phrasing.,"","","","",captured_no_row_volume
+ovi defense lawyer delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Defense modifier.,"","","","",captured_no_row_volume
+first offense ovi lawyer delaware ohio,Core OVI,/ovi-dui-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,First-offense commercial query.,"","","","",captured_no_row_volume
+criminal defense attorney delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Primary criminal-defense term.,50,High,"","",captured_with_volume
+criminal lawyer delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Short-form synonym.,"","","","",captured_no_row_volume
+delaware ohio criminal defense attorney,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P0,,Add/retain exact keyword and owner URL,,Exact local construction.,"","","","",captured_no_row_volume
+delaware county criminal defense attorney,Core criminal defense,/criminal-defense-delaware-oh,Delaware County OH,P0,,Add/retain exact keyword and owner URL,,County modifier.,500,Medium,9.75,35.00,captured_with_volume
+criminal defense lawyer delaware county ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware County OH,P1,,Add/retain exact keyword and owner URL,,Long-form county variant.,"","","","",captured_no_row_volume
+misdemeanor lawyer delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Service subtopic.,"","","","",captured_no_row_volume
+felony lawyer delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,High-value charge modifier.,"","","","",captured_no_row_volume
+criminal attorney delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Common shorthand.,"","","","",captured_no_row_volume
+criminal defense lawyer delaware ohio,Core criminal defense,/criminal-defense-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Lawyer wording.,"","","","",captured_no_row_volume
+delaware county criminal lawyer,Core criminal defense,/criminal-defense-delaware-oh,Delaware County OH,P1,,Add/retain exact keyword and owner URL,,County shorthand.,500,Medium,9.75,35.00,captured_with_volume
+drug crime lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Drug-crime owner term.,"","","","",captured_no_row_volume
+drug possession attorney delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Possession variant.,"","","","",captured_no_row_volume
+drug possession lawyer delaware county ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware County OH,P1,,Add/retain exact keyword and owner URL,,County possession variant.,"","","","",captured_no_row_volume
+drug trafficking lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Trafficking subtopic.,"","","","",captured_no_row_volume
+drug charges lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Broad drug-charge wording.,"","","","",captured_no_row_volume
+drug defense attorney delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Attorney wording.,"","","","",captured_no_row_volume
+drug possession defense lawyer delaware ohio,Drug crimes,/drug-crime-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Possession defense wording.,"","","","",captured_no_row_volume
+protection order lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Commercial protection-order owner.,"","","","",captured_no_row_volume
+civil protection order lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,CPO local phrase.,"","","","",captured_no_row_volume
+cpo defense attorney ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Statewide support phrase.,"","","","",captured_no_row_volume
+cpo lawyer delaware ohio,Protection orders,/protection-order-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Short CPO local variant.,"","","","",captured_no_row_volume
+protection order defense attorney ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Statewide defense wording.,"","","","",captured_no_row_volume
+no contact order lawyer ohio,Protection orders,/protection-order-lawyer-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Related no-contact query.,"","","","",captured_no_row_volume
+domestic violence lawyer delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,Local commercial DV term.,50,Medium,"","",captured_with_volume
+domestic violence defense attorney delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,P1,,Add/retain exact keyword and owner URL,,High-intent defense wording.,"","","","",captured_no_row_volume
+domestic violence attorney delaware ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware OH,P2,,Add/retain exact keyword and owner URL,,Attorney shorthand.,"","","","",captured_no_row_volume
+domestic violence defense lawyer delaware county ohio,Domestic violence,/domestic-violence-lawyer-delaware-oh,Delaware County OH,P2,,Add/retain exact keyword and owner URL,,County DV variant.,"","","","",captured_no_row_volume
+first offense domestic violence ohio,Domestic violence,/domestic-violence-first-offense-ohio-defense,Ohio,P2,,Add/retain exact keyword and owner URL,,Dedicated support owner.,50,Low,"","",captured_with_volume
+ovi test refusal lawyer ohio,OVI support,/ovi-test-refusal-lawyer-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Refusal support term.,"","","","",captured_no_row_volume
+als suspension ohio lawyer,OVI support,/als-license-suspension-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,ALS support term.,"","","","",captured_no_row_volume
+license suspension lawyer ohio,OVI support,/als-license-suspension-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,License-suspension variant.,"","","","",captured_no_row_volume
+field sobriety test refusal ohio,OVI support,/ovi-test-refusal-lawyer-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Problem-aware refusal query.,"","","","",captured_no_row_volume
+breath test refusal lawyer ohio,OVI support,/ovi-test-refusal-lawyer-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Breath-test variant.,"","","","",captured_no_row_volume
+motion to suppress ovi ohio,OVI support,/motion-to-suppress-ovi-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Suppression support query.,50,Low,"","",captured_with_volume
+first offense ovi ohio,OVI support,/first-offense-ovi-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Dedicated support page.,500,Medium,1.44,7.20,captured_with_volume
+felony ovi lawyer ohio,OVI support,/felony-ovi-lawyer-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,High-value support term.,"","","","",captured_no_row_volume
+high tier ovi ohio,OVI support,/ovi-dui-defense-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Keep on OVI pillar unless dedicated owner is created.,50,Low,"","",captured_with_volume
+ohio liv's law ovi,OVI support,/ovi-dui-defense-delaware-oh,Ohio,P2,,Add/retain exact keyword and owner URL,,Fresh law-change term.,"","","","",captured_no_row_volume
+ohio dui checkpoints,Resource,/resources/dui-checkpoints,Ohio,P2,,Add/retain exact keyword and owner URL,,Resource visibility term.,500,Low,"","",captured_with_volume
+ohio ovi checkpoints,Resource,/ovi-checkpoints-ohio,Ohio,P2,,Add/retain exact keyword and owner URL,,Checkpoint support term.,500,Low,"","",captured_with_volume
