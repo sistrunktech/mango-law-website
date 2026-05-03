@@ -62,7 +62,7 @@ try {
   assert.equal(gtagCalls[1]?.[1], 'G-NJZD79GGFG');
   assert.deepEqual(gtagCalls[1]?.[2], { send_page_view: false });
   assert.equal(gtagCalls[2]?.[0], 'event');
-  assert.equal(gtagCalls[2]?.[1], 'lead_submitted');
+  assert.equal(gtagCalls[2]?.[1], 'generate_lead');
   assert.deepEqual(gtagCalls[2]?.[2], {
     lead_source: 'form',
     checkpoint_id: 'contact_form_submit',
@@ -72,7 +72,7 @@ try {
   trackLeadSubmitted('phone', 'contact_page_call_office');
   assert.equal(gtagCalls.length, 4);
   assert.equal(gtagCalls[3]?.[0], 'event');
-  assert.equal(gtagCalls[3]?.[1], 'lead_submitted');
+  assert.equal(gtagCalls[3]?.[1], 'generate_lead');
 } finally {
   globalThis.window = originalWindow;
   globalThis.document = originalDocument;

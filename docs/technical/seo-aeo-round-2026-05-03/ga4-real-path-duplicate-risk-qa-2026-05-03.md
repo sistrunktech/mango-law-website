@@ -1,6 +1,6 @@
 # GA4/GTM Real Lead-Path Duplicate-Risk QA - 2026-05-03
 
-Scope: read-only source and docs QA for Mango Law lead-path tracking after GTM container `GTM-WLJQZKB5` Version 5 went live on 2026-05-03 at 11:09 EDT. No source files, package files, images, changelog, or other docs were edited.
+Scope: source and docs QA for Mango Law lead-path tracking after GTM container `GTM-WLJQZKB5` Version 5 went live on 2026-05-03 at 11:09 EDT.
 
 ## Evidence Reviewed
 
@@ -34,33 +34,33 @@ Scope: read-only source and docs QA for Mango Law lead-path tracking after GTM c
 1. **No confirmed duplicate `generate_lead` on the synthetic mapping path.**  
    Existing live evidence shows one synthetic `lead_submitted` reaching GA4 as `generate_lead`. This validates the GTM mapping, but it does not prove real form, phone, email, or chat paths are duplicate-free.
 
-2. **Real lead paths remain pending.**  
+2. **Real lead paths remain pending.**
    `ContactForm`, `QuickIntakeForm`, `LeadCaptureModal`, and `ConversationWindow` emit `trackLeadSubmitted()` only after successful backend submission. That is the right sequencing, and submit buttons are disabled while submitting. Residual risk remains until an approved test lead confirms one backend success equals one GA4 `generate_lead`.
 
-3. **Phone/email clicks are source-instrumented and should not also be captured by broad GTM click conversion triggers.**  
+3. **Phone/email clicks are source-instrumented and should not also be captured by broad GTM click conversion triggers.**
    Header, footer, contact page, hero, CTA section, chat chooser, about, home, service area, checkpoint banner, location block, and practice-area phone/email surfaces generally call `trackCtaClick()` plus `trackLeadSubmitted()`. A broad GTM trigger such as "Click URL starts with `tel:`" or `mailto:` mapped to a lead event would double count many real clicks. Existing docs correctly warn not to enable broad optional tel/mailto triggers without a crawl and de-duplication plan.
 
-4. **Direct GA4 fallback creates a conditional naming and duplication risk.**  
-   Current root layout installs GTM, not a standalone `gtag/js` script. The saved live resource evidence records `gtm.js` resources. However, `trackLeadSubmitted()` also has a fallback path that sends GA4 event name `lead_submitted` directly if a `gtag/js` script is present. That event name differs from the documented GA4 lead key event `generate_lead`, and if a standalone Google tag is later added it could create parallel GA4 lead-like events alongside the GTM `generate_lead` mapping.
+4. **Direct GA4 fallback naming risk resolved in source.**
+   Current root layout installs GTM, not a standalone `gtag/js` script. The saved live resource evidence records `gtm.js` resources. The conditional fallback in `trackLeadSubmitted()` now sends GA4 event name `generate_lead` if a standalone `gtag/js` script is ever added, matching the GTM-mapped key event instead of creating a parallel `lead_submitted` GA4 event.
 
-5. **Post-form success phone CTA can count a second lead in the same user journey.**  
-   `LeadCaptureModal` emits `lead_submitted` with `lead_source=form` after `submit-lead` succeeds, then the success screen call button emits another `lead_submitted` with `lead_source=phone` if clicked. This is not one click causing two lead events, but it can count one person as two key events when they submit and immediately call.
+5. **Post-form success phone CTA duplicate-risk resolved in source.**
+   `LeadCaptureModal` emits `lead_submitted` with `lead_source=form` after `submit-lead` succeeds. The success screen call button now emits `cta_click` with `lead_followup_after_form=true` instead of a second `lead_submitted` event, so a person who submits and immediately calls is not counted as two GA4 key-event leads from that modal flow.
 
-6. **Synthetic validation can pollute lead reporting if not excluded.**  
+6. **Synthetic validation can pollute lead reporting if not excluded.**
    Because the GTM trigger accepts the synthetic `lead_submitted` event, the validation generated a GA4 `generate_lead` with `lead_source=synthetic_validation`. Reporting should filter out that `lead_source` and `checkpoint_id`.
 
-7. **Supporting page-view duplicate risk is visible in the live network capture.**  
+7. **Supporting page-view duplicate risk is visible in the live network capture.**
    The OVI CTA-to-contact validation includes both source-driven SPA page-view behavior and an additional GA4 `page_view` collect for `/contact`. This is not a lead duplicate, but it can affect lead-path funnel analysis and landing/next-page counts if not resolved.
 
-8. **Experiment exposure events are not lead events, but live evidence shows repeated A/B exposure pushes.**  
+8. **Experiment exposure events are not lead events, but live evidence shows repeated A/B exposure pushes.**
    The saved network evidence includes multiple `experiment_exposure` pushes for the OVI page. There is no confirmed GTM/GA4 mapping for this event, so it does not affect lead counts today. If mapped later, validate exposure de-duplication first.
 
 ## Recommended Next Actions
 
 1. Validate one approved real form lead, one approved real chat lead, and one prevented-default phone/email click path in GTM Preview plus GA4 DebugView/Realtime. For phone/email, use a browser setup that prevents the default `tel:`/`mailto:` navigation while still allowing React click handlers to run; do not place calls or send emails.
 2. Keep broad GTM tel/mailto click triggers disabled unless they are explicitly scoped to links that do not already emit source `lead_submitted`.
-3. Decide whether the `LeadCaptureModal` success-screen phone click should remain a second `generate_lead` or become a support event such as `cta_click` only.
-4. Align or remove the direct GA4 fallback event path before adding any standalone `gtag/js` script. If kept, send the same GA4 event name and parameters as the GTM path or document it as non-key telemetry.
+3. Keep the `LeadCaptureModal` success-screen phone click as support `cta_click` telemetry unless business reporting intentionally wants post-submit calls counted as a separate lead type.
+4. Do not add a standalone `gtag/js` script without rerunning fallback validation; the fallback event name is now aligned to `generate_lead`, but GTM-only remains the preferred production path.
 5. Exclude `lead_source=synthetic_validation` and `checkpoint_id=gtm_generate_lead_validation_2026_05_03` from SEO conversion reporting.
 6. Investigate the duplicate `/contact` `page_view` behavior in the live network capture. Choose one SPA page-view source: custom `mango_page_view` via GTM or GA4 enhanced measurement/history page views.
 
