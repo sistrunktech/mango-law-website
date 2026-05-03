@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 10:10 EDT
+Post slug and title: high-tier-ovi-ohio-17-test | High-Tier OVI in Ohio: What a .17+ Test Can Change in Your Case
+Change type: minor
+Summary of change: Replaced the initial flat/vector-style generated blog image with a watercolor-style roadway/courthouse image matching Mango's existing blog image aesthetic.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: User requested the new post image be updated to match the established watercolor blog image style.
+Rollback notes: Restore the previous `public/images/generated/blog-high-tier-ovi-ohio-17-test.png` version from the prior commit.
+
 Date/time: 2026-05-03 09:15 EDT
 Post slug and title: high-tier-ovi-ohio-17-test | High-Tier OVI in Ohio: What a .17+ Test Can Change in Your Case
 Change type: major
