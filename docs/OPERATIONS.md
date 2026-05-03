@@ -255,7 +255,7 @@ Important:
   - GA4 Event tags triggered by the Custom Events above:
     - `mango_page_view` → send GA4 `page_view` with `page_location`, `page_path`, `page_title`
     - `cta_click` → send GA4 event `cta_click` with param `cta`
-    - `lead_submitted` → send GA4 event `lead_submitted` with params `lead_source`, `checkpoint_id`, `target_number`, `target_email`
+    - `lead_submitted` → send GA4 event `generate_lead` with params `lead_source`, `checkpoint_id`, `target_number`, `target_email`
 
 ## Consent Mode v2 (GTM / GA4)
 

@@ -14,7 +14,7 @@ export const contactPageMetaDescription =
   'Contact Mango Law about OVI, criminal defense, domestic violence, drug charges, or protection-order issues in Delaware and Franklin County, Ohio.';
 
 export const domesticViolencePageMetaDescription =
-  'Domestic violence defense for Delaware, Ohio cases involving bond conditions, no-contact orders, first-offense allegations, and protection-order overlap.';
+  'Domestic violence lawyer in Delaware, Ohio for cases involving bond conditions, no-contact orders, first-offense allegations, and protection-order overlap.';
 
 export const drugCrimePageMetaDescription =
   'Drug charge defense in Delaware, Ohio for possession, trafficking, paraphernalia, and search-related cases, with diversion and suppression strategy where supported.';
@@ -119,6 +119,11 @@ export const contactIssueGuideLinks: SeoSupportLink[] = [
 ];
 
 export const domesticViolenceSupportLinks: SeoSupportLink[] = [
+  {
+    title: 'After a domestic violence arrest',
+    href: '/blog/domestic-violence-arrest-delaware-county-ohio',
+    description: 'Delaware County first steps for booking, bond, no-contact, and protection-order issues.',
+  },
   {
     title: 'First-offense domestic violence defense',
     href: '/domestic-violence-first-offense-ohio-defense',

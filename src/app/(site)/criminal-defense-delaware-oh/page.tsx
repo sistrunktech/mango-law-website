@@ -4,9 +4,9 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Delaware Ohio Criminal Defense Attorney | Mango Law LLC',
+  title: 'Delaware County Criminal Defense Attorney | Mango Law LLC',
   description:
-    'Delaware Ohio criminal defense attorney for drug charges, domestic violence, assault, theft, weapons, and other felony or misdemeanor cases. Practicing in Central Ohio since 1999.',
+    'Delaware County criminal defense attorney for drug charges, domestic violence, assault, theft, weapons, and felony or misdemeanor cases in Delaware, Ohio.',
   image: '/images/generated/criminal-defense-hero.png',
   url: '/criminal-defense-delaware-oh',
 };

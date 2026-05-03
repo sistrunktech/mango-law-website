@@ -138,6 +138,8 @@ Common review points include:
 
 Ohio Administrative Code Chapter 3701-53 contains rules for breath testing, specimen collection, handling, laboratory requirements, calibration, and record retention. Those rules do not create a defense in every case, but they give counsel a concrete checklist for reviewing whether the testing evidence is reliable and admissible.
 
+When testing, stop, or arrest problems may affect admissibility, the next defense step may include a [motion to suppress OVI evidence](/motion-to-suppress-ovi-ohio).
+
 ## What should you do after a high-tier OVI charge?
 
 Take the first week seriously. A high-tier allegation can affect both the license timeline and negotiation posture.
@@ -219,6 +221,244 @@ For help with a high-tier OVI in Delaware County or central Ohio, contact [Mango
         question: 'What should I preserve after a high-tier OVI arrest?',
         answer:
           'Keep citations, BMV paperwork, court notices, test paperwork, receipts, phone records, ride-share records, witness names, and a written timeline of the stop, arrest, and testing process.',
+      },
+    ],
+  },
+  {
+    slug: 'domestic-violence-arrest-delaware-county-ohio',
+    title: 'What Happens After a Domestic Violence Arrest in Delaware County, Ohio?',
+    excerpt:
+      'A domestic violence arrest can move quickly from booking to bond, no-contact restrictions, and protection-order issues. This Delaware County guide explains what to expect and what to preserve early.',
+    imageUrl: '/images/generated/blog-domestic-violence-arrest-delaware-county-ohio.png',
+    content: `A domestic violence arrest in Delaware County can create urgent problems before the case is ever resolved. The first few days may involve jail booking, a first court appearance, bond conditions, no-contact terms, possible temporary protection-order issues, and pressure to make quick decisions without seeing the evidence.
+
+If you are searching for a domestic violence lawyer in Delaware, Ohio, the immediate goal is not to argue the whole case in one conversation. The first goal is to understand the charge, stay compliant with court orders, preserve evidence, and avoid a second case from an accidental violation.
+
+Start with the main [domestic violence defense page](/domestic-violence-lawyer-delaware-oh) if you need case-specific help. If the case also involves broader misdemeanor or felony exposure, review the [criminal defense page](/criminal-defense-delaware-oh). If a protection order is already involved, use the [protection order defense page](/protection-order-lawyer-delaware-oh).
+
+## Quick answer
+
+After a domestic violence arrest in Delaware County, the case typically moves through several early stages:
+
+- booking at the jail,
+- a first appearance or arraignment,
+- bond and release-condition review,
+- possible no-contact or stay-away restrictions,
+- possible temporary protection-order issues,
+- discovery and evidence review, and
+- pretrial negotiation, motion practice, or trial preparation.
+
+The exact path depends on the charge, prior history, alleged injuries, whether a protection order is requested, whether the case is a misdemeanor or felony, and which court has jurisdiction.
+
+## What charge is usually involved?
+
+Ohio domestic violence is governed by [ORC 2919.25](https://codes.ohio.gov/ohio-revised-code/section-2919.25). The statute covers several categories of alleged conduct involving a family or household member, including:
+
+- knowingly causing or attempting to cause physical harm,
+- recklessly causing serious physical harm, and
+- making a threat of force that causes belief of imminent physical harm.
+
+The relationship element matters. The statute defines family or household member in a specific way, including spouses, former spouses, people living together or who lived together, certain relatives, and parents of a child in common. If that relationship element is not supported, the charge may need a different analysis than a standard domestic violence label suggests.
+
+## What happens after booking in Delaware County?
+
+The Delaware County Sheriff's Office explains that a person arrested on new charges or a municipal court warrant is generally seen in court the following business day by televised video arraignment. The Sheriff's Office identifies the Municipal Court location as 70 N. Union St., Delaware, Ohio, and notes that times can vary based on court needs.
+
+That first court step usually focuses on identity, the filed charge, bond, release conditions, and future dates. It is not usually where the defense has complete discovery or where the full facts are litigated.
+
+If a family member is trying to understand where the person is or how release works, the [Delaware County bond and jail guide](/blog/bond-jail-information-delaware-county-ohio) gives a broader local-process overview.
+
+## Why bond is different in domestic violence cases
+
+Domestic violence is not always handled like a routine misdemeanor release. The Delaware Municipal Court bail bond schedule lists assault or domestic violence among exceptions where the person may not be released without bond being set by the court.
+
+That means the first appearance can matter quickly. The court may address:
+
+- whether the person will be released,
+- whether a financial bond is required,
+- whether no-contact terms apply,
+- whether the person must stay away from a home, work, school, or other location,
+- whether alcohol, weapons, monitoring, or treatment-related terms apply, and
+- what happens if there is already another pending case or court order.
+
+Ohio's pretrial-release statute, [ORC 2937.011](https://codes.ohio.gov/ohio-revised-code/section-2937.011), allows courts to use conditions designed to protect appearance in court and public safety. It specifically includes restrictions on travel, association, place of abode, and contact with alleged victims or witnesses where appropriate.
+
+## No-contact conditions are not optional
+
+A no-contact condition is commonly issued as part of bond in domestic violence cases. It can prohibit direct contact, indirect contact through another person, text messages, social media messages, phone calls, visits, or returning to a shared residence.
+
+Do not assume that contact is allowed because the other person reaches out first. A court order is controlled by the court, not by private agreement. If the order blocks contact, the safer path is:
+
+1. Do not respond.
+2. Save the message or call log.
+3. Tell your attorney.
+4. Ask about a court-approved modification if contact is necessary for children, property, housing, or work.
+
+This distinction is explained in more detail in [No-Contact Orders vs Civil Protection Orders in Ohio](/blog/no-contact-order-vs-civil-protection-order-ohio).
+
+## Criminal temporary protection order vs civil protection order
+
+Domestic violence cases can involve more than one kind of order.
+
+A criminal temporary protection order may arise under [ORC 2919.26](https://codes.ohio.gov/ohio-revised-code/section-2919.26). That statute allows a qualifying request for a temporary protection order as a pretrial condition of release after a complaint or indictment is filed. The statute also describes quick hearing timing and potential stay-away terms.
+
+A domestic violence civil protection order is a separate civil process under [ORC 3113.31](https://codes.ohio.gov/ohio-revised-code/section-3113.31). The Supreme Court of Ohio publishes statewide domestic violence civil protection-order forms, including petition and hearing forms.
+
+These processes can overlap, but they are not the same thing. A person may need to defend the criminal charge while also preparing for a civil protection-order hearing. Statements, evidence, and hearing strategy should be coordinated carefully.
+
+## Violating an order can create a new charge
+
+The fastest way to make a difficult case worse is to violate a protection order or no-contact condition. [ORC 2919.27](https://codes.ohio.gov/ohio-revised-code/section-2919.27) makes violation of certain protection orders a separate offense.
+
+In practical terms, a new alleged violation can:
+
+- create a second criminal case,
+- make bond more restrictive,
+- weaken negotiation posture,
+- complicate parenting or housing issues, and
+- create evidence that distracts from the original allegation.
+
+Treat every order as literal until a judge changes it in writing.
+
+## What evidence should be preserved early?
+
+Domestic violence cases often turn on details that are easy to lose. Preserve evidence before phones are replaced, social accounts are deleted, or memories fade.
+
+Useful materials can include:
+
+- text messages and call logs,
+- voicemails,
+- social media messages,
+- photos of injuries or lack of injuries,
+- photos of property damage or the scene,
+- names and contact information for witnesses,
+- doorbell or security camera footage,
+- medical records,
+- receipts or location records, and
+- a written timeline created while events are fresh.
+
+Do not edit screenshots in a way that hides context. Keep the full conversation thread where possible, including timestamps.
+
+## What should you avoid after release?
+
+Avoid anything that can be misread as pressure, intimidation, retaliation, or contact through another person. That includes:
+
+- asking friends or relatives to pass messages,
+- posting about the case online,
+- trying to get the alleged victim to "drop it,"
+- going back to a restricted residence without written permission,
+- deleting messages,
+- ignoring court dates, and
+- assuming a verbal understanding overrides a court order.
+
+Even well-intended contact can create a serious compliance problem.
+
+## Common defense review points
+
+Every case is fact-specific, but early defense review often focuses on:
+
+- whether the charged relationship fits the statute,
+- whether the alleged conduct matches the charged subsection,
+- whether injuries are documented or disputed,
+- whether accounts changed over time,
+- whether 911 audio, body camera, or witness statements support or conflict with the allegation,
+- whether self-defense or defense of another is supported,
+- whether statements were obtained lawfully, and
+- whether bond or protection-order terms need modification.
+
+The defense is not built from one side of the story alone. It is built from the charge, the evidence, the statute, and the local court process.
+
+## How this supports the owner page
+
+This article is a process guide. The commercial owner for local domestic violence defense remains [Domestic Violence Defense Attorney in Delaware, Ohio](/domestic-violence-lawyer-delaware-oh). Use that page for attorney-selection questions, strategy, FAQs, and direct consultation options.
+
+Related guides:
+
+- [First-offense domestic violence defense](/domestic-violence-first-offense-ohio-defense)
+- [Protection order defense](/protection-order-lawyer-delaware-oh)
+- [Civil protection order defense in Ohio](/civil-protection-order-defense-ohio)
+- [Criminal defense overview](/criminal-defense-delaware-oh)
+
+## Bottom line
+
+A domestic violence arrest in Delaware County can affect release, housing, contact, parenting, employment, and future record consequences before the case is resolved. The early priorities are compliance, evidence preservation, and careful coordination between the criminal case and any protection-order process.
+
+If you have a pending Delaware County domestic violence case, contact Mango Law before responding to messages, returning to a restricted location, or making a plea decision based only on the first police report.
+
+---
+
+*This article is for educational purposes and does not create an attorney-client relationship. Domestic violence law, bond conditions, protection-order rules, and local court procedures are fact-specific. Consult a qualified Ohio attorney about your situation.*`,
+    category: 'Domestic Violence Defense',
+    date: '2026-05-03',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-03',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 2919.25 (Domestic violence)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.26 (Motion for and hearing on protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.26',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.27 (Violating protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2937.011 (Pretrial release)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.011',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 3113.31 (Domestic violence civil protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Sheriff’s Office: Inmate information and initial court appearance',
+        url: 'https://sheriff.co.delaware.oh.us/inmates/',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware Municipal Court Bail Bond Schedule',
+        url: 'https://www.delawareohio.net/home/showpublisheddocument/3746/638517944122230000',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: Domestic Violence Civil Protection Order forms',
+        url: 'https://www.supremecourt.ohio.gov/forms/all-forms/1001d-petition-for-domestic-violence-civil-protection-order-rc-311331/121',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'How soon is the first court appearance after a Delaware County domestic violence arrest?',
+        answer:
+          'The Delaware County Sheriff’s Office says people arrested on new charges or a municipal court warrant are generally seen in court the following business day by televised video arraignment, though times can vary based on court needs.',
+      },
+      {
+        question: 'Can a domestic violence defendant be released before seeing a judge?',
+        answer:
+          'Not always. The Delaware Municipal Court bail bond schedule lists assault or domestic violence among exceptions where release generally requires bond to be set by the court.',
+      },
+      {
+        question: 'Is a criminal no-contact order the same as a civil protection order?',
+        answer:
+          'No. A no-contact condition is often part of criminal bond. A domestic violence civil protection order is a separate civil process under ORC 3113.31. The two can overlap, so strategy should be coordinated carefully.',
+      },
+      {
+        question: 'What should I preserve after a domestic violence arrest?',
+        answer:
+          'Save texts, call logs, voicemails, photos, witness names, video footage, medical records, and a written timeline. Preserve full context and do not delete or edit evidence.',
+      },
+      {
+        question: 'Can the other person give permission to contact them if there is a no-contact order?',
+        answer:
+          'A court order is controlled by the court. If an order prohibits contact, private permission from another person does not safely modify it. Ask counsel about a written court-approved modification.',
       },
     ],
   },

@@ -653,6 +653,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 2937.222', url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.222', type: 'primary' },
     ],
   },
+  '2937.011': {
+    id: 'pretrial-release',
+    section: '2937.011',
+    title: 'Pretrial Release',
+    shortTitle: 'Pretrial Release',
+    definition: 'Sets Ohio pretrial-release standards and authorizes release conditions designed to reasonably assure court appearance, public safety, and protection of alleged victims or witnesses.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2937.011',
+    practiceAreas: ['criminal-defense', 'domestic-violence', 'ovi-dui'],
+    relatedStatutes: ['2937.222', '2919.26', '2919.27'],
+    lastVerified: '2026-05-03',
+    sources: [
+      { label: 'Ohio Revised Code § 2937.011', url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.011', type: 'primary' },
+    ],
+  },
   '2913.02': {
     id: 'theft',
     section: '2913.02',

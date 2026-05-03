@@ -108,7 +108,7 @@ const NAMING_RECOMMENDATIONS: Record<IntegrationType, { title: string; lines: st
       'Account: Mango Law',
       'GA4 Property: Mango Law | Website | Prod',
       'Web Data Stream: mango.law | Web | Prod',
-      'Key events (GA4): page_view, cta_click, lead_submitted',
+      'Key events (GA4): generate_lead; supporting events: page_view, cta_click',
     ],
   },
   search_console: {
@@ -124,7 +124,7 @@ const NAMING_RECOMMENDATIONS: Record<IntegrationType, { title: string; lines: st
       'Account: Mango Law',
       'Container: Mango Law | mango.law | Web | Prod',
       'Workspace: Main',
-      'Tags: GA4 | Config | mango.law | Prod; GA4 | Event | page_view; GA4 | Event | cta_click; GA4 | Event | lead_submitted',
+      'Tags: GA4 | Config | mango.law | Prod; GA4 | Event | page_view; GA4 | Event | cta_click; GA4 | Event | generate_lead',
       'Triggers: Event | mango_page_view; Event | cta_click; Event | lead_submitted; (optional) Click | Phone | tel:',
     ],
   },

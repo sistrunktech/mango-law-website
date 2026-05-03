@@ -169,9 +169,9 @@ export const firstOffenseOviFaqs: FAQEntry[] = [
 
 const firstOffenseOviConfig: HighIntentConfig = {
   slug: 'first-offense-ovi-ohio',
-  seoTitle: 'First Offense OVI Lawyer in Ohio | What to Do Now',
+  seoTitle: 'First Offense OVI in Ohio | Lawyer Guidance',
   seoDescription:
-    'Charged with a first OVI in Ohio? Learn what happens next, where risk usually comes from, and how to protect your license and record early.',
+    'Charged with a first offense OVI in Ohio? Learn what happens next, where risk usually comes from, and how to protect your license and record early.',
   heroEyebrow: 'First-Offense OVI',
   heroTitle: 'First Offense OVI in Ohio: What to Do in the First 72 Hours',
   heroDescription:
@@ -181,7 +181,7 @@ const firstOffenseOviConfig: HighIntentConfig = {
   optionalOrcSection: '4511.191',
   introHeading: 'A first OVI charge is time-sensitive',
   introBody: [
-    'The first days after an OVI arrest often shape what options remain later. Preserving facts, understanding deadlines, and avoiding preventable mistakes can materially change case posture.',
+    'The first days after a first offense OVI in Ohio often shape what options remain later. Preserving facts, understanding deadlines, and avoiding preventable mistakes can materially change case posture.',
     'Most first-offense matters involve two separate tracks: administrative license consequences and the court case. A clear strategy addresses both from the start.',
   ],
   keyPointsHeading: 'Where first-offense cases are usually defended',
