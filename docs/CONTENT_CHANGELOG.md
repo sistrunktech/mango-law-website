@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 13:35 EDT
+Post slug and title: ohio-misdemeanor-vs-felony-charges-delaware-county | Ohio Misdemeanor vs. Felony Charges: Delaware County Defense Guide
+Change type: major
+Summary of change: Added the next criminal-defense support post from the keyword-aligned queue, using official Ohio crime-classification, misdemeanor jail-term, felony prison-term, municipal-court jurisdiction, Delaware County Prosecutor, Delaware County Clerk of Courts, and Delaware Municipal Court sources; added a neutral watercolor comparison image; linked the post from the criminal-defense owner page; refreshed the existing OVI driving-privileges/ALS article with Delaware County filing context, ALS appeal, limited-privileges, ignition-interlock, and current-source coverage; added required ORC glossary entries for the new statutory citations; and applied high-signal internal links from older criminal/OVI/DV/drug/protection articles into the tracked owner pages.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked to fix the high-tier image, then proceed with the next long-run onsite SEO/AEO tasks after keyword/tracking alignment.
+Rollback notes: Remove the `ohio-misdemeanor-vs-felony-charges-delaware-county` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-ohio-misdemeanor-vs-felony-charges-delaware-county.png`, remove the criminal-defense owner-page links to the new post, and restore the prior `ohio-ovi-driving-privileges-als` content plus internal-link additions in `src/data/blogPosts.ts`.
+
 Date/time: 2026-05-03 13:00 EDT
 Post slug and title: delaware-county-criminal-case-timeline | Delaware County Criminal Case Timeline: What Happens After Charges Are Filed?
 Change type: major
