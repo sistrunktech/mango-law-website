@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 13:00 EDT
+Post slug and title: delaware-county-criminal-case-timeline | Delaware County Criminal Case Timeline: What Happens After Charges Are Filed?
+Change type: major
+Summary of change: Added the next high-ROI criminal-defense support post from the SEO/AEO queue, with official Delaware Municipal Court, Delaware County Clerk of Courts, Delaware County Sheriff, Delaware Municipal Court bail schedule, and Ohio Criminal Rules sources; added a matching watercolor legal-process image; linked the post from the criminal-defense owner page; fixed Article schema image URLs to emit absolute image URLs; updated sitemap lastmod handling for current posts and changed owner/resource pages; added the domestic-violence blog category filter; and refreshed checkpoint announcements client-side after hydration so current Solon/Aurora pending notices are not blocked by stale server preload.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked to proceed with the next long-run onsite SEO/AEO tasks after fixing the high-tier OVI image and completing keyword/tracking alignment.
+Rollback notes: Remove the `delaware-county-criminal-case-timeline` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-delaware-county-criminal-case-timeline.png`, remove the criminal-defense owner-page links to that post, and revert the sitemap/schema/checkpoint hydration/category-filter changes if they cause regressions.
+
 Date/time: 2026-05-03 12:36 EDT
 Post slug and title: DUI checkpoint data | Solon Cinco de Mayo pending announcement
 Change type: minor

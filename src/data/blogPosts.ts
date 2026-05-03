@@ -463,6 +463,244 @@ If you have a pending Delaware County domestic violence case, contact Mango Law 
     ],
   },
   {
+    slug: 'delaware-county-criminal-case-timeline',
+    title: 'Delaware County Criminal Case Timeline: What Happens After Charges Are Filed?',
+    excerpt:
+      'A practical Delaware County criminal-case timeline for arraignment, bond, pretrial conferences, discovery, motions, plea negotiations, trial settings, and what defendants should preserve early.',
+    imageUrl: '/images/generated/blog-delaware-county-criminal-case-timeline.png',
+    content: `A criminal charge in Delaware County can feel chaotic because several things happen at once: court dates, bond terms, evidence requests, prosecutor communications, and pressure to decide whether to fight, negotiate, or plead. The timeline is not identical in every case, but most misdemeanor and felony cases move through a few predictable stages.
+
+This guide explains the usual path after charges are filed in Delaware County, Ohio. It is written for people trying to understand what happens next, what deadlines matter, and why early defense review should start before a plea decision.
+
+If you need help choosing the next step, start with the main [criminal defense page](/criminal-defense-delaware-oh). If the charge is OVI-specific, use the [Delaware Ohio OVI lawyer page](/ovi-dui-defense-delaware-oh). If the immediate issue is release from jail or bond, compare this with the [Delaware County bond and jail guide](/blog/bond-jail-information-delaware-county-ohio).
+
+## Quick answer
+
+A Delaware County criminal case often moves through these stages:
+
+1. charge filed or arrest,
+2. booking or summons,
+3. first appearance or arraignment,
+4. bond and release-condition review,
+5. pretrial conference,
+6. discovery and evidence review,
+7. motion deadlines and motion hearings,
+8. plea negotiations or trial preparation,
+9. trial or negotiated resolution, and
+10. sentencing, dismissal, diversion, or post-resolution compliance.
+
+The court, timeline, and strategy depend on whether the charge is a misdemeanor, felony, traffic offense, OVI, protection-order violation, drug case, theft case, assault allegation, or another criminal-defense matter.
+
+## Which court handles the case?
+
+The first practical question is where the case is pending.
+
+Many misdemeanors, traffic offenses, and OVI cases start in Delaware Municipal Court. The Delaware Municipal Court local rules say criminal complaints and traffic citations are filed with the clerk in original form and in accordance with the Ohio Traffic Rules and Ohio Criminal Rules of Procedure.
+
+Felony criminal cases are different. The Delaware County Clerk of Courts explains that its Legal Division includes felony criminal case dockets, court schedules, and filings for the Delaware County Common Pleas Court.
+
+That court split matters because the calendar, prosecutor, discovery posture, possible penalties, and negotiation path may be different.
+
+## Arrest, summons, or citation
+
+Not every case begins with jail. Some people receive a summons or citation with a court date. Others are arrested and booked.
+
+The Delaware Municipal Court local rules require the prosecutor or law-enforcement agency filing a complaint to indicate whether the complaint has already been served or whether a warrant or summons is requested. If a complaint is filed after the original ordered appearance date, the filing agency must request a new summons or warrant.
+
+For traffic and some misdemeanor matters, the paper citation may be the first document that tells you the charge, court, and appearance date. Do not assume a "minor" looking citation is payable. The local rules exclude OVI from the violations-bureau process, and other offenses with possible jail time may require a court appearance.
+
+## First appearance or arraignment
+
+If a person is arrested on new charges or a municipal court warrant, the Delaware County Sheriff's Office says the person is generally seen in court the following business day through televised video arraignment, with times varying based on court needs.
+
+At arraignment, the court addresses the filed charge and plea posture. Ohio Criminal Rule 10 says arraignment consists of reading the indictment, information, or complaint, or stating the substance of the charge, and calling on the defendant to plead. The rule also addresses when a defendant may appear remotely and the rights that must be explained to an unrepresented defendant.
+
+That first appearance is not usually the full trial. It is often where the court sets or reviews bond, release conditions, future dates, and the immediate plea or not-guilty posture.
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## Bond and release conditions
+
+Bond is not just about money. Bond can also include conditions that restrict travel, contact, residence, weapons, alcohol, treatment, monitoring, or other conduct while the case is pending.
+
+The Delaware Municipal Court bail bond schedule explains that Delaware County residents are generally released on recognizance for many misdemeanor categories, but the schedule also lists exceptions where release requires bond to be set by the court. Exceptions include assault or domestic violence, protection-order violations, third-lifetime OVI, certain homicide-related traffic offenses, and other higher-risk categories.
+
+The schedule also says a jail commander may hold an otherwise eligible person for a bond hearing based on factors such as failure-to-appear history, apparent danger to self or others, current bond/parole/probation status, or flight-risk concerns.
+
+Treat bond terms as court orders. A new violation can become more damaging than the original charge.
+
+## Pretrial conference
+
+After arraignment, many cases move into one or more pretrial conferences. A pretrial is where the defense, prosecutor, and court begin narrowing what needs to happen next.
+
+Pretrial topics can include:
+
+- discovery status,
+- body camera, dash camera, lab, witness, or report requests,
+- whether bond conditions need modification,
+- whether a diversion or treatment track may be available,
+- whether the prosecutor is making an offer,
+- whether a motion deadline is approaching,
+- whether the case needs a motion hearing, and
+- whether the case is moving toward trial.
+
+Ohio Criminal Rule 17.1 permits courts to order pretrial conferences after the filing of an indictment, information, or complaint to promote a fair and expeditious trial.
+
+## Discovery and evidence review
+
+Discovery is where the defense starts comparing the charge against the actual evidence. The documents may include police reports, citations, witness statements, videos, photographs, lab records, dispatch logs, prior court orders, and other case-specific materials.
+
+Do not judge the case only from the first police summary. A useful defense review asks:
+
+- What does the charging document actually allege?
+- Does the evidence match each element?
+- Are there missing witnesses, recordings, or reports?
+- Did the stop, search, statement, or seizure create a motion issue?
+- Are there defenses that require notice before trial?
+- Are bond conditions creating problems with work, housing, parenting, or treatment?
+
+If the case involves OVI evidence, review the [motion to suppress OVI evidence page](/motion-to-suppress-ovi-ohio), the [OVI refusal page](/ovi-test-refusal-lawyer-ohio), and the [ALS license suspension page](/als-license-suspension-ohio). If the case involves drugs, compare the charge with the [drug crimes defense page](/drug-crime-lawyer-delaware-oh).
+
+## Motion deadlines
+
+Motion timing matters. Ohio Criminal Rule 12 allows pretrial motions to raise defenses, objections, evidentiary issues, or requests that can be decided before trial. It specifically includes motions to suppress evidence, discovery requests, severance requests, and certain defect-based objections.
+
+The same rule says most pretrial motions must be made within 35 days after arraignment or seven days before trial, whichever is earlier, unless the court extends the deadline in the interest of justice.
+
+That does not mean every case needs a motion. It means the defense should identify motion issues early enough to avoid losing them. Common examples include:
+
+- illegal stop,
+- unlawful search,
+- improper interrogation,
+- unreliable identification,
+- missing discovery,
+- defective complaint or indictment issue,
+- severance issue, and
+- testing or chain-of-custody issue.
+
+## Plea negotiations, diversion, or trial preparation
+
+Once discovery is reviewed, the case usually moves in one of three directions:
+
+| Path | What it means | What should be reviewed first |
+|---|---|---|
+| Negotiated resolution | The parties discuss a plea, amendment, dismissal of some counts, treatment term, or sentencing recommendation. | Evidence strength, penalties, record impact, license impact, and compliance obligations. |
+| Diversion or treatment track | Some cases may be screened for program-based resolution if the facts and history fit. | Eligibility, admissions, costs, treatment requirements, dismissal terms, and what happens if the program is not completed. |
+| Trial track | The defense prepares for bench or jury trial. | Elements, witnesses, exhibits, motions, subpoenas, jury instructions, and trial risks. |
+
+A plea offer is not automatically good or bad. It should be measured against the evidence, penalties, collateral consequences, and the client's priorities.
+
+## What should you preserve early?
+
+Preserve evidence before it disappears. Depending on the charge, useful material may include:
+
+- citations and court notices,
+- jail or bond paperwork,
+- text messages and call logs,
+- photos or videos,
+- doorbell or security camera footage,
+- receipts and location records,
+- witness names and contact information,
+- medical or treatment records,
+- screenshots with full timestamps and context, and
+- a written timeline created while memory is fresh.
+
+Do not delete messages, edit screenshots, contact witnesses in a way that looks like pressure, or violate no-contact or bond terms to gather evidence.
+
+## When should a lawyer get involved?
+
+The safest time is before a plea, before waiving rights, and before motion deadlines pass. Early review is especially important if:
+
+- you were arrested and bond terms restrict where you can go or whom you can contact,
+- you have a prior record,
+- immigration, licensing, employment, school, housing, or firearm consequences may matter,
+- the case involves OVI, drugs, violence, theft, weapons, or a protection order,
+- there may be body camera, lab, search, or statement issues, or
+- you are being asked to resolve the case before discovery is complete.
+
+The goal is not to delay for the sake of delay. The goal is to make decisions with the charge, evidence, deadline, and consequence picture in view.
+
+## How this supports the owner page
+
+This article is a process guide. The commercial owner for local defense remains [Criminal Defense Attorney in Delaware, Ohio](/criminal-defense-delaware-oh). Use that page for attorney-selection questions, practice-area fit, consultation options, and broader defense strategy.
+
+Related guides:
+
+- [Delaware County bond and jail information](/blog/bond-jail-information-delaware-county-ohio)
+- [Domestic violence arrest in Delaware County](/blog/domestic-violence-arrest-delaware-county-ohio)
+- [First OVI court date in Delaware County](/blog/first-ovi-court-date-delaware-county-ohio)
+- [Motion practice in criminal defense](/blog/motion-practice-criminal-defense)
+- [Drug possession charge in Ohio](/blog/drug-possession-charge-ohio-what-to-do-next)
+
+## Bottom line
+
+A Delaware County criminal case is a sequence of deadlines and decisions, not one single court date. The most important early steps are to understand the court, preserve evidence, comply with bond, review discovery, and identify any motion or negotiation leverage before making a plea decision.
+
+If you have a pending criminal charge in Delaware County or central Ohio, contact Mango Law before assuming the first offer or first report tells the whole story.
+
+---
+
+*This article is for educational purposes and does not create an attorney-client relationship. Criminal procedure, local court practice, bond conditions, and case timelines are fact-specific. Consult a qualified Ohio attorney about your situation.*`,
+    category: 'Criminal Defense',
+    date: '2026-05-03',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-03',
+    sources: [
+      {
+        label: 'Delaware Municipal Court Local Rules',
+        url: 'https://www.delawareohio.net/government/departments/municipal-court/about/resources/court-rules',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Clerk of Courts',
+        url: 'https://clerkofcourts.co.delaware.oh.us/',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Sheriff: Inmate information and initial court appearance',
+        url: 'https://sheriff.co.delaware.oh.us/inmates/',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware Municipal Court Bail Bond Schedule',
+        url: 'https://www.delawareohio.net/home/showpublisheddocument/3746/638517944122230000',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: Ohio Rules of Criminal Procedure',
+        url: 'https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/criminal/CriminalProcedure.pdf',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the first court date after a Delaware County criminal arrest?',
+        answer:
+          'For a person arrested on new charges or a municipal court warrant, the Delaware County Sheriff says the person is generally seen the following business day by televised video arraignment, though times can vary based on court needs.',
+      },
+      {
+        question: 'Are misdemeanors and felonies handled in the same Delaware County court?',
+        answer:
+          'Not always. Many misdemeanors, traffic offenses, and OVI cases begin in Delaware Municipal Court. Felony criminal dockets and filings are handled through the Delaware County Common Pleas system and Clerk of Courts.',
+      },
+      {
+        question: 'When are criminal motions usually due in Ohio?',
+        answer:
+          'Ohio Criminal Rule 12 generally requires most pretrial motions within 35 days after arraignment or seven days before trial, whichever is earlier, unless the court extends the deadline in the interest of justice.',
+      },
+      {
+        question: 'Should I plead at the first appearance?',
+        answer:
+          'A first appearance or arraignment is often early in the case, before full discovery has been reviewed. Do not make a final plea decision without understanding the evidence, penalties, bond conditions, and collateral consequences.',
+      },
+      {
+        question: 'What should I bring to a criminal-defense consultation?',
+        answer:
+          'Bring citations, court notices, bond papers, police or jail paperwork, screenshots, witness names, videos, photos, and any timeline you created. Full context is usually more useful than isolated screenshots.',
+      },
+    ],
+  },
+  {
     slug: 'ohio-livs-law-ovi-changes',
     title: "Ohio Liv's Law OVI Changes: Fines, Interlock, and Oral-Fluid Testing",
     excerpt:

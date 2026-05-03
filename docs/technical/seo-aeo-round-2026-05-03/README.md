@@ -50,7 +50,18 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Production DB now contains the two May-window Lake Township/Stark rows and one Solon/Cinco pending announcement row with source `Cleveland19/WOIO`.
 - Boundary: no exact Solon time window was published by the source, so Solon was intentionally kept as a pending announcement rather than a precise checkpoint map row.
 - Remaining risk: manual trigger works, but unattended `pg_cron` / `pg_net` scheduler health still needs confirmation.
-- Frontend deployment note: local `http://localhost:3023/resources/dui-checkpoints` shows Solon/Aurora Road; production did not before frontend deployment, so public display still depends on deploying the corrected frontend source.
+- Frontend deployment note: local `http://localhost:3023/resources/dui-checkpoints` shows Solon/Aurora Road after client hydration; production display depends on deploying the hydration refresh patch in the next release.
+
+## 2026-05-03 Next Onsite/AEO Release Result
+
+- Fixed Article JSON-LD image URLs so relative blog image paths are emitted as absolute `https://mango.law/images/...` schema URLs.
+- Updated sitemap generation so current posts and changed owner/resource pages use May 3, 2026 `lastmod` values instead of the stale March static date.
+- Added the `Domestic Violence Defense` blog filter category so the new DV arrest post is browsable by topic.
+- Added inbound links from `/ovi-dui-defense-delaware-oh` to `/blog/high-tier-ovi-ohio-17-test`.
+- Added the next criminal-defense support article: `/blog/delaware-county-criminal-case-timeline`.
+- Linked the new timeline article from `/criminal-defense-delaware-oh`.
+- Added a matching watercolor blog image at `/images/generated/blog-delaware-county-criminal-case-timeline.png`.
+- Local QA confirmed Solon/Aurora appears on the checkpoint page after hydration, sitemap May 3 lastmods render, Article schema image URLs are absolute, and the new post/owner-page/category paths render.
 
 ## Execution Rules
 

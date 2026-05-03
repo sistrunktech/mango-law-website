@@ -194,7 +194,6 @@ export default function DUICheckpointsPage({
   const [leadModalTrigger, setLeadModalTrigger] = useState<'emergency_banner' | 'checkpoint_card' | 'lead_magnet' | 'exit_intent' | 'hotspot_specific'>('emergency_banner');
   const [leadModalCheckpointId, setLeadModalCheckpointId] = useState<string | undefined>();
   const [now, setNow] = useState<Date | undefined>(undefined);
-  const hasHydratedRef = useRef(false);
   const itemsPerPage = 15;
 
   useEffect(() => {
@@ -263,11 +262,6 @@ export default function DUICheckpointsPage({
   }, [dateRange, filterPublicCheckpoints, usedHistoryFallback, viewMode]);
 
   useEffect(() => {
-    if (!hasHydratedRef.current) {
-      hasHydratedRef.current = true;
-      return;
-    }
-
     loadCheckpoints();
   }, [loadCheckpoints]);
 
