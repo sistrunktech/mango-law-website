@@ -17,7 +17,7 @@ export const domesticViolencePageMetaDescription =
   'Domestic violence lawyer in Delaware, Ohio for cases involving bond conditions, no-contact orders, first-offense allegations, and protection-order overlap.';
 
 export const drugCrimePageMetaDescription =
-  'Drug charge defense in Delaware, Ohio for possession, trafficking, paraphernalia, and search-related cases, with diversion and suppression strategy where supported.';
+  'Drug crime lawyer in Delaware, Ohio for possession, trafficking, paraphernalia, and search-related drug charges in Delaware County.';
 
 export const aboutSupportLinks: SeoSupportLink[] = [
   {
@@ -151,6 +151,11 @@ export const drugCrimeSupportLinks: SeoSupportLink[] = [
     title: 'Drug possession vs trafficking defense',
     href: '/drug-possession-vs-trafficking-ohio-defense',
     description: 'High-intent guidance on how charge structure changes the case strategy.',
+  },
+  {
+    title: 'Possession vs trafficking guide',
+    href: '/blog/drug-possession-vs-trafficking-ohio',
+    description: 'Plain-English Ohio law guide comparing possession, trafficking, search issues, and penalties.',
   },
   {
     title: 'Drug possession: what to do next',

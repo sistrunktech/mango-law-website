@@ -15,11 +15,11 @@ import { drugCrimePageMetaDescription, drugCrimeSupportLinks } from '../data/seo
 export const drugCrimeFaqs = [
   {
     question: 'What is the difference between drug possession and trafficking?',
-    answer: 'Possession charges apply when you have drugs for personal use, while trafficking charges involve the intent to sell or distribute drugs. The distinction often depends on the quantity, packaging, and presence of scales, cash, or other evidence of distribution. Trafficking carries much harsher penalties, including mandatory prison time.',
+    answer: 'Possession charges usually focus on whether the state can prove knowing possession or use. Trafficking charges focus on sale, offer to sell, shipment, delivery, distribution, or facts suggesting drugs were intended for sale. The distinction often depends on quantity, packaging, statements, scales, cash, location, and lab evidence. Trafficking can carry harsher penalties, and some categories can involve mandatory prison terms depending on drug type, amount, location, and history.',
   },
   {
     question: 'Can I get drug charges dismissed if the search was illegal?',
-    answer: 'Yes. If law enforcement violated your Fourth Amendment rights by conducting an illegal search or seizure, we can file a motion to suppress the evidence. If the motion is granted, the drugs and related evidence cannot be used against you, often resulting in case dismissal.',
+    answer: 'Possibly. If law enforcement violated your Fourth Amendment rights during the stop, search, seizure, or warrant process, we can file a motion to suppress the evidence. If the motion is granted, the state may lose key evidence, which can create dismissal, reduction, or negotiation leverage depending on the remaining proof.',
   },
   {
     question: 'What are the penalties for drug possession in Ohio?',
@@ -35,7 +35,7 @@ export const drugCrimeFaqs = [
   },
   {
     question: 'What happens if I am charged with drug paraphernalia?',
-    answer: 'Drug paraphernalia charges apply to items used to consume, produce, or distribute drugs, such as pipes, syringes, scales, and baggies. These are typically misdemeanor charges, but they can carry jail time, fines, and a criminal record. We defend these cases by challenging the legality of the search and the classification of the items.',
+    answer: 'Drug paraphernalia charges can involve items allegedly used to store, test, package, weigh, conceal, inject, ingest, inhale, or introduce controlled substances. Ohio law also recognizes exceptions and fact-specific classification issues. We defend these cases by reviewing the search, the item, residue or testing claims, and whether the state can prove the required purpose.',
   },
   {
     question: 'Will I go to prison for a first-time drug offense?',
@@ -59,7 +59,7 @@ export default function DrugCrimePage() {
   return (
     <>
       <SEO
-        title="Drug Crime Lawyer Delaware, OH | Drug Charges Defense | Mango Law LLC"
+        title="Drug Crime Lawyer Delaware Ohio | Possession & Trafficking Defense | Mango Law LLC"
         description={drugCrimePageMetaDescription}
         image="/images/generated/drug-crimes-defense-hero.png"
         faqs={drugCrimeFaqs}
@@ -71,8 +71,8 @@ export default function DrugCrimePage() {
       />
       <PageHero
         eyebrow="Drug Crimes"
-        title="Drug charge defense with early focus on searches, testing, and diversion paths"
-        description="If you are looking for a drug charges attorney in Delaware, Ohio, start here. We defend possession, trafficking, paraphernalia, and related allegations with motion practice and practical strategy."
+        title="Drug crime lawyer in Delaware, Ohio for possession and trafficking defense"
+        description="If you are looking for a drug possession attorney or drug trafficking lawyer in Delaware, Ohio, start here. We defend drug charges with search review, lab analysis, diversion screening, and practical case strategy."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -89,14 +89,16 @@ export default function DrugCrimePage() {
               <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
                 <div className="space-y-6">
                   <div>
-                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Drug charge defense in Delaware and Franklin County</h2>
+                    <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">Drug charges lawyer for Delaware County possession and trafficking cases</h2>
                     <p className="text-lg text-brand-black/70 leading-relaxed">
-                      Drug charges can derail your life. A conviction can mean prison time, licensing issues, financial strain,
-                      and a record that follows you for years. Whether the allegation is possession, trafficking, or paraphernalia,
-                      early strategy should match the actual evidence and exposure.
+                      Drug charges can derail your life. A conviction can mean jail or prison exposure, licensing issues,
+                      financial strain, and a record that follows you for years. Whether the allegation is possession,
+                      trafficking, or paraphernalia, early strategy should match the actual evidence, the charge level, and
+                      the Delaware County court path.
                     </p>
                   </div>
                   <p className="text-brand-black/70 leading-relaxed">
+                    Mango Law is a drug defense attorney in Delaware, Ohio for people facing controlled-substance charges.
                     We scrutinize the legality of the stop, the validity of the search, the chain of custody, and lab testing
                     procedures. We also screen for diversion and treatment-based resolutions where the facts and eligibility rules support them.
                   </p>
@@ -137,6 +139,7 @@ export default function DrugCrimePage() {
               </div>
 
               <LegalCodeCallout section="2925.11" />
+              <LegalCodeCallout section="2925.03" />
             </div>
 
             <aside className="lg:col-span-1">
@@ -151,22 +154,23 @@ export default function DrugCrimePage() {
           <div className="mb-12 text-center">
             <h2 className="font-display text-display-sm md:text-display-md mb-4">Drug Charges We Handle</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
-              From minor possession to serious trafficking allegations, we defend all types of drug-related charges.
+              From possession to serious trafficking allegations, we defend drug-related charges with attention to the statute,
+              substance, amount, testing, and search record.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 title: 'Drug Possession',
-                description: 'Defense for possession of marijuana, cocaine, heroin, fentanyl, methamphetamine, and prescription drugs.',
+                description: 'Drug possession defense lawyer guidance for marijuana, cocaine, heroin, fentanyl, methamphetamine, and prescription-drug allegations.',
               },
               {
                 title: 'Drug Trafficking',
-                description: 'Aggressive defense for trafficking and distribution charges with focus on evidence and intent.',
+                description: 'Drug trafficking lawyer analysis focused on sale allegations, distribution evidence, packaging, statements, amounts, and intent.',
               },
               {
                 title: 'Drug Paraphernalia',
-                description: 'Representation for charges involving pipes, syringes, scales, and other drug-related items.',
+                description: 'Representation for charges involving items the state claims were used for storage, testing, weighing, packaging, ingestion, or concealment.',
               },
               {
                 title: 'Prescription Fraud',
@@ -235,6 +239,40 @@ export default function DrugCrimePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mx-auto max-w-4xl space-y-6">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-mangoText">
+                Case strategy
+              </p>
+              <h2 className="mt-3 font-display text-display-sm md:text-display-md text-brand-black">
+                Possession, trafficking, and search issues belong on one strategy map
+              </h2>
+            </div>
+            <p className="text-lg leading-relaxed text-brand-black/70">
+              A drug crime lawyer in Delaware, Ohio should not treat the charge label as the whole case. The first pass
+              should separate possession proof, trafficking proof, paraphernalia allegations, and search-and-seizure issues
+              before any plea, diversion, or trial decision is made.
+            </p>
+            <p className="leading-relaxed text-brand-black/70">
+              If you need a drug possession attorney in Delaware, Ohio, a drug possession lawyer in Delaware County, Ohio,
+              or a drug trafficking lawyer in Delaware, Ohio, start here and then compare the
+              supporting guides for the evidence issue: <Link href="/drug-possession-vs-trafficking-ohio-defense" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">possession vs. trafficking defense</Link>,{' '}
+              <Link href="/blog/drug-possession-vs-trafficking-ohio" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">possession vs. trafficking explained</Link>,{' '}
+              <Link href="/blog/drug-possession-charge-ohio-what-to-do-next" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">what to do after a possession charge</Link>, and{' '}
+              <Link href="/blog/motion-practice-criminal-defense" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">motion practice for search issues</Link>.
+            </p>
+            <p className="leading-relaxed text-brand-black/70">
+              People often start with searches like drug charges lawyer Delaware Ohio, drug defense attorney Delaware Ohio,
+              or drug possession defense lawyer Delaware Ohio. The better first move is the same in each lane: preserve the
+              stop timeline, review the search, compare the alleged substance and amount against the statute, and decide
+              whether diversion, suppression, reduction, or trial preparation should lead the strategy.
+            </p>
           </div>
         </div>
       </section>
