@@ -201,11 +201,11 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     section: '3113.31',
     title: 'Civil Protection Orders (Domestic Violence)',
     shortTitle: 'Civil Protection Order',
-    definition: 'Authorizes courts to issue protection orders in domestic violence cases. Allows for ex parte (emergency) orders without the accused being present. Orders can prohibit contact, remove someone from their home, and restrict firearm possession.',
+    definition: 'Authorizes courts to issue domestic-violence civil protection orders, including ex parte temporary orders and orders after full hearing. Orders can restrict contact, residence access, parenting issues, and other conduct; qualifying orders may also carry federal firearm consequences.',
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31',
     practiceAreas: ['protection-orders', 'criminal-defense', 'domestic-violence'],
-    relatedStatutes: ['2919.27', '2919.25', '2903.214'],
-    lastVerified: '2025-12-15',
+    relatedStatutes: ['2919.27', '2919.26', '2919.25', '2903.214'],
+    lastVerified: '2026-05-03',
     sources: [
       { label: 'Ohio Revised Code § 3113.31', url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31', type: 'primary' },
     ],
@@ -219,7 +219,7 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2919.26',
     practiceAreas: ['protection-orders', 'criminal-defense', 'domestic-violence'],
     relatedStatutes: ['3113.31', '2919.25', '2919.27'],
-    lastVerified: '2026-03-06',
+    lastVerified: '2026-05-03',
     sources: [
       { label: 'Ohio Revised Code § 2919.26', url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.26', type: 'primary' },
     ],
@@ -233,7 +233,7 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
     practiceAreas: ['protection-orders', 'criminal-defense'],
     relatedStatutes: ['3113.31', '2903.211'],
-    lastVerified: '2025-12-15',
+    lastVerified: '2026-05-03',
     sources: [
       { label: 'Ohio Revised Code § 2919.27', url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27', type: 'primary' },
     ],

@@ -742,9 +742,9 @@ const civilProtectionOrderDefenseConfig: HighIntentConfig = {
   relatedDescription: 'Use these resources for CPO distinctions, ex parte process, and connected defense issues.',
   relatedGuides: [
     {
-      title: 'Protection order defense pillar',
+      title: 'Protection order lawyer in Delaware, Ohio',
       href: '/protection-order-lawyer-delaware-oh',
-      description: 'Core protection-order defense overview.',
+      description: 'Local protection-order defense overview for Delaware CPO hearings.',
     },
     {
       title: 'No-contact order vs CPO guide',

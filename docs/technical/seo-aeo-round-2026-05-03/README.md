@@ -13,7 +13,7 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 |---|---|
 | `google-ads-keyword-planner-results-capture.csv` | Captured Planner volume, competition, and bid data for the validated 50-keyword set from Mango Ads account `133-925-6176`. |
 | `google-ads-keyword-planner-historical-metrics-export-2026-05-03.csv` | UTF-8 normalized evidence export from the saved Google Ads Keyword Planner plan. |
-| `gsc-indexing-submission-log.csv` | Submit and track seven priority URLs: the five April live-test-valid but not-indexed URLs plus the two new OVI support posts if live/indexable. |
+| `gsc-indexing-submission-log.csv` | Submit and track the April live-test-valid but not-indexed URLs plus the new May owner/support posts after deployment and live-test confirmation. |
 | `ga4-gtm-live-event-validation-checklist.md` | Validate live `page_view`, `cta_click`, and `generate_lead` behavior after consent acceptance and deployment. |
 | `ga4-gtm-live-network-validation-2026-05-03.json` | Live public-site network capture after GTM Version 5 publish showing GA4 collect events for `page_view`, `cta_click`, and synthetic `generate_lead`. |
 | `brightlocal-50-keyword-alignment-checklist.csv` | Reconcile BrightLocal tracker rows against the validated 50-keyword April recommendation; includes Planner metric columns for prioritization before any admin write. |
@@ -70,6 +70,12 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Added a matching neutral watercolor blog image at `/images/generated/blog-ohio-misdemeanor-vs-felony-charges-delaware-county.png`.
 - Refreshed `/blog/ohio-ovi-driving-privileges-als` with Delaware County filing context, ALS appeal timing, limited privileges, ignition interlock, updated FAQs, and current official sources.
 - Applied high-signal internal links from older arrest, bond, motion-practice, checkpoint, drug, domestic-violence, first-OVI-date, no-contact, and CPO articles into the validated owner/support pages.
+
+## 2026-05-03 Owner-Page Indexing Prep Result
+
+- Optimized `/drug-crime-lawyer-delaware-oh` for the seven validated drug-crime tracker terms, tightened current Ohio drug-law wording, added the possession-vs-trafficking blog support link, and refreshed sitemap `lastmod`.
+- Optimized `/protection-order-lawyer-delaware-oh` for the six validated protection-order/CPO tracker terms, tightened CPO/firearm/counter-petition legal language against official sources, added stronger CPO/no-contact/DV support links, and refreshed sitemap `lastmod`.
+- Added `/blog/ovi-refusal-vs-failed-test-ohio` and `/blog/domestic-violence-arrest-delaware-county-ohio` to the GSC indexing submission log so the admin-browser queue matches the latest live content.
 
 ## Execution Rules
 

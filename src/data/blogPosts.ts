@@ -443,7 +443,7 @@ For help with a high-tier OVI in Delaware County or central Ohio, contact [Mango
 
 If you are searching for a domestic violence lawyer in Delaware, Ohio, the immediate goal is not to argue the whole case in one conversation. The first goal is to understand the charge, stay compliant with court orders, preserve evidence, and avoid a second case from an accidental violation.
 
-Start with the main [domestic violence defense page](/domestic-violence-lawyer-delaware-oh) if you need case-specific help. If the case also involves broader misdemeanor or felony exposure, review the [criminal defense page](/criminal-defense-delaware-oh). If a protection order is already involved, use the [protection order defense page](/protection-order-lawyer-delaware-oh).
+Start with the main [domestic violence defense page](/domestic-violence-lawyer-delaware-oh) if you need case-specific help. If the case also involves broader misdemeanor or felony exposure, review the [criminal defense page](/criminal-defense-delaware-oh). If a protection order is already involved, use the [protection order lawyer in Delaware, Ohio](/protection-order-lawyer-delaware-oh) page.
 
 ## Quick answer
 
@@ -2836,7 +2836,7 @@ This article is for educational purposes and does not constitute legal advice. O
 - Preserve evidence and build a clean timeline.
 - Prepare for the full hearing (usually within days, not weeks).
 
-If you do only three things: comply, preserve, prepare. For the broader hearing-focused owner page, use [civil protection order defense in Ohio](/civil-protection-order-defense-ohio).
+If you do only three things: comply, preserve, prepare. If you need local defense help, start with the [protection order lawyer in Delaware, Ohio](/protection-order-lawyer-delaware-oh) page; use the statewide [civil protection order defense in Ohio](/civil-protection-order-defense-ohio) guide for hearing-stage background.
 
 ## What is an ex parte protection order?
 
