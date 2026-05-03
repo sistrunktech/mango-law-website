@@ -231,7 +231,7 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     shortTitle: 'CPO Violation',
     definition: 'Makes it a criminal offense to violate the terms of a civil protection order or temporary protection order. First violation is typically a first-degree misdemeanor; subsequent violations can be felonies.',
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
-    practiceAreas: ['protection-orders', 'criminal-defense'],
+    practiceAreas: ['protection-orders', 'criminal-defense', 'domestic-violence'],
     relatedStatutes: ['3113.31', '2903.211'],
     lastVerified: '2026-05-03',
     sources: [
@@ -381,11 +381,11 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     section: '2919.25',
     title: 'Domestic Violence',
     shortTitle: 'Domestic Violence',
-    definition: 'Prohibits knowingly causing or attempting to cause physical harm to a family or household member. Also covers recklessly causing serious physical harm. Can result in criminal charges, mandatory protection orders, and firearm prohibitions.',
+    definition: 'Prohibits knowingly causing or attempting to cause physical harm to a family or household member, recklessly causing serious physical harm, and certain threats by force. Domestic-violence cases can involve bond restrictions, temporary protection-order requests, and qualifying federal firearm consequences.',
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25',
     practiceAreas: ['criminal-defense', 'protection-orders', 'domestic-violence'],
-    relatedStatutes: ['3113.31', '2903.13', '2903.11'],
-    lastVerified: '2025-12-15',
+    relatedStatutes: ['2919.26', '2919.27', '3113.31', '2903.13'],
+    lastVerified: '2026-05-03',
     sources: [
       { label: 'Ohio Revised Code § 2919.25', url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25', type: 'primary' },
     ],

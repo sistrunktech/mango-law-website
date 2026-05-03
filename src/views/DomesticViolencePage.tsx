@@ -19,7 +19,7 @@ export const domesticViolenceFaqs = [
   {
     question: 'What counts as domestic violence in Ohio?',
     answer:
-      'Domestic violence charges often involve allegations of physical harm, attempted harm, threats, or certain menacing conduct involving a family or household member. The exact charge and degree depend on the facts, relationship, and any prior history. We review the allegations, evidence, and relationship element carefully before advising on next steps.',
+      'Domestic violence charges can involve allegations of knowingly causing or attempting to cause physical harm, recklessly causing serious physical harm, or making a threat of force that causes belief of imminent physical harm to a family or household member. The exact charge and degree depend on the facts, relationship, and any prior history. We review the allegations, evidence, and relationship element carefully before advising on next steps.',
   },
   {
     question: 'Will I go to jail for a domestic violence charge?',
@@ -44,7 +44,7 @@ export const domesticViolenceFaqs = [
   {
     question: 'Will a domestic violence case affect gun rights?',
     answer:
-      'It can. Certain convictions and protection orders can trigger firearm restrictions under state and federal law. We assess these risks early and factor them into strategy, negotiations, and any potential resolution.',
+      'It can. A qualifying misdemeanor domestic violence conviction can trigger federal firearm restrictions under 18 U.S.C. 922(g)(9), and a qualifying protection order can create separate restrictions under 18 U.S.C. 922(g)(8). We review the charge, order language, notice and hearing history, and any court weapons terms before negotiations or plea decisions.',
   },
   {
     question: 'What should I do right after an arrest for domestic violence?',
@@ -57,7 +57,7 @@ export default function DomesticViolencePage() {
   return (
     <>
       <SEO
-        title="Domestic Violence Lawyer Delaware, OH | Mango Law LLC"
+        title="Domestic Violence Lawyer Delaware, OH | DV Defense | Mango Law"
         description={domesticViolencePageMetaDescription}
         image="/images/generated/blog-assault-domestic-violence.png"
         faqs={domesticViolenceFaqs}
@@ -70,8 +70,8 @@ export default function DomesticViolencePage() {
 
       <PageHero
         eyebrow="Domestic Violence"
-        title="Domestic violence defense with early control over bond, no-contact, and protection-order risk"
-        description="If you are looking for a domestic violence lawyer in Delaware, Ohio, start here. We focus on evidence review, bond compliance, and related protection-order issues in Delaware and Franklin County cases."
+        title="Domestic violence lawyer in Delaware, Ohio for bond, no-contact, and protection-order risk"
+        description="If you are looking for a domestic violence lawyer in Delaware, Ohio, start here. We focus on evidence review, bond compliance, and related protection-order issues in Delaware County and Franklin County cases."
         ctaLabel="Schedule a consult"
         ctaHref="/contact"
         showQuickActions={false}
@@ -89,12 +89,12 @@ export default function DomesticViolencePage() {
                 <div className="space-y-6">
                   <div>
                     <h2 className="font-display text-display-sm font-bold text-brand-black mb-4">
-                      Domestic violence defense for Delaware and Franklin County cases
+                      Domestic violence lawyer strategy for Delaware County cases
                     </h2>
                     <p className="text-lg text-brand-black/70 leading-relaxed">
                       Domestic violence cases often involve high emotion and fast timelines. The court may impose immediate
                       conditions that impact your home, work, and family. Our approach is to get you compliant, protect your
-                      record, and challenge the evidence methodically as a Delaware domestic violence lawyer focused on
+                      record, and challenge the evidence methodically as a domestic violence lawyer in Delaware, Ohio focused on
                       criminal-defense and protection-order overlap.
                     </p>
                   </div>
@@ -203,6 +203,55 @@ export default function DomesticViolencePage() {
                   <h3 className="text-xl font-bold text-brand-black mb-2">{item.title}</h3>
                   <p className="text-brand-black/70">{item.description}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="container">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="font-display text-display-sm md:text-display-md mb-4">
+              What a Delaware domestic violence defense review should cover
+            </h2>
+            <p className="text-lg text-brand-black/65 leading-relaxed">
+              A useful first review separates the criminal charge, the relationship element, bond restrictions, and any
+              civil protection-order process. That keeps urgent compliance decisions from being confused with trial
+              strategy.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: 'Charge and relationship element',
+                body: 'Ohio domestic violence charges turn on both the alleged conduct and whether the family-or-household relationship fits the statute.',
+                href: '/blog/domestic-violence-arrest-delaware-county-ohio',
+                label: 'Arrest process guide',
+              },
+              {
+                title: 'Bond and no-contact compliance',
+                body: 'Release terms can affect housing, parenting, calls, texts, social media, and third-party messages before discovery is complete.',
+                href: '/blog/no-contact-order-vs-civil-protection-order-ohio',
+                label: 'No-contact guide',
+              },
+              {
+                title: 'CPO and firearms consequences',
+                body: 'Criminal temporary protection orders, civil protection orders, and qualifying federal firearm restrictions need separate review.',
+                href: '/protection-order-lawyer-delaware-oh',
+                label: 'Protection-order defense',
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6">
+                <h3 className="text-xl font-bold text-brand-black">{item.title}</h3>
+                <p className="mt-3 text-brand-black/70 leading-relaxed">{item.body}</p>
+                <Link
+                  href={item.href}
+                  className="mt-5 inline-flex text-sm font-semibold text-brand-mango hover:text-brand-leaf"
+                >
+                  {item.label}
+                </Link>
               </div>
             ))}
           </div>

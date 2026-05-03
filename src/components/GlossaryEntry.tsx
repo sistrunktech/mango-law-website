@@ -17,7 +17,7 @@ export default function GlossaryEntry({
     'ovi-dui': { title: 'OVI / DUI Defense', href: '/ovi-dui-defense-delaware-oh' },
     'criminal-defense': { title: 'Criminal Defense', href: '/criminal-defense-delaware-oh' },
     'protection-orders': { title: 'Protection Orders', href: '/protection-order-lawyer-delaware-oh' },
-    'domestic-violence': { title: 'Domestic Violence', href: '/criminal-defense-delaware-oh' },
+    'domestic-violence': { title: 'Domestic Violence', href: '/domestic-violence-lawyer-delaware-oh' },
     'sex-crimes': { title: 'Sex Crime Defense', href: '/sex-crime-defense-lawyer-delaware-oh' },
     'weapons': { title: 'Weapons Charges', href: '/criminal-defense-delaware-oh' },
     'drug-crimes': { title: 'Drug Crimes', href: '/drug-crime-lawyer-delaware-oh' },

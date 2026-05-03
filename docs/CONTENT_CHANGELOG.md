@@ -98,6 +98,19 @@ Regression checklist:
 Approval token: User asked to proceed with the next long-run onsite SEO/AEO tasks after fixing the high-tier OVI image and completing keyword/tracking alignment.
 Rollback notes: Remove the `delaware-county-criminal-case-timeline` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-delaware-county-criminal-case-timeline.png`, remove the criminal-defense owner-page links to that post, and revert the sitemap/schema/checkpoint hydration/category-filter changes if they cause regressions.
 
+Date/time: 2026-05-03 16:23 EDT
+Post slug and title: domestic-violence-lawyer-delaware-oh | Domestic Violence Lawyer Delaware, OH
+Change type: minor
+Summary of change: Optimized the domestic-violence owner page for the validated local commercial DV terms, added exact "domestic violence lawyer in Delaware, Ohio" phrasing to visible copy, added an AEO-style defense-review section, routed glossary DV links to the owner page, and tightened ORC 2919.25/firearm language against official Ohio and federal sources.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked to continue the keyword/tracking/content queue and QA live content against the validated keyword research.
+Rollback notes: Restore the prior title/hero/FAQ/intro copy in `src/views/DomesticViolencePage.tsx`, route `domestic-violence` glossary links back to `/criminal-defense-delaware-oh`, and restore the previous ORC 2919.25 definition if needed.
+
 Date/time: 2026-05-03 12:36 EDT
 Post slug and title: DUI checkpoint data | Solon Cinco de Mayo pending announcement
 Change type: minor
