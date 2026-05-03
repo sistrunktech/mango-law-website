@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 16:38 EDT
+Post slug and title: drug-ovi-ohio | Drug OVI in Ohio: Marijuana, Prescription Drugs, and Blood or Urine Testing
+Change type: major
+Summary of change: Added the next keyword-aligned OVI/drug-defense support post for the validated drug-OVI lane; grounded the article in current ORC 4511.19, ORC 4511.191, ORC 4511.192, ORC 4511.197, ORC 3701.143, OAC Chapter 3701-53, Ohio BMV ALS guidance, ORC 3796.221, and the H.B. 37 final analysis; linked OVI, drug-crime, suppression, refusal, ALS, first-offense, Liv's Law, drug-possession, and contact paths; added a unique watercolor legal-tabletop featured image; updated OVI owner/drug-crime support links and image-generation standards; and marked the task queue/indexing log for live inspection.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked to continue keyword/tracking/content queue work with checkpoint cleanup no longer blocking publication.
+Rollback notes: Remove the `drug-ovi-ohio` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-drug-ovi-ohio.png`, remove the related OVI owner and drug-crime support links, restore the Liv's Law internal-link sentence, and restore the queue/indexing rows to pending.
+
 Date/time: 2026-05-03 15:47 EDT
 Post slug and title: ovi-refusal-vs-failed-test-ohio | OVI Refusal vs. Failed Test in Ohio: What Changes After an Arrest
 Change type: major

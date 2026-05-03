@@ -185,7 +185,7 @@ export default function OviDuiPage() {
                     </h3>
                   </div>
                   <p className="max-w-xl text-sm leading-relaxed text-brand-black/65">
-                    Use the broad OVI page for the overall defense picture, then jump into the narrower guide if the case is really about suspension timing, refusal, checkpoints, or motion practice.
+                    Use the broad OVI page for the overall defense picture, then jump into the narrower guide if the case is really about suspension timing, refusal, drug testing, checkpoints, or motion practice.
                   </p>
                 </div>
 
@@ -215,6 +215,11 @@ export default function OviDuiPage() {
                       title: 'High-tier OVI in Ohio',
                       description: 'What a .17+ alcohol-test allegation can change in jail, license, and evidence review.',
                       href: '/blog/high-tier-ovi-ohio-17-test',
+                    },
+                    {
+                      title: 'Drug OVI in Ohio',
+                      description: 'Marijuana, prescription-drug, blood, urine, and oral-fluid testing issues.',
+                      href: '/blog/drug-ovi-ohio',
                     },
                     {
                       title: 'Ohio DUI checkpoint map',
@@ -462,6 +467,11 @@ export default function OviDuiPage() {
             title: 'High-tier OVI in Ohio',
             description: 'How a .17+ test allegation changes defense priorities and license planning.',
             href: '/blog/high-tier-ovi-ohio-17-test',
+          },
+          {
+            title: 'Drug OVI in Ohio',
+            description: 'How marijuana, prescription-drug, blood, urine, and oral-fluid evidence can affect OVI defense.',
+            href: '/blog/drug-ovi-ohio',
           },
           {
             title: 'OVI test refusal defense',

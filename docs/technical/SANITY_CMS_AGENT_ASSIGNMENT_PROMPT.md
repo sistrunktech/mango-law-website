@@ -62,7 +62,7 @@ Define schemas with strict validation:
   - title (required)
   - excerpt/meta description (required length constraints)
   - body/content (portable text)
-  - featured image (required policy-compliant)
+  - featured image (required policy-compliant; follow `docs/technical/BLOG_REQUIREMENTS.md` for the current watercolor legal still-life standard)
   - status/lifecycle (`draft|published|finalized`)
   - `lastVerified` date
   - `sources` array (primary sources preferred)

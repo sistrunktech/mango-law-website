@@ -6,6 +6,10 @@ import { join } from 'path';
 
 dotenv.config();
 
+// Legacy bulk asset generator. Do not use this for blog featured images.
+// Blog posts must use scripts/generate-blog-featured-images.ts and the
+// watercolor legal still-life standard in docs/technical/BLOG_REQUIREMENTS.md.
+
 // Create Supabase client for Node environment
 const supabaseUrl =
   process.env.SUPABASE_URL ||

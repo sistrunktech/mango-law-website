@@ -163,6 +163,11 @@ export const drugCrimeSupportLinks: SeoSupportLink[] = [
     description: 'Immediate first-step checklist after a possession arrest in Ohio.',
   },
   {
+    title: 'Drug OVI in Ohio',
+    href: '/blog/drug-ovi-ohio',
+    description: 'How marijuana, prescription-drug, blood, urine, and oral-fluid evidence can overlap with OVI defense.',
+  },
+  {
     title: 'Criminal defense overview',
     href: '/criminal-defense-delaware-oh',
     description: 'Broader strategy for felony and misdemeanor criminal cases.',
