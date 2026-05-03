@@ -63,6 +63,14 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Added a matching watercolor blog image at `/images/generated/blog-delaware-county-criminal-case-timeline.png`.
 - Local QA confirmed Solon/Aurora appears on the checkpoint page after hydration, sitemap May 3 lastmods render, Article schema image URLs are absolute, and the new post/owner-page/category paths render.
 
+## 2026-05-03 Round Three Onsite/AEO Result
+
+- Added the next criminal-defense support article: `/blog/ohio-misdemeanor-vs-felony-charges-delaware-county`.
+- Linked the new misdemeanor/felony article from `/criminal-defense-delaware-oh`.
+- Added a matching neutral watercolor blog image at `/images/generated/blog-ohio-misdemeanor-vs-felony-charges-delaware-county.png`.
+- Refreshed `/blog/ohio-ovi-driving-privileges-als` with Delaware County filing context, ALS appeal timing, limited privileges, ignition interlock, updated FAQs, and current official sources.
+- Applied high-signal internal links from older arrest, bond, motion-practice, checkpoint, drug, domestic-violence, first-OVI-date, no-contact, and CPO articles into the validated owner/support pages.
+
 ## Execution Rules
 
 - Do not submit billing, payment, paid campaign, subscription, or spend actions in Google Ads.

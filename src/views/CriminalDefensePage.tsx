@@ -167,11 +167,14 @@ export default function CriminalDefensePage() {
                   <Link href="/resources/dui-checkpoints" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
                     Checkpoint resource
                   </Link>
-                  <Link href="/blog/delaware-county-criminal-case-timeline" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
-                    Criminal case timeline
-                  </Link>
+                    <Link href="/blog/delaware-county-criminal-case-timeline" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Criminal case timeline
+                    </Link>
+                    <Link href="/blog/ohio-misdemeanor-vs-felony-charges-delaware-county" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                      Misdemeanor vs. felony charges
+                    </Link>
+                  </div>
                 </div>
-              </div>
 
               <LegalCodeCallout section="2903.13" />
               <LegalCodeCallout section="2919.25" />
@@ -298,6 +301,11 @@ export default function CriminalDefensePage() {
             title: 'Delaware County criminal case timeline',
             description: 'Arraignment, bond, pretrial, discovery, motion, negotiation, and trial stages.',
             href: '/blog/delaware-county-criminal-case-timeline',
+          },
+          {
+            title: 'Misdemeanor vs. felony charges',
+            description: 'How Ohio charge classification changes court path, penalties, and defense priorities.',
+            href: '/blog/ohio-misdemeanor-vs-felony-charges-delaware-county',
           },
           {
             title: 'OVI / DUI defense',
