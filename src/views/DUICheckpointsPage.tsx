@@ -19,6 +19,7 @@ import {
 import { isApproximateCheckpointLocation, type DUICheckpoint } from '../data/checkpoints';
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
+import { buildPendingAnnouncementMapCheckpoints } from '../lib/checkpointAnnouncementMapMarkers';
 import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { SEO } from '../lib/seo';
@@ -277,23 +278,6 @@ export default function DUICheckpointsPage({
     return checkpoints.filter((checkpoint) => checkpoint.location_county === selectedCounty);
   }, [checkpoints, selectedCounty]);
 
-  const countyCounts = useMemo(() => {
-    return checkpoints.reduce<Record<string, number>>((counts, checkpoint) => {
-      if (!checkpoint.location_county) {
-        return counts;
-      }
-
-      counts[checkpoint.location_county] = (counts[checkpoint.location_county] ?? 0) + 1;
-      return counts;
-    }, {});
-  }, [checkpoints]);
-
-  useEffect(() => {
-    if (selectedCounty !== 'all' && !countyCounts[selectedCounty]) {
-      setSelectedCounty('all');
-    }
-  }, [countyCounts, selectedCounty]);
-
   // Calculate pagination
   const totalPages = Math.ceil(filteredCheckpoints.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -305,11 +289,6 @@ export default function DUICheckpointsPage({
     setViewMode('all');
   };
 
-  const countiesWithCheckpoints = useMemo(
-    () => Object.keys(countyCounts).sort(),
-    [countyCounts],
-  );
-
   const openLeadModal = (trigger: typeof leadModalTrigger, checkpointId?: string) => {
     setLeadModalTrigger(trigger);
     setLeadModalCheckpointId(checkpointId);
@@ -317,12 +296,77 @@ export default function DUICheckpointsPage({
   };
 
   const publicAnnouncements = useMemo(
-    () => announcements.filter((a) => a.status !== 'pending_details' || isAnnouncementFreshForPublic(a)),
-    [announcements],
+    () => announcements.filter((a) => a.status !== 'pending_details' || isAnnouncementFreshForPublic(a, now)),
+    [announcements, now],
   );
 
-  const pendingAnnouncements = publicAnnouncements.filter(
-    (a) => a.status === 'pending_details' && isAnnouncementFreshForPublic(a)
+  const pendingAnnouncements = useMemo(
+    () => publicAnnouncements.filter(
+      (a) => a.status === 'pending_details' && isAnnouncementFreshForPublic(a, now)
+    ),
+    [publicAnnouncements, now],
+  );
+
+  const pendingAnnouncementMapCheckpoints = useMemo(
+    () => buildPendingAnnouncementMapCheckpoints(publicAnnouncements, now),
+    [publicAnnouncements, now],
+  );
+
+  const mapCheckpoints = useMemo(() => {
+    if (viewMode !== 'upcoming') {
+      return checkpoints;
+    }
+
+    const existingSourceUrls = new Set(
+      checkpoints
+        .map((checkpoint) => checkpoint.source_url)
+        .filter((sourceUrl): sourceUrl is string => Boolean(sourceUrl)),
+    );
+
+    return [
+      ...checkpoints,
+      ...pendingAnnouncementMapCheckpoints.filter(
+        (checkpoint) => !existingSourceUrls.has(checkpoint.source_url ?? ''),
+      ),
+    ];
+  }, [checkpoints, pendingAnnouncementMapCheckpoints, viewMode]);
+
+  const filteredMapCheckpoints = useMemo(() => {
+    if (selectedCounty === 'all') {
+      return mapCheckpoints;
+    }
+
+    return mapCheckpoints.filter((checkpoint) => checkpoint.location_county === selectedCounty);
+  }, [mapCheckpoints, selectedCounty]);
+
+  const filteredPendingAnnouncements = useMemo(() => {
+    if (selectedCounty === 'all') {
+      return pendingAnnouncements;
+    }
+
+    return pendingAnnouncements.filter((announcement) => announcement.location_county === selectedCounty);
+  }, [pendingAnnouncements, selectedCounty]);
+
+  const countyCounts = useMemo(() => {
+    return mapCheckpoints.reduce<Record<string, number>>((counts, checkpoint) => {
+      if (!checkpoint.location_county) {
+        return counts;
+      }
+
+      counts[checkpoint.location_county] = (counts[checkpoint.location_county] ?? 0) + 1;
+      return counts;
+    }, {});
+  }, [mapCheckpoints]);
+
+  useEffect(() => {
+    if (selectedCounty !== 'all' && !countyCounts[selectedCounty]) {
+      setSelectedCounty('all');
+    }
+  }, [countyCounts, selectedCounty]);
+
+  const countiesWithCheckpoints = useMemo(
+    () => Object.keys(countyCounts).sort(),
+    [countyCounts],
   );
 
   const latestAnnouncement = useMemo(() => {
@@ -342,8 +386,8 @@ export default function DUICheckpointsPage({
   }, [checkpoints]);
 
   const approximateMarkerCount = useMemo(
-    () => filteredCheckpoints.filter((checkpoint) => isApproximateCheckpointLocation(checkpoint)).length,
-    [filteredCheckpoints]
+    () => filteredMapCheckpoints.filter((checkpoint) => isApproximateCheckpointLocation(checkpoint)).length,
+    [filteredMapCheckpoints]
   );
 
   const recentPublicReferences = useMemo<PublicSourceSnapshot[]>(() => {
@@ -434,11 +478,11 @@ export default function DUICheckpointsPage({
   }, [publicAnnouncements, checkpoints]);
 
   const currentStatusSummary = useMemo(() => {
-    if (pendingAnnouncements.length > 0 || checkpoints.length > 0) {
-      if (pendingAnnouncements.length > 0) {
+    if (filteredPendingAnnouncements.length > 0 || filteredMapCheckpoints.length > 0) {
+      if (filteredPendingAnnouncements.length > 0) {
         return {
           heading: 'Current public signal',
-          body: `${pendingAnnouncements.length} pending announcement${pendingAnnouncements.length !== 1 ? 's are' : ' is'} published right now, even if some locations are still being finalized.`,
+          body: `${filteredPendingAnnouncements.length} pending announcement${filteredPendingAnnouncements.length !== 1 ? 's are' : ' is'} published right now, with approximate map pins until exact checkpoint details are released.`,
         };
       }
 
@@ -451,7 +495,7 @@ export default function DUICheckpointsPage({
 
       return {
         heading: 'Current public signal',
-        body: `${checkpoints.length} announced checkpoint${checkpoints.length !== 1 ? 's are' : ' is'} currently visible in the selected view.`,
+        body: `${filteredMapCheckpoints.length} announced checkpoint${filteredMapCheckpoints.length !== 1 ? 's are' : ' is'} currently visible in the selected view.`,
       };
     }
 
@@ -459,7 +503,7 @@ export default function DUICheckpointsPage({
       heading: 'Current public signal',
       body: 'There are no currently announced checkpoints in the live feed right now. Check recent history below, and monitor this page more closely around major holiday and travel weekends when public notices are more common.',
     };
-  }, [checkpoints.length, dateRange, pendingAnnouncements.length, usedHistoryFallback, viewMode]);
+  }, [dateRange, filteredMapCheckpoints.length, filteredPendingAnnouncements.length, usedHistoryFallback, viewMode]);
 
   return (
     <>
@@ -673,7 +717,7 @@ export default function DUICheckpointsPage({
                       onChange={(e) => setSelectedCounty(e.target.value)}
                       className="border-none bg-transparent text-sm font-medium text-brand-black focus:outline-none focus:ring-0"
                     >
-                      <option value="all">All Counties ({checkpoints.length})</option>
+                      <option value="all">All Counties ({mapCheckpoints.length})</option>
                       {countiesWithCheckpoints.map((county) => {
                         const count = countyCounts[county] ?? 0;
                         return (
@@ -686,9 +730,9 @@ export default function DUICheckpointsPage({
                   </div>
                 </div>
                 <div className="text-sm text-brand-black/60">
-                  Showing {filteredCheckpoints.length} checkpoint{filteredCheckpoints.length !== 1 ? 's' : ''}
-                  {pendingAnnouncements.length > 0
-                    ? ` • ${pendingAnnouncements.length} pending announcement${pendingAnnouncements.length !== 1 ? 's' : ''}`
+                  Showing {filteredMapCheckpoints.length} map item{filteredMapCheckpoints.length !== 1 ? 's' : ''}
+                  {filteredPendingAnnouncements.length > 0
+                    ? ` • ${filteredPendingAnnouncements.length} pending announcement${filteredPendingAnnouncements.length !== 1 ? 's' : ''}`
                     : ''}
                 </div>
               </div>
@@ -698,7 +742,7 @@ export default function DUICheckpointsPage({
                 minHeight={420}
               >
                 <CheckpointMap
-                  checkpoints={filteredCheckpoints}
+                  checkpoints={filteredMapCheckpoints}
                   selectedCheckpoint={selectedCheckpoint}
                   onCheckpointSelect={setSelectedCheckpoint}
                   now={now}
@@ -849,13 +893,13 @@ export default function DUICheckpointsPage({
 
           <CheckpointHotspots onCityClick={handleHotspotClick} initialHotspots={initialHotspots} />
 
-          {pendingAnnouncements.length > 0 && (
+          {filteredPendingAnnouncements.length > 0 && (
             <div className="mb-8 rounded-2xl border border-brand-black/10 bg-brand-offWhite p-5">
               <div className="mb-3 text-sm font-semibold text-brand-black">
                 Pending checkpoint announcements (details to be announced)
               </div>
               <div className="space-y-3">
-                {pendingAnnouncements.slice(0, 8).map((a) => (
+                {filteredPendingAnnouncements.slice(0, 8).map((a) => (
                   <div key={a.id} className="rounded-xl border border-brand-black/10 bg-white px-4 py-3">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="font-semibold text-brand-black">{a.title}</div>
@@ -881,9 +925,9 @@ export default function DUICheckpointsPage({
                   </div>
                 ))}
               </div>
-              {pendingAnnouncements.length > 8 && (
+              {filteredPendingAnnouncements.length > 8 && (
                 <div className="mt-3 text-xs text-brand-black/60">
-                  Showing 8 of {pendingAnnouncements.length}. More will appear as details are confirmed.
+                  Showing 8 of {filteredPendingAnnouncements.length}. More will appear as details are confirmed.
                 </div>
               )}
             </div>
@@ -1082,10 +1126,14 @@ export default function DUICheckpointsPage({
                         </div>
                       </div>
                       <h3 className="mb-2 text-lg font-bold text-brand-black">
-                        No announced checkpoints at this time
+                        {filteredPendingAnnouncements.length > 0
+                          ? 'Checkpoint details pending'
+                          : 'No announced checkpoints at this time'}
                       </h3>
                       <p className="text-sm text-brand-black/80 max-w-md mx-auto">
-                        {selectedCounty === 'all'
+                        {filteredPendingAnnouncements.length > 0
+                          ? 'Public notices are active, but exact checkpoint times and street-level locations have not been released yet. Review the pending announcements below.'
+                          : selectedCounty === 'all'
                           ? 'We have not detected any officially announced OVI checkpoints scheduled for this period. Please check back later or follow local law enforcement for real-time updates.'
                           : `There are currently no scheduled checkpoints detected in ${selectedCounty} County.`}
                       </p>
