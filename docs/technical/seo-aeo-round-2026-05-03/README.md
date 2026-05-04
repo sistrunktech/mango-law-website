@@ -26,6 +26,7 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 | `admin-execution-status-2026-05-03.md` | Production QA plus authenticated BrightLocal and GSC execution status after the CPO/drug-possession release. |
 | `gbp-post-schedule-2026-05.md` | BrightLocal/Google Business Profile posting calendar for the May 2026 content cluster, including UTM URLs, copy, CTA settings, landing-page QA, and execution boundary. |
 | `monthly-report-agent-handoff-2026-05-04.md` | Read-only handoff for a separate agent to run BrightLocal, Ahrefs, GA4, and GSC monthly trend reporting and draft the next Sistrunk-hosted private client report. |
+| `monthly-report-live-trend-memo-2026-05-04.md` | Live read-only trend memo after GBP scheduling, BrightLocal export review, GSC/GA4 checks, and Ahrefs Site Explorer/Site Audit review. |
 
 ## 2026-05-03 Google Ads Execution Result
 
@@ -131,6 +132,15 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Added a separate-agent handoff for Mango Law monthly reporting across BrightLocal, Ahrefs, GA4, and GSC.
 - Pointed the next agent to the Sistrunk Tech private report source, existing `mango-law-2026-02` and `mango-law-2026-03` records, live client-report surfaces, and the expected `mango-law-2026-04` report shape.
 - Included report boundaries: read-only first, no email sends/access changes/GSC indexing requests/public posts/admin writes without action-time approval, and do not interrupt the active BrightLocal GBP scheduling modal.
+
+## 2026-05-04 Live Reporting Pull Result
+
+- BrightLocal GBP Scheduler now shows `All posts (18)`, `Live (10)`, `Scheduled (8)`, `Expired (0)`, and `Rejected (0)`.
+- Verified the last scheduled GBP post is set for May 28, 2026 at 10:00 AM ET, completing the two-posts-per-week May GBP calendar.
+- BrightLocal rank export shows the strongest current traction in Google Places and Bing, with Google Places top-10 visibility for core Delaware OVI, DUI, criminal-defense, and drug-charge terms.
+- GSC last-28-days performance is up to `78` clicks and `3.11K` impressions; `/resources/dui-checkpoints` is the clearest new search winner with `23` clicks and `1,008` impressions.
+- GA4 last-30-days traffic remains low and down, with `19` active users, `152` events, and `0` key events; real lead-path conversion reporting remains pending.
+- Ahrefs shows the checkpoint page as the only current organic-traffic page, ranking for `ohio dui checkpoints tonight` and `sobriety checkpoint finder ohio`; Site Audit health is `99%` with `3` errors, `49` warnings, and `79` notices.
 
 ## Execution Rules
 
