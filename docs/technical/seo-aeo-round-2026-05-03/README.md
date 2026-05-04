@@ -25,6 +25,7 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 | `ga4-real-path-duplicate-risk-qa-2026-05-03.md` | Source-level duplicate-risk QA for real form/phone/email/chat lead paths after GTM Version 5 publish. |
 | `admin-execution-status-2026-05-03.md` | Production QA plus authenticated BrightLocal and GSC execution status after the CPO/drug-possession release. |
 | `gbp-post-schedule-2026-05.md` | BrightLocal/Google Business Profile posting calendar for the May 2026 content cluster, including UTM URLs, copy, CTA settings, landing-page QA, and execution boundary. |
+| `monthly-report-agent-handoff-2026-05-04.md` | Read-only handoff for a separate agent to run BrightLocal, Ahrefs, GA4, and GSC monthly trend reporting and draft the next Sistrunk-hosted private client report. |
 
 ## 2026-05-03 Google Ads Execution Result
 
@@ -124,6 +125,12 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Added `google_business_profile / organic / gbp_posts_may_2026` UTM URLs with unique `utm_content` values for each post.
 - Verified all eight target URLs returned HTTP `200` with UTM parameters attached on 2026-05-04.
 - Boundary: final BrightLocal scheduling/posting clicks still require action-time approval because they create public/scheduled Google Business Profile communications.
+
+## 2026-05-04 Monthly Report Agent Handoff Result
+
+- Added a separate-agent handoff for Mango Law monthly reporting across BrightLocal, Ahrefs, GA4, and GSC.
+- Pointed the next agent to the Sistrunk Tech private report source, existing `mango-law-2026-02` and `mango-law-2026-03` records, live client-report surfaces, and the expected `mango-law-2026-04` report shape.
+- Included report boundaries: read-only first, no email sends/access changes/GSC indexing requests/public posts/admin writes without action-time approval, and do not interrupt the active BrightLocal GBP scheduling modal.
 
 ## Execution Rules
 
