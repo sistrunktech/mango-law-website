@@ -742,6 +742,11 @@ const civilProtectionOrderDefenseConfig: HighIntentConfig = {
   relatedDescription: 'Use these resources for CPO distinctions, ex parte process, and connected defense issues.',
   relatedGuides: [
     {
+      title: 'Delaware County CPO hearing guide',
+      href: '/blog/civil-protection-order-hearing-delaware-county-ohio',
+      description: 'Evidence, hearing deadlines, and respondent preparation steps for local CPO cases.',
+    },
+    {
       title: 'Protection order lawyer in Delaware, Ohio',
       href: '/protection-order-lawyer-delaware-oh',
       description: 'Local protection-order defense overview for Delaware CPO hearings.',

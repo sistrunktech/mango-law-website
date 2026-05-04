@@ -86,6 +86,17 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Added a matching watercolor legal-tabletop image at `/images/generated/blog-drug-ovi-ohio.png` and updated image-generation guidance so future blog assets avoid DC/courthouse/location drift.
 - Added `/blog/drug-ovi-ohio` to the GSC indexing submission log for post-deployment live inspection.
 
+## 2026-05-03 CPO and Vehicle Drug-Possession Support Article Result
+
+- Added `/blog/civil-protection-order-hearing-delaware-county-ohio` for the validated `civil protection order lawyer delaware ohio`, `cpo hearing delaware county ohio`, and related protection-order query lane.
+- Grounded the CPO article in current ORC 3113.31, ORC 2919.27, ORC 2919.26, ORC 2903.214, Civil Rule 65.1, Supreme Court of Ohio CPO resources, Felton, and Delaware County Domestic Relations sources.
+- Linked the CPO post from `/protection-order-lawyer-delaware-oh`, `/civil-protection-order-defense-ohio`, and domestic-violence support surfaces; the article links back to protection-order, CPO, ex parte, no-contact, domestic-violence, criminal-defense, and contact paths.
+- Added `/blog/drug-possession-in-car-ohio` for the validated `drug possession in car ohio`, traffic-stop possession, constructive-possession, and passenger-possession query lane.
+- Grounded the drug-possession article in current ORC 2925.11, ORC 2925.01, ORC 2901.22, ORC 2925.03, ORC 2925.14, ORC 3796.062, ORC 3796.221, ORC 4511.19, ORC 2951.041, Ohio Criminal Rule 12, and current Ohio Supreme Court stop/search sources.
+- Linked the vehicle drug-possession post from `/drug-crime-lawyer-delaware-oh`; the article links back to drug-crime, possession/trafficking, motion-practice, criminal-defense, drug-OVI, OVI, and contact paths.
+- Added matching watercolor legal-tabletop images at `/images/generated/blog-civil-protection-order-hearing-delaware-county-ohio.png` and `/images/generated/blog-drug-possession-in-car-ohio.png`.
+- Added both new posts to the GSC indexing submission log for post-deployment live inspection.
+
 ## Execution Rules
 
 - Do not submit billing, payment, paid campaign, subscription, or spend actions in Google Ads.

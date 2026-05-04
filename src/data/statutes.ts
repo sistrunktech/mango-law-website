@@ -738,6 +738,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 2315.19', url: 'https://codes.ohio.gov/ohio-revised-code/section-2315.19', type: 'primary' },
     ],
   },
+  '2901.22': {
+    id: 'culpable-mental-states',
+    section: '2901.22',
+    title: 'Culpable Mental States',
+    shortTitle: 'Mental States',
+    definition: 'Defines Ohio culpable mental states, including purposely, knowingly, recklessly, and negligently. Drug possession charges often require careful review of what the state claims the person knew.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2901.22',
+    practiceAreas: ['criminal-defense', 'drug-crimes'],
+    relatedStatutes: ['2925.11', '2925.01'],
+    lastVerified: '2026-05-03',
+    sources: [
+      { label: 'Ohio Revised Code § 2901.22', url: 'https://codes.ohio.gov/ohio-revised-code/section-2901.22', type: 'primary' },
+    ],
+  },
   '2925.01': {
     id: 'drug-offense-definitions',
     section: '2925.01',
@@ -792,6 +806,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     lastVerified: '2026-05-03',
     sources: [
       { label: 'Ohio Revised Code § 3796.221', url: 'https://codes.ohio.gov/ohio-revised-code/section-3796.221', type: 'primary' },
+    ],
+  },
+  '3796.062': {
+    id: 'transporting-marihuana',
+    section: '3796.062',
+    title: 'Transporting Marihuana',
+    shortTitle: 'Marijuana Transport',
+    definition: 'Sets Ohio rules for transporting adult-use marihuana in a motor vehicle. Vehicle drug cases should separate transport-rule questions from possession, search, and impaired-driving allegations.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-3796.062',
+    practiceAreas: ['drug-crimes', 'ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['3796.221', '2925.11', '4511.19'],
+    lastVerified: '2026-05-03',
+    sources: [
+      { label: 'Ohio Revised Code § 3796.062', url: 'https://codes.ohio.gov/ohio-revised-code/section-3796.062', type: 'primary' },
     ],
   },
   '2925.14': {
@@ -1032,11 +1060,11 @@ export const ohioStatutes: Record<string, OhioStatute> = {
 export const practiceAreaStatutes = {
   'ovi-dui': ['4511.19', '4511.191', '4511.197', '4511.194', '3701.143', '3796.221', '4510.14', '4510.13', '4510.021', '4510.022', '4511.203'],
   'protection-orders': ['3113.31', '2919.27', '2903.214', '2903.211'],
-  'criminal-defense': ['2901.02', '1901.20', '2903.13', '2919.25', '2903.11', '2913.02', '2921.13'],
+  'criminal-defense': ['2901.02', '2901.22', '1901.20', '2903.13', '2919.25', '2903.11', '2913.02', '2921.13'],
   'domestic-violence': ['2919.25', '2903.13', '2903.11', '3113.31', '2903.21'],
   'sex-crimes': ['2907.02', '2907.03', '2907.04', '2907.07', '2903.214'],
   'weapons': ['2923.12', '2923.13', '2923.16'],
-  'drug-crimes': ['2925.11', '2925.03', '2925.14', '3796.221'],
+  'drug-crimes': ['2925.11', '2925.03', '2925.14', '2925.01', '2901.22', '3796.062', '3796.221'],
   'white-collar': ['2913.42', '2913.02', '2921.13'],
   'personal-injury': ['2315.33', '2305.10', '2315.18'],
 };

@@ -91,7 +91,7 @@ Planner data warrants a minor reorder, not a rewrite:
 2. Move first-offense OVI live-page optimization ahead of the planned refusal-vs-failed-test article.
 3. Move the Delaware County criminal case timeline article earlier than drug OVI if production capacity is tight, because county criminal-defense terms returned the strongest commercial Planner signal.
 4. Keep domestic-violence arrest article in the next two weeks because DV has measured commercial volume and the owner page needs support/indexing.
-5. Keep CPO, drug possession, misdemeanor/felony, and criminal timeline pieces in the 5-week plan, but prioritize the two criminal-defense support pieces above lower-evidence ALS/refusal expansion.
+5. CPO hearing and vehicle drug-possession support are now complete; next onsite priority should shift to GSC/BrightLocal reconciliation and live QA before adding more net-new content.
 
 Suggested next order:
 
@@ -105,9 +105,9 @@ Suggested next order:
 | 6 | Publish "Misdemeanor vs. Felony Charges in Delaware County..." | Supports strong criminal-defense cluster. |
 | 7 | Publish "OVI Refusal vs. Failed Test in Ohio..." | Keep, but after measured first-offense/criminal/checkpoint work. |
 | 8 | Publish "Drug OVI in Ohio..." | Completed 2026-05-03 as a bridge between OVI, drug-defense, suppression, refusal, ALS, and oral-fluid testing topics. |
-| 9 | Publish "Civil Protection Order Hearing in Delaware County..." | Keep unless Planner/GSC later shows stronger CPO demand. |
-| 10 | Publish "Drug Possession in a Car in Ohio..." | Keep as later support for drug owner. |
+| 9 | Publish "Civil Protection Order Hearing in Delaware County..." | Completed 2026-05-03 as protection-order/CPO owner support. |
+| 10 | Publish "Drug Possession in a Car in Ohio..." | Completed 2026-05-03 as drug-crime owner and motion-practice support. |
 
 ## Bottom Line
 
-The April ownership map mostly holds after Planner evidence. The main adjustment is priority, not ownership: push criminal-defense county phrasing and first-offense OVI optimization to the front, keep checkpoint freshness as a high-volume resource task, and use high-tier/DV/motion pages as targeted support rather than creating new owner pages.
+The April ownership map mostly holds after Planner evidence. The main adjustment is now operational, not ownership: request indexing for the high-value owner/support pages, reconcile BrightLocal against the validated 50-keyword set, keep checkpoint freshness active through the Cinco de Mayo watch window, and use the newly published OVI/DV/CPO/drug support pages as internal-link reinforcement rather than creating new owner pages.

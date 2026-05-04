@@ -314,6 +314,11 @@ export default function DomesticViolencePage() {
             href: '/protection-order-lawyer-delaware-oh',
           },
           {
+            title: 'Delaware County CPO hearing guide',
+            description: 'Evidence, deadlines, and compliance steps for local civil protection order hearings.',
+            href: '/blog/civil-protection-order-hearing-delaware-county-ohio',
+          },
+          {
             title: 'Civil protection order defense (Ohio)',
             description: 'Hearing-stage preparation for respondents in CPO cases.',
             href: '/civil-protection-order-defense-ohio',
