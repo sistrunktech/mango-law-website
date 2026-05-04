@@ -179,8 +179,13 @@ export default function ProtectionOrderPage() {
               Related guidance for ex parte hearings, no-contact terms, and connected domestic violence allegations.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
+              {
+                title: 'CPO hearing in Delaware County',
+                description: 'Evidence, deadlines, and hearing-day preparation for respondents.',
+                href: '/blog/civil-protection-order-hearing-delaware-county-ohio',
+              },
               {
                 title: 'No-contact order vs CPO',
                 description: 'Compare criminal no-contact terms against civil protection orders.',

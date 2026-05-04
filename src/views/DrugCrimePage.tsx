@@ -264,6 +264,7 @@ export default function DrugCrimePage() {
               or a drug trafficking lawyer in Delaware, Ohio, start here and then compare the
               supporting guides for the evidence issue: <Link href="/drug-possession-vs-trafficking-ohio-defense" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">possession vs. trafficking defense</Link>,{' '}
               <Link href="/blog/drug-possession-vs-trafficking-ohio" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">possession vs. trafficking explained</Link>,{' '}
+              <Link href="/blog/drug-possession-in-car-ohio" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">drug possession in a car</Link>,{' '}
               <Link href="/blog/drug-possession-charge-ohio-what-to-do-next" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">what to do after a possession charge</Link>, and{' '}
               <Link href="/blog/motion-practice-criminal-defense" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">motion practice for search issues</Link>.
             </p>

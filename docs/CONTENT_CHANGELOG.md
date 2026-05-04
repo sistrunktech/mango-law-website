@@ -20,6 +20,32 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-03 20:01 EDT
+Post slug and title: civil-protection-order-hearing-delaware-county-ohio | Civil Protection Order Hearing in Delaware County, Ohio: Evidence, Deadlines, and Defense Steps
+Change type: major
+Summary of change: Added the next keyword-aligned protection-order support post for the validated CPO/protection-order lane; grounded the article in current ORC 3113.31, ORC 2919.27, ORC 2919.26, ORC 2903.214, Civil Rule 65.1, Supreme Court of Ohio CPO resources, Felton v. Felton, and Delaware County Domestic Relations court sources; linked the article to the protection-order owner, CPO defense page, ex parte guide, no-contact guide, DV owner/support content, criminal-defense owner, and contact path; added a unique watercolor legal-tabletop image; and added reciprocal owner/DV support links.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked to work through next highest-value keyword/tracking/content queue work with subagents and no publication block after checkpoint cleanup.
+Rollback notes: Remove the `civil-protection-order-hearing-delaware-county-ohio` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-civil-protection-order-hearing-delaware-county-ohio.png`, remove the related protection-order/DV/CPO support links, remove the GSC queue row, and restore the queue row to pending.
+
+Date/time: 2026-05-03 20:01 EDT
+Post slug and title: drug-possession-in-car-ohio | Drug Possession in a Car in Ohio: Searches, Constructive Possession, and Passenger Issues
+Change type: major
+Summary of change: Added the next keyword-aligned drug-defense support post for the validated drug-crime owner lane; grounded the article in current ORC 2925.11, ORC 2925.01, ORC 2901.22, ORC 2925.03, ORC 2925.14, ORC 3796.062, ORC 3796.221, ORC 4511.19, ORC 2951.041, Ohio Criminal Rule 12, and current Ohio Supreme Court traffic-stop/search decisions; linked the article to the drug-crime owner, possession/trafficking support pages, motion-practice guide, criminal-defense owner, drug-OVI guide, OVI owner, and contact path; added a unique watercolor legal-tabletop traffic-stop evidence image; added drug-crime support links; and added ORC glossary entries for 2901.22 and 3796.062.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked to work through next highest-value keyword/tracking/content queue work with subagents and no publication block after checkpoint cleanup.
+Rollback notes: Remove the `drug-possession-in-car-ohio` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-drug-possession-in-car-ohio.png`, remove the related drug-crime support links and ORC glossary entries if unused, remove the GSC queue row, and restore the queue row to pending.
+
 Date/time: 2026-05-03 16:38 EDT
 Post slug and title: drug-ovi-ohio | Drug OVI in Ohio: Marijuana, Prescription Drugs, and Blood or Urine Testing
 Change type: major

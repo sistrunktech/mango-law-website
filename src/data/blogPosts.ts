@@ -48,6 +48,485 @@ export function resolveBlogScope(post: BlogPost): BlogScope {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'civil-protection-order-hearing-delaware-county-ohio',
+    title: 'Civil Protection Order Hearing in Delaware County, Ohio: Evidence, Deadlines, and Defense Steps',
+    excerpt:
+      'A Delaware County CPO hearing can move quickly. This guide explains what respondents should review first, how Ohio hearing deadlines work, and how to prepare evidence without creating new compliance problems.',
+    imageUrl: '/images/generated/blog-civil-protection-order-hearing-delaware-county-ohio.png',
+    content: `A civil protection order hearing in Delaware County can move from emergency paperwork to a full hearing in days. If you have been served with a domestic violence civil protection order petition, a dating violence CPO petition, or an ex parte order, the immediate goal is practical: comply with the temporary terms, confirm the hearing date, preserve evidence, and prepare for sworn testimony.
+
+This is not the time to explain yourself to the petitioner by text, ask a friend to pass a message, or assume a related criminal case will automatically control the civil order. A CPO case has its own procedure, its own hearing record, and its own consequences.
+
+If you need help from a [protection order lawyer in Delaware, Ohio](/protection-order-lawyer-delaware-oh), start with the local owner page. For broader strategy, compare this article with the [Ohio civil protection order defense guide](/civil-protection-order-defense-ohio), the [ex parte protection order guide](/blog/ex-parte-protection-orders-ohio-defense), and the [no-contact order vs. civil protection order guide](/blog/no-contact-order-vs-civil-protection-order-ohio).
+
+## Quick answer
+
+If you are facing a Delaware County civil protection order hearing:
+
+- Read the order, petition, and hearing notice line by line.
+- Do not contact the petitioner unless the order clearly permits it or the court changes the order.
+- Preserve texts, calls, emails, photos, videos, location records, witness names, and relevant court or police documents.
+- Separate the civil CPO case from any criminal no-contact order, bond condition, or domestic violence charge.
+- Prepare testimony and exhibits around the exact allegations in the petition.
+- Bring organized copies and plan for courthouse security and check-in time.
+- Ask the court for clarification or modification through proper channels, not private communication.
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## Where Delaware County CPO hearings happen
+
+The Delaware County Domestic Relations Division hears civil protection order cases requested under ORC 3113.31. The court lists its location as 117 N. Union Street, Level 400, Delaware, Ohio.
+
+That local detail matters because the hearing is not just an abstract Ohio-law issue. You need to know where to check in, how security works, what papers to bring, whether witnesses must appear, and how any related criminal, parenting, divorce, or custody matter may affect the record.
+
+Ohio law also recognizes more than one kind of protection order. This article focuses on domestic violence and dating violence civil protection order hearings under ORC 3113.31. Stalking or sexually oriented offense civil protection orders can involve ORC 2903.214. Criminal temporary protection orders and no-contact bond conditions are different tools, even if the day-to-day restrictions feel similar.
+
+## The ex parte stage and full-hearing timeline
+
+An ex parte order is a temporary order issued after a hearing where the respondent is not present. Under ORC 3113.31, if an ex parte order is issued, the court schedules a full hearing so the respondent receives notice and an opportunity to be heard.
+
+The deadline is not always described correctly online. Ohio's domestic violence CPO statute uses a seven or ten court-day framework depending on the type of relief ordered, and the court may grant a continuance for reasons such as lack of service, consent, time to obtain counsel, or other good cause.
+
+The practical takeaway is simple: do not assume the hearing will be delayed, and do not assume the temporary order expires just because service or scheduling is complicated. Treat every date on the paperwork as active until the court says otherwise.
+
+## What the full hearing decides
+
+At the full hearing, the court can hear testimony, review exhibits, consider witness credibility, and decide whether to dismiss the petition, issue a civil protection order, approve a consent agreement, or take another action allowed by law.
+
+Possible CPO terms can affect:
+
+- contact with the petitioner or protected persons,
+- access to a residence, school, workplace, or other listed location,
+- parenting time or temporary child-related terms,
+- counseling or other court-ordered conditions,
+- use of property or a vehicle,
+- weapon or firearm-related restrictions stated in the order, and
+- the duration of the order.
+
+ORC 3113.31 allows an order or consent agreement to last until a date certain, but not later than five years, unless modified or terminated under the statute. The exact order controls, so read the signed order instead of relying on a generic summary.
+
+## Evidence checklist for respondents
+
+The best CPO defense preparation is organized and specific. The hearing is not a general relationship review. It should stay tied to the petition, the alleged incidents, the requested restrictions, and the evidence the court can actually consider.
+
+Start by collecting:
+
+- the petition, ex parte order, summons, hearing notice, and service papers,
+- texts, emails, voicemails, call logs, and social messages,
+- screenshots with dates and account information preserved,
+- photos, videos, doorbell footage, or location records,
+- police reports, medical records, or court filings if they exist,
+- witness names and contact information,
+- records related to parenting, school, housing, work, or property issues, and
+- any proof of compliance with the temporary order.
+
+Do not alter messages, delete threads, crop context out of screenshots, or coach witnesses. If the case overlaps with a criminal investigation, speak with counsel before turning over, posting, or forwarding sensitive evidence.
+
+[VISUAL:CPO_DOS_DONTS]
+
+## Compliance while the case is pending
+
+Many CPO problems get worse because someone tries to fix the situation outside court. If the temporary order says no contact, do not text, call, email, message, visit, tag, comment, send gifts, or use a third party to communicate unless the order clearly permits that conduct.
+
+ORC 3113.31 also says certain stay-away terms cannot be waived by an invitation from the petitioner or protected person. In practical terms, a friendly message from the other side does not make contact safe if the court order still prohibits it.
+
+Violating a protection order can create a separate criminal charge under ORC 2919.27. That risk is why CPO defense is often part evidence preparation and part compliance discipline. If a restriction is unworkable because of housing, parenting, property, school, or employment, the safer path is a court-approved modification request.
+
+## Criminal case overlap
+
+A civil protection order is not the same thing as a criminal domestic violence charge. It is also different from a criminal temporary protection order under ORC 2919.26 or a bond condition that says no contact.
+
+The overlap still matters. The same facts may appear in:
+
+- a Delaware County CPO hearing,
+- a domestic violence or assault case,
+- a no-contact bond condition,
+- a parenting or custody dispute,
+- a divorce or dissolution matter, or
+- a later violation-of-protection-order allegation.
+
+That is why the defense strategy should be coordinated. A statement made casually in a civil hearing can affect a related criminal case. A bond violation can affect the CPO case. A parenting order can conflict with a stay-away term unless the orders are reconciled carefully.
+
+If the allegations include an arrest, review the [Delaware County domestic violence arrest guide](/blog/domestic-violence-arrest-delaware-county-ohio), the [domestic violence lawyer page](/domestic-violence-lawyer-delaware-oh), and the [criminal defense overview](/criminal-defense-delaware-oh).
+
+## Hearing-day preparation in Delaware County
+
+Delaware County Domestic Relations tells visitors to expect courthouse security screening and to check in at the kiosk station on the fourth floor for Domestic Relations matters. Build in time for parking, screening, check-in, and organizing papers before the case is called.
+
+Bring:
+
+- the complete order packet,
+- your exhibit set,
+- a witness list,
+- notes organized by allegation and date,
+- a pen and blank paper,
+- any required court paperwork, and
+- copies for counsel or court use if requested.
+
+Do not bring prohibited items through security. If an object is relevant as evidence, review the court's security instructions before showing up with it.
+
+## After the hearing
+
+After the full hearing, the case may end in dismissal, a civil protection order, a consent agreement, or another order. If a magistrate heard the case, Civil Rule 65.1 may affect objection timing and appeal steps. Do not treat objections, appeals, modification, termination, or renewal as informal requests. They are procedural steps with deadlines.
+
+If an order is issued, read every restriction before leaving the courthouse. Save copies. Share only what is necessary with people who need to know for compliance, such as a workplace contact, school contact, or parenting-exchange coordinator. If later facts change, ask whether modification or termination is appropriate under ORC 3113.31 rather than improvising.
+
+## Bottom line
+
+A Delaware County CPO hearing is a fast legal event with real consequences. The strongest early defense posture is disciplined: comply first, preserve evidence, prepare the hearing record, and coordinate any related criminal, domestic violence, parenting, or no-contact issues before the hearing date arrives.`,
+    category: 'Protection Orders',
+    date: '2026-05-03',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-03',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 3113.31 (Domestic violence civil protection orders)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3113.31',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.27 (Violating a protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.26 (Criminal temporary protection orders)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.26',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2903.214 (Stalking and sexually oriented offense civil protection orders)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2903.214',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: Ohio Rules of Civil Procedure',
+        url: 'https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/civil/CivilProcedure.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: Domestic Violence Protection Order Forms',
+        url: 'https://www.supremecourt.ohio.gov/courts/services-to-courts/domestic-violence-program/domestic-violence-protection-order-forms/',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: Felton v. Felton',
+        url: 'https://www.supremecourt.ohio.gov/rod/docs/pdf/0/1997/1997-Ohio-302.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Domestic Relations Court: About the Court',
+        url: 'https://domestic.co.delaware.oh.us/about-the-court/',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Domestic Relations Court: Plan Your Visit',
+        url: 'https://domestic.co.delaware.oh.us/plan-your-visit/',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Domestic Relations Court: Domestic Violence Protection Order Checklist',
+        url: 'https://domestic.co.delaware.oh.us/wp-content/uploads/sites/44/2022/02/Domestic-Violence-Protection-Order-Checklist.pdf',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What should I do first after being served with a civil protection order in Delaware County?',
+        answer:
+          'Read the temporary order and hearing notice immediately, comply with every restriction, preserve relevant communications and records, and prepare for the full hearing. Do not contact the petitioner to discuss the case unless the order clearly permits it or the court modifies the order.',
+      },
+      {
+        question: 'How fast is the full CPO hearing in Ohio?',
+        answer:
+          'For domestic violence CPOs under ORC 3113.31, the full hearing is generally scheduled within seven or ten court days after an ex parte order depending on the relief ordered, with continuances possible for reasons such as service, consent, time to obtain counsel, or other good cause.',
+      },
+      {
+        question: 'Can the petitioner contact me if the CPO says no contact?',
+        answer:
+          'A message or invitation from the petitioner does not automatically make contact safe. If the order prohibits contact or entry, get court clarification or a formal modification instead of relying on private permission.',
+      },
+      {
+        question: 'Does a civil protection order mean I committed a crime?',
+        answer:
+          'A civil protection order is a civil case, not a criminal conviction. However, the same facts can overlap with criminal charges or bond conditions, and violating a protection order can create separate criminal exposure under ORC 2919.27.',
+      },
+      {
+        question: 'Can a CPO be modified after the hearing?',
+        answer:
+          'ORC 3113.31 allows modification or termination of certain protection orders after a full hearing by motion. The exact procedure, burden, and timing depend on the order and court record, so the signed order should be reviewed carefully.',
+      },
+    ],
+  },
+  {
+    slug: 'drug-possession-in-car-ohio',
+    title: 'Drug Possession in a Car in Ohio: Searches, Constructive Possession, and Passenger Issues',
+    excerpt:
+      'Drugs found in a vehicle do not automatically decide an Ohio possession case. The stop, search, knowledge, control, passenger facts, lab proof, and statements all need a careful review.',
+    imageUrl: '/images/generated/blog-drug-possession-in-car-ohio.png',
+    content: `A drug possession charge after a traffic stop can feel automatic because the substance was found inside a car. Ohio law is more specific than that. The state still has to prove the charged offense, and vehicle cases often turn on the stop, the search, the location of the item, who knew about it, who could control it, what people said, and what the lab actually confirms.
+
+That is why the first defense review should not stop at "drugs were in the car." It should ask where they were found, whether the stop was lawfully extended, whether anyone consented to a search, whether the item was tied to a particular person, and whether the facts support possession, trafficking, paraphernalia, drug OVI, or a different charge.
+
+For local help, start with the [drug crime lawyer Delaware, Ohio](/drug-crime-lawyer-delaware-oh) page. Then compare this guide with [drug possession: what to do next](/blog/drug-possession-charge-ohio-what-to-do-next), [possession vs. trafficking in Ohio](/blog/drug-possession-vs-trafficking-ohio), and [motion practice in criminal defense](/blog/motion-practice-criminal-defense).
+
+## Quick answer
+
+In an Ohio vehicle drug case, drugs found in the car do not automatically prove every occupant possessed them. The useful questions are:
+
+- Was the traffic stop valid?
+- Did the officer extend the stop beyond the traffic mission?
+- Was there consent, probable cause, a warrant, an inventory search, or another claimed basis for the search?
+- Where exactly was the substance found?
+- Was it tied to the driver, a passenger, a bag, a console, a trunk, or a shared area?
+- Did anyone make statements about ownership, use, or knowledge?
+- What substance and amount did the lab confirm?
+- Is the charge possession, trafficking, paraphernalia, OVI, or a combination?
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## How a traffic stop becomes a drug case
+
+Many vehicle possession cases start with a routine traffic stop: speed, lane use, equipment, plates, registration, or another traffic issue. A valid traffic stop can still become a contested drug case if the officer's actions go beyond the stop's lawful scope.
+
+The defense should reconstruct the timeline:
+
+- reason for the initial stop,
+- when the officer obtained license, registration, insurance, and warrant information,
+- what questions were asked,
+- whether the officer requested consent to search,
+- whether a K-9 was called,
+- whether the stop was extended and why,
+- when the search began,
+- what areas or containers were searched, and
+- what was seized and logged.
+
+Small timing details matter. Body camera, dash camera, cruiser logs, dispatch records, tow records, and property inventory records can show whether the search stayed within lawful boundaries.
+
+## What Ohio possession law requires
+
+ORC 2925.11 prohibits knowingly obtaining, possessing, or using controlled substances unless the conduct is authorized by law. ORC 2925.01 defines possession as having control over a thing or substance, but it also states that possession may not be inferred solely from mere access to the thing or substance through ownership or occupation of the premises where it is found.
+
+Vehicle cases create the same basic proof problem in a moving setting. A person may be near an item without knowingly controlling it. A driver may control the car without controlling every object inside it. A passenger may be charged if the facts support knowledge and control, but passenger status alone is not the whole case.
+
+That means the key issue is often constructive possession. The state may argue that the person did not physically hold the item but still knew about it and had the ability to control it. The defense response depends on the facts.
+
+## Driver, passenger, or shared vehicle?
+
+Constructive possession cases are fact-specific. Prosecutors may point to proximity, statements, fingerprints, personal items, who owned the bag, who sat near the console, who had keys, odor, packaging, or behavior during the stop. The defense should test each link instead of accepting the conclusion.
+
+Questions to review include:
+
+- Was the item in plain view or hidden?
+- Was it closer to the driver, a passenger, or neither?
+- Was it inside a purse, backpack, jacket, case, or locked container?
+- Did the container have identifying items inside?
+- Did anyone admit ownership or use?
+- Did anyone deny knowledge before the search?
+- Did the driver recently borrow the car?
+- Were multiple people using the vehicle?
+- Did the officer preserve photos of the item as found?
+
+The more shared the space, the more careful the possession analysis should be. A center console, glove box, rear floorboard, trunk, or passenger bag can create very different proof questions.
+
+## Search issues to review
+
+A strong drug-possession defense often starts with the search. The question is not just whether drugs were found. It is whether the state can use that evidence.
+
+Common search issues include:
+
+- consent and whether it was voluntary,
+- whether the search exceeded the scope of consent,
+- whether the stop was unlawfully prolonged,
+- dog-sniff timing and reliability issues,
+- probable cause for a vehicle search,
+- search of bags or containers inside the car,
+- inventory-search and tow-policy compliance,
+- Miranda and statement issues,
+- body-camera gaps, and
+- chain of custody for seized evidence.
+
+If a suppression motion is granted, the state may lose key evidence. The result can affect dismissal, reduction, plea leverage, diversion posture, or trial strategy depending on what remains. For a broader motion overview, see the [criminal motion practice guide](/blog/motion-practice-criminal-defense).
+
+[VISUAL:DEFENSE_STRATEGIES]
+
+## Marijuana in a car after Ohio's 2026 transport rule
+
+Ohio's marijuana laws changed again in 2026, including ORC 3796.062, which addresses transportation of marijuana in a motor vehicle. The transportation rule should be read directly because details such as package status, placement, and vehicle access can matter.
+
+Adult-use marijuana law also does not authorize impaired driving. ORC 3796.221 says adult-use rights do not permit operating a vehicle while under the influence of marijuana, and ORC 4511.19 still governs OVI allegations.
+
+For defense review, keep the issues separate:
+
+- lawful adult-use possession,
+- transportation rules for marijuana in a vehicle,
+- a possession or paraphernalia allegation,
+- a search or seizure issue,
+- a drug OVI allegation, and
+- any statement about use or impairment.
+
+Do not assume "marijuana is legal" answers the traffic-stop question. It may affect the analysis, but the facts and charge still control. If impairment is alleged, compare this article with [drug OVI in Ohio](/blog/drug-ovi-ohio) and the [OVI/DUI defense page](/ovi-dui-defense-delaware-oh).
+
+## When police treat the case as trafficking or paraphernalia
+
+Vehicle drug cases can expand beyond simple possession. ORC 2925.03 covers trafficking allegations, and police may look at packaging, scales, cash, messages, quantity, location, and statements to argue sale, shipment, delivery, distribution, or preparation for sale.
+
+ORC 2925.14 addresses drug paraphernalia. A paraphernalia charge can create its own defense issues, especially when the item is ordinary, multipurpose, connected to lawful cannabis activity, or poorly documented by police.
+
+Before assuming the case is "just possession," compare:
+
+- the exact substance and amount,
+- whether the police claim the substance was packaged for sale,
+- whether lab testing supports the alleged drug type,
+- whether paraphernalia was tested or photographed,
+- whether messages or cash are being overread, and
+- whether the trafficking theory fits the actual evidence.
+
+The [drug possession vs. trafficking defense page](/drug-possession-vs-trafficking-ohio-defense) explains those charge distinctions in more detail.
+
+## What to preserve right away
+
+After a traffic-stop drug charge, preserve the ordinary records that can become useful later:
+
+- citation, summons, complaint, and bond paperwork,
+- tow slip and property inventory,
+- photos of the vehicle, console, trunk, and personal items,
+- passenger names and contact information,
+- receipts, location records, or travel timeline,
+- prescription packaging if medication is involved,
+- proof of vehicle ownership or borrowing,
+- messages that explain who used the vehicle or bag,
+- lab paperwork and evidence inventory when available, and
+- any court or police request deadlines.
+
+Avoid posting about the stop or trying to collect statements through group messages. A defensive explanation can become evidence if it is written carelessly or shared with the wrong person.
+
+## What a defense lawyer reviews
+
+A drug possession lawyer should review the case in layers:
+
+1. Charge: possession, trafficking, paraphernalia, OVI, or another offense.
+2. Stop: whether the traffic basis and stop timeline are lawful.
+3. Search: consent, probable cause, K-9, inventory, containers, and body-camera timing.
+4. Possession: knowledge, control, location, statements, and passenger/driver facts.
+5. Substance: lab confirmation, amount, chain of custody, and statutory thresholds.
+6. Resolution: suppression, dismissal, diversion, intervention in lieu of conviction, plea, or trial posture.
+
+ORC 2951.041 may provide intervention in lieu of conviction in eligible cases, but eligibility is fact-specific. Some cases require litigation first; others call for early treatment documentation or diversion review.
+
+## Bottom line
+
+Drug possession in a car is not a one-question case. The strongest defense review matches the traffic-stop timeline, search basis, vehicle layout, occupant facts, substance evidence, and charge theory. That is how you separate a weak constructive-possession allegation from a provable case and decide whether suppression, negotiation, diversion, or trial preparation should come first.`,
+    category: 'Drug Crimes',
+    date: '2026-05-03',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-03',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 2925.11 (Possession of controlled substances)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.11',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2925.01 (Drug offense definitions)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.01',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2901.22 (Culpable mental states)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2901.22',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2925.03 (Trafficking in drugs)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.03',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2925.14 (Drug paraphernalia offenses)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2925.14',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 3796.062 (Transporting marihuana)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3796.062',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 3796.221 (Adult-use cannabis rights and limits)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-3796.221',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.19 (Operating a vehicle under the influence)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2951.041 (Intervention in lieu of conviction)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2951.041',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: Ohio Rules of Criminal Procedure',
+        url: 'https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/criminal/CriminalProcedure.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: State v. Mays',
+        url: 'https://www.supremecourt.ohio.gov/rod/docs/pdf/0/2008/2008-ohio-4539.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: State v. Dunlap',
+        url: 'https://www.supremecourt.ohio.gov/rod/docs/pdf/0/2024/2024-Ohio-4821.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: State v. Batchili',
+        url: 'https://www.supremecourt.ohio.gov/rod/docs/pdf/0/2007/2007-Ohio-2204.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: State v. Farris',
+        url: 'https://www.supremecourt.ohio.gov/rod/docs/pdf/0/2006/2006-ohio-3255.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: State v. Brown',
+        url: 'https://www.supremecourt.ohio.gov/rod/docs/pdf/4/2009/2009-Ohio-5390.pdf',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can a passenger be charged with drug possession in Ohio?',
+        answer:
+          'Yes, but passenger status alone is not the whole proof question. The state still has to connect the person to knowing possession or control through facts such as location, access, statements, personal items, or other evidence.',
+      },
+      {
+        question: 'Do drugs in a car automatically belong to the driver?',
+        answer:
+          'No. A driver may be charged, but the defense should review where the item was found, who owned or used the vehicle, who had access to the area or container, and whether the evidence proves knowing control.',
+      },
+      {
+        question: 'Can police search my whole car during a drug stop?',
+        answer:
+          'Search scope depends on the facts and the claimed legal basis, such as consent, probable cause, inventory, a warrant, or another exception. The timing and scope of the search should be reviewed before assuming the evidence is admissible.',
+      },
+      {
+        question: 'Does Ohio adult-use marijuana law make car possession harmless?',
+        answer:
+          'No. Ohio now has specific marijuana transportation rules, and adult-use rights do not authorize impaired driving. The analysis depends on package status, access, vehicle location, amount, impairment claims, and the exact charge.',
+      },
+      {
+        question: 'What should I save after a traffic-stop drug possession charge?',
+        answer:
+          'Save the citation, complaint, tow and property inventory paperwork, passenger names, photos of vehicle storage areas, relevant messages, prescription packaging if applicable, and any lab or evidence documents you receive.',
+      },
+    ],
+  },
+  {
     slug: 'drug-ovi-ohio',
     title: 'Drug OVI in Ohio: Marijuana, Prescription Drugs, and Blood or Urine Testing',
     excerpt:

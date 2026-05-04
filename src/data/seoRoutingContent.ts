@@ -125,6 +125,11 @@ export const domesticViolenceSupportLinks: SeoSupportLink[] = [
     description: 'Delaware County first steps for booking, bond, no-contact, and protection-order issues.',
   },
   {
+    title: 'Civil protection order hearing',
+    href: '/blog/civil-protection-order-hearing-delaware-county-ohio',
+    description: 'Delaware County CPO hearing deadlines, evidence organization, and compliance risks.',
+  },
+  {
     title: 'First-offense domestic violence defense',
     href: '/domestic-violence-first-offense-ohio-defense',
     description: 'Immediate priorities and common mistakes in first-offense cases.',
@@ -147,6 +152,11 @@ export const domesticViolenceSupportLinks: SeoSupportLink[] = [
 ];
 
 export const drugCrimeSupportLinks: SeoSupportLink[] = [
+  {
+    title: 'Drug possession in a car',
+    href: '/blog/drug-possession-in-car-ohio',
+    description: 'Search, constructive-possession, driver, and passenger issues after traffic-stop drug allegations.',
+  },
   {
     title: 'Drug possession vs trafficking defense',
     href: '/drug-possession-vs-trafficking-ohio-defense',
