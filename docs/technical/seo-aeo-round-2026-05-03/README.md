@@ -23,6 +23,7 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 | `ovi-checkpoint-source-evidence-2026-05-03.csv` | Source evidence rows used by the checkpoint live pass. |
 | `checkpoint-scraper-cron-health-followup-2026-05-03.md` | Follow-up checkpoint scraper execution log after the Solon/Cinco source appeared; includes Edge Function deploy, manual scraper runs, and DB verification. |
 | `ga4-real-path-duplicate-risk-qa-2026-05-03.md` | Source-level duplicate-risk QA for real form/phone/email/chat lead paths after GTM Version 5 publish. |
+| `admin-execution-status-2026-05-03.md` | Production QA plus authenticated BrightLocal and GSC execution status after the CPO/drug-possession release. |
 
 ## 2026-05-03 Google Ads Execution Result
 
@@ -32,6 +33,24 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Metrics returned: 12 of 50 keywords had row-level volume/competition data; 38 returned blank row-level metrics under current account access.
 - Boundary: no campaign was created, no billing/payment action was taken, and no spend action was launched.
 - Interpretation: the export provides directional bucketed Planner evidence. The strongest quick-ROI lanes from this pass are criminal defense, first-offense OVI, checkpoint resources, high-tier OVI, motion-to-suppress OVI, and local domestic-violence terms.
+
+## 2026-05-03 BrightLocal Execution Result
+
+- Authenticated BrightLocal location: `Mango Law LLC (MANGOLAWLLC-43015)`, location ID `3937875`.
+- Export downloaded: `/Users/sistech_tim/Downloads/rank-tracker-mango-law-llc-2026-05-04-00-41-03.csv`.
+- Pre-update tracker count: 49 unique keywords.
+- Added keyword: `delaware county criminal defense attorney`, selected because it was the strongest missing validated P0/P1 term with Planner support.
+- Post-update tracker count shown by BrightLocal UI: `50/50 keywords`.
+- Name-tracking phone corrected in the Rank Tracker report from `+1 740-602-2155` to the public office line `+1 740-417-6191`.
+- Boundary: no current tracker keywords were removed because full replacement would delete existing rank-tracking terms/history and needs action-time confirmation.
+- Remaining risk: BrightLocal's connected Google Business Profile card still displays `+1 740-602-2155`, so GBP/Citation Builder NAP cleanup remains open.
+
+## 2026-05-03 GSC Production Inspection Result
+
+- Production URLs for `/blog/civil-protection-order-hearing-delaware-county-ohio` and `/blog/drug-possession-in-car-ohio` return HTTP 200, load their generated images, and are present in `/sitemap.xml`.
+- Search Console inspection for both new posts reports `URL is not on Google` and `Page is not indexed: URL is unknown to Google`.
+- Request-indexing buttons were available for both inspected URLs.
+- Boundary: request-indexing clicks were not submitted because that sends explicit crawl requests to Google and requires action-time confirmation.
 
 ## 2026-05-03 GA4/GTM Execution Result
 
