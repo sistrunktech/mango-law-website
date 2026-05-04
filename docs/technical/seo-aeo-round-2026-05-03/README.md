@@ -24,6 +24,7 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 | `checkpoint-scraper-cron-health-followup-2026-05-03.md` | Follow-up checkpoint scraper execution log after the Solon/Cinco source appeared; includes Edge Function deploy, manual scraper runs, and DB verification. |
 | `ga4-real-path-duplicate-risk-qa-2026-05-03.md` | Source-level duplicate-risk QA for real form/phone/email/chat lead paths after GTM Version 5 publish. |
 | `admin-execution-status-2026-05-03.md` | Production QA plus authenticated BrightLocal and GSC execution status after the CPO/drug-possession release. |
+| `gbp-post-schedule-2026-05.md` | BrightLocal/Google Business Profile posting calendar for the May 2026 content cluster, including UTM URLs, copy, CTA settings, landing-page QA, and execution boundary. |
 
 ## 2026-05-03 Google Ads Execution Result
 
@@ -115,6 +116,14 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Linked the vehicle drug-possession post from `/drug-crime-lawyer-delaware-oh`; the article links back to drug-crime, possession/trafficking, motion-practice, criminal-defense, drug-OVI, OVI, and contact paths.
 - Added matching watercolor legal-tabletop images at `/images/generated/blog-civil-protection-order-hearing-delaware-county-ohio.png` and `/images/generated/blog-drug-possession-in-car-ohio.png`.
 - Added both new posts to the GSC indexing submission log for post-deployment live inspection.
+
+## 2026-05-04 GBP Post Scheduler Prep Result
+
+- Prepared an 8-post BrightLocal/Google Business Profile calendar for May 5 through May 28, 2026, at a recommended two-posts-per-week cadence.
+- Prioritized the live checkpoint map first for Cinco de Mayo relevance, then the keyword-backed OVI, drug, CPO/protection-order, Memorial Day enforcement, and Delaware County criminal-defense support assets.
+- Added `google_business_profile / organic / gbp_posts_may_2026` UTM URLs with unique `utm_content` values for each post.
+- Verified all eight target URLs returned HTTP `200` with UTM parameters attached on 2026-05-04.
+- Boundary: final BrightLocal scheduling/posting clicks still require action-time approval because they create public/scheduled Google Business Profile communications.
 
 ## Execution Rules
 
