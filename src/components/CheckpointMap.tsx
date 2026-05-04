@@ -14,6 +14,7 @@ import {
   isAggregatorSourceName,
   type DUICheckpoint,
 } from '../data/checkpoints';
+import { formatCalendarDate } from '../lib/formatting';
 import { getMapboxPublicToken, getMapboxStyleUrl } from '../lib/mapbox';
 
 type Props = {
@@ -37,6 +38,12 @@ function isOhioCoordinate(latitude: number, longitude: number): boolean {
     longitude >= OHIO_BOUNDS.minLongitude &&
     longitude <= OHIO_BOUNDS.maxLongitude
   );
+}
+
+function formatMapDateTime(value: string): string {
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return 'Date unavailable';
+  return parsed.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
 }
 
 export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheckpointSelect, now }: Props) {
@@ -149,13 +156,16 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
         cancelled: '#8E8E93',
       };
 
-      const displayStatus = getDisplayStatus(checkpoint, displayNow);
+      const isPendingAnnouncement = checkpoint.is_pending_announcement === true;
+      const displayStatus = isPendingAnnouncement ? 'upcoming' : getDisplayStatus(checkpoint, displayNow);
       const color = statusColors[displayStatus] || statusColors.upcoming;
       const isSelected = selectedCheckpoint?.id === checkpoint.id;
       const precision = getCheckpointLocationPrecision(checkpoint);
       const isApproximate = precision !== 'exact';
       const locationLabel = getCheckpointAreaLabel(checkpoint);
-      const locationGuidance = getCheckpointLocationGuidance(checkpoint);
+      const locationGuidance = isPendingAnnouncement
+        ? 'This pin marks the named city or county from a public pending announcement. It is not a confirmed street-level checkpoint location.'
+        : getCheckpointLocationGuidance(checkpoint);
 
       const el = document.createElement('div');
       const core = document.createElement('div');
@@ -208,17 +218,37 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       el.addEventListener('blur', removeFocusStyles);
       el.appendChild(core);
 
-      const startDate = new Date(checkpoint.start_date);
-      const endDate = new Date(checkpoint.end_date);
       const sourceNameForPopup = checkpoint.source_name && !isAggregatorSourceName(checkpoint.source_name) ? checkpoint.source_name : null;
+      const eventDateLabel = checkpoint.pending_announcement_event_date
+        ? formatCalendarDate(checkpoint.pending_announcement_event_date)
+        : formatCalendarDate(checkpoint.start_date);
+      const timingHtml = isPendingAnnouncement
+        ? `
+              <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
+                <strong>Event date:</strong> ${eventDateLabel}
+              </p>
+              <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
+                <strong>Timing:</strong> Exact time pending
+              </p>
+            `
+        : `
+              <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
+                <strong>Start:</strong> ${formatMapDateTime(checkpoint.start_date)}
+              </p>
+              <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
+                <strong>End:</strong> ${formatMapDateTime(checkpoint.end_date)}
+              </p>
+            `;
+      const statusLabel = isPendingAnnouncement ? 'Pending details' : displayStatus;
 
       const label = [
         `DUI checkpoint: ${checkpoint.title}`,
         locationLabel,
-        `Status: ${displayStatus}`,
+        `Status: ${statusLabel}`,
         `Map precision: ${getCheckpointLocationPrecisionLabel(precision)}`,
-        `Start: ${startDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`,
-        `End: ${endDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`,
+        isPendingAnnouncement
+          ? `Event date: ${eventDateLabel}. Exact time pending`
+          : `Start: ${formatMapDateTime(checkpoint.start_date)}. End: ${formatMapDateTime(checkpoint.end_date)}`,
         'Press Enter for details.',
       ].join('. ');
       el.setAttribute('role', 'button');
@@ -237,14 +267,9 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
               <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
                 <strong>Map precision:</strong> ${getCheckpointLocationPrecisionLabel(precision)}
               </p>
-              <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
-                <strong>Start:</strong> ${startDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
-              </p>
-              <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
-                <strong>End:</strong> ${endDate.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
-              </p>
+              ${timingHtml}
               <p style="margin: 0; font-size: 13px; color: #666;">
-                <strong>Status:</strong> <span style="color: ${color}; font-weight: 600; text-transform: capitalize;">${displayStatus}</span>
+                <strong>Status:</strong> <span style="color: ${color}; font-weight: 600; text-transform: capitalize;">${statusLabel}</span>
               </p>
             </div>
             ${locationGuidance ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #666; line-height: 1.5;">${locationGuidance}</p>` : ''}

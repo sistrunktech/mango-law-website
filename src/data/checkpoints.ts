@@ -33,6 +33,8 @@ export interface DUICheckpoint {
   views_count: number;
   announcement_date?: string | null;
   geocoding_confidence?: string | null;
+  is_pending_announcement?: boolean;
+  pending_announcement_event_date?: string | null;
 }
 
 const UNDISCLOSED_LOCATION_PATTERNS = [
