@@ -59,7 +59,7 @@ export default function DrugCrimePage() {
   return (
     <>
       <SEO
-        title="Drug Crime Lawyer Delaware Ohio | Possession & Trafficking Defense | Mango Law LLC"
+        title="Drug Crime Lawyer Delaware Ohio"
         description={drugCrimePageMetaDescription}
         image="/images/generated/drug-crimes-defense-hero.png"
         faqs={drugCrimeFaqs}

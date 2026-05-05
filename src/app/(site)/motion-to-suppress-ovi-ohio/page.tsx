@@ -4,7 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Motion to Suppress OVI Evidence in Ohio | Defense Guide',
+  title: 'Motion to Suppress OVI Evidence',
   description:
     'Learn when OVI evidence may be challenged in Ohio and how suppression strategy can affect negotiations and trial posture.',
   image: '/images/generated/ovi-case-strategy.png',

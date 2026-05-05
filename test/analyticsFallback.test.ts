@@ -73,6 +73,26 @@ try {
   assert.equal(gtagCalls.length, 4);
   assert.equal(gtagCalls[3]?.[0], 'event');
   assert.equal(gtagCalls[3]?.[1], 'generate_lead');
+
+  trackLeadSubmitted('email', 'contact_page_email_office', { target_email: 'office@mango.law' });
+  assert.equal(gtagCalls.length, 5);
+  assert.equal(gtagCalls[4]?.[0], 'event');
+  assert.equal(gtagCalls[4]?.[1], 'generate_lead');
+  assert.deepEqual(gtagCalls[4]?.[2], {
+    lead_source: 'email',
+    checkpoint_id: 'contact_page_email_office',
+    target_email: 'office@mango.law',
+  });
+
+  trackLeadSubmitted('chat', 'chat_widget', { source: 'chat_widget' });
+  assert.equal(gtagCalls.length, 6);
+  assert.equal(gtagCalls[5]?.[0], 'event');
+  assert.equal(gtagCalls[5]?.[1], 'generate_lead');
+  assert.deepEqual(gtagCalls[5]?.[2], {
+    lead_source: 'chat',
+    checkpoint_id: 'chat_widget',
+    source: 'chat_widget',
+  });
 } finally {
   globalThis.window = originalWindow;
   globalThis.document = originalDocument;

@@ -4,7 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'ALS License Suspension in Ohio | OVI License Defense',
+  title: 'Ohio ALS License Suspension',
   description:
     'Dealing with an Ohio ALS suspension? See how ALS works, what can vary, and what to do early to protect driving options.',
   image: '/images/generated/ovi-case-strategy.png',

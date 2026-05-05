@@ -4,6 +4,7 @@ import BlogPostPage from '@/views/BlogPostPage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 import { getPublicBlogPostBySlug, getPublicBlogPosts } from '@/lib/blogPostsRepo';
+import { resolveBlogSeo } from '@/lib/blog-seo';
 
 type PageProps = {
   params: { slug: string };
@@ -21,9 +22,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
 
+  const seo = resolveBlogSeo(post);
+
   return buildMetadata({
-    title: `${post.title} | Mango Law Blog`,
-    description: post.excerpt,
+    title: seo.title,
+    description: seo.description,
     image: post.imageUrl,
     url: `/blog/${post.slug}`,
     type: 'article',

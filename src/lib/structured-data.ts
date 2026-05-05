@@ -235,7 +235,6 @@ export const localBusinessSchema = {
             name: 'Supreme Court of Ohio',
           },
           identifier: attorneyProfile.registrationNumber,
-          dateIssued: String(attorneyProfile.practiceSinceYear),
         },
         {
           '@type': 'EducationalOccupationalCredential',
@@ -245,7 +244,6 @@ export const localBusinessSchema = {
             '@type': 'Organization',
             name: 'United States Court of Appeals for the Sixth Circuit',
           },
-          dateIssued: '2014-11-10',
         },
       ],
       alumniOf: {
@@ -294,7 +292,6 @@ export const attorneySchema = {
         name: 'Supreme Court of Ohio',
       },
       identifier: attorneyProfile.registrationNumber,
-      dateIssued: String(attorneyProfile.practiceSinceYear),
     },
     {
       '@type': 'EducationalOccupationalCredential',
@@ -304,7 +301,6 @@ export const attorneySchema = {
         '@type': 'Organization',
         name: 'United States Court of Appeals for the Sixth Circuit',
       },
-      dateIssued: '2014-11-10',
     },
   ],
   alumniOf: {

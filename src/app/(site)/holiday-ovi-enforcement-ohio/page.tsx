@@ -4,7 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Holiday OVI Enforcement Ohio - What Drivers Should Know | Mango Law',
+  title: 'Holiday OVI Enforcement Ohio',
   description:
     'Seasonal OVI enforcement guidance for Ohio drivers: what to expect, how checkpoints work, and how to protect your rights.',
   url: '/holiday-ovi-enforcement-ohio',

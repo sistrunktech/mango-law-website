@@ -508,7 +508,7 @@ export default function DUICheckpointsPage({
   return (
     <>
       <SEO
-        title="Ohio DUI Checkpoint Map and Guide | Announced Checkpoints"
+        title="Ohio DUI Checkpoint Map"
         description="Browse announced Ohio DUI checkpoints, understand how checkpoint stops work, and review your rights after an OVI checkpoint stop."
         breadcrumbs={[
           { name: 'Home', item: '/' },

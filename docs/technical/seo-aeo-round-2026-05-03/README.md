@@ -24,6 +24,10 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 | `checkpoint-scraper-cron-health-followup-2026-05-03.md` | Follow-up checkpoint scraper execution log after the Solon/Cinco source appeared; includes Edge Function deploy, manual scraper runs, and DB verification. |
 | `ga4-real-path-duplicate-risk-qa-2026-05-03.md` | Source-level duplicate-risk QA for real form/phone/email/chat lead paths after GTM Version 5 publish. |
 | `admin-execution-status-2026-05-03.md` | Production QA plus authenticated BrightLocal and GSC execution status after the CPO/drug-possession release. |
+| `gbp-post-schedule-2026-05.md` | BrightLocal/Google Business Profile posting calendar for the May 2026 content cluster, including UTM URLs, copy, CTA settings, landing-page QA, and execution boundary. |
+| `monthly-report-agent-handoff-2026-05-04.md` | Read-only handoff for a separate agent to run BrightLocal, Ahrefs, GA4, and GSC monthly trend reporting and draft the next Sistrunk-hosted private client report. |
+| `monthly-report-live-trend-memo-2026-05-04.md` | Live read-only trend memo after GBP scheduling, BrightLocal export review, GSC/GA4 checks, and Ahrefs Site Explorer/Site Audit review. |
+| `ahrefs-metadata-schema-ga4-qa-2026-05-05.md` | Ahrefs title/meta/schema cleanup evidence plus local browser QA for source lead-path analytics before GSC indexing requests. |
 
 ## 2026-05-03 Google Ads Execution Result
 
@@ -115,6 +119,39 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - Linked the vehicle drug-possession post from `/drug-crime-lawyer-delaware-oh`; the article links back to drug-crime, possession/trafficking, motion-practice, criminal-defense, drug-OVI, OVI, and contact paths.
 - Added matching watercolor legal-tabletop images at `/images/generated/blog-civil-protection-order-hearing-delaware-county-ohio.png` and `/images/generated/blog-drug-possession-in-car-ohio.png`.
 - Added both new posts to the GSC indexing submission log for post-deployment live inspection.
+
+## 2026-05-04 GBP Post Scheduler Prep Result
+
+- Prepared an 8-post BrightLocal/Google Business Profile calendar for May 5 through May 28, 2026, at a recommended two-posts-per-week cadence.
+- Prioritized the live checkpoint map first for Cinco de Mayo relevance, then the keyword-backed OVI, drug, CPO/protection-order, Memorial Day enforcement, and Delaware County criminal-defense support assets.
+- Added `google_business_profile / organic / gbp_posts_may_2026` UTM URLs with unique `utm_content` values for each post.
+- Verified all eight target URLs returned HTTP `200` with UTM parameters attached on 2026-05-04.
+- Boundary: final BrightLocal scheduling/posting clicks still require action-time approval because they create public/scheduled Google Business Profile communications.
+
+## 2026-05-04 Monthly Report Agent Handoff Result
+
+- Added a separate-agent handoff for Mango Law monthly reporting across BrightLocal, Ahrefs, GA4, and GSC.
+- Pointed the next agent to the Sistrunk Tech private report source, existing `mango-law-2026-02` and `mango-law-2026-03` records, live client-report surfaces, and the expected `mango-law-2026-04` report shape.
+- Included report boundaries: read-only first, no email sends/access changes/GSC indexing requests/public posts/admin writes without action-time approval, and do not interrupt the active BrightLocal GBP scheduling modal.
+
+## 2026-05-04 Live Reporting Pull Result
+
+- BrightLocal GBP Scheduler now shows `All posts (18)`, `Live (10)`, `Scheduled (8)`, `Expired (0)`, and `Rejected (0)`.
+- Verified the last scheduled GBP post is set for May 28, 2026 at 10:00 AM ET, completing the two-posts-per-week May GBP calendar.
+- BrightLocal rank export shows the strongest current traction in Google Places and Bing, with Google Places top-10 visibility for core Delaware OVI, DUI, criminal-defense, and drug-charge terms.
+- GSC last-28-days performance is up to `78` clicks and `3.11K` impressions; `/resources/dui-checkpoints` is the clearest new search winner with `23` clicks and `1,008` impressions.
+- GA4 last-30-days traffic remains low and down, with `19` active users, `152` events, and `0` key events; real lead-path conversion reporting remains pending.
+- Ahrefs shows the checkpoint page as the only current organic-traffic page, ranking for `ohio dui checkpoints tonight` and `sobriety checkpoint finder ohio`; Site Audit health is `99%` with `3` errors, `49` warnings, and `79` notices.
+
+## 2026-05-05 Ahrefs / GA4 QA Result
+
+- Shortened SEO-only titles and meta descriptions across the new blog cluster, high-value owner/resource pages, and hydrated client-side `<SEO>` overrides.
+- Removed the Schema.org-invalid `dateIssued` property from attorney credential nodes while retaining credential names, recognizers, and identifiers.
+- Rendered browser QA across 15 high-value pages found `metadataFailures: []`: all checked title tags are `60` characters or shorter, meta descriptions are `155` characters or shorter, and credential JSON-LD no longer includes `dateIssued`.
+- Local lead-path QA confirmed source `lead_submitted` events for phone, email, contact form, and chat paths. Contact/chat backend calls were CORS-mocked locally; no production lead, call, email, or chat submission was created.
+- Updated fallback analytics test coverage so `form`, `phone`, `email`, and `chat` lead sources continue mapping to GA4 event name `generate_lead`.
+- After action-time approval, submitted GSC Request Indexing for the eight May support posts. Each URL inspection showed `URL is on Google`, `Page is indexed`, HTTPS valid, Breadcrumbs valid, and FAQ valid; GSC confirmed every URL was added to a priority crawl queue.
+- Fixed the remaining Next build warning on the blog OpenGraph image endpoint by adding explicit alt text and the appropriate `ImageResponse`-specific lint exception.
 
 ## Execution Rules
 

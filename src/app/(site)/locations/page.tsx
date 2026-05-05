@@ -4,9 +4,9 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Areas We Serve | Criminal Defense Attorney in Delaware & Franklin Counties, Ohio',
+  title: 'Areas We Serve',
   description:
-    'Mango Law LLC serves clients throughout Delaware County, Franklin County, and Central Ohio. Experienced criminal defense representation in Columbus, Dublin, Westerville, and surrounding communities.',
+    'Mango Law serves clients in Delaware County, Franklin County, and Central Ohio for criminal defense and OVI matters.',
   url: '/locations',
 };
 

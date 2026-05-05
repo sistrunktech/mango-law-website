@@ -4,7 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'OVI Test Refusal Lawyer in Ohio | Breath Test Refusal Defense',
+  title: 'OVI Test Refusal Lawyer Ohio',
   description:
     'Refused a breath or chemical test in Ohio? Understand ALS risk, court impact, and how refusal cases are defended.',
   image: '/images/generated/ovi-case-strategy.png',

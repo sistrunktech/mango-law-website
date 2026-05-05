@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo-metadata';
 const seo = {
   title: 'Personal Injury Lawyer Delaware, OH | Mango Law LLC',
   description:
-    'Selective personal injury representation for cases with clear liability and insurance coverage. Experienced legal guidance in Delaware and Franklin Counties.',
+    'Selective personal injury representation for clear-liability cases with insurance coverage in Delaware and Franklin Counties.',
   image: '/images/generated/personal-injury-hero.png',
   url: '/personal-injury-lawyer-delaware-oh',
 };

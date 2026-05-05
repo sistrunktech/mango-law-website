@@ -8,7 +8,7 @@ export default function PrivacyPage() {
   return (
     <section className="container py-12">
       <SEO
-        title="Privacy Policy | Ohio Criminal Defense Attorney - Mango Law LLC"
+        title="Privacy Policy"
         description="Read how Mango Law LLC collects, uses, and protects information on mango.law."
         breadcrumbs={[
           { name: 'Home', item: '/' },

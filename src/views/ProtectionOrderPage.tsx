@@ -59,7 +59,7 @@ export default function ProtectionOrderPage() {
   return (
     <>
       <SEO
-        title="Protection Order Lawyer Delaware, OH | CPO Defense | Mango Law LLC"
+        title="Protection Order Lawyer Delaware OH"
         description="Protection order lawyer in Delaware, Ohio for CPO hearings, no-contact issues, evidence preparation, and related domestic-violence case overlap."
         image="/images/generated/protection-order-defense-hero.png"
         faqs={protectionOrderFaqs}

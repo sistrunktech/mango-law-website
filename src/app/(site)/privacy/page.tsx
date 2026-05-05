@@ -4,7 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Privacy Policy | Ohio Criminal Defense Attorney - Mango Law LLC',
+  title: 'Privacy Policy',
   description: 'Read how Mango Law LLC collects, uses, and protects information on mango.law.',
   url: '/privacy',
 };

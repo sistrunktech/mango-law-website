@@ -6,7 +6,7 @@ import { getPublicBlogPosts } from '@/lib/blogPostsRepo';
 import { attorneyProfile } from '@/data/attorneyProfile';
 
 const seo = {
-  title: 'Mango Law Blog | Legal Insights & Ohio Criminal Defense Updates',
+  title: 'Mango Law Blog',
   description:
     `Stay informed with Ohio criminal defense and OVI/DUI articles from Dominic Mango, Ohio Supreme Court registration no. ${attorneyProfile.registrationNumber}.`,
   url: '/blog',

@@ -51,7 +51,7 @@ export default function GlossaryPage() {
   return (
     <>
       <SEO
-        title="Ohio Revised Code Glossary | Criminal & Traffic Law Terms"
+        title="Ohio Criminal Law Glossary"
         description="A plain-English guide to Ohio criminal and civil statutes. Search by statute number, practice area, or keyword."
         breadcrumbs={[
           { name: 'Home', item: '/' },

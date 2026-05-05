@@ -5,7 +5,7 @@ import { buildMetadata } from '@/lib/seo-metadata';
 import { domesticViolencePageMetaDescription } from '@/data/seoRoutingContent';
 
 const seo = {
-  title: 'Domestic Violence Lawyer Delaware, OH | DV Defense | Mango Law',
+  title: 'Domestic Violence Lawyer Delaware OH',
   description: domesticViolencePageMetaDescription,
   image: '/images/generated/blog-assault-domestic-violence.png',
   url: '/domestic-violence-lawyer-delaware-oh',
