@@ -29,7 +29,9 @@ export default function OpenGraphImage({ params }: { params: { slug: string } })
           background: '#0A0A0A',
         }}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element -- next/image is not supported inside ImageResponse markup. */}
         <img
+          alt={post?.title ?? 'Mango Law criminal defense article'}
           src={absoluteImageUrl}
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />

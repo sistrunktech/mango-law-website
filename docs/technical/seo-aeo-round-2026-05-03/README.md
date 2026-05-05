@@ -27,6 +27,7 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 | `gbp-post-schedule-2026-05.md` | BrightLocal/Google Business Profile posting calendar for the May 2026 content cluster, including UTM URLs, copy, CTA settings, landing-page QA, and execution boundary. |
 | `monthly-report-agent-handoff-2026-05-04.md` | Read-only handoff for a separate agent to run BrightLocal, Ahrefs, GA4, and GSC monthly trend reporting and draft the next Sistrunk-hosted private client report. |
 | `monthly-report-live-trend-memo-2026-05-04.md` | Live read-only trend memo after GBP scheduling, BrightLocal export review, GSC/GA4 checks, and Ahrefs Site Explorer/Site Audit review. |
+| `ahrefs-metadata-schema-ga4-qa-2026-05-05.md` | Ahrefs title/meta/schema cleanup evidence plus local browser QA for source lead-path analytics before GSC indexing requests. |
 
 ## 2026-05-03 Google Ads Execution Result
 
@@ -141,6 +142,16 @@ This folder is the execution workbook for the next SEO/AEO round after the April
 - GSC last-28-days performance is up to `78` clicks and `3.11K` impressions; `/resources/dui-checkpoints` is the clearest new search winner with `23` clicks and `1,008` impressions.
 - GA4 last-30-days traffic remains low and down, with `19` active users, `152` events, and `0` key events; real lead-path conversion reporting remains pending.
 - Ahrefs shows the checkpoint page as the only current organic-traffic page, ranking for `ohio dui checkpoints tonight` and `sobriety checkpoint finder ohio`; Site Audit health is `99%` with `3` errors, `49` warnings, and `79` notices.
+
+## 2026-05-05 Ahrefs / GA4 QA Result
+
+- Shortened SEO-only titles and meta descriptions across the new blog cluster, high-value owner/resource pages, and hydrated client-side `<SEO>` overrides.
+- Removed the Schema.org-invalid `dateIssued` property from attorney credential nodes while retaining credential names, recognizers, and identifiers.
+- Rendered browser QA across 15 high-value pages found `metadataFailures: []`: all checked title tags are `60` characters or shorter, meta descriptions are `155` characters or shorter, and credential JSON-LD no longer includes `dateIssued`.
+- Local lead-path QA confirmed source `lead_submitted` events for phone, email, contact form, and chat paths. Contact/chat backend calls were CORS-mocked locally; no production lead, call, email, or chat submission was created.
+- Updated fallback analytics test coverage so `form`, `phone`, `email`, and `chat` lead sources continue mapping to GA4 event name `generate_lead`.
+- After action-time approval, submitted GSC Request Indexing for the eight May support posts. Each URL inspection showed `URL is on Google`, `Page is indexed`, HTTPS valid, Breadcrumbs valid, and FAQ valid; GSC confirmed every URL was added to a priority crawl queue.
+- Fixed the remaining Next build warning on the blog OpenGraph image endpoint by adding explicit alt text and the appropriate `ImageResponse`-specific lint exception.
 
 ## Execution Rules
 

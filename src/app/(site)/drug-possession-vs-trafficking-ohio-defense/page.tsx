@@ -7,7 +7,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Drug Possession vs Trafficking Defense in Ohio | Key Differences',
+  title: 'Drug Possession vs Trafficking Defense',
   description:
     'Charged with possession or trafficking in Ohio? Understand legal differences, evidence issues, and defense strategy priorities.',
   image: '/images/generated/drug-crimes-defense-hero.png',

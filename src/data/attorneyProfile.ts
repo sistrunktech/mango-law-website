@@ -27,7 +27,7 @@ export const attorneyProfile = {
   sixthCircuitAdmissionLabel: 'November 10, 2014',
   lawSchool: 'The Ohio State University Moritz College of Law',
   siteDescription:
-    'Ohio criminal defense and OVI attorney practicing in Central Ohio since 1999. Mango Law serves Delaware and Franklin County clients with trial and appellate defense.',
+    'Ohio criminal defense and OVI attorney in Delaware, Ohio, serving Delaware and Franklin County clients with trial and appellate defense.',
   homeSubtitle: 'Nick Mango | Practicing Since 1999 | Former Prosecutor',
   aboutMetaDescription:
     'Ohio criminal defense attorney, Ohio Supreme Court registration no. 0071238. Practicing in Central Ohio since 1999 and founded Mango Law in Delaware in February 2009.',

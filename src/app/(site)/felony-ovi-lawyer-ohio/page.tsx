@@ -4,7 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Felony OVI Lawyer in Ohio | Defense for High-Risk Cases',
+  title: 'Felony OVI Lawyer Ohio',
   description:
     'Facing felony OVI allegations in Ohio? Learn what raises risk, what the process can look like, and how early defense strategy can protect options.',
   image: '/images/generated/ovi-case-strategy.png',

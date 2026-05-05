@@ -7,7 +7,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Civil Protection Order Defense in Ohio | Hearing Preparation',
+  title: 'Civil Protection Order Defense Ohio',
   description:
     'Responding to a civil protection order in Ohio? Learn hearing-stage priorities, evidence prep, and defense strategy considerations.',
   image: '/images/generated/protection-order-defense-hero.png',

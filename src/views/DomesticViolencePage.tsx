@@ -57,7 +57,7 @@ export default function DomesticViolencePage() {
   return (
     <>
       <SEO
-        title="Domestic Violence Lawyer Delaware, OH | DV Defense | Mango Law"
+        title="Domestic Violence Lawyer Delaware OH"
         description={domesticViolencePageMetaDescription}
         image="/images/generated/blog-assault-domestic-violence.png"
         faqs={domesticViolenceFaqs}

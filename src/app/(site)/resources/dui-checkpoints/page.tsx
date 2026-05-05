@@ -13,7 +13,7 @@ import { supabaseAnonKey, supabaseUrl } from '@/lib/supabaseClient';
 import type { CheckpointHotspot, DateRangeOption } from '@/lib/checkpointService';
 
 const seo = {
-  title: 'Ohio DUI Checkpoint Map and Guide | Announced Checkpoints',
+  title: 'Ohio DUI Checkpoint Map',
   description:
     'Browse announced Ohio DUI checkpoints, understand how checkpoint stops work, and review your rights after an OVI checkpoint stop.',
   url: '/resources/dui-checkpoints',

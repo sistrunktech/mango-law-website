@@ -4,7 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'Protection Order Lawyer Delaware, OH | CPO Defense | Mango Law LLC',
+  title: 'Protection Order Lawyer Delaware OH',
   description:
     'Protection order lawyer in Delaware, Ohio for CPO hearings, no-contact issues, evidence preparation, and related domestic-violence case overlap.',
   image: '/images/generated/protection-order-defense-hero.png',

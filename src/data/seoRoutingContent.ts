@@ -5,13 +5,13 @@ export type SeoSupportLink = {
 };
 
 export const aboutPageMetaDescription =
-  'Learn about Dominic Mango, a Delaware, Ohio criminal defense and OVI attorney practicing since 1999, and start with the right page for OVI, domestic violence, drug charges, or broader criminal defense.';
+  'Learn about Dominic Mango, a Delaware, Ohio criminal defense and OVI attorney, and find the right next page for your case.';
 
 export const reviewsPageMetaDescription =
   'Read Mango Law client reviews, then compare the pages for OVI, criminal defense, domestic violence, and drug-charge matters in Delaware, Ohio.';
 
 export const contactPageMetaDescription =
-  'Contact Mango Law about OVI, criminal defense, domestic violence, drug charges, or protection-order issues in Delaware and Franklin County, Ohio.';
+  'Contact Mango Law for OVI, criminal defense, domestic violence, drug-charge, or protection-order issues in Delaware and Franklin County.';
 
 export const domesticViolencePageMetaDescription =
   'Domestic violence lawyer in Delaware, Ohio for cases involving bond conditions, no-contact orders, first-offense allegations, and protection-order overlap.';

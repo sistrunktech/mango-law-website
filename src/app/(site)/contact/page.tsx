@@ -5,7 +5,7 @@ import { buildMetadata } from '@/lib/seo-metadata';
 import { contactPageMetaDescription } from '@/data/seoRoutingContent';
 
 const seo = {
-  title: 'Contact Mango Law | Delaware, OH OVI & Criminal Defense Attorney',
+  title: 'Contact Mango Law',
   description: contactPageMetaDescription,
   url: '/contact',
 };

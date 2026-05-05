@@ -25,7 +25,7 @@ export default function AboutPage() {
   return (
     <>
       <SEO
-        title="About Dominic Mango | Delaware, OH Criminal Defense & OVI Attorney"
+        title="About Dominic Mango"
         description={aboutPageMetaDescription}
         structuredData={attorneySchema}
         breadcrumbs={[

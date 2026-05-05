@@ -7,7 +7,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 
 const seo = {
-  title: 'First Offense Domestic Violence Defense in Ohio | What to Do',
+  title: 'First Offense DV Defense Ohio',
   description:
     'Charged with domestic violence in Ohio for the first time? Understand immediate risks, court process, and defense strategy options.',
   image: '/images/generated/blog-assault-domestic-violence.png',

@@ -20,6 +20,32 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-04 23:42 EDT
+Post slug and title: May 2026 SEO/AEO support cluster | GSC indexing and OG image cleanup
+Change type: minor
+Summary of change: After action-time approval, submitted GSC Request Indexing for the eight May support posts and logged Search Console confirmation that each URL was on Google, indexed, HTTPS-valid, Breadcrumbs-valid, FAQ-valid, and added to Google's priority crawl queue; fixed the blog OpenGraph image endpoint's remaining build warning by adding explicit alt text and documenting the `ImageResponse`-specific `<img>` lint exception.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: User approved GSC Request Indexing and asked to address anything else that needed cleanup.
+Rollback notes: Restore the GSC log rows to pending status and remove the alt/lint-exception change in `src/app/(site)/blog/[slug]/opengraph-image.tsx`.
+
+Date/time: 2026-05-04 22:25 EDT
+Post slug and title: SEO metadata and structured data | Ahrefs audit cleanup
+Change type: minor
+Summary of change: Shortened SEO-only title and meta-description outputs for static pages, hydrated client-side SEO overrides, and blog posts without changing visible article titles or body copy; removed `dateIssued` from `EducationalOccupationalCredential` JSON-LD nodes after Ahrefs identified it as an unexpected Schema.org property; retained credential names, categories, recognizers, and attorney identifiers; added rendered metadata and GA4 lead-path QA evidence for the indexing gate.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: User asked to fix Ahrefs audit issues around titles, meta descriptions, and schema.
+Rollback notes: Restore the prior blog metadata generation in `src/app/(site)/blog/[slug]/page.tsx`, remove `src/lib/blog-seo.ts`, restore prior static page SEO titles/descriptions, and restore `dateIssued` fields in `src/lib/structured-data.ts`.
+
 Date/time: 2026-05-03 20:01 EDT
 Post slug and title: civil-protection-order-hearing-delaware-county-ohio | Civil Protection Order Hearing in Delaware County, Ohio: Evidence, Deadlines, and Defense Steps
 Change type: major
