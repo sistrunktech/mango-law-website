@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Activity, RefreshCw, CheckCircle, AlertTriangle, XCircle, Loader2 } from 'lucide-react';
-import { supabase, supabaseAnonKey, supabaseUrl } from '../lib/supabaseClient';
+import { supabase, supabaseUrl } from '../lib/supabaseClient';
 
 interface ScraperLog {
   id: string;
@@ -17,6 +17,15 @@ interface ScraperLog {
   errors: Array<{ checkpoint: string; error: string }>;
   metadata: any;
   created_at: string;
+}
+
+function getMetadataNumber(metadata: any, key: string): number {
+  const value = metadata?.[key];
+  return typeof value === 'number' && Number.isFinite(value) ? value : 0;
+}
+
+function getWarningSample(metadata: any): Array<{ checkpoint: string; error: string }> {
+  return Array.isArray(metadata?.warnings_sample) ? metadata.warnings_sample : [];
 }
 
 export default function ScraperLogsViewer() {
@@ -59,22 +68,35 @@ export default function ScraperLogsViewer() {
 
     setTriggering(true);
     try {
+      if (!supabase) {
+        throw new Error('Supabase client not initialized');
+      }
+
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
+
+      const accessToken = sessionData.session?.access_token;
+      if (!accessToken) {
+        throw new Error('Admin session required to trigger scraper');
+      }
+
       const functionUrl = `${supabaseUrl}/functions/v1/checkpoint-scraper`;
       const response = await fetch(functionUrl, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${supabaseAnonKey}`,
+          'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ trigger: 'manual' }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to trigger scraper');
+        const text = await response.text();
+        throw new Error(text || 'Failed to trigger scraper');
       }
 
       const result = await response.json();
-      alert(`Scraper completed!\n\nNew: ${result.stats.checkpointsNew}\nUpdated: ${result.stats.checkpointsUpdated}\nErrors: ${result.stats.errors.length}`);
+      alert(`Scraper completed with status: ${result.status || 'unknown'}\n\nNew: ${result.stats.checkpointsNew}\nUpdated: ${result.stats.checkpointsUpdated}\nWarnings: ${result.stats.warnings?.length || 0}\nErrors: ${result.stats.errors.length}`);
 
       setTimeout(() => {
         loadLogs();
@@ -153,11 +175,20 @@ export default function ScraperLogsViewer() {
         </div>
       ) : (
         <div className="space-y-3">
-          {logs.map((log) => (
-            <div
-              key={log.id}
-              className="rounded-lg border border-brand-black/10 bg-brand-offWhite p-4"
-            >
+          {logs.map((log) => {
+            const warningsCount = getMetadataNumber(log.metadata, 'warnings_count');
+            const rssFailed = getMetadataNumber(log.metadata, 'rss_sources_failed');
+            const rssChecked = getMetadataNumber(log.metadata, 'rss_sources_checked');
+            const withoutCoordinates = getMetadataNumber(log.metadata, 'checkpoints_without_coordinates');
+            const health = typeof log.metadata?.health === 'string' ? log.metadata.health : null;
+            const warningSample = getWarningSample(log.metadata);
+            const errors = Array.isArray(log.errors) ? log.errors : [];
+
+            return (
+              <div
+                key={log.id}
+                className="rounded-lg border border-brand-black/10 bg-brand-offWhite p-4"
+              >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start gap-3">
                   {getStatusIcon(log.status)}
@@ -177,6 +208,11 @@ export default function ScraperLogsViewer() {
                       >
                         {log.status}
                       </span>
+                      {health && (
+                        <span className="rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-brand-black/60">
+                          {health}
+                        </span>
+                      )}
                     </div>
                     <p className="mt-1 text-xs text-brand-black/60">
                       {new Date(log.started_at).toLocaleString()}
@@ -198,32 +234,62 @@ export default function ScraperLogsViewer() {
                     <p className="font-semibold text-blue-600">{log.checkpoints_updated}</p>
                     <p className="text-brand-black/60">Updated</p>
                   </div>
-                  {log.errors.length > 0 && (
+                  {errors.length > 0 && (
                     <div>
-                      <p className="font-semibold text-red-600">{log.errors.length}</p>
+                      <p className="font-semibold text-red-600">{errors.length}</p>
                       <p className="text-brand-black/60">Errors</p>
+                    </div>
+                  )}
+                  {warningsCount > 0 && (
+                    <div>
+                      <p className="font-semibold text-amber-600">{warningsCount}</p>
+                      <p className="text-brand-black/60">Warnings</p>
                     </div>
                   )}
                 </div>
               </div>
 
-              {log.errors.length > 0 && (
+              {(rssChecked > 0 || withoutCoordinates > 0) && (
+                <div className="mt-3 flex flex-wrap gap-2 text-xs text-brand-black/60">
+                  {rssChecked > 0 && (
+                    <span>RSS: {rssChecked - rssFailed}/{rssChecked} sources healthy</span>
+                  )}
+                  {withoutCoordinates > 0 && (
+                    <span>{withoutCoordinates} saved without coordinates</span>
+                  )}
+                </div>
+              )}
+
+              {errors.length > 0 && (
                 <div className="mt-3 rounded border border-red-200 bg-red-50 p-2">
                   <p className="mb-1 text-xs font-semibold text-red-900">Errors:</p>
                   <ul className="space-y-1 text-xs text-red-800">
-                    {log.errors.slice(0, 3).map((err, idx) => (
+                    {errors.slice(0, 3).map((err, idx) => (
                       <li key={idx}>
                         <span className="font-semibold">{err.checkpoint}:</span> {err.error}
                       </li>
                     ))}
-                    {log.errors.length > 3 && (
-                      <li className="text-red-600">+{log.errors.length - 3} more errors</li>
+                    {errors.length > 3 && (
+                      <li className="text-red-600">+{errors.length - 3} more errors</li>
                     )}
                   </ul>
                 </div>
               )}
-            </div>
-          ))}
+              {warningSample.length > 0 && (
+                <div className="mt-3 rounded border border-amber-200 bg-amber-50 p-2">
+                  <p className="mb-1 text-xs font-semibold text-amber-900">Warnings:</p>
+                  <ul className="space-y-1 text-xs text-amber-800">
+                    {warningSample.slice(0, 3).map((warning, idx) => (
+                      <li key={idx}>
+                        <span className="font-semibold">{warning.checkpoint}:</span> {warning.error}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

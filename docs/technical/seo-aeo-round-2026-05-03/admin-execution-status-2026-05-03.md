@@ -30,3 +30,18 @@ Date: 2026-05-03
 
 - Fresh public-source checks still did not find exact mappable time/location details for Solon or Summit County May 5, 2026 checkpoints.
 - The existing Solon/Summit monitor remains the right path: keep pending rows pending until exact time windows and street-level or mappable locations publish.
+
+## 2026-05-09 Follow-Up
+
+- Production has been redeployed and `https://mango.law/sitemap.xml` now returns `200` with 59 URLs, including the previously blocked May blog routes.
+- The nine blog URLs that were pending because production returned `404` are now live; GSC API follow-up shows those rows are indexed or do not need a new request.
+- Browser GSC requests submitted on 2026-05-09:
+  - `https://mango.law/blog/no-contact-order-vs-civil-protection-order-ohio`
+  - `https://mango.law/blog/ohio-dui-checkpoint-hotspots`
+  - `https://mango.law/protection-order-lawyer-delaware-oh`
+  - `https://mango.law/sex-crime-defense-lawyer-delaware-oh`
+- Browser GSC request not confirmed:
+  - `https://mango.law/white-collar-crimes-attorney-delaware-oh` was opened for the next request, but the browser changed focus before a Search Console confirmation was observed. Treat it as pending until the 2026-05-16 recheck or the next browser-owned pass.
+- Low-value unknown URL skipped:
+  - `https://mango.law/privacy` remains low SEO value and was not submitted.
+- Detailed row-level status lives in `gsc-indexing-submission-log.csv`; broader queue and reporting-overhaul notes live in `seo-ops-hardening-and-next-queue-2026-05-09.md`.

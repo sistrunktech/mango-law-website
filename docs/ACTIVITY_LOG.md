@@ -13,6 +13,12 @@ Notes:
 
 ## Entries
 
+Date/time: 2026-05-09 17:25 EDT
+Category: SEO Ops / Security + Automation Hardening
+Summary: Hardened the Google OAuth/admin SEO endpoints, restored reliable authenticated rank checks, repaired the DUI checkpoint scraper's scheduled execution path, and redeployed production after verifying the recovered May blog URLs are live and in the sitemap.
+Files: src/components/ScraperLogsViewer.tsx; src/components/admin/SEORankManager.tsx; src/components/CheckpointMap.tsx; supabase/functions/_shared/admin-auth.ts; supabase/functions/check-rankings/*; supabase/functions/checkpoint-scraper/*; supabase/functions/google-oauth-*; supabase/migrations/20260509120000_harden_admin_oauth_and_seo_rls.sql; supabase/migrations/20260509210500_harden_checkpoint_scraper_scheduler.sql; supabase/migrations/20260509212500_add_checkpoint_scheduler_private_settings.sql; docs/technical/seo-aeo-round-2026-05-03/seo-ops-hardening-and-next-queue-2026-05-09.md
+Notes: Live verification showed `checkpoint-scraper` can no longer be called anonymously, the scheduler now invokes it every 4 hours with service-role auth, the latest scheduled run completed successfully with warnings only for public notices that do not disclose a mappable location, and `check-rankings` returned 17/17 successful keyword checks.
+
 Date/time: 2025-12-14
 Category: Performance / Crawlability
 Summary: Captured PageSpeed Insights baseline (homepage) and documented a prioritized fix plan (image delivery, third-party badge, render-blocking requests, a11y targets).

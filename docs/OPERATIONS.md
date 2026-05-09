@@ -61,8 +61,8 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - **Email templates** (shared): `submit-contact`, `submit-lead`, and `chat-intake` generate email HTML via `supabase/functions/_shared/email/*`.
   - Theme/season toggles: `APP_THEME` (`dark|light`), `APP_SEASON` (`spring|summer|fall|winter`), `APP_HOLIDAY` (`true|false`).
   - Host links: `FRONTEND_URL` (fallback: `NEXT_PUBLIC_SITE_URL`, then `https://mango.law`).
-- **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, ingests newsroom/search announcement candidates, and upserts checkpoint data to the database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
-- **check-rankings**: Search Intelligence job that pulls Serper.dev results for active keywords and writes ranking history to `seo_rankings`. Requires `SERPER_API_KEY` and service-role access (no fallback key).
+- **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, ingests newsroom/search announcement candidates, and upserts checkpoint data to the database. Logs all execution details to `scraper_logs` table. Requires an authenticated admin session or verified service-role invocation.
+- **check-rankings**: Search Intelligence job that pulls Serper.dev results for active keywords and writes ranking history to `seo_rankings`. Requires `SERPER_API_KEY` and an authenticated admin session or verified service-role invocation. A run where every keyword fails should return a failed status instead of being treated as successful.
 - **generate-review-response**: Generates draft responses for reviews using the configured AI provider/model.
 - **sync-google-reviews**: Syncs Google reviews into the DB (used by admin dashboard).
 - **google-oauth-connect / google-oauth-callback**: OAuth connect + callback endpoints for GBP/GA/GSC/GTM token storage. Callback must allow unauthenticated Google redirects (no Supabase `Authorization` header).
@@ -132,7 +132,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - **Indexes**: Comprehensive indexes on frequently queried columns including composite indexes for date range queries, location searches, and rate limiting.
 - **Functions**: Helper functions for `increment_column()` (generic counter for views/metrics), `increment()` (backward-compatible wrapper), `increment_geocoding_cache_hit()`, `cleanup_old_scraper_logs()`, `update_checkpoint_status()` (auto-transitions statuses), `invoke_checkpoint_scraper()`, `trigger_checkpoint_scraper_now()`.
 - **Security hardening**: Database functions now set `search_path = public, pg_temp` via migration `20251228180000_secure_function_search_paths.sql` to address mutable search path warnings.
-- **pg_cron Extension**: Enabled for scheduled jobs. Daily scraper runs at 2:00 AM EST (7:00 AM UTC).
+- **pg_cron Extension**: Enabled for scheduled jobs. The checkpoint scraper runs every 4 hours. The database trigger reads the Supabase URL and service-role key from locked `private_app_settings` rows and invokes the Edge Function through pg_net.
 - **pg_net Extension**: Enabled for async HTTP requests from database functions to Edge Functions.
 - **Backups/PITR**: Via Supabase defaults; add monitoring alerts when available.
 
@@ -160,8 +160,8 @@ Project ref (prod): `rgucewewminsevbjgcad`
   - **Pending announcements**: RSS ingestion stores “details pending” items in `dui_checkpoint_announcements` (list-only; no map pins).
 - **Transparency**: The UI surfaces “Announced on” dates when available and displays an explicit “No announced checkpoints at this time” empty state.
 - **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
-- **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints will be inserted without `latitude/longitude` and the map will show few/no markers.
-- **Scraper Schedule**: Runs every 4 hours via pg_cron. Manual trigger available in admin dashboard.
+- **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints may be inserted without `latitude/longitude`; public notices that intentionally withhold a mappable location are logged as warnings instead of blocking failures.
+- **Scraper Schedule**: Runs every 4 hours via pg_cron. Manual trigger is available in the authenticated admin dashboard and sends the admin session access token to the Edge Function.
 - **One-time data repair (OVICheckpoint history)**: If historical checkpoint dates were corrupted by an earlier scraper regression, use `scripts/backfill-ovicheckpoint-dates.ts`:
   - Dry-run: `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts`
   - Apply (safe insert only): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode upsert --apply`

@@ -147,7 +147,20 @@ export default function SEORankManager() {
       const { data, error } = await supabase.functions.invoke('check-rankings');
       if (error) throw error;
       await loadKeywordData();
-      alert('Rank check completed successfully!');
+      const processed = typeof data?.processed === 'number' ? data.processed : 0;
+      const successCount = typeof data?.successCount === 'number' ? data.successCount : processed;
+      const failureCount = typeof data?.failureCount === 'number' ? data.failureCount : 0;
+
+      if (data?.success === false || failureCount === processed) {
+        throw new Error(`Rank check failed for all ${processed} keywords`);
+      }
+
+      if (failureCount > 0) {
+        alert(`Rank check completed with warnings.\n\nSuccessful: ${successCount}\nFailed: ${failureCount}`);
+        return;
+      }
+
+      alert(`Rank check completed successfully.\n\nChecked: ${processed}`);
     } catch (err) {
       console.error('Error triggering rank check:', err);
       alert(`Error: ${err instanceof Error ? err.message : 'Failed to trigger check'}`);

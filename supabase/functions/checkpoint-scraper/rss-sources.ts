@@ -20,8 +20,21 @@ const TEMP_DISABLED_RSS_URLS = new Set([
   'https://www.13abc.com/feeds/rss/',
 ]);
 
+const REPLACEMENT_RSS_URLS = new Map([
+  [
+    'https://feeds.feedblitz.com/wtol/news',
+    'https://www.wtol.com/feeds/syndication/rss/news',
+  ],
+]);
+
+function normalizeRssUrl(url: string): string {
+  const trimmed = url.trim();
+  return REPLACEMENT_RSS_URLS.get(trimmed) || trimmed;
+}
+
 function isEnabledRssUrl(url: string): boolean {
-  return Boolean(url) && !TEMP_DISABLED_RSS_URLS.has(url.trim());
+  const normalizedUrl = normalizeRssUrl(url);
+  return Boolean(normalizedUrl) && !TEMP_DISABLED_RSS_URLS.has(normalizedUrl);
 }
 
 export interface RssSource {
@@ -62,7 +75,7 @@ export async function loadMasterRssSources(): Promise<RssSource[]> {
   return dataRows
     .map((r) => ({
       sourceName: r[iSourceName] || '',
-      rssUrl: r[iUrl] || '',
+      rssUrl: normalizeRssUrl(r[iUrl] || ''),
       sourceType: r[iType] || '',
       tier: r[iTier] || '',
       confidence: r[iConfidence] || '',
@@ -96,7 +109,7 @@ export async function loadSeedSources(seedRow?: number): Promise<SeedSource[]> {
         county: r[iCounty] || '',
         city: (r[iCity] || '').trim() || null,
         sourceName: r[iSourceName] || '',
-        rssUrl: r[iUrl] || '',
+        rssUrl: normalizeRssUrl(r[iUrl] || ''),
         sourceType: r[iType] || '',
         tier: r[iTier] || '',
         confidence: r[iConfidence] || '',

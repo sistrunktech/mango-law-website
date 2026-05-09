@@ -1,9 +1,11 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
+import { requireAdmin } from '../_shared/admin-auth.ts';
 import { scrapeOVICheckpoint } from './ovicheckpoint-scraper.ts';
-import { geocodeCheckpointLocation, parseAddress } from './geocoding.ts';
+import { geocodeCheckpointLocation, parseAddress, shouldSkipCheckpointGeocoding } from './geocoding.ts';
 import { loadMasterRssSources, loadSeedSources } from './rss-sources.ts';
 import { scrapeRssSources, scrapeSeedSources } from './rss-scraper.ts';
 import { discoverCheckpointAnnouncements } from './search-discovery.ts';
+import { determineScraperHealth, determineScraperRunStatus } from './run-health.ts';
 import {
   loadCuratedAnnouncementSeeds,
   type CuratedAnnouncementSeed,
@@ -17,15 +19,34 @@ const corsHeaders = {
 
 const RSS_ANNOUNCEMENT_LOOKBACK_DAYS = 21;
 
+type SupabaseAdminClient = any;
+
 interface ScraperStats {
   checkpointsFound: number;
   checkpointsNew: number;
   checkpointsUpdated: number;
   checkpointsSkipped: number;
+  checkpointsWithoutCoordinates: number;
+  checkpointsGeocodingSkipped: number;
+  checkpointsGeocodingFailed: number;
   checkpointsHeuristicMatched: number;
   announcementsFound: number;
   announcementsUpserted: number;
+  rssSourcesChecked: number;
+  rssSourcesFailed: number;
+  warnings: Array<{ checkpoint: string; error: string }>;
   errors: Array<{ checkpoint: string; error: string }>;
+}
+
+function isMissingCoordinateWarning(error: { error: string }): boolean {
+  return /without coordinates|geocoding/i.test(error.error);
+}
+
+function getGeocodingSkippedWarning(checkpoint: string): { checkpoint: string; error: string } {
+  return {
+    checkpoint,
+    error: 'Location intentionally not geocoded because the public source did not publish a specific mappable location',
+  };
 }
 
 function isAggregatorSourceName(sourceName: unknown): boolean {
@@ -79,7 +100,7 @@ function isSameCheckpointLocation(left: unknown, right: unknown): boolean {
 }
 
 async function findExistingCheckpointMatch(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseAdminClient,
   input: {
     title: string;
     locationAddress: string;
@@ -121,13 +142,13 @@ async function findExistingCheckpointMatch(
   if (candidateError) throw candidateError;
   if (!candidates?.length) return null;
 
-  const best = candidates
-    .filter((row) => isSameCheckpointLocation((row as any).location_address, input.locationAddress))
-    .map((row) => ({
+  const best = (candidates as any[])
+    .filter((row: any) => isSameCheckpointLocation(row.location_address, input.locationAddress))
+    .map((row: any) => ({
       row,
-      distance: Math.abs(new Date((row as any).start_date as string).getTime() - startTimeMs),
+      distance: Math.abs(new Date(row.start_date as string).getTime() - startTimeMs),
     }))
-    .sort((a, b) => a.distance - b.distance)[0];
+    .sort((a: { distance: number }, b: { distance: number }) => a.distance - b.distance)[0];
 
   if (!best) return null;
 
@@ -144,7 +165,7 @@ async function findExistingCheckpointMatch(
 }
 
 async function upsertAnnouncement(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseAdminClient,
   payload: Record<string, unknown>
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const sourceUrl = typeof payload.source_url === 'string' ? payload.source_url : null;
@@ -199,7 +220,7 @@ function stripUrlHash(sourceUrl: string): string {
 }
 
 async function upsertCuratedCheckpoint(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseAdminClient,
   mapboxToken: string | undefined,
   seed: CuratedAnnouncementSeed,
   stats: ScraperStats
@@ -214,15 +235,15 @@ async function upsertCuratedCheckpoint(
     return;
   }
 
-  const geocoded = await geocodeCheckpointLocation(
-    {
-      address: seed.locationText,
-      city: seed.locationCity,
-      county: seed.locationCounty,
-    },
-    supabase,
-    mapboxToken
-  );
+  const geocodingInput = {
+    address: seed.locationText,
+    city: seed.locationCity,
+    county: seed.locationCounty,
+  };
+  const geocodingSkipped = shouldSkipCheckpointGeocoding(geocodingInput);
+  const geocoded = geocodingSkipped
+    ? null
+    : await geocodeCheckpointLocation(geocodingInput, supabase, mapboxToken);
 
   const checkpointData = {
     title: seed.checkpointTitle ?? seed.title,
@@ -238,7 +259,7 @@ async function upsertCuratedCheckpoint(
     source_name: seed.sourceName,
     description: seed.rawText || null,
     updated_at: new Date().toISOString(),
-    geocoding_confidence: geocoded?.confidence || 'none',
+    geocoding_confidence: geocodingSkipped ? 'undisclosed' : geocoded?.confidence || 'none',
     last_geocoded_at: geocoded ? new Date().toISOString() : null,
   };
 
@@ -273,15 +294,23 @@ async function upsertCuratedCheckpoint(
 
   if (!geocoded) {
     stats.checkpointsSkipped++;
-    stats.errors.push({
-      checkpoint: seed.title,
-      error: 'Geocoding failed (saved without coordinates)',
-    });
+    stats.checkpointsWithoutCoordinates++;
+
+    if (geocodingSkipped) {
+      stats.checkpointsGeocodingSkipped++;
+      stats.warnings.push(getGeocodingSkippedWarning(seed.title));
+    } else {
+      stats.checkpointsGeocodingFailed++;
+      stats.warnings.push({
+        checkpoint: seed.title,
+        error: 'Geocoding failed (saved without coordinates)',
+      });
+    }
   }
 }
 
 async function ingestCuratedAnnouncements(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseAdminClient,
   mapboxToken: string | undefined,
   stats: ScraperStats
 ): Promise<void> {
@@ -340,9 +369,15 @@ Deno.serve(async (req: Request) => {
     checkpointsNew: 0,
     checkpointsUpdated: 0,
     checkpointsSkipped: 0,
+    checkpointsWithoutCoordinates: 0,
+    checkpointsGeocodingSkipped: 0,
+    checkpointsGeocodingFailed: 0,
     checkpointsHeuristicMatched: 0,
     announcementsFound: 0,
     announcementsUpserted: 0,
+    rssSourcesChecked: 0,
+    rssSourcesFailed: 0,
+    warnings: [],
     errors: [],
   };
 
@@ -360,6 +395,12 @@ Deno.serve(async (req: Request) => {
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    const auth = await requireAdmin(req, supabase, corsHeaders, {
+      allowVerifiedServiceRoleJwt: true,
+    });
+    if (!auth.ok) {
+      return auth.response;
+    }
 
     const requestBody = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
     const mode = requestBody?.mode === 'discovery' ? 'discovery' : 'core';
@@ -372,13 +413,16 @@ Deno.serve(async (req: Request) => {
     const logId = crypto.randomUUID();
     const logStartTime = new Date().toISOString();
 
-    await supabase.from('scraper_logs').insert({
+    const { error: logInsertError } = await supabase.from('scraper_logs').insert({
       id: logId,
       scraper_name: 'checkpoint-scraper',
       status: 'partial',
       started_at: logStartTime,
       metadata: { trigger, mode, seedRow, source: 'OVICheckpoint + RSS + curated + search' },
     });
+    if (logInsertError) {
+      console.error('Failed to create scraper log:', logInsertError);
+    }
 
     console.log('Starting OVICheckpoint.com scraper...');
     const rawCheckpoints = await scrapeOVICheckpoint();
@@ -389,16 +433,11 @@ Deno.serve(async (req: Request) => {
     for (const raw of rawCheckpoints) {
       try {
         const { address, city, county } = parseAddress(raw.location);
-
-        const geocoded = await geocodeCheckpointLocation(
-          {
-            address,
-            city,
-            county,
-          },
-          supabase,
-          mapboxToken
-        );
+        const geocodingInput = { address, city, county };
+        const geocodingSkipped = shouldSkipCheckpointGeocoding(geocodingInput);
+        const geocoded = geocodingSkipped
+          ? null
+          : await geocodeCheckpointLocation(geocodingInput, supabase, mapboxToken);
 
         if (!geocoded) {
           console.warn(`Checkpoint has no geocode (still saving): ${raw.title}`);
@@ -418,7 +457,7 @@ Deno.serve(async (req: Request) => {
           source_name: 'OVICheckpoint.com',
           description: raw.description || null,
           updated_at: new Date().toISOString(),
-          geocoding_confidence: geocoded?.confidence || 'none',
+          geocoding_confidence: geocodingSkipped ? 'undisclosed' : geocoded?.confidence || 'none',
           last_geocoded_at: geocoded ? new Date().toISOString() : null,
         };
 
@@ -475,10 +514,18 @@ Deno.serve(async (req: Request) => {
 
         if (!geocoded) {
           stats.checkpointsSkipped++;
-          stats.errors.push({
-            checkpoint: raw.title,
-            error: 'Geocoding failed (saved without coordinates)',
-          });
+          stats.checkpointsWithoutCoordinates++;
+
+          if (geocodingSkipped) {
+            stats.checkpointsGeocodingSkipped++;
+            stats.warnings.push(getGeocodingSkippedWarning(raw.title));
+          } else {
+            stats.checkpointsGeocodingFailed++;
+            stats.warnings.push({
+              checkpoint: raw.title,
+              error: 'Geocoding failed (saved without coordinates)',
+            });
+          }
         }
       } catch (error) {
         console.error(`Error processing checkpoint: ${raw.title}`, error);
@@ -497,10 +544,12 @@ Deno.serve(async (req: Request) => {
           maxSources: sources.length,
           maxAgeDays: RSS_ANNOUNCEMENT_LOOKBACK_DAYS,
         });
+        stats.rssSourcesChecked += results.length;
 
         for (const r of results) {
           if (r.error) {
-            stats.errors.push({ checkpoint: `RSS: ${r.source.sourceName}`, error: r.error });
+            stats.rssSourcesFailed++;
+            stats.warnings.push({ checkpoint: `RSS: ${r.source.sourceName}`, error: r.error });
             continue;
           }
           stats.announcementsFound += r.items.length;
@@ -530,10 +579,14 @@ Deno.serve(async (req: Request) => {
       } else {
         const seeds = await loadSeedSources(seedRow);
         const seedResults = await scrapeSeedSources(seeds, { maxUniqueUrls: 12 });
+        const seedUrlsChecked = new Set(seedResults.map((r) => r.seed.rssUrl));
+        const seedUrlsFailed = new Set(seedResults.filter((r) => r.error).map((r) => r.seed.rssUrl));
+        stats.rssSourcesChecked += seedUrlsChecked.size;
+        stats.rssSourcesFailed += seedUrlsFailed.size;
 
         for (const r of seedResults) {
           if (r.error) {
-            stats.errors.push({ checkpoint: `RSS seed ${r.seed.seedRow}: ${r.seed.sourceName}`, error: r.error });
+            stats.warnings.push({ checkpoint: `RSS seed ${r.seed.seedRow}: ${r.seed.sourceName}`, error: r.error });
             continue;
           }
           stats.announcementsFound += r.items.length;
@@ -591,7 +644,7 @@ Deno.serve(async (req: Request) => {
             }
           }
         } catch (error) {
-          stats.errors.push({
+          stats.warnings.push({
             checkpoint: 'Search discovery',
             error: error instanceof Error ? error.message : String(error),
           });
@@ -610,9 +663,16 @@ Deno.serve(async (req: Request) => {
 
     const duration = Date.now() - startTime;
     const didWork = stats.checkpointsNew + stats.checkpointsUpdated + stats.announcementsUpserted > 0;
-    const finalStatus = stats.errors.length === 0 ? 'success' : didWork ? 'partial' : 'failed';
+    const healthInput = {
+      didWork,
+      blockingErrorCount: stats.errors.length,
+      warningCount: stats.warnings.length,
+    };
+    const finalStatus = determineScraperRunStatus(healthInput);
+    const health = determineScraperHealth(healthInput);
+    const warningSamples = stats.warnings.filter((warning) => !isMissingCoordinateWarning(warning)).slice(0, 10);
 
-    await supabase
+    const { error: logUpdateError } = await supabase
       .from('scraper_logs')
       .update({
         status: finalStatus,
@@ -624,21 +684,41 @@ Deno.serve(async (req: Request) => {
         errors: stats.errors,
         metadata: {
           trigger,
-          skipped: stats.checkpointsSkipped,
+          triggered_by: auth.admin.userEmail,
+          triggered_by_role: auth.admin.role,
+          health,
+          warnings_count: stats.warnings.length,
+          warnings_sample: warningSamples,
+          geocoding_warnings_count: stats.warnings.filter(isMissingCoordinateWarning).length,
+          errors_count: stats.errors.length,
+          checkpoints_skipped: stats.checkpointsSkipped,
+          checkpoints_without_coordinates: stats.checkpointsWithoutCoordinates,
+          checkpoints_geocoding_skipped: stats.checkpointsGeocodingSkipped,
+          checkpoints_geocoding_failed: stats.checkpointsGeocodingFailed,
+          checkpoints_heuristic_matched: stats.checkpointsHeuristicMatched,
           announcements_found: stats.announcementsFound,
           announcements_upserted: stats.announcementsUpserted,
+          rss_sources_checked: stats.rssSourcesChecked,
+          rss_sources_failed: stats.rssSourcesFailed,
           mode,
           seedRow,
         },
       })
       .eq('id', logId);
 
+    if (logUpdateError) {
+      console.error('Failed to update scraper log:', logUpdateError);
+    }
+
     return new Response(
       JSON.stringify({
         success: true,
         message: `Scraper completed: ${stats.checkpointsNew} new, ${stats.checkpointsUpdated} updated`,
+        status: finalStatus,
+        health,
         stats,
         duration_ms: duration,
+        triggered_by: auth.admin.userEmail,
       }),
       {
         status: 200,

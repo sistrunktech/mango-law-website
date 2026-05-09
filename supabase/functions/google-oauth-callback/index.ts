@@ -4,10 +4,22 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
+  "Access-Control-Allow-Headers":
+    "Content-Type, Authorization, X-Client-Info, Apikey",
 };
 
-type IntegrationType = 'business_profile' | 'analytics' | 'search_console' | 'tag_manager';
+type IntegrationType =
+  | "business_profile"
+  | "analytics"
+  | "search_console"
+  | "tag_manager";
+
+const INTEGRATION_TYPES: IntegrationType[] = [
+  "business_profile",
+  "analytics",
+  "search_console",
+  "tag_manager",
+];
 
 interface TokenResponse {
   access_token: string;
@@ -31,15 +43,52 @@ interface GBPLocation {
   address?: { formattedAddress: string };
 }
 
-async function discoverGBPLocations(accessToken: string): Promise<{ accountId: string; locationId: string } | null> {
+function isIntegrationType(value: unknown): value is IntegrationType {
+  return typeof value === "string" &&
+    INTEGRATION_TYPES.includes(value as IntegrationType);
+}
+
+function base64UrlDecode(value: string): string {
+  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = normalized.padEnd(
+    normalized.length + ((4 - (normalized.length % 4)) % 4),
+    "=",
+  );
+  return atob(padded);
+}
+
+async function sha256Hex(value: string): Promise<string> {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function getRedirectOrigin(req: Request): string {
+  const configured = Deno.env.get("OAUTH_FUNCTION_ORIGIN");
+  if (configured) return configured.replace(/\/$/, "");
+
+  const requestOrigin = new URL(req.url).origin;
+  return requestOrigin.startsWith("http://")
+    ? requestOrigin.replace("http://", "https://")
+    : requestOrigin;
+}
+
+async function discoverGBPLocations(
+  accessToken: string,
+): Promise<{ accountId: string; locationId: string } | null> {
   try {
     const accountsResponse = await fetch(
-      'https://mybusinessaccountmanagement.googleapis.com/v1/accounts',
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      "https://mybusinessaccountmanagement.googleapis.com/v1/accounts",
+      { headers: { Authorization: `Bearer ${accessToken}` } },
     );
 
     if (!accountsResponse.ok) {
-      console.error('Failed to fetch GBP accounts:', await accountsResponse.text());
+      console.error(
+        "Failed to fetch GBP accounts:",
+        await accountsResponse.text(),
+      );
       return null;
     }
 
@@ -47,7 +96,7 @@ async function discoverGBPLocations(accessToken: string): Promise<{ accountId: s
     const accounts: GBPAccount[] = accountsData.accounts || [];
 
     if (accounts.length === 0) {
-      console.log('No GBP accounts found');
+      console.log("No GBP accounts found");
       return null;
     }
 
@@ -56,20 +105,23 @@ async function discoverGBPLocations(accessToken: string): Promise<{ accountId: s
 
     const locationsResponse = await fetch(
       `https://mybusinessbusinessinformation.googleapis.com/v1/${accountId}/locations`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: { Authorization: `Bearer ${accessToken}` } },
     );
 
     if (!locationsResponse.ok) {
-      console.error('Failed to fetch GBP locations:', await locationsResponse.text());
-      return { accountId, locationId: '' };
+      console.error(
+        "Failed to fetch GBP locations:",
+        await locationsResponse.text(),
+      );
+      return { accountId, locationId: "" };
     }
 
     const locationsData = await locationsResponse.json();
     const locations: GBPLocation[] = locationsData.locations || [];
 
     if (locations.length === 0) {
-      console.log('No GBP locations found');
-      return { accountId, locationId: '' };
+      console.log("No GBP locations found");
+      return { accountId, locationId: "" };
     }
 
     return {
@@ -77,7 +129,7 @@ async function discoverGBPLocations(accessToken: string): Promise<{ accountId: s
       locationId: locations[0].name,
     };
   } catch (error) {
-    console.error('Error discovering GBP locations:', error);
+    console.error("Error discovering GBP locations:", error);
     return null;
   }
 }
@@ -92,75 +144,144 @@ Deno.serve(async (req: Request) => {
 
   try {
     const url = new URL(req.url);
-    const code = url.searchParams.get('code');
-    const stateParam = url.searchParams.get('state');
-    const error = url.searchParams.get('error');
+    const code = url.searchParams.get("code");
+    const stateParam = url.searchParams.get("state");
+    const error = url.searchParams.get("error");
 
-    const frontendUrl = Deno.env.get('FRONTEND_URL') || 'https://mango.law';
+    const frontendUrl = Deno.env.get("FRONTEND_URL") || "https://mango.law";
 
     if (error) {
-      console.error('OAuth error:', error);
-      return Response.redirect(`${frontendUrl}/admin/connections?error=${encodeURIComponent(error)}`, 302);
+      console.error("OAuth error:", error);
+      return Response.redirect(
+        `${frontendUrl}/admin/connections?error=${encodeURIComponent(error)}`,
+        302,
+      );
     }
 
     if (!code || !stateParam) {
-      return Response.redirect(`${frontendUrl}/admin/connections?error=missing_params`, 302);
+      return Response.redirect(
+        `${frontendUrl}/admin/connections?error=missing_params`,
+        302,
+      );
     }
 
-    let integrationType: IntegrationType = 'business_profile';
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ||
+      Deno.env.get("SERVICE_ROLE_KEY");
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error("Supabase service credentials not configured");
+    }
+
+    const supabase: any = createClient(supabaseUrl, supabaseKey);
+    let integrationType: IntegrationType = "business_profile";
+    let nonce = "";
     try {
-      const state = JSON.parse(atob(stateParam));
-      integrationType = state.integrationType || 'business_profile';
+      const state = JSON.parse(base64UrlDecode(stateParam));
+      if (
+        !isIntegrationType(state.integrationType) ||
+        typeof state.nonce !== "string" || !state.nonce
+      ) {
+        return Response.redirect(
+          `${frontendUrl}/admin/connections?error=invalid_state`,
+          302,
+        );
+      }
+      integrationType = state.integrationType;
+      nonce = state.nonce;
     } catch (e) {
-      console.error('Failed to parse state:', e);
+      console.error("Failed to parse state:", e);
+      return Response.redirect(
+        `${frontendUrl}/admin/connections?error=invalid_state`,
+        302,
+      );
     }
 
-    const googleClientId = Deno.env.get('GOOGLE_CLIENT_ID');
-    const googleClientSecret = Deno.env.get('GOOGLE_CLIENT_SECRET');
-    // Derive from request origin to prevent cross-project/env drift.
-    // Supabase edge runtime may report `http://` internally; always use `https://` for Google OAuth.
-    const requestOrigin = new URL(req.url).origin;
-    const origin = requestOrigin.startsWith('http://')
-      ? requestOrigin.replace('http://', 'https://')
-      : requestOrigin;
-    const redirectUri = `${origin}/functions/v1/google-oauth-callback`;
+    const nonceHash = await sha256Hex(nonce);
+    const { data: oauthState, error: stateReadError } = await supabase
+      .from("google_oauth_states")
+      .select(
+        "nonce_hash, requested_by_email, requested_by_user_id, created_at",
+      )
+      .eq("nonce_hash", nonceHash)
+      .eq("integration_type", integrationType)
+      .is("consumed_at", null)
+      .gt("expires_at", new Date().toISOString())
+      .maybeSingle();
+
+    if (stateReadError) {
+      console.error("Failed to read OAuth state:", stateReadError);
+      return Response.redirect(
+        `${frontendUrl}/admin/connections?error=state_read_failed`,
+        302,
+      );
+    }
+
+    if (!oauthState) {
+      return Response.redirect(
+        `${frontendUrl}/admin/connections?error=invalid_state`,
+        302,
+      );
+    }
+
+    const { data: consumedStates, error: stateUpdateError } = await supabase
+      .from("google_oauth_states")
+      .update({ consumed_at: new Date().toISOString() })
+      .eq("nonce_hash", nonceHash)
+      .is("consumed_at", null)
+      .select("nonce_hash");
+
+    if (stateUpdateError || !consumedStates || consumedStates.length !== 1) {
+      console.error("Failed to consume OAuth state:", stateUpdateError);
+      return Response.redirect(
+        `${frontendUrl}/admin/connections?error=state_update_failed`,
+        302,
+      );
+    }
+
+    const googleClientId = Deno.env.get("GOOGLE_CLIENT_ID");
+    const googleClientSecret = Deno.env.get("GOOGLE_CLIENT_SECRET");
+    const redirectUri = `${
+      getRedirectOrigin(req)
+    }/functions/v1/google-oauth-callback`;
 
     if (!googleClientId || !googleClientSecret) {
-      throw new Error('Google OAuth credentials not configured');
+      throw new Error("Google OAuth credentials not configured");
     }
 
-    const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
         code,
         client_id: googleClientId,
         client_secret: googleClientSecret,
         redirect_uri: redirectUri,
-        grant_type: 'authorization_code',
+        grant_type: "authorization_code",
       }),
     });
 
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
-      console.error('Token exchange failed:', errorText);
-      return Response.redirect(`${frontendUrl}/admin/connections?error=token_exchange_failed`, 302);
+      console.error("Token exchange failed:", errorText);
+      return Response.redirect(
+        `${frontendUrl}/admin/connections?error=token_exchange_failed`,
+        302,
+      );
     }
 
     const tokens: TokenResponse = await tokenResponse.json();
 
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
-    let accountId = '';
-    let locationId = '';
+    let accountId = "";
+    let locationId = "";
     const metadata: Record<string, unknown> = {
-      scopes: tokens.scope?.split(' ') || [],
+      scopes: tokens.scope?.split(" ") || [],
       connectedAt: new Date().toISOString(),
+      requestedByEmail: oauthState.requested_by_email,
+      requestedByUserId: oauthState.requested_by_user_id,
+      stateCreatedAt: oauthState.created_at,
     };
 
-    if (integrationType === 'business_profile') {
+    if (integrationType === "business_profile") {
       const discovery = await discoverGBPLocations(tokens.access_token);
       if (discovery) {
         accountId = discovery.accountId;
@@ -169,17 +290,21 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    const tokenExpiresAt = new Date(Date.now() + tokens.expires_in * 1000).toISOString();
+    const tokenExpiresAt = new Date(Date.now() + tokens.expires_in * 1000)
+      .toISOString();
 
     const { data: existing, error: existingError } = await supabase
-      .from('google_integrations')
-      .select('id, refresh_token, account_id, location_id, metadata')
-      .eq('integration_type', integrationType)
+      .from("google_integrations")
+      .select("id, refresh_token, account_id, location_id, metadata")
+      .eq("integration_type", integrationType)
       .maybeSingle();
 
     if (existingError) {
-      console.error('Failed to check existing integration:', existingError);
-      return Response.redirect(`${frontendUrl}/admin/connections?error=db_read_failed`, 302);
+      console.error("Failed to check existing integration:", existingError);
+      return Response.redirect(
+        `${frontendUrl}/admin/connections?error=db_read_failed`,
+        302,
+      );
     }
 
     if (existing) {
@@ -193,11 +318,15 @@ Deno.serve(async (req: Request) => {
       // - Google does not always return a refresh_token on subsequent auth flows.
       // - For non-GBP integrations we don't want to wipe admin-selected account/resource state.
       const nextRefreshToken = tokens.refresh_token || preservedRefreshToken;
-      const nextAccountId = integrationType === 'business_profile' ? (accountId || preservedAccountId) : preservedAccountId;
-      const nextLocationId = integrationType === 'business_profile' ? (locationId || preservedLocationId) : preservedLocationId;
+      const nextAccountId = integrationType === "business_profile"
+        ? (accountId || preservedAccountId)
+        : preservedAccountId;
+      const nextLocationId = integrationType === "business_profile"
+        ? (locationId || preservedLocationId)
+        : preservedLocationId;
 
       const { error: updateError } = await supabase
-        .from('google_integrations')
+        .from("google_integrations")
         .update({
           access_token: tokens.access_token,
           refresh_token: nextRefreshToken || null,
@@ -208,15 +337,18 @@ Deno.serve(async (req: Request) => {
           is_active: true,
           updated_at: new Date().toISOString(),
         })
-        .eq('id', existing.id);
+        .eq("id", existing.id);
 
       if (updateError) {
-        console.error('Failed to update integration row:', updateError);
-        return Response.redirect(`${frontendUrl}/admin/connections?error=db_write_failed`, 302);
+        console.error("Failed to update integration row:", updateError);
+        return Response.redirect(
+          `${frontendUrl}/admin/connections?error=db_write_failed`,
+          302,
+        );
       }
     } else {
       const { error: insertError } = await supabase
-        .from('google_integrations')
+        .from("google_integrations")
         .insert({
           integration_type: integrationType,
           access_token: tokens.access_token,
@@ -229,15 +361,24 @@ Deno.serve(async (req: Request) => {
         });
 
       if (insertError) {
-        console.error('Failed to insert integration row:', insertError);
-        return Response.redirect(`${frontendUrl}/admin/connections?error=db_write_failed`, 302);
+        console.error("Failed to insert integration row:", insertError);
+        return Response.redirect(
+          `${frontendUrl}/admin/connections?error=db_write_failed`,
+          302,
+        );
       }
     }
 
-    return Response.redirect(`${frontendUrl}/admin/connections?success=${integrationType}`, 302);
+    return Response.redirect(
+      `${frontendUrl}/admin/connections?success=${integrationType}`,
+      302,
+    );
   } catch (error) {
-    console.error('OAuth callback error:', error);
-    const frontendUrl = Deno.env.get('FRONTEND_URL') || 'https://mango.law';
-    return Response.redirect(`${frontendUrl}/admin/connections?error=server_error`, 302);
+    console.error("OAuth callback error:", error);
+    const frontendUrl = Deno.env.get("FRONTEND_URL") || "https://mango.law";
+    return Response.redirect(
+      `${frontendUrl}/admin/connections?error=server_error`,
+      302,
+    );
   }
 });

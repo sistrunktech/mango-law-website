@@ -457,7 +457,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       )}
 
       {/* Checkpoints exist but none have coordinates yet */}
-      {!isLoading && checkpoints.length > 0 && checkpoints.filter(c => c.latitude && c.longitude).length === 0 && (
+      {!isLoading && checkpoints.length > 0 && !checkpoints.some(checkpointHasCoordinates) && (
         <div className="absolute top-4 left-4 right-4 z-10">
           <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 shadow-sm">
             <div className="flex items-center gap-3">

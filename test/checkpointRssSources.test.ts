@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { loadMasterRssSources } from '../supabase/functions/checkpoint-scraper/rss-sources.ts';
+import { loadMasterRssSources, loadSeedSources } from '../supabase/functions/checkpoint-scraper/rss-sources.ts';
 import { scrapeRssSources } from '../supabase/functions/checkpoint-scraper/rss-scraper.ts';
 
 async function run() {
@@ -7,6 +7,24 @@ async function run() {
   assert.ok(
     sources.some((source) => source.sourceName === 'Google News Ohio Checkpoints'),
     'expected statewide Google News checkpoint source to be loaded'
+  );
+  assert.ok(
+    sources.some(
+      (source) =>
+        source.sourceName === 'WTOL Toledo' &&
+        source.rssUrl === 'https://www.wtol.com/feeds/syndication/rss/news'
+    ),
+    'expected WTOL stale FeedBlitz source to be normalized to the current WTOL RSS endpoint'
+  );
+
+  const lucasSeeds = await loadSeedSources(36);
+  assert.ok(
+    lucasSeeds.some(
+      (source) =>
+        source.sourceName === 'WTOL Toledo' &&
+        source.rssUrl === 'https://www.wtol.com/feeds/syndication/rss/news'
+    ),
+    'expected WTOL seed sources to use the current WTOL RSS endpoint'
   );
 
   const originalFetch = globalThis.fetch;

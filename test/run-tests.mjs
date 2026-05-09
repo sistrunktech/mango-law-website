@@ -8,6 +8,7 @@ await import('./checkpointStatus.test.ts');
 await import('./checkpointAnnouncementFreshness.test.ts');
 await import('./checkpointAnnouncementMapMarkers.test.ts');
 await import('./checkpointCuratedAnnouncements.test.ts');
+await import('./checkpointGeocoding.test.ts');
 await import('./checkpointRssSources.test.ts');
 await import('./checkpointSearchDiscovery.test.ts');
 await import('./analyticsFallback.test.ts');

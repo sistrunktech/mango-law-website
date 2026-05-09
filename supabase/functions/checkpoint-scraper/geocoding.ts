@@ -44,9 +44,14 @@ const OHIO_BOUNDS = {
 const UNDISCLOSED_LOCATION_PATTERNS = [
   /\bundisclosed\b/i,
   /\bconfidential\b/i,
+  /\bunknown\b/i,
+  /\btb[ad]\b/i,
+  /\bto\s+be\s+(?:determined|released|provided|disclosed)\b/i,
   /\bcountywide\b/i,
   /\bdetails?\s+(?:to\s+be\s+)?announced\b/i,
   /\blocation\s+(?:to\s+be\s+)?announced\b/i,
+  /\blocation\s+(?:has\s+not\s+been\s+)?(?:released|provided|disclosed)\b/i,
+  /\b(?:specific|exact)\s+location\s+(?:has\s+not\s+been\s+)?(?:released|provided|announced|disclosed)\b/i,
   /\bexact checkpoints?\s+undisclosed\b/i,
   /\bmultiple locations\b/i,
   /\bvarious locations\b/i,
@@ -131,6 +136,28 @@ export function hasStreetLevelHint(locationText: string | null | undefined): boo
   const normalized = normalizeText(locationText);
   if (!normalized) return false;
   return STREET_LEVEL_HINT_PATTERNS.some((pattern) => pattern.test(normalized));
+}
+
+export function shouldSkipCheckpointGeocoding(input: CheckpointLocationInput): boolean {
+  const address = normalizeText(input.address);
+  if (!address) return true;
+  if (locationTextSuggestsUndisclosed(address)) return true;
+
+  const city = normalizeText(input.city);
+  const county = normalizeText(input.county);
+  const normalizedAddress = address.toLowerCase();
+  const normalizedCity = city.toLowerCase();
+  const normalizedCounty = county.toLowerCase();
+
+  if (
+    normalizedAddress === normalizedCity ||
+    normalizedAddress === normalizedCounty ||
+    normalizedAddress === `${normalizedCounty} county`
+  ) {
+    return !hasStreetLevelHint(address);
+  }
+
+  return false;
 }
 
 function isOhioCoordinate(latitude: number, longitude: number): boolean {
@@ -305,6 +332,10 @@ export async function geocodeCheckpointLocation(
   const county = normalizeText(input.county);
 
   if (!city && !county) {
+    return null;
+  }
+
+  if (shouldSkipCheckpointGeocoding({ address, city, county })) {
     return null;
   }
 
