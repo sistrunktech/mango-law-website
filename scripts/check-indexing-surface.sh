@@ -16,6 +16,29 @@ print_head() {
   echo
 }
 
+assert_redirect() {
+  local source_path="$1"
+  local expected_path="$2"
+  local url="${BASE_URL}${source_path}"
+  local headers
+
+  headers="$(curl -sSI "${url}" | tr -d '\r')"
+
+  echo "===== Redirect assertion ${url}"
+  echo "${headers}" | sed -n '1,12p'
+  echo
+
+  if ! echo "${headers}" | rg -q '^HTTP/[0-9.]+ 30[178]'; then
+    echo "Expected ${url} to return a permanent redirect status." >&2
+    exit 1
+  fi
+
+  if ! echo "${headers}" | rg -qi "^location: .*${expected_path}$"; then
+    echo "Expected ${url} to include Location ending in ${expected_path}." >&2
+    exit 1
+  fi
+}
+
 print_head "${BASE_URL}/"
 print_head "${BASE_URL}/robots.txt"
 print_head "${BASE_URL}/sitemap.xml"
@@ -28,6 +51,8 @@ print_head "${BASE_URL}/practice-areas"
 print_head "${BASE_URL}/blog/understanding-ovi-dui-charges-ohio"
 print_head "${BASE_URL}/blog/ohio-ovi-driving-privileges-als"
 print_head "${BASE_URL}/blog/drug-possession-charge-ohio-what-to-do-next"
+
+assert_redirect "/delaware-ohio-ovi-lawyer" "/ovi-dui-defense-delaware-oh"
 
 print_head "${BASE_URL}/non-existent-404-check-20260211"
 
