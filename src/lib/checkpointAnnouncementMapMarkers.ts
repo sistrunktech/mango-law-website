@@ -29,6 +29,11 @@ const COUNTY_COORDINATES: Record<string, ApproximateCoordinate> = {
     longitude: -81.51757,
     geocodingConfidence: 'county_centroid',
   },
+  stark: {
+    latitude: 40.813292,
+    longitude: -81.365667,
+    geocodingConfidence: 'county_centroid',
+  },
 };
 
 function normalizePlaceKey(value: string | null | undefined): string | null {

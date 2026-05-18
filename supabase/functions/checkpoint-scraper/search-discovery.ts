@@ -17,7 +17,23 @@ export interface SearchAnnouncementCandidate {
 const SEARCH_LOCATION = 'Columbus, Ohio, United States';
 const SEARCH_QUERIES = ['ovi checkpoints ohio', 'dui checkpoint ohio', 'sobriety checkpoint ohio', 'site:reddit.com ovi checkpoint ohio', 'site:facebook.com ovi checkpoint ohio'];
 const CHECKPOINT_NEEDLES = ['ovi checkpoint', 'dui checkpoint', 'sobriety checkpoint', 'traffic safety checkpoint', 'checkpoint tonight', 'checkpoint friday', 'checkpoint saturday', 'checkpoint sunday'];
-const NOISE_NEEDLES = ['stopdrinking', 'sobriety journey', 'addiction recovery', 'sober living', 'aa meeting', 'rehab', 'alcoholic'];
+const NOISE_NEEDLES = [
+  'stopdrinking',
+  'sobriety journey',
+  'addiction recovery',
+  'sober living',
+  'aa meeting',
+  'rehab',
+  'alcoholic',
+  'pennsylvania',
+  'psp ',
+  'california',
+  'chula vista',
+  'sacramento',
+  'stockton',
+  'barstow',
+  'somerset',
+];
 
 function canonicalizeUrl(input: string): string {
   try {

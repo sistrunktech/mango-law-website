@@ -47,7 +47,7 @@ const seasonalEnforcementWindows = [
   },
   {
     title: 'Memorial Day to July 4th',
-    description: 'Warm-weather travel and lake/weekend traffic often bring heavier patrol activity and more roadside enforcement messaging.',
+    description: 'Warm-weather travel, Dublin-area event traffic, and lake/weekend trips often bring heavier patrol activity and more roadside enforcement messaging.',
   },
   {
     title: 'Labor Day and fall football weekends',

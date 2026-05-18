@@ -43,6 +43,13 @@ const markers = buildPendingAnnouncementMapCheckpoints(
       location_county: 'Summit',
     }),
     announcement({
+      id: 'stark',
+      title: 'Stark County OVI Task Force announced Memorial Day weekend sobriety checkpoints',
+      event_date: '2026-05-23',
+      location_text: 'Stark County; exact checkpoint time and location details pending',
+      location_county: 'Stark',
+    }),
+    announcement({
       id: 'noise',
       title: "Video of Correspondents' Dinner incident shows a security checkpoint",
       event_date: null,
@@ -52,7 +59,7 @@ const markers = buildPendingAnnouncementMapCheckpoints(
   now,
 );
 
-assert.equal(markers.length, 2);
+assert.equal(markers.length, 3);
 
 const solon = markers.find((marker) => marker.id === 'announcement-solon');
 assert.ok(solon);
@@ -71,3 +78,12 @@ assert.equal(summit.location_county, 'Summit');
 assert.equal(summit.geocoding_confidence, 'county_centroid');
 assert.equal(summit.latitude, 41.08088);
 assert.equal(summit.longitude, -81.51757);
+
+const stark = markers.find((marker) => marker.id === 'announcement-stark');
+assert.ok(stark);
+assert.equal(stark.location_city, '');
+assert.equal(stark.location_county, 'Stark');
+assert.equal(stark.geocoding_confidence, 'county_centroid');
+assert.equal(stark.latitude, 40.813292);
+assert.equal(stark.longitude, -81.365667);
+assert.equal(stark.pending_announcement_event_date, '2026-05-23');

@@ -143,6 +143,41 @@ async function findExistingCheckpointMatch(
   };
 }
 
+async function findExistingCuratedOverlap(
+  supabase: ReturnType<typeof createClient>,
+  input: {
+    startDate: string;
+    locationCounty: string;
+  }
+): Promise<{ id: string } | null> {
+  const startTimeMs = new Date(input.startDate).getTime();
+  if (Number.isNaN(startTimeMs)) return null;
+
+  const windowStart = new Date(startTimeMs - 45 * 60 * 1000).toISOString();
+  const windowEnd = new Date(startTimeMs + 45 * 60 * 1000).toISOString();
+
+  const { data, error } = await supabase
+    .from('dui_checkpoints')
+    .select('id, source_name, source_url')
+    .eq('location_county', input.locationCounty)
+    .gte('start_date', windowStart)
+    .lte('start_date', windowEnd)
+    .limit(10);
+
+  if (error) throw error;
+
+  const curated = (data || []).find((row) => {
+    const sourceName = (row as any).source_name;
+    const sourceUrl = (row as any).source_url;
+    return (
+      (typeof sourceName === 'string' && !isAggregatorSourceName(sourceName)) ||
+      (typeof sourceUrl === 'string' && !isAggregatorSourceUrl(sourceUrl))
+    );
+  });
+
+  return curated ? { id: (curated as any).id } : null;
+}
+
 async function upsertAnnouncement(
   supabase: ReturnType<typeof createClient>,
   payload: Record<string, unknown>
@@ -388,7 +423,21 @@ Deno.serve(async (req: Request) => {
 
     for (const raw of rawCheckpoints) {
       try {
-        const { address, city, county } = parseAddress(raw.location);
+        const parsedLocation = parseAddress(raw.location);
+        const address = raw.locationAddress?.trim() || parsedLocation.address;
+        const city = raw.locationCity?.trim() || parsedLocation.city;
+        const county = raw.locationCounty?.trim() || parsedLocation.county;
+
+        const existingCuratedOverlap = await findExistingCuratedOverlap(supabase, {
+          startDate: raw.startDate,
+          locationCounty: county,
+        });
+
+        if (existingCuratedOverlap) {
+          stats.checkpointsSkipped++;
+          console.log(`Skipping OVICheckpoint duplicate covered by curated source: ${raw.title}`);
+          continue;
+        }
 
         const geocoded = await geocodeCheckpointLocation(
           {

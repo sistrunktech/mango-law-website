@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import { getDisplayStatus, type DUICheckpoint } from '../src/data/checkpoints.ts';
-import { parseDateTime as parseOVICheckpointDateTime } from '../supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts';
+import {
+  isUsableOVICheckpointLocationRow,
+  parseDateTime as parseOVICheckpointDateTime,
+} from '../supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts';
 import { parseAddress } from '../supabase/functions/checkpoint-scraper/geocoding.ts';
 
 function run() {
@@ -100,6 +103,24 @@ function run() {
       city: 'Trotwood',
       county: 'Montgomery',
     }
+  );
+
+  assert.equal(
+    isUsableOVICheckpointLocationRow({
+      county: 'Allen',
+      city: 'Bellefontaine',
+      locationText: 'DUI checkpoint operation expected on Main Street north of Avon Lake in Bellefontaine',
+    }),
+    false
+  );
+
+  assert.equal(
+    isUsableOVICheckpointLocationRow({
+      county: 'Hancock',
+      city: 'Findlay',
+      locationText: 'Tiffin Avenue',
+    }),
+    true
   );
 }
 
