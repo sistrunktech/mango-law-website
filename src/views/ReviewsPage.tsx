@@ -2,7 +2,7 @@ import Link from 'next/link';
 import PageHero from '../components/PageHero';
 import ReviewsSidebar from '../components/ReviewsSidebar';
 import CTASection from '../components/CTASection';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { Quote } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
 import { SEO } from '../lib/seo';
@@ -118,8 +118,8 @@ export default function ReviewsPage() {
         body="If you are comparing counsel for an OVI, domestic-violence, drug, or broader criminal matter, schedule a consultation and we will help sort the first move."
         primaryLabel="Get Free Consultation"
         primaryHref="/contact"
-        secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryLabel={`Call ${PRIMARY_PHONE_DISPLAY}`}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="reviews_cta_call_office"
       />
     </>

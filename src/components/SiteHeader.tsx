@@ -7,7 +7,7 @@ import { ChevronDown, Menu, Phone, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { navLinks, type NavLink } from '../data/navigation';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import type { LeadSource } from './LeadCaptureModal';
 
 interface SiteHeaderProps {
@@ -229,18 +229,18 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
 
           <div className="hidden items-center gap-3 lg:flex">
             <a
-              href={`tel:${OFFICE_PHONE_TEL}`}
+              href={`tel:${PRIMARY_PHONE_TEL}`}
               className="inline-flex items-center gap-2 rounded-full border border-brand-leaf/25 bg-white px-4 py-2.5 text-sm font-semibold text-brand-forest transition-all hover:border-brand-leaf hover:bg-brand-leaf hover:text-white"
               data-cta="header_call"
               onClick={() => {
                 trackCtaClick('header_call');
                 trackLeadSubmitted('phone', 'header_call', {
-                  target_number: OFFICE_PHONE_TEL,
+                  target_number: PRIMARY_PHONE_TEL,
                 });
               }}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
-              Call {OFFICE_PHONE_DISPLAY}
+              Call {PRIMARY_PHONE_DISPLAY}
             </a>
             <button
               type="button"
@@ -257,14 +257,14 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
 
           <div className="flex items-center gap-2 lg:hidden">
             <a
-              href={`tel:${OFFICE_PHONE_TEL}`}
+              href={`tel:${PRIMARY_PHONE_TEL}`}
               className="inline-flex items-center justify-center rounded-full border border-brand-leaf/25 bg-white p-2.5 text-brand-forest transition-colors hover:border-brand-leaf hover:bg-brand-leaf hover:text-white"
               aria-label="Call Mango Law"
               data-cta="mobile_header_call"
               onClick={() => {
                 trackCtaClick('mobile_header_call');
                 trackLeadSubmitted('phone', 'mobile_header_call', {
-                  target_number: OFFICE_PHONE_TEL,
+                  target_number: PRIMARY_PHONE_TEL,
                 });
               }}
             >
@@ -347,18 +347,18 @@ export default function SiteHeader({ onOpenLeadModal }: SiteHeaderProps) {
                 Start Free Case Review
               </button>
               <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
+                href={`tel:${PRIMARY_PHONE_TEL}`}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-leaf/25 bg-white px-5 py-3 text-sm font-semibold text-brand-forest transition-colors hover:border-brand-leaf hover:bg-brand-leaf hover:text-white"
                 data-cta="mobile_header_call_secondary"
                 onClick={() => {
                   trackCtaClick('mobile_header_call_secondary');
                   trackLeadSubmitted('phone', 'mobile_header_call_secondary', {
-                    target_number: OFFICE_PHONE_TEL,
+                    target_number: PRIMARY_PHONE_TEL,
                   });
                 }}
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
-                Call/Text {OFFICE_PHONE_DISPLAY}
+                Call/Text {PRIMARY_PHONE_DISPLAY}
               </a>
             </div>
           </div>

@@ -34,7 +34,7 @@ assert(/export const OFFICE_PHONE_TEL = PRIMARY_PHONE_TEL;/.test(contactInfo), '
 
 assert(!/INSERT_[A-Z0-9_]+/g.test(structured), 'Placeholder token detected in structured data source.');
 assert(/['"]@type['"]:\s*['"]LegalService['"]/.test(structured), 'LegalService node is required.');
-assert(/telephone:\s*`\+1\$\{OFFICE_PHONE_TEL\}`/.test(structured), 'LegalService telephone must bind to OFFICE_PHONE_TEL constant.');
+assert(/telephone:\s*`\+1\$\{PRIMARY_PHONE_TEL\}`/.test(structured), 'LegalService telephone must bind to PRIMARY_PHONE_TEL constant.');
 assert(/streetAddress:\s*OFFICE_ADDRESS_STREET/.test(structured), 'LegalService streetAddress must bind to OFFICE_ADDRESS_STREET constant.');
 assert(!/\battorney\s*:/.test(structured), 'Disallowed legacy property "attorney" detected in structured data.');
 assert(!/['"]@type['"]:\s*['"]Attorney['"]/.test(structured), 'Disallowed @type "Attorney" detected; use Person + hasOccupation.');

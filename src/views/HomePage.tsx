@@ -13,7 +13,7 @@ import PracticeAreaCardGrid from '../components/PracticeAreaCardGrid';
 import DeferredSection from '../components/DeferredSection';
 import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
-import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { OFFICE_EMAIL, PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import type { BlogPost } from '../data/blogPosts';
 import { attorneyProfile } from '../data/attorneyProfile';
 
@@ -50,7 +50,7 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
         description="Talk through what happened, what matters first, and how to protect your license, record, and court position in Delaware and Franklin Counties."
         ctaLabel="Free Case Review"
         ctaHref="/contact"
-        phoneNumber={OFFICE_PHONE_DISPLAY}
+        phoneNumber={PRIMARY_PHONE_DISPLAY}
         showQuickActions={false}
         phoneCtaId="home_hero_call_office"
       />
@@ -226,13 +226,13 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <a
-                  href={`tel:${OFFICE_PHONE_TEL}`}
+                  href={`tel:${PRIMARY_PHONE_TEL}`}
                   className="group rounded-[1.5rem] border border-brand-black/10 bg-brand-offWhite/45 p-5 shadow-soft transition-all hover:-translate-y-1 hover:shadow-soft-lg"
                   data-cta="home_contact_call_office"
                   onClick={() => {
                     trackCtaClick('home_contact_call_office');
                     trackLeadSubmitted('phone', 'home_contact_call_office', {
-                      target_number: OFFICE_PHONE_TEL,
+                      target_number: PRIMARY_PHONE_TEL,
                     });
                   }}
                 >
@@ -241,7 +241,7 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
                   </div>
                   <p className="mt-4 text-sm font-medium text-brand-black/60">Need the fastest response?</p>
                   <p className="mt-1 text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
-                    Call or text {OFFICE_PHONE_DISPLAY}
+                    Call or text {PRIMARY_PHONE_DISPLAY}
                   </p>
                 </a>
 
@@ -308,8 +308,8 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
           body="If the charge is fresh, the paperwork is confusing, or the court date is close, reach out now instead of guessing at the timeline."
           primaryLabel="Free Case Review"
           primaryHref="/contact"
-          secondaryLabel={OFFICE_PHONE_DISPLAY}
-          secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+          secondaryLabel={PRIMARY_PHONE_DISPLAY}
+          secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
           secondaryCtaId="home_cta_call_office"
         />
       </DeferredSection>

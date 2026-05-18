@@ -7,7 +7,7 @@ import StatuteSidebar from '../components/StatuteSidebar';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
 import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import Link from 'next/link';
 import { drugCrimePageMetaDescription, drugCrimeSupportLinks } from '../data/seoRoutingContent';
@@ -358,8 +358,8 @@ export default function DrugCrimePage() {
         title="Let's review your drug case quickly."
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel={OFFICE_PHONE_DISPLAY}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryLabel={PRIMARY_PHONE_DISPLAY}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="drug_crime_cta_call_office"
       />
     </>

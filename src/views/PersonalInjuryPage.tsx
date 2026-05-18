@@ -6,7 +6,7 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 
 export const personalInjuryFaqs = [
@@ -214,8 +214,8 @@ export default function PersonalInjuryPage() {
         body="We provide honest assessments and practical strategies for personal injury cases."
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel={OFFICE_PHONE_DISPLAY}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryLabel={PRIMARY_PHONE_DISPLAY}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="personal_injury_cta_call_office"
       />
     </>

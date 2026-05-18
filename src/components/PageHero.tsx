@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ArrowRight, Phone, Shield, Scale, Clock, Award } from 'lucide-react';
 import ORCLabel from './ORCLabel';
-import { OFFICE_PHONE_DISPLAY } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY } from '../lib/contactInfo';
 import { trackCtaClick, trackExperimentExposure, trackLeadSubmitted } from '../lib/analytics';
 import {
   ACTIVE_HERO_EXPERIMENT,
@@ -70,7 +70,7 @@ export default function PageHero({
   ctaHref,
   secondaryCtaLabel,
   secondaryCtaHref,
-  phoneNumber = OFFICE_PHONE_DISPLAY,
+  phoneNumber = PRIMARY_PHONE_DISPLAY,
   phoneCtaId = 'page_hero_call',
   variant = 'dark',
   backgroundUrl,

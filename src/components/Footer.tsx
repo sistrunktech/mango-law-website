@@ -10,13 +10,13 @@ import {
   footerServiceLinks,
 } from '../data/navigation';
 import {
-  NICK_DIRECT_PHONE_DISPLAY,
-  NICK_DIRECT_PHONE_TEL,
   OFFICE_ADDRESS_CITY_STATE_ZIP,
   OFFICE_ADDRESS_STREET,
   OFFICE_EMAIL,
-  OFFICE_PHONE_DISPLAY,
-  OFFICE_PHONE_TEL,
+  PRIMARY_PHONE_DISPLAY,
+  PRIMARY_PHONE_TEL,
+  SECONDARY_OFFICE_PHONE_DISPLAY,
+  SECONDARY_OFFICE_PHONE_TEL,
 } from '../lib/contactInfo';
 import { getCopyrightText, COMPANY_START_YEAR } from '../lib/legalDocuments';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
@@ -73,13 +73,13 @@ export default function Footer() {
 
             <div className="mt-6 space-y-3">
               <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
+                href={`tel:${PRIMARY_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/85 transition-colors hover:text-brand-leaf"
                 data-cta="footer_mobile_call_office"
                 onClick={() => {
                   trackCtaClick('footer_mobile_call_office');
                   trackLeadSubmitted('phone', 'footer_mobile_call_office', {
-                    target_number: OFFICE_PHONE_TEL,
+                    target_number: PRIMARY_PHONE_TEL,
                   });
                 }}
               >
@@ -88,7 +88,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <div className="text-xs text-brand-offWhite/50">Call or text Mango Law</div>
-                  <div className="font-semibold">{OFFICE_PHONE_DISPLAY}</div>
+                  <div className="font-semibold">{PRIMARY_PHONE_DISPLAY}</div>
                 </div>
               </a>
 
@@ -159,13 +159,13 @@ export default function Footer() {
 
             <div className="mt-6 space-y-3">
               <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
+                href={`tel:${PRIMARY_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/84 transition-colors hover:text-brand-leaf"
                 data-cta="footer_call_office"
                 onClick={() => {
                   trackCtaClick('footer_call_office');
                   trackLeadSubmitted('phone', 'footer_call_office', {
-                    target_number: OFFICE_PHONE_TEL,
+                    target_number: PRIMARY_PHONE_TEL,
                   });
                 }}
               >
@@ -173,19 +173,19 @@ export default function Footer() {
                   <Phone className="h-4 w-4 text-brand-mango" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/50">Office line</div>
-                  <div className="font-semibold">{OFFICE_PHONE_DISPLAY}</div>
+                  <div className="text-xs text-brand-offWhite/50">Primary call/text</div>
+                  <div className="font-semibold">{PRIMARY_PHONE_DISPLAY}</div>
                 </div>
               </a>
 
               <a
-                href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                href={`tel:${SECONDARY_OFFICE_PHONE_TEL}`}
                 className="flex items-center gap-3 text-sm text-brand-offWhite/84 transition-colors hover:text-brand-leaf"
                 data-cta="footer_call_secondary"
                 onClick={() => {
                   trackCtaClick('footer_call_secondary');
                   trackLeadSubmitted('phone', 'footer_call_secondary', {
-                    target_number: NICK_DIRECT_PHONE_TEL,
+                    target_number: SECONDARY_OFFICE_PHONE_TEL,
                   });
                 }}
               >
@@ -193,8 +193,8 @@ export default function Footer() {
                   <Phone className="h-4 w-4 text-brand-leaf" />
                 </div>
                 <div>
-                  <div className="text-xs text-brand-offWhite/50">Direct line</div>
-                  <div className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</div>
+                  <div className="text-xs text-brand-offWhite/50">Secondary office line</div>
+                  <div className="font-semibold">{SECONDARY_OFFICE_PHONE_DISPLAY}</div>
                 </div>
               </a>
 

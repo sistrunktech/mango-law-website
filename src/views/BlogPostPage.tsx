@@ -13,7 +13,7 @@ import remarkGfm from 'remark-gfm';
 import type { BlogPost } from '../data/blogPosts';
 import CTASection from '../components/CTASection';
 import RelatedPosts from '../components/RelatedPosts';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import BlogCoverArt from '../components/BlogCoverArt';
 import { formatCalendarDate } from '../lib/formatting';
 import { attorneyProfile } from '../data/attorneyProfile';
@@ -1467,8 +1467,8 @@ export default function BlogPostPage({
         body="If you're facing criminal charges, contact Mango Law for experienced representation in Delaware and Franklin County."
         primaryLabel="Free Consultation"
         primaryHref="/contact"
-        secondaryLabel={OFFICE_PHONE_DISPLAY}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryLabel={PRIMARY_PHONE_DISPLAY}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="blog_post_cta_call_office"
       />
     </>

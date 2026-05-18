@@ -1,4 +1,4 @@
-import { OFFICE_ADDRESS_STREET, OFFICE_PHONE_TEL } from './contactInfo';
+import { OFFICE_ADDRESS_STREET, PRIMARY_PHONE_TEL } from './contactInfo';
 import { serviceAreas } from '../data/serviceAreas';
 import { SITE_URL } from './seo-config';
 import { attorneyProfile } from '../data/attorneyProfile';
@@ -127,7 +127,7 @@ export const localBusinessSchema = {
       url: SITE_URL,
       logo: `${SITE_URL}/images/brand/mango-logo-primary-fullcolor.svg`,
       image: `${SITE_URL}/images/headshots/nick-mango-hero.jpg`,
-      telephone: `+1${OFFICE_PHONE_TEL}`,
+      telephone: `+1${PRIMARY_PHONE_TEL}`,
       email: 'office@mango.law',
       foundingDate: '2009-02',
       foundingLocation: {
@@ -271,7 +271,7 @@ export const attorneySchema = {
   url: `${SITE_URL}/about`,
   image: `${SITE_URL}/images/headshots/nick-mango-hero.jpg`,
   email: 'office@mango.law',
-  telephone: `+1${OFFICE_PHONE_TEL}`,
+  telephone: `+1${PRIMARY_PHONE_TEL}`,
   worksFor: { '@id': `${SITE_URL}/#legalservice` },
   identifier: {
     '@type': 'PropertyValue',
@@ -349,7 +349,7 @@ export const organizationSchema = {
   ],
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: `+1${OFFICE_PHONE_TEL}`,
+    telephone: `+1${PRIMARY_PHONE_TEL}`,
     contactType: 'legal services',
     availableLanguage: ['English'],
   },
@@ -368,7 +368,7 @@ export const organizationGraphNode = {
   ],
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: `+1${OFFICE_PHONE_TEL}`,
+    telephone: `+1${PRIMARY_PHONE_TEL}`,
     contactType: 'legal services',
     availableLanguage: ['English'],
   },

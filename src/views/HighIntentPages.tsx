@@ -5,7 +5,7 @@ import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
 import RelatedDefenseGuides, { type DefenseGuideLink } from '../components/RelatedDefenseGuides';
 import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import type { FAQEntry } from '../lib/structured-data';
 
@@ -141,8 +141,8 @@ function HighIntentServicePage({ config }: { config: HighIntentConfig }) {
         body={config.ctaBody}
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel={OFFICE_PHONE_DISPLAY}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryLabel={PRIMARY_PHONE_DISPLAY}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId={`${config.slug}_cta_call_office`}
       />
     </>

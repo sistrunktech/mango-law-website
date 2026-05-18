@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-18 10:30 EDT
+Post slug and title: sitewide contact surfaces | May 8 phone-role confirmation
+Change type: minor
+Summary of change: Applied the confirmed May 8 phone-role decision to website/code: Nick's cell `(740) 602-2155` is now the sitewide primary public/SMS call-text line, while the office number `(740) 417-6191` is retained only where intentionally labeled as the secondary office line. Updated shared contact constants, active app imports to `PRIMARY_PHONE_*`, public CTAs, footer/about/chat surfaces, structured-data guardrails, Supabase email/review-response defaults, blog CTAs, operations docs, and SMS alert env naming.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: User approval in Codex thread on 2026-05-18
+Rollback notes: Do not revert to older April docs unless Nick or the user explicitly supersedes the May 8 decision; current source of truth is 602 primary/SMS and 417 secondary.
+
 Date/time: 2026-05-04 23:42 EDT
 Post slug and title: May 2026 SEO/AEO support cluster | GSC indexing and OG image cleanup
 Change type: minor

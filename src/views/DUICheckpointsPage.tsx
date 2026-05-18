@@ -20,7 +20,7 @@ import { isApproximateCheckpointLocation, type DUICheckpoint } from '../data/che
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { buildPendingAnnouncementMapCheckpoints } from '../lib/checkpointAnnouncementMapMarkers';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { SEO } from '../lib/seo';
 import { formatCalendarDate } from '../lib/formatting';
@@ -546,18 +546,18 @@ export default function DUICheckpointsPage({
                 </div>
                 <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
                   <a
-                    href={`tel:${OFFICE_PHONE_TEL}`}
+                    href={`tel:${PRIMARY_PHONE_TEL}`}
                     onClick={() => {
                       trackCtaClick('checkpoint_banner_call');
                       trackLeadSubmitted('phone', 'checkpoint_banner_call', {
-                        target_number: OFFICE_PHONE_TEL,
+                        target_number: PRIMARY_PHONE_TEL,
                       });
                     }}
                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-brand-black/10 bg-white px-4 py-2 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-mango/10"
                     data-cta="checkpoint_banner_call"
-                    aria-label={`Call: ${OFFICE_PHONE_DISPLAY}`}
+                    aria-label={`Call: ${PRIMARY_PHONE_DISPLAY}`}
                   >
-                    Call {OFFICE_PHONE_DISPLAY}
+                    Call {PRIMARY_PHONE_DISPLAY}
                   </a>
                   <button
                     type="button"
@@ -1183,8 +1183,8 @@ export default function DUICheckpointsPage({
         body="If you've been charged with OVI/DUI, don't face it alone. Contact Mango Law for experienced defense representation."
         primaryLabel="Free Case Evaluation"
         primaryHref="/contact"
-        secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryLabel={`Call ${PRIMARY_PHONE_DISPLAY}`}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="dui_checkpoints_cta_call_office"
       />
 

@@ -6,7 +6,7 @@ import ImagePlaceholder from '../components/ImagePlaceholder';
 import StatuteSidebar from '../components/StatuteSidebar';
 import LegalCodeCallout from '../components/LegalCodeCallout';
 import ServiceAreasSection from '../components/ServiceAreasSection';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 
 export const sexCrimeFaqs = [
@@ -223,8 +223,8 @@ export default function SexCrimePage() {
         body="Your privacy and your future are our top priorities. Contact us for a confidential consultation."
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
-        secondaryLabel={OFFICE_PHONE_DISPLAY}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryLabel={PRIMARY_PHONE_DISPLAY}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="sex_crime_cta_call_office"
       />
     </>

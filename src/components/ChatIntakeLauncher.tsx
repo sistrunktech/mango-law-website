@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MessageCircle, Phone, FileText } from 'lucide-react';
 import ConversationWindow from './chat/ConversationWindow';
-import { NICK_DIRECT_PHONE_TEL, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_TEL, SECONDARY_OFFICE_PHONE_TEL } from '../lib/contactInfo';
 import { trackChatOpen, trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 interface ChatIntakeLauncherProps {
@@ -118,12 +118,12 @@ export default function ChatIntakeLauncher({
                 Chat now
               </button>
               <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
+                href={`tel:${PRIMARY_PHONE_TEL}`}
                 className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
                 onClick={() => {
                   trackCtaClick('floating_chooser_call_office');
                   trackLeadSubmitted('phone', 'floating_chooser_call_office', {
-                    target_number: OFFICE_PHONE_TEL,
+                    target_number: PRIMARY_PHONE_TEL,
                   });
                 }}
                 data-cta="floating_chooser_call_office"
@@ -132,18 +132,18 @@ export default function ChatIntakeLauncher({
                 Call/Text (fastest)
               </a>
               <a
-                href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                href={`tel:${SECONDARY_OFFICE_PHONE_TEL}`}
                 className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-brand-black transition-colors hover:bg-brand-black/5"
                 onClick={() => {
                   trackCtaClick('floating_chooser_call_office_secondary');
                   trackLeadSubmitted('phone', 'floating_chooser_call_office_secondary', {
-                    target_number: NICK_DIRECT_PHONE_TEL,
+                    target_number: SECONDARY_OFFICE_PHONE_TEL,
                   });
                 }}
                 data-cta="floating_chooser_call_office_secondary"
               >
                 <Phone className="h-4 w-4 text-brand-leaf" aria-hidden="true" />
-                Call direct line
+                Call secondary line
               </a>
               <button
                 type="button"

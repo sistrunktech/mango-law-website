@@ -7,7 +7,7 @@ import PageHero from '../components/PageHero';
 import BlogSidebar from '../components/BlogSidebar';
 import CTASection from '../components/CTASection';
 import type { BlogPost } from '../data/blogPosts';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import BlogCoverArt from '../components/BlogCoverArt';
 import { formatCalendarDate } from '../lib/formatting';
 import { attorneyProfile } from '../data/attorneyProfile';
@@ -348,8 +348,8 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
         body="Use the articles for orientation, then reach out when you want advice tied to the actual facts of your stop, charge, or court date."
         primaryLabel="Request Case Review"
         primaryHref="/contact"
-        secondaryLabel={`Call ${OFFICE_PHONE_DISPLAY}`}
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryLabel={`Call ${PRIMARY_PHONE_DISPLAY}`}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="blog_cta_call_office"
       />
     </>
