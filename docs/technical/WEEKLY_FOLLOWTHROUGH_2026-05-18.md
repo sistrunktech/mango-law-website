@@ -65,9 +65,12 @@ The May 8 phone-role decision is now confirmed as authoritative for the website 
 2026-05-18 execution:
 
 - Updated the website/code source of truth so `602` is primary and `417` is secondary only.
-- Live GA4 controlled validation still observed the deployed header phone CTA as `tel:7404176191`, proving production is stale until this branch is deployed.
+- Pre-deploy live GA4 controlled validation observed the deployed header phone CTA as `tel:7404176191`, proving production was stale before this branch landed.
+- PR #140 merged on 2026-05-18 at 21:24:59Z, producing merge commit `a875a226394ecf6086c6a2d01fac1b6de8c2f551`.
+- Post-merge live verification confirmed `https://mango.law` returns seven `tel:7406022155` links, one secondary `tel:7404176191` link, and structured data telephone `+17406022155`.
+- Post-merge live verification confirmed `/protection-order-lawyer-delaware-oh` returns HTTP `200` from Vercel and the same seven primary / one secondary phone-link split.
 - Gmail check found Nick's April 8 Justia reply (`Will do`) from `mangolawoffice@gmail.com` and no later Justia follow-up from Nick. Forwarded Justia's latest `Click to Complete` instruction email again to both `nick@mango.law` and `mangolawoffice@gmail.com`.
-- Gmail check found Kaylyn Malinowski (`kaylynmalinowski@gmail.com`) as the assistant contact from the January Apple/ezlocal thread. Nick had already sent the EZLOCAL text screenshot in that thread, so no fresh ezlocal outreach was sent.
+- Gmail check found Kaylyn Malinowski (`kaylynmalinowski@gmail.com`) as the assistant contact from the January Apple/ezlocal thread. Nick had already sent the EZLOCAL text screenshot in that thread.
 - BrightLocal Gmail check found no support/validation update after the May 8 pending phone-role save, only billing/marketing messages.
 - BrightLocal admin check confirmed the saved phone roles: primary phone `+1 740-602-2155`, SMS `+17406022155`, GBP alternate phone `(740) 417-6191`, and Citation Builder mobile `(740) 602-2155`.
 - Citation Builder campaign `921991` is complete overall, but the dashboard still has one action item for ezlocal verification. BrightLocal support was not contacted because the admin data now reflects the approved phone roles and the only remaining item is the client-side ezlocal verification.
@@ -99,7 +102,6 @@ Approval needed before action: controlled production test lead or GA4/GTM DebugV
 
 ## Next Local Work
 
-1. Deploy the phone-role website/code fix so live production no longer routes primary CTAs to `7404176191`.
-2. Reinspect `/protection-order-lawyer-delaware-oh` in GSC on 2026-05-25.
-3. Wait for Kaylyn/Nick on ezlocal. Do not chase BrightLocal support unless a fresh dashboard or support-state mismatch appears.
-4. Continue local-only cleanup: stale doc quarantine, ReachAttorneys draft refinement, and monthly memo preparation.
+1. Reinspect `/protection-order-lawyer-delaware-oh` in GSC on 2026-05-25.
+2. Wait for Kaylyn/Nick on ezlocal. Do not chase BrightLocal support unless a fresh dashboard or support-state mismatch appears.
+3. Continue local-only cleanup: stale doc quarantine, ReachAttorneys draft refinement, and monthly memo preparation.
