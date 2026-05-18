@@ -13,11 +13,11 @@ import {
   attorneyTrustMetadata,
 } from '../data/attorneyProfile';
 import {
-  NICK_DIRECT_PHONE_DISPLAY,
-  NICK_DIRECT_PHONE_TEL,
   OFFICE_EMAIL,
-  OFFICE_PHONE_DISPLAY,
-  OFFICE_PHONE_TEL,
+  PRIMARY_PHONE_DISPLAY,
+  PRIMARY_PHONE_TEL,
+  SECONDARY_OFFICE_PHONE_DISPLAY,
+  SECONDARY_OFFICE_PHONE_TEL,
 } from '../lib/contactInfo';
 import { aboutPageMetaDescription, aboutSupportLinks } from '../data/seoRoutingContent';
 
@@ -59,37 +59,37 @@ export default function AboutPage() {
                       </p>
                       <div className="mt-4 flex flex-col gap-3 border-t border-brand-black/10 pt-4">
                         <a
-                          href={`tel:${OFFICE_PHONE_TEL}`}
+                          href={`tel:${PRIMARY_PHONE_TEL}`}
                           className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
                           data-cta="about_mobile_call_office"
                           onClick={() => {
                             trackCtaClick('about_mobile_call_office');
                             trackLeadSubmitted('phone', 'about_mobile_call_office', {
-                              target_number: OFFICE_PHONE_TEL,
+                              target_number: PRIMARY_PHONE_TEL,
                             });
                           }}
                         >
                           <span className="text-lg">📞</span>
                           <div className="flex flex-col">
                             <span className="text-xs text-brand-black/60">Primary Call/Text</span>
-                            <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                            <span className="font-semibold">{PRIMARY_PHONE_DISPLAY}</span>
                           </div>
                         </a>
                         <a
-                          href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                          href={`tel:${SECONDARY_OFFICE_PHONE_TEL}`}
                           className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
                           data-cta="about_mobile_call_secondary"
                           onClick={() => {
                             trackCtaClick('about_mobile_call_secondary');
                             trackLeadSubmitted('phone', 'about_mobile_call_secondary', {
-                              target_number: NICK_DIRECT_PHONE_TEL,
+                              target_number: SECONDARY_OFFICE_PHONE_TEL,
                             });
                           }}
                         >
                           <span className="text-lg">📱</span>
                           <div className="flex flex-col">
-                            <span className="text-xs text-brand-black/60">Secondary line</span>
-                            <span className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</span>
+                            <span className="text-xs text-brand-black/60">Secondary office line</span>
+                            <span className="font-semibold">{SECONDARY_OFFICE_PHONE_DISPLAY}</span>
                           </div>
                         </a>
                         <a
@@ -150,37 +150,37 @@ export default function AboutPage() {
                     </p>
                     <div className="flex flex-col gap-3 border-t border-brand-black/10 pt-3">
                       <a
-                        href={`tel:${OFFICE_PHONE_TEL}`}
+                        href={`tel:${PRIMARY_PHONE_TEL}`}
                         className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
                         data-cta="about_call_office"
                         onClick={() => {
                           trackCtaClick('about_call_office');
                           trackLeadSubmitted('phone', 'about_call_office', {
-                            target_number: OFFICE_PHONE_TEL,
+                            target_number: PRIMARY_PHONE_TEL,
                           });
                         }}
                       >
                         <span className="text-lg">📞</span>
                         <div className="flex flex-col">
                           <span className="text-xs text-brand-black/60">Primary Call/Text</span>
-                          <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                          <span className="font-semibold">{PRIMARY_PHONE_DISPLAY}</span>
                         </div>
                       </a>
                       <a
-                        href={`tel:${NICK_DIRECT_PHONE_TEL}`}
+                        href={`tel:${SECONDARY_OFFICE_PHONE_TEL}`}
                         className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-leaf/80 transition-colors"
                         data-cta="about_call_secondary"
                         onClick={() => {
                           trackCtaClick('about_call_secondary');
                           trackLeadSubmitted('phone', 'about_call_secondary', {
-                            target_number: NICK_DIRECT_PHONE_TEL,
+                            target_number: SECONDARY_OFFICE_PHONE_TEL,
                           });
                         }}
                       >
                         <span className="text-lg">📱</span>
                         <div className="flex flex-col">
-                          <span className="text-xs text-brand-black/60">Secondary line</span>
-                          <span className="font-semibold">{NICK_DIRECT_PHONE_DISPLAY}</span>
+                          <span className="text-xs text-brand-black/60">Secondary office line</span>
+                          <span className="font-semibold">{SECONDARY_OFFICE_PHONE_DISPLAY}</span>
                         </div>
                       </a>
                       <a
@@ -368,7 +368,7 @@ export default function AboutPage() {
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
         secondaryLabel="Call the office"
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="about_cta_call_office"
       />
     </>

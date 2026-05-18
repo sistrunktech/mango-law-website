@@ -36,6 +36,9 @@ interface LogContext {
   [key: string]: unknown;
 }
 
+const PRIMARY_SMS_DIGITS = "7406022155";
+const SECONDARY_SMS_DIGITS = "7404176191";
+
 function log(level: string, message: string, context?: LogContext) {
   const timestamp = new Date().toISOString();
   const logEntry = {
@@ -88,6 +91,10 @@ function validateEmail(email: string): boolean {
 function validatePhone(phone: string): boolean {
   const cleaned = phone.replace(/\D/g, "");
   return cleaned.length >= 10 && cleaned.length <= 15;
+}
+
+function resolveLegacySmsGateway(phoneDigits: string, gateways: Array<string | undefined>): string | undefined {
+  return gateways.find((gateway) => gateway?.replace(/\D/g, "").includes(phoneDigits));
 }
 
 async function verifyTurnstile(args: { token: string; ip: string }): Promise<boolean> {
@@ -331,8 +338,11 @@ Deno.serve(async (req: Request) => {
         : [];
     const sourceLabel = Deno.env.get("CHAT_LEAD_SOURCE_LABEL") || "Chat Widget";
     const enableSmsAlerts = Deno.env.get("ENABLE_SMS_LEAD_ALERTS") === "true";
-    const smsGatewayOffice = Deno.env.get("SMS_GATEWAY_OFFICE");
-    const smsGatewayNick = Deno.env.get("SMS_GATEWAY_NICK");
+    const legacySmsGateways = [Deno.env.get("SMS_GATEWAY_OFFICE"), Deno.env.get("SMS_GATEWAY_NICK")];
+    const smsGatewayPrimary = Deno.env.get("SMS_GATEWAY_PRIMARY") ||
+      resolveLegacySmsGateway(PRIMARY_SMS_DIGITS, legacySmsGateways);
+    const smsGatewaySecondary = Deno.env.get("SMS_GATEWAY_SECONDARY") ||
+      resolveLegacySmsGateway(SECONDARY_SMS_DIGITS, legacySmsGateways);
     const smsGatewayTest = Deno.env.get("SMS_GATEWAY_TEST");
 
     if (resendApiKey) {
@@ -449,7 +459,7 @@ Deno.serve(async (req: Request) => {
 
         // Send SMS-style notifications via email-to-SMS gateways
         if (enableSmsAlerts) {
-          const smsGateways = [smsGatewayOffice, smsGatewayNick, smsGatewayTest].filter(Boolean);
+          const smsGateways = [smsGatewayPrimary, smsGatewaySecondary, smsGatewayTest].filter(Boolean);
 
           if (smsGateways.length > 0) {
             // Truncate message to 100 chars for SMS compatibility (total ~160 char limit)

@@ -236,7 +236,7 @@ export default function OviCheckpointsOhioPage() {
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
         secondaryLabel="Call now"
-        secondaryHref="tel:7404176191"
+        secondaryHref="tel:7406022155"
         secondaryCtaId="ovi_checkpoints_cta_call"
       />
     </>

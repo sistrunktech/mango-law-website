@@ -179,7 +179,7 @@ export default function DelawareOhioOviLawyerPage() {
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
         secondaryLabel="Call now"
-        secondaryHref="tel:7404176191"
+        secondaryHref="tel:7406022155"
         secondaryCtaId="delaware_ovi_lawyer_cta_call"
       />
     </>

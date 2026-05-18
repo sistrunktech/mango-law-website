@@ -477,7 +477,7 @@ export default function HolidayOviEnforcementOhioPage() {
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
         secondaryLabel="Call now"
-        secondaryHref="tel:7404176191"
+        secondaryHref="tel:7406022155"
         secondaryCtaId="holiday_ovi_cta_call"
       />
     </>

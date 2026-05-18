@@ -1,7 +1,7 @@
 'use client';
 
 import GoogleMap from './GoogleMap';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '../lib/businessProfile';
 
@@ -29,15 +29,15 @@ export default function LocationBlock({
             <p>43 S Franklin St</p>
             <p>Delaware, OH 43015</p>
             <a
-              href={`tel:${OFFICE_PHONE_TEL}`}
+              href={`tel:${PRIMARY_PHONE_TEL}`}
               className="underline decoration-brand-black/20 underline-offset-4 hover:decoration-brand-mango"
               data-cta="location_call_office"
               onClick={() => {
                 trackCtaClick('location_call_office');
-                trackLeadSubmitted('phone', 'location_call_office', { target_number: OFFICE_PHONE_TEL });
+                trackLeadSubmitted('phone', 'location_call_office', { target_number: PRIMARY_PHONE_TEL });
               }}
             >
-              Phone: {OFFICE_PHONE_DISPLAY}
+              Phone: {PRIMARY_PHONE_DISPLAY}
             </a>
           </div>
         </div>

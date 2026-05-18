@@ -4,7 +4,7 @@ import Image from 'next/image';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
-import { OFFICE_EMAIL, OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { OFFICE_EMAIL, PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { SEO } from '../lib/seo';
 import ExternalLink from '../components/ExternalLink';
 
@@ -51,18 +51,18 @@ export default function OfCounselPage() {
                   <p className="text-brand-black/70 font-medium">Of Counsel</p>
                   <div className="flex flex-col gap-3 pt-3 border-t border-brand-black/10">
                     <a
-                      href={`tel:${OFFICE_PHONE_TEL}`}
+                      href={`tel:${PRIMARY_PHONE_TEL}`}
                       className="inline-flex items-center gap-2 text-brand-mango hover:text-brand-mango/80 transition-colors"
                       data-cta="of_counsel_call_office"
                       onClick={() => {
                         trackCtaClick('of_counsel_call_office');
                         trackLeadSubmitted('phone', 'of_counsel_call_office', {
-                          target_number: OFFICE_PHONE_TEL,
+                          target_number: PRIMARY_PHONE_TEL,
                         });
                       }}
                     >
                       <span className="text-lg">📞</span>
-                      <span className="font-semibold">{OFFICE_PHONE_DISPLAY}</span>
+                      <span className="font-semibold">{PRIMARY_PHONE_DISPLAY}</span>
                     </a>
                     <a
                       href={`mailto:${OFFICE_EMAIL}`}
@@ -146,7 +146,7 @@ export default function OfCounselPage() {
         primaryLabel="Schedule a consultation"
         primaryHref="/contact"
         secondaryLabel="Call the office"
-        secondaryHref={`tel:${OFFICE_PHONE_TEL}`}
+        secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="of_counsel_cta_call_office"
       />
     </>

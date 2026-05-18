@@ -2,7 +2,7 @@
 
 import { List } from 'lucide-react';
 import Link from 'next/link';
-import { OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY } from '../../lib/contactInfo';
 
 interface TOCItem {
   id: string;
@@ -56,7 +56,7 @@ export default function StickyConsultCTA({ tocItems }: StickyConsultCTAProps) {
           Facing OVI charges?
         </h2>
         <p className="mb-4 text-sm text-brand-black/70">
-          Get a free case review from an experienced Ohio defense attorney. Call/text {OFFICE_PHONE_DISPLAY} if timing is urgent.
+          Get a free case review from an experienced Ohio defense attorney. Call/text {PRIMARY_PHONE_DISPLAY} if timing is urgent.
         </p>
         <Link
           href="/contact"

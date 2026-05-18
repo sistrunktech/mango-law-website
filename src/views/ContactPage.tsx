@@ -7,8 +7,8 @@ import PageHero from '../components/PageHero';
 import LocationBlock from '../components/LocationBlock';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import {
-  OFFICE_PHONE_DISPLAY,
-  OFFICE_PHONE_TEL,
+  PRIMARY_PHONE_DISPLAY,
+  PRIMARY_PHONE_TEL,
   OFFICE_EMAIL,
 } from '../lib/contactInfo';
 import { attorneyProfile } from '../data/attorneyProfile';
@@ -22,7 +22,7 @@ export default function ContactPage() {
         title="Tell us what happened and we’ll help sort the first move."
         description="Use the form for a clear written summary, or call/text if the situation is moving quickly and you need the fastest response."
         ctaLabel="Call/Text now"
-        ctaHref={`tel:${OFFICE_PHONE_TEL}`}
+        ctaHref={`tel:${PRIMARY_PHONE_TEL}`}
         variant="light"
         compact
         showQuickActions={false}
@@ -42,13 +42,13 @@ export default function ContactPage() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
+                href={`tel:${PRIMARY_PHONE_TEL}`}
                 className="group rounded-[1.5rem] border border-brand-black/10 bg-brand-offWhite/45 p-5 shadow-soft transition-all hover:-translate-y-1 hover:shadow-soft-lg"
                 data-cta="contact_page_call_office"
                 onClick={() => {
                   trackCtaClick('contact_page_call_office');
                   trackLeadSubmitted('phone', 'contact_page_call_office', {
-                    target_number: OFFICE_PHONE_TEL,
+                    target_number: PRIMARY_PHONE_TEL,
                   });
                 }}
               >
@@ -57,7 +57,7 @@ export default function ContactPage() {
                 </div>
                 <p className="mt-4 text-sm font-medium text-brand-black/60">Call or text now</p>
                 <p className="mt-1 text-lg font-bold text-brand-black transition-colors group-hover:text-brand-mangoText">
-                  {OFFICE_PHONE_DISPLAY}
+                  {PRIMARY_PHONE_DISPLAY}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-mangoText transition-colors group-hover:text-brand-leaf">
                   Fastest response

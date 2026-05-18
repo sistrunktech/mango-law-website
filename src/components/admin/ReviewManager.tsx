@@ -15,7 +15,7 @@ import {
   Edit3,
   Sparkles
 } from 'lucide-react';
-import { OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY } from '../../lib/contactInfo';
 
 interface Review {
   id: string;
@@ -94,8 +94,8 @@ export default function ReviewManager() {
       const mockResponse = review.rating >= 4
         ? `Thank you so much for taking the time to share your positive experience, ${review.author_name}! We're thrilled that we could help you achieve a favorable outcome in your case. Your trust in our legal team means everything to us. If you ever need our services again or have questions, please don't hesitate to reach out. We're here for you!`
         : review.rating === 3
-        ? `Thank you for your feedback, ${review.author_name}. We appreciate you sharing your experience. We're always looking to improve our services and would welcome the opportunity to discuss your concerns further. Please feel free to contact our office directly at ${OFFICE_PHONE_DISPLAY} so we can address any issues and ensure you receive the level of service you deserve.`
-        : `${review.author_name}, thank you for bringing this to our attention. We take all feedback seriously and are sorry to hear that your experience didn't meet expectations. We'd like the opportunity to discuss this with you directly and work toward a resolution. Please contact our office at ${OFFICE_PHONE_DISPLAY} at your earliest convenience. Your satisfaction is important to us.`;
+        ? `Thank you for your feedback, ${review.author_name}. We appreciate you sharing your experience. We're always looking to improve our services and would welcome the opportunity to discuss your concerns further. Please feel free to contact our office directly at ${PRIMARY_PHONE_DISPLAY} so we can address any issues and ensure you receive the level of service you deserve.`
+        : `${review.author_name}, thank you for bringing this to our attention. We take all feedback seriously and are sorry to hear that your experience didn't meet expectations. We'd like the opportunity to discuss this with you directly and work toward a resolution. Please contact our office at ${PRIMARY_PHONE_DISPLAY} at your earliest convenience. Your satisfaction is important to us.`;
 
       setTimeout(() => {
         setResponseText(mockResponse);

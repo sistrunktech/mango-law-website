@@ -36,14 +36,15 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - Optional client config: `NEXT_PUBLIC_SUPABASE_CUSTOM_DOMAIN` (only if a current, approved custom domain exists for this Supabase project; do not revive retired hosts such as `api.mango.law`).
 - Server/CI-only: `SERVICE_ROLE_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`), `SUPABASE_JWT_SECRET`, `RESEND_API_KEY`, `AI_CHAT_API_KEY`, `FAL_KEY` (or `FAL_API_KEY`), `MAPBOX_PUBLIC_TOKEN` (fallback), `TURNSTILE_SECRET_KEY` (optional), `SERPER_API_KEY` (Search Intelligence).
 - Config (non-secret): `FROM_EMAIL`, `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_CC`, `CONTACT_NOTIFY_BCC`, `APP_ENV`, `APP_THEME`, `APP_SEASON`, `APP_HOLIDAY`, `FRONTEND_URL`, `ORIGIN_ALLOWLIST`, `CHAT_LEAD_NOTIFY_TO`, `CHAT_LEAD_NOTIFY_BCC`, `CHAT_LEAD_SOURCE_LABEL`, `AI_CHAT_PROVIDER`, `AI_CHAT_MODEL`, `REVIEW_RESPONSE_CONTACT_PHONE_DISPLAY`, `REVIEW_RESPONSE_CONTACT_PHONE_TEL`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (optional).
-- SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_OFFICE`, `SMS_GATEWAY_NICK`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
+- SMS Notifications (email-to-SMS gateways): `SMS_GATEWAY_PRIMARY`, `SMS_GATEWAY_SECONDARY`, `SMS_GATEWAY_TEST` (format: 10-digit-phone@carrier-gateway.com). Legacy `SMS_GATEWAY_OFFICE` and `SMS_GATEWAY_NICK` are still accepted as fallbacks. Enable with `ENABLE_SMS_LEAD_ALERTS=true`.
 - Image/OG generation: `FAL_KEY`, `SUPABASE_URL` (matches `NEXT_PUBLIC_SUPABASE_URL`), `SB_BUCKET=og-images` (or `SUPABASE_BUCKET`), `OG_SIGNED_URL_TTL=31536000`.
 - See `.env.example` for the full list; update it whenever variables change.
 - **Supabase project pinning:** the frontend is currently pinned to the production Supabase project in `src/lib/supabaseClient.ts` to prevent “split brain” data and OAuth redirect drift. If you truly need multiple environments later, reintroduce host/env-based switching carefully and update Google OAuth redirect URIs accordingly.
 
 ## Contact Numbers
-- **Primary public call/text line:** `(740) 417-6191` (`tel:7404176191`) — default for public CTAs, the website, GBP, citations, and email defaults.
-- **Nick direct cell:** `(740) 602-2155` (`tel:7406022155`) — show only where it is intentionally labeled as his direct line.
+- **Primary public/SMS call-text line:** `(740) 602-2155` (`tel:7406022155`) — Nick's cell; default for public CTAs, the website, GBP, citations, and email defaults.
+- **Secondary office line:** `(740) 417-6191` (`tel:7404176191`) — show only where a second line is intentionally labeled as secondary.
+- **Supersedes old campaign docs:** any April/early-May handoff or audit note that says `417` is the public/default line is historical only. Use this section and `src/lib/contactInfo.ts` as the current source of truth.
 
 ## Secrets Placement
 - GitHub Actions: secrets and variables have been added via `gh secret set` / `gh variable set`. Replace placeholder Supabase values (`NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `NEXT_PUBLIC_SUPABASE_URL`) with real env-specific keys.

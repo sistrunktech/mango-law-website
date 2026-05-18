@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
-import { OFFICE_PHONE_DISPLAY, OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/phone';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
@@ -182,18 +182,18 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             <p className="mb-6 text-brand-black/70">We'll contact you within 24 hours. For immediate assistance:</p>
             <div className="space-y-2">
               <a
-                href={`tel:${OFFICE_PHONE_TEL}`}
+                href={`tel:${PRIMARY_PHONE_TEL}`}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white"
                 data-cta="lead_success_call"
                 onClick={() => {
                   trackCtaClick('lead_success_call', {
                     lead_followup_after_form: true,
-                    target_number: OFFICE_PHONE_TEL,
+                    target_number: PRIMARY_PHONE_TEL,
                   });
                 }}
               >
                 <Phone className="h-5 w-5" />
-                Call/Text {OFFICE_PHONE_DISPLAY}
+                Call/Text {PRIMARY_PHONE_DISPLAY}
               </a>
             </div>
             <button
