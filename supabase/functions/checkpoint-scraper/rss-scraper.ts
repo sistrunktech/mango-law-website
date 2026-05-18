@@ -32,6 +32,14 @@ const DEFAULT_NOISE_KEYWORDS = [
   'checkpoint inhibitor',
   "correspondents' dinner",
   'correspondents dinner',
+  'pennsylvania',
+  'psp ',
+  'california',
+  'chula vista',
+  'sacramento',
+  'stockton',
+  'barstow',
+  'somerset',
 ];
 
 function canonicalizeUrl(input: string): string {

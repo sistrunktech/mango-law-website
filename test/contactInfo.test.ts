@@ -9,17 +9,21 @@ import {
   OFFICE_PHONE_TEL,
   PRIMARY_PHONE_DISPLAY,
   PRIMARY_PHONE_TEL,
+  SECONDARY_OFFICE_PHONE_DISPLAY,
+  SECONDARY_OFFICE_PHONE_TEL,
 } from '../src/lib/contactInfo.ts';
 import { buildClientConfirmationHtml } from '../supabase/functions/_shared/email/templates.ts';
 
-assert.equal(PRIMARY_PHONE_DISPLAY, '(740) 417-6191');
-assert.equal(PRIMARY_PHONE_TEL, '7404176191');
+assert.equal(PRIMARY_PHONE_DISPLAY, '(740) 602-2155');
+assert.equal(PRIMARY_PHONE_TEL, '7406022155');
 assert.equal(OFFICE_PHONE_DISPLAY, PRIMARY_PHONE_DISPLAY);
 assert.equal(OFFICE_PHONE_TEL, PRIMARY_PHONE_TEL);
 assert.equal(GENERAL_OFFICE_PHONE_DISPLAY, PRIMARY_PHONE_DISPLAY);
 assert.equal(GENERAL_OFFICE_PHONE_TEL, PRIMARY_PHONE_TEL);
-assert.equal(NICK_DIRECT_PHONE_DISPLAY, '(740) 602-2155');
-assert.equal(NICK_DIRECT_PHONE_TEL, '7406022155');
+assert.equal(NICK_DIRECT_PHONE_DISPLAY, PRIMARY_PHONE_DISPLAY);
+assert.equal(NICK_DIRECT_PHONE_TEL, PRIMARY_PHONE_TEL);
+assert.equal(SECONDARY_OFFICE_PHONE_DISPLAY, '(740) 417-6191');
+assert.equal(SECONDARY_OFFICE_PHONE_TEL, '7404176191');
 
 const clientHtml = buildClientConfirmationHtml(
   'contact',
@@ -33,4 +37,4 @@ const clientHtml = buildClientConfirmationHtml(
   { theme: 'light', season: 'spring', holiday: false, siteUrl: 'https://mango.law' },
 );
 
-assert.ok(clientHtml.includes('Call/Text (740) 417-6191'));
+assert.ok(clientHtml.includes('Call/Text (740) 602-2155'));

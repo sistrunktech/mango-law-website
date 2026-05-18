@@ -80,3 +80,29 @@ assert.equal(
   ),
   false,
 );
+
+assert.equal(
+  isAnnouncementFreshForPublic(
+    announcement({
+      title: 'PSP to conduct sobriety checkpoint in Erie County',
+      raw_text: 'Pennsylvania State Police announced a sobriety checkpoint.',
+      announcement_date: '2026-05-03T12:00:00.000Z',
+      created_at: '2026-05-03T12:00:00.000Z',
+    }),
+    now,
+  ),
+  false,
+);
+
+assert.equal(
+  isAnnouncementFreshForPublic(
+    announcement({
+      title: 'Police announce more sobriety checkpoints in Northeast Ohio',
+      source_name: 'FOX8 Cleveland',
+      announcement_date: '2026-05-03T12:00:00.000Z',
+      created_at: '2026-05-03T12:00:00.000Z',
+    }),
+    now,
+  ),
+  true,
+);

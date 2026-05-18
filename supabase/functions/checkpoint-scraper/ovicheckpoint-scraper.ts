@@ -10,6 +10,41 @@ interface RawCheckpoint {
   sourceUrl: string;
 }
 
+const NON_LOCATION_CELL_PATTERNS = [
+  /\b(?:dui|ovi|sobriety)\s+(?:checkpoint|checkpoints|enforcement|operation)\b/i,
+  /\bcheckpoints?\s+(?:planned|scheduled|announced|expected|operation|to be)\b/i,
+  /\b(?:police|troopers|state patrol|authorities|task force)\b.*\b(?:announce|plan|schedule|conduct)\b/i,
+  /\bdrivers?\s+(?:to\s+see|should|can\s+expect|will\s+see)\b/i,
+  /\b(?:law enforcement|officers?)\b.*\b(?:checkpoint|enforcement)\b/i,
+] as const;
+
+const PLACEHOLDER_CELL_PATTERNS = [
+  /^\s*$/,
+  /\bcheck back for updates\b/i,
+  /\btbd\b/i,
+  /\bto be (?:announced|determined)\b/i,
+] as const;
+
+export function isUsableOVICheckpointLocationRow(input: {
+  county: string;
+  city: string;
+  locationText: string;
+}): boolean {
+  const county = input.county.trim();
+  const city = input.city.trim();
+  const locationText = input.locationText.trim();
+
+  if (!county) return false;
+  if (PLACEHOLDER_CELL_PATTERNS.some((pattern) => pattern.test(city))) return false;
+  if (PLACEHOLDER_CELL_PATTERNS.some((pattern) => pattern.test(locationText))) return false;
+
+  // The aggregator sometimes places article headlines/summaries in the location
+  // cell. Those sentences have caused bad city/county pairings and map pins.
+  if (NON_LOCATION_CELL_PATTERNS.some((pattern) => pattern.test(locationText))) return false;
+
+  return true;
+}
+
 function stripHtml(input: string): string {
   return input.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 }
@@ -394,6 +429,8 @@ export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
       const county = countyRaw.replace(/\s+County$/i, '').trim();
       const city = cityRaw?.trim() || '';
       const locationText = locationRaw?.trim() || '';
+      if (!isUsableOVICheckpointLocationRow({ county, city, locationText })) continue;
+
       const parsed = parseDateTime(timeRaw);
       if (!parsed) {
         console.warn(`Skipping OVICheckpoint row due to unparseable time/date: ${timeRaw}`);
@@ -461,6 +498,8 @@ async function scrapeOVICheckpointHomepage(url: string): Promise<RawCheckpoint[]
     const county = countyRaw.replace(/\s+County$/i, '').trim();
     const city = cityRaw?.trim() || '';
     const locationText = locationRaw?.trim() || '';
+    if (!isUsableOVICheckpointLocationRow({ county, city, locationText })) continue;
+
     const parsed = parseDateTime(timeRaw);
     if (!parsed) {
       console.warn(`Skipping OVICheckpoint row due to unparseable time/date: ${timeRaw}`);

@@ -40,6 +40,31 @@ const CHECKPOINT_PUBLIC_NOISE_PATTERNS = [
   /\bborder checkpoints?\b/i,
   /\bcheckpoint inhibitor\b/i,
   /\bcorrespondents'? dinner\b/i,
+  /\bPennsylvania\b/i,
+  /\bPSP\b/i,
+  /\bCalifornia\b/i,
+  /\bChula Vista\b/i,
+  /\bSacramento\b/i,
+  /\bStockton\b/i,
+  /\bBarstow\b/i,
+  /\bSomerset\b/i,
+];
+
+const OHIO_PUBLIC_SIGNAL_PATTERNS = [
+  /\bOhio\b/i,
+  /\bOVI\b/i,
+  /\bOSHP\b/i,
+  /\bOhio State Highway Patrol\b/i,
+  /\bOhio Highway Patrol\b/i,
+  /\bCleveland\b/i,
+  /\bColumbus\b/i,
+  /\bCincinnati\b/i,
+  /\bDayton\b/i,
+  /\bAkron\b/i,
+  /\bToledo\b/i,
+  /\bYoungstown\b/i,
+  /\bStark County\b/i,
+  /\bFranklin County\b/i,
 ];
 
 function parseIsoDate(value: unknown): Date | null {
@@ -57,7 +82,7 @@ function parseDateOnlyToUtc(value: unknown): Date | null {
 }
 
 function hasCheckpointPublicSignal(announcement: CheckpointAnnouncement): boolean {
-  const text = [announcement.title, announcement.location_text, announcement.raw_text]
+  const text = [announcement.title, announcement.source_name, announcement.location_text, announcement.raw_text]
     .filter(Boolean)
     .join('\n');
 
@@ -66,6 +91,18 @@ function hasCheckpointPublicSignal(announcement: CheckpointAnnouncement): boolea
   }
 
   return CHECKPOINT_PUBLIC_SIGNAL_PATTERNS.some((pattern) => pattern.test(text));
+}
+
+function hasOhioPublicSignal(announcement: CheckpointAnnouncement): boolean {
+  const text = [announcement.title, announcement.source_name, announcement.location_text, announcement.raw_text]
+    .filter(Boolean)
+    .join('\n');
+
+  if (CHECKPOINT_PUBLIC_NOISE_PATTERNS.some((pattern) => pattern.test(text))) {
+    return false;
+  }
+
+  return OHIO_PUBLIC_SIGNAL_PATTERNS.some((pattern) => pattern.test(text));
 }
 
 function createCheckpointAnnouncementsClient() {
@@ -93,6 +130,8 @@ export function isAnnouncementFreshForPublic(announcement: CheckpointAnnouncemen
       announcement.location_county?.trim() ||
       announcement.location_text?.trim()
   );
+
+  if (!hasLocationContext && !hasOhioPublicSignal(announcement)) return false;
 
   if (eventDate && eventDate >= oneDayAgo) return true;
   if (startDate && startDate >= oneDayAgo) return true;

@@ -73,6 +73,14 @@ const STREET_LEVEL_HINT_PATTERNS = [
   /&/,
 ] as const;
 
+const LOW_INFORMATION_ROUTE_PATTERNS = [
+  /^\s*(?:state|us|u\.s\.|county)\s+(?:route|road)\s*$/i,
+  /^\s*(?:state|us|u\.s\.)\s*route\s*$/i,
+  /^\s*(?:sr|us|u\.s\.)\s*$/i,
+  /\b(?:state|us|u\.s\.|county)\s+(?:route|road)\s*$/i,
+  /\bnear\s+(?:county|state|us|u\.s\.)\s+(?:route|road)\s*$/i,
+] as const;
+
 function normalizeText(value: string | null | undefined): string {
   return value?.trim() || '';
 }
@@ -131,6 +139,24 @@ export function hasStreetLevelHint(locationText: string | null | undefined): boo
   const normalized = normalizeText(locationText);
   if (!normalized) return false;
   return STREET_LEVEL_HINT_PATTERNS.some((pattern) => pattern.test(normalized));
+}
+
+function hasUsableExactLocation(locationText: string | null | undefined): boolean {
+  const normalized = normalizeText(locationText);
+  if (!normalized) return false;
+  if (LOW_INFORMATION_ROUTE_PATTERNS.some((pattern) => pattern.test(normalized))) return false;
+  return hasStreetLevelHint(normalized);
+}
+
+function formattedAddressMatchesExpectedPlace(
+  formattedAddress: string | null | undefined,
+  city: string,
+): boolean {
+  const formatted = normalizeText(formattedAddress).toLowerCase();
+  const normalizedCity = city.trim().toLowerCase();
+
+  if (!formatted || !normalizedCity) return false;
+  return formatted.includes(normalizedCity);
 }
 
 function isOhioCoordinate(latitude: number, longitude: number): boolean {
@@ -311,11 +337,16 @@ export async function geocodeCheckpointLocation(
   const useApproximateFallback = locationTextSuggestsUndisclosed(address);
   const canUseCityCentroid = Boolean(city) && Boolean(county) && !cityLooksRedundant(city, county);
 
-  if (!useApproximateFallback && address && city) {
+  if (!useApproximateFallback && address && city && !cityLooksRedundant(city, county) && hasUsableExactLocation(address)) {
     const exactQueries = buildExactQueryCandidates({ address, city, county });
     for (const exactQuery of exactQueries) {
       const exactResult = await geocodeAddress(exactQuery, supabaseClient, mapboxToken);
       if (exactResult) {
+        if (!formattedAddressMatchesExpectedPlace(exactResult.formatted_address, city)) {
+          console.warn(`Rejecting geocode outside expected city "${city}" for: ${exactQuery}`);
+          continue;
+        }
+
         const exactConfidence =
           exactResult.confidence === 'high'
             ? 'exact_high'

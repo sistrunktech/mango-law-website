@@ -49,7 +49,7 @@ const holidayWindows = [
   },
   {
     title: 'Memorial Day through July 4th',
-    description: 'Travel weekends, parties, and lake or festival traffic usually raise patrol visibility fast.',
+    description: 'Travel weekends, parties, lake traffic, and Central Ohio event traffic such as Dublin tournament week usually raise patrol visibility fast.',
   },
   {
     title: 'Labor Day and football weekends',
@@ -97,7 +97,7 @@ const seasonalPlaybook = [
     key: 'summer' as const,
     label: 'Summer',
     window: 'Memorial Day through Labor Day',
-    body: 'Travel weekends, lake traffic, and festivals create the broadest mix of stops and checkpoint chatter.',
+    body: 'Travel weekends, lake traffic, festivals, and Dublin-area tournament traffic create the broadest mix of stops and checkpoint chatter.',
   },
   {
     key: 'fall' as const,
