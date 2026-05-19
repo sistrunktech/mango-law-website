@@ -207,6 +207,11 @@ export default function OviDuiPage() {
                       href: '/als-license-suspension-ohio',
                     },
                     {
+                      title: 'CDL or out-of-state OVI',
+                      description: 'License, work, employer, and home-state issues after an Ohio OVI charge.',
+                      href: '/blog/cdl-out-of-state-driver-ovi-ohio',
+                    },
+                    {
                       title: 'Motion to suppress OVI evidence',
                       description: 'Where the stop, detention, or testing process becomes the legal battleground.',
                       href: '/motion-to-suppress-ovi-ohio',
@@ -467,6 +472,11 @@ export default function OviDuiPage() {
             title: 'High-tier OVI in Ohio',
             description: 'How a .17+ test allegation changes defense priorities and license planning.',
             href: '/blog/high-tier-ovi-ohio-17-test',
+          },
+          {
+            title: 'CDL or out-of-state OVI',
+            description: 'License, work, employer, and home-state issues after an Ohio OVI charge.',
+            href: '/blog/cdl-out-of-state-driver-ovi-ohio',
           },
           {
             title: 'Drug OVI in Ohio',

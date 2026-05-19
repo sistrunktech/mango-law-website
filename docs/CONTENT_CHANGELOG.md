@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-19 17:03 EDT
+Post slug and title: cdl-out-of-state-driver-ovi-ohio | CDL or Out-of-State Driver Charged With OVI in Ohio: License, Work, and Court Issues
+Change type: major
+Summary of change: Added the next OVI support post from the approved May 19 roadmap for CDL holders and out-of-state drivers; grounded the article in current Ohio OVI/ALS/CDL/Driver License Compact statutes, Ohio BMV resources, and FMCSA CDL disqualification/reporting rules; added a unique watercolor Ohio-route featured image; added ORC 4506.15, 4506.16, 4506.17, and 4510.61 glossary/statute entries; connected the post to homepage/blog discovery, OVI fast paths, related posts, OVI owner support cards, first-offense OVI, ALS support, and SEO metadata; refreshed sitemap lastmod for touched OVI/blog surfaces.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked "next?" on 2026-05-19 after approving continued pillar-supporting content and SEO optimizations, with prior instruction to stop treating approved work as blocked by repeated permission checks.
+Rollback notes: Remove the `cdl-out-of-state-driver-ovi-ohio` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-cdl-out-of-state-driver-ovi-ohio.png`, remove the ORC 4506.15/4506.16/4506.17/4510.61 glossary/statute entries if unused, remove the slug from blog discovery, related-post, SEO override, OVI/ALS/first-offense support surfaces, sitemap lastmod updates, protected-content registry, and this changelog entry if the content should not remain live.
+
 Date/time: 2026-05-19 16:33 EDT
 Post slug and title: no-contact-bond-terms-domestic-violence-ohio | Featured image watercolor alignment
 Change type: minor

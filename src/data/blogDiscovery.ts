@@ -11,9 +11,9 @@ export type BlogIssuePathGroup = {
 };
 
 export const homepageBlogPrioritySlugs = [
+  'cdl-out-of-state-driver-ovi-ohio',
   'what-to-do-after-dui-checkpoint-stop-ohio',
-  'civil-protection-order-hearing-delaware-county-ohio',
-  'drug-possession-charge-ohio-what-to-do-next',
+  'no-contact-bond-terms-domestic-violence-ohio',
 ];
 
 export const oviFastPathLinks: BlogDiscoveryLink[] = [
@@ -26,6 +26,11 @@ export const oviFastPathLinks: BlogDiscoveryLink[] = [
     title: 'After a DUI checkpoint stop',
     description: 'Evidence to preserve, license deadlines to watch, and first-court-date prep.',
     href: '/blog/what-to-do-after-dui-checkpoint-stop-ohio',
+  },
+  {
+    title: 'CDL or out-of-state OVI',
+    description: 'License, work, employer, and home-state issues after an Ohio OVI charge.',
+    href: '/blog/cdl-out-of-state-driver-ovi-ohio',
   },
   {
     title: 'OVI / DUI defense overview',
@@ -54,9 +59,9 @@ export const blogIssuePathGroups: BlogIssuePathGroup[] = [
     label: 'OVI / DUI',
     summary: 'Stops, checkpoints, license pressure, testing, and first-court-date planning.',
     links: [
+      oviFastPathLinks[2],
       oviFastPathLinks[1],
-      oviFastPathLinks[0],
-      oviFastPathLinks[3],
+      oviFastPathLinks[4],
     ],
   },
   {

@@ -251,6 +251,11 @@ const firstOffenseOviConfig: HighIntentConfig = {
       description: 'Administrative suspension process and strategy.',
     },
     {
+      title: 'CDL or out-of-state OVI guide',
+      href: '/blog/cdl-out-of-state-driver-ovi-ohio',
+      description: 'License, work, employer, and home-state issues after an Ohio OVI charge.',
+    },
+    {
       title: 'OVI test refusal defense',
       href: '/ovi-test-refusal-lawyer-ohio',
       description: 'How refusal issues affect case posture and licensing.',
@@ -520,6 +525,11 @@ const alsLicenseSuspensionConfig: HighIntentConfig = {
       title: 'ALS educational guide',
       href: '/blog/ohio-ovi-driving-privileges-als',
       description: 'General explainer for ALS and driving privileges.',
+    },
+    {
+      title: 'CDL or out-of-state OVI guide',
+      href: '/blog/cdl-out-of-state-driver-ovi-ohio',
+      description: 'Work, CDL, home-state, and licensing issues after an Ohio OVI charge.',
     },
     {
       title: 'First-offense OVI guide',

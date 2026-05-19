@@ -22,7 +22,7 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     definition: 'Prohibits operating any vehicle while under the influence of alcohol, drugs, or a combination of both. Includes specific BAC thresholds (.08% for adults, .02% for underage) and applies to all vehicles including cars, motorcycles, boats, and bicycles.',
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
     practiceAreas: ['ovi-dui', 'criminal-defense'],
-    relatedStatutes: ['4511.191', '4511.194', '4510.14', '4511.203'],
+    relatedStatutes: ['4511.191', '4511.194', '4510.14', '4511.203', '4506.16'],
     lastVerified: '2025-12-15',
     sources: [
       { label: 'Ohio Revised Code § 4511.19', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19', type: 'primary' },
@@ -36,7 +36,7 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     definition: 'Establishes that any person who operates a vehicle on Ohio roads has given implied consent to chemical testing (breath, oral fluid, blood/serum/plasma, or urine) if arrested for OVI. Refusal triggers automatic administrative license suspension.',
     orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
     practiceAreas: ['ovi-dui'],
-    relatedStatutes: ['4511.19', '4511.192', '4511.197', '4510.021', '4510.13'],
+    relatedStatutes: ['4511.19', '4511.192', '4511.197', '4510.021', '4510.13', '4506.17'],
     lastVerified: '2025-12-15',
     sources: [
       { label: 'Ohio Revised Code § 4511.191', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191', type: 'primary' },
@@ -54,6 +54,48 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     lastVerified: '2026-05-03',
     sources: [
       { label: 'Ohio Revised Code § 4511.197', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.197', type: 'primary' },
+    ],
+  },
+  '4506.15': {
+    id: 'commercial-driver-prohibited-acts',
+    section: '4506.15',
+    title: 'Commercial Driver Prohibited Acts and Out-of-Service Orders',
+    shortTitle: 'CDL Prohibited Acts',
+    definition: 'Sets prohibited conduct and out-of-service rules for commercial drivers, including alcohol-related and controlled-substance-related restrictions tied to commercial motor vehicle operation.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4506.15',
+    practiceAreas: ['ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['4506.16', '4506.17', '4511.19', '4511.191'],
+    lastVerified: '2026-05-19',
+    sources: [
+      { label: 'Ohio Revised Code § 4506.15', url: 'https://codes.ohio.gov/ohio-revised-code/section-4506.15', type: 'primary' },
+    ],
+  },
+  '4506.16': {
+    id: 'commercial-driver-disqualification',
+    section: '4506.16',
+    title: 'Disqualification from Operating Commercial Motor Vehicles',
+    shortTitle: 'CDL Disqualification',
+    definition: 'Describes when a person is disqualified from operating a commercial motor vehicle, including OVI-related, refusal-related, controlled-substance, and other commercial-driving disqualification categories.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4506.16',
+    practiceAreas: ['ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['4506.15', '4506.17', '4511.19', '4511.191'],
+    lastVerified: '2026-05-19',
+    sources: [
+      { label: 'Ohio Revised Code § 4506.16', url: 'https://codes.ohio.gov/ohio-revised-code/section-4506.16', type: 'primary' },
+    ],
+  },
+  '4506.17': {
+    id: 'commercial-driver-implied-consent',
+    section: '4506.17',
+    title: 'Implied Consent for Commercial Drivers',
+    shortTitle: 'CDL Implied Consent',
+    definition: 'Addresses implied consent and testing consequences for commercial drivers and commercial motor vehicle operation, including refusal-related issues that can affect CDL status.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4506.17',
+    practiceAreas: ['ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['4506.15', '4506.16', '4511.19', '4511.191'],
+    lastVerified: '2026-05-19',
+    sources: [
+      { label: 'Ohio Revised Code § 4506.17', url: 'https://codes.ohio.gov/ohio-revised-code/section-4506.17', type: 'primary' },
     ],
   },
   '4511.192': {
@@ -180,6 +222,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
     lastVerified: '2026-05-03',
     sources: [
       { label: 'Ohio Revised Code § 4510.022', url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.022', type: 'primary' },
+    ],
+  },
+  '4510.61': {
+    id: 'driver-license-compact',
+    section: '4510.61',
+    title: 'Driver License Compact',
+    shortTitle: 'Driver License Compact',
+    definition: 'Enacts the Driver License Compact in Ohio, including interstate reporting rules for certain convictions involving drivers licensed by another party state.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-4510.61',
+    practiceAreas: ['ovi-dui', 'criminal-defense'],
+    relatedStatutes: ['4511.19', '4511.191', '4511.197'],
+    lastVerified: '2026-05-19',
+    sources: [
+      { label: 'Ohio Revised Code § 4510.61', url: 'https://codes.ohio.gov/ohio-revised-code/section-4510.61', type: 'primary' },
     ],
   },
   '4510.11': {

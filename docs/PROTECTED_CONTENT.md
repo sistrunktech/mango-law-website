@@ -4,6 +4,7 @@ This registry tracks approved/finalized content and its source of truth.
 
 | Slug | Title | Source of Truth | Last Approved | Notes |
 |---|---|---|---|---|
+| cdl-out-of-state-driver-ovi-ohio | CDL or Out-of-State Driver Charged With OVI in Ohio: License, Work, and Court Issues | src/data/blogPosts.ts | 2026-05-19 | Next OVI support article from May 19 pillar roadmap. |
 | bond-jail-information-delaware-county-ohio | Bond & Jail Information in Delaware County, Ohio | src/data/blogPosts.ts | 2025-12-27 | |
 | what-to-do-after-ovi-arrest-ohio | What to Do After an OVI Arrest in Ohio: A Step-by-Step Guide | src/data/blogPosts.ts | 2025-12-29 | |
 | understanding-ovi-dui-charges-ohio | Understanding OVI/DUI Charges in Ohio: What You Need to Know | src/data/blogPosts.ts | 2025-12-27 | |
