@@ -63,6 +63,11 @@
     font-family: var(--font-sans);
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  html {
+    overflow-x: clip;
   }
   
   /* Improved heading defaults */

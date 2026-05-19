@@ -3,7 +3,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MessageCircle, Phone, FileText } from 'lucide-react';
 import ConversationWindow from './chat/ConversationWindow';
-import { PRIMARY_PHONE_TEL, SECONDARY_OFFICE_PHONE_TEL } from '../lib/contactInfo';
+import {
+  PRIMARY_PHONE_DISPLAY,
+  PRIMARY_PHONE_TEL,
+  SECONDARY_OFFICE_PHONE_DISPLAY,
+  SECONDARY_OFFICE_PHONE_TEL,
+} from '../lib/contactInfo';
 import { trackChatOpen, trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 
 interface ChatIntakeLauncherProps {
@@ -52,7 +57,7 @@ export default function ChatIntakeLauncher({
         <>
           <button
             type="button"
-            className="fixed inset-0 z-40 bg-brand-black/30 backdrop-blur-sm"
+            className="fixed inset-0 z-[65] bg-brand-black/30 backdrop-blur-sm"
             onClick={() => setIsChatOpen(false)}
             aria-label="Close chat"
           />
@@ -75,7 +80,8 @@ export default function ChatIntakeLauncher({
           trackCtaClick('floating_action_toggle');
         }}
         className={[
-          'fixed right-4 z-40 inline-flex items-center rounded-full bg-brand-black text-sm font-semibold text-brand-offWhite shadow-lg transition-all hover:bg-brand-gold hover:text-brand-black hover:shadow-xl active:scale-95 sm:right-6',
+          'fixed right-4 inline-flex items-center rounded-full bg-brand-black text-sm font-semibold text-brand-offWhite shadow-lg transition-all hover:bg-brand-gold hover:text-brand-black hover:shadow-xl active:scale-95 sm:right-6',
+          'z-[70]',
           isCollapsed ? 'h-11 w-11 justify-center px-0 py-0' : 'gap-2 px-5 py-4',
           bottomOffsetClass,
         ].join(' ')}
@@ -91,13 +97,13 @@ export default function ChatIntakeLauncher({
         <>
           <button
             type="button"
-            className="fixed inset-0 z-30 cursor-default bg-transparent"
+            className="fixed inset-0 z-[65] cursor-default bg-transparent"
             onClick={() => setIsChooserOpen(false)}
             aria-label="Close contact options"
           />
           <div
             className={[
-              'fixed right-4 z-40 w-[min(320px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-2xl sm:right-6',
+              'fixed right-4 z-[70] w-[min(320px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-2xl sm:right-6',
               chooserBottomOffsetClass,
             ].join(' ')}
             role="dialog"
@@ -115,7 +121,10 @@ export default function ChatIntakeLauncher({
                 data-cta="floating_chooser_chat"
               >
                 <MessageCircle className="h-4 w-4 text-brand-mango" aria-hidden="true" />
-                Chat now
+                <span>
+                  Chat intake
+                  <span className="block text-xs font-normal text-brand-black/55">Not monitored 24/7</span>
+                </span>
               </button>
               <a
                 href={`tel:${PRIMARY_PHONE_TEL}`}
@@ -129,7 +138,10 @@ export default function ChatIntakeLauncher({
                 data-cta="floating_chooser_call_office"
               >
                 <Phone className="h-4 w-4 text-brand-mango" aria-hidden="true" />
-                Call/Text (fastest)
+                <span>
+                  Call/Text {PRIMARY_PHONE_DISPLAY}
+                  <span className="block text-xs font-normal text-brand-black/55">Primary line, fastest</span>
+                </span>
               </a>
               <a
                 href={`tel:${SECONDARY_OFFICE_PHONE_TEL}`}
@@ -143,7 +155,10 @@ export default function ChatIntakeLauncher({
                 data-cta="floating_chooser_call_office_secondary"
               >
                 <Phone className="h-4 w-4 text-brand-leaf" aria-hidden="true" />
-                Call secondary line
+                <span>
+                  Backup office line
+                  <span className="block text-xs font-normal text-brand-black/55">{SECONDARY_OFFICE_PHONE_DISPLAY}</span>
+                </span>
               </a>
               <button
                 type="button"

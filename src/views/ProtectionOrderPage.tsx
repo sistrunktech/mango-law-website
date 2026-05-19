@@ -127,7 +127,7 @@ export default function ProtectionOrderPage() {
           <div className="mb-12 text-center">
             <h2 className="font-display text-display-sm md:text-display-md mb-4">How We Defend Protection Order Cases</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
-              We prepare thoroughly and fight aggressively to protect your rights.
+              We prepare around evidence, compliance, hearing timing, and the practical restrictions the order creates.
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
@@ -173,6 +173,32 @@ export default function ProtectionOrderPage() {
 
       <section className="section bg-white">
         <div className="container">
+          <div className="mb-10 rounded-[1.75rem] border border-brand-black/10 bg-brand-offWhite/55 p-6">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-goldText">
+              Pick the next step
+            </p>
+            <div className="mt-5 grid gap-4 md:grid-cols-3">
+              {[
+                {
+                  title: 'If you were just served',
+                  description: 'Read the order, preserve evidence, confirm the full-hearing date, and do not contact the petitioner.',
+                },
+                {
+                  title: 'If there is also a DV charge',
+                  description: 'Separate the civil CPO case from bond and no-contact terms so one mistake does not create another case.',
+                },
+                {
+                  title: 'If your hearing is this week',
+                  description: 'Organize exhibits, witnesses, courthouse logistics, and any request for clarification or modification.',
+                },
+              ].map((item) => (
+                <div key={item.title} className="rounded-2xl border border-brand-black/10 bg-white p-5 shadow-sm">
+                  <h3 className="font-bold text-brand-black">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-black/65">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
           <div className="mb-8 text-center">
             <h2 className="font-display text-display-sm md:text-display-md mb-3">Protection order resources</h2>
             <p className="text-lg text-brand-black/60 max-w-3xl mx-auto">
@@ -302,7 +328,7 @@ export default function ProtectionOrderPage() {
 
       <CTASection
         title="Need help with a protection order?"
-        body="Time is critical. Contact us immediately to prepare your defense."
+        body="Time can move quickly. Get the hearing date, order terms, and evidence plan organized before avoidable contact or compliance problems compound."
         primaryLabel="Schedule a consult"
         primaryHref="/contact"
         secondaryLabel={PRIMARY_PHONE_DISPLAY}

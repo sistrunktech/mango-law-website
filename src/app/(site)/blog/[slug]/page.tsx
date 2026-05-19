@@ -5,6 +5,7 @@ import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
 import { getPublicBlogPostBySlug, getPublicBlogPosts } from '@/lib/blogPostsRepo';
 import { resolveBlogSeo } from '@/lib/blog-seo';
+import { selectRelatedBlogPosts } from '@/lib/relatedBlogPosts';
 
 type PageProps = {
   params: { slug: string };
@@ -43,9 +44,7 @@ export default async function Page({ params }: PageProps) {
   if (!post) notFound();
 
   const allPosts = await getPublicBlogPosts();
-  const relatedPosts = allPosts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 2);
+  const relatedPosts = selectRelatedBlogPosts({ post, posts: allPosts, limit: 3 });
 
   const breadcrumbs = [
     { name: 'Home', item: '/' },

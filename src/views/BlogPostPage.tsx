@@ -17,6 +17,7 @@ import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import BlogCoverArt from '../components/BlogCoverArt';
 import { formatCalendarDate } from '../lib/formatting';
 import { attorneyProfile } from '../data/attorneyProfile';
+import { getBlogCtaContent } from '../lib/blogCtas';
 import {
   PenaltyGrid,
   CostBreakdown,
@@ -98,6 +99,7 @@ export default function BlogPostPage({
   const hasMidCta = post.content.includes('[VISUAL:MID_ARTICLE_CTA]');
   const tocItems = extractTOCItems(post.content);
   const readingTime = estimateReadingTime(post.content);
+  const blogCta = getBlogCtaContent(post);
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -114,16 +116,59 @@ export default function BlogPostPage({
       aria-label="Consultation call to action"
     >
       <p className="mb-3 text-sm text-brand-black/80">
-        Need clarity before your next court date? Talk with a defense attorney about your options.
+        {blogCta.body}
       </p>
       <Link
-        href="/contact"
+        href={blogCta.primaryHref}
         className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2 text-xs font-semibold text-brand-black transition-colors hover:bg-brand-mango/90"
       >
-        Request Free Consultation
+        {blogCta.primaryLabel}
       </Link>
     </aside>
   );
+  const sourcesBlock = post.sources.length > 0 ? (
+    <div id="sources" className="mt-10 rounded-xl border border-brand-black/10 bg-brand-offWhite p-5 shadow-sm">
+      <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
+        <FileText className="h-4 w-4 text-brand-leaf" />
+        Sources
+      </div>
+      <p className="mt-2 text-xs text-gray-500">
+        Visual summaries and timelines are simplified. Use these sources to confirm current law and details.
+      </p>
+      <ul className="mt-3 space-y-2 text-sm text-gray-700">
+        {(() => {
+          let dofollowBudget = 2;
+
+          return post.sources.map((source) => {
+            const allowDofollow = dofollowBudget > 0 && isHighAuthorityCitationUrl(source.url);
+            if (allowDofollow) dofollowBudget -= 1;
+
+            const rel = allowDofollow
+              ? 'noopener noreferrer'
+              : 'noopener noreferrer nofollow';
+
+            return (
+              <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel={rel}
+                  className="font-medium text-brand-leaf underline-offset-2 hover:text-brand-leafLight hover:underline"
+                >
+                  {source.label}
+                </a>
+                {source.type && (
+                  <span className="rounded-full bg-brand-black/5 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
+                    {source.type}
+                  </span>
+                )}
+              </li>
+            );
+          });
+        })()}
+      </ul>
+    </div>
+  ) : null;
 
   return (
     <>
@@ -218,50 +263,6 @@ export default function BlogPostPage({
                     year: 'numeric',
                   })}
                   .
-                </div>
-              )}
-
-              {post.sources.length > 0 && (
-                <div id="sources" className="mt-6 rounded-xl border border-brand-black/10 bg-brand-offWhite p-5 shadow-sm">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-brand-black">
-                    <FileText className="h-4 w-4 text-brand-leaf" />
-                    Sources
-                  </div>
-                  <p className="mt-2 text-xs text-gray-500">
-                    Visual summaries and timelines are simplified. Use these sources to confirm current law and details.
-                  </p>
-                  <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                    {(() => {
-                      let dofollowBudget = 2;
-
-                      return post.sources.map((source) => {
-                        const allowDofollow = dofollowBudget > 0 && isHighAuthorityCitationUrl(source.url);
-                        if (allowDofollow) dofollowBudget -= 1;
-
-                        const rel = allowDofollow
-                          ? 'noopener noreferrer'
-                          : 'noopener noreferrer nofollow';
-
-                        return (
-                          <li key={source.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                            <a
-                              href={source.url}
-                              target="_blank"
-                              rel={rel}
-                              className="font-medium text-brand-leaf underline-offset-2 hover:text-brand-leafLight hover:underline"
-                            >
-                              {source.label}
-                            </a>
-                            {source.type && (
-                              <span className="rounded-full bg-brand-black/5 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-black/60">
-                                {source.type}
-                              </span>
-                            )}
-                          </li>
-                        );
-                      });
-                    })()}
-                  </ul>
                 </div>
               )}
 
@@ -1228,13 +1229,13 @@ export default function BlogPostPage({
                         aria-label="Consultation call to action"
                       >
                         <p className="mb-3 text-sm text-brand-black/80">
-                          Charged with an OVI in Delaware or Franklin County? Get advice before your first court date.
+                          {blogCta.body}
                         </p>
                         <Link
-                          href="/contact"
+                          href={blogCta.primaryHref}
                           className="inline-flex items-center gap-2 rounded-lg bg-brand-mango px-4 py-2 text-xs font-semibold text-brand-black transition-colors hover:bg-brand-mango/90"
                         >
-                          Request Free Consultation
+                          {blogCta.primaryLabel}
                         </Link>
                       </aside>
                     );
@@ -1379,6 +1380,8 @@ export default function BlogPostPage({
                 })()}
               </div>
 
+              {sourcesBlock}
+
               {post.faqs && post.faqs.length > 0 && (
                 <section
                   id="common-questions"
@@ -1448,6 +1451,31 @@ export default function BlogPostPage({
                 </div>
               </footer>
 
+              <section
+                className="mt-12 rounded-2xl border border-brand-black/10 bg-brand-offWhite p-6"
+                aria-label="Practical next steps"
+              >
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-goldText">
+                  Practical next steps
+                </p>
+                <h2 className="mt-2 text-2xl font-bold text-brand-black">{blogCta.heading}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-brand-black/70">{blogCta.body}</p>
+                <div className="mt-5 grid gap-3 md:grid-cols-3">
+                  {blogCta.nextSteps.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="rounded-xl border border-brand-black/10 bg-white p-4 transition-colors hover:border-brand-mango/40"
+                    >
+                      <span className="text-sm font-semibold text-brand-black">{item.label}</span>
+                      <span className="mt-2 block text-xs leading-relaxed text-brand-black/62">
+                        {item.description}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
               <div className="mt-16">
                 <RelatedPosts posts={relatedPosts} />
               </div>
@@ -1455,7 +1483,7 @@ export default function BlogPostPage({
 
             <div className="hidden lg:block lg:self-start">
               <div className="sticky top-24">
-                <StickyConsultCTA tocItems={tocItems} />
+                <StickyConsultCTA tocItems={tocItems} cta={blogCta} />
               </div>
             </div>
           </div>
@@ -1463,10 +1491,10 @@ export default function BlogPostPage({
       </section>
 
       <CTASection
-        title="Need legal guidance?"
-        body="If you're facing criminal charges, contact Mango Law for experienced representation in Delaware and Franklin County."
-        primaryLabel="Free Consultation"
-        primaryHref="/contact"
+        title={blogCta.heading}
+        body={blogCta.body}
+        primaryLabel={blogCta.primaryLabel}
+        primaryHref={blogCta.primaryHref}
         secondaryLabel={PRIMARY_PHONE_DISPLAY}
         secondaryHref={`tel:${PRIMARY_PHONE_TEL}`}
         secondaryCtaId="blog_post_cta_call_office"

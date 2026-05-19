@@ -1,14 +1,9 @@
 import Link from 'next/link';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
 import type { BlogPost } from '../data/blogPosts';
+import { homepageBlogPrioritySlugs } from '../data/blogDiscovery';
 import BlogCoverArt from './BlogCoverArt';
 import { formatCalendarDate } from '../lib/formatting';
-
-const recoveryPrioritySlugs = [
-  'ohio-ovi-driving-privileges-als',
-  'drug-possession-charge-ohio-what-to-do-next',
-  'first-ovi-court-date-delaware-county-ohio',
-];
 
 function getRecentDiversePosts(posts: BlogPost[], count: number): BlogPost[] {
   const sorted = [...posts].sort(
@@ -18,7 +13,7 @@ function getRecentDiversePosts(posts: BlogPost[], count: number): BlogPost[] {
   const selected: BlogPost[] = [];
   const usedCategories = new Set<string>();
 
-  for (const slug of recoveryPrioritySlugs) {
+  for (const slug of homepageBlogPrioritySlugs) {
     const match = sorted.find((post) => post.slug === slug);
     if (!match || selected.includes(match) || selected.length >= count) continue;
     selected.push(match);

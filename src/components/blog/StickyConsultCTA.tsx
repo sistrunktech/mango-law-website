@@ -3,6 +3,7 @@
 import { List } from 'lucide-react';
 import Link from 'next/link';
 import { PRIMARY_PHONE_DISPLAY } from '../../lib/contactInfo';
+import type { BlogCtaContent } from '../../lib/blogCtas';
 
 interface TOCItem {
   id: string;
@@ -12,9 +13,10 @@ interface TOCItem {
 
 interface StickyConsultCTAProps {
   tocItems?: TOCItem[];
+  cta: BlogCtaContent;
 }
 
-export default function StickyConsultCTA({ tocItems }: StickyConsultCTAProps) {
+export default function StickyConsultCTA({ tocItems, cta }: StickyConsultCTAProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -53,16 +55,16 @@ export default function StickyConsultCTA({ tocItems }: StickyConsultCTAProps) {
 
       <div className="rounded-lg border border-brand-black/10 border-l-4 border-brand-mango bg-brand-offWhite p-6 text-brand-black">
         <h2 id="sidebar-cta-heading" className="mb-2 text-base font-semibold">
-          Facing OVI charges?
+          {cta.heading}
         </h2>
         <p className="mb-4 text-sm text-brand-black/70">
-          Get a free case review from an experienced Ohio defense attorney. Call/text {PRIMARY_PHONE_DISPLAY} if timing is urgent.
+          {cta.body} Call/text {PRIMARY_PHONE_DISPLAY} if timing is urgent.
         </p>
         <Link
-          href="/contact"
+          href={cta.primaryHref}
           className="inline-flex items-center justify-center rounded bg-brand-mango px-4 py-2 text-xs font-semibold text-brand-black transition hover:bg-brand-mango/90 focus:outline-none focus:ring-2 focus:ring-brand-mango/40"
         >
-          Request Free Consultation
+          {cta.primaryLabel}
         </Link>
       </div>
     </aside>
