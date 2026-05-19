@@ -2,6 +2,16 @@ import type { BlogPost } from '../data/blogPosts';
 import { resolveBlogScope } from '../data/blogPosts';
 
 export const relatedBlogPostSlugsBySlug: Record<string, string[]> = {
+  'cdl-out-of-state-driver-ovi-ohio': [
+    'ohio-ovi-driving-privileges-als',
+    'first-ovi-court-date-delaware-county-ohio',
+    'ovi-refusal-vs-failed-test-ohio',
+  ],
+  'ohio-ovi-driving-privileges-als': [
+    'cdl-out-of-state-driver-ovi-ohio',
+    'first-ovi-court-date-delaware-county-ohio',
+    'ovi-refusal-vs-failed-test-ohio',
+  ],
   'what-to-do-after-dui-checkpoint-stop-ohio': [
     'ohio-dui-checkpoint-hotspots',
     'ohio-ovi-driving-privileges-als',

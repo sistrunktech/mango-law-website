@@ -6,6 +6,11 @@ type BlogSeoOverride = {
 };
 
 const BLOG_SEO_OVERRIDES: Record<string, BlogSeoOverride> = {
+  'cdl-out-of-state-driver-ovi-ohio': {
+    title: 'CDL or Out-of-State OVI in Ohio',
+    description:
+      'Ohio OVI guide for CDL and out-of-state drivers covering license, ALS, employment, home-state, and court issues.',
+  },
   'civil-protection-order-hearing-delaware-county-ohio': {
     title: 'Delaware County CPO Hearing Defense',
     description:

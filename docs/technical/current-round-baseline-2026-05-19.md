@@ -161,7 +161,7 @@ Use Ahrefs when a crawl/export is available:
 
 After this post, the next scoped pieces remain:
 
-1. CDL or out-of-state driver charged with OVI in Ohio.
+1. CDL or out-of-state driver charged with OVI in Ohio. Completed in follow-up branch on 2026-05-19 as `/blog/cdl-out-of-state-driver-ovi-ohio`.
 2. Summons vs. arrest in Delaware County.
 3. Lab testing and chain of custody in Ohio drug possession cases.
 4. What to do if police contact you about a sex-offense investigation in Ohio.

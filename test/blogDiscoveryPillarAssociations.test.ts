@@ -20,12 +20,14 @@ function run() {
     '/contact',
   ]);
   const checkpointAfterStopPost = postsBySlug.get('what-to-do-after-dui-checkpoint-stop-ohio');
+  const cdlOviPost = postsBySlug.get('cdl-out-of-state-driver-ovi-ohio');
   const cpoHearingPost = postsBySlug.get('civil-protection-order-hearing-delaware-county-ohio');
   const noContactBondPost = postsBySlug.get('no-contact-bond-terms-domestic-violence-ohio');
   const criminalTimelinePost = postsBySlug.get('delaware-county-criminal-case-timeline');
   const drugVehiclePost = postsBySlug.get('drug-possession-in-car-ohio');
 
   assert.ok(checkpointAfterStopPost, 'checkpoint after-stop article should exist');
+  assert.ok(cdlOviPost, 'CDL/out-of-state OVI article should exist');
   assert.ok(cpoHearingPost, 'CPO hearing article should exist');
   assert.ok(noContactBondPost, 'no-contact bond terms article should exist');
   assert.ok(criminalTimelinePost, 'criminal timeline article should exist');
@@ -35,7 +37,11 @@ function run() {
     assert.ok(postsBySlug.has(slug), `homepage priority slug should exist: ${slug}`);
   }
 
-  assert.equal(homepageBlogPrioritySlugs[0], 'what-to-do-after-dui-checkpoint-stop-ohio');
+  assert.equal(homepageBlogPrioritySlugs[0], 'cdl-out-of-state-driver-ovi-ohio');
+  assert.ok(
+    oviFastPathLinks.some((link) => link.href === '/blog/cdl-out-of-state-driver-ovi-ohio'),
+    'OVI fast paths should surface the CDL/out-of-state OVI article'
+  );
   assert.ok(
     oviFastPathLinks.some((link) => link.href === '/blog/what-to-do-after-dui-checkpoint-stop-ohio'),
     'OVI fast paths should surface the checkpoint after-stop article'
@@ -87,6 +93,31 @@ function run() {
 
   const checkpointLegalityPost = postsBySlug.get('ohio-dui-checkpoint-hotspots');
   assert.ok(checkpointLegalityPost?.content.includes('/blog/what-to-do-after-dui-checkpoint-stop-ohio'));
+
+  for (const href of [
+    '/ovi-dui-defense-delaware-oh',
+    '/als-license-suspension-ohio',
+    '/first-offense-ovi-ohio',
+    '/blog/ohio-ovi-driving-privileges-als',
+    '/ovi-test-refusal-lawyer-ohio',
+    '/motion-to-suppress-ovi-ohio',
+  ]) {
+    assert.ok(cdlOviPost.content.includes(href), `CDL/out-of-state OVI article should link to ${href}`);
+  }
+
+  const cdlRelatedPosts = selectRelatedBlogPosts({
+    post: cdlOviPost,
+    posts: blogPosts,
+    limit: 3,
+  });
+  assert.deepEqual(
+    cdlRelatedPosts.map((post) => post.slug),
+    [
+      'ohio-ovi-driving-privileges-als',
+      'first-ovi-court-date-delaware-county-ohio',
+      'ovi-refusal-vs-failed-test-ohio',
+    ]
+  );
 
   const domesticIssueGroup = blogIssuePathGroups.find((group) => group.label === 'Protection / Domestic');
   assert.ok(
