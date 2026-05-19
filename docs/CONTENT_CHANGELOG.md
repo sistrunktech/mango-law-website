@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-19 16:45 EDT
+Post slug and title: blog pillar UX and checkpoint article associations
+Change type: minor
+Summary of change: Connected the new checkpoint after-stop article into homepage blog priority, blog issue paths, related-post selection, and reciprocal checkpoint/holiday OVI internal links; replaced public-facing internal SEO language with user-facing "where to go next" copy; added category-aware blog CTAs so non-OVI posts no longer show OVI-specific calls to action; and documented the next support-post roadmap by pillar.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? no
+Approval token: User asked on 2026-05-19 to optimize the new content display, associate it with pillar content and related posts, deploy consumer-style UX subagents, and start implementing feedback.
+Rollback notes: Revert this branch's changes to `src/data/blogPosts.ts`, `src/data/blogDiscovery.ts`, `src/lib/relatedBlogPosts.ts`, `src/lib/blogCtas.ts`, `src/views/BlogPage.tsx`, `src/views/BlogPostPage.tsx`, and `src/components/BlogSection.tsx` if the blog-pillar routing needs to return to the prior simple category/date behavior.
+
 Date/time: 2026-05-19 13:55 EDT
 Post slug and title: what-to-do-after-dui-checkpoint-stop-ohio | What to Do After a DUI Checkpoint Stop in Ohio: Evidence, License, and Court Next Steps
 Change type: major

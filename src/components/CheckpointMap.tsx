@@ -46,6 +46,15 @@ function formatMapDateTime(value: string): string {
   return parsed.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
 }
 
+function getFallbackDate(checkpoint: DUICheckpoint): string {
+  if (checkpoint.is_pending_announcement && checkpoint.pending_announcement_event_date) {
+    return `Upcoming ${formatCalendarDate(checkpoint.pending_announcement_event_date)}`;
+  }
+
+  const startDate = checkpoint.start_date ? formatCalendarDate(checkpoint.start_date) : null;
+  return startDate ? startDate : 'Date unavailable';
+}
+
 export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheckpointSelect, now }: Props) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -82,11 +91,11 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       let didLoad = false;
       const loadTimeout = window.setTimeout(() => {
         if (didLoad) return;
-        setMapError('Failed to load map');
+        setMapError('The interactive map did not load in time. The checkpoint list is still available.');
         setIsLoading(false);
         map.current?.remove();
         map.current = null;
-      }, 15000);
+      }, 10000);
 
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
@@ -107,7 +116,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       map.current.on('error', (e) => {
         console.error('Mapbox error:', e);
         if (!didLoad) {
-          setMapError('Failed to load map');
+          setMapError('The interactive map could not load. The checkpoint list is still available.');
           setIsLoading(false);
           window.clearTimeout(loadTimeout);
           map.current?.remove();
@@ -116,7 +125,7 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       });
     } catch (error) {
       console.error('Map initialization error:', error);
-      setMapError('Failed to initialize map');
+      setMapError('The interactive map could not initialize. The checkpoint list is still available.');
       setIsLoading(false);
       map.current?.remove();
       map.current = null;
@@ -407,11 +416,44 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   if (mapError) {
     return (
       <div className="relative h-full min-h-[500px] overflow-hidden rounded-2xl border border-brand-black/10 bg-brand-offWhite">
-        <div className="flex h-full items-center justify-center p-8">
-          <div className="text-center">
-            <MapPin className="mx-auto mb-3 h-12 w-12 text-red-500/40" />
-            <p className="text-lg font-semibold text-red-600">Map Error</p>
-            <p className="text-sm text-brand-black/60">{mapError}</p>
+        <div className="flex h-full items-center justify-center p-5 sm:p-8">
+          <div className="w-full max-w-2xl">
+            <div className="text-center">
+              <MapPin className="mx-auto mb-3 h-12 w-12 text-brand-mango/60" />
+              <p className="text-lg font-semibold text-brand-black">Interactive map unavailable</p>
+              <p className="mt-1 text-sm text-brand-black/65">{mapError}</p>
+            </div>
+            {checkpoints.length > 0 ? (
+              <div className="mt-6 rounded-2xl border border-brand-black/10 bg-white p-4 text-left shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-goldText">
+                  Current list view
+                </p>
+                <div className="mt-3 space-y-2">
+                  {checkpoints.slice(0, 6).map((checkpoint) => (
+                    <button
+                      key={checkpoint.id}
+                      type="button"
+                      onClick={() => onCheckpointSelect?.(checkpoint)}
+                      className="block w-full rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-left transition-colors hover:border-brand-mango/40 hover:bg-brand-mango/5"
+                    >
+                      <span className="block text-sm font-semibold text-brand-black">{checkpoint.title}</span>
+                      <span className="mt-1 block text-xs text-brand-black/60">
+                        {getCheckpointAreaLabel(checkpoint)} • {getFallbackDate(checkpoint)}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                {checkpoints.length > 6 ? (
+                  <p className="mt-3 text-xs text-brand-black/55">
+                    Showing 6 of {checkpoints.length}. The full list appears below the map section.
+                  </p>
+                ) : null}
+              </div>
+            ) : (
+              <p className="mt-6 rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-center text-sm text-brand-black/65">
+                No checkpoint rows are available for the selected filters.
+              </p>
+            )}
           </div>
         </div>
       </div>

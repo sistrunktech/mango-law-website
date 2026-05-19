@@ -7,7 +7,7 @@ import ChatBubble from './ChatBubble';
 import TypingIndicator from './TypingIndicator';
 import TextInput from './TextInput';
 import PhoneInput from './PhoneInput';
-import { PRIMARY_PHONE_DISPLAY, SECONDARY_OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL, SECONDARY_OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
 import { trackLeadSubmitted } from '../../lib/analytics';
 import TurnstileWidget from '../TurnstileWidget';
@@ -486,7 +486,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
   return (
     <div
       className={[
-        'fixed inset-x-3 bottom-4 z-50 flex max-w-full flex-col overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-lift-lg',
+        'fixed inset-x-3 bottom-4 z-[70] flex max-w-full flex-col overflow-hidden rounded-2xl border border-brand-black/10 bg-white shadow-lift-lg',
         bottomOffsetClass,
         'max-h-[85vh]',
         'lg:inset-x-auto lg:right-6 lg:bottom-6 lg:max-h-none lg:h-[640px] lg:w-[420px]',
@@ -710,7 +710,7 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
               />
               <button
                 onClick={handleMessageSubmit}
-                disabled={!message.trim() || isSubmitting || (turnstileSiteKey ? !turnstileToken : false)}
+                disabled={!message.trim() || isSubmitting}
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-mango px-4 py-3 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
@@ -738,6 +738,15 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
                     className="turnstile-widget origin-top-right scale-[0.9]"
                   />
                 </div>
+              ) : null}
+              {turnstileSiteKey && !turnstileToken ? (
+                <a
+                  href={`tel:${PRIMARY_PHONE_TEL}`}
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-brand-mangoText hover:text-brand-leaf"
+                >
+                  <Phone size={12} />
+                  Form stuck? Call/Text {PRIMARY_PHONE_DISPLAY}
+                </a>
               ) : null}
               {submissionError ? <p className="text-xs text-red-600">{submissionError}</p> : null}
             </div>

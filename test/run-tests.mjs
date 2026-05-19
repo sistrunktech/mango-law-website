@@ -15,3 +15,4 @@ await import('./analyticsFallback.test.ts');
 await import('./contactInfo.test.ts');
 await import('./emailTemplates.test.ts');
 await import('./seoRoutingContent.test.ts');
+await import('./blogDiscoveryPillarAssociations.test.ts');

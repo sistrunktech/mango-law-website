@@ -1,13 +1,14 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Loader2, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { trackLeadSubmitted } from '../lib/analytics';
 import { normalizePhoneDigits } from '../lib/phone';
 import TurnstileWidget from './TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 
 interface ContactFormProps {
   variant?: 'default' | 'compact';
@@ -119,10 +120,10 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
     <form className={isCompact ? 'space-y-4' : 'space-y-5'} onSubmit={handleSubmit}>
       <div className={`rounded-xl border border-brand-black/10 bg-white/70 ${isCompact ? 'p-3' : 'p-4'}`}>
         <p className={`font-semibold text-brand-black ${isCompact ? 'text-xs' : 'text-sm'}`}>
-          Free, confidential consultation. No obligation.
+          Free case review. No obligation.
         </p>
         <p className={`mt-1 text-brand-black/60 ${isCompact ? 'text-[11px]' : 'text-xs'}`}>
-          Share only what you’re comfortable sharing — we’ll respond promptly with next steps.
+          Share basic facts, deadlines, and contact info. Save full evidence and sensitive details until asked.
         </p>
       </div>
 
@@ -168,42 +169,7 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
               placeholder="(555) 000-0000"
             />
           </div>
-          <div>
-            <label htmlFor="how_found" className={labelClasses}>
-              How did you find Nick/Mango Law? <span className="text-brand-mango">*</span>
-            </label>
-            <select
-              id="how_found"
-              name="how_found"
-              required
-              className={inputClasses}
-              value={howFound}
-              onChange={(e) => setHowFound(e.target.value)}
-            >
-              <option value="">Select an option</option>
-              {HOW_FOUND_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-          </div>
         </div>
-
-        {(howFound === 'referral' || howFound === 'other') ? (
-          <div className={isCompact ? 'mt-4' : 'mt-5'}>
-            <label htmlFor="how_found_detail" className={labelClasses}>
-              {howFound === 'referral' ? 'Who can we thank?' : 'Quick note'} <span className="text-brand-mango">*</span>
-            </label>
-            <input
-              id="how_found_detail"
-              name="how_found_detail"
-              required
-              className={inputClasses}
-              placeholder={howFound === 'referral' ? 'Name of the person or business' : 'Tell us a little more'}
-            />
-          </div>
-        ) : null}
       </fieldset>
 
       <fieldset className={`border border-brand-black/10 bg-white shadow-sm ${isCompact ? 'rounded-xl p-4' : 'rounded-2xl p-5'}`}>
@@ -261,8 +227,44 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
             required
             className={inputClasses}
             rows={4}
-            placeholder="Briefly describe your situation and any upcoming court dates."
+            placeholder="Briefly describe the issue, court date or hearing date, county, and any urgent restriction like bond, license suspension, no-contact, or a protection order."
           />
+
+          <div className={`mt-4 grid ${isCompact ? 'gap-4' : 'gap-5 sm:grid-cols-2'}`}>
+            <div>
+              <label htmlFor="how_found" className={labelClasses}>
+                How did you find Nick/Mango Law? <span className="font-normal text-brand-black/45">(optional)</span>
+              </label>
+              <select
+                id="how_found"
+                name="how_found"
+                className={inputClasses}
+                value={howFound}
+                onChange={(e) => setHowFound(e.target.value)}
+              >
+                <option value="">Select an option</option>
+                {HOW_FOUND_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {(howFound === 'referral' || howFound === 'other') ? (
+              <div>
+                <label htmlFor="how_found_detail" className={labelClasses}>
+                  {howFound === 'referral' ? 'Who can we thank?' : 'Quick note'} <span className="font-normal text-brand-black/45">(optional)</span>
+                </label>
+                <input
+                  id="how_found_detail"
+                  name="how_found_detail"
+                  className={inputClasses}
+                  placeholder={howFound === 'referral' ? 'Name of the person or business' : 'Tell us a little more'}
+                />
+              </div>
+            ) : null}
+          </div>
         </div>
       </fieldset>
 
@@ -285,7 +287,7 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
       {/* Submit button */}
       <button
         type="submit"
-        disabled={status === 'submitting' || (turnstileSiteKey ? !turnstileToken : false)}
+        disabled={status === 'submitting'}
         className={`btn btn-primary w-full ${isCompact ? 'py-3 text-sm' : 'py-4 text-base'}`}
         data-cta="contact_form_submit"
       >
@@ -302,10 +304,25 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
         )}
       </button>
 
+      {turnstileSiteKey && !turnstileToken ? (
+        <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-sm text-brand-black/70">
+          <p>
+            Verification may take a moment. If the form does not send, call or text the primary line instead.
+          </p>
+          <a
+            href={`tel:${PRIMARY_PHONE_TEL}`}
+            className="mt-2 inline-flex items-center gap-2 font-semibold text-brand-mangoText hover:text-brand-leaf"
+          >
+            <Phone className="h-4 w-4" />
+            Call/Text {PRIMARY_PHONE_DISPLAY}
+          </a>
+        </div>
+      ) : null}
+
       <div className="mt-3 flex flex-col gap-2 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
         <p className={`text-center text-brand-black/60 md:text-left ${isCompact ? 'text-[11px]' : 'text-xs'}`}>
-          Submitting this form does not create an attorney-client relationship. Please do not send confidential or
-          sensitive information.
+          Submitting this form does not create an attorney-client relationship. Please send basic facts and deadlines only;
+          do not upload or paste full evidence until asked.
         </p>
         {turnstileSiteKey ? (
           <div className="flex flex-col items-center gap-1 md:items-end">

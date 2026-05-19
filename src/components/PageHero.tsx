@@ -314,7 +314,7 @@ export default function PageHero({
               <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-brand-offWhite/70">
                 <span className="flex items-center gap-2">
                   <Clock className="h-5 w-5 text-brand-leaf" />
-                  <span>Available 24/7</span>
+                  <span>Call/text intake available</span>
                 </span>
                 <span className="hidden h-4 w-px bg-brand-offWhite/20 sm:block" />
                 <span className="flex items-center gap-2">
@@ -324,7 +324,7 @@ export default function PageHero({
                 <span className="hidden h-4 w-px bg-brand-offWhite/20 sm:block" />
                 <span className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-brand-leaf" />
-                  <span>Confidential</span>
+                  <span>Discreet intake</span>
                 </span>
               </div>
             )}

@@ -171,6 +171,11 @@ export default function HomePage({ posts }: { posts: BlogPost[] }) {
             href: '/resources/dui-checkpoints',
           },
           {
+            title: 'What to do after a DUI checkpoint stop',
+            description: 'A practical checklist for court dates, license paperwork, evidence, and next steps after a stop.',
+            href: '/blog/what-to-do-after-dui-checkpoint-stop-ohio',
+          },
+          {
             title: 'Ohio OVI driving privileges and ALS',
             description: 'A practical explainer on license suspension timing, driving privileges, and the paperwork that matters early.',
             href: '/blog/ohio-ovi-driving-privileges-als',

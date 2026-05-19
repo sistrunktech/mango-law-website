@@ -57,7 +57,7 @@ export const blogPosts: BlogPost[] = [
 
 This is not the time to explain yourself to the petitioner by text, ask a friend to pass a message, or assume a related criminal case will automatically control the civil order. A CPO case has its own procedure, its own hearing record, and its own consequences.
 
-If you need help from a [protection order lawyer in Delaware, Ohio](/protection-order-lawyer-delaware-oh), start with the local owner page. For broader strategy, compare this article with the [Ohio civil protection order defense guide](/civil-protection-order-defense-ohio), the [ex parte protection order guide](/blog/ex-parte-protection-orders-ohio-defense), and the [no-contact order vs. civil protection order guide](/blog/no-contact-order-vs-civil-protection-order-ohio).
+If you need help from a [protection order lawyer in Delaware, Ohio](/protection-order-lawyer-delaware-oh), start with the local protection-order page. For broader strategy, compare this article with the [Ohio civil protection order defense guide](/civil-protection-order-defense-ohio), the [ex parte protection order guide](/blog/ex-parte-protection-orders-ohio-defense), and the [no-contact order vs. civil protection order guide](/blog/no-contact-order-vs-civil-protection-order-ohio).
 
 ## Quick answer
 
@@ -652,7 +652,7 @@ If a separate drug possession or trafficking charge was filed, the search and po
 
 ## How this article fits Mango Law's OVI and drug-defense pages
 
-This guide supports the main OVI owner page because drug impairment, testing, refusal, ALS, and suppression questions often decide the first week of an OVI case. It also supports the drug-crime owner page because a traffic stop can create both OVI and drug-possession exposure.
+This guide connects to the main Delaware OVI defense page because drug impairment, testing, refusal, ALS, and suppression questions often decide the first week of an OVI case. It also connects to the drug-crime defense page because a traffic stop can create both OVI and drug-possession exposure.
 
 The right next page depends on the pressure point:
 
@@ -1285,9 +1285,9 @@ Every case is fact-specific, but early defense review often focuses on:
 
 The defense is not built from one side of the story alone. It is built from the charge, the evidence, the statute, and the local court process.
 
-## How this supports the owner page
+## Where to go next
 
-This article is a process guide. The commercial owner for local domestic violence defense remains [Domestic Violence Defense Attorney in Delaware, Ohio](/domestic-violence-lawyer-delaware-oh). Use that page for attorney-selection questions, strategy, FAQs, and direct consultation options.
+This article is a process guide. If you need local domestic-violence defense help, start with [Domestic Violence Defense Attorney in Delaware, Ohio](/domestic-violence-lawyer-delaware-oh). Use that page for attorney-selection questions, strategy, FAQs, and direct consultation options.
 
 Related guides:
 
@@ -1537,9 +1537,9 @@ The safest time is before a plea, before waiving rights, and before motion deadl
 
 The goal is not to delay for the sake of delay. The goal is to make decisions with the charge, evidence, deadline, and consequence picture in view.
 
-## How this supports the owner page
+## Where to go next
 
-This article is a process guide. The commercial owner for local defense remains [Criminal Defense Attorney in Delaware, Ohio](/criminal-defense-delaware-oh). Use that page for attorney-selection questions, practice-area fit, consultation options, and broader defense strategy.
+This article is a process guide. If you need local defense help, start with [Criminal Defense Attorney in Delaware, Ohio](/criminal-defense-delaware-oh). Use that page for attorney-selection questions, practice-area fit, consultation options, and broader defense strategy.
 
 Related guides:
 
@@ -1932,7 +1932,7 @@ If the case is a first offense, start with [first offense OVI in Ohio](/first-of
 
 ## Why this law-change article matters for SEO and clients
 
-People searching for "Ohio Liv's Law OVI," "Ohio OVI law changes 2025," or "oral fluid testing OVI Ohio" are usually trying to understand a recent change before a court date, license decision, or conversation with a lawyer. This article supports the main [Delaware OVI lawyer page](/ovi-dui-defense-delaware-oh) by answering the current-law question and routing readers to the correct owner pages for ALS, refusal, felony/high-tier, and suppression issues.
+People searching for "Ohio Liv's Law OVI," "Ohio OVI law changes 2025," or "oral fluid testing OVI Ohio" are usually trying to understand a recent change before a court date, license decision, or conversation with a lawyer. This article supports the main [Delaware OVI lawyer page](/ovi-dui-defense-delaware-oh) by answering the current-law question and routing readers to the right ALS, refusal, felony/high-tier, and suppression pages.
 
 ## Bottom line
 
@@ -4426,7 +4426,7 @@ This article is for educational purposes and does not constitute legal advice. C
 
 Sobriety checkpoints (sometimes called DUI/OVI checkpoints) are planned stops where officers briefly screen drivers for impairment. Practices vary by agency, and not every checkpoint is announced in advance.
 
-This guide focuses on what matters most: the legality standards, what typically happens at a checkpoint, and your rights. For publicly announced checkpoints we’ve collected, see our [Ohio DUI Checkpoint Map](/resources/dui-checkpoints).
+This guide focuses on what matters most: the legality standards, what typically happens at a checkpoint, and your rights. For publicly announced checkpoints we’ve collected, see our [Ohio DUI Checkpoint Map](/resources/dui-checkpoints). If the checkpoint already led to an OVI investigation or citation, use the follow-up checklist: [What to Do After a DUI Checkpoint Stop in Ohio](/blog/what-to-do-after-dui-checkpoint-stop-ohio).
 
 ## Are DUI checkpoints legal in Ohio?
 
@@ -4523,7 +4523,7 @@ If you are arrested for OVI at a checkpoint:
 4. **Document everything**: Note the checkpoint location, time, officer names, and any irregularities
 5. **Contact an experienced OVI attorney**: Early legal intervention can make a significant difference in your case
 
-For representation after a checkpoint arrest, start with the [Delaware Ohio OVI defense page](/ovi-dui-defense-delaware-oh), then preserve the checkpoint details for evidence review.
+For representation after a checkpoint arrest, start with the [Delaware Ohio OVI defense page](/ovi-dui-defense-delaware-oh), then preserve the checkpoint details for evidence review. For a step-by-step evidence, license, and first-court-date checklist, read [What to Do After a DUI Checkpoint Stop in Ohio](/blog/what-to-do-after-dui-checkpoint-stop-ohio).
 
 In some checkpoint cases, defense strategy can include challenging:
 - Whether the checkpoint was operated under a neutral plan
@@ -4590,6 +4590,10 @@ After an Ohio DUI checkpoint stop:
 - Bring all paperwork to a lawyer before the first court date when possible.
 
 [VISUAL:MID_ARTICLE_CTA]
+
+## Where this fits in the OVI defense path
+
+Use this article as the after-stop checklist. If you are still trying to understand whether checkpoints are legal and how they are supposed to operate, read the [Ohio DUI checkpoint legality guide](/blog/ohio-dui-checkpoint-hotspots). If you want public notices and recent announced locations, use the [Ohio DUI Checkpoint Map](/resources/dui-checkpoints). If a citation has already been filed, the broader [Delaware Ohio OVI defense guide](/ovi-dui-defense-delaware-oh), [first-offense OVI guide](/first-offense-ovi-ohio), [ALS license suspension guide](/als-license-suspension-ohio), and [motion to suppress OVI guide](/motion-to-suppress-ovi-ohio) are the main pillar pages to compare next.
 
 ## 1. Separate the checkpoint issue from the OVI investigation
 
@@ -4829,6 +4833,8 @@ If you want a Central Ohio example of how quickly a vehicle encounter can turn i
 ## If you get pulled over: how to keep a traffic stop from turning into a disaster
 
 This is not a "talk your way out of it" section. It is a "do not make it worse" section.
+
+If the stop happens at a checkpoint and turns into an arrest or citation, switch from general planning to evidence preservation with the [Ohio DUI checkpoint stop checklist](/blog/what-to-do-after-dui-checkpoint-stop-ohio).
 
 [VISUAL:HOLIDAY_STOP_TIPS]
 

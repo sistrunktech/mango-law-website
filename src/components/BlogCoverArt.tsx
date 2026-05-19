@@ -94,7 +94,9 @@ export default function BlogCoverArt({
       className={joinClasses(
         'group relative overflow-hidden border bg-brand-black text-white shadow-soft',
         style.frame,
-        isHero ? 'aspect-[21/9] min-h-[280px] rounded-[1.75rem]' : 'aspect-[16/10] rounded-2xl',
+        isHero
+          ? 'h-[240px] rounded-[1.75rem] sm:h-[280px] lg:h-auto lg:aspect-[21/9] lg:min-h-[280px]'
+          : 'aspect-[16/10] rounded-2xl',
         className,
       )}
     >

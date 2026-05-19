@@ -32,10 +32,52 @@ type HighIntentConfig = {
   ctaTitle: string;
   ctaBody: string;
   midPageContext: string;
+  prioritizeActionSteps?: boolean;
 };
 
 const legalVariabilityNote =
   'What happens in your case may vary based on the facts, prior history, county/court practice, and prosecutor policy. This page is general information, not legal advice for your specific situation.';
+
+function LegalCodeSection({ config }: { config: HighIntentConfig }) {
+  return (
+    <section className="section-tight bg-white">
+      <div className="container">
+        <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
+          <LegalCodeCallout section={config.orcSection} />
+          {config.optionalOrcSection ? <LegalCodeCallout section={config.optionalOrcSection} /> : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ActionStepsSection({ config }: { config: HighIntentConfig }) {
+  return (
+    <section className="section bg-white">
+      <div className="container">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="font-display text-display-sm md:text-display-md">{config.actionHeading}</h2>
+          <ol className="mt-6 grid gap-4 md:grid-cols-2">
+            {config.actionSteps.map((step, index) => (
+              <li key={step} className="flex gap-3 rounded-xl border border-brand-black/10 bg-brand-offWhite p-4">
+                <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-mango/20 text-sm font-bold text-brand-black">
+                  {index + 1}
+                </span>
+                <span className="text-brand-black/75">{step}</span>
+              </li>
+            ))}
+          </ol>
+
+          <MidPageCtaExperiment
+            contextLabel={config.midPageContext}
+            className="mt-8"
+            ctaIdPrefix={`${config.slug}_midpage`}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function HighIntentServicePage({ config }: { config: HighIntentConfig }) {
   return (
@@ -79,12 +121,21 @@ function HighIntentServicePage({ config }: { config: HighIntentConfig }) {
             </p>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-4xl gap-4 md:grid-cols-2">
-            <LegalCodeCallout section={config.orcSection} />
-            {config.optionalOrcSection ? <LegalCodeCallout section={config.optionalOrcSection} /> : null}
-          </div>
+          {!config.prioritizeActionSteps && (
+            <div className="mx-auto mt-8 grid max-w-4xl gap-4 md:grid-cols-2">
+              <LegalCodeCallout section={config.orcSection} />
+              {config.optionalOrcSection ? <LegalCodeCallout section={config.optionalOrcSection} /> : null}
+            </div>
+          )}
         </div>
       </section>
+
+      {config.prioritizeActionSteps && (
+        <>
+          <ActionStepsSection config={config} />
+          <LegalCodeSection config={config} />
+        </>
+      )}
 
       <section className="section bg-brand-offWhite">
         <div className="container">
@@ -102,29 +153,7 @@ function HighIntentServicePage({ config }: { config: HighIntentConfig }) {
         </div>
       </section>
 
-      <section className="section bg-white">
-        <div className="container">
-          <div className="mx-auto max-w-4xl">
-            <h2 className="font-display text-display-sm md:text-display-md">{config.actionHeading}</h2>
-            <ol className="mt-6 grid gap-4 md:grid-cols-2">
-              {config.actionSteps.map((step, index) => (
-                <li key={step} className="flex gap-3 rounded-xl border border-brand-black/10 bg-brand-offWhite p-4">
-                  <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-mango/20 text-sm font-bold text-brand-black">
-                    {index + 1}
-                  </span>
-                  <span className="text-brand-black/75">{step}</span>
-                </li>
-              ))}
-            </ol>
-
-            <MidPageCtaExperiment
-              contextLabel={config.midPageContext}
-              className="mt-8"
-              ctaIdPrefix={`${config.slug}_midpage`}
-            />
-          </div>
-        </div>
-      </section>
+      {!config.prioritizeActionSteps && <ActionStepsSection config={config} />}
 
       <RelatedDefenseGuides
         title="Related defense guides"
@@ -237,6 +266,7 @@ const firstOffenseOviConfig: HighIntentConfig = {
   ctaTitle: 'Need first-offense OVI guidance now?',
   ctaBody: 'Early strategy often determines what options remain. Get a case-specific review quickly.',
   midPageContext: 'first-offense OVI',
+  prioritizeActionSteps: true,
 };
 
 export const felonyOviFaqs: FAQEntry[] = [
@@ -705,14 +735,14 @@ const civilProtectionOrderDefenseConfig: HighIntentConfig = {
   heroEyebrow: 'Civil Protection Order Defense',
   heroTitle: 'Defending a Civil Protection Order Case in Ohio',
   heroDescription:
-    'Preparation quality, evidence structure, and hearing strategy are decisive in many CPO matters.',
+    'Delaware and Central Ohio CPO defense starts with service, hearing timing, evidence structure, compliance, and related criminal-case risk.',
   breadcrumbName: 'Civil Protection Order Defense Ohio',
   orcSection: '3113.31',
   optionalOrcSection: '2919.26',
   introHeading: 'CPO defense is hearing-driven and evidence-heavy',
   introBody: [
-    'Protection-order proceedings often move quickly. Temporary and full-hearing stages have different standards and strategic priorities.',
-    'A focused response plan should cover timeline, documentation, witness strategy, and overlap with any criminal proceedings.',
+    'Protection-order proceedings often move quickly. In Delaware County, domestic-violence CPO cases are handled in Domestic Relations at 117 N. Union Street, and the full-hearing date can arrive within days depending on service, relief requested, and continuances.',
+    'A focused response plan should cover timeline, documentation, witness strategy, courthouse logistics, compliance with temporary terms, and overlap with any criminal proceedings.',
   ],
   keyPointsHeading: 'Critical CPO defense priorities',
   keyPoints: [
@@ -732,10 +762,10 @@ const civilProtectionOrderDefenseConfig: HighIntentConfig = {
   ],
   actionHeading: 'First steps after service of a protection-order petition',
   actionSteps: [
-    'Read all order terms and hearing dates immediately.',
+    'Read all order terms, service papers, and hearing dates immediately.',
     'Follow temporary restrictions strictly while preparing defense.',
-    'Preserve communication records and timeline evidence.',
-    'Identify witnesses and supporting documentation early.',
+    'Preserve texts, call logs, location records, photos, screenshots, and timeline evidence.',
+    'Identify witnesses, exhibits, courthouse logistics, and work or parenting conflicts early.',
     'Coordinate hearing strategy with any related criminal matter.',
     'Prepare clear, defensible hearing narrative and exhibits.',
   ],

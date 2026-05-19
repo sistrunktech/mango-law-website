@@ -81,14 +81,6 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
     if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
     else if (!isLikelyValidPhone(formData.phone)) newErrors.phone = 'Invalid phone format';
     if (!formData.case_type.trim()) newErrors.case_type = 'Please select what you need help with';
-    if (!formData.how_found.trim()) newErrors.how_found = 'Please tell us how you found Nick/Mango Law';
-    if (formData.how_found === 'referral' && !formData.how_found_detail.trim()) {
-      newErrors.how_found_detail = 'Who can we thank for the referral?';
-    }
-    if (formData.how_found === 'other' && !formData.how_found_detail.trim()) {
-      newErrors.how_found_detail = 'Please share a quick note';
-    }
-
     if (turnstileSiteKey && !turnstileToken) {
       newErrors.turnstile = 'Please complete the verification step';
     }
@@ -236,7 +228,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
         </button>
 
         <h2 id="modal-title" className="mb-2 text-xl font-bold text-brand-black">Free Case Evaluation</h2>
-        <p className="mb-6 text-sm text-brand-black/70">Get confidential legal advice from an experienced DUI defense attorney.</p>
+        <p className="mb-6 text-sm text-brand-black/70">Share basic facts and deadlines so an Ohio defense attorney can identify the next move.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -350,14 +342,24 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-brand-black">How did you find Nick/Mango Law? *</label>
+            <label className="mb-1 block text-sm font-medium text-brand-black">Message (optional)</label>
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows={3}
+              className="w-full resize-none rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
+              placeholder="Brief facts, court date or hearing date, county, and urgent restrictions..."
+            />
+          </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-brand-black">How did you find Nick/Mango Law? <span className="font-normal text-brand-black/45">(optional)</span></label>
             <select
               name="how_found"
               value={formData.how_found}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
-                errors.how_found ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
-              }`}
+              className="w-full rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
             >
               <option value="">Select an option...</option>
               {HOW_FOUND_OPTIONS.map((opt) => (
@@ -366,39 +368,23 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
                 </option>
               ))}
             </select>
-            {errors.how_found && <p className="mt-1 text-xs text-red-600">{errors.how_found}</p>}
           </div>
 
           {formData.how_found === 'referral' || formData.how_found === 'other' ? (
             <div>
               <label className="mb-1 block text-sm font-medium text-brand-black">
-                {formData.how_found === 'referral' ? 'Who can we thank?' : 'Quick note'} *
+                {formData.how_found === 'referral' ? 'Who can we thank?' : 'Quick note'} <span className="font-normal text-brand-black/45">(optional)</span>
               </label>
               <input
                 type="text"
                 name="how_found_detail"
                 value={formData.how_found_detail}
                 onChange={handleChange}
-                className={`w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50 ${
-                  errors.how_found_detail ? 'border-red-300 bg-red-50' : 'border-brand-black/20'
-                }`}
+                className="w-full rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
                 placeholder={formData.how_found === 'referral' ? 'Name of the person or business' : 'Tell us a little more'}
               />
-              {errors.how_found_detail && <p className="mt-1 text-xs text-red-600">{errors.how_found_detail}</p>}
             </div>
           ) : null}
-
-          <div>
-            <label className="mb-1 block text-sm font-medium text-brand-black">Message (optional)</label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows={3}
-              className="w-full resize-none rounded-lg border border-brand-black/20 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/50"
-              placeholder="Brief description of your situation..."
-            />
-          </div>
 
           {errors.submit && (
             <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
@@ -408,7 +394,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
 
           <button
             type="submit"
-            disabled={isSubmitting || (turnstileSiteKey ? !turnstileToken : false)}
+            disabled={isSubmitting}
             className="w-full rounded-lg bg-brand-mango px-6 py-3 font-semibold text-brand-black transition-all hover:bg-brand-leaf hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? (
@@ -421,10 +407,25 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
             )}
           </button>
 
+          {turnstileSiteKey && !turnstileToken ? (
+            <div className="rounded-xl border border-brand-black/10 bg-brand-offWhite px-4 py-3 text-sm text-brand-black/70">
+              <p>
+                Verification may take a moment. If the form does not send, call or text the primary line instead.
+              </p>
+              <a
+                href={`tel:${PRIMARY_PHONE_TEL}`}
+                className="mt-2 inline-flex items-center gap-2 font-semibold text-brand-mangoText hover:text-brand-leaf"
+              >
+                <Phone className="h-4 w-4" />
+                Call/Text {PRIMARY_PHONE_DISPLAY}
+              </a>
+            </div>
+          ) : null}
+
           <div className="mt-3 flex flex-col gap-2 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
             <p className="text-center text-xs text-brand-black/60 md:text-left">
-              Submitting this form does not create an attorney-client relationship. Please do not send confidential or
-              sensitive information.
+              Submitting this form does not create an attorney-client relationship. Share basic facts and deadlines only;
+              save full evidence until asked.
             </p>
             {turnstileSiteKey ? (
               <div className="flex flex-col items-center gap-1 md:items-end">

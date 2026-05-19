@@ -1,13 +1,14 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import { Send, CheckCircle, AlertCircle, Loader2, ChevronDown } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Loader2, ChevronDown, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { trackLeadSubmitted } from '../lib/analytics';
 import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/phone';
 import TurnstileWidget from './TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
+import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 
 const inputClasses = [
   'w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
@@ -122,9 +123,9 @@ export default function QuickIntakeForm() {
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="rounded-xl border border-brand-leaf/20 bg-brand-leaf/5 p-3">
-        <p className="text-sm font-semibold text-brand-forest">Free, confidential consultation</p>
+        <p className="text-sm font-semibold text-brand-forest">Free case review</p>
         <p className="mt-0.5 text-xs text-brand-black/60">
-          Share only what you're comfortable sharing.
+          Share basic facts and deadlines. Save full evidence until asked.
         </p>
       </div>
 
@@ -160,7 +161,7 @@ export default function QuickIntakeForm() {
 
       <div>
         <label htmlFor="quick_message" className={labelClasses}>
-          What happened? <span className="text-brand-mango">*</span>
+          What is the urgent issue? <span className="text-brand-mango">*</span>
         </label>
         <textarea
           id="quick_message"
@@ -168,7 +169,7 @@ export default function QuickIntakeForm() {
           required
           className={inputClasses}
           rows={3}
-          placeholder="Briefly describe your situation (charge, arrest date, court date if known)"
+          placeholder="Briefly describe the charge or order, court/hearing date, county, and urgent restriction if known."
         />
       </div>
 
@@ -288,7 +289,7 @@ export default function QuickIntakeForm() {
 
       <button
         type="submit"
-        disabled={status === 'submitting' || (turnstileSiteKey ? !turnstileToken : false)}
+        disabled={status === 'submitting'}
         className="btn btn-primary w-full py-4 text-base"
         data-cta="quick_intake_submit"
       >
@@ -305,9 +306,24 @@ export default function QuickIntakeForm() {
         )}
       </button>
 
+      {turnstileSiteKey && !turnstileToken ? (
+        <div className="rounded-xl border border-brand-black/10 bg-white px-4 py-3 text-sm text-brand-black/70">
+          <p>
+            Verification may take a moment. If the form does not send, call or text the primary line instead.
+          </p>
+          <a
+            href={`tel:${PRIMARY_PHONE_TEL}`}
+            className="mt-2 inline-flex items-center gap-2 font-semibold text-brand-mangoText hover:text-brand-leaf"
+          >
+            <Phone className="h-4 w-4" />
+            Call/Text {PRIMARY_PHONE_DISPLAY}
+          </a>
+        </div>
+      ) : null}
+
       <div className="flex flex-col gap-2 border-t border-brand-black/10 pt-3 md:flex-row md:items-end md:justify-between">
         <p className="text-center text-xs text-brand-black/60 md:text-left">
-          Submitting this form does not create an attorney-client relationship.
+          Submitting this form does not create an attorney-client relationship. Send basic facts only.
         </p>
         {turnstileSiteKey ? (
           <div className="flex flex-col items-center gap-1 md:items-end">
