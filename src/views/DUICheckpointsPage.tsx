@@ -20,6 +20,7 @@ import { isApproximateCheckpointLocation, type DUICheckpoint } from '../data/che
 import LeadCaptureModal from '../components/LeadCaptureModal';
 import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { buildPendingAnnouncementMapCheckpoints } from '../lib/checkpointAnnouncementMapMarkers';
+import { filterPublicCheckpointRows, isPublicCheckpointRow } from '../lib/publicCheckpointFilters';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
 import { SEO } from '../lib/seo';
@@ -204,9 +205,9 @@ export default function DUICheckpointsPage({
   }, []);
 
   const filterPublicCheckpoints = useCallback((data: DUICheckpoint[]) => {
-    // Public page should only show checkpoints with a real upstream source URL.
-    // This prevents demo/seed rows from appearing as “real” checkpoints.
-    return data.filter((c) => Boolean(c.source_url));
+    // Public page should only show sourced, non-aggregator checkpoints.
+    // This prevents demo/seed rows and stale third-party scrape rows from appearing as “real” checkpoints.
+    return filterPublicCheckpointRows(data);
   }, []);
 
   const loadCheckpoints = useCallback(async () => {
@@ -428,7 +429,7 @@ export default function DUICheckpointsPage({
       });
 
     const checkpointSnapshots: PublicSourceSnapshot[] = checkpoints
-      .filter((checkpoint) => Boolean(checkpoint.source_url))
+      .filter(isPublicCheckpointRow)
       .flatMap((checkpoint) => {
         const publishedDate = checkpoint.start_date;
         const publishedTime = parseTimestamp(publishedDate);
@@ -578,6 +579,13 @@ export default function DUICheckpointsPage({
                   >
                     <Shield className="h-4 w-4" />
                     Know Your Rights
+                  </a>
+                  <a
+                    href="/blog/what-to-do-after-dui-checkpoint-stop-ohio"
+                    className="inline-flex items-center gap-2 font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf"
+                  >
+                    <AlertTriangle className="h-4 w-4" />
+                    After a Checkpoint Stop
                   </a>
                   <a
                     href="/blog/refuse-field-sobriety-test-ohio"
@@ -987,6 +995,11 @@ export default function DUICheckpointsPage({
                   href: '/ovi-dui-defense-delaware-oh',
                   title: 'OVI rights and defense',
                   description: 'Use this if you need the broad legal picture first.',
+                },
+                {
+                  href: '/blog/what-to-do-after-dui-checkpoint-stop-ohio',
+                  title: 'After a checkpoint stop',
+                  description: 'Use this checklist to preserve evidence, license paperwork, and court-date details.',
                 },
                 {
                   href: '/first-offense-ovi-ohio',

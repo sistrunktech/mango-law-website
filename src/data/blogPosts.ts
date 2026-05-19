@@ -4568,6 +4568,206 @@ Checkpoint practices change and vary by agency. Focus on safety, keep the intera
     ],
   },
   {
+    slug: 'what-to-do-after-dui-checkpoint-stop-ohio',
+    title: 'What to Do After a DUI Checkpoint Stop in Ohio: Evidence, License, and Court Next Steps',
+    excerpt:
+      'Stopped or arrested after an Ohio DUI checkpoint? Use this practical checklist to preserve evidence, protect license deadlines, and prepare for the first court date.',
+    imageUrl: '/images/generated/blog-checkpoint-hotspots.png',
+    content: `If a DUI checkpoint stop turned into an OVI investigation, the first few days matter. The checkpoint itself is only one part of the case. Officers may also rely on driving behavior before the checkpoint, observations during the stop, field sobriety testing, chemical testing, statements, video, and the paperwork used to support an administrative license suspension.
+
+This checklist is built for the period after the stop: what to save, what to write down, what deadlines to watch, and what facts can matter when a lawyer reviews the case. For live public-source checkpoint notices, start with the [Ohio DUI Checkpoint Map](/resources/dui-checkpoints). For the broader defense overview, use the [Delaware Ohio OVI defense guide](/ovi-dui-defense-delaware-oh).
+
+## Quick answer
+
+After an Ohio DUI checkpoint stop:
+
+- Write a timeline while details are fresh.
+- Save ride-share, GPS, receipt, text, and photo evidence.
+- Preserve the exact checkpoint location, time, lane pattern, signs, cones, and officer instructions if you remember them.
+- Do not post about the stop or explain facts over text.
+- Track any administrative license suspension paperwork and appeal timing.
+- Review whether the case involves field sobriety tests, a chemical test, a refusal, or alleged high-tier results.
+- Bring all paperwork to a lawyer before the first court date when possible.
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## 1. Separate the checkpoint issue from the OVI investigation
+
+A checkpoint can be lawful in general and still leave room to challenge what happened in your case. The defense review usually has two layers:
+
+- Was the checkpoint planned and operated under a neutral, safety-focused procedure?
+- Did officers have a lawful basis to move you from a brief screening into a longer OVI investigation, testing, arrest, or vehicle search?
+
+That second question is often where the facts get specific. A report might say the officer noticed odor, glassy eyes, slurred speech, open containers, unsafe driving, admissions, balance issues, or problems with documents. Your job early is not to argue with the report online. It is to preserve facts that let the report be checked against video, body camera, cruiser camera, dispatch logs, and witness accounts.
+
+## 2. Write the timeline before memory fades
+
+Do this as soon as you are safe and sober. Keep it private and do not publish it.
+
+Include:
+
+- where you were before the stop,
+- what time you left,
+- whether you ate, drank, used medication, or used marijuana,
+- who was with you,
+- where the checkpoint was located,
+- what signs, cones, lighting, and officers you remember,
+- whether every car was stopped or only selected cars,
+- what questions you were asked,
+- whether you were moved to a secondary screening area,
+- what field sobriety tests were requested,
+- whether a breath, oral-fluid, blood, or urine test was requested,
+- whether you were read implied-consent consequences,
+- where you were taken after arrest, and
+- what paperwork you received.
+
+Do not guess. Mark uncertain items as uncertain. A careful "I am not sure" is more useful than a confident detail that later turns out to be wrong.
+
+## 3. Save digital and physical evidence
+
+Checkpoint cases can turn on details that disappear quickly.
+
+Save:
+
+- phone location history,
+- ride-share records,
+- parking receipts,
+- bar or restaurant receipts,
+- text messages arranging rides or plans,
+- photos or videos from earlier in the night,
+- names and numbers of passengers or witnesses,
+- medication labels and dosing instructions if relevant,
+- medical records for injuries, balance issues, anxiety, eye conditions, or speech conditions,
+- footwear and clothing worn during field sobriety testing,
+- weather conditions and road conditions, and
+- any tow, impound, or release paperwork.
+
+If you took your own photos of the checkpoint after release, keep the originals. Metadata can matter. Do not edit the files before sending them for legal review.
+
+## 4. Understand the license piece
+
+Ohio OVI cases often have two tracks: the criminal charge and the license suspension. A chemical-test refusal or a test over the legal limit can trigger administrative license suspension issues before the criminal case is resolved.
+
+The paperwork matters. Look for:
+
+- the citation or ticket,
+- BMV or ALS forms,
+- the initial court date,
+- test result paperwork,
+- refusal paperwork,
+- seizure of license information, and
+- any temporary permit language.
+
+Do not assume "I was stopped at a checkpoint" automatically controls the license issue. License questions often depend on arrest timing, implied-consent advisement, test type, prior history, and whether an ALS appeal is filed correctly.
+
+For more detail, compare this article with the [Ohio ALS license suspension guide](/als-license-suspension-ohio), the [OVI refusal vs. failed test guide](/blog/ovi-refusal-vs-failed-test-ohio), and the [Ohio OVI driving privileges guide](/blog/ohio-ovi-driving-privileges-als).
+
+## 5. Field sobriety tests are different from chemical tests
+
+Roadside field sobriety tests and post-arrest chemical tests are not the same thing.
+
+Field sobriety tests usually refer to roadside tasks like walk-and-turn, one-leg stand, and horizontal gaze nystagmus. Chemical tests involve breath, oral fluid, blood, urine, or similar bodily-substance testing requested after an arrest or under implied-consent procedures.
+
+That distinction matters because refusal consequences, admissibility issues, and defense strategy are different. If the checkpoint stop included field sobriety testing, read the [Ohio field sobriety refusal guide](/blog/refuse-field-sobriety-test-ohio). If the dispute is about breath, oral fluid, blood, or urine, the review should also cover test timing, calibration, operator qualifications, collection method, chain of custody, and whether the result fits the rest of the evidence.
+
+## 6. Prepare for the first court date
+
+Before the first court date, gather:
+
+- citation,
+- license paperwork,
+- bond paperwork,
+- test or refusal forms,
+- jail or release paperwork,
+- proof of insurance,
+- valid photo ID,
+- work or school schedule,
+- medical and prescription information,
+- witness names,
+- your private timeline, and
+- any evidence you saved.
+
+If this is your first OVI, the [first-offense OVI guide](/first-offense-ovi-ohio) is the best next page. If there are prior OVIs, a high-tier test, an accident, a child passenger, a refusal, or a commercial license issue, the risk profile can change quickly.
+
+## 7. What a lawyer may investigate
+
+A checkpoint case review can include:
+
+- public notice and agency planning documents,
+- checkpoint supervisor records,
+- neutral vehicle-selection method,
+- traffic safety and visibility setup,
+- body camera and cruiser camera video,
+- dispatch and CAD logs,
+- officer observations before secondary screening,
+- field sobriety test conditions and scoring,
+- chemical-test advisements and timing,
+- breath-machine records or blood/urine lab records,
+- whether the arrest decision was supported by probable cause, and
+- whether evidence should be challenged through a motion to suppress.
+
+For the suppression angle, see the [Ohio motion to suppress OVI guide](/motion-to-suppress-ovi-ohio).
+
+## What not to do
+
+Avoid these mistakes:
+
+- posting about the stop,
+- texting a long explanation to friends or witnesses,
+- deleting messages or photos,
+- contacting officers directly for an informal explanation,
+- assuming the first court date is optional,
+- driving while suspended or without knowing your privilege status,
+- waiting until the day before court to gather paperwork, and
+- assuming every checkpoint case has the same defense.
+
+## Bottom line
+
+After a checkpoint stop, focus on preservation and deadlines. The checkpoint map can tell you what public notice exists, but your case turns on what happened to you: the stop, the screening, the tests, the paperwork, and the timing.
+
+If you were cited or arrested after a checkpoint in Delaware County, Franklin County, Union County, or nearby Central Ohio courts, start with the [OVI defense page](/ovi-dui-defense-delaware-oh) or [contact Mango Law](/contact) before the first court date.
+
+---
+
+This article is for educational purposes only and is not legal advice. A qualified Ohio OVI attorney should review the specific facts, paperwork, deadlines, and evidence in your case.`,
+    category: 'OVI/DUI Defense',
+    date: '2026-05-19',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-19',
+    sources: [
+      {
+        label: 'Michigan Dept. of State Police v. Sitz, 496 U.S. 444 (1990)',
+        url: 'https://supreme.justia.com/cases/federal/us/496/444/',
+        type: 'primary',
+      },
+      {
+        label: 'City of Indianapolis v. Edmond, 531 U.S. 32 (2000)',
+        url: 'https://supreme.justia.com/cases/federal/us/531/32/',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.19 (OVI)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.191 (Implied consent; ALS)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.191',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.192 (Chemical test advisement)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.192',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 4511.197 (ALS appeal)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.197',
+        type: 'primary',
+      },
+    ],
+  },
+  {
     slug: 'holiday-ovi-enforcement-ohio-delaware-dublin-columbus',
     title: 'Holiday OVI Enforcement in Ohio: What Drivers in Delaware, Dublin, and Central Ohio Should Expect',
     excerpt: 'Ohio\'s holiday enforcement wave ramps up from mid-December through New Year\'s Day. Here\'s what\'s changing, what police are looking for, and what to do if a traffic stop turns into an OVI investigation.',
