@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-19 13:55 EDT
+Post slug and title: what-to-do-after-dui-checkpoint-stop-ohio | What to Do After a DUI Checkpoint Stop in Ohio: Evidence, License, and Court Next Steps
+Change type: major
+Summary of change: Added a checkpoint-pillar support post focused on post-stop evidence preservation, ALS/license deadlines, field sobriety vs chemical testing, first-court-date prep, and suppression review; linked it from the live checkpoint map intro and guide-card cluster; added a concise blog SEO override; and added a public checkpoint-row filter so sourced newsroom/official rows remain public while stale aggregator rows are excluded from the map, cards, hotspots, and source snapshots.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked on 2026-05-19 to confirm the checkpoint map and proceed with pillar-supporting content and SEO optimizations from the latest reports/logs/todos.
+Rollback notes: Remove the `what-to-do-after-dui-checkpoint-stop-ohio` object from `src/data/blogPosts.ts`, remove its SEO override from `src/lib/blog-seo.ts`, remove checkpoint-page links to the post, and restore the prior checkpoint public filtering if production data no longer needs aggregator suppression.
+
 Date/time: 2026-05-18 10:30 EDT
 Post slug and title: sitewide contact surfaces | May 8 phone-role confirmation
 Change type: minor

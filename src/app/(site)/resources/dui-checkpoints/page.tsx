@@ -8,6 +8,7 @@ import {
   isAnnouncementFreshForPublic,
   type CheckpointAnnouncement,
 } from '@/lib/checkpointAnnouncementsService';
+import { filterPublicCheckpointRows, isPublicCheckpointRow } from '@/lib/publicCheckpointFilters';
 import { buildMetadata } from '@/lib/seo-metadata';
 import { supabaseAnonKey, supabaseUrl } from '@/lib/supabaseClient';
 import type { CheckpointHotspot, DateRangeOption } from '@/lib/checkpointService';
@@ -50,14 +51,16 @@ function createCheckpointClient() {
 }
 
 function normalizeCheckpoints(rows: DUICheckpoint[] | null): DUICheckpoint[] {
-  return (rows ?? []).filter((checkpoint) => Boolean(checkpoint.source_url));
+  return filterPublicCheckpointRows(rows);
 }
 
-function buildHotspots(rows: Pick<DUICheckpoint, 'location_city' | 'location_county' | 'source_url'>[]): CheckpointHotspot[] {
+function buildHotspots(
+  rows: Pick<DUICheckpoint, 'location_city' | 'location_county' | 'source_name' | 'source_url'>[],
+): CheckpointHotspot[] {
   const hotspotMap = new Map<string, CheckpointHotspot>();
 
   rows
-    .filter((row) => row.source_url && row.location_city && row.location_county)
+    .filter((row) => isPublicCheckpointRow(row) && row.location_city && row.location_county)
     .forEach((row) => {
       const key = `${row.location_city}-${row.location_county}`;
       const existing = hotspotMap.get(key);
@@ -109,7 +112,7 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
         .in('status', ['upcoming', 'active'])
         .gte('end_date', now.toISOString())
         .order('start_date', { ascending: true }),
-      client.from('dui_checkpoints').select('location_city, location_county, source_url'),
+      client.from('dui_checkpoints').select('location_city, location_county, source_name, source_url'),
     ]);
 
     if (announcementsResult.error) throw announcementsResult.error;
@@ -127,7 +130,10 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
 
     const upcomingCheckpoints = normalizeCheckpoints((upcomingResult.data as DUICheckpoint[] | null) ?? []);
     const initialHotspots = buildHotspots(
-      ((hotspotsResult.data as Pick<DUICheckpoint, 'location_city' | 'location_county' | 'source_url'>[] | null) ??
+      ((hotspotsResult.data as Pick<
+        DUICheckpoint,
+        'location_city' | 'location_county' | 'source_name' | 'source_url'
+      >[] | null) ??
         []),
     );
 

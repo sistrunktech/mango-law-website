@@ -121,6 +121,11 @@ const BLOG_SEO_OVERRIDES: Record<string, BlogSeoOverride> = {
     description:
       'Ohio DUI checkpoint guide covering legality, checkpoint procedure, driver rights, and what to do after an OVI stop.',
   },
+  'what-to-do-after-dui-checkpoint-stop-ohio': {
+    title: 'After an Ohio DUI Checkpoint Stop',
+    description:
+      'Ohio DUI checkpoint stop checklist covering evidence, ALS license deadlines, field sobriety tests, chemical tests, and court prep.',
+  },
   'holiday-ovi-enforcement-ohio-delaware-dublin-columbus': {
     title: 'Ohio Holiday OVI Enforcement',
     description:

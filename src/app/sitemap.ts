@@ -10,7 +10,7 @@ const ROUTE_LASTMOD: Record<string, Date> = {
   '/protection-order-lawyer-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
   '/domestic-violence-lawyer-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
   '/criminal-defense-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
-  '/resources/dui-checkpoints': new Date('2026-05-03T00:00:00.000Z'),
+  '/resources/dui-checkpoints': new Date('2026-05-19T00:00:00.000Z'),
   '/ovi-checkpoints-ohio': new Date('2026-05-03T00:00:00.000Z'),
 }
 
