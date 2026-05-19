@@ -71,6 +71,11 @@ export function getBlogCtaContent(post: BlogPost): BlogCtaContent {
       primaryHref: '/contact',
       nextSteps: [
         {
+          label: 'If bond says no contact',
+          href: '/blog/no-contact-bond-terms-domestic-violence-ohio',
+          description: 'Review contact, housing, parenting, and property risks before replying or returning home.',
+        },
+        {
           label: 'If you were just served',
           href: '/blog/civil-protection-order-hearing-delaware-county-ohio',
           description: 'Confirm the hearing date, order terms, evidence, and courthouse logistics.',

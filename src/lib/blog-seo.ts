@@ -36,6 +36,11 @@ const BLOG_SEO_OVERRIDES: Record<string, BlogSeoOverride> = {
     description:
       'Delaware County domestic violence arrest guide covering booking, bond, no-contact terms, protection orders, and evidence to preserve.',
   },
+  'no-contact-bond-terms-domestic-violence-ohio': {
+    title: 'No-Contact Bond Terms After an Ohio DV Arrest',
+    description:
+      'Ohio domestic violence no-contact bond terms guide covering release conditions, contact risks, housing, parenting, and violations.',
+  },
   'delaware-county-criminal-case-timeline': {
     title: 'Delaware County Criminal Case Timeline',
     description:

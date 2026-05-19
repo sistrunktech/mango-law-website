@@ -148,7 +148,7 @@ The subagent review found three high-impact themes:
 
 ## Suggested Publishing Order
 
-1. No-contact bond terms after a domestic violence arrest.
+1. No-contact bond terms after a domestic violence arrest. Completed in follow-up branch on 2026-05-19.
 2. CDL or out-of-state driver charged with OVI in Ohio.
 3. Summons vs. arrest in Delaware County.
 4. Lab testing and chain of custody in Ohio drug possession cases.

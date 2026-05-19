@@ -291,6 +291,11 @@ export default function ProtectionOrderPage() {
         description="Use these pages to coordinate CPO hearing preparation with related domestic-violence defense strategy."
         links={[
           {
+            title: 'No-contact bond terms after a DV arrest',
+            description: 'Criminal release-condition guidance when contact, housing, or parenting is restricted.',
+            href: '/blog/no-contact-bond-terms-domestic-violence-ohio',
+          },
+          {
             title: 'Civil protection order defense (Ohio)',
             description: 'Hearing-focused strategy for respondents in Ohio CPO proceedings.',
             href: '/civil-protection-order-defense-ohio',

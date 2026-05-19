@@ -85,6 +85,11 @@ export const blogIssuePathGroups: BlogIssuePathGroup[] = [
     summary: 'CPO hearings, no-contact rules, domestic allegations, and compliance first steps.',
     links: [
       {
+        title: 'No-contact bond terms after a DV arrest',
+        description: 'What contact, housing, parenting, and property restrictions can mean after release.',
+        href: '/blog/no-contact-bond-terms-domestic-violence-ohio',
+      },
+      {
         title: 'Delaware County CPO hearing guide',
         description: 'Evidence, deadlines, and what to prepare before the full hearing.',
         href: '/blog/civil-protection-order-hearing-delaware-county-ohio',

@@ -1380,6 +1380,246 @@ If you have a pending Delaware County domestic violence case, contact Mango Law 
     ],
   },
   {
+    slug: 'no-contact-bond-terms-domestic-violence-ohio',
+    title: 'No-Contact Bond Terms After a Domestic Violence Arrest in Ohio: What You Can and Cannot Do',
+    excerpt:
+      'No-contact bond terms can affect housing, parenting, work, phones, social media, and release after an Ohio domestic violence arrest. This guide explains what to check first and how to avoid an accidental violation.',
+    imageUrl: '/images/generated/blog-no-contact-bond-terms-domestic-violence-ohio.png',
+    content: `A domestic violence arrest can change daily life before the case is resolved. The court may allow release from jail, but only under bond terms that restrict contact with the alleged victim, children, a shared home, a workplace, or another listed place. Those restrictions are often called no-contact bond terms, stay-away terms, or release conditions.
+
+The urgent point is simple: treat the written court order as controlling. Do not rely on a private conversation, a message from the protected person, or what someone at the jail thought the order meant. If the order says no contact, a friendly text can still create a serious problem.
+
+If you need local help, start with the [domestic violence lawyer in Delaware, Ohio page](/domestic-violence-lawyer-delaware-oh). If a civil order is also involved, compare this with the [protection order defense page](/protection-order-lawyer-delaware-oh), the [Delaware County CPO hearing guide](/blog/civil-protection-order-hearing-delaware-county-ohio), and the [no-contact order vs. civil protection order guide](/blog/no-contact-order-vs-civil-protection-order-ohio).
+
+## Quick answer
+
+After an Ohio domestic violence arrest, no-contact bond terms may prohibit:
+
+- calls, texts, emails, and social media contact,
+- messages sent through friends, relatives, children, or coworkers,
+- going to a home, school, workplace, or other restricted location,
+- asking the alleged victim to change the story or drop the case,
+- discussing parenting, property, rent, pets, bills, or belongings unless the order allows a specific channel, and
+- contact even if the protected person reaches out first.
+
+The safer first steps are to read the bond paperwork, save any attempted contact, avoid replying, preserve evidence, and ask counsel whether a court-approved modification is needed.
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## Bond terms are court orders, not suggestions
+
+Ohio pretrial release is now governed largely by ORC Chapter 2937. ORC 2937.011 allows courts to impose release conditions aimed at court appearance and public safety. In domestic violence cases, the release conversation often includes whether the accused can return home, communicate with the alleged victim, use alcohol, possess weapons, or be near a listed address.
+
+Domestic violence cases also have a special bail statute. ORC 2919.251 requires certain defendants charged with an offense of violence involving a family or household member to appear before the court for bail setting when specified risk factors are present. The statute is one reason domestic violence release can feel different from a routine misdemeanor summons or waiverable traffic case.
+
+The Delaware Municipal Court bond schedule also treats assault or domestic violence differently from many lower-level cases. It lists assault or domestic violence among exceptions where release generally requires bond to be set by the court rather than handled like an ordinary scheduled bond.
+
+## What "no contact" usually means
+
+Exact terms vary, but no-contact language is usually broad. It can include direct and indirect contact.
+
+Direct contact means communication from you to the protected person, including:
+
+- phone calls,
+- text messages,
+- email,
+- social media messages,
+- comments, tags, likes, and reactions,
+- letters or notes,
+- in-person conversation, and
+- showing up where the person lives, works, studies, or spends time if the order restricts those places.
+
+Indirect contact means using someone else or another channel to send a message. That can include asking a friend, family member, child, coworker, pastor, landlord, or neighbor to pass information along. It can also include public posts obviously aimed at the protected person.
+
+When the order is unclear, do not guess. Save the order, identify the exact sentence causing the question, and ask about a written clarification or modification.
+
+## "They contacted me first" is not safe
+
+Many accidental violations begin with an incoming message. The protected person may text about rent, pets, children, belongings, apology, transportation, or whether you can come home. That does not automatically make a reply safe.
+
+If a no-contact order is still active:
+
+1. Do not respond.
+2. Screenshot or preserve the message with the date and time.
+3. Tell your attorney.
+4. Ask whether the court can approve a narrow exception.
+
+The court controls the order. Private permission does not reliably change it. This is also why a domestic violence case can become harder even when both people want communication restored.
+
+## Criminal no-contact terms vs a protection order
+
+No-contact bond terms are usually part of the criminal case. A criminal temporary protection order can also be requested under ORC 2919.26 after a qualifying complaint or indictment. A domestic violence civil protection order is a separate civil process under ORC 3113.31.
+
+These can overlap, but they are not interchangeable. A person may have:
+
+- bond conditions in the criminal case,
+- a criminal temporary protection order,
+- a civil protection order,
+- parenting or domestic relations orders, and
+- probation, community-control, or pretrial supervision terms.
+
+If more than one order exists, follow the most restrictive live order unless the court changes it. The [no-contact order vs. civil protection order guide](/blog/no-contact-order-vs-civil-protection-order-ohio) explains the difference in more detail.
+
+## Common practical problems
+
+No-contact terms often create immediate life problems. The common ones are not abstract legal issues; they are housing, parenting, and property questions.
+
+### Shared home
+
+If the order says stay away from the home, do not return alone to get clothes, tools, medication, paperwork, or a vehicle. Ask about a court-approved property retrieval process, law-enforcement standby, third-party exchange, or another written carve-out.
+
+### Children and parenting
+
+If children are involved, do not assume parenting communication is allowed. Some orders provide specific exchange terms or third-party communication rules. Others do not. If parenting time, school pickups, medical decisions, or child support require contact, seek a court-approved method.
+
+### Bills, pets, and belongings
+
+Practical issues still need handling, but not through prohibited contact. Make a list of what must be addressed and what deadline applies. Then ask counsel whether a motion, agreed modification, third-party logistics, or another written court process is available.
+
+### Work and public places
+
+If you and the protected person work together or go to the same school, gym, church, or family events, the order may require distance or avoidance. Do not rely on informal scheduling. Ask for clear written terms before a routine encounter becomes an alleged violation.
+
+## What can happen after a violation
+
+Violating certain protection orders can be charged as a separate offense under ORC 2919.27. Bond-condition violations can also affect release, bond amount, supervision, and the court's view of risk. A new allegation can shift the case from a single disputed incident to a compliance problem with fresh evidence.
+
+Possible consequences include:
+
+- arrest or a warrant,
+- stricter bond conditions,
+- higher bond,
+- loss of negotiation leverage,
+- a new criminal charge,
+- additional evidence for the prosecutor, and
+- more difficulty resolving parenting, housing, or civil-order issues.
+
+Even a technical violation can matter. The best defense is usually prevention: know the terms, document attempted contact, and use court-approved channels.
+
+## What to preserve
+
+Preserve both the original case evidence and the bond-compliance record.
+
+Save:
+
+- the bond entry and every release-condition document,
+- any temporary protection order or civil protection order,
+- screenshots of incoming calls, texts, emails, or messages,
+- call logs and voicemails,
+- proof of where you stayed after release,
+- receipts for hotel, rideshare, storage, or replacement essentials,
+- any property-retrieval communications handled through approved channels,
+- witness names for disputed contact allegations, and
+- a timeline of service, release, first court appearance, and restrictions.
+
+Do not delete messages, edit screenshots, or post about the case online. If the case overlaps with a civil protection order hearing, assume anything preserved may matter in both forums.
+
+## When to ask for a modification
+
+Modification is a court question. A judge may or may not change the terms, but a written request is safer than improvising.
+
+Common reasons to discuss a modification include:
+
+- retrieving essential property,
+- arranging child exchanges,
+- preserving employment,
+- avoiding shared workplace contact,
+- addressing housing or lease problems,
+- clarifying social-media or third-party contact restrictions, and
+- coordinating with a civil protection order case.
+
+The request should be narrow, practical, and tied to the actual order. "We want to talk" is different from "we need a third-party exchange location for parenting time" or "I need one law-enforcement standby to retrieve work tools."
+
+## Delaware County next steps
+
+In Delaware County domestic violence cases, start by identifying the court, the next date, and every active order. The related [Delaware County domestic violence arrest guide](/blog/domestic-violence-arrest-delaware-county-ohio) explains booking, first appearance, bond, and evidence preservation. The [domestic violence first-offense defense page](/domestic-violence-first-offense-ohio-defense) is useful when the allegation is a first case but release restrictions are already creating pressure.
+
+For civil-order overlap, the Delaware County Domestic Relations Court identifies its location at 117 N. Union Street, Level 400, Delaware, Ohio. The Supreme Court of Ohio also publishes statewide domestic violence protection-order forms. If a CPO hearing is pending, use the [Delaware County CPO hearing guide](/blog/civil-protection-order-hearing-delaware-county-ohio) to organize the civil evidence separately from criminal bond compliance.
+
+## Bottom line
+
+No-contact bond terms after a domestic violence arrest are not just paperwork. They can control where you sleep, whether you can communicate about children, how property is exchanged, and whether a new allegation gets added to the case.
+
+Read the order, do not respond to contact unless the order clearly allows it, preserve every attempted communication, and use the court process for exceptions or modifications. If timing is urgent, contact Mango Law before returning to a restricted location or replying to a message that could be treated as a violation.
+
+---
+
+*This article is for educational purposes and does not create an attorney-client relationship. Domestic violence law, bond conditions, protection-order rules, and local court procedure are fact-specific. Consult a qualified Ohio attorney about your situation.*`,
+    category: 'Domestic Violence Defense',
+    date: '2026-05-19',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-19',
+    sources: [
+      {
+        label: 'Ohio Revised Code § 2937.011 (Pretrial release)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.011',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.251 (Bail in certain domestic violence cases)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.251',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.25 (Domestic violence)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.26 (Criminal temporary protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.26',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2919.27 (Violating protection order)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.27',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware Municipal Court: Court costs and bond schedules',
+        url: 'https://www.delawareohio.net/government/departments/municipal-court/about/resources/court-costs-and-bond-schedules',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Domestic Relations Court',
+        url: 'https://domestic.co.delaware.oh.us/',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio: Domestic Violence Protection Order Forms',
+        url: 'https://www.supremecourt.ohio.gov/courts/services-to-courts/domestic-violence-program/domestic-violence-protection-order-forms/',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can I reply if the protected person texts me first?',
+        answer:
+          'Not safely if the order still prohibits contact. Preserve the message, do not respond, and ask whether a court-approved modification is available.',
+      },
+      {
+        question: 'Are no-contact bond terms the same as a civil protection order?',
+        answer:
+          'No. No-contact terms are usually criminal release conditions. A civil protection order is a separate civil process, although both can restrict similar conduct.',
+      },
+      {
+        question: 'Can I go home to get belongings after release?',
+        answer:
+          'Only if the written order allows it or the court approves a process. If the home is restricted, ask about property retrieval, law-enforcement standby, or another written carve-out.',
+      },
+      {
+        question: 'Can bond terms be changed?',
+        answer:
+          'Sometimes, but changes should go through the court. Private agreement with the protected person does not reliably modify a court order.',
+      },
+      {
+        question: 'What should I save after release?',
+        answer:
+          'Save bond paperwork, protection-order paperwork, incoming messages, call logs, voicemails, proof of alternate housing, and a timeline of release and restrictions.',
+      },
+    ],
+  },
+  {
     slug: 'delaware-county-criminal-case-timeline',
     title: 'Delaware County Criminal Case Timeline: What Happens After Charges Are Filed?',
     excerpt:
