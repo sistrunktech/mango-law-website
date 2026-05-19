@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-19 16:33 EDT
+Post slug and title: no-contact-bond-terms-domestic-violence-ohio | Featured image watercolor alignment
+Change type: minor
+Summary of change: Replaced the initial flatter/vector-style featured image with a distinct watercolor map-and-boundary concept tied to no-contact bond compliance, contact restrictions, and central Ohio location context, keeping the same public image path so blog and article references remain stable.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? no
+Approval token: User asked "do it" on 2026-05-19 after clarifying the image should fit the watercolor blog style, then rejected the first courthouse/envelope variant as too close to previous images.
+Rollback notes: Restore the prior version of `public/images/generated/blog-no-contact-bond-terms-domestic-violence-ohio.png` from commit `894ca50` if the earlier flatter image is preferred.
+
 Date/time: 2026-05-19 15:30 EDT
 Post slug and title: no-contact-bond-terms-domestic-violence-ohio | No-Contact Bond Terms After a Domestic Violence Arrest in Ohio: What You Can and Cannot Do
 Change type: major
