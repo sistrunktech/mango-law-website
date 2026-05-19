@@ -21,11 +21,13 @@ function run() {
   ]);
   const checkpointAfterStopPost = postsBySlug.get('what-to-do-after-dui-checkpoint-stop-ohio');
   const cpoHearingPost = postsBySlug.get('civil-protection-order-hearing-delaware-county-ohio');
+  const noContactBondPost = postsBySlug.get('no-contact-bond-terms-domestic-violence-ohio');
   const criminalTimelinePost = postsBySlug.get('delaware-county-criminal-case-timeline');
   const drugVehiclePost = postsBySlug.get('drug-possession-in-car-ohio');
 
   assert.ok(checkpointAfterStopPost, 'checkpoint after-stop article should exist');
   assert.ok(cpoHearingPost, 'CPO hearing article should exist');
+  assert.ok(noContactBondPost, 'no-contact bond terms article should exist');
   assert.ok(criminalTimelinePost, 'criminal timeline article should exist');
   assert.ok(drugVehiclePost, 'drug vehicle article should exist');
 
@@ -86,8 +88,26 @@ function run() {
   const checkpointLegalityPost = postsBySlug.get('ohio-dui-checkpoint-hotspots');
   assert.ok(checkpointLegalityPost?.content.includes('/blog/what-to-do-after-dui-checkpoint-stop-ohio'));
 
+  const domesticIssueGroup = blogIssuePathGroups.find((group) => group.label === 'Protection / Domestic');
+  assert.ok(
+    domesticIssueGroup?.links.some((link) => link.href === '/blog/no-contact-bond-terms-domestic-violence-ohio'),
+    'Protection / Domestic issue path should surface the no-contact bond article'
+  );
+  assert.ok(
+    noContactBondPost.content.includes('/domestic-violence-lawyer-delaware-oh') &&
+      noContactBondPost.content.includes('/protection-order-lawyer-delaware-oh') &&
+      noContactBondPost.content.includes('/blog/no-contact-order-vs-civil-protection-order-ohio'),
+    'no-contact bond article should route readers into DV/protection pillar pages'
+  );
+
   assert.match(getBlogCtaContent(checkpointAfterStopPost).heading, /OVI|checkpoint|license/i);
   assert.match(getBlogCtaContent(cpoHearingPost).heading, /CPO|no-contact|domestic/i);
+  assert.ok(
+    getBlogCtaContent(noContactBondPost).nextSteps.some(
+      (step) => step.href === '/blog/no-contact-bond-terms-domestic-violence-ohio'
+    ),
+    'DV blog CTA should include the no-contact bond article as a next step'
+  );
   assert.match(getBlogCtaContent(criminalTimelinePost).heading, /criminal case/i);
   assert.match(getBlogCtaContent(drugVehiclePost).heading, /drug/i);
 }

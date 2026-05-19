@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-19 15:30 EDT
+Post slug and title: no-contact-bond-terms-domestic-violence-ohio | No-Contact Bond Terms After a Domestic Violence Arrest in Ohio: What You Can and Cannot Do
+Change type: major
+Summary of change: Added the next domestic-violence/protection-order support post from the approved May 19 roadmap; grounded the article in current ORC 2937.011, 2919.251, 2919.25, 2919.26, 2919.27, Delaware Municipal Court bond schedule, Delaware County Domestic Relations, and Supreme Court of Ohio protection-order resources; added a unique featured image; added the ORC 2919.251 glossary/statute entry; connected the post to DV/protection blog discovery, related posts, support links, blog CTAs, and DV/protection owner-page guide clusters; and added a consolidated baseline record for the current pushed work.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User said "do it" on 2026-05-19 for the next recommended content and clarified that this round includes all approved/pushed work from the conversation, with appropriate benchmarking.
+Rollback notes: Remove the `no-contact-bond-terms-domestic-violence-ohio` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-no-contact-bond-terms-domestic-violence-ohio.png`, remove the ORC 2919.251 glossary/statute entry if unused, remove the slug from blog SEO, related-post, blog-discovery, DV/protection support-link surfaces, and remove the matching baseline/update docs if this content should not remain live.
+
 Date/time: 2026-05-19 16:45 EDT
 Post slug and title: blog pillar UX and checkpoint article associations
 Change type: minor

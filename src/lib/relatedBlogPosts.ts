@@ -18,6 +18,21 @@ export const relatedBlogPostSlugsBySlug: Record<string, string[]> = {
     'ohio-dui-checkpoint-hotspots',
     'ohio-ovi-driving-privileges-als',
   ],
+  'no-contact-bond-terms-domestic-violence-ohio': [
+    'domestic-violence-arrest-delaware-county-ohio',
+    'no-contact-order-vs-civil-protection-order-ohio',
+    'civil-protection-order-hearing-delaware-county-ohio',
+  ],
+  'domestic-violence-arrest-delaware-county-ohio': [
+    'no-contact-bond-terms-domestic-violence-ohio',
+    'no-contact-order-vs-civil-protection-order-ohio',
+    'civil-protection-order-hearing-delaware-county-ohio',
+  ],
+  'no-contact-order-vs-civil-protection-order-ohio': [
+    'no-contact-bond-terms-domestic-violence-ohio',
+    'domestic-violence-arrest-delaware-county-ohio',
+    'civil-protection-order-hearing-delaware-county-ohio',
+  ],
 };
 
 function sortByDateDesc(posts: BlogPost[]): BlogPost[] {

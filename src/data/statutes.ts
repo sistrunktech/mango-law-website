@@ -404,6 +404,20 @@ export const ohioStatutes: Record<string, OhioStatute> = {
       { label: 'Ohio Revised Code § 2919.25', url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.25', type: 'primary' },
     ],
   },
+  '2919.251': {
+    id: 'domestic-violence-bail',
+    section: '2919.251',
+    title: 'Bail in Certain Domestic Violence Cases',
+    shortTitle: 'DV Bail',
+    definition: 'Requires court bail review in specified domestic-violence and family-or-household-member offense cases when statutory risk factors are present. This can affect release timing, bond terms, and no-contact conditions.',
+    orcLink: 'https://codes.ohio.gov/ohio-revised-code/section-2919.251',
+    practiceAreas: ['criminal-defense', 'protection-orders', 'domestic-violence'],
+    relatedStatutes: ['2919.25', '2919.26', '2919.27', '2937.011'],
+    lastVerified: '2026-05-19',
+    sources: [
+      { label: 'Ohio Revised Code § 2919.251', url: 'https://codes.ohio.gov/ohio-revised-code/section-2919.251', type: 'primary' },
+    ],
+  },
   '2903.13': {
     id: 'assault',
     section: '2903.13',
@@ -1059,9 +1073,9 @@ export const ohioStatutes: Record<string, OhioStatute> = {
 
 export const practiceAreaStatutes = {
   'ovi-dui': ['4511.19', '4511.191', '4511.197', '4511.194', '3701.143', '3796.221', '4510.14', '4510.13', '4510.021', '4510.022', '4511.203'],
-  'protection-orders': ['3113.31', '2919.27', '2903.214', '2903.211'],
+  'protection-orders': ['3113.31', '2919.27', '2919.251', '2903.214', '2903.211'],
   'criminal-defense': ['2901.02', '2901.22', '1901.20', '2903.13', '2919.25', '2903.11', '2913.02', '2921.13'],
-  'domestic-violence': ['2919.25', '2903.13', '2903.11', '3113.31', '2903.21'],
+  'domestic-violence': ['2919.25', '2919.251', '2903.13', '2903.11', '3113.31', '2903.21'],
   'sex-crimes': ['2907.02', '2907.03', '2907.04', '2907.07', '2903.214'],
   'weapons': ['2923.12', '2923.13', '2923.16'],
   'drug-crimes': ['2925.11', '2925.03', '2925.14', '2925.01', '2901.22', '3796.062', '3796.221'],
