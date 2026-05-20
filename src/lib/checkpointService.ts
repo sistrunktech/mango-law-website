@@ -23,6 +23,11 @@ function normalizeCheckpoints(rows: any[] | null): DUICheckpoint[] {
   return (rows || []).map(normalizeCheckpoint);
 }
 
+function isMissingPublicViewError(error: unknown): boolean {
+  const err = error as { code?: string; message?: string } | null;
+  return err?.code === '42P01' || /public_dui_checkpoint/i.test(err?.message || '');
+}
+
 export interface CheckpointFilters {
   county?: string;
   status?: CheckpointStatus;
@@ -71,13 +76,25 @@ export async function getUpcomingCheckpoints(): Promise<DUICheckpoint[]> {
     throw new Error('Supabase client is not initialized');
   }
 
-  const { data, error } = await supabase
-    .from('dui_checkpoints')
+  const now = new Date().toISOString();
+  let { data, error } = await supabase
+    .from('public_dui_checkpoints')
     .select('*')
-    .not('source_url', 'is', null)
-    .in('status', ['upcoming', 'active'])
-    .gte('end_date', new Date().toISOString())
+    .neq('status', 'cancelled')
+    .gte('end_date', now)
     .order('start_date', { ascending: true });
+
+  if (error && isMissingPublicViewError(error)) {
+    const fallback = await supabase
+      .from('dui_checkpoints')
+      .select('*')
+      .not('source_url', 'is', null)
+      .neq('status', 'cancelled')
+      .gte('end_date', now)
+      .order('start_date', { ascending: true });
+    data = fallback.data;
+    error = fallback.error;
+  }
 
   if (error) {
     console.error('Error fetching upcoming checkpoints:', error);
@@ -92,11 +109,22 @@ export async function getCheckpointById(id: string): Promise<DUICheckpoint | nul
     throw new Error('Supabase client is not initialized');
   }
 
-  const { data, error } = await supabase
-    .from('dui_checkpoints')
+  let { data, error } = await supabase
+    .from('public_dui_checkpoints')
     .select('*')
     .eq('id', id)
     .maybeSingle();
+
+  if (error && isMissingPublicViewError(error)) {
+    const fallback = await supabase
+      .from('dui_checkpoints')
+      .select('*')
+      .not('source_url', 'is', null)
+      .eq('id', id)
+      .maybeSingle();
+    data = fallback.data;
+    error = fallback.error;
+  }
 
   if (error) {
     console.error('Error fetching checkpoint:', error);
@@ -201,9 +229,8 @@ export async function getRecentCheckpoints(
   }
 
   let query = supabase
-    .from('dui_checkpoints')
+    .from('public_dui_checkpoints')
     .select('*')
-    .not('source_url', 'is', null)
     .order('start_date', { ascending: false });
 
   if (dateRange !== 'all') {
@@ -217,7 +244,30 @@ export async function getRecentCheckpoints(
     query = query.eq('location_county', county);
   }
 
-  const { data, error } = await query;
+  let { data, error } = await query;
+
+  if (error && isMissingPublicViewError(error)) {
+    let fallback = supabase
+      .from('dui_checkpoints')
+      .select('*')
+      .not('source_url', 'is', null)
+      .order('start_date', { ascending: false });
+
+    if (dateRange !== 'all') {
+      const days = dateRange === '30d' ? 30 : 90;
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - days);
+      fallback = fallback.gte('start_date', cutoffDate.toISOString());
+    }
+
+    if (county) {
+      fallback = fallback.eq('location_county', county);
+    }
+
+    const fallbackResult = await fallback;
+    data = fallbackResult.data;
+    error = fallbackResult.error;
+  }
 
   if (error) {
     console.error('Error fetching recent checkpoints:', error);
@@ -238,9 +288,18 @@ export async function getCheckpointHotspots(limit: number = 10): Promise<Checkpo
     throw new Error('Supabase client is not initialized');
   }
 
-  const { data, error } = await supabase
-    .from('dui_checkpoints')
+  let { data, error } = await supabase
+    .from('public_dui_checkpoints')
     .select('location_city, location_county');
+
+  if (error && isMissingPublicViewError(error)) {
+    const fallback = await supabase
+      .from('dui_checkpoints')
+      .select('location_city, location_county')
+      .not('source_url', 'is', null);
+    data = fallback.data;
+    error = fallback.error;
+  }
 
   if (error) {
     console.error('Error fetching checkpoint hotspots:', error);

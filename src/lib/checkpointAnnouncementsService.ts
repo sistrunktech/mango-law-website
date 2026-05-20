@@ -158,6 +158,11 @@ function normalizeDateOnly(value: unknown): string | null {
   return s;
 }
 
+function isMissingPublicViewError(error: unknown): boolean {
+  const err = error as { code?: string; message?: string } | null;
+  return err?.code === '42P01' || /public_dui_checkpoint/i.test(err?.message || '');
+}
+
 function buildAnnouncementPayload(
   input: Partial<CheckpointAnnouncement>,
   options: { defaultAnnouncementDate?: boolean } = {}
@@ -189,16 +194,30 @@ function buildAnnouncementPayload(
   };
 }
 
-export async function getCheckpointAnnouncements(): Promise<CheckpointAnnouncement[]> {
+export async function getCheckpointAnnouncements(
+  options: { publicOnly?: boolean } = {}
+): Promise<CheckpointAnnouncement[]> {
   if (!supabase) throw new Error('Supabase client is not initialized');
   const checkpointAnnouncementsClient = createCheckpointAnnouncementsClient();
 
-  const { data, error } = await checkpointAnnouncementsClient
-    .from('dui_checkpoint_announcements')
+  let { data, error } = await checkpointAnnouncementsClient
+    .from(options.publicOnly ? 'public_dui_checkpoint_announcements' : 'dui_checkpoint_announcements')
     .select('*')
     .order('event_date', { ascending: true, nullsFirst: false })
     .order('announcement_date', { ascending: false, nullsFirst: false })
     .order('created_at', { ascending: false });
+
+  if (options.publicOnly && error && isMissingPublicViewError(error)) {
+    const fallback = await checkpointAnnouncementsClient
+      .from('dui_checkpoint_announcements')
+      .select('*')
+      .not('source_url', 'is', null)
+      .order('event_date', { ascending: true, nullsFirst: false })
+      .order('announcement_date', { ascending: false, nullsFirst: false })
+      .order('created_at', { ascending: false });
+    data = fallback.data;
+    error = fallback.error;
+  }
 
   if (error) {
     console.error('Error fetching announcements:', error);

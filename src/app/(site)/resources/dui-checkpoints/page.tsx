@@ -100,19 +100,18 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
 
     const [announcementsResult, upcomingResult, hotspotsResult] = await Promise.all([
       client
-        .from('dui_checkpoint_announcements')
+        .from('public_dui_checkpoint_announcements')
         .select('*')
         .order('event_date', { ascending: true, nullsFirst: false })
         .order('announcement_date', { ascending: false, nullsFirst: false })
         .order('created_at', { ascending: false }),
       client
-        .from('dui_checkpoints')
+        .from('public_dui_checkpoints')
         .select('*')
-        .not('source_url', 'is', null)
-        .in('status', ['upcoming', 'active'])
+        .neq('status', 'cancelled')
         .gte('end_date', now.toISOString())
         .order('start_date', { ascending: true }),
-      client.from('dui_checkpoints').select('location_city, location_county, source_name, source_url'),
+      client.from('public_dui_checkpoints').select('location_city, location_county, source_name, source_url'),
     ]);
 
     if (announcementsResult.error) throw announcementsResult.error;
@@ -147,9 +146,8 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
     }
 
     const recentHistoryResult = await client
-      .from('dui_checkpoints')
+      .from('public_dui_checkpoints')
       .select('*')
-      .not('source_url', 'is', null)
       .gte('start_date', ninetyDaysAgo.toISOString())
       .order('start_date', { ascending: false });
 
@@ -169,9 +167,8 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
     }
 
     const allHistoryResult = await client
-      .from('dui_checkpoints')
+      .from('public_dui_checkpoints')
       .select('*')
-      .not('source_url', 'is', null)
       .order('start_date', { ascending: false });
 
     if (allHistoryResult.error) throw allHistoryResult.error;

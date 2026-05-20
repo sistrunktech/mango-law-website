@@ -263,7 +263,7 @@ export default function DUICheckpointsPage({
     try {
       setLoading(true);
       setError(null);
-      const announcementsPromise = getCheckpointAnnouncements().catch((fetchError) => {
+      const announcementsPromise = getCheckpointAnnouncements({ publicOnly: true }).catch((fetchError) => {
         console.warn('Unable to load checkpoint announcements (continuing):', fetchError);
         return [] as CheckpointAnnouncement[];
       });
