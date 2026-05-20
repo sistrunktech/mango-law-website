@@ -23,6 +23,7 @@ function run() {
   const cdlOviPost = postsBySlug.get('cdl-out-of-state-driver-ovi-ohio');
   const cpoHearingPost = postsBySlug.get('civil-protection-order-hearing-delaware-county-ohio');
   const noContactBondPost = postsBySlug.get('no-contact-bond-terms-domestic-violence-ohio');
+  const summonsArrestPost = postsBySlug.get('summons-vs-arrest-delaware-county-ohio');
   const criminalTimelinePost = postsBySlug.get('delaware-county-criminal-case-timeline');
   const drugVehiclePost = postsBySlug.get('drug-possession-in-car-ohio');
 
@@ -30,6 +31,7 @@ function run() {
   assert.ok(cdlOviPost, 'CDL/out-of-state OVI article should exist');
   assert.ok(cpoHearingPost, 'CPO hearing article should exist');
   assert.ok(noContactBondPost, 'no-contact bond terms article should exist');
+  assert.ok(summonsArrestPost, 'summons vs arrest article should exist');
   assert.ok(criminalTimelinePost, 'criminal timeline article should exist');
   assert.ok(drugVehiclePost, 'drug vehicle article should exist');
 
@@ -37,7 +39,7 @@ function run() {
     assert.ok(postsBySlug.has(slug), `homepage priority slug should exist: ${slug}`);
   }
 
-  assert.equal(homepageBlogPrioritySlugs[0], 'cdl-out-of-state-driver-ovi-ohio');
+  assert.equal(homepageBlogPrioritySlugs[0], 'summons-vs-arrest-delaware-county-ohio');
   assert.ok(
     oviFastPathLinks.some((link) => link.href === '/blog/cdl-out-of-state-driver-ovi-ohio'),
     'OVI fast paths should surface the CDL/out-of-state OVI article'
@@ -120,6 +122,36 @@ function run() {
   );
 
   const domesticIssueGroup = blogIssuePathGroups.find((group) => group.label === 'Protection / Domestic');
+  const criminalIssueGroup = blogIssuePathGroups.find((group) => group.label === 'Criminal Case');
+  assert.ok(
+    criminalIssueGroup?.links.some((link) => link.href === '/blog/summons-vs-arrest-delaware-county-ohio'),
+    'Criminal Case issue path should surface the summons vs arrest article'
+  );
+  for (const href of [
+    '/criminal-defense-delaware-oh',
+    '/blog/delaware-county-criminal-case-timeline',
+    '/blog/bond-jail-information-delaware-county-ohio',
+    '/blog/ohio-misdemeanor-vs-felony-charges-delaware-county',
+    '/ovi-dui-defense-delaware-oh',
+    '/domestic-violence-lawyer-delaware-oh',
+  ]) {
+    assert.ok(summonsArrestPost.content.includes(href), `summons vs arrest article should link to ${href}`);
+  }
+
+  const summonsRelatedPosts = selectRelatedBlogPosts({
+    post: summonsArrestPost,
+    posts: blogPosts,
+    limit: 3,
+  });
+  assert.deepEqual(
+    summonsRelatedPosts.map((post) => post.slug),
+    [
+      'delaware-county-criminal-case-timeline',
+      'bond-jail-information-delaware-county-ohio',
+      'ohio-misdemeanor-vs-felony-charges-delaware-county',
+    ]
+  );
+
   assert.ok(
     domesticIssueGroup?.links.some((link) => link.href === '/blog/no-contact-bond-terms-domestic-violence-ohio'),
     'Protection / Domestic issue path should surface the no-contact bond article'
@@ -138,6 +170,12 @@ function run() {
       (step) => step.href === '/blog/no-contact-bond-terms-domestic-violence-ohio'
     ),
     'DV blog CTA should include the no-contact bond article as a next step'
+  );
+  assert.ok(
+    getBlogCtaContent(summonsArrestPost).nextSteps.some(
+      (step) => step.href === '/blog/summons-vs-arrest-delaware-county-ohio'
+    ),
+    'criminal-defense blog CTA should include the summons vs arrest article as a next step'
   );
   assert.match(getBlogCtaContent(criminalTimelinePost).heading, /criminal case/i);
   assert.match(getBlogCtaContent(drugVehiclePost).heading, /drug/i);

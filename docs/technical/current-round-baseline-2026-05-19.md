@@ -18,8 +18,11 @@ This baseline covers the approved and pushed work from the current conversation,
 ### Added in this branch
 
 - New post: `/blog/no-contact-bond-terms-domestic-violence-ohio`
+- New post: `/blog/summons-vs-arrest-delaware-county-ohio`
 - New image: `/images/generated/blog-no-contact-bond-terms-domestic-violence-ohio.png`
+- New image: `/images/generated/blog-summons-vs-arrest-delaware-county-ohio.png`
 - Blog SEO override for the new post.
+- Criminal-defense issue-path, related-post, CTA, owner-page, and glossary support for the summons/arrest post.
 - DV/protection cluster links from:
   - blog issue paths,
   - related-post selection,
@@ -73,6 +76,14 @@ Watch these as the current round's measurement set.
 - `https://mango.law/domestic-violence-lawyer-delaware-oh`
 - `https://mango.law/protection-order-lawyer-delaware-oh`
 - `https://mango.law/civil-protection-order-defense-ohio`
+
+### Criminal-defense cluster
+
+- `https://mango.law/blog/summons-vs-arrest-delaware-county-ohio`
+- `https://mango.law/blog/delaware-county-criminal-case-timeline`
+- `https://mango.law/blog/bond-jail-information-delaware-county-ohio`
+- `https://mango.law/blog/ohio-misdemeanor-vs-felony-charges-delaware-county`
+- `https://mango.law/criminal-defense-delaware-oh`
 
 ## Current Known Performance Baseline
 
@@ -151,7 +162,7 @@ Use Ahrefs when a crawl/export is available:
 
 ## Success Signals by 2026-05-29
 
-- New no-contact bond post is live, indexed or submitted for indexing, and internally linked from DV/protection surfaces.
+- New no-contact bond and summons-vs-arrest posts are live, indexed or submitted for indexing, and internally linked from their pillar surfaces.
 - Checkpoint cluster continues to hold live map/list trust state and visible after-stop paths.
 - GSC starts showing impressions for the new DV/protection support URL or adjacent DV/protection queries.
 - GA4 shows at least page_view/user_engagement for new and touched URLs; conversion claims remain conservative unless real lead events appear.
@@ -162,6 +173,6 @@ Use Ahrefs when a crawl/export is available:
 After this post, the next scoped pieces remain:
 
 1. CDL or out-of-state driver charged with OVI in Ohio. Completed in follow-up branch on 2026-05-19 as `/blog/cdl-out-of-state-driver-ovi-ohio`.
-2. Summons vs. arrest in Delaware County.
+2. Summons vs. arrest in Delaware County. Completed in follow-up branch on 2026-05-20 as `/blog/summons-vs-arrest-delaware-county-ohio`.
 3. Lab testing and chain of custody in Ohio drug possession cases.
 4. What to do if police contact you about a sex-offense investigation in Ohio.

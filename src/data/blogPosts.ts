@@ -48,6 +48,231 @@ export function resolveBlogScope(post: BlogPost): BlogScope {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'summons-vs-arrest-delaware-county-ohio',
+    title: 'Summons vs. Arrest in Delaware County, Ohio: What the Paperwork Means',
+    excerpt:
+      'A summons and an arrest can both start a Delaware County criminal case, but they create different immediate pressures. This guide explains court dates, warrants, arraignment, bond, and what to preserve before the first appearance.',
+    imageUrl: '/images/generated/blog-summons-vs-arrest-delaware-county-ohio.png',
+    content: `A summons and an arrest can both start a Delaware County criminal case. They do not create the same first-day pressure, but both deserve a careful response. A summons may mean you were not booked into jail. It does not mean the charge is harmless. An arrest may mean booking, bond, release conditions, and a faster first appearance. It does not mean the case is already decided.
+
+The practical question is usually this: what does the paperwork require next, and what needs to be protected before that first date?
+
+If your case is pending in Delaware County, start with the main [criminal defense page](/criminal-defense-delaware-oh). If you are trying to understand the broader path, compare this guide with the [Delaware County criminal case timeline](/blog/delaware-county-criminal-case-timeline), the [bond and jail guide](/blog/bond-jail-information-delaware-county-ohio), and the [misdemeanor vs. felony guide](/blog/ohio-misdemeanor-vs-felony-charges-delaware-county).
+
+## Quick answer
+
+A summons usually tells you to appear in court without being arrested first. An arrest usually means law enforcement took the person into custody, booking happened or may happen, and the court may need to address bond or release conditions before the person is released or shortly after release.
+
+In Delaware County, Ohio:
+
+- read every citation, summons, complaint, bond paper, jail paper, and court notice,
+- confirm the court, date, time, charge, statute, and whether appearance is required,
+- do not assume a summons is optional,
+- do not assume a traffic ticket is safe to simply pay,
+- treat bond and no-contact terms as court orders,
+- preserve evidence before videos, messages, locations, receipts, or witness memories disappear, and
+- get advice before a plea, waiver, payment, or statement creates a harder problem to undo.
+
+[VISUAL:MID_ARTICLE_CTA]
+
+## What a summons means
+
+A summons is a court document requiring a person to appear. It is different from being physically arrested and booked, but it still connects to a criminal, traffic, or ordinance case.
+
+Ohio Criminal Rule 4 addresses when a warrant or summons may issue after a complaint. The local paperwork matters because it can identify the charge, the court, the appearance date, and whether the state is proceeding by complaint, citation, or another charging document.
+
+Delaware Municipal Court local rules also make the summons-versus-warrant issue practical. When a criminal complaint is filed, the filing prosecutor or law-enforcement agency must indicate whether the complaint has already been served or whether a warrant or summons is requested. If the complaint is filed after the original ordered appearance date, the filing agency must request a new summons or warrant.
+
+That is why a summons should not be treated like informal mail. If the document gives a court date, you should calendar it, confirm the court, and make sure you understand whether a personal appearance is required.
+
+## What an arrest means
+
+An arrest means the person was taken into custody. The case may still be a misdemeanor, traffic offense, OVI, domestic allegation, drug charge, theft allegation, assault allegation, warrant case, or felony-related matter. The arrest itself does not prove guilt, but it can create immediate decisions about bond, release, property, work, transportation, and contact restrictions.
+
+After an arrest in Delaware County, the person may have:
+
+- jail or booking paperwork,
+- a court date or video arraignment notice,
+- a bond amount or recognizance release order,
+- release conditions,
+- a no-contact order or protected-address restriction,
+- instructions about alcohol, drugs, weapons, travel, treatment, or monitoring, and
+- future dates in Delaware Municipal Court or Delaware County Common Pleas Court.
+
+The Delaware County Sheriff's Office inmate information page explains that people arrested on new charges or on a municipal court warrant are generally seen the next business day through televised video arraignment, with times varying depending on court needs. Do not build a plan around an exact time unless the court, jail, or counsel confirms it for that case.
+
+## What changes at the first court date
+
+The first court date is where many people make avoidable mistakes. It may be called arraignment, initial appearance, preliminary hearing, or another local label depending on the charge and court.
+
+For many criminal cases, Ohio Criminal Rule 10 describes arraignment as the stage where the court states the substance of the charge and calls on the defendant to plead. In practical terms, the first appearance can also involve bond review, release conditions, future dates, counsel status, and the basic posture of the case.
+
+Do not assume the first date is the whole trial. It often happens before the defense has full discovery, body camera, dash camera, dispatch records, lab information, witness statements, medical records, or digital evidence. That is why the safest early posture is usually document-driven: identify what is charged, what the court requires, what conditions apply, and what evidence needs to be requested or preserved before anyone makes a final plea decision.
+
+## Bond, warrants, and release conditions
+
+Bond is not only about money. Ohio pretrial release is governed in large part by [ORC 2937.011](https://codes.ohio.gov/ohio-revised-code/section-2937.011), which allows release conditions aimed at court appearance, public safety, and protection of alleged victims or witnesses. Depending on the case, conditions can affect travel, residence, association, contact, alcohol, weapons, monitoring, or treatment.
+
+A summons can also become a warrant problem if it is ignored. Missing a required appearance, failing to comply with a court order, or misunderstanding a waiver/payment option can create a worse issue than the original paperwork suggested.
+
+If the immediate concern is jail, bond, or release timing, use the [Delaware County bond and jail guide](/blog/bond-jail-information-delaware-county-ohio). If the paperwork involves a domestic allegation, no-contact order, or protected person, compare it with the [domestic violence defense page](/domestic-violence-lawyer-delaware-oh) before replying to messages, going home, or arranging property pickup.
+
+## Traffic tickets, citations, and waiver decisions
+
+Some people receive a traffic ticket and assume the case is just a fine. That can be wrong.
+
+The Supreme Court of Ohio Traffic Rules explain the Ohio Uniform Traffic Ticket process, and Delaware Municipal Court publishes local guidance for people who have received a ticket. Some matters may be waiverable, but other cases require court. A payment or waiver can also operate like a conviction or admission for practical purposes, which may affect license status, insurance, employment, CDL issues, immigration, or later criminal-history analysis.
+
+OVI is one obvious area where a citation is not just a payable ticket. If your paperwork involves OVI, physical control, refusal, ALS paperwork, or testing, start with the [OVI defense page](/ovi-dui-defense-delaware-oh) before treating it as a routine traffic matter.
+
+## What to do if you receive a summons
+
+If you receive a summons, citation, or court notice, the first goal is to control information and deadlines:
+
+1. Photograph or scan every page, including envelopes and attachments.
+2. Calendar the court date, time, and location.
+3. Confirm whether the case is in Delaware Municipal Court or Delaware County Common Pleas Court.
+4. Identify the exact charge, statute, degree, and case number if listed.
+5. Do not ignore the notice just because you were not arrested.
+6. Do not pay or waive a ticket until you understand the consequences.
+7. Save messages, photos, videos, receipts, GPS data, workplace records, medical records, and witness names.
+8. Avoid discussing the facts with police, witnesses, employers, or the alleged victim without advice.
+
+The earlier the defense sees the original paperwork, the easier it is to separate court logistics from case strategy.
+
+## What to do after an arrest
+
+After an arrest, the paperwork often matters more than memory. Save:
+
+- the citation or complaint,
+- bond paperwork,
+- jail release paperwork,
+- no-contact or protection-order paperwork,
+- court-date notices,
+- property receipts,
+- medical or booking-related notes,
+- license or ALS paperwork if driving was involved, and
+- text messages, call logs, videos, photos, and names of witnesses.
+
+Also write down a short timeline while the details are fresh. Include when police contact began, where the arrest happened, whether anyone searched a car, home, phone, bag, or person, what was said, when release occurred, and what the court ordered.
+
+Mango Law handles Delaware County criminal-defense matters involving summonses, arrests, bond terms, first appearances, and evidence review. The point of early review is not to panic. It is to stop the case from being framed only by the first police report or the first piece of court paperwork.
+
+## Common mistakes
+
+The most common mistakes are practical:
+
+- assuming a summons means the case is minor,
+- missing the first court date,
+- paying a ticket before checking license or criminal consequences,
+- contacting a protected person because they reached out first,
+- violating alcohol, weapons, travel, or residence terms,
+- posting about the case online,
+- deleting messages or videos,
+- waiting until the day before court to look for body-camera or witness evidence, and
+- treating a felony, OVI, domestic, drug, or theft allegation like a generic traffic matter.
+
+If the charge level is unclear, use the [Ohio misdemeanor vs. felony guide](/blog/ohio-misdemeanor-vs-felony-charges-delaware-county). If the next step is unclear, use the [criminal case timeline](/blog/delaware-county-criminal-case-timeline).
+
+## Where to go next
+
+Use the paperwork to pick the next guide:
+
+- If you need the main strategy page, start with [Delaware County criminal defense](/criminal-defense-delaware-oh).
+- If you are trying to understand court stages, use the [criminal case timeline](/blog/delaware-county-criminal-case-timeline).
+- If someone was arrested or bond is the immediate issue, use the [bond and jail guide](/blog/bond-jail-information-delaware-county-ohio).
+- If the charge level is unclear, use the [misdemeanor vs. felony guide](/blog/ohio-misdemeanor-vs-felony-charges-delaware-county).
+- If the citation involves OVI or a traffic stop, use the [OVI defense page](/ovi-dui-defense-delaware-oh).
+- If the paperwork includes domestic violence, no-contact terms, or protected-person restrictions, use the [domestic violence defense page](/domestic-violence-lawyer-delaware-oh).
+
+## Bottom line
+
+A summons is not the same thing as an arrest, but both can start a serious Delaware County, Ohio case. The difference changes the first pressure point: a summons puts the court date and paperwork first, while an arrest usually adds booking, bond, and release conditions. In either situation, preserve the documents, confirm the court requirements, and review the evidence path before making a plea, waiver, payment, or statement.
+
+---
+
+This article is for educational purposes only and does not create an attorney-client relationship. Court rules, bond decisions, and local scheduling can change or vary by case. Speak with a qualified Ohio criminal-defense attorney about your specific facts before making legal decisions.
+`,
+    category: 'Criminal Defense',
+    date: '2026-05-20',
+    author: 'Dominic Mango',
+    lastVerified: '2026-05-20',
+    sources: [
+      {
+        label: 'Supreme Court of Ohio - Ohio Rules of Criminal Procedure',
+        url: 'https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/criminal/CriminalProcedure.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Supreme Court of Ohio - Ohio Traffic Rules',
+        url: 'https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/traffic/Traffic.pdf',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware Municipal Court Local Rules',
+        url: 'https://www.delawareohio.net/government/departments/municipal-court/about/resources/court-rules',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware Municipal Court - If You Have Received a Ticket',
+        url: 'https://www.delawareohio.net/government/departments/municipal-court/about/if-you-have-received-a-ticket-you-may-consider-the-following',
+        type: 'primary',
+      },
+      {
+        label: 'Delaware County Sheriff - Inmate Information',
+        url: 'https://sheriff.co.delaware.oh.us/inmates/',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2935.10 (Affidavit or complaint filing)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2935.10',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2935.26 (Minor misdemeanor citation)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2935.26',
+        type: 'primary',
+      },
+      {
+        label: 'Ohio Revised Code § 2937.011 (Pretrial release)',
+        url: 'https://codes.ohio.gov/ohio-revised-code/section-2937.011',
+        type: 'primary',
+      },
+      {
+        label: 'City of Delaware Legal Department - City Prosecutor role',
+        url: 'https://www.delawareohio.net/government/departments/legal-department',
+        type: 'primary',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is a summons the same as an arrest in Delaware County?',
+        answer:
+          'No. A summons usually orders you to appear without being booked into jail first. An arrest means law enforcement took the person into custody. Both can lead to court, bond conditions, warrants, and criminal consequences.',
+      },
+      {
+        question: 'Does a summons mean the charge is not serious?',
+        answer:
+          'No. A summons can still involve a misdemeanor, traffic offense, OVI, protection-order issue, theft allegation, drug charge, or another criminal-defense matter. The charge and court requirements control the risk, not whether jail happened on day one.',
+      },
+      {
+        question: 'Can ignoring a summons lead to a warrant?',
+        answer:
+          'Yes. If the summons requires a court appearance and you miss it, the court can issue a warrant or take other action. Always confirm whether appearance is required before relying on a waiver or payment option.',
+      },
+      {
+        question: 'Should I just pay a Delaware Municipal Court ticket?',
+        answer:
+          'Not without checking the consequences. Some tickets may be waiverable, but payment can affect license status, insurance, employment, CDL issues, or the criminal record. OVI and many offenses with possible jail require more careful review.',
+      },
+      {
+        question: 'What should I bring to a consultation after a summons or arrest?',
+        answer:
+          'Bring the summons, citation, complaint, bond papers, jail paperwork, court notices, license paperwork, screenshots, videos, photos, witness names, and a short timeline of what happened and what the court ordered.',
+      },
+    ],
+  },
+  {
     slug: 'cdl-out-of-state-driver-ovi-ohio',
     title: 'CDL or Out-of-State Driver Charged With OVI in Ohio: License, Work, and Court Issues',
     excerpt:

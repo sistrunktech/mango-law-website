@@ -167,14 +167,17 @@ export default function CriminalDefensePage() {
                   <Link href="/resources/dui-checkpoints" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
                     Checkpoint resource
                   </Link>
-                    <Link href="/blog/delaware-county-criminal-case-timeline" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
-                      Criminal case timeline
-                    </Link>
-                    <Link href="/blog/ohio-misdemeanor-vs-felony-charges-delaware-county" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
-                      Misdemeanor vs. felony charges
-                    </Link>
-                  </div>
+                  <Link href="/blog/summons-vs-arrest-delaware-county-ohio" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                    Summons vs. arrest guide
+                  </Link>
+                  <Link href="/blog/delaware-county-criminal-case-timeline" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                    Criminal case timeline
+                  </Link>
+                  <Link href="/blog/ohio-misdemeanor-vs-felony-charges-delaware-county" className="font-semibold text-brand-mangoText transition-colors hover:text-brand-leaf">
+                    Misdemeanor vs. felony charges
+                  </Link>
                 </div>
+              </div>
 
               <LegalCodeCallout section="2903.13" />
               <LegalCodeCallout section="2919.25" />
@@ -297,6 +300,11 @@ export default function CriminalDefensePage() {
         title="Related criminal defense guides"
         description="Use these guides to compare OVI, drug, domestic, and protection-order defense pathways."
         links={[
+          {
+            title: 'Summons vs. arrest in Delaware County',
+            description: 'Court-date, warrant, arraignment, and bond priorities after criminal paperwork or booking.',
+            href: '/blog/summons-vs-arrest-delaware-county-ohio',
+          },
           {
             title: 'Delaware County criminal case timeline',
             description: 'Arraignment, bond, pretrial, discovery, motion, negotiation, and trial stages.',

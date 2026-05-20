@@ -11,8 +11,8 @@ export type BlogIssuePathGroup = {
 };
 
 export const homepageBlogPrioritySlugs = [
+  'summons-vs-arrest-delaware-county-ohio',
   'cdl-out-of-state-driver-ovi-ohio',
-  'what-to-do-after-dui-checkpoint-stop-ohio',
   'no-contact-bond-terms-domestic-violence-ohio',
 ];
 
@@ -69,9 +69,19 @@ export const blogIssuePathGroups: BlogIssuePathGroup[] = [
     summary: 'Court timing, bond, evidence review, and the difference between charge levels.',
     links: [
       {
+        title: 'Summons vs. arrest in Delaware County',
+        description: 'What paperwork, court dates, warrants, arraignment, and bond pressure can change first.',
+        href: '/blog/summons-vs-arrest-delaware-county-ohio',
+      },
+      {
         title: 'Delaware County criminal case timeline',
         description: 'Arraignment, discovery, motions, negotiation, and trial-setting basics.',
         href: '/blog/delaware-county-criminal-case-timeline',
+      },
+      {
+        title: 'Bond and jail information',
+        description: 'Release timing, bond types, court instructions, and what to preserve after booking.',
+        href: '/blog/bond-jail-information-delaware-county-ohio',
       },
       {
         title: 'Misdemeanor vs. felony charges',
