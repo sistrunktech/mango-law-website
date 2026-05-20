@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-20 09:25 EDT
+Post slug and title: ovi-dui-defense-union-county-oh | Union County OVI & Criminal Defense Lawyer
+Change type: major
+Summary of change: Added a noindexed direct-link staging preview route for the first validated county expansion page, focused on Union County and Marysville OVI/criminal-defense intent; documented the source, competitor, keyword, and doorway-page-risk rationale; and added a safety test confirming exported robots metadata and generated sitemap exclusion until client approval.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User asked on 2026-05-20 to have Codex and subagents research location-specific expansion thoroughly, validate SEO and quality concerns, and prepare a staging/Vercel preview before production.
+Rollback notes: Remove `src/app/(site)/ovi-dui-defense-union-county-oh/`, `src/views/UnionCountyOviCriminalDefensePreviewPage.tsx`, `test/locationPreviewSitemapSafety.test.ts`, the `test/run-tests.mjs` import, and `docs/technical/location-expansion-validation-2026-05-20.md` if this staging preview should not remain.
+
 Date/time: 2026-05-20 06:55 EDT
 Post slug and title: summons-vs-arrest-delaware-county-ohio | Summons vs. Arrest in Delaware County, Ohio: What the Paperwork Means
 Change type: major
