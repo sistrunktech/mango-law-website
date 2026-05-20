@@ -9,9 +9,6 @@ import {
 
 dotenv.config();
 
-const PROD_MAPBOX_PUBLIC_TOKEN =
-  'pk.eyJ1Ijoic2lzdGVjaC10aW0iLCJhIjoiY21peGR3MHg5MDNkZDNkcHllaDlxdnY4aCJ9.ki5gsUR547d0i2rbMQvyog';
-
 const supabaseUrl =
   process.env.SUPABASE_URL ||
   process.env.NEXT_PUBLIC_SUPABASE_URL ||
@@ -20,8 +17,7 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const MAPBOX_TOKEN =
   process.env.MAPBOX_PUBLIC_TOKEN ||
   process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN ||
-  process.env.VITE_MAPBOX_PUBLIC_TOKEN ||
-  PROD_MAPBOX_PUBLIC_TOKEN;
+  process.env.VITE_MAPBOX_PUBLIC_TOKEN;
 
 if (!supabaseUrl || !supabaseServiceRoleKey) {
   throw new Error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY env vars.');

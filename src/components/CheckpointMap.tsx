@@ -55,6 +55,25 @@ function getFallbackDate(checkpoint: DUICheckpoint): string {
   return startDate ? startDate : 'Date unavailable';
 }
 
+function escapePopupHtml(value: string | null | undefined): string {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => {
+    switch (char) {
+      case '&':
+        return '&amp;';
+      case '<':
+        return '&lt;';
+      case '>':
+        return '&gt;';
+      case '"':
+        return '&quot;';
+      case "'":
+        return '&#39;';
+      default:
+        return char;
+    }
+  });
+}
+
 export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheckpointSelect, now }: Props) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -231,10 +250,11 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       const eventDateLabel = checkpoint.pending_announcement_event_date
         ? formatCalendarDate(checkpoint.pending_announcement_event_date)
         : formatCalendarDate(checkpoint.start_date);
+      const safeEventDateLabel = escapePopupHtml(eventDateLabel);
       const timingHtml = isPendingAnnouncement
         ? `
               <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
-                <strong>Event date:</strong> ${eventDateLabel}
+                <strong>Event date:</strong> ${safeEventDateLabel}
               </p>
               <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
                 <strong>Timing:</strong> Exact time pending
@@ -268,22 +288,22 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
       const popup = new mapboxgl.Popup({ offset: 25, closeButton: true })
         .setHTML(`
           <div style="padding: 12px; min-width: 240px; max-width: 320px;">
-            <h4 style="margin: 0 0 10px 0; font-weight: 600; font-size: 15px; color: #1a1a1a;">${checkpoint.title}</h4>
+            <h4 style="margin: 0 0 10px 0; font-weight: 600; font-size: 15px; color: #1a1a1a;">${escapePopupHtml(checkpoint.title)}</h4>
             <div style="border-top: 1px solid #e5e5e5; padding-top: 8px; margin-top: 8px;">
               <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
-                <strong>Location:</strong> ${locationLabel}
+                <strong>Location:</strong> ${escapePopupHtml(locationLabel)}
               </p>
               <p style="margin: 0 0 6px 0; font-size: 13px; color: #666;">
                 <strong>Map precision:</strong> ${getCheckpointLocationPrecisionLabel(precision)}
               </p>
               ${timingHtml}
               <p style="margin: 0; font-size: 13px; color: #666;">
-                <strong>Status:</strong> <span style="color: ${color}; font-weight: 600; text-transform: capitalize;">${statusLabel}</span>
+                <strong>Status:</strong> <span style="color: ${color}; font-weight: 600; text-transform: capitalize;">${escapePopupHtml(statusLabel)}</span>
               </p>
             </div>
-            ${locationGuidance ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #666; line-height: 1.5;">${locationGuidance}</p>` : ''}
-            ${checkpoint.description ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #888; line-height: 1.4;">${checkpoint.description}</p>` : ''}
-            ${sourceNameForPopup ? `<p style="margin: 8px 0 0 0; font-size: 11px; color: #aaa;">Source: ${sourceNameForPopup}</p>` : ''}
+            ${locationGuidance ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #666; line-height: 1.5;">${escapePopupHtml(locationGuidance)}</p>` : ''}
+            ${checkpoint.description ? `<p style="margin: 10px 0 0 0; padding-top: 8px; border-top: 1px solid #e5e5e5; font-size: 12px; color: #888; line-height: 1.4;">${escapePopupHtml(checkpoint.description)}</p>` : ''}
+            ${sourceNameForPopup ? `<p style="margin: 8px 0 0 0; font-size: 11px; color: #aaa;">Source: ${escapePopupHtml(sourceNameForPopup)}</p>` : ''}
           </div>
         `);
 
