@@ -128,6 +128,11 @@ export function getBlogCtaContent(post: BlogPost): BlogCtaContent {
       primaryHref: '/contact',
       nextSteps: [
         {
+          label: 'If the case started by summons or arrest',
+          href: '/blog/summons-vs-arrest-delaware-county-ohio',
+          description: 'Sort out paperwork, court dates, warrant risk, arraignment, and bond pressure.',
+        },
+        {
           label: 'If you need the main defense page',
           href: '/criminal-defense-delaware-oh',
           description: 'Start with the broader criminal-defense overview and local court context.',

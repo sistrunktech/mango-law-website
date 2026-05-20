@@ -6,6 +6,11 @@ type BlogSeoOverride = {
 };
 
 const BLOG_SEO_OVERRIDES: Record<string, BlogSeoOverride> = {
+  'summons-vs-arrest-delaware-county-ohio': {
+    title: 'Summons vs. Arrest in Delaware County',
+    description:
+      'Delaware County summons vs arrest guide covering citations, warrants, arraignment, bond, court dates, and what to preserve.',
+  },
   'cdl-out-of-state-driver-ovi-ohio': {
     title: 'CDL or Out-of-State OVI in Ohio',
     description:

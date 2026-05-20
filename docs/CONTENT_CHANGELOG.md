@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-20 06:55 EDT
+Post slug and title: summons-vs-arrest-delaware-county-ohio | Summons vs. Arrest in Delaware County, Ohio: What the Paperwork Means
+Change type: major
+Summary of change: Added the next criminal-defense support post from the approved May 19 roadmap; grounded the article in Ohio Criminal Rules, Ohio Traffic Rules, ORC 2935.10, ORC 2935.26, ORC 2937.011, Delaware Municipal Court local/ticket resources, Delaware County Sheriff inmate/arraignment information, and City of Delaware prosecutor context; added a distinct watercolor summons/court-path featured image; added ORC 2935.10 and 2935.26 glossary/statute entries; connected the post to homepage/blog discovery, criminal-defense issue paths, related posts, category-aware blog CTAs, the criminal-defense owner page, sitemap lastmod, and the current baseline/roadmap docs.
+Regression checklist:
+- Hero changed? yes
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User said "okay let's work on that" and then authorized scoping/delegating to subagents, research, correct tone/style, Nick EEAT details, and execution without escalation unless absolutely necessary.
+Rollback notes: Remove the `summons-vs-arrest-delaware-county-ohio` object from `src/data/blogPosts.ts`, remove `/images/generated/blog-summons-vs-arrest-delaware-county-ohio.png`, remove the ORC 2935.10/2935.26 glossary/statute entries if unused, remove the slug from homepage/blog discovery, related-post mappings, blog CTA next steps, criminal-defense owner-page guide links, SEO override, sitemap lastmod updates, protected-content registry, and current roadmap/baseline notes if this content should not remain live.
+
 Date/time: 2026-05-19 17:03 EDT
 Post slug and title: cdl-out-of-state-driver-ovi-ohio | CDL or Out-of-State Driver Charged With OVI in Ohio: License, Work, and Court Issues
 Change type: major

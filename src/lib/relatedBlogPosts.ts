@@ -2,6 +2,26 @@ import type { BlogPost } from '../data/blogPosts';
 import { resolveBlogScope } from '../data/blogPosts';
 
 export const relatedBlogPostSlugsBySlug: Record<string, string[]> = {
+  'summons-vs-arrest-delaware-county-ohio': [
+    'delaware-county-criminal-case-timeline',
+    'bond-jail-information-delaware-county-ohio',
+    'ohio-misdemeanor-vs-felony-charges-delaware-county',
+  ],
+  'delaware-county-criminal-case-timeline': [
+    'summons-vs-arrest-delaware-county-ohio',
+    'bond-jail-information-delaware-county-ohio',
+    'ohio-misdemeanor-vs-felony-charges-delaware-county',
+  ],
+  'bond-jail-information-delaware-county-ohio': [
+    'summons-vs-arrest-delaware-county-ohio',
+    'delaware-county-criminal-case-timeline',
+    'ohio-misdemeanor-vs-felony-charges-delaware-county',
+  ],
+  'ohio-misdemeanor-vs-felony-charges-delaware-county': [
+    'summons-vs-arrest-delaware-county-ohio',
+    'delaware-county-criminal-case-timeline',
+    'bond-jail-information-delaware-county-ohio',
+  ],
   'cdl-out-of-state-driver-ovi-ohio': [
     'ohio-ovi-driving-privileges-als',
     'first-ovi-court-date-delaware-county-ohio',
