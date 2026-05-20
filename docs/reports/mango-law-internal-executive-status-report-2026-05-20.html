@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mango Law Internal Executive Status Report - May 20, 2026</title>
+  <style>
+    :root {
+      --ink: #17201c;
+      --muted: #5f6d66;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --line: #d8dfdb;
+      --green: #0e5f4f;
+      --green-soft: #dff3ec;
+      --blue: #245fbd;
+      --blue-soft: #e8f0ff;
+      --amber: #f0b84a;
+      --amber-soft: #fff4d8;
+      --red: #b94b36;
+      --red-soft: #fde9e4;
+      --slate: #26343b;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: #e8ece9;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    body { padding: 24px; }
+    a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+
+    .sheet {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid #cdd5d1;
+      box-shadow: 0 18px 45px rgba(24, 35, 31, 0.18);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      padding: 28px 34px 22px;
+      color: #f9fbf8;
+      background:
+        linear-gradient(135deg, rgba(13, 81, 71, 0.98), rgba(34, 44, 52, 0.98)),
+        radial-gradient(circle at 82% 18%, rgba(240, 184, 74, 0.3), transparent 33%);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #cfe9df;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 540px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .hero-copy {
+      margin: 12px 0 0;
+      max-width: 580px;
+      color: #deeee8;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .hero-meta {
+      display: grid;
+      gap: 10px;
+      align-content: center;
+    }
+
+    .meta-box {
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .meta-label {
+      display: block;
+      color: #cfe0d9;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 3px;
+      font-size: 14px;
+      line-height: 1.22;
+      font-weight: 900;
+    }
+
+    .content { padding: 18px 28px 18px; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .kpi {
+      min-height: 86px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      background: var(--panel);
+    }
+
+    .kpi .label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 8px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .kpi .value {
+      margin: 7px 0 3px;
+      color: var(--green);
+      font-size: 23px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .kpi .delta {
+      margin: 0;
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 13px;
+      border-bottom: 1px solid var(--line);
+      background: #f4f7f5;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--slate);
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 950;
+    }
+
+    .source {
+      color: var(--muted);
+      font-size: 8px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .panel-body { padding: 12px 13px; }
+
+    .exec-summary {
+      margin: 0;
+      color: #33423c;
+      font-size: 11px;
+      line-height: 1.48;
+    }
+
+    .activity-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .activity {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 8px;
+      align-items: start;
+      font-size: 9.6px;
+      line-height: 1.34;
+    }
+
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--green);
+      text-align: center;
+      font-size: 10px;
+      line-height: 18px;
+      font-weight: 950;
+    }
+
+    .activity strong {
+      display: block;
+      margin-bottom: 1px;
+      font-size: 10.2px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.4px;
+      line-height: 1.32;
+    }
+
+    th {
+      padding: 0 0 6px;
+      color: var(--muted);
+      font-size: 7.8px;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 7px 0;
+      border-top: 1px solid #edf1ee;
+      vertical-align: top;
+    }
+
+    td.small { color: var(--muted); }
+
+    .impact {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 7px;
+      background: var(--green-soft);
+      color: #103b31;
+      font-size: 8.5px;
+      font-weight: 950;
+    }
+
+    .risk {
+      background: var(--red-soft);
+      color: #7c2417;
+    }
+
+    .watch {
+      background: var(--amber-soft);
+      color: #6d4d09;
+    }
+
+    .links {
+      margin: 0;
+      color: #33423c;
+      font-size: 9.5px;
+      line-height: 1.45;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #eff4f1;
+      color: var(--muted);
+      font-size: 8.6px;
+      line-height: 1.4;
+    }
+
+    @media print {
+      body { padding: 0; background: #fff; }
+      .sheet { width: 100%; min-height: 0; box-shadow: none; border: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Internal executive status report</p>
+        <h1>The May SEO round is live; the next job is disciplined measurement.</h1>
+        <p class="hero-copy">The site now has stronger checkpoint trust, cleaner contact routing, and three additional support articles tied into OVI, DV/protection, and criminal-defense pillars. The next 10 days should be measured for indexing, engagement, and consult-path behavior, not overread as immediate ranking proof.</p>
+      </div>
+      <aside class="hero-meta">
+        <div class="meta-box">
+          <span class="meta-label">Prepared</span>
+          <span class="meta-value">May 20, 2026</span>
+        </div>
+        <div class="meta-box">
+          <span class="meta-label">Deployment status</span>
+          <span class="meta-value">Main live, Vercel green</span>
+        </div>
+        <div class="meta-box">
+          <span class="meta-label">Benchmark stance</span>
+          <span class="meta-value">Measure 10 days, then prioritize</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="content">
+      <div class="kpi-grid">
+        <div class="kpi">
+          <p class="label">Merged PRs in chain</p>
+          <p class="value">7</p>
+          <p class="delta">#142 through #148</p>
+        </div>
+        <div class="kpi">
+          <p class="label">New support guides</p>
+          <p class="value">4</p>
+          <p class="delta">Checkpoint, DV, CDL, summons</p>
+        </div>
+        <div class="kpi">
+          <p class="label">Live smoke failures</p>
+          <p class="value">0</p>
+          <p class="delta">May 20 route/content checks</p>
+        </div>
+        <div class="kpi">
+          <p class="label">Current GSC clicks</p>
+          <p class="value">238</p>
+          <p class="delta">Latest prepared snapshot</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Executive Summary</h2>
+          <span class="source">Status</span>
+        </div>
+        <div class="panel-body">
+          <p class="exec-summary">The round is complete and live. We published the no-contact DV guide, CDL/out-of-state OVI guide, and summons vs. arrest guide; confirmed the checkpoint page still returns live map/list content for Stark County May 23; reinforced homepage/blog roll discovery; and preserved phone-role consistency with 602 as the primary call/text line and 417 as the secondary office line. The repo baseline now defines the URL set and 10-day measurement plan for GSC, GA4, BrightLocal, and Ahrefs.</p>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Completed Work</h2>
+            <span class="source">Recently shipped</span>
+          </div>
+          <div class="panel-body">
+            <ul class="activity-list">
+              <li class="activity"><span class="dot">1</span><span><strong>Checkpoint system trust</strong>Confirmed May 23 Stark County representation, fallback map/list behavior, future-date labels, and source quality filtering.</span></li>
+              <li class="activity"><span class="dot">2</span><span><strong>Conversion path cleanup</strong>Homepage, floating contact, contact page, and forms consistently expose the primary call/text path.</span></li>
+              <li class="activity"><span class="dot">3</span><span><strong>Content cluster expansion</strong>Added no-contact bond, CDL/out-of-state, and summons/arrest posts with related links and CTA routing.</span></li>
+              <li class="activity"><span class="dot">4</span><span><strong>Governance and benchmark docs</strong>Updated changelog, protected-content ledger, roadmap, baseline URL set, and expected measurement plan.</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Current Status</h2>
+            <span class="source">Verification</span>
+          </div>
+          <div class="panel-body">
+            <table>
+              <thead>
+                <tr><th>Area</th><th>Status</th><th>Action</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Build/tests</td><td>Passing: test, typecheck, image audit, SEO smoke, build.</td><td><span class="impact">Done</span></td></tr>
+                <tr><td>Production</td><td>Vercel green on merged main commit; live content smoke passed.</td><td><span class="impact">Done</span></td></tr>
+                <tr><td>Checkpoint map</td><td>Live page returns 200 and includes Stark County / May 23 content.</td><td><span class="impact">Done</span></td></tr>
+                <tr><td>Analytics exports</td><td>Current local env lacks GSC/GA4/BrightLocal/Ahrefs credentials or exports.</td><td><span class="impact watch">Manual pull</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid">
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Upcoming Work</h2>
+            <span class="source">Recommended order</span>
+          </div>
+          <div class="panel-body">
+            <table>
+              <thead>
+                <tr><th>Work</th><th>Expected impact</th><th>Priority</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Lab testing and chain of custody in Ohio drug cases</td><td class="small">Expands drug-crime evidence/suppression support and routes to practice page.</td><td><span class="impact">P1</span></td></tr>
+                <tr><td>Police contact in sex-offense investigations</td><td class="small">Captures high-anxiety pre-charge intent with careful statement-risk guidance.</td><td><span class="impact">P1</span></td></tr>
+                <tr><td>Diversion, intervention in lieu, and treatment-based resolutions</td><td class="small">Supports lower-level criminal/drug cases and solution-seeking queries.</td><td><span class="impact">P2</span></td></tr>
+                <tr><td>Evidence to bring to a CPO or DV hearing</td><td class="small">Builds practical protection-order topical depth around existing owner pages.</td><td><span class="impact">P2</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Risks To Monitor</h2>
+            <span class="source">Do not ignore</span>
+          </div>
+          <div class="panel-body">
+            <table>
+              <thead>
+                <tr><th>Risk</th><th>Why it matters</th><th>Control</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Checkpoint rumors</td><td class="small">Publishing unconfirmed checkpoints can damage trust.</td><td><span class="impact risk">Source gate</span></td></tr>
+                <tr><td>Turnstile/CSP friction</td><td class="small">Forms cannot be allowed to block urgent contact.</td><td><span class="impact watch">Phone fallback</span></td></tr>
+                <tr><td>Analytics overread</td><td class="small">New URLs need time before clicks or conversions are meaningful.</td><td><span class="impact watch">10-day view</span></td></tr>
+                <tr><td>Legal-source drift</td><td class="small">Statute and court-resource pages need periodic verification.</td><td><span class="impact watch">Refresh cycle</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel" style="margin-top:12px;">
+        <div class="panel-header">
+          <h2>Reference Links</h2>
+          <span class="source">Internal use</span>
+        </div>
+        <div class="panel-body">
+          <p class="links"><a href="https://mango.law/resources/dui-checkpoints">Checkpoint map</a> | <a href="https://mango.law/blog/no-contact-bond-terms-domestic-violence-ohio">No-contact guide</a> | <a href="https://mango.law/blog/cdl-out-of-state-driver-ovi-ohio">CDL/out-of-state OVI guide</a> | <a href="https://mango.law/blog/summons-vs-arrest-delaware-county-ohio">Summons vs. arrest guide</a> | <a href="https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain:mango.law">GSC</a> | <a href="https://analytics.google.com/analytics/web/">GA4</a></p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>Prepared for Sistrunk Tech internal planning. Client-safe report is separate.</span>
+        <span>Next review window: May 30, 2026.</span>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

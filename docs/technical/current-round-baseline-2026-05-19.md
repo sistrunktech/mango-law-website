@@ -1,6 +1,7 @@
 # Current Round Baseline and Follow-Through
 
 Date prepared: 2026-05-19
+Last updated: 2026-05-20
 Owner: Sistrunk Tech internal
 Client: Mango Law
 
@@ -8,20 +9,27 @@ Client: Mango Law
 
 This baseline covers the approved and pushed work from the current conversation, plus the new support content added in this round.
 
-### Already merged and live before this branch
+### Merged and live before this content follow-through
 
 - PR #142 / `a9f0797`: summer checkpoint announcements and verified Ohio OVI checkpoint updates.
 - PR #143 / `1f0539b`: checkpoint conversion hardening, public map/list fallback, and the after-stop checklist post.
 - PR #144 / `ae59ea5`: homepage/blog discovery, blog pillar routing, category-aware CTAs, consumer UX fixes, phone labeling, and checkpoint map trust improvements.
 - Phone source of truth: `(740) 602-2155` is the primary public call/text line; `(740) 417-6191` is the secondary office line only where intentionally labeled.
 
-### Added in this branch
+### Merged and live in this content follow-through
 
+- PR #145 / `894ca50`: no-contact bond terms guide, DV/protection internal routing, generated image, SEO override, and benchmark documentation.
+- PR #147 / `34d07ec`: CDL and out-of-state driver OVI guide.
+- PR #148 / `7abb92b`: summons vs. arrest guide, criminal-defense internal routing, generated image, SEO override, and benchmark documentation.
+- PR #149 / pending from this final pass: tracked May 20 client one-sheet, email preview, internal executive report, and final benchmark reconciliation.
 - New post: `/blog/no-contact-bond-terms-domestic-violence-ohio`
+- New post: `/blog/cdl-out-of-state-driver-ovi-ohio`
 - New post: `/blog/summons-vs-arrest-delaware-county-ohio`
 - New image: `/images/generated/blog-no-contact-bond-terms-domestic-violence-ohio.png`
+- New image: `/images/generated/blog-cdl-out-of-state-driver-ovi-ohio.png`
 - New image: `/images/generated/blog-summons-vs-arrest-delaware-county-ohio.png`
-- Blog SEO override for the new post.
+- Blog SEO overrides for the new support posts.
+- OVI/CDL support routing from the OVI pillar and related-post surfaces.
 - Criminal-defense issue-path, related-post, CTA, owner-page, and glossary support for the summons/arrest post.
 - DV/protection cluster links from:
   - blog issue paths,
@@ -31,6 +39,13 @@ This baseline covers the approved and pushed work from the current conversation,
   - protection-order owner-page related guides,
   - domestic support-link data.
 - Current-round verification notes: production-mode local build and HTTP smoke checks passed for the baseline URL set; the in-app browser was unavailable in this Codex session and Chromium/Puppeteer crashed before screenshots, so rendered browser screenshots remain a follow-up verification item after deployment/CI.
+- Post-deploy live smoke on 2026-05-20 confirmed `200` responses and expected content on `/`, `/blog`, `/blog/no-contact-bond-terms-domestic-violence-ohio`, `/blog/cdl-out-of-state-driver-ovi-ohio`, `/blog/summons-vs-arrest-delaware-county-ohio`, `/criminal-defense-delaware-oh`, `/blog/delaware-county-criminal-case-timeline`, `/resources/dui-checkpoints`, and `/contact`.
+
+### Report Artifacts
+
+- Client one-sheet: `docs/reports/mango-law-local-search-one-sheet-2026-05-20.html`
+- Client email preview: `docs/reports/mango-law-local-search-one-sheet-email-preview-2026-05-20.md`
+- Internal executive report: `docs/reports/mango-law-internal-executive-status-report-2026-05-20.html`
 
 ## Checkpoint Freshness Pass
 
@@ -62,6 +77,7 @@ Watch these as the current round's measurement set.
 
 - `https://mango.law/blog/what-to-do-after-dui-checkpoint-stop-ohio`
 - `https://mango.law/blog/ohio-dui-checkpoint-hotspots`
+- `https://mango.law/blog/cdl-out-of-state-driver-ovi-ohio`
 - `https://mango.law/ovi-dui-defense-delaware-oh`
 - `https://mango.law/first-offense-ovi-ohio`
 - `https://mango.law/als-license-suspension-ohio`
@@ -95,6 +111,13 @@ The most recent full cross-tool baseline in the repo is `docs/technical/seo-aeo-
 - `/resources/dui-checkpoints`: 23 clicks and 1,008 impressions in the last 28 days.
 - Checkpoint discovery queries were already visible, including DUI checkpoint tonight variants.
 
+The latest prepared client one-sheet uses the newer GSC snapshot from the May 18 reporting pass:
+
+- Last 28 days: 238 clicks, up 367% from the prior 28-day period.
+- Impressions: 9,576, up 264%.
+- Average organic position: 9.8, improved from 35.6.
+- `/resources/dui-checkpoints`: 172 clicks and 5,967 impressions in the last 28 days.
+
 ### GA4, last validated 2026-05-04
 
 - Last 30 days: 19 active users, 152 events, 16 new users, 0 key events.
@@ -113,6 +136,12 @@ The most recent full cross-tool baseline in the repo is `docs/technical/seo-aeo-
 - Referring domains: 36-37 range.
 - Organic keywords: 2, both tied to `/resources/dui-checkpoints`.
 - Ahrefs Rank Tracker was not available on the current plan.
+
+### Current API/export boundary, checked 2026-05-20
+
+- Live site deployment and HTTP/content checks were completed directly against production.
+- Local GSC, GA4, BrightLocal, and Ahrefs API pulls were not run in this worktree because the required credentials or exports are not present in the local environment.
+- The benchmark set is still ready for a 10-day comparison as soon as Search Console/GA4 data has time to populate and BrightLocal/Ahrefs exports are available.
 
 ## 10-Day Measurement Plan
 
@@ -162,7 +191,7 @@ Use Ahrefs when a crawl/export is available:
 
 ## Success Signals by 2026-05-29
 
-- New no-contact bond and summons-vs-arrest posts are live, indexed or submitted for indexing, and internally linked from their pillar surfaces.
+- New no-contact bond, CDL/out-of-state OVI, and summons-vs-arrest posts are live, indexed or submitted for indexing, and internally linked from their pillar surfaces.
 - Checkpoint cluster continues to hold live map/list trust state and visible after-stop paths.
 - GSC starts showing impressions for the new DV/protection support URL or adjacent DV/protection queries.
 - GA4 shows at least page_view/user_engagement for new and touched URLs; conversion claims remain conservative unless real lead events appear.
@@ -170,7 +199,7 @@ Use Ahrefs when a crawl/export is available:
 
 ## Follow-Up Content Queue
 
-After this post, the next scoped pieces remain:
+After this round, the next scoped pieces remain:
 
 1. CDL or out-of-state driver charged with OVI in Ohio. Completed in follow-up branch on 2026-05-19 as `/blog/cdl-out-of-state-driver-ovi-ohio`.
 2. Summons vs. arrest in Delaware County. Completed in follow-up branch on 2026-05-20 as `/blog/summons-vs-arrest-delaware-county-ohio`.
