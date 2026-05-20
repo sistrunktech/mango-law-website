@@ -46,6 +46,7 @@ This baseline covers the approved and pushed work from the current conversation,
 - Client one-sheet: `docs/reports/mango-law-local-search-one-sheet-2026-05-20.html`
 - Client email preview: `docs/reports/mango-law-local-search-one-sheet-email-preview-2026-05-20.md`
 - Internal executive report: `docs/reports/mango-law-internal-executive-status-report-2026-05-20.html`
+- Delivery status: the client email preview is prepared but not sent. The Codex automation handler returned `No handler registered for tool: automation_update`, so automated delivery to Nick is not actually scheduled from this environment. Do not send from Gmail unless the authenticated sender is verified to be `seo_team@sistrunktech.com` or an approved alias.
 
 ## Checkpoint Freshness Pass
 
@@ -141,6 +142,7 @@ The latest prepared client one-sheet uses the newer GSC snapshot from the May 18
 
 - Live site deployment and HTTP/content checks were completed directly against production.
 - Local GSC, GA4, BrightLocal, and Ahrefs API pulls were not run in this worktree because the required credentials or exports are not present in the local environment.
+- Automated email delivery was not created because the automation tool handler is unavailable in this Codex session; the email preview remains the handoff artifact.
 - The benchmark set is still ready for a 10-day comparison as soon as Search Console/GA4 data has time to populate and BrightLocal/Ahrefs exports are available.
 
 ## 10-Day Measurement Plan
