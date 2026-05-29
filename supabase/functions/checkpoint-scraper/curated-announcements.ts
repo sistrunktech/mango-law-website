@@ -648,6 +648,44 @@ const MAY_2026_CONFIRMED_CHECKPOINTS: ConfirmedCheckpointSeedInput[] = [
 const CURATED_ANNOUNCEMENT_SEEDS: CuratedAnnouncementSeed[] = [
   ...MAY_2026_CONFIRMED_CHECKPOINTS.map(buildConfirmedCheckpointSeed),
   {
+    id: '2026-05-22-hamilton-mariemont-wooster-pike',
+    title: 'Hamilton County OVI checkpoint operated on Wooster Pike in Mariemont',
+    checkpointTitle: 'OVI Checkpoint - Mariemont, Hamilton County',
+    sourceUrl:
+      'https://www.wlwt.com/article/ohio-state-local-police-partner-ovi-checkpoints-memorial-day/71390675#2026-05-22-hamilton-mariemont-wooster-pike',
+    sourceName: 'WLWT / Hamilton County OVI Task Force',
+    announcementDate: '2026-05-22T23:20:00-04:00',
+    eventDate: '2026-05-22',
+    startDate: '2026-05-22T20:00:00-04:00',
+    endDate: '2026-05-22T22:00:00-04:00',
+    locationText: '6900 block of Wooster Pike (US-50)',
+    locationCity: 'Mariemont',
+    locationCounty: 'Hamilton',
+    status: 'confirmed',
+    rawText:
+      'WLWT confirmed the Hamilton County OVI Task Force and local departments operated a Friday Memorial Day-weekend checkpoint along Wooster Pike in Mariemont. A public repost of the task force notice placed the checkpoint in the 6900 block of Wooster Pike from 8 p.m. to 10 p.m.',
+    promoteToCheckpoint: true,
+  },
+  {
+    id: '2026-05-28-brook-park-west-130th-street',
+    title: 'Brook Park OVI checkpoint announced on West 130th Street',
+    checkpointTitle: 'OVI Checkpoint - Brook Park, Cuyahoga County',
+    sourceUrl:
+      'https://www.cleveland19.com/2026/05/22/brook-park-police-conduct-sobriety-checkpoints-memorial-week/',
+    sourceName: 'Cleveland 19 / Brook Park Police Department',
+    announcementDate: '2026-05-28T15:42:57-04:00',
+    eventDate: '2026-05-28',
+    startDate: '2026-05-28T19:00:00-04:00',
+    endDate: '2026-05-28T23:00:00-04:00',
+    locationText: 'West 130th Street',
+    locationCity: 'Brook Park',
+    locationCounty: 'Cuyahoga',
+    status: 'confirmed',
+    rawText:
+      'Cleveland 19 reported that Brook Park Police announced an OVI checkpoint on West 130th Street from 7 p.m. to 11 p.m. during Memorial Day week.',
+    promoteToCheckpoint: true,
+  },
+  {
     id: '2026-05-05-solon-cinco-de-mayo-aurora-road-pending',
     title: 'Solon Police announced Cinco de Mayo sobriety checkpoints in the Aurora Road area',
     sourceUrl: 'https://www.cleveland19.com/2026/05/02/solon-police-conduct-sobriety-checkpoints-cinco-de-mayo/',

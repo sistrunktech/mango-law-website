@@ -47,3 +47,21 @@ assert.equal(starkMemorialLeadIn.length, 2);
 assert.ok(starkMemorialLeadIn.every((seed) => seed.locationCounty === 'Stark'));
 assert.ok(starkMemorialLeadIn.every((seed) => seed.status === 'confirmed'));
 assert.ok(starkMemorialLeadIn.every((seed) => seed.promoteToCheckpoint));
+
+const hamiltonMemorialCheckpoint = seeds.find(
+  (seed) => seed.id === '2026-05-22-hamilton-mariemont-wooster-pike',
+);
+assert.ok(hamiltonMemorialCheckpoint);
+assert.equal(hamiltonMemorialCheckpoint.status, 'confirmed');
+assert.equal(hamiltonMemorialCheckpoint.locationCounty, 'Hamilton');
+assert.equal(hamiltonMemorialCheckpoint.promoteToCheckpoint, true);
+
+const brookParkCheckpoint = seeds.find(
+  (seed) => seed.id === '2026-05-28-brook-park-west-130th-street',
+);
+assert.ok(brookParkCheckpoint);
+assert.equal(brookParkCheckpoint.status, 'confirmed');
+assert.equal(brookParkCheckpoint.eventDate, '2026-05-28');
+assert.equal(brookParkCheckpoint.startDate, '2026-05-28T19:00:00-04:00');
+assert.equal(brookParkCheckpoint.locationText, 'West 130th Street');
+assert.equal(brookParkCheckpoint.promoteToCheckpoint, true);
