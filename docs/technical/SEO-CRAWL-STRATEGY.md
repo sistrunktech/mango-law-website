@@ -9,7 +9,8 @@ This document describes how Mango Law pages are surfaced to search engines witho
 - Output: served at `https://mango.law/sitemap.xml` via the Next.js MetadataRoute.
 - Blog slugs: includes only publishable posts (CMS + legacy), excluding future-dated/scheduled content.
 - Robots: `src/app/robots.ts` references the sitemap and is served at `https://mango.law/robots.txt`.
-- IndexNow: sitemap route performs a best-effort IndexNow ping for the homepage to accelerate discovery (`src/app/sitemap.ts`).
+- LLM discovery: `https://mango.law/llms.txt` is served from `src/app/llms.txt/route.ts` and included in the sitemap as an AI-readable discovery and citation guide.
+- The sitemap route is read-only; crawl notification and resubmission actions should run from scripts or reporting/admin workflows, not during sitemap rendering.
 
 ### 2) SSR/SSG Rendering
 - Next.js App Router renders server HTML for core routes.
@@ -25,4 +26,4 @@ This document describes how Mango Law pages are surfaced to search engines witho
 - If you add a route, ensure it is in the sitemap so it gets crawled.
 - Admin/internal routes are intentionally excluded from indexing.
 - If you add/rename a static marketing route, update `staticPages` in `src/app/sitemap.ts`.
-- LLM discovery policy is served at `https://mango.law/llms.txt` (`src/app/llms.txt/route.ts`); it is informational and does not replace `robots.txt`.
+- `llms.txt` is informational and does not replace `robots.txt`.

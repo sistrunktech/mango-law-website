@@ -120,20 +120,26 @@ The May 29 site patch supports the GSC/AIO follow-through by:
 - Expanding the `llms.txt` route into a canonical AI-readable discovery and citation guide.
 - Removing the duplicate static `public/llms.txt`.
 - Refreshing sitemap lastmod hints for the current OVI/checkpoint/support surfaces.
+- Adding `llms.txt` to the sitemap discovery surface after GSC reported no referring sitemap for the newly deployed file.
 - Removing the sitemap route's IndexNow side effect.
 - Fixing the missing 192px favicon metadata reference.
 - Removing client-side head mutation from top checkpoint, OVI, and criminal-defense pages that already have App Router metadata/schema.
 - Strengthening the indexing surface smoke script so local and live checks fail on bad status/canonical/sitemap/robots/llms signals.
 
-## Next Follow-Up
+## Post-Deploy Follow-Up
 
-After this patch is deployed:
+Completed after the May 29 deployment:
 
-1. Submit `https://mango.law/sitemap.xml` in GSC again.
-2. Inspect `https://mango.law/llms.txt`; request indexing only after the expanded route is live.
-3. Reinspect the four requested URLs after Google has had time to crawl:
+1. Submitted `https://mango.law/sitemap.xml` in GSC for both the domain and URL-prefix properties.
+2. Inspected `https://mango.law/llms.txt`; it was `URL is unknown to Google`.
+3. Tried manual indexing requests for `llms.txt` under both properties; GSC returned its retry-later UI error, so discovery should rely on root availability plus sitemap inclusion.
+
+Next reporting follow-up:
+
+1. Reinspect the four requested URLs after Google has had time to crawl:
    - `/motion-to-suppress-ovi-ohio`
    - `/blog/ohio-ovi-driving-privileges-als`
    - `/blog/drug-possession-charge-ohio-what-to-do-next`
    - `/protection-order-lawyer-delaware-oh`
-4. Keep conversion language cautious until GA4 has more real `generate_lead` events.
+2. Reinspect `https://mango.law/llms.txt` after the sitemap version that includes it has been deployed and resubmitted.
+3. Keep conversion language cautious until GA4 has more real `generate_lead` events.
