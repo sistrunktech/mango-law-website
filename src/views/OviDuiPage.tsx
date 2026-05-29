@@ -10,7 +10,6 @@ import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
 import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { attorneyProfile } from '../data/attorneyProfile';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
-import { SEO } from '../lib/seo';
 import Link from 'next/link';
 import { AlertTriangle, MapPinned } from 'lucide-react';
 
@@ -76,17 +75,6 @@ export const oviDuiFaqs = [
 export default function OviDuiPage() {
   return (
     <>
-      <SEO
-        title="Delaware Ohio OVI Lawyer | DUI Defense | Mango Law"
-        description="Delaware Ohio OVI lawyer for DUI charges, ALS hearings, checkpoint stops, and Delaware County court defense. Practicing in Central Ohio since 1999."
-        image="/images/headshots/nick-mango-standing-profile-court-steps.png"
-        faqs={oviDuiFaqs}
-        breadcrumbs={[
-          { name: 'Home', item: '/' },
-          { name: 'Practice Areas', item: '/practice-areas' },
-          { name: 'OVI / DUI Defense', item: '/ovi-dui-defense-delaware-oh' },
-        ]}
-      />
       <PageHero
         eyebrow="Delaware County OVI Defense"
         title="Delaware Ohio OVI lawyer for DUI charges, ALS hearings, and checkpoint stops"

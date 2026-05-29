@@ -4,7 +4,8 @@ import { cookies } from 'next/headers';
 const COOKIE_NAME = 'client_report_access';
 
 export async function GET(req: Request) {
-  cookies().set({
+  const cookieStore = await cookies();
+  cookieStore.set({
     name: COOKIE_NAME,
     value: '',
     httpOnly: true,

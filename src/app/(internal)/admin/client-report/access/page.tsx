@@ -10,12 +10,13 @@ const seo = {
 
 export const metadata: Metadata = buildMetadata(seo);
 
-export default function Page({
-  searchParams,
-}: {
-  searchParams?: { error?: string };
-}) {
-  const error = searchParams?.error;
+type PageProps = {
+  searchParams?: Promise<{ error?: string } | undefined>;
+};
+
+export default async function Page({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const error = params?.error;
 
   return (
     <div className="min-h-screen bg-brand-offWhite flex items-center justify-center px-4">
