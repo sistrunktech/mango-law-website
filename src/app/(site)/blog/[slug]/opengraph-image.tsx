@@ -10,8 +10,9 @@ export const size = {
 
 export const contentType = 'image/png';
 
-export default function OpenGraphImage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((item) => item.slug === params.slug);
+export default async function OpenGraphImage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = blogPosts.find((item) => item.slug === slug);
   const featuredImageUrl = post ? getBlogPostFeaturedImageUrl(post) : '/images/generated/criminal-defense-hero.png';
   const absoluteImageUrl = featuredImageUrl.startsWith('http')
     ? featuredImageUrl

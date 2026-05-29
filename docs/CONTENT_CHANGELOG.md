@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-29 14:55 EDT
+Post slug and title: sitewide indexing and AIO discovery surfaces
+Change type: minor
+Summary of change: Removed the sitemap route's IndexNow side effect, refreshed sitemap lastmod hints for the current OVI/checkpoint/support surfaces, corrected the 192px favicon metadata reference, consolidated `llms.txt` to the App Router route, expanded `llms.txt` into an AI-readable discovery/citation guide aligned with the current OVI/criminal-defense strategy, removed legacy client-side SEO head mutation from the top checkpoint, OVI, and criminal-defense pages that already use App Router metadata/schema, and strengthened the live indexing-surface smoke script with hard assertions for priority URLs, canonicals, robots, sitemap, and llms.txt.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: User asked on 2026-05-29 to review GA4/GSC and reporting resources, prioritize SEO/AIO issues that could be completed this afternoon, and see them through with subagents as needed.
+Rollback notes: Restore the previous `src/app/sitemap.ts`, `src/app/layout.tsx`, `src/app/llms.txt/route.ts`, `public/llms.txt`, and `scripts/check-indexing-surface.sh` versions if the deployment should return to the prior sitemap ping behavior and minimal llms policy file.
+
 Date/time: 2026-05-20 06:55 EDT
 Post slug and title: summons-vs-arrest-delaware-county-ohio | Summons vs. Arrest in Delaware County, Ohio: What the Paperwork Means
 Change type: major

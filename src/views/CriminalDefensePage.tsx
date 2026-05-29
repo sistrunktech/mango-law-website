@@ -10,7 +10,6 @@ import RelatedDefenseGuides from '../components/RelatedDefenseGuides';
 import MidPageCtaExperiment from '../components/MidPageCtaExperiment';
 import { attorneyProfile } from '../data/attorneyProfile';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
-import { SEO } from '../lib/seo';
 
 export const criminalDefenseFaqs = [
   {
@@ -62,17 +61,6 @@ export const criminalDefenseFaqs = [
 export default function CriminalDefensePage() {
   return (
     <>
-      <SEO
-        title="Delaware County Criminal Defense Attorney | Mango Law LLC"
-        description="Delaware County criminal defense attorney for drug charges, domestic violence, assault, theft, weapons, and felony or misdemeanor cases in Delaware, Ohio."
-        image="/images/generated/criminal-defense-hero.png"
-        faqs={criminalDefenseFaqs}
-        breadcrumbs={[
-          { name: 'Home', item: '/' },
-          { name: 'Practice Areas', item: '/practice-areas' },
-          { name: 'Criminal Defense', item: '/criminal-defense-delaware-oh' },
-        ]}
-      />
       <PageHero
         eyebrow="Delaware County Criminal Defense"
         title="Delaware County criminal defense attorney for felony and misdemeanor charges"

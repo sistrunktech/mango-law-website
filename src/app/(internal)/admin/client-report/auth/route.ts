@@ -33,7 +33,8 @@ export async function POST(req: Request) {
   const maxAge = getSessionMaxAgeSeconds();
   const secure = process.env.NODE_ENV === 'production';
 
-  cookies().set({
+  const cookieStore = await cookies();
+  cookieStore.set({
     name: COOKIE_NAME,
     value: createClientReportCookieValue(),
     httpOnly: true,

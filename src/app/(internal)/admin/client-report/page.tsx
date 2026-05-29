@@ -15,8 +15,9 @@ export const metadata: Metadata = buildMetadata(seo);
 
 const COOKIE_NAME = 'client_report_access';
 
-export default function Page() {
-  const cookieValue = cookies().get(COOKIE_NAME)?.value;
+export default async function Page() {
+  const cookieStore = await cookies();
+  const cookieValue = cookieStore.get(COOKIE_NAME)?.value;
   if (!isValidClientReportCookieValue(cookieValue)) {
     redirect('/admin/client-report/access');
   }

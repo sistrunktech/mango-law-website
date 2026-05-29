@@ -23,7 +23,6 @@ import { buildPendingAnnouncementMapCheckpoints } from '../lib/checkpointAnnounc
 import { filterPublicCheckpointRows, isPublicCheckpointRow } from '../lib/publicCheckpointFilters';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
-import { SEO } from '../lib/seo';
 import { formatCalendarDate } from '../lib/formatting';
 
 type ViewMode = 'upcoming' | 'all';
@@ -571,14 +570,6 @@ export default function DUICheckpointsPage({
 
   return (
     <>
-      <SEO
-        title="Ohio DUI Checkpoint Map"
-        description="Browse announced Ohio DUI checkpoints, understand how checkpoint stops work, and review your rights after an OVI checkpoint stop."
-        breadcrumbs={[
-          { name: 'Home', item: '/' },
-          { name: 'DUI Checkpoints', item: '/resources/dui-checkpoints' },
-        ]}
-      />
       <PageHero
         eyebrow="DUI Resources"
         title="Ohio DUI Checkpoint Map"

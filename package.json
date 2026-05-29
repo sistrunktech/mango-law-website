@@ -9,7 +9,7 @@
     "prebuild": "node scripts/check-filenames.mjs && node scripts/check-orc-references.mjs && node scripts/check-protected-content.mjs && node scripts/check-structured-data.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint src test --ext .js,.jsx,.ts,.tsx --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "TS_NODE_TRANSPILE_ONLY=1 node --experimental-specifier-resolution=node test/run-tests.mjs",
     "seo:smoke": "node scripts/seo-smoke.mjs",

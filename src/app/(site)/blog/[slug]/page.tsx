@@ -8,18 +8,19 @@ import { resolveBlogSeo } from '@/lib/blog-seo';
 import { selectRelatedBlogPosts } from '@/lib/relatedBlogPosts';
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export const revalidate = 300;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const post = await getPublicBlogPostBySlug({ slug: params.slug });
+  const { slug } = await params;
+  const post = await getPublicBlogPostBySlug({ slug });
   if (!post) {
     return buildMetadata({
       title: 'Blog Post Not Found | Mango Law',
       noindex: true,
-      url: `/blog/${params.slug}`,
+      url: `/blog/${slug}`,
     });
   }
 
@@ -40,7 +41,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  const post = await getPublicBlogPostBySlug({ slug: params.slug });
+  const { slug } = await params;
+  const post = await getPublicBlogPostBySlug({ slug });
   if (!post) notFound();
 
   const allPosts = await getPublicBlogPosts();

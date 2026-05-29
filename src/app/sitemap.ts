@@ -1,19 +1,26 @@
 import { MetadataRoute } from 'next'
 import { getPublicBlogPosts } from '@/lib/blogPostsRepo'
 
-const INDEXNOW_KEY = process.env.INDEXNOW_KEY || ''
 const STATIC_LASTMOD = new Date('2026-03-24T00:00:00.000Z')
 const ROUTE_LASTMOD: Record<string, Date> = {
+  '': new Date('2026-05-20T00:00:00.000Z'),
   '/blog': new Date('2026-05-20T00:00:00.000Z'),
+  '/practice-areas': new Date('2026-05-20T00:00:00.000Z'),
+  '/contact': new Date('2026-05-18T00:00:00.000Z'),
   '/ovi-dui-defense-delaware-oh': new Date('2026-05-19T00:00:00.000Z'),
   '/drug-crime-lawyer-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
   '/protection-order-lawyer-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
   '/domestic-violence-lawyer-delaware-oh': new Date('2026-05-03T00:00:00.000Z'),
   '/criminal-defense-delaware-oh': new Date('2026-05-20T00:00:00.000Z'),
-  '/resources/dui-checkpoints': new Date('2026-05-19T00:00:00.000Z'),
+  '/resources/dui-checkpoints': new Date('2026-05-29T00:00:00.000Z'),
   '/ovi-checkpoints-ohio': new Date('2026-05-03T00:00:00.000Z'),
   '/first-offense-ovi-ohio': new Date('2026-05-19T00:00:00.000Z'),
+  '/ovi-test-refusal-lawyer-ohio': new Date('2026-05-19T00:00:00.000Z'),
   '/als-license-suspension-ohio': new Date('2026-05-19T00:00:00.000Z'),
+  '/motion-to-suppress-ovi-ohio': new Date('2026-05-19T00:00:00.000Z'),
+  '/civil-protection-order-defense-ohio': new Date('2026-05-19T00:00:00.000Z'),
+  '/domestic-violence-first-offense-ohio-defense': new Date('2026-05-19T00:00:00.000Z'),
+  '/drug-possession-vs-trafficking-ohio-defense': new Date('2026-05-03T00:00:00.000Z'),
 }
 
 type SitemapEntrySeed = {
@@ -25,17 +32,6 @@ function parseSitemapDate(value: string | undefined) {
   if (!value) return null
   const parsed = new Date(value)
   return Number.isNaN(parsed.getTime()) ? null : parsed
-}
-
-async function pingIndexNow(baseUrl: string) {
-  if (!INDEXNOW_KEY) return
-  const pingUrl = `https://api.indexnow.org/indexnow?url=${encodeURIComponent(baseUrl)}&key=${INDEXNOW_KEY}`
-  try {
-    // fire-and-forget; errors are non-fatal
-    await fetch(pingUrl, { next: { revalidate: 0 } })
-  } catch (error) {
-    console.warn('IndexNow ping failed:', error)
-  }
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -98,9 +94,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].filter(({ page }) => {
     return !privatePrefixes.some((prefix) => page === prefix || page.startsWith(`${prefix}/`))
   })
-
-  // Non-blocking IndexNow ping for homepage (indexes sitemap contents)
-  pingIndexNow(baseUrl)
 
   return allPages.map(({ page, lastModified }) => ({
     url: `${baseUrl}${page}`,
