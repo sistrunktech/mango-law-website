@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-05-29 15:40 EDT
+Post slug and title: llms.txt sitemap discovery surface
+Change type: minor
+Summary of change: Added `https://mango.law/llms.txt` to the sitemap with a May 29 lastmod after live GSC inspection showed no referring sitemap for the new AI-readable discovery guide; updated SEO smoke checks and crawl strategy notes so the llms discovery surface remains covered by local and live validation.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? no
+- Headings changed? no
+- Meta/schema changed? yes
+Approval token: User pre-approved continuing the GA4/GSC and SEO/AIO follow-through on 2026-05-29.
+Rollback notes: Remove `/llms.txt` from `src/app/sitemap.ts`, remove the corresponding smoke assertions, and restore the previous crawl-strategy wording if the file should remain root-only instead of sitemap-discoverable.
+
 Date/time: 2026-05-29 14:55 EDT
 Post slug and title: sitewide indexing and AIO discovery surfaces
 Change type: minor

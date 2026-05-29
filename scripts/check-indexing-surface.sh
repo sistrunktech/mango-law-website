@@ -128,6 +128,7 @@ assert_body_contains "/robots.txt" '^Sitemap: https://mango\.law/sitemap\.xml$'
 
 echo "===== sitemap signal checks"
 assert_body_contains "/sitemap.xml" '<loc>https://mango\.law/resources/dui-checkpoints</loc>'
+assert_body_contains "/sitemap.xml" '<loc>https://mango\.law/llms\.txt</loc>'
 assert_body_contains "/sitemap.xml" '<loc>https://mango\.law/ovi-dui-defense-delaware-oh</loc>'
 assert_body_contains "/sitemap.xml" '<loc>https://mango\.law/motion-to-suppress-ovi-ohio</loc>'
 assert_body_contains "/sitemap.xml" '<loc>https://mango\.law/domestic-violence-lawyer-delaware-oh</loc>'

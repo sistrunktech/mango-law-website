@@ -37,6 +37,7 @@ if (staticPagesMatch) {
   for (const route of [
     '/blog',
     '/resources/dui-checkpoints',
+    '/llms.txt',
     '/domestic-violence-lawyer-delaware-oh',
     '/privacy',
     '/terms',
