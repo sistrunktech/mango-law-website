@@ -15,21 +15,14 @@ export default function Layout({ children }: { children: ReactNode }) {
   const pathname = usePathname() ?? '';
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
-  const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(false);
 
   const isCheckpoints = pathname.startsWith('/resources/dui-checkpoints');
-  const chatBottomOffsetClass = (() => {
-    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-36 lg:bottom-6' : 'bottom-24 lg:bottom-6';
-    return isConsentBannerVisible ? 'bottom-28 lg:bottom-6' : 'bottom-6';
-  })();
-  const chatChooserBottomOffsetClass = (() => {
-    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-52 lg:bottom-20' : 'bottom-40 lg:bottom-20';
-    return isConsentBannerVisible ? 'bottom-44 lg:bottom-20' : 'bottom-20';
-  })();
-  const accessibilityBottomOffsetClass = (() => {
-    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-52 lg:bottom-6' : 'bottom-44 lg:bottom-6';
-    return isConsentBannerVisible ? 'bottom-40 lg:bottom-6' : 'bottom-24 lg:bottom-6';
-  })();
+  const launcherBottomOffsetClass = isCheckpoints
+    ? 'bottom-[calc(env(safe-area-inset-bottom)_+_6rem)] lg:bottom-6'
+    : 'bottom-[max(1rem,env(safe-area-inset-bottom))] lg:bottom-6';
+  const chatChooserBottomOffsetClass = isCheckpoints
+    ? 'bottom-[calc(env(safe-area-inset-bottom)_+_9.75rem)] lg:bottom-20'
+    : 'bottom-[calc(max(1rem,env(safe-area-inset-bottom))_+_3.75rem)] lg:bottom-20';
 
   const openLeadModal = (trigger: LeadSource) => {
     setLeadModalTrigger(trigger);
@@ -47,17 +40,16 @@ export default function Layout({ children }: { children: ReactNode }) {
       </a>
       <ScrollToTop />
       <SiteHeader onOpenLeadModal={openLeadModal} />
+      <ConsentBanner />
       <main id="main-content" className="pb-[env(safe-area-inset-bottom)] lg:pb-0">
         {children}
       </main>
       <Footer />
 
-      <ConsentBanner onVisibilityChange={setIsConsentBannerVisible} />
-
-      <AccessibilityLauncher bottomOffsetClass={accessibilityBottomOffsetClass} />
+      <AccessibilityLauncher bottomOffsetClass={launcherBottomOffsetClass} />
       <ChatIntakeLauncher
         onOpenLeadModal={() => openLeadModal('floating_chooser')}
-        bottomOffsetClass={chatBottomOffsetClass}
+        bottomOffsetClass={launcherBottomOffsetClass}
         chooserBottomOffsetClass={chatChooserBottomOffsetClass}
       />
 

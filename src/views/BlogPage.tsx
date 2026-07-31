@@ -190,9 +190,13 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
           </div>
 
           <div className="mb-6">
+            <label htmlFor="blog-search" className="mb-2 block text-sm font-semibold text-brand-black/75">
+              Search articles
+            </label>
             <div className="relative max-w-md">
               <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-brand-black/40" />
               <input
+                id="blog-search"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -201,6 +205,7 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
               />
               {searchQuery && (
                 <button
+                  type="button"
                   onClick={handleClearSearch}
                   className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-brand-black/40 transition-colors hover:bg-brand-black/5 hover:text-brand-black"
                   aria-label="Clear search"
@@ -217,7 +222,7 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
             )}
           </div>
 
-          <div className="mb-8 flex flex-wrap gap-3">
+          <div className="mb-8 flex flex-wrap gap-3" role="group" aria-label="Filter articles by category">
             {categories.map((category) => {
               const count =
                 category === 'All Posts'
@@ -226,8 +231,10 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
 
               return (
                 <button
+                  type="button"
                   key={category}
                   onClick={() => setSelectedCategory(category)}
+                  aria-pressed={selectedCategory === category}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                     selectedCategory === category
                       ? 'bg-brand-mango text-brand-black shadow-soft'

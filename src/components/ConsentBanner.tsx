@@ -9,7 +9,7 @@ function isConsentChosen(consent: ConsentStateV2 | null) {
   return Boolean(consent);
 }
 
-export default function ConsentBanner(props: { onVisibilityChange?: (visible: boolean) => void }) {
+export default function ConsentBanner() {
   const [isReady, setIsReady] = useState(false);
   const [stored, setStored] = useState<ConsentStateV2 | null>(null);
   const [view, setView] = useState<ViewState>('collapsed');
@@ -24,10 +24,6 @@ export default function ConsentBanner(props: { onVisibilityChange?: (visible: bo
 
   const visible = useMemo(() => isReady && !isConsentChosen(stored), [isReady, stored]);
 
-  useEffect(() => {
-    props.onVisibilityChange?.(visible);
-  }, [props, visible]);
-
   if (!visible) return null;
 
   const apply = (next: ConsentStateV2) => {
@@ -36,22 +32,23 @@ export default function ConsentBanner(props: { onVisibilityChange?: (visible: bo
   };
 
   const buttonBase =
-    'inline-flex h-9 items-center justify-center rounded-md px-3 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40';
-  const buttonSecondary = `${buttonBase} border border-brand-black/15 bg-white text-brand-black/80 hover:bg-brand-black/5`;
-  const buttonPrimary = `${buttonBase} bg-brand-mango text-brand-black hover:bg-brand-mangoLight`;
+    'inline-flex h-9 items-center justify-center rounded-md px-2 text-[11px] font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mango/40 sm:px-3 sm:text-xs';
+  const buttonUtility = `${buttonBase} text-brand-black/70 hover:bg-brand-black/5`;
+  const buttonDecision = `${buttonBase} border border-brand-black/20 bg-white text-brand-black/85 hover:border-brand-mango hover:bg-brand-mango/10`;
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-[60] px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 sm:px-4"
+      className="relative z-40 border-b border-brand-black/10 bg-brand-offWhite px-2 py-2 sm:px-4"
       role="dialog"
-      aria-label="Cookie consent"
+      aria-labelledby="cookie-consent-title"
+      aria-describedby="cookie-consent-description"
     >
       <div className="mx-auto max-w-[860px] overflow-hidden rounded-xl border border-brand-black/10 bg-white text-brand-black shadow-soft">
         <div className="p-3 sm:p-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-black/70">
+                <p id="cookie-consent-title" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-black/70">
                   Privacy preferences
                 </p>
                 <a
@@ -61,30 +58,30 @@ export default function ConsentBanner(props: { onVisibilityChange?: (visible: bo
                   Privacy Policy
                 </a>
               </div>
-              <p className="mt-1 max-w-[64ch] text-xs leading-relaxed text-brand-black/75 sm:text-sm">
+              <p id="cookie-consent-description" className="mt-1 max-w-[64ch] text-xs leading-relaxed text-brand-black/75 sm:text-sm">
                 We use cookies to measure site performance and improve your experience. Choose what’s allowed.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+            <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:items-center sm:justify-end">
               {view !== 'customize' ? (
-                <button type="button" className={buttonSecondary} onClick={() => setView('customize')}>
+                <button type="button" className={buttonUtility} onClick={() => setView('customize')}>
                   Customize
                 </button>
               ) : (
-                <button type="button" className={buttonSecondary} onClick={() => setView('collapsed')}>
+                <button type="button" className={buttonUtility} onClick={() => setView('collapsed')}>
                   Back
                 </button>
               )}
 
-              <button type="button" className={buttonSecondary} onClick={() => apply(rejectAllConsent())}>
+              <button type="button" className={buttonDecision} onClick={() => apply(rejectAllConsent())}>
                 Reject all
               </button>
 
               {view === 'customize' ? (
                 <button
                   type="button"
-                  className={buttonPrimary}
+                  className={buttonDecision}
                   onClick={() => apply(draft)}
                 >
                   Save choices
@@ -92,7 +89,7 @@ export default function ConsentBanner(props: { onVisibilityChange?: (visible: bo
               ) : (
                 <button
                   type="button"
-                  className={buttonPrimary}
+                  className={buttonDecision}
                   onClick={() => apply(acceptAllConsent())}
                 >
                   Accept all

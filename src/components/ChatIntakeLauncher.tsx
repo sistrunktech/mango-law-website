@@ -19,8 +19,8 @@ interface ChatIntakeLauncherProps {
 
 export default function ChatIntakeLauncher({
   onOpenLeadModal,
-  bottomOffsetClass = 'bottom-6',
-  chooserBottomOffsetClass = 'bottom-20',
+  bottomOffsetClass = 'bottom-[max(1rem,env(safe-area-inset-bottom))] lg:bottom-6',
+  chooserBottomOffsetClass = 'bottom-[calc(max(1rem,env(safe-area-inset-bottom))_+_3.75rem)] lg:bottom-20',
 }: ChatIntakeLauncherProps) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isChooserOpen, setIsChooserOpen] = useState(false);
@@ -82,7 +82,9 @@ export default function ChatIntakeLauncher({
         className={[
           'fixed right-4 inline-flex items-center rounded-full bg-brand-black text-sm font-semibold text-brand-offWhite shadow-lg transition-all hover:bg-brand-gold hover:text-brand-black hover:shadow-xl active:scale-95 sm:right-6',
           'z-[70]',
-          isCollapsed ? 'h-11 w-11 justify-center px-0 py-0' : 'gap-2 px-5 py-4',
+          isCollapsed
+            ? 'h-11 w-11 justify-center p-0'
+            : 'h-11 w-11 justify-center p-0 lg:h-auto lg:w-auto lg:gap-2 lg:px-5 lg:py-4',
           bottomOffsetClass,
         ].join(' ')}
         aria-label={isChatOpen ? 'Close chat' : 'Open contact options'}
@@ -90,7 +92,7 @@ export default function ChatIntakeLauncher({
         data-cta="floating_action"
       >
         <MessageCircle size={18} aria-hidden="true" />
-        {shouldShowLabel && <span>Chat</span>}
+        {shouldShowLabel && <span className="hidden lg:inline">Chat</span>}
       </button>
 
       {isChooserOpen && !isChatOpen && (
