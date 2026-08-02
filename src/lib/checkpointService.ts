@@ -1,5 +1,9 @@
 import { supabase } from './supabaseClient';
 import type { DUICheckpoint, CheckpointStatus } from '../data/checkpoints';
+import {
+  filterPublicCheckpointRows,
+  type PublicCheckpointCandidate,
+} from './publicCheckpointFilters';
 
 function coerceCoordinate(value: unknown): number | null {
   if (value === null || value === undefined) return null;
@@ -290,12 +294,16 @@ export async function getCheckpointHotspots(limit: number = 10): Promise<Checkpo
 
   let { data, error } = await supabase
     .from('public_dui_checkpoints')
-    .select('location_city, location_county');
+    .select(
+      'title, description, location_address, location_city, location_county, status, source_name, source_url, is_verified'
+    );
 
   if (error && isMissingPublicViewError(error)) {
     const fallback = await supabase
       .from('dui_checkpoints')
-      .select('location_city, location_county')
+      .select(
+        'title, description, location_address, location_city, location_county, status, source_name, source_url, is_verified'
+      )
       .not('source_url', 'is', null);
     data = fallback.data;
     error = fallback.error;
@@ -308,7 +316,11 @@ export async function getCheckpointHotspots(limit: number = 10): Promise<Checkpo
 
   const hotspotMap = new Map<string, CheckpointHotspot>();
 
-  for (const checkpoint of data || []) {
+  const publicRows = filterPublicCheckpointRows(
+    (data || []) as PublicCheckpointCandidate[],
+  );
+
+  for (const checkpoint of publicRows) {
     const key = `${checkpoint.location_city}-${checkpoint.location_county}`;
     if (hotspotMap.has(key)) {
       hotspotMap.get(key)!.count++;

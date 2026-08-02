@@ -5,7 +5,7 @@ import {
 } from '../data/checkpoints';
 import { hasOhioOviCheckpointIntent, isDirectCheckpointSource } from './checkpointRelevance';
 
-type PublicCheckpointCandidate = Pick<
+export type PublicCheckpointCandidate = Pick<
   DUICheckpoint,
   | 'title'
   | 'description'
