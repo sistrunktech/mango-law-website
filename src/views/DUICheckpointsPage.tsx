@@ -95,34 +95,6 @@ function normalizeSourceLabel(sourceName: string | null | undefined): string {
   return sourceName;
 }
 
-const NON_OHIO_CHECKPOINT_PATTERNS = [
-  /\bPennsylvania\b/i,
-  /\bPennsylvania State Police\b/i,
-  /\bPSP\b/i,
-  /\bPA State Police\b/i,
-  /\bCalifornia\b/i,
-  /\bChula Vista\b/i,
-  /\bSacramento\b/i,
-  /\bStockton\b/i,
-  /\bBarstow\b/i,
-];
-
-function isOhioCheckpointAnnouncement(announcement: CheckpointAnnouncement): boolean {
-  const text = [
-    announcement.title,
-    announcement.source_name,
-    announcement.source_url,
-    announcement.location_text,
-    announcement.location_city,
-    announcement.location_county,
-    announcement.raw_text,
-  ]
-    .filter(Boolean)
-    .join('\n');
-
-  return !NON_OHIO_CHECKPOINT_PATTERNS.some((pattern) => pattern.test(text));
-}
-
 function isFuturePublicDate(value: string | null | undefined, now: Date | undefined): boolean {
   const timestamp = parseTimestamp(value);
   if (timestamp === null || !now) return false;
@@ -132,9 +104,12 @@ function isFuturePublicDate(value: string | null | undefined, now: Date | undefi
   return timestamp >= startOfToday.getTime();
 }
 
-function formatRefreshLabel(now: Date | undefined): string {
-  if (!now) return 'Loading current time';
-  return now.toLocaleString('en-US', {
+function formatSourceCheckLabel(value: string | null): string {
+  if (!value) return 'not available';
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return 'not available';
+
+  return parsed.toLocaleString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -345,11 +320,7 @@ export default function DUICheckpointsPage({
   };
 
   const publicAnnouncements = useMemo(
-    () => announcements.filter(
-      (a) =>
-        isOhioCheckpointAnnouncement(a) &&
-        (a.status !== 'pending_details' || isAnnouncementFreshForPublic(a, now)),
-    ),
+    () => announcements.filter((a) => isAnnouncementFreshForPublic(a, now)),
     [announcements, now],
   );
 
@@ -565,7 +536,16 @@ export default function DUICheckpointsPage({
     };
   }, [dateRange, error, filteredMapCheckpoints.length, filteredPendingAnnouncements.length, usedHistoryFallback, viewMode]);
 
-  const lastRefreshedLabel = formatRefreshLabel(now);
+  const latestSourceCheckAt = useMemo(() => {
+    return publicAnnouncements.reduce<string | null>((latest, announcement) => {
+      if (!announcement.last_checked_at) return latest;
+      if (!latest) return announcement.last_checked_at;
+      return new Date(announcement.last_checked_at).getTime() > new Date(latest).getTime()
+        ? announcement.last_checked_at
+        : latest;
+    }, null);
+  }, [publicAnnouncements]);
+  const latestSourceCheckLabel = formatSourceCheckLabel(latestSourceCheckAt);
   const latestAnnouncementDate =
     latestAnnouncement?.event_date || latestAnnouncement?.announcement_date || latestAnnouncement?.created_at;
   const latestAnnouncementDateKind =
@@ -707,7 +687,7 @@ export default function DUICheckpointsPage({
                     {viewMode === 'upcoming' ? 'Upcoming public notices' : dateRange === 'all' ? 'All available history' : 'Recent public checkpoint history'}
                   </div>
                   <div className="mt-1 text-[11px] text-brand-black/55">
-                    Last refreshed {lastRefreshedLabel}
+                    Latest source check {latestSourceCheckLabel}
                   </div>
                 </div>
               </div>

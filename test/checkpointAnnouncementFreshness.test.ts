@@ -104,5 +104,42 @@ assert.equal(
     }),
     now,
   ),
+  false,
+);
+
+assert.equal(
+  isAnnouncementFreshForPublic(
+    announcement({
+      title: 'Ohio OVI checkpoint confirmed for Friday night',
+      status: 'confirmed',
+      announcement_date: '2026-05-03T12:00:00.000Z',
+    }),
+    now,
+  ),
   true,
+);
+
+assert.equal(
+  isAnnouncementFreshForPublic(
+    announcement({
+      title: 'Ohio OVI checkpoint confirmed for Friday night',
+      status: 'cancelled',
+      location_city: 'Columbus',
+    }),
+    now,
+  ),
+  false,
+);
+
+assert.equal(
+  isAnnouncementFreshForPublic(
+    announcement({
+      title: 'Ohio OVI checkpoint notice',
+      source_name: 'OVICheckpoint.com',
+      source_url: 'https://example.com/redirected-source',
+      location_city: 'Columbus',
+    }),
+    now,
+  ),
+  false,
 );
