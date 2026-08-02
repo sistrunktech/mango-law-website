@@ -33,6 +33,24 @@ async function run() {
             <pubDate>Fri, 04 Apr 2026 13:00:00 GMT</pubDate>
             <description>Unrelated security checkpoint coverage, not an Ohio OVI notice.</description>
           </item>
+          <item>
+            <title>TSA expands PreCheck airport checkpoints in Ohio</title>
+            <link>https://example.com/tsa-precheck</link>
+            <pubDate>Fri, 04 Apr 2026 14:00:00 GMT</pubDate>
+            <description>Ohio airport security checkpoint update.</description>
+          </item>
+          <item>
+            <title>Free Lyft rides offered during Ohio safety campaign</title>
+            <link>https://example.com/free-rides</link>
+            <pubDate>Fri, 04 Apr 2026 15:00:00 GMT</pubDate>
+            <description>Free rides and designated drivers support road safety.</description>
+          </item>
+          <item>
+            <title>My sobriety journey after rehab</title>
+            <link>https://example.com/rehab</link>
+            <pubDate>Fri, 04 Apr 2026 16:00:00 GMT</pubDate>
+            <description>Sobriety, addiction recovery, and rehab reflections.</description>
+          </item>
         </channel>
       </rss>`,
       {

@@ -1,4 +1,5 @@
 import type { RssSource, SeedSource } from './rss-sources.ts';
+import { hasOhioOviCheckpointIntent } from '../_shared/checkpoint-relevance.ts';
 
 export interface RssItemCandidate {
   title: string;
@@ -23,23 +24,6 @@ const DEFAULT_KEYWORDS = [
   'drive sober',
   'ovi task force',
   'dui task force',
-];
-
-const DEFAULT_NOISE_KEYWORDS = [
-  'security checkpoint',
-  'airport checkpoint',
-  'border checkpoint',
-  'checkpoint inhibitor',
-  "correspondents' dinner",
-  'correspondents dinner',
-  'pennsylvania',
-  'psp ',
-  'california',
-  'chula vista',
-  'sacramento',
-  'stockton',
-  'barstow',
-  'somerset',
 ];
 
 function canonicalizeUrl(input: string): string {
@@ -71,10 +55,6 @@ function canonicalizeUrl(input: string): string {
 function textIncludesAny(text: string, keywords: string[]): boolean {
   const haystack = text.toLowerCase();
   return keywords.some((k) => haystack.includes(k.toLowerCase()));
-}
-
-function textIncludesNoNoise(text: string): boolean {
-  return !textIncludesAny(text, DEFAULT_NOISE_KEYWORDS);
 }
 
 function stripHtml(input: string): string {
@@ -185,7 +165,12 @@ export async function scrapeRssSources(
       for (const parsed of parseRssOrAtom(xml)) {
         const combined = `${parsed.title}\n${parsed.summary || ''}`;
         if (!textIncludesAny(combined, keywords)) continue;
-        if (!textIncludesNoNoise(combined)) continue;
+        if (!hasOhioOviCheckpointIntent({
+          title: parsed.title,
+          rawText: parsed.summary,
+          sourceName: source.sourceName,
+          sourceUrl: parsed.url,
+        })) continue;
         if (!isWithinAgeWindow(parsed.pubDate, opts?.maxAgeDays, now)) continue;
 
         const normalizedUrl = canonicalizeUrl(parsed.url);
@@ -245,7 +230,14 @@ export async function scrapeSeedSources(
       for (const parsed of parseRssOrAtom(xml)) {
         const combined = `${parsed.title}\n${parsed.summary || ''}`;
         if (!textIncludesAny(combined, keywords)) continue;
-        if (!textIncludesNoNoise(combined)) continue;
+        if (!hasOhioOviCheckpointIntent({
+          title: parsed.title,
+          rawText: parsed.summary,
+          sourceName: seeds.map((seed) => seed.sourceName).join(' '),
+          sourceUrl: parsed.url,
+          locationCity: seeds.map((seed) => seed.city).filter(Boolean).join(' '),
+          locationCounty: seeds.map((seed) => seed.county).filter(Boolean).join(' '),
+        })) continue;
 
         candidates.push({
           title: parsed.title,
