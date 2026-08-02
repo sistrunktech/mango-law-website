@@ -9,6 +9,10 @@ import TurnstileWidget from './TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
+import LeadBackendFallback, {
+  LeadBackendChecking,
+  useLeadBackendAvailability,
+} from './LeadBackendFallback';
 
 const inputClasses = [
   'w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
@@ -28,6 +32,7 @@ export default function QuickIntakeForm() {
   const [phone, setPhone] = useState('');
   const [howFound, setHowFound] = useState('');
   const turnstileSiteKey = TURNSTILE_SITE_KEY;
+  const backendAvailability = useLeadBackendAvailability();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -118,6 +123,14 @@ export default function QuickIntakeForm() {
         </button>
       </div>
     );
+  }
+
+  if (backendAvailability === 'checking') {
+    return <LeadBackendChecking />;
+  }
+
+  if (backendAvailability === 'unavailable') {
+    return <LeadBackendFallback />;
   }
 
   return (

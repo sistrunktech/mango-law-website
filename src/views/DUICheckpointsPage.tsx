@@ -531,6 +531,13 @@ export default function DUICheckpointsPage({
   }, [publicAnnouncements, checkpoints]);
 
   const currentStatusSummary = useMemo(() => {
+    if (error) {
+      return {
+        heading: 'Live checkpoint feed temporarily unavailable',
+        body: 'The public feed could not be refreshed. Do not treat an empty map as confirmation that no checkpoints are active; check official agency notices and try this page again later.',
+      };
+    }
+
     if (filteredPendingAnnouncements.length > 0 || filteredMapCheckpoints.length > 0) {
       if (filteredPendingAnnouncements.length > 0) {
         return {
@@ -556,7 +563,7 @@ export default function DUICheckpointsPage({
       heading: 'Current public signal',
       body: 'There are no currently announced checkpoints in the live feed right now. Check recent history below, and monitor this page more closely around major holiday and travel weekends when public notices are more common.',
     };
-  }, [dateRange, filteredMapCheckpoints.length, filteredPendingAnnouncements.length, usedHistoryFallback, viewMode]);
+  }, [dateRange, error, filteredMapCheckpoints.length, filteredPendingAnnouncements.length, usedHistoryFallback, viewMode]);
 
   const lastRefreshedLabel = formatRefreshLabel(now);
   const latestAnnouncementDate =
@@ -770,6 +777,15 @@ export default function DUICheckpointsPage({
               {usedHistoryFallback && viewMode === 'all' && (
                 <div className="mb-4 rounded-xl border border-brand-mango/20 bg-brand-mango/5 px-4 py-3 text-sm text-brand-black/75">
                   No current public checkpoint notice is live right now, so the page has automatically switched to recent history to keep the map and list useful.
+                </div>
+              )}
+
+              {error && (
+                <div
+                  role="status"
+                  className="mb-4 rounded-xl border border-amber-600/25 bg-amber-50 px-4 py-3 text-sm text-amber-950"
+                >
+                  <strong>Live data is temporarily unavailable.</strong> The empty map is not confirmation that no checkpoints are active. Check official agency notices and try again later.
                 </div>
               )}
 

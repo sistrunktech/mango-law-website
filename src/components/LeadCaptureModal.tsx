@@ -10,6 +10,10 @@ import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import TurnstileWidget from './TurnstileWidget';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
 import { useFocusTrap } from '../lib/useFocusTrap';
+import LeadBackendFallback, {
+  LeadBackendChecking,
+  useLeadBackendAvailability,
+} from './LeadBackendFallback';
 
 export type LeadSource =
   | 'emergency_banner'
@@ -45,6 +49,7 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const backendAvailability = useLeadBackendAvailability();
 
   const modalRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -71,6 +76,31 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
   const turnstileSiteKey = TURNSTILE_SITE_KEY;
 
   if (!isOpen) return null;
+
+  if (backendAvailability !== 'available') {
+    return (
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Call or text Mango Law"
+      >
+        <div ref={modalRef} className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close modal"
+            className="absolute right-4 top-4 rounded-full p-1 text-brand-black/40 hover:bg-brand-black/5 hover:text-brand-black"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <div className="pt-8">
+            {backendAvailability === 'checking' ? <LeadBackendChecking /> : <LeadBackendFallback />}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};

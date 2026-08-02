@@ -9,6 +9,10 @@ import TurnstileWidget from './TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
+import LeadBackendFallback, {
+  LeadBackendChecking,
+  useLeadBackendAvailability,
+} from './LeadBackendFallback';
 
 interface ContactFormProps {
   variant?: 'default' | 'compact';
@@ -33,6 +37,7 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [howFound, setHowFound] = useState('');
   const turnstileSiteKey = TURNSTILE_SITE_KEY;
+  const backendAvailability = useLeadBackendAvailability();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -114,6 +119,14 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
         </button>
       </div>
     );
+  }
+
+  if (backendAvailability === 'checking') {
+    return <LeadBackendChecking />;
+  }
+
+  if (backendAvailability === 'unavailable') {
+    return <LeadBackendFallback />;
   }
 
   return (

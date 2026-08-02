@@ -27,3 +27,28 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
+
+type HealthFetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+
+export async function checkSupabaseAvailability(
+  fetchImpl: HealthFetch = fetch,
+  timeoutMs = 2_000
+): Promise<boolean> {
+  if (!supabaseUrl || !supabaseAnonKey) return false;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetchImpl(`${supabaseUrl}/auth/v1/health`, {
+      cache: 'no-store',
+      headers: { apikey: supabaseAnonKey },
+      signal: controller.signal,
+    });
+    return response.ok;
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
