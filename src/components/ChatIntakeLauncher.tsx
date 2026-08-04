@@ -15,12 +15,14 @@ interface ChatIntakeLauncherProps {
   onOpenLeadModal: () => void;
   bottomOffsetClass?: string;
   chooserBottomOffsetClass?: string;
+  suppressOnMobile?: boolean;
 }
 
 export default function ChatIntakeLauncher({
   onOpenLeadModal,
   bottomOffsetClass = 'bottom-[max(1rem,env(safe-area-inset-bottom))] lg:bottom-6',
   chooserBottomOffsetClass = 'bottom-[calc(max(1rem,env(safe-area-inset-bottom))_+_3.75rem)] lg:bottom-20',
+  suppressOnMobile = false,
 }: ChatIntakeLauncherProps) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isChooserOpen, setIsChooserOpen] = useState(false);
@@ -86,9 +88,13 @@ export default function ChatIntakeLauncher({
             ? 'h-11 w-11 justify-center p-0'
             : 'h-11 w-11 justify-center p-0 lg:h-auto lg:w-auto lg:gap-2 lg:px-5 lg:py-4',
           bottomOffsetClass,
+          suppressOnMobile &&
+            'max-lg:pointer-events-none max-lg:translate-y-2 max-lg:opacity-0',
         ].join(' ')}
         aria-label={isChatOpen ? 'Close chat' : 'Open contact options'}
         aria-expanded={isChooserOpen || isChatOpen}
+        aria-hidden={suppressOnMobile || undefined}
+        tabIndex={suppressOnMobile ? -1 : undefined}
         data-cta="floating_action"
       >
         <MessageCircle size={18} aria-hidden="true" />

@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import SiteHeader from './SiteHeader';
 import Footer from './Footer';
@@ -15,6 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const pathname = usePathname() ?? '';
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
+  const [suppressMobileLaunchers, setSuppressMobileLaunchers] = useState(false);
 
   const isCheckpoints = pathname.startsWith('/resources/dui-checkpoints');
   const launcherBottomOffsetClass = isCheckpoints
@@ -29,6 +30,20 @@ export default function Layout({ children }: { children: ReactNode }) {
     setIsLeadModalOpen(true);
     trackLeadModalOpen(trigger);
   };
+
+  useEffect(() => {
+    const updateLauncherClearance = () =>
+      setSuppressMobileLaunchers(
+        pathname === '/' && window.innerWidth < 1024 && window.scrollY < 160,
+      );
+    updateLauncherClearance();
+    window.addEventListener('scroll', updateLauncherClearance, { passive: true });
+    window.addEventListener('resize', updateLauncherClearance);
+    return () => {
+      window.removeEventListener('scroll', updateLauncherClearance);
+      window.removeEventListener('resize', updateLauncherClearance);
+    };
+  }, [pathname]);
 
   return (
     <div className="min-h-screen bg-brand-offWhite text-brand-black">
@@ -46,11 +61,15 @@ export default function Layout({ children }: { children: ReactNode }) {
       </main>
       <Footer />
 
-      <AccessibilityLauncher bottomOffsetClass={launcherBottomOffsetClass} />
+      <AccessibilityLauncher
+        bottomOffsetClass={launcherBottomOffsetClass}
+        suppressOnMobile={suppressMobileLaunchers}
+      />
       <ChatIntakeLauncher
         onOpenLeadModal={() => openLeadModal('floating_chooser')}
         bottomOffsetClass={launcherBottomOffsetClass}
         chooserBottomOffsetClass={chatChooserBottomOffsetClass}
+        suppressOnMobile={suppressMobileLaunchers}
       />
 
       <LeadCaptureModal

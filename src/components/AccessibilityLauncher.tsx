@@ -7,10 +7,12 @@ import { useFocusTrap } from '../lib/useFocusTrap';
 
 interface AccessibilityLauncherProps {
   bottomOffsetClass?: string;
+  suppressOnMobile?: boolean;
 }
 
 export default function AccessibilityLauncher({
   bottomOffsetClass = 'bottom-[max(1rem,env(safe-area-inset-bottom))] lg:bottom-6',
+  suppressOnMobile = false,
 }: AccessibilityLauncherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -64,9 +66,13 @@ export default function AccessibilityLauncher({
         ref={launcherButtonRef}
         onClick={() => setIsOpen(true)}
         aria-label="Open accessibility options (Alt+A)"
+        aria-hidden={suppressOnMobile || undefined}
+        tabIndex={suppressOnMobile ? -1 : undefined}
         className={[
           'group fixed left-auto right-[4.75rem] z-50 flex items-center justify-center rounded-full bg-brand-mango shadow-lg transition-all hover:bg-brand-leaf hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-mango/50 sm:right-[5.25rem]',
           bottomClass,
+          suppressOnMobile &&
+            'max-lg:pointer-events-none max-lg:translate-y-2 max-lg:opacity-0',
           isCollapsed ? 'h-11 w-11' : 'h-11 w-11 sm:h-14 sm:w-14 sm:hover:scale-110',
           'lg:left-6 lg:right-auto',
         ].join(' ')}
