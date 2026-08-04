@@ -74,6 +74,21 @@ function escapePopupHtml(value: string | null | undefined): string {
   });
 }
 
+function getFatalMapboxLoadError(event: unknown): string | null {
+  const candidate = event as { error?: { message?: unknown; status?: unknown }; message?: unknown; status?: unknown } | null;
+  const message = String(candidate?.error?.message ?? candidate?.message ?? '').toLowerCase();
+  const status = candidate?.error?.status ?? candidate?.status;
+  if (status === 401 || status === 403 || /access token|invalid token|unauthorized|not authorized|forbidden/.test(message)) {
+    return 'The interactive map is unavailable because its access configuration could not be verified.';
+  }
+  if ((status === 404 && /\bstyle\b/.test(message)) || /(?:invalid|malformed|unsupported|failed to parse).*style|style.*(?:invalid|malformed|unsupported)/.test(message)) {
+    return 'The interactive map is unavailable because its map style configuration is invalid.';
+  }
+  return null;
+}
+
+const isValidMapboxStyleUrl = (styleUrl: string) => styleUrl.startsWith('mapbox://styles/') || /^https?:\/\//.test(styleUrl);
+
 export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheckpointSelect, now }: Props) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -82,82 +97,102 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState<string | null>(null);
+  const [canRetry, setCanRetry] = useState(false);
+  const [retryAttempt, setRetryAttempt] = useState(0);
 
   // Initialize map
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
-    const markerLookup = markersByCheckpointId.current;
+    let didLoad = false;
+    let isDisposed = false;
+    let loadTimeout: number | undefined;
+    let mapInstance: mapboxgl.Map | null = null;
+
+    const clearLoadTimeout = () => { if (loadTimeout !== undefined) window.clearTimeout(loadTimeout); loadTimeout = undefined; };
+    const clearMapResources = () => { markers.current.forEach((marker) => marker.remove()); markers.current = []; markersByCheckpointId.current.clear(); };
+
+    function removeMap() {
+      const activeMap = mapInstance;
+      if (!activeMap) return;
+      activeMap.off('load', markMapReady);
+      activeMap.off('style.load', markMapReady);
+      activeMap.off('error', handleMapError);
+      activeMap.remove();
+      if (map.current === activeMap) map.current = null;
+      mapInstance = null;
+    }
+
+    function failMap(message: string, retryable: boolean) {
+      if (isDisposed || didLoad) return;
+      didLoad = true; clearLoadTimeout(); clearMapResources(); removeMap();
+      setMapError(message);
+      setCanRetry(retryable);
+      setIsLoading(false);
+    }
+
+    function markMapReady() {
+      if (isDisposed || didLoad) return;
+      didLoad = true; clearLoadTimeout();
+      setMapError(null);
+      setCanRetry(false);
+      setIsLoading(false);
+    }
+
+    function handleMapError(event: unknown) {
+      if (isDisposed || didLoad) return;
+      const fatalError = getFatalMapboxLoadError(event);
+      if (fatalError) {
+        failMap(fatalError, false);
+        return;
+      }
+      console.warn('Mapbox emitted a pre-load error; waiting for the map to finish loading.', event);
+    }
+
+    function cleanup() {
+      isDisposed = true; clearLoadTimeout(); removeMap(); clearMapResources();
+    }
 
     if (!mapboxgl.supported()) {
-      setMapError('Your browser does not support WebGL (required for the interactive map).');
-      setIsLoading(false);
-      return;
+      failMap('Your browser does not support WebGL (required for the interactive map).', false);
+      return cleanup;
     }
 
     const token = getMapboxPublicToken();
     const styleUrl = getMapboxStyleUrl();
 
     if (!token) {
-      setMapError('Map temporarily unavailable. Checkpoint details are still available below.');
-      setIsLoading(false);
-      return;
+      failMap('Map temporarily unavailable. Checkpoint details are still available below.', false);
+      return cleanup;
     }
+
+    if (!isValidMapboxStyleUrl(styleUrl)) {
+      failMap('The interactive map is unavailable because its map style configuration is invalid.', false);
+      return cleanup;
+    }
+
+    loadTimeout = window.setTimeout(() => failMap('The interactive map did not load in time. The checkpoint list is still available.', true), 10000);
 
     try {
       mapContainer.current.innerHTML = '';
       mapboxgl.accessToken = token;
 
-      let didLoad = false;
-      const loadTimeout = window.setTimeout(() => {
-        if (didLoad) return;
-        setMapError('The interactive map did not load in time. The checkpoint list is still available.');
-        setIsLoading(false);
-        map.current?.remove();
-        map.current = null;
-      }, 10000);
+      mapInstance = new mapboxgl.Map({ container: mapContainer.current, style: styleUrl, center: [-82.9988, 39.9612], zoom: 8 });
+      map.current = mapInstance;
 
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: styleUrl,
-        center: [-82.9988, 39.9612], // Columbus, OH
-        zoom: 8,
-      });
+      mapInstance.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      mapInstance.addControl(new mapboxgl.ScaleControl(), 'bottom-right');
 
-      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
-      map.current.addControl(new mapboxgl.ScaleControl(), 'bottom-right');
-
-      map.current.on('load', () => {
-        didLoad = true;
-        window.clearTimeout(loadTimeout);
-        setIsLoading(false);
-      });
-
-      map.current.on('error', (e) => {
-        console.error('Mapbox error:', e);
-        if (!didLoad) {
-          setMapError('The interactive map could not load. The checkpoint list is still available.');
-          setIsLoading(false);
-          window.clearTimeout(loadTimeout);
-          map.current?.remove();
-          map.current = null;
-        }
-      });
+      mapInstance.on('load', markMapReady);
+      mapInstance.on('style.load', markMapReady);
+      mapInstance.on('error', handleMapError);
     } catch (error) {
       console.error('Map initialization error:', error);
-      setMapError('The interactive map could not initialize. The checkpoint list is still available.');
-      setIsLoading(false);
-      map.current?.remove();
-      map.current = null;
+      const fatalError = getFatalMapboxLoadError(error);
+      if (fatalError) failMap(fatalError, false);
     }
 
-    return () => {
-      markers.current.forEach((marker) => marker.remove());
-      markers.current = [];
-      markerLookup.clear();
-      map.current?.remove();
-      map.current = null;
-    };
-  }, []);
+    return cleanup;
+  }, [retryAttempt]);
 
   // Update markers when checkpoints change
   useEffect(() => {
@@ -373,6 +408,13 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
     }
   }, [selectedCheckpoint]);
 
+  const retryInteractiveMap = () => {
+    setMapError(null);
+    setCanRetry(false);
+    setIsLoading(true);
+    setRetryAttempt((attempt) => attempt + 1);
+  };
+
   // Get user location
   const handleLocateUser = () => {
     if (!map.current) return;
@@ -441,7 +483,16 @@ export default function CheckpointMap({ checkpoints, selectedCheckpoint, onCheck
             <div className="text-center">
               <MapPin className="mx-auto mb-3 h-12 w-12 text-brand-mango/60" />
               <p className="text-lg font-semibold text-brand-black">Interactive map unavailable</p>
-              <p className="mt-1 text-sm text-brand-black/65">{mapError}</p>
+              <p role="status" className="mt-1 text-sm text-brand-black/65">{mapError}</p>
+              {canRetry ? (
+                <button
+                  type="button"
+                  onClick={retryInteractiveMap}
+                  className="mt-4 rounded-lg bg-brand-mango px-4 py-2.5 text-sm font-semibold text-brand-black transition-colors hover:bg-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-black focus:ring-offset-2"
+                >
+                  Retry interactive map
+                </button>
+              ) : null}
             </div>
             {checkpoints.length > 0 ? (
               <div className="mt-6 rounded-2xl border border-brand-black/10 bg-white p-4 text-left shadow-sm">

@@ -9,6 +9,8 @@ const accessibilityLauncher = readSource('src/components/AccessibilityLauncher.t
 const chatLauncher = readSource('src/components/ChatIntakeLauncher.tsx');
 const blogPage = readSource('src/views/BlogPage.tsx');
 const layout = readSource('src/components/Layout.tsx');
+const checkpointMap = readSource('src/components/CheckpointMap.tsx');
+const checkpointMapSmoke = readSource('scripts/checkpoint-map-smoke.mjs');
 
 assert.match(consentBanner, /className="relative z-40/);
 assert.match(consentBanner, /aria-labelledby="cookie-consent-title"/);
@@ -22,3 +24,9 @@ assert.match(layout, /window\.scrollY < 160/);
 assert.match(blogPage, /htmlFor="blog-search"/);
 assert.match(blogPage, /id="blog-search"/);
 assert.match(blogPage, /aria-pressed=\{selectedCategory === category\}/);
+assert.match(checkpointMap, /mapInstance\.on\('load', markMapReady\)[\s\S]*mapInstance\.on\('style\.load', markMapReady\)/);
+assert.match(checkpointMap, /getFatalMapboxLoadError\(event\)/);
+assert.match(checkpointMap, /console\.warn\('Mapbox emitted a pre-load error; waiting for the map to finish loading\.'/);
+assert.match(checkpointMap, /onClick=\{retryInteractiveMap\}/);
+assert.match(checkpointMap, /(?=[\s\S]*activeMap\.off\('style\.load', markMapReady\))(?=[\s\S]*window\.clearTimeout\(loadTimeout\))(?=[\s\S]*Current list view)/);
+assert.match(checkpointMapSmoke, /CHECKPOINT_MAP_SMOKE_URL is required[\s\S]*targetUrl\.pathname = '\/resources\/dui-checkpoints'[\s\S]*scrollIntoView[\s\S]*mapboxgl-canvas[\s\S]*hasFeedError \|\| mapState\.hasMapError/);
