@@ -14,6 +14,7 @@ targetUrl.search = '';
 targetUrl.hash = '';
 
 const { default: puppeteer } = await import('puppeteer');
+const protectionBypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET?.trim();
 const mapboxResponses = [];
 const styleResponses = [];
 const checkpointViewResponses = [];
@@ -28,6 +29,7 @@ function summarizeResponse(response) {
 try {
   const page = await browser.newPage();
   await page.setViewport({ width: 1440, height: 1000 });
+  if (protectionBypass) await page.setRequestInterception(true);
   page.on('response', (response) => {
     const url = response.url();
     const result = summarizeResponse(response);
@@ -45,9 +47,34 @@ try {
     ) {
       forbiddenWriteRequests.push({ method: request.method(), url: new URL(request.url()).pathname });
     }
+
+    if (protectionBypass) {
+      const requestUrl = new URL(request.url());
+      const isTargetOrigin = requestUrl.origin === targetUrl.origin;
+      void request.continue(isTargetOrigin ? {
+        headers: {
+          ...request.headers(),
+          'x-vercel-protection-bypass': protectionBypass,
+          'x-vercel-set-bypass-cookie': 'true',
+        },
+      } : undefined);
+    }
   });
 
   await page.goto(targetUrl.toString(), { waitUntil: 'domcontentloaded', timeout: 45_000 });
+  const loadedUrl = new URL(page.url());
+  if (loadedUrl.origin !== targetUrl.origin) {
+    throw new Error(
+      `The smoke target redirected to ${loadedUrl.origin}${loadedUrl.pathname}. ` +
+      'For a protected Vercel preview, provide an existing VERCEL_AUTOMATION_BYPASS_SECRET.',
+    );
+  }
+  await page.waitForFunction(
+    () => [...document.querySelectorAll('h1, h2, h3')].some(
+      (element) => element.textContent?.trim() === 'Live checkpoint map and recent history',
+    ),
+    { timeout: 20_000 },
+  );
   const scrolledToMap = await page.evaluate(() => {
     const heading = [...document.querySelectorAll('h1, h2, h3')].find(
       (element) => element.textContent?.trim() === 'Live checkpoint map and recent history',

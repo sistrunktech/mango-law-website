@@ -30,3 +30,6 @@ assert.match(checkpointMap, /console\.warn\('Mapbox emitted a pre-load error; wa
 assert.match(checkpointMap, /onClick=\{retryInteractiveMap\}/);
 assert.match(checkpointMap, /(?=[\s\S]*activeMap\.off\('style\.load', markMapReady\))(?=[\s\S]*window\.clearTimeout\(loadTimeout\))(?=[\s\S]*Current list view)/);
 assert.match(checkpointMapSmoke, /CHECKPOINT_MAP_SMOKE_URL is required[\s\S]*targetUrl\.pathname = '\/resources\/dui-checkpoints'[\s\S]*scrollIntoView[\s\S]*mapboxgl-canvas[\s\S]*hasFeedError \|\| mapState\.hasMapError/);
+assert.match(checkpointMapSmoke, /waitForFunction[\s\S]*Live checkpoint map and recent history[\s\S]*scrollIntoView/);
+assert.match(checkpointMapSmoke, /VERCEL_AUTOMATION_BYPASS_SECRET[\s\S]*requestUrl\.origin === targetUrl\.origin[\s\S]*x-vercel-protection-bypass/);
+assert.match(checkpointMapSmoke, /loadedUrl\.origin !== targetUrl\.origin[\s\S]*protected Vercel preview/);
