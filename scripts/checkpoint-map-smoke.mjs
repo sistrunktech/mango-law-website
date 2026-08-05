@@ -75,22 +75,21 @@ try {
     ),
     { timeout: 20_000 },
   );
-  const scrolledToMap = await page.evaluate(() => {
-    const heading = [...document.querySelectorAll('h1, h2, h3')].find(
-      (element) => element.textContent?.trim() === 'Live checkpoint map and recent history',
-    );
-    heading?.scrollIntoView({ block: 'center' });
-    return Boolean(heading);
-  });
-
-  if (!scrolledToMap) {
-    throw new Error('Could not locate the checkpoint map section to trigger deferred rendering.');
+  let mapStateMounted = false;
+  for (let attempt = 0; attempt < 30 && !mapStateMounted; attempt += 1) {
+    mapStateMounted = await page.evaluate(() => {
+      if (document.querySelector('.mapboxgl-canvas') || document.body.innerText.includes('Interactive map unavailable')) {
+        return true;
+      }
+      const heading = [...document.querySelectorAll('h1, h2, h3')].find(
+        (element) => element.textContent?.trim() === 'Live checkpoint map and recent history',
+      );
+      heading?.scrollIntoView({ block: 'center' });
+      return false;
+    });
+    if (!mapStateMounted) await new Promise((resolve) => setTimeout(resolve, 300));
   }
-
-  await page.waitForFunction(
-    () => Boolean(document.querySelector('.mapboxgl-canvas')) || document.body.innerText.includes('Interactive map unavailable'),
-    { timeout: 20_000 },
-  );
+  if (!mapStateMounted) throw new Error('The deferred checkpoint map did not mount after repeated viewport triggers.');
   await page.waitForNetworkIdle({ idleTime: 500, timeout: 15_000 }).catch(() => undefined);
 
   const mapState = await page.evaluate(() => {
