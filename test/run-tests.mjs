@@ -6,6 +6,7 @@ register('ts-node/esm', pathToFileURL('./'));
 // Run ESM TypeScript tests via dynamic import so they stay ESM
 await import('./checkpointStatus.test.ts');
 await import('./checkpointRelevance.test.ts');
+await import('./checkpointPublicViewMigration.test.mjs');
 await import('./publicCheckpointFilters.test.ts');
 await import('./checkpointAnnouncementFreshness.test.ts');
 await import('./checkpointAnnouncementMapMarkers.test.ts');

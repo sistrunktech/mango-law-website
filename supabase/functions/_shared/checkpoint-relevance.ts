@@ -56,7 +56,7 @@ const PUBLIC_NOISE_PATTERNS = [
   /\b(?:stopdrinking|sobriety journey|addiction recovery|sober living|aa meeting|rehab|alcoholic)\b/i,
   /\bcheckpoint inhibitor\b/i,
   /\bcorrespondents'? dinner\b/i,
-  /\b(?:pennsylvania|california|chula vista|sacramento|stockton|barstow|somerset)\b/i,
+  /\b(?:pennsylvania|michigan|indiana|kentucky|west virginia|california|chula vista|sacramento|stockton|barstow|somerset)\b/i,
   /\b(?:psp|pa state police)\b/i,
 ] as const;
 
