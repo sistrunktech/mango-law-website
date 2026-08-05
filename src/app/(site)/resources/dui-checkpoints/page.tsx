@@ -55,7 +55,18 @@ function normalizeCheckpoints(rows: DUICheckpoint[] | null): DUICheckpoint[] {
 }
 
 function buildHotspots(
-  rows: Pick<DUICheckpoint, 'location_city' | 'location_county' | 'source_name' | 'source_url'>[],
+  rows: Pick<
+    DUICheckpoint,
+    | 'title'
+    | 'description'
+    | 'location_address'
+    | 'location_city'
+    | 'location_county'
+    | 'status'
+    | 'source_name'
+    | 'source_url'
+    | 'is_verified'
+  >[],
 ): CheckpointHotspot[] {
   const hotspotMap = new Map<string, CheckpointHotspot>();
 
@@ -111,7 +122,9 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
         .neq('status', 'cancelled')
         .gte('end_date', now.toISOString())
         .order('start_date', { ascending: true }),
-      client.from('public_dui_checkpoints').select('location_city, location_county, source_name, source_url'),
+      client
+        .from('public_dui_checkpoints')
+        .select('title, description, location_address, location_city, location_county, status, source_name, source_url, is_verified'),
     ]);
 
     if (announcementsResult.error) throw announcementsResult.error;
@@ -119,8 +132,7 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
     if (hotspotsResult.error) throw hotspotsResult.error;
 
     const initialAnnouncements = (announcementsResult.data ?? []).filter(
-      (announcement) =>
-        announcement.status !== 'pending_details' || isAnnouncementFreshForPublic(announcement, now),
+      (announcement) => isAnnouncementFreshForPublic(announcement, now),
     );
     const freshPendingAnnouncementsCount = initialAnnouncements.filter(
       (announcement) =>
@@ -131,7 +143,15 @@ async function getInitialCheckpointPageData(): Promise<InitialCheckpointPageData
     const initialHotspots = buildHotspots(
       ((hotspotsResult.data as Pick<
         DUICheckpoint,
-        'location_city' | 'location_county' | 'source_name' | 'source_url'
+        | 'title'
+        | 'description'
+        | 'location_address'
+        | 'location_city'
+        | 'location_county'
+        | 'status'
+        | 'source_name'
+        | 'source_url'
+        | 'is_verified'
       >[] | null) ??
         []),
     );

@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { supabase, supabaseAnonKey, supabaseUrl } from './supabaseClient';
+import { hasOhioOviCheckpointIntent, isDirectCheckpointSource } from './checkpointRelevance';
 
 export type AnnouncementStatus = 'pending_details' | 'confirmed' | 'cancelled';
 
@@ -23,50 +24,6 @@ export interface CheckpointAnnouncement {
   updated_at: string;
 }
 
-const CHECKPOINT_PUBLIC_SIGNAL_PATTERNS = [
-  /\bsobriety checkpoints?\b/i,
-  /\bovi checkpoints?\b/i,
-  /\bdui checkpoints?\b/i,
-  /\bimpaired[-\s]driving checkpoints?\b/i,
-  /\btraffic safety checkpoints?\b/i,
-  /\bovi task force\b/i,
-  /\bdui task force\b/i,
-  /\bdrive sober\b/i,
-];
-
-const CHECKPOINT_PUBLIC_NOISE_PATTERNS = [
-  /\bsecurity checkpoints?\b/i,
-  /\bairport checkpoints?\b/i,
-  /\bborder checkpoints?\b/i,
-  /\bcheckpoint inhibitor\b/i,
-  /\bcorrespondents'? dinner\b/i,
-  /\bPennsylvania\b/i,
-  /\bPSP\b/i,
-  /\bCalifornia\b/i,
-  /\bChula Vista\b/i,
-  /\bSacramento\b/i,
-  /\bStockton\b/i,
-  /\bBarstow\b/i,
-  /\bSomerset\b/i,
-];
-
-const OHIO_PUBLIC_SIGNAL_PATTERNS = [
-  /\bOhio\b/i,
-  /\bOVI\b/i,
-  /\bOSHP\b/i,
-  /\bOhio State Highway Patrol\b/i,
-  /\bOhio Highway Patrol\b/i,
-  /\bCleveland\b/i,
-  /\bColumbus\b/i,
-  /\bCincinnati\b/i,
-  /\bDayton\b/i,
-  /\bAkron\b/i,
-  /\bToledo\b/i,
-  /\bYoungstown\b/i,
-  /\bStark County\b/i,
-  /\bFranklin County\b/i,
-];
-
 function parseIsoDate(value: unknown): Date | null {
   if (typeof value !== 'string' || !value.trim()) return null;
   const d = new Date(value);
@@ -81,30 +38,6 @@ function parseDateOnlyToUtc(value: unknown): Date | null {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-function hasCheckpointPublicSignal(announcement: CheckpointAnnouncement): boolean {
-  const text = [announcement.title, announcement.source_name, announcement.location_text, announcement.raw_text]
-    .filter(Boolean)
-    .join('\n');
-
-  if (CHECKPOINT_PUBLIC_NOISE_PATTERNS.some((pattern) => pattern.test(text))) {
-    return false;
-  }
-
-  return CHECKPOINT_PUBLIC_SIGNAL_PATTERNS.some((pattern) => pattern.test(text));
-}
-
-function hasOhioPublicSignal(announcement: CheckpointAnnouncement): boolean {
-  const text = [announcement.title, announcement.source_name, announcement.location_text, announcement.raw_text]
-    .filter(Boolean)
-    .join('\n');
-
-  if (CHECKPOINT_PUBLIC_NOISE_PATTERNS.some((pattern) => pattern.test(text))) {
-    return false;
-  }
-
-  return OHIO_PUBLIC_SIGNAL_PATTERNS.some((pattern) => pattern.test(text));
-}
-
 function createCheckpointAnnouncementsClient() {
   return createClient(supabaseUrl, supabaseAnonKey, {
     auth: { persistSession: false, autoRefreshToken: false },
@@ -115,8 +48,19 @@ function createCheckpointAnnouncementsClient() {
 }
 
 export function isAnnouncementFreshForPublic(announcement: CheckpointAnnouncement, now: Date = new Date()): boolean {
+  if (announcement.status === 'cancelled') return false;
+  if (!isDirectCheckpointSource(announcement.source_name, announcement.source_url)) return false;
+  if (!hasOhioOviCheckpointIntent({
+    title: announcement.title,
+    rawText: announcement.raw_text,
+    sourceName: announcement.source_name,
+    sourceUrl: announcement.source_url,
+    locationText: announcement.location_text,
+    locationCity: announcement.location_city,
+    locationCounty: announcement.location_county,
+  })) return false;
+
   if (announcement.status !== 'pending_details') return true;
-  if (!hasCheckpointPublicSignal(announcement)) return false;
 
   const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
@@ -131,15 +75,15 @@ export function isAnnouncementFreshForPublic(announcement: CheckpointAnnouncemen
       announcement.location_text?.trim()
   );
 
-  if (!hasLocationContext && !hasOhioPublicSignal(announcement)) return false;
+  // Unreviewed title/summary-only discoveries stay in the admin queue. Public
+  // pending notices need structured city/county/location context first.
+  if (!hasLocationContext) return false;
 
   if (eventDate && eventDate >= oneDayAgo) return true;
   if (startDate && startDate >= oneDayAgo) return true;
   if (hasLocationContext && announcementDate && announcementDate >= fourteenDaysAgo) return true;
-  if (!hasLocationContext && announcementDate && announcementDate >= oneDayAgo) return true;
-
   // Only fall back to created_at when we don't have an upstream announcement date.
-  if (!announcementDate && createdAt && createdAt >= (hasLocationContext ? fourteenDaysAgo : oneDayAgo)) return true;
+  if (!announcementDate && createdAt && createdAt >= fourteenDaysAgo) return true;
 
   return false;
 }
