@@ -11,6 +11,11 @@ const blogPage = readSource('src/views/BlogPage.tsx');
 const layout = readSource('src/components/Layout.tsx');
 const checkpointMap = readSource('src/components/CheckpointMap.tsx');
 const checkpointMapSmoke = readSource('scripts/checkpoint-map-smoke.mjs');
+const leadBackendFallback = readSource('src/components/LeadBackendFallback.tsx');
+const quickIntake = readSource('src/components/QuickIntakeForm.tsx');
+const contactForm = readSource('src/components/ContactForm.tsx');
+const leadCaptureModal = readSource('src/components/LeadCaptureModal.tsx');
+const conversationWindow = readSource('src/components/chat/ConversationWindow.tsx');
 
 assert.match(consentBanner, /className="relative z-40/);
 assert.match(consentBanner, /aria-labelledby="cookie-consent-title"/);
@@ -33,3 +38,12 @@ assert.match(checkpointMapSmoke, /CHECKPOINT_MAP_SMOKE_URL is required[\s\S]*tar
 assert.match(checkpointMapSmoke, /waitForFunction[\s\S]*Live checkpoint map and recent history[\s\S]*scrollIntoView/);
 assert.match(checkpointMapSmoke, /VERCEL_AUTOMATION_BYPASS_SECRET[\s\S]*requestUrl\.origin === targetUrl\.origin[\s\S]*x-vercel-protection-bypass/);
 assert.match(checkpointMapSmoke, /loadedUrl\.origin !== targetUrl\.origin[\s\S]*protected Vercel preview/);
+assert.match(leadBackendFallback, /checkLeadBackendAvailability[\s\S]*window\.addEventListener\('online', checkAvailability\)/);
+assert.match(leadBackendFallback, /availableUntil[\s\S]*availabilityPromise = null/);
+assert.match(leadBackendFallback, /result === 'unavailable' && !hasRetried[\s\S]*window\.setTimeout\(checkAvailability, 5_000\)/);
+assert.match(quickIntake, /sm:col-span-2[\s\S]*id="quick_email"[\s\S]*required[\s\S]*\{showDetails &&/);
+assert.match(quickIntake, /const email = String\(formData\.get\('email'\) \|\| ''\)\.trim\(\)[\s\S]*email,/);
+assert.match(quickIntake, /trackFallbackPhoneLead\('quick_intake_turnstile_fallback_call'/);
+assert.match(contactForm, /trackFallbackPhoneLead\('contact_form_turnstile_fallback_call'/);
+assert.match(leadCaptureModal, /trackFallbackPhoneLead\('lead_modal_turnstile_fallback_call'/);
+assert.match(conversationWindow, /trackFallbackPhoneLead\('chat_turnstile_fallback_call'/);

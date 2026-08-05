@@ -3,7 +3,7 @@
 import { FormEvent, useState } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
-import { trackLeadSubmitted } from '../lib/analytics';
+import { trackFallbackPhoneLead, trackLeadSubmitted } from '../lib/analytics';
 import { normalizePhoneDigits } from '../lib/phone';
 import TurnstileWidget from './TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
@@ -325,6 +325,11 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
           <a
             href={`tel:${PRIMARY_PHONE_TEL}`}
             className="mt-2 inline-flex items-center gap-2 font-semibold text-brand-mangoText hover:text-brand-leaf"
+            onClick={() =>
+              trackFallbackPhoneLead('contact_form_turnstile_fallback_call', {
+                target_number: PRIMARY_PHONE_TEL,
+              })
+            }
           >
             <Phone className="h-4 w-4" />
             Call/Text {PRIMARY_PHONE_DISPLAY}

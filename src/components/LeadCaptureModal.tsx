@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { X, Phone, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
-import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
+import { trackCtaClick, trackFallbackPhoneLead, trackLeadSubmitted } from '../lib/analytics';
 import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/phone';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import TurnstileWidget from './TurnstileWidget';
@@ -445,6 +445,11 @@ export default function LeadCaptureModal({ isOpen, onClose, trigger, checkpointI
               <a
                 href={`tel:${PRIMARY_PHONE_TEL}`}
                 className="mt-2 inline-flex items-center gap-2 font-semibold text-brand-mangoText hover:text-brand-leaf"
+                onClick={() =>
+                  trackFallbackPhoneLead('lead_modal_turnstile_fallback_call', {
+                    target_number: PRIMARY_PHONE_TEL,
+                  })
+                }
               >
                 <Phone className="h-4 w-4" />
                 Call/Text {PRIMARY_PHONE_DISPLAY}

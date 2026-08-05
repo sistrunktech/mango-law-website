@@ -2,21 +2,28 @@
 
 import { useEffect, useState } from 'react';
 import { Loader2, Phone } from 'lucide-react';
-import { checkSupabaseAvailability } from '../lib/supabaseClient';
+import { checkLeadBackendAvailability } from '../lib/supabaseClient';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
-import { trackCtaClick } from '../lib/analytics';
+import { trackFallbackPhoneLead } from '../lib/analytics';
 
 export type LeadBackendAvailability = 'checking' | 'available' | 'unavailable';
 
 let availabilityPromise: Promise<LeadBackendAvailability> | null = null;
+let availableUntil = 0;
+const AVAILABILITY_CACHE_MS = 30_000;
 
 function resolveLeadBackendAvailability(): Promise<LeadBackendAvailability> {
+  if (Date.now() < availableUntil) return Promise.resolve('available');
+
   if (!availabilityPromise) {
     availabilityPromise = (async () => {
-      const firstPass = await checkSupabaseAvailability();
-      const available = firstPass || (await checkSupabaseAvailability());
+      const firstPass = await checkLeadBackendAvailability();
+      const available = firstPass || (await checkLeadBackendAvailability());
+      if (available) availableUntil = Date.now() + AVAILABILITY_CACHE_MS;
       return available ? 'available' : 'unavailable';
-    })();
+    })().finally(() => {
+      availabilityPromise = null;
+    });
   }
 
   return availabilityPromise;
@@ -27,13 +34,27 @@ export function useLeadBackendAvailability(): LeadBackendAvailability {
 
   useEffect(() => {
     let active = true;
+    let retryTimer: number | undefined;
+    let hasRetried = false;
 
-    void resolveLeadBackendAvailability().then((result) => {
-      if (active) setAvailability(result);
-    });
+    const checkAvailability = () => {
+      void resolveLeadBackendAvailability().then((result) => {
+        if (!active) return;
+        setAvailability(result);
+        if (result === 'unavailable' && !hasRetried) {
+          hasRetried = true;
+          retryTimer = window.setTimeout(checkAvailability, 5_000);
+        }
+      });
+    };
+
+    checkAvailability();
+    window.addEventListener('online', checkAvailability);
 
     return () => {
       active = false;
+      if (retryTimer) window.clearTimeout(retryTimer);
+      window.removeEventListener('online', checkAvailability);
     };
   }, []);
 
@@ -71,7 +92,11 @@ export default function LeadBackendFallback() {
         href={`tel:${PRIMARY_PHONE_TEL}`}
         className="btn btn-primary mt-5 inline-flex w-full items-center justify-center gap-2 py-3"
         data-cta="lead_backend_fallback_call"
-        onClick={() => trackCtaClick('lead_backend_fallback_call', { target_number: PRIMARY_PHONE_TEL })}
+        onClick={() =>
+          trackFallbackPhoneLead('lead_backend_fallback_call', {
+            target_number: PRIMARY_PHONE_TEL,
+          })
+        }
       >
         <Phone className="h-4 w-4" />
         Call/Text {PRIMARY_PHONE_DISPLAY}

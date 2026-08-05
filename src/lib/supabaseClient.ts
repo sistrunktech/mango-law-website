@@ -28,10 +28,10 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
 
-type HealthFetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+type AvailabilityFetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 
-export async function checkSupabaseAvailability(
-  fetchImpl: HealthFetch = fetch,
+export async function checkLeadBackendAvailability(
+  fetchImpl: AvailabilityFetch = fetch,
   timeoutMs = 2_000
 ): Promise<boolean> {
   if (!supabaseUrl || !supabaseAnonKey) return false;
@@ -40,9 +40,13 @@ export async function checkSupabaseAvailability(
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    const response = await fetchImpl(`${supabaseUrl}/auth/v1/health`, {
+    const response = await fetchImpl(`${supabaseUrl}/functions/v1/submit-contact`, {
+      method: 'OPTIONS',
       cache: 'no-store',
-      headers: { apikey: supabaseAnonKey },
+      headers: {
+        Authorization: `Bearer ${supabaseAnonKey}`,
+        apikey: supabaseAnonKey,
+      },
       signal: controller.signal,
     });
     return response.ok;
