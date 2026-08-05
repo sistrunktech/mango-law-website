@@ -271,6 +271,7 @@ async function upsertCuratedCheckpoint(
     status: determineStatus(seed.startDate, seed.endDate),
     source_url: stripUrlHash(seed.sourceUrl),
     source_name: seed.sourceName,
+    is_verified: true,
     description: seed.rawText || null,
     updated_at: new Date().toISOString(),
     geocoding_confidence: geocoded?.confidence || 'none',
@@ -465,6 +466,7 @@ Deno.serve(async (req: Request) => {
           status: determineStatus(raw.startDate, raw.endDate),
           source_url: raw.sourceUrl,
           source_name: 'OVICheckpoint.com',
+          is_verified: false,
           description: raw.description || null,
           updated_at: new Date().toISOString(),
           geocoding_confidence: geocoded?.confidence || 'none',
@@ -493,6 +495,7 @@ Deno.serve(async (req: Request) => {
                   ...checkpointData,
                   source_name: hasCuratedSourceName ? existingSourceName : checkpointData.source_name,
                   source_url: hasCuratedSourceUrl ? existingSourceUrl : checkpointData.source_url,
+                  is_verified: match.row?.is_verified === true,
                 }
               : checkpointData;
 

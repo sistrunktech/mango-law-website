@@ -1,3 +1,5 @@
+import { hasOhioOviCheckpointIntent } from '../_shared/checkpoint-relevance.ts';
+
 export interface SearchOrganicResult {
   title?: string;
   link?: string;
@@ -16,25 +18,6 @@ export interface SearchAnnouncementCandidate {
 
 const SEARCH_LOCATION = 'Columbus, Ohio, United States';
 const SEARCH_QUERIES = ['ovi checkpoints ohio', 'dui checkpoint ohio', 'sobriety checkpoint ohio', 'site:reddit.com ovi checkpoint ohio', 'site:facebook.com ovi checkpoint ohio'];
-const CHECKPOINT_NEEDLES = ['ovi checkpoint', 'dui checkpoint', 'sobriety checkpoint', 'traffic safety checkpoint', 'checkpoint tonight', 'checkpoint friday', 'checkpoint saturday', 'checkpoint sunday'];
-const NOISE_NEEDLES = [
-  'stopdrinking',
-  'sobriety journey',
-  'addiction recovery',
-  'sober living',
-  'aa meeting',
-  'rehab',
-  'alcoholic',
-  'pennsylvania',
-  'psp ',
-  'california',
-  'chula vista',
-  'sacramento',
-  'stockton',
-  'barstow',
-  'somerset',
-];
-
 function canonicalizeUrl(input: string): string {
   try {
     const url = new URL(input);
@@ -78,9 +61,12 @@ export function collectCheckpointSearchCandidates(
     const url = canonicalizeUrl(result.link);
     if (!url || seenUrls.has(url)) continue;
 
-    const combined = `${result.title}\n${result.snippet || ''}\n${url}`.toLowerCase();
-    if (!CHECKPOINT_NEEDLES.some((needle) => combined.includes(needle))) continue;
-    if (NOISE_NEEDLES.some((needle) => combined.includes(needle))) continue;
+    if (!hasOhioOviCheckpointIntent({
+      title: result.title,
+      rawText: result.snippet,
+      sourceName: getSourceName(url),
+      sourceUrl: url,
+    })) continue;
 
     seenUrls.add(url);
     out.push({ title: result.title, url, summary: result.snippet?.trim() || null, sourceName: getSourceName(url), query, publishedAt: toPublishedAt(result.date) });
