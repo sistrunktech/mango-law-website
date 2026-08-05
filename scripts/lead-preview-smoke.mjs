@@ -33,10 +33,16 @@ function isVercelLogin(value) {
 
 function isAnalyticsCollection(value) {
   const url = new URL(value);
-  return url.hostname === 'analytics.ahrefs.com' ||
+  return (url.origin === targetUrl.origin && /^\/zvxt\/(?:gs\/ccm\/collect|ga\/g\/c)$/i.test(url.pathname)) ||
+    url.hostname === 'analytics.ahrefs.com' ||
     ((/(^|\.)google-analytics\.com$/i.test(url.hostname) ||
       /(^|\.)googletagmanager\.com$/i.test(url.hostname) ||
       url.hostname === 'www.google.com') && /\/(?:g\/|j\/)?collect(?:\/|$)/i.test(url.pathname));
+}
+
+function isCloudflareChallenge(value) {
+  const url = new URL(value);
+  return url.origin === targetUrl.origin && url.pathname.startsWith('/cdn-cgi/challenge-platform/');
 }
 
 async function fillAndSubmit(page, pathname, formSelector, fields, checkpointId) {
@@ -121,7 +127,7 @@ try {
       }
       return void request.abort('blockedbyclient');
     }
-    if (isAnalyticsCollection(url)) {
+    if (isAnalyticsCollection(url) || isCloudflareChallenge(url)) {
       blockedTelemetry.push({ method, url: describeLocation(url) });
       return void request.abort('blockedbyclient');
     }

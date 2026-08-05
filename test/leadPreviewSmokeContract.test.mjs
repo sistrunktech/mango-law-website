@@ -9,6 +9,8 @@ assert.match(source, /method === 'OPTIONS'/);
 assert.match(source, /method === 'POST'/);
 assert.match(source, /request\.abort\('blockedbyclient'\)/);
 assert.match(source, /isAnalyticsCollection[\s\S]*blockedTelemetry/);
+assert.match(source, /\/zvxt\\\/\(\?:gs\\\/ccm\\\/collect\|ga\\\/g\\\/c\)/);
+assert.match(source, /isCloudflareChallenge[\s\S]*\/cdn-cgi\/challenge-platform\//);
 assert.match(source, /requestUrl\.origin === targetUrl\.origin/);
 assert.match(source, /Vercel login redirect detected/);
 assert.match(source, /__leadSmokePassTurnstile/);
