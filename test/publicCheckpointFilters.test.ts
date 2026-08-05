@@ -60,6 +60,19 @@ assert.equal(
   }),
   false,
 );
+assert.equal(
+  isPublicCheckpointRow({
+    ...sourcedNewsRow,
+    title: 'Oakland County DUI checkpoint announced for Friday',
+    description: 'Michigan authorities announced a checkpoint near Detroit.',
+    location_address: 'Undisclosed',
+    location_city: 'Detroit',
+    location_county: 'Oakland',
+    source_name: 'Michigan local news',
+    source_url: 'https://localnews.example/michigan-checkpoint',
+  }),
+  false,
+);
 
 assert.deepEqual(
   filterPublicCheckpointRows([
