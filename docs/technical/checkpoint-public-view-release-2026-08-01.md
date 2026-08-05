@@ -10,6 +10,7 @@ Internal only. This is not proof that the migration or Edge function is live.
 - All three July aggregator rows remain in the admin/base table and remain hidden publicly.
 - The SQL public boundary intentionally accepts DNS hostnames on default HTTP/S ports only. This is stricter than the application URL parser and avoids malformed or authority-obscured source URLs reaching anonymous REST reads.
 - Deployed `checkpoint-scraper` revision 57 is active but predates the staged shared relevance code. The August 4 8:17 p.m. EDT run succeeded in 31.8s with 353 found, 355 updated, and zero errors.
+- Repository and linked production migration history now pair through May 20; `supabase db push --dry-run --linked` reports only `20260801023000_harden_public_checkpoint_read_views.sql` pending.
 
 ## Release order
 
@@ -26,7 +27,7 @@ Internal only. This is not proof that the migration or Edge function is live.
 - Roll back the application or Edge version independently while leaving the narrowed views in place; the view column contract is unchanged.
 - Never restore the former 513/198 anonymous surface as a routine rollback.
 - If the view predicate itself is proven unsafe, replace each public view with the same explicit column list and `WHERE FALSE`, preserve the grants, and serve the application's honest no-data state while correcting the predicate. This containment rollback favors privacy/relevance over stale or contaminated data.
-- Authenticated sessions retain the existing base-table read path used by the current admin UI. The present schema treats any authenticated account as an admin; tightening that separate authorization model needs its own tested release and must not be implied by this anonymous-surface change.
+- Authenticated base-table reads remain limited by the recovered active-admin RLS predicate (`public.is_admin_user()`); verify one authorized admin read separately. This migration changes the anonymous curation boundary, not admin authorization.
 
 Containment SQL, to use only if the new predicate itself is unsafe:
 
