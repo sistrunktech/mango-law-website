@@ -1,28 +1,38 @@
-# Checkpoint public-view release gate — 2026-08-01
+# Checkpoint public-view release gate — updated 2026-08-04
 
-Internal only. This is not approval to run the migration or deploy code.
+Internal only. This is not proof that the migration or Edge function is live.
 
 ## Read-only preflight
 
-- Current public views: 513 checkpoint rows and 196 announcement rows.
-- Staged view migration: 56 checkpoint rows and 59 announcement rows before the application relevance predicate.
-- Staged application predicate: 56 checkpoint rows and 56 announcements at the August 1 cutoff.
+- August 4 base tables: 513 checkpoint rows and 198 announcement rows.
+- Staged view predicate: 56 checkpoint rows and 56 direct, relevant announcement rows using the same public fields the application receives.
+- Staged application surface: 56 checkpoint rows and 56 announcements at the same cutoff.
 - All three July aggregator rows remain in the admin/base table and remain hidden publicly.
-- One generic Super Bowl enforcement row and one unverified syndicated Brunswick row remain available for review but are not promoted.
+- The SQL public boundary intentionally accepts DNS hostnames on default HTTP/S ports only. This is stricter than the application URL parser and avoids malformed or authority-obscured source URLs reaching anonymous REST reads.
+- Deployed `checkpoint-scraper` revision 57 is active but predates the staged shared relevance code. The August 4 8:17 p.m. EDT run succeeded in 31.8s with 353 found, 355 updated, and zero errors.
 
 ## Release order
 
-1. Record current view counts and definitions in the Supabase dashboard.
-2. Verify the deployed Edge revision and latest completed scraper log.
-3. Apply `20260801023000_harden_public_checkpoint_read_views.sql` only after Tim approves the production migration.
-4. Verify anonymous counts, checkpoint page list/map/hotspots/latest cards, and `Latest source check`.
-5. Deploy the staged application commits only under their separate deployment approval.
+1. Record current base/view counts, definitions, Edge revision, and latest completed scraper log.
+2. Merge the shared ingestion predicate, then the application filter, then this migration; keep each PR below the repository size limit.
+3. Apply `20260801023000_harden_public_checkpoint_read_views.sql` from clean `origin/main`.
+4. With the public anon key, prove base-table reads are denied and both public views exclude cancelled, TSA, airport, PreCheck, generic-safety, rideshare, aggregator, and non-Ohio fixtures.
+5. Verify anonymous counts, page list/map/hotspots/latest cards, and the feed-derived `Latest source check` value.
+6. Deploy `checkpoint-scraper` from the same reviewed source, verify its new revision and one completed scheduled/manual run, then rebuild/promote the Cloudflare application candidate.
+7. Keep the three July rows hidden. If a direct agency/news source is later found, correct and verify their Eastern timestamps before promotion.
 
-## Rollback SQL
+## Safe rollback
 
-Use only if the post-migration anonymous surface or application smoke test fails.
+- Roll back the application or Edge version independently while leaving the narrowed views in place; the view column contract is unchanged.
+- Never restore the former 513/198 anonymous surface as a routine rollback.
+- If the view predicate itself is proven unsafe, replace each public view with the same explicit column list and `WHERE FALSE`, preserve the grants, and serve the application's honest no-data state while correcting the predicate. This containment rollback favors privacy/relevance over stale or contaminated data.
+- Authenticated sessions retain the existing base-table read path used by the current admin UI. The present schema treats any authenticated account as an admin; tightening that separate authorization model needs its own tested release and must not be implied by this anonymous-surface change.
+
+Containment SQL, to use only if the new predicate itself is unsafe:
 
 ```sql
+BEGIN;
+
 CREATE OR REPLACE VIEW public.public_dui_checkpoints AS
 SELECT
   id, title, location_address, location_city, location_county,
@@ -30,7 +40,7 @@ SELECT
   source_url, source_name, description, created_at, updated_at,
   is_verified, views_count, announcement_date, geocoding_confidence
 FROM public.dui_checkpoints
-WHERE source_url IS NOT NULL;
+WHERE FALSE;
 
 CREATE OR REPLACE VIEW public.public_dui_checkpoint_announcements AS
 SELECT
@@ -39,12 +49,24 @@ SELECT
   status, linked_checkpoint_id, last_checked_at,
   NULL::text AS raw_text, created_at, updated_at
 FROM public.dui_checkpoint_announcements
-WHERE source_url IS NOT NULL;
+WHERE FALSE;
 
 REVOKE ALL ON public.dui_checkpoints FROM anon;
 REVOKE ALL ON public.dui_checkpoint_announcements FROM anon;
+REVOKE ALL ON public.public_dui_checkpoints FROM anon, authenticated;
+REVOKE ALL ON public.public_dui_checkpoint_announcements FROM anon, authenticated;
 GRANT SELECT ON public.public_dui_checkpoints TO anon, authenticated;
 GRANT SELECT ON public.public_dui_checkpoint_announcements TO anon, authenticated;
+
+COMMIT;
 ```
 
-After rollback, confirm counts return to 513 and 196 at the same data cutoff, then keep the application deployment blocked pending review.
+After containment, verify both public views return zero rows with the anon key and both base-table requests remain denied. Do not treat an authenticated session as an anonymous-boundary test.
+
+## Done evidence
+
+- Migration row exists in production migration history.
+- Anonymous base reads fail; anonymous view reads return only the reviewed surface.
+- Edge revision differs from 57 and the completed run has zero errors.
+- Public list, 56-marker map, hotspots, latest announcement, and source-check timestamp pass without TSA/cancelled/aggregator noise.
+- Rollback Worker version, prior Edge revision, and containment SQL are recorded before release.

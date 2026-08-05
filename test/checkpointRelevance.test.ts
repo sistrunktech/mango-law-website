@@ -29,6 +29,30 @@ assert.equal(
   false,
 );
 
+assert.equal(
+  hasOhioOviCheckpointIntent({
+    title: 'DUI checkpoint announced for Friday',
+    locationCounty: 'Franklin',
+  }),
+  true,
+);
+
+assert.equal(
+  hasOhioOviCheckpointIntent({
+    title: 'DUI checkpoint announced for Friday',
+    rawText: 'Lake County, Indiana',
+    locationCounty: 'Lake',
+  }),
+  false,
+);
+
+assert.equal(
+  hasOhioOviCheckpointIntent({
+    title: 'Ohio impaired\ndriving checkpoint announced',
+  }),
+  true,
+);
+
 for (const title of [
   'TSA expands PreCheck airport checkpoints in Ohio',
   'Free Lyft rides offered during Ohio safety campaign',
@@ -45,5 +69,7 @@ for (const title of [
 assert.equal(isDirectCheckpointSource('FOX8 Cleveland', 'https://fox8.com/news/checkpoint'), true);
 assert.equal(isDirectCheckpointSource('OVICheckpoint.com', 'https://example.com/redirect'), false);
 assert.equal(isDirectCheckpointSource('Local source', 'https://duiblock.com/ohio'), false);
+assert.equal(isDirectCheckpointSource('Local source', 'https://example.org@reddit.com/a'), false);
+assert.equal(isDirectCheckpointSource('Local source', 'not-a-url'), false);
 assert.equal(isDirectCheckpointSource('Google News', 'https://localnews.example/checkpoint'), false);
 assert.equal(isDirectCheckpointSource('Local source', null), false);
