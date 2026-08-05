@@ -19,3 +19,4 @@ await import('./emailTemplates.test.ts');
 await import('./seoRoutingContent.test.ts');
 await import('./blogDiscoveryPillarAssociations.test.ts');
 await import('./uiAccessibilityContracts.test.mjs');
+await import('./leadPreviewSmokeContract.test.mjs');
