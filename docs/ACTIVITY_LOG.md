@@ -186,3 +186,9 @@ Category: DUI Checkpoints / Search Discovery
 Summary: Added a Google-style search discovery layer to the checkpoint scraper so localized Ohio search results can feed fresh Reddit, Facebook, and newsroom checkpoint candidates into the pending-announcements table instead of relying only on direct RSS/newsroom feeds.
 Files: supabase/functions/checkpoint-scraper/index.ts; supabase/functions/checkpoint-scraper/search-discovery.ts; test/checkpointSearchDiscovery.test.ts; test/run-tests.mjs; docs/OPERATIONS.md
 Notes: The new discovery pass uses the existing `SERPER_API_KEY` integration with a Columbus, Ohio location bias and keeps results in `pending_details` unless stronger source confirmation exists, so search/social breadth improves without promoting unverified noise onto the public checkpoint map.
+
+Date/time: 2026-08-04 21:23 EDT
+Category: Production Release / Checkpoint Map + Lead Safety
+Summary: Re-established `origin/main` as the production source, made the Cloudflare/OpenNext Worker build reproducible, promoted the reviewed candidate to both production custom domains, restored the interactive DUI checkpoint map, and completed zero-write plus one-canary lead-path verification.
+Files: wrangler.jsonc; open-next.config.ts; public/_headers; scripts/checkpoint-map-smoke.mjs; scripts/lead-preview-smoke.mjs; src/components/CheckpointMap.tsx; src/components/ContactForm.tsx; docs/OPERATIONS.md; docs/technical/MANGO_LAW_AUGUST_EXECUTION_BOARD_2026-08-05.md
+Notes: Worker version `1ee23e0a-bf32-47ca-9fd3-42ef72882df8` is live through deployment `a909eee8-cc9f-4eca-8600-660db7ae6186`. Production map smoke passed with 56 recent-history markers and a feed-derived August 4 refresh. The controlled contact canary created exactly one row (6→7), sent one admin notice to `office@mango.law` and one confirmation to Tim's QA alias, used no phone number, and was not retried. TSA/noise curation and deployed scraper revision verification remain open.

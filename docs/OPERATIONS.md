@@ -9,27 +9,19 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - CI: GitHub Actions build workflow (`.github/workflows/ci.yml`).
 - Legacy (Vite-only): OG/hero pipeline via `plugins/vite-og-plugin.ts` (deprecated during Next migration).
 
-## Hosting (Cloudflare Pages + Bolt Legacy)
-### Cloudflare Pages (target)
-- Deploy the Next.js build to Cloudflare Pages for SSR/SSG support.
-- Build command: `npm run build && npx @cloudflare/next-on-pages` (recommended for Pages).
-- Build output directory: `.vercel/output`.
-- Supabase Edge Functions + DB migrations are still deployed separately via Supabase CLI/Dashboard.
+## Hosting (Cloudflare Workers + OpenNext)
+- Production `mango.law` and `www.mango.law` are custom domains on Cloudflare Worker `mango-law-preview`.
+- The Worker entrypoint is `.open-next/worker.js`; static assets use the `ASSETS` binding with asset-first routing.
+- Reproducible configuration lives in `wrangler.jsonc` and `open-next.config.ts`. The adapter and Wrangler versions are pinned in `package.json`.
+- Build with `npm run build:cloudflare`; use `wrangler versions upload` for an immutable preview candidate and `wrangler versions deploy <version>@100%` only after the candidate passes QA.
+- Supabase Edge Functions and database migrations are separate release surfaces; a Worker deployment does not deploy either one.
+- Vercel previews may still run for pull requests, but Vercel does not serve the production custom domains and is not production proof.
 
-### Bolt (legacy during migration)
-- Bolt remains live until cutover; treat it as a legacy deploy target.
-- Bolt deploys the **frontend** only (previously Vite build output). It does **not** deploy Supabase Edge Functions or DB migrations.
-
-### Deploy verification (important)
-- The live site may be served via a CDN edge layer; if you don’t see recent changes, assume the **frontend deploy is stale** until proven otherwise.
-- Quick check: View Source on `https://mango.law` and confirm that HTML reflects the latest build metadata/scripts.
-
-### Cutover checklist (Next.js → Cloudflare Pages)
-- Merge order: `codex/nextjs-migration` → `codex/docs-nextjs-alignment` → `codex/lint-cleanup` → `codex/next-image-migration`.
-- Ensure Pages env vars match `.env.example` (all `NEXT_PUBLIC_*`, plus server-only keys for Edge Functions).
-- Configure Pages build to use Node 20, then run the build command above and verify no build errors.
-- Update DNS (Cloudflare): swap `@` + `www` from Bolt to the Pages target only after CI and a preview deploy are green.
-- Validate `/admin/*` routes, `/blog/:slug`, and `/resources/dui-checkpoints` on the new deployment before disabling Bolt.
+### Production release provenance
+- Release only from a clean worktree at an exact reviewed `origin/main` commit. Record the source SHA, Worker version ID, deployment ID, preview alias, rollback version, and live smoke results.
+- Compare the candidate's compatibility date, flags, bindings, asset-first setting, and custom-domain behavior with the current Worker before promotion. Adding R2, Images, Durable Objects, services, routes, or other billed resources requires separate approval.
+- Validate apex, `www`, HTTP→HTTPS, TLS, canonical URLs, robots, sitemap, representative money/blog routes, the checkpoint map, and lead safety before promotion.
+- A merge to `main` is not a production deploy. A successful Worker promotion plus live-domain verification is the production proof.
 
 ## Environment Variables
 - Client-exposed (`NEXT_PUBLIC_`): `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`, `NEXT_PUBLIC_MAPBOX_STYLE_URL` (optional).
@@ -58,7 +50,7 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
   - `chat-intake`: Similar pattern for chat leads with conversation context support. Rate limited to 20 req/min per IP. Includes optional SMS notifications via email-to-SMS gateways.
 - **Bot protection** (optional): If `TURNSTILE_SECRET_KEY` is set, `submit-contact`, `submit-lead`, and `chat-intake` require a valid Turnstile token (`turnstile_token`).
   - Client-side site key: the app uses `NEXT_PUBLIC_TURNSTILE_SITE_KEY` when present, otherwise falls back to the default site key in `src/lib/turnstile.ts`.
-  - If you rotate Turnstile keys, update the Cloudflare/Bolt env var and the fallback constant (or remove/adjust the fallback).
+  - If you rotate Turnstile keys, update the Cloudflare build environment and the fallback constant (or remove/adjust the fallback).
 - **Email templates** (shared): `submit-contact`, `submit-lead`, and `chat-intake` generate email HTML via `supabase/functions/_shared/email/*`.
   - Theme/season toggles: `APP_THEME` (`dark|light`), `APP_SEASON` (`spring|summer|fall|winter`), `APP_HOLIDAY` (`true|false`).
   - Host links: `FRONTEND_URL` (fallback: `NEXT_PUBLIC_SITE_URL`, then `https://mango.law`).
@@ -83,7 +75,7 @@ Project ref (prod): `rgucewewminsevbjgcad`
   - `supabase db push`
 
 ## Turnstile Setup (Recommended)
-- Create a Cloudflare Turnstile widget for the hostnames you will test on (at minimum `mango.law`; add `staging.mango.law` / Bolt preview hostnames as needed).
+- Create a Cloudflare Turnstile widget for every hostname used for real submissions (at minimum `mango.law`; add approved preview hostnames only when needed).
 - Client env: set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (preferred for rotation and multi-environment setups). If it’s missing, the app uses a default fallback site key from `src/lib/turnstile.ts`.
 - Supabase Edge Function secrets (server): set `TURNSTILE_SECRET_KEY`.
 - UI placement: the Turnstile widget is rendered *below the submit button* and aligned with the confidentiality/security disclaimer so it stays out of the main form flow.
@@ -141,16 +133,22 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - Build-only workflow in `.github/workflows/ci.yml` (Node 20, npm ci, npm run build).
 - `npm run build` runs a preflight filename check (`scripts/check-filenames.mjs`) to prevent publish failures caused by unsupported filename characters.
 - Next.js route group names under `src/app` use `()` and `[]`; the filename check allows those characters only within `src/app`.
-- Bundle analysis (`npm run analyze`) uses a dynamic import of `rollup-plugin-visualizer` so Bolt publish/build environments without dev dependencies don’t fail.
-- **Staging/Prod Deploy**: Staging deploys are automated via Bolt/Netlify on non-main branches. Production deploys to `https://mango.law` occur on merges to `main`. Database migrations must be pushed manually via `supabase db push` before cutover.
+- Pull requests must pass build, lint, test, and policy checks through the merge queue.
+- Production frontend deployment is a manual Cloudflare Worker release from clean `origin/main`; it is not implied by CI, a Vercel preview, or a merged PR.
+- Database migrations and Supabase Edge Functions remain explicit manual deployments with their own rollback and verification steps.
 
 ## Domains/DNS
-- Registrar: Porkbun. Current records (as of 2025-12-06):
-  - `ALIAS @ -> site-dns.bolt.host` (TTL 600)
-  - `CNAME www -> site-dns.bolt.host` (TTL 600)
-  - `CNAME staging -> site-dns.bolt.host` (TTL 300)
-  - ACME TXT records managed by Bolt for SSL issuance.
+- Cloudflare Worker custom domains currently route both `mango.law` and `www.mango.law` to `mango-law-preview`.
+- The old December 2025 Bolt DNS notes are historical and must not be used for release decisions.
+- Reconcile DNS in Cloudflare without changing healthy apex/`www`/TLS routing unless the exact intended change and rollback are approved.
 - Ensure `ORIGIN_ALLOWLIST` includes `https://mango.law` and `https://staging.mango.law` when staging is live.
+
+## Production user-path release gates
+- Run `npm run checkpoint-map:smoke -- https://mango.law` after every frontend release that can affect the checkpoint page, Mapbox, CSP, caching, or shared layout/runtime code.
+- Run `npm run lead:preview-smoke -- <candidate-or-live-url>` before promotion. This harness must intercept all synthetic lead writes and fail on any unknown POST; it must never reach Supabase, email, SMS, or analytics collectors.
+- For releases that can affect forms, Turnstile, Supabase calls, recipients, email templates, CTA tracking, consent, or shared runtime code, run one controlled production `/contact` canary after promotion. Do not use chat or modal canaries, do not enter a phone number, and never retry a submitted canary.
+- The canary is complete only when one click yields one success UI state, exactly one new database row, the admin notice, the lead confirmation, and the expected single lead-event contract. Record recipient proof without exposing secrets or real-client data.
+- If the submission outcome is uncertain, stop. Investigate the existing attempt; never submit another test merely to obtain cleaner evidence.
 
 ## DUI Checkpoint Map System
 - **Interactive Map**: Mapbox GL map (`CheckpointMap.tsx`) displays checkpoint locations with status-based colored markers (active=red, upcoming=orange, completed=green, cancelled=gray).
@@ -163,6 +161,8 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - **Geocoding**: Mapbox Geocoding API with aggressive caching strategy to minimize API calls. Cache tracks hit counts and confidence levels.
 - **Required secrets**: The scraper needs a valid Mapbox token in Supabase Edge Function secrets (`MAPBOX_PUBLIC_TOKEN` or `NEXT_PUBLIC_MAPBOX_PUBLIC_TOKEN`). If missing/invalid, checkpoints will be inserted without `latitude/longitude` and the map will show few/no markers.
 - **Scraper Schedule**: Runs every 4 hours via pg_cron. Manual trigger available in admin dashboard.
+- **Public relevance rule**: cancelled and non-OVI noise (including TSA/airport/PreCheck, generic safety campaigns, and rideshare promotions) must not appear as the latest announcement or in checkpoint snapshots. Aggregator-only rows stay hidden until upgraded with a direct agency/news source.
+- **Freshness proof**: the public `Last refreshed` value must be feed-derived. A rendering pass does not prove the scheduled Edge function is current; verify the deployed Edge revision and privileged scraper logs separately.
 - **One-time data repair (OVICheckpoint history)**: If historical checkpoint dates were corrupted by an earlier scraper regression, use `scripts/backfill-ovicheckpoint-dates.ts`:
   - Dry-run: `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts`
   - Apply (safe insert only): `npx ts-node --esm scripts/backfill-ovicheckpoint-dates.ts --mode upsert --apply`
