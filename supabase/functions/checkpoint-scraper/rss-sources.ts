@@ -2,7 +2,7 @@ import { parseCsv } from './csv.ts';
 import { RSS_SOURCES_MASTER_CSV } from './rss-sources-master.csv.ts';
 import { CHECKPOINT_RSS_SOURCES_CSV } from './checkpoint-rss-sources.csv.ts';
 
-// These endpoints were returning 404/DNS failures during the 2026-03-26 live refresh.
+// These endpoints returned 404/DNS failures during live refresh verification.
 // Keep them out of active scraping until a verified replacement URL is identified.
 const TEMP_DISABLED_RSS_URLS = new Set([
   'http://www.10tv.com/mobile/news/all.xml',
@@ -17,6 +17,7 @@ const TEMP_DISABLED_RSS_URLS = new Set([
   'https://rssfeeds.wkyc.com/wkyc/news',
   'https://www.wlwt.com/-/9838586/9838828/-/format/rss_2.0/view/asFeed/-/68f33gz/-/index.xml',
   'https://abc6onyourside.com/resources/rss',
+  'https://feeds.feedblitz.com/wtol/news',
   'https://www.13abc.com/feeds/rss/',
 ]);
 

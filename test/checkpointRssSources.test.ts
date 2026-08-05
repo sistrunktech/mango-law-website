@@ -8,6 +8,11 @@ async function run() {
     sources.some((source) => source.sourceName === 'Google News Ohio Checkpoints'),
     'expected statewide Google News checkpoint source to be loaded'
   );
+  assert.equal(
+    sources.some((source) => source.sourceName === 'WTOL Toledo'),
+    false,
+    'dead WTOL FeedBlitz source must stay disabled until a replacement is verified'
+  );
 
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async () =>
