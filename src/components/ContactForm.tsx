@@ -3,12 +3,16 @@
 import { FormEvent, useState } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
-import { trackLeadSubmitted } from '../lib/analytics';
+import { trackFallbackPhoneLead, trackLeadSubmitted } from '../lib/analytics';
 import { normalizePhoneDigits } from '../lib/phone';
 import TurnstileWidget from './TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
+import LeadBackendFallback, {
+  LeadBackendChecking,
+  useLeadBackendAvailability,
+} from './LeadBackendFallback';
 
 interface ContactFormProps {
   variant?: 'default' | 'compact';
@@ -33,6 +37,7 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [howFound, setHowFound] = useState('');
   const turnstileSiteKey = TURNSTILE_SITE_KEY;
+  const backendAvailability = useLeadBackendAvailability();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -114,6 +119,14 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
         </button>
       </div>
     );
+  }
+
+  if (backendAvailability === 'checking') {
+    return <LeadBackendChecking />;
+  }
+
+  if (backendAvailability === 'unavailable') {
+    return <LeadBackendFallback />;
   }
 
   return (
@@ -312,6 +325,11 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
           <a
             href={`tel:${PRIMARY_PHONE_TEL}`}
             className="mt-2 inline-flex items-center gap-2 font-semibold text-brand-mangoText hover:text-brand-leaf"
+            onClick={() =>
+              trackFallbackPhoneLead('contact_form_turnstile_fallback_call', {
+                target_number: PRIMARY_PHONE_TEL,
+              })
+            }
           >
             <Phone className="h-4 w-4" />
             Call/Text {PRIMARY_PHONE_DISPLAY}

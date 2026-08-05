@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 
 import {
   extractGa4MeasurementIdFromScripts,
+  hasGtmContainerScript,
   hasGrantedAnalyticsConsent,
+  trackFallbackPhoneLead,
   trackLeadSubmitted,
 } from '../src/lib/analytics.ts';
 
@@ -24,6 +26,8 @@ assert.equal(
 assert.equal(hasGrantedAnalyticsConsent({ analytics_storage: 'granted' }), true);
 assert.equal(hasGrantedAnalyticsConsent({ analytics_storage: 'denied' }), false);
 assert.equal(hasGrantedAnalyticsConsent(null), false);
+assert.equal(hasGtmContainerScript(['https://www.googletagmanager.com/gtm.js?id=GTM-WLJQZKB5']), true);
+assert.equal(hasGtmContainerScript(['https://www.googletagmanager.com/gtag/js?id=G-NJZD79GGFG']), false);
 
 const originalWindow = globalThis.window;
 const originalDocument = globalThis.document;
@@ -93,6 +97,26 @@ try {
     checkpoint_id: 'chat_widget',
     source: 'chat_widget',
   });
+
+  globalThis.document = {
+    scripts: [
+      { src: 'https://www.googletagmanager.com/gtm.js?id=GTM-WLJQZKB5' },
+      { src: 'https://www.googletagmanager.com/gtag/js?id=G-NJZD79GGFG' },
+    ],
+  } as typeof globalThis.document;
+  const gtagCallCount = gtagCalls.length;
+  const dataLayerCount = dataLayer.length;
+  trackFallbackPhoneLead('lead_backend_fallback_call', {
+    target_number: '4191234567',
+  });
+
+  assert.equal(dataLayer.length, dataLayerCount + 2);
+  assert.equal(dataLayer.slice(dataLayerCount).filter((event) => event.event === 'lead_submitted').length, 1);
+  assert.equal(dataLayer.at(-2)?.event, 'cta_click');
+  assert.equal(dataLayer.at(-2)?.cta, 'lead_backend_fallback_call');
+  assert.equal(dataLayer.at(-1)?.event, 'lead_submitted');
+  assert.equal(dataLayer.at(-1)?.lead_source, 'phone');
+  assert.equal(gtagCalls.length, gtagCallCount);
 } finally {
   globalThis.window = originalWindow;
   globalThis.document = originalDocument;

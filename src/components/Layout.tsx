@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import SiteHeader from './SiteHeader';
 import Footer from './Footer';
@@ -15,27 +15,35 @@ export default function Layout({ children }: { children: ReactNode }) {
   const pathname = usePathname() ?? '';
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalTrigger, setLeadModalTrigger] = useState<LeadSource>('header_cta');
-  const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(false);
+  const [suppressMobileLaunchers, setSuppressMobileLaunchers] = useState(false);
 
   const isCheckpoints = pathname.startsWith('/resources/dui-checkpoints');
-  const chatBottomOffsetClass = (() => {
-    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-36 lg:bottom-6' : 'bottom-24 lg:bottom-6';
-    return isConsentBannerVisible ? 'bottom-28 lg:bottom-6' : 'bottom-6';
-  })();
-  const chatChooserBottomOffsetClass = (() => {
-    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-52 lg:bottom-20' : 'bottom-40 lg:bottom-20';
-    return isConsentBannerVisible ? 'bottom-44 lg:bottom-20' : 'bottom-20';
-  })();
-  const accessibilityBottomOffsetClass = (() => {
-    if (isCheckpoints) return isConsentBannerVisible ? 'bottom-52 lg:bottom-6' : 'bottom-44 lg:bottom-6';
-    return isConsentBannerVisible ? 'bottom-40 lg:bottom-6' : 'bottom-24 lg:bottom-6';
-  })();
+  const launcherBottomOffsetClass = isCheckpoints
+    ? 'bottom-[calc(env(safe-area-inset-bottom)_+_6rem)] lg:bottom-6'
+    : 'bottom-[max(1rem,env(safe-area-inset-bottom))] lg:bottom-6';
+  const chatChooserBottomOffsetClass = isCheckpoints
+    ? 'bottom-[calc(env(safe-area-inset-bottom)_+_9.75rem)] lg:bottom-20'
+    : 'bottom-[calc(max(1rem,env(safe-area-inset-bottom))_+_3.75rem)] lg:bottom-20';
 
   const openLeadModal = (trigger: LeadSource) => {
     setLeadModalTrigger(trigger);
     setIsLeadModalOpen(true);
     trackLeadModalOpen(trigger);
   };
+
+  useEffect(() => {
+    const updateLauncherClearance = () =>
+      setSuppressMobileLaunchers(
+        pathname === '/' && window.innerWidth < 1024 && window.scrollY < 160,
+      );
+    updateLauncherClearance();
+    window.addEventListener('scroll', updateLauncherClearance, { passive: true });
+    window.addEventListener('resize', updateLauncherClearance);
+    return () => {
+      window.removeEventListener('scroll', updateLauncherClearance);
+      window.removeEventListener('resize', updateLauncherClearance);
+    };
+  }, [pathname]);
 
   return (
     <div className="min-h-screen bg-brand-offWhite text-brand-black">
@@ -47,18 +55,21 @@ export default function Layout({ children }: { children: ReactNode }) {
       </a>
       <ScrollToTop />
       <SiteHeader onOpenLeadModal={openLeadModal} />
+      <ConsentBanner />
       <main id="main-content" className="pb-[env(safe-area-inset-bottom)] lg:pb-0">
         {children}
       </main>
       <Footer />
 
-      <ConsentBanner onVisibilityChange={setIsConsentBannerVisible} />
-
-      <AccessibilityLauncher bottomOffsetClass={accessibilityBottomOffsetClass} />
+      <AccessibilityLauncher
+        bottomOffsetClass={launcherBottomOffsetClass}
+        suppressOnMobile={suppressMobileLaunchers}
+      />
       <ChatIntakeLauncher
         onOpenLeadModal={() => openLeadModal('floating_chooser')}
-        bottomOffsetClass={chatBottomOffsetClass}
+        bottomOffsetClass={launcherBottomOffsetClass}
         chooserBottomOffsetClass={chatChooserBottomOffsetClass}
+        suppressOnMobile={suppressMobileLaunchers}
       />
 
       <LeadCaptureModal

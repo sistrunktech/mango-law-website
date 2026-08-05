@@ -9,7 +9,7 @@ import TextInput from './TextInput';
 import PhoneInput from './PhoneInput';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL, SECONDARY_OFFICE_PHONE_DISPLAY } from '../../lib/contactInfo';
 import { supabaseAnonKey, supabaseUrl } from '../../lib/supabaseClient';
-import { trackLeadSubmitted } from '../../lib/analytics';
+import { trackFallbackPhoneLead, trackLeadSubmitted } from '../../lib/analytics';
 import TurnstileWidget from '../TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../../lib/turnstile';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../../lib/intake';
@@ -743,6 +743,11 @@ export default function ConversationWindow({ onClose, bottomOffsetClass = 'botto
                 <a
                   href={`tel:${PRIMARY_PHONE_TEL}`}
                   className="inline-flex items-center gap-2 text-xs font-semibold text-brand-mangoText hover:text-brand-leaf"
+                  onClick={() =>
+                    trackFallbackPhoneLead('chat_turnstile_fallback_call', {
+                      target_number: PRIMARY_PHONE_TEL,
+                    })
+                  }
                 >
                   <Phone size={12} />
                   Form stuck? Call/Text {PRIMARY_PHONE_DISPLAY}

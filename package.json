@@ -12,6 +12,8 @@
     "lint": "ESLINT_USE_FLAT_CONFIG=false eslint src test --ext .js,.jsx,.ts,.tsx --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "TS_NODE_TRANSPILE_ONLY=1 node --experimental-specifier-resolution=node test/run-tests.mjs",
+    "checkpoint-map:smoke": "node scripts/checkpoint-map-smoke.mjs",
+    "lead:preview-smoke": "node scripts/lead-preview-smoke.mjs",
     "seo:smoke": "node scripts/seo-smoke.mjs",
     "seo:smoke:live": "bash scripts/check-indexing-surface.sh",
     "seo:gsc:inspect": "node scripts/gsc-url-inspection-audit.mjs",

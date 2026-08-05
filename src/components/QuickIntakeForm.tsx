@@ -3,12 +3,16 @@
 import { FormEvent, useState } from 'react';
 import { Send, CheckCircle, AlertCircle, Loader2, ChevronDown, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
-import { trackLeadSubmitted } from '../lib/analytics';
+import { trackFallbackPhoneLead, trackLeadSubmitted } from '../lib/analytics';
 import { formatUsPhone, normalizePhoneDigits, isLikelyValidPhone } from '../lib/phone';
 import TurnstileWidget from './TurnstileWidget';
 import { TURNSTILE_SITE_KEY } from '../lib/turnstile';
 import { CASE_TYPE_OPTIONS, COUNTY_OPTIONS, HOW_FOUND_OPTIONS, URGENCY_OPTIONS } from '../lib/intake';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
+import LeadBackendFallback, {
+  LeadBackendChecking,
+  useLeadBackendAvailability,
+} from './LeadBackendFallback';
 
 const inputClasses = [
   'w-full rounded-xl border-2 border-brand-black/10 bg-white px-4 py-3 text-brand-black',
@@ -28,6 +32,7 @@ export default function QuickIntakeForm() {
   const [phone, setPhone] = useState('');
   const [howFound, setHowFound] = useState('');
   const turnstileSiteKey = TURNSTILE_SITE_KEY;
+  const backendAvailability = useLeadBackendAvailability();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,7 +48,13 @@ export default function QuickIntakeForm() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const email = String(formData.get('email') || '').trim();
     const phoneValue = String(formData.get('phone') || '');
+
+    if (!email) {
+      setError('Please enter your email address.');
+      return;
+    }
 
     if (!isLikelyValidPhone(phoneValue)) {
       setError('Please enter a valid phone number.');
@@ -52,7 +63,7 @@ export default function QuickIntakeForm() {
 
     const payload = {
       name: formData.get('name'),
-      email: formData.get('email') || null,
+      email,
       phone: normalizePhoneDigits(phoneValue),
       message: formData.get('message'),
       case_type: formData.get('case_type') || null,
@@ -120,6 +131,14 @@ export default function QuickIntakeForm() {
     );
   }
 
+  if (backendAvailability === 'checking') {
+    return <LeadBackendChecking />;
+  }
+
+  if (backendAvailability === 'unavailable') {
+    return <LeadBackendFallback />;
+  }
+
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="rounded-xl border border-brand-leaf/20 bg-brand-leaf/5 p-3">
@@ -157,6 +176,19 @@ export default function QuickIntakeForm() {
             placeholder="(555) 000-0000"
           />
         </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="quick_email" className={labelClasses}>
+            Email <span className="text-brand-mango">*</span>
+          </label>
+          <input
+            id="quick_email"
+            name="email"
+            type="email"
+            required
+            className={inputClasses}
+            placeholder="you@example.com"
+          />
+        </div>
       </div>
 
       <div>
@@ -185,18 +217,6 @@ export default function QuickIntakeForm() {
       {showDetails && (
         <div className="space-y-4 rounded-xl border border-brand-black/10 bg-brand-offWhite/50 p-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label htmlFor="quick_email" className={labelClasses}>
-                Email
-              </label>
-              <input
-                id="quick_email"
-                name="email"
-                type="email"
-                className={inputClasses}
-                placeholder="you@example.com"
-              />
-            </div>
             <div>
               <label htmlFor="quick_case_type" className={labelClasses}>
                 Type of Case
@@ -314,6 +334,11 @@ export default function QuickIntakeForm() {
           <a
             href={`tel:${PRIMARY_PHONE_TEL}`}
             className="mt-2 inline-flex items-center gap-2 font-semibold text-brand-mangoText hover:text-brand-leaf"
+            onClick={() =>
+              trackFallbackPhoneLead('quick_intake_turnstile_fallback_call', {
+                target_number: PRIMARY_PHONE_TEL,
+              })
+            }
           >
             <Phone className="h-4 w-4" />
             Call/Text {PRIMARY_PHONE_DISPLAY}

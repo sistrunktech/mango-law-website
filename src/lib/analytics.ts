@@ -29,15 +29,20 @@ function extractGa4MeasurementIdFromScripts(scriptSources: string[]): string | n
   return null;
 }
 
+function hasGtmContainerScript(scriptSources: string[]): boolean {
+  return scriptSources.some((src) => /googletagmanager\.com\/gtm\.js\?id=GTM-/.test(src));
+}
+
 function dispatchGa4FallbackEvent(eventName: string, params: Record<string, unknown>): boolean {
   if (typeof window === 'undefined' || typeof document === 'undefined') return false;
   const consent = window.__mlConsent?.get?.() as ConsentSnapshot | null | undefined;
   if (!hasGrantedAnalyticsConsent(consent)) return false;
   if (typeof window.gtag !== 'function') return false;
 
-  const measurementId = extractGa4MeasurementIdFromScripts(
-    Array.from(document.scripts, (script) => script.src)
-  );
+  const scriptSources = Array.from(document.scripts, (script) => script.src);
+  if (hasGtmContainerScript(scriptSources)) return false;
+
+  const measurementId = extractGa4MeasurementIdFromScripts(scriptSources);
   if (!measurementId) return false;
 
   window.__mlGa4FallbackConfiguredIds = window.__mlGa4FallbackConfiguredIds || [];
@@ -113,6 +118,14 @@ export function trackCtaClick(cta: string, extra?: Record<string, unknown>) {
   });
 }
 
+export function trackFallbackPhoneLead(
+  checkpoint_id: string,
+  extra?: Record<string, unknown>
+) {
+  trackCtaClick(checkpoint_id, extra);
+  trackLeadSubmitted('phone', checkpoint_id, extra);
+}
+
 export function trackExperimentExposure(
   experiment_id: string,
   variant: 'A' | 'B',
@@ -159,4 +172,4 @@ export function trackLeadSubmitted(
   });
 }
 
-export { extractGa4MeasurementIdFromScripts, hasGrantedAnalyticsConsent };
+export { extractGa4MeasurementIdFromScripts, hasGrantedAnalyticsConsent, hasGtmContainerScript };
