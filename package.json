@@ -9,6 +9,10 @@
     "prebuild": "node scripts/check-filenames.mjs && node scripts/check-orc-references.mjs && node scripts/check-protected-content.mjs && node scripts/check-structured-data.mjs",
     "build": "next build",
     "start": "next start",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare deploy -- --keep-vars",
+    "cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "lint": "ESLINT_USE_FLAT_CONFIG=false eslint src test --ext .js,.jsx,.ts,.tsx --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "TS_NODE_TRANSPILE_ONLY=1 node --experimental-specifier-resolution=node test/run-tests.mjs",
@@ -44,6 +48,7 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "1.15.1",
     "@tailwindcss/forms": "^0.5.9",
     "@types/node": "^20.17.12",
     "@types/mapbox-gl": "^3.4.1",
@@ -57,6 +62,7 @@
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.15",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "wrangler": "4.86.0"
   }
 }
