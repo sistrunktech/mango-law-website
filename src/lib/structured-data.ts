@@ -328,6 +328,30 @@ export const websiteSchema = {
   url: SITE_URL,
 };
 
+export const geoffreySpallSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE_URL}/of-counsel#geoffrey-spall`,
+  name: 'Geoffrey A. Spall',
+  alternateName: 'Geoff Spall',
+  url: `${SITE_URL}/of-counsel`,
+  image: `${SITE_URL}/images/geoff_spall_.webp`,
+  jobTitle: 'Of Counsel',
+  worksFor: { '@id': `${SITE_URL}/#legalservice` },
+  affiliation: { '@id': `${SITE_URL}/#legalservice` },
+  hasOccupation: {
+    '@type': 'Occupation',
+    name: 'Attorney',
+  },
+  knowsAbout: ['Criminal Defense', 'OVI Defense', 'DUI Defense', 'Domestic Violence Defense'],
+  sameAs: [
+    'https://bettercallspall.com',
+    'https://www.avvo.com/attorneys/43015-oh-geoffrey-spall-5079659.html',
+    'https://profiles.superlawyers.com/ohio/delaware/lawyer/geoffrey-a-spall/e9986fd5-2f4d-4dc2-a73e-80c3b08e4bdc.html',
+    'https://www.linkedin.com/in/geoff-spall-26433067',
+  ],
+};
+
 export const websiteGraphNode = {
   '@type': 'WebSite',
   '@id': `${SITE_URL}/#website`,

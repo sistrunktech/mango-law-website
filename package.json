@@ -22,6 +22,7 @@
     "seo:smoke:live": "bash scripts/check-indexing-surface.sh",
     "seo:gsc:inspect": "node scripts/gsc-url-inspection-audit.mjs",
     "seo:gsc:submit-sitemap": "node scripts/gsc-submit-sitemap.mjs",
+    "ops:contact-reachability": "bash scripts/check-contact-form-reachability.sh",
     "check:structured-data": "node scripts/check-structured-data.mjs",
     "docs:parity": "node scripts/check-prd-doc-parity.mjs",
     "optimize:practice-images": "node scripts/optimize-practice-images.mjs",

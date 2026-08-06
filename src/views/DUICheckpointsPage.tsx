@@ -569,6 +569,32 @@ export default function DUICheckpointsPage({
 
       <section className="section bg-white">
         <div className="container">
+          <div className="mb-8 overflow-hidden rounded-2xl bg-brand-leaf px-6 py-7 text-white shadow-soft-lg sm:px-8">
+            <div className="grid gap-5 lg:grid-cols-[1fr,auto] lg:items-center">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-mangoLight">
+                  Delaware County legal help
+                </p>
+                <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
+                  Stopped at a checkpoint in Delaware County?
+                </h2>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/85 sm:text-base">
+                  A checkpoint stop can create immediate license, testing, and court deadlines. Start with the
+                  Delaware OVI defense guide to understand the issues that may affect your case and what to preserve
+                  for a case review.
+                </p>
+              </div>
+              <a
+                href="/ovi-dui-defense-delaware-oh"
+                className="inline-flex items-center justify-center rounded-lg bg-brand-mango px-5 py-3 text-sm font-bold text-brand-black transition-colors hover:bg-brand-gold"
+                data-cta="checkpoint_delaware_ovi_bridge"
+                onClick={() => trackCtaClick('checkpoint_delaware_ovi_bridge')}
+              >
+                Delaware OVI lawyer guide
+              </a>
+            </div>
+          </div>
+
           <div className="mb-8 rounded-2xl border border-brand-mango/20 bg-brand-mango/5 p-6">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-mango/20">

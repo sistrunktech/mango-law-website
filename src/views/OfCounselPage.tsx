@@ -98,7 +98,10 @@ export default function OfCounselPage() {
                 </p>
                 <p className="text-lg text-brand-black/80 leading-relaxed">
                   Learn more about Geoffrey on{' '}
-                  <ExternalLink href="https://bettercallspall.com">bettercallspall.com</ExternalLink>.
+                  <ExternalLink href="https://bettercallspall.com" nofollow={false}>
+                    bettercallspall.com
+                  </ExternalLink>
+                  .
                 </p>
               </div>
 

@@ -54,6 +54,9 @@ This document tracks current environment expectations, secrets handling, CI/CD, 
 - **Email templates** (shared): `submit-contact`, `submit-lead`, and `chat-intake` generate email HTML via `supabase/functions/_shared/email/*`.
   - Theme/season toggles: `APP_THEME` (`dark|light`), `APP_SEASON` (`spring|summer|fall|winter`), `APP_HOLIDAY` (`true|false`).
   - Host links: `FRONTEND_URL` (fallback: `NEXT_PUBLIC_SITE_URL`, then `https://mango.law`).
+- **Contact reachability check:** Run `npm run ops:contact-reachability` from a clean network. It verifies the production
+  CORS preflight and function validation response without creating a lead or sending email. An end-to-end valid form test
+  must use an approved test identity because it writes to `contact_leads` and sends client-facing notifications.
 - **checkpoint-scraper**: Automated DUI checkpoint scraper that fetches data from OVICheckpoint.com, geocodes addresses using Mapbox API with caching, ingests newsroom/search announcement candidates, and upserts checkpoint data to the database. Logs all execution details to `scraper_logs` table. Rate limited to 5 req/hour per IP.
 - **check-rankings**: Search Intelligence job that pulls Serper.dev results for active keywords and writes ranking history to `seo_rankings`. Requires `SERPER_API_KEY` and service-role access (no fallback key).
 - **generate-review-response**: Generates draft responses for reviews using the configured AI provider/model.
