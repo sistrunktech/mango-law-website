@@ -20,6 +20,19 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-08-06 01:35 EDT
+Post slug and title: resources/dui-checkpoints | Ohio DUI Checkpoint Map
+Change type: minor
+Summary of change: Added a prominent Delaware County checkpoint-stop bridge to the canonical OVI money page, added Geoffrey Spall Person structured data with verified sameAs profiles on the of-counsel page, and allowed the relevant of-counsel firm link to be followed. The canonical OVI redirect and existing checkpoint guide relationships were preserved.
+Regression checklist:
+- Hero changed? no
+- Images removed? no
+- Links changed? yes
+- Headings changed? yes
+- Meta/schema changed? yes
+Approval token: User supplied the 2026-08-06 Mango Law Site Fix Work Order and asked Codex to act on it.
+Rollback notes: Remove the Delaware County bridge from `src/views/DUICheckpointsPage.tsx`, remove `geoffreySpallSchema`, restore the previous `/of-counsel` structured-data props, and remove the `nofollow={false}` override from the Geoffrey Spall firm link.
+
 Date/time: 2026-05-29 15:40 EDT
 Post slug and title: llms.txt sitemap discovery surface
 Change type: minor

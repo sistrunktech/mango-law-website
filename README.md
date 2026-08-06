@@ -56,6 +56,9 @@ This site includes a single GTM container injected from `src/app/layout.tsx` (`G
 
 Do not hard-code the GA4 `gtag.js` snippet anywhere in the site — GA4 should be configured inside GTM.
 
+Canonical property, stream, consent, and hosting-layer diagnostics are documented in
+[`docs/ANALYTICS.md`](docs/ANALYTICS.md).
+
 ## Admin Panel (Google Connectors)
 
 Use `/admin/connections` to connect Google tools and select the correct resources:

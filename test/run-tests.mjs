@@ -16,6 +16,7 @@ await import('./checkpointSearchDiscovery.test.ts');
 await import('./analyticsFallback.test.ts');
 await import('./supabaseAvailability.test.ts');
 await import('./securityHeaders.test.mjs');
+await import('./siteFixWorkOrder.test.ts');
 await import('./contactInfo.test.ts');
 await import('./emailTemplates.test.ts');
 await import('./seoRoutingContent.test.ts');

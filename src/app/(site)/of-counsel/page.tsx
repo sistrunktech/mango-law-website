@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import OfCounselPage from '@/views/OfCounselPage';
 import StructuredData from '@/components/StructuredData';
 import { buildMetadata } from '@/lib/seo-metadata';
+import { geoffreySpallSchema } from '@/lib/structured-data';
 
 const seo = {
   title: 'Geoffrey Spall - Of Counsel | Mango Law LLC',
@@ -20,7 +21,7 @@ export const metadata: Metadata = buildMetadata(seo);
 export default function Page() {
   return (
     <>
-      <StructuredData breadcrumbs={breadcrumbs} url={seo.url} />
+      <StructuredData structuredData={geoffreySpallSchema} breadcrumbs={breadcrumbs} url={seo.url} />
       <OfCounselPage />
     </>
   );
