@@ -29,6 +29,9 @@ A clean Chromium session confirmed:
 - clicking **Accept all** stores `ml_consent_v2` and subsequent requests carry `gcs=G111`;
 - the `submit-contact` CORS preflight returns `204` from a clean network;
 - an empty, non-submitting validation probe returns the expected `400` response;
+- an authorized submission labeled `Sistrunk Tech QA` passed Turnstile and reached the **Message Sent** state;
+- the office notification and sender acknowledgement both arrived in the authenticated mailbox; and
+- GA4 Realtime reported one `generate_lead` event and one `generate_lead` key event for the test session;
 - `/delaware-ohio-ovi-lawyer` already returns a permanent `308` to `/ovi-dui-defense-delaware-oh`.
 
 This verifies the repository consent grant path. The authenticated GA4 console check described below confirms the
