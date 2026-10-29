@@ -18,6 +18,7 @@ import BlogCoverArt from '../components/BlogCoverArt';
 import { formatCalendarDate } from '../lib/formatting';
 import { attorneyProfile } from '../data/attorneyProfile';
 import { getBlogCtaContent } from '../lib/blogCtas';
+import { isEditorialAuthor } from '../lib/blogEditorial';
 import {
   PenaltyGrid,
   CostBreakdown,
@@ -90,9 +91,11 @@ function extractTOCItems(content: string): { id: string; title: string; level: n
 export default function BlogPostPage({
   post,
   relatedPosts,
+  offerNotice,
 }: {
   post: BlogPost;
   relatedPosts: BlogPost[];
+  offerNotice?: string | null;
 }) {
 
   const hasVisuals = post.content.includes('[VISUAL:');
@@ -202,6 +205,13 @@ export default function BlogPostPage({
             <p className="mt-5 text-base leading-relaxed text-brand-black/68 md:text-lg">
               {post.excerpt}
             </p>
+            {isEditorialAuthor(post.author) && <p className="mt-4 text-sm text-brand-black/70">By {post.author}</p>}
+            {offerNotice && (
+              <aside aria-label="Ride-credit offer status" className="mt-5 rounded-xl border border-brand-mango/40 bg-white p-5 text-sm leading-relaxed text-brand-black">
+                {offerNotice}{' '}
+                <a href="https://oh.projectplanahead.com/" className="font-semibold text-brand-leaf underline">Official program details</a>
+              </aside>
+            )}
           </header>
         </div>
 
@@ -1404,6 +1414,12 @@ export default function BlogPostPage({
               )}
 
               <footer className="mt-16 border-t border-gray-200 pt-8">
+                {isEditorialAuthor(post.author) ? (
+                  <div>
+                    <p className="font-semibold text-brand-black">{post.author}</p>
+                    <p className="mt-2 text-sm text-gray-600">Prepared by Mango Law's editorial team using the official sources listed above.</p>
+                  </div>
+                ) : (
                 <div
                   className="flex items-start gap-6"
                   itemScope
@@ -1449,6 +1465,7 @@ export default function BlogPostPage({
                     </div>
                   </div>
                 </div>
+                )}
               </footer>
 
               <section

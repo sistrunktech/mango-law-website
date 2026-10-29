@@ -6,6 +6,7 @@ import { buildMetadata } from '@/lib/seo-metadata';
 import { getPublicBlogPostBySlug, getPublicBlogPosts } from '@/lib/blogPostsRepo';
 import { resolveBlogSeo } from '@/lib/blog-seo';
 import { selectRelatedBlogPosts } from '@/lib/relatedBlogPosts';
+import { getBlogOfferNotice } from '@/lib/blogEditorial';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -69,7 +70,7 @@ export default async function Page({ params }: PageProps) {
         image={post.imageUrl}
         url={`/blog/${post.slug}`}
       />
-      <BlogPostPage post={post} relatedPosts={relatedPosts} />
+      <BlogPostPage post={post} relatedPosts={relatedPosts} offerNotice={getBlogOfferNotice(post.offerEndsAt)} />
     </>
   );
 }
