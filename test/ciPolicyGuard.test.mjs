@@ -18,6 +18,7 @@ const cases = [
   ['suppressed step failures', (ci) => { ci.jobs.test.steps.at(-1)['continue-on-error'] = true; }],
   ['removed test command', (ci) => { ci.jobs.test.steps.at(-1).run = 'echo skipped'; }],
   ['write-enabled CI token', (ci) => { ci.permissions.contents = 'write'; }],
+  ['unsupported CI toolchain', (ci) => { ci.jobs.test.steps[1].with['node-version'] = 20; }],
   ['persisted checkout token', (ci) => { ci.jobs.guard.steps[0].with['persist-credentials'] = true; }],
   ['checkout of another ref', (ci) => { ci.jobs.test.steps[0].with.ref = 'main'; }],
 ];

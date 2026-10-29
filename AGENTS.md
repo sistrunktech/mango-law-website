@@ -140,7 +140,7 @@ npm test
 
 - uses: actions/setup-node@v4
   with:
-    node-version-file: '.nvmrc'
+    node-version: 22
     cache: 'npm'
 
 - run: npm ci

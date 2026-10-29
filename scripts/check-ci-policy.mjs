@@ -42,6 +42,7 @@ export function checkCiPolicy(files) {
     const job = ci.jobs[name];
     for (const key of ['if', 'needs', 'strategy', 'name', 'continue-on-error', 'permissions']) assert(!(key in job), name + ': required checks must be unconditional and inherit read-only permissions');
     assert.equal(job['runs-on'], 'ubuntu-latest');
+    assert(job.steps.some((step) => step.uses === 'actions/setup-node@v4' && step.with?.['node-version'] === 22), name + ': use the validated Node22 LTS toolchain');
     assert(Number.isInteger(job['timeout-minutes']) && job['timeout-minutes'] > 0 && job['timeout-minutes'] <= 25, name + ': timeout must fit the queue');
     assert(job.steps.some((step) => step.uses === 'actions/checkout@v4' && step.with?.['persist-credentials'] === false && !step.with?.ref), name + ': checkout must use the event SHA without persisted credentials');
     for (const step of job.steps) {
