@@ -127,15 +127,11 @@ npm test
 
 ## CI & Merge Queue Policy
 
-- **Required checks** are enforced by the **merge queue** (not by manual merges). Only the stable PR checks are required:
-  - `CI (safety) / build (pull_request)`
-  - `CI (safety) / lint (pull_request)`
-  - `CI (safety) / test (pull_request)`
-  - `CI Policy Guard / guard (pull_request)`
-- **CI Policy Guard** blocks unauthorized PR-triggered workflows. Allowed PR workflows are:
-  - `ci-pr-safety.yml`, `ci-policy-guard.yml`, `openapi-contract.yml`, `pr-triage.yml`
-- **Lockfile workflows** (`lockfile-sync.yml`, labeler) run on **schedule/dispatch** or are **label-gated**; they are **not required** checks.
-- Use the manual **rerun helper** (`rerun-failed-checks.yml`) to re-run flaky checks without pushing no-op commits.
+- Required GitHub Actions check contexts are `build`, `lint`, `test`, and `guard` (app ID15368). `ci.yml` reports them for `pull_request` and `merge_group: checks_requested`, without path filters or conditional required jobs.
+- `guard` runs `scripts/check-ci-policy.mjs`. Only `ci.yml` may run PR/queue checks. Existing `pr-standardize-on-pr.yml` is a metadata-only `pull_request_target` exception pinned by its audited file hash; changes require explicit policy review.
+- CI uses read-only tokens and checkout without persisted credentials. Required jobs/steps must not suppress failures.
+- Workflow support does not enable the repository queue or required-check rules. Bootstrap merge and additive ruleset configuration require separate owner approval; the missing queue is never standing permission to merge manually.
+- After queue enforcement is approved and verified, merge through it; never force-push or weaken protections. Re-run failed jobs from the existing Actions run; no rerun-helper workflow currently exists.
 
 ### CI expectations (example)
 
@@ -144,7 +140,7 @@ npm test
 
 - uses: actions/setup-node@v4
   with:
-    node-version-file: '.nvmrc'
+    node-version: 22
     cache: 'npm'
 
 - run: npm ci

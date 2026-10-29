@@ -130,7 +130,9 @@ Project ref (prod): `rgucewewminsevbjgcad`
 - **Backups/PITR**: Via Supabase defaults; add monitoring alerts when available.
 
 ## CI/CD
-- Build-only workflow in `.github/workflows/ci.yml` (Node 20, npm ci, npm run build).
+- `.github/workflows/ci.yml` reports separate unconditional `build`, `lint`, `test`, `guard` checks on main-targeting PRs, merge groups and main pushes (Node22 LTS). Existing content/structured-data/SEO/parity/typecheck/build gates remain; the test job runs the full suite.
+- `scripts/check-ci-policy.mjs` checks workflow events, stable job IDs, read-only CI permissions, failure propagation, event-SHA checkout and the audited metadata-only PR workflow. Its regression cases run in `npm test`.
+- Queue support must land before owner-approved ruleset11727992 changes require these four GitHub Actions contexts and the queue. This PR does not enable the queue, change protections or authorize its own bootstrap merge.
 - `npm run build` runs a preflight filename check (`scripts/check-filenames.mjs`) to prevent publish failures caused by unsupported filename characters.
 - Next.js route group names under `src/app` use `()` and `[]`; the filename check allows those characters only within `src/app`.
 - Pull requests must pass build, lint, test, and policy checks through the merge queue.
