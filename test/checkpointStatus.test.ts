@@ -2,11 +2,39 @@ import assert from 'node:assert/strict';
 import { getDisplayStatus, type DUICheckpoint } from '../src/data/checkpoints.ts';
 import {
   isUsableOVICheckpointLocationRow,
+  scrapeOVICheckpoint,
   parseDateTime as parseOVICheckpointDateTime,
 } from '../supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts';
 import { parseAddress } from '../supabase/functions/checkpoint-scraper/geocoding.ts';
 
-function run() {
+async function run() {
+  const originalFetch = globalThis.fetch;
+  const requested: string[] = [];
+  globalThis.fetch = async (input, init) => {
+    assert.ok(init?.signal, 'aggregator fetches must have a deadline');
+    requested.push(String(input));
+    if (String(input).includes('/wp-json/')) return new Response(null, { status: 404 });
+    return new Response(`<table id="tablepress-1"><tbody><tr>
+      <td>Franklin</td><td>Columbus</td><td>100 Main Street</td>
+      <td>Friday, October 30, 2026 | 8 PM to 11 PM</td>
+    </tr></tbody></table>`);
+  };
+  try {
+    const recovered = await scrapeOVICheckpoint();
+    assert.equal(recovered.length, 1, 'a missing API page must fall back to the homepage');
+    assert.equal(recovered[0].locationCity, 'Columbus');
+    assert.deepEqual(requested, [
+      'https://www.ovicheckpoint.com/wp-json/wp/v2/pages/1078',
+      'https://www.ovicheckpoint.com/',
+    ]);
+    globalThis.fetch = async (input) => String(input).includes('/wp-json/')
+      ? new Response(null, { status: 404 })
+      : new Response('<html>Homepage template changed</html>');
+    await assert.rejects(scrapeOVICheckpoint(), /missing checkpoint table/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+
   const checkpoint = {
     start_date: '2025-12-10T00:00:00.000Z',
     end_date: '2025-12-10T01:00:00.000Z',
@@ -124,4 +152,4 @@ function run() {
   );
 }
 
-run();
+await run();

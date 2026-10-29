@@ -140,6 +140,7 @@ function parseRssOrAtom(xml: string): Array<{ title: string; url: string; pubDat
 
 async function fetchRss(url: string): Promise<string> {
   const res = await fetch(url, {
+    signal: AbortSignal.timeout(10_000),
     headers: {
       'user-agent': 'MangoLawCheckpointBot/1.0 (+https://mango.law/resources/dui-checkpoints)',
       accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*',

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-29
+
+- Keep checkpoint announcement ingestion running when the aggregator fails; fall back to its homepage after a missing API page, report missing source tables, bound external requests to ten seconds, and record fatal run completion.
+
 ## 2026-02-02
 
 ### SEO / Outgoing Link Policy
