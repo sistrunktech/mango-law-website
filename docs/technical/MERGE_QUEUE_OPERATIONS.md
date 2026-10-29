@@ -4,7 +4,7 @@ Activated 2026-10-29 after the checked [CI bootstrap PR179](https://github.com/s
 
 ## Enforced configuration
 
-Repository ruleset11727992 requires `build`, `lint`, `test`, `guard` from GitHub Actions app ID15368 on the default branch. CI reports these contexts for PRs and `merge_group: checks_requested`, using Node22 LTS.
+Repository ruleset11727992 requires `build`, `lint`, `test`, `guard` from GitHub Actions app ID 15368 on the default branch. CI reports these contexts for PRs and `merge_group: checks_requested`, using Node22 LTS.
 
 The queue uses squash and ALLGREEN, with one PR/build/group at a time, a 30-minute check timeout and a 5-minute minimum-group wait. Minimum group size is 1. Strict branch freshness is disabled because the mandatory queue tests the current base.
 
@@ -22,4 +22,8 @@ A failed required queue check must prevent merging and remove the failing entry.
 
 ## Verification record
 
-The initial canary uses this document plus a temporary test-runner failure limited to the merge-group event. The temporary failure must be removed before the final documentation-only change can merge. Negative and positive run receipts belong in the companion PR and execution evidence.
+[Canary PR180](https://github.com/sistrunktech/mango-law-website/pull/180) passed ordinary PR checks, then intentionally failed only its required merge-group test. [Queue run 40940032367](https://github.com/sistrunktech/mango-law-website/actions/runs/40940032367) tested queue SHA 9bbef0ee8d7829498b061165856326e51f3761e6.
+
+GitHub removed the entry with reason `failed_checks` at 2026-10-29T19:27:09Z. The PR remained open and main remained 2927ac1a2abb639fad256eb7d499cbe94df33d35. The original test runner was restored byte-for-byte before the final documentation-only change.
+
+Positive verification requires all four checks on the corrected queue SHA and a queue-produced squash merge. Its receipts are on PR180 and in the execution report; configuration alone does not establish successful queue behavior.
