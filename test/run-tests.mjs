@@ -3,6 +3,10 @@ import { pathToFileURL } from 'node:url';
 
 register('ts-node/esm', pathToFileURL('./'));
 
+if (process.env.GITHUB_EVENT_NAME === 'merge_group') {
+  throw new Error('Intentional merge-queue failure canary; remove before merge');
+}
+
 // Run ESM TypeScript tests via dynamic import so they stay ESM
 await import('./checkpointStatus.test.ts');
 await import('./checkpointRelevance.test.ts');
