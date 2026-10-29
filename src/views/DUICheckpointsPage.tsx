@@ -18,7 +18,7 @@ import {
 } from '../lib/checkpointService';
 import { isApproximateCheckpointLocation, type DUICheckpoint } from '../data/checkpoints';
 import LeadCaptureModal from '../components/LeadCaptureModal';
-import { getCheckpointAnnouncements, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
+import { getCheckpointAnnouncements, getCheckpointFeedState, isAnnouncementFreshForPublic, type CheckpointAnnouncement } from '../lib/checkpointAnnouncementsService';
 import { buildPendingAnnouncementMapCheckpoints } from '../lib/checkpointAnnouncementMapMarkers';
 import { filterPublicCheckpointRows, isPublicCheckpointRow } from '../lib/publicCheckpointFilters';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
@@ -501,11 +501,30 @@ export default function DUICheckpointsPage({
     return Array.from(deduped.values()).slice(0, 4);
   }, [publicAnnouncements, checkpoints]);
 
+  const latestFeedActivityAt = useMemo(() => {
+    return publicAnnouncements.reduce<string | null>((latest, announcement) => {
+      if (!announcement.last_checked_at) return latest;
+      if (!latest) return announcement.last_checked_at;
+      return new Date(announcement.last_checked_at).getTime() > new Date(latest).getTime()
+        ? announcement.last_checked_at
+        : latest;
+    }, null);
+  }, [publicAnnouncements]);
+  const latestFeedActivityLabel = formatSourceCheckLabel(latestFeedActivityAt);
+  const feedState = getCheckpointFeedState(latestFeedActivityAt, now);
+
   const currentStatusSummary = useMemo(() => {
     if (error) {
       return {
         heading: 'Live checkpoint feed temporarily unavailable',
         body: 'The public feed could not be refreshed. Do not treat an empty map as confirmation that no checkpoints are active; check official agency notices and try this page again later.',
+      };
+    }
+
+    if (feedState !== 'recent') {
+      return {
+        heading: 'Checkpoint feed freshness unverified',
+        body: 'An empty or historical map does not confirm that no checkpoints have been announced. Check official agency notices for current details.',
       };
     }
 
@@ -534,18 +553,8 @@ export default function DUICheckpointsPage({
       heading: 'Current public signal',
       body: 'There are no currently announced checkpoints in the live feed right now. Check recent history below, and monitor this page more closely around major holiday and travel weekends when public notices are more common.',
     };
-  }, [dateRange, error, filteredMapCheckpoints.length, filteredPendingAnnouncements.length, usedHistoryFallback, viewMode]);
+  }, [dateRange, error, feedState, filteredMapCheckpoints.length, filteredPendingAnnouncements.length, usedHistoryFallback, viewMode]);
 
-  const latestSourceCheckAt = useMemo(() => {
-    return publicAnnouncements.reduce<string | null>((latest, announcement) => {
-      if (!announcement.last_checked_at) return latest;
-      if (!latest) return announcement.last_checked_at;
-      return new Date(announcement.last_checked_at).getTime() > new Date(latest).getTime()
-        ? announcement.last_checked_at
-        : latest;
-    }, null);
-  }, [publicAnnouncements]);
-  const latestSourceCheckLabel = formatSourceCheckLabel(latestSourceCheckAt);
   const latestAnnouncementDate =
     latestAnnouncement?.event_date || latestAnnouncement?.announcement_date || latestAnnouncement?.created_at;
   const latestAnnouncementDateKind =
@@ -687,10 +696,17 @@ export default function DUICheckpointsPage({
                     {viewMode === 'upcoming' ? 'Upcoming public notices' : dateRange === 'all' ? 'All available history' : 'Recent public checkpoint history'}
                   </div>
                   <div className="mt-1 text-[11px] text-brand-black/55">
-                    Latest source check {latestSourceCheckLabel}
+                    Latest feed activity {latestFeedActivityLabel}
                   </div>
                 </div>
               </div>
+
+              {feedState !== 'recent' && (
+                <p role="status" className="mb-5 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950">
+                  {feedState === 'stale' ? 'The latest recorded feed activity is more than 24 hours old.' : 'Recent feed activity could not be verified.'}
+                  {' '}An empty map does not confirm that no checkpoints have been announced. Check official agency notices.
+                </p>
+              )}
 
               <div className="mb-5 flex flex-wrap items-center gap-2">
                 <div className="flex gap-1 rounded-lg border border-brand-black/10 bg-brand-offWhite p-1">

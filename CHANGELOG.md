@@ -2,6 +2,8 @@
 
 ## 2026-10-29
 
+- Require matching city/address before suppressing simultaneous checkpoints; preserve source-check timestamps during static-seed replays and warn when recorded feed activity is stale or unverified.
+
 - Keep checkpoint announcement ingestion running when the aggregator fails; fall back to its homepage after a missing API page, report missing source tables, bound external requests to ten seconds, and record fatal run completion.
 
 ## 2026-02-02

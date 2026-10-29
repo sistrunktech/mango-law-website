@@ -5,9 +5,17 @@ import {
   scrapeOVICheckpoint,
   parseDateTime as parseOVICheckpointDateTime,
 } from '../supabase/functions/checkpoint-scraper/ovicheckpoint-scraper.ts';
+import { matchesCheckpointEventLocation } from '../supabase/functions/checkpoint-scraper/checkpoint-matching.ts';
 import { parseAddress } from '../supabase/functions/checkpoint-scraper/geocoding.ts';
 
 async function run() {
+  const event = { startDate: '2026-10-31T00:00:00Z', locationCounty: 'Franklin', locationCity: 'Columbus', locationAddress: '100 Main Street' };
+  assert.equal(matchesCheckpointEventLocation(event, { ...event, locationAddress: '100 Main St.' }), true);
+  assert.equal(matchesCheckpointEventLocation(event, { ...event, locationAddress: '200 Morse Road' }), false);
+  assert.equal(matchesCheckpointEventLocation(event, { ...event, locationCity: 'Dublin' }), false);
+  assert.equal(matchesCheckpointEventLocation(event, { ...event, startDate: '2026-11-01T00:00:00Z' }), false);
+  assert.equal(matchesCheckpointEventLocation(event, { ...event, locationAddress: '' }), false);
+
   const originalFetch = globalThis.fetch;
   const requested: string[] = [];
   globalThis.fetch = async (input, init) => {
