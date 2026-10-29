@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {
   isAnnouncementFreshForPublic,
+  getCheckpointFeedState,
   type CheckpointAnnouncement,
 } from '../src/lib/checkpointAnnouncementsService.ts';
 
@@ -143,3 +144,10 @@ assert.equal(
   ),
   false,
 );
+
+assert.equal(getCheckpointFeedState('2026-05-02T18:00:00.000Z', now), 'recent');
+assert.equal(getCheckpointFeedState('2026-05-02T17:59:59.000Z', now), 'stale');
+assert.equal(getCheckpointFeedState(null, now), 'unknown');
+assert.equal(getCheckpointFeedState('invalid', now), 'unknown');
+assert.equal(getCheckpointFeedState('2026-05-04T18:00:00.000Z', now), 'unknown');
+assert.equal(getCheckpointFeedState('2026-05-02T18:00:00.000Z'), 'unknown');

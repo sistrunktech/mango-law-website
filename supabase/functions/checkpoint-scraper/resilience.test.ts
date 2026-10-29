@@ -14,12 +14,20 @@ for (const failCompletion of [false, true]) {
     Deno.env.set('SUPABASE_URL', 'https://checkpoint-test.supabase.co');
     Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'test-key');
     let rssFetches = 0;
+    let staticReplays = 0;
+    const priorCheckedAt = '2026-09-13T08:17:28Z';
     let rejectedCompletion = false;
     const updates: Record<string, unknown>[] = [];
     globalThis.fetch = async (input, init) => {
       const url = String(input);
       assert.ok(init?.signal, 'every upstream/DB request needs a deadline');
       if (url.includes('/rest/v1/')) {
+        if (init?.method === 'POST' && url.includes('/dui_checkpoint_announcements')) {
+          const payload = JSON.parse(String(init.body));
+          staticReplays++;
+          assert.equal('last_checked_at' in payload, false, 'static seeds must not claim a source fetch');
+          assert.equal({ last_checked_at: priorCheckedAt, ...payload }.last_checked_at, priorCheckedAt);
+        }
         if (init?.method === 'PATCH' && url.includes('/scraper_logs')) {
           const payload = JSON.parse(String(init.body));
           updates.push(payload);
@@ -40,6 +48,7 @@ for (const failCompletion of [false, true]) {
         method: 'POST', body: JSON.stringify({ mode: 'core', trigger: 'manual' }),
       }));
       assert.ok(rssFetches > 0);
+      assert.ok(staticReplays > 0);
       const lastUpdate = updates.at(-1)!;
       assert.ok(lastUpdate.completed_at);
       assert.equal(response.status, failCompletion ? 500 : 200);
