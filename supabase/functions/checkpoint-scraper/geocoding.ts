@@ -257,7 +257,7 @@ export async function geocodeAddress(
     const encodedAddress = encodeURIComponent(geocodingAddress);
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${mapboxToken}&country=US&limit=5&proximity=-82.9988,39.9612`;
 
-    const response = await fetch(url);
+    const response = await fetch(url, { signal: AbortSignal.timeout(10_000) });
 
     if (!response.ok) {
       console.error('Mapbox geocoding failed:', response.status);

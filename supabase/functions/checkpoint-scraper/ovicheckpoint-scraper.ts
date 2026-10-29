@@ -391,11 +391,13 @@ export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
 
   try {
     const response = await fetch(wpJsonUrl, {
+      signal: AbortSignal.timeout(10_000),
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
     });
 
+    if (response.status === 404) return await scrapeOVICheckpointHomepage(url);
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -465,6 +467,7 @@ export async function scrapeOVICheckpoint(): Promise<RawCheckpoint[]> {
 
 async function scrapeOVICheckpointHomepage(url: string): Promise<RawCheckpoint[]> {
   const response = await fetch(url, {
+    signal: AbortSignal.timeout(10_000),
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
     },
@@ -478,7 +481,7 @@ async function scrapeOVICheckpointHomepage(url: string): Promise<RawCheckpoint[]
   const checkpoints: RawCheckpoint[] = [];
 
   const tableMatch = html.match(/<table[^>]*id=\"tablepress-1\"[\s\S]*?<\/table>/i);
-  if (!tableMatch) return checkpoints;
+  if (!tableMatch) throw new Error('OVICheckpoint homepage is missing checkpoint table');
 
   const tableHtml = tableMatch[0];
   const tbodyMatch = tableHtml.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
