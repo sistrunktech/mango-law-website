@@ -2,6 +2,7 @@ import { OFFICE_ADDRESS_STREET, PRIMARY_PHONE_TEL } from './contactInfo';
 import { serviceAreas } from '../data/serviceAreas';
 import { SITE_URL } from './seo-config';
 import { attorneyProfile } from '../data/attorneyProfile';
+import { isEditorialAuthor } from './blogEditorial';
 
 export type FAQEntry = { question: string; answer: string };
 export type BreadcrumbItem = { name: string; item: string };
@@ -79,7 +80,7 @@ export function buildArticleSchema(article: ArticleData, fullUrl: string, fallba
           },
         }
       : {
-          '@type': 'Person',
+          '@type': isEditorialAuthor(article.author) ? 'Organization' : 'Person',
           name: article.author,
         },
     datePublished: article.datePublished,
