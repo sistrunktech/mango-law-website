@@ -31,9 +31,10 @@ function registeredSource(input: string) {
 }
 
 function text(html: string): string {
-  return html.replace(/<[^>]*>/g, ' ').replace(/&(?:nbsp|#160);/gi, ' ')
-    .replace(/&amp;/gi, '&').replace(/&#39;|&apos;/gi, "'")
-    .replace(/&quot;/gi, '"').replace(/\s+/g, ' ').trim();
+  const entities: Record<string, string> = { nbsp: ' ', '#160': ' ', amp: '&', '#39': "'", apos: "'", quot: '"' };
+  return html.replace(/<[^>]*>/g, ' ')
+    .replace(/&(nbsp|#160|amp|#39|apos|quot);/gi, (_match, name: string) => entities[name.toLowerCase()])
+    .replace(/\s+/g, ' ').trim();
 }
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

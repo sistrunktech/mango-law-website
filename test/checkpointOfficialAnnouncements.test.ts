@@ -13,6 +13,8 @@ const html = `<!--normalTemplateStart-->
 <p>Checkpoint operations will run from 8:00 PM to 1:30 AM, weather permitting.</p>
 <p>Plan for a designated driver.</p><!--normalTemplateEnd-->`;
 const parsed = parseOfficialCheckpointNotice(url, html);
+const encodedLocation = parseOfficialCheckpointNotice(url, html.replace('south of Rensch Road', 'south of Rensch Road &amp;quot;'));
+assert.equal(encodedLocation.events[0].locationText, 'US-62, south of Rensch Road &quot;', 'source entities must be decoded in a single pass');
 assert.equal(parsed.events.length, 2);
 assert.equal(parsed.events[0].startDate, '2026-10-03T00:00:00.000Z');
 assert.equal(parsed.events[0].endDate, '2026-10-03T05:30:00.000Z');
