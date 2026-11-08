@@ -1,4 +1,5 @@
 import { createClient, type SupabaseClient } from 'npm:@supabase/supabase-js@2';
+import { ingestOfficialNotices } from './official-ingestion.ts';
 import { scrapeOVICheckpoint } from './ovicheckpoint-scraper.ts';
 import { normalizeLocationAddress, matchesCheckpointEventLocation } from './checkpoint-matching.ts';
 import { geocodeCheckpointLocation, parseAddress } from './geocoding.ts';
@@ -408,10 +409,12 @@ Deno.serve(async (req: Request) => {
       scraper_name: 'checkpoint-scraper',
       status: 'partial',
       started_at: logStartTime,
-      metadata: { trigger, mode, seedRow, source: 'OVICheckpoint + RSS + curated + search' },
+      metadata: { trigger, mode, seedRow, source: 'Franklin County + OVICheckpoint + RSS + curated + search' },
     });
     if (logStartError) throw logStartError;
     logStarted = true;
+
+    const official = mode === 'core' ? await ingestOfficialNotices(supabase, mapboxToken, stats, determineStatus) : undefined;
 
     console.log('Starting OVICheckpoint.com scraper...');
     // An unavailable aggregator must not prevent independent announcement feeds.
@@ -680,6 +683,7 @@ Deno.serve(async (req: Request) => {
         metadata: {
           trigger,
           skipped: stats.checkpointsSkipped,
+          official,
           announcements_found: stats.announcementsFound,
           announcements_upserted: stats.announcementsUpserted,
           mode,

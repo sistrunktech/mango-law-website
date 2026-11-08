@@ -1,12 +1,13 @@
 import { formatCalendarDate, formatEasternTime } from '../lib/formatting';
 
 export type CheckpointStatus = 'upcoming' | 'active' | 'completed' | 'cancelled';
-export type CheckpointLocationPrecision = 'exact' | 'city_centroid' | 'county_centroid' | 'undisclosed' | 'missing';
+export type CheckpointLocationPrecision = 'exact' | 'nearby_intersection' | 'city_centroid' | 'county_centroid' | 'undisclosed' | 'missing';
 
 export const checkpointGeocodingConfidenceOptions = [
   { value: 'exact_high', label: 'Exact location · high confidence' },
   { value: 'exact_medium', label: 'Exact location · medium confidence' },
   { value: 'exact_low', label: 'Exact location · low confidence' },
+  { value: 'nearby_intersection', label: 'Approximate nearby intersection' },
   { value: 'city_centroid', label: 'Approximate city center' },
   { value: 'county_centroid', label: 'Approximate county center' },
   { value: 'undisclosed', label: 'Undisclosed / no public street address' },
@@ -83,6 +84,7 @@ export function getCheckpointLocationPrecision(
     return normalizedConfidence === 'undisclosed' ? 'undisclosed' : 'missing';
   }
 
+  if (normalizedConfidence === 'nearby_intersection') return 'nearby_intersection';
   if (normalizedConfidence.startsWith('city_centroid')) return 'city_centroid';
   if (normalizedConfidence.startsWith('county_centroid')) return 'county_centroid';
   if (normalizedConfidence === 'undisclosed') return 'undisclosed';
@@ -116,13 +118,15 @@ export function isApproximateCheckpointLocation(
   >
 ): boolean {
   const precision = getCheckpointLocationPrecision(checkpoint);
-  return precision === 'city_centroid' || precision === 'county_centroid' || precision === 'undisclosed';
+  return precision === 'nearby_intersection' || precision === 'city_centroid' || precision === 'county_centroid' || precision === 'undisclosed';
 }
 
 export function getCheckpointLocationPrecisionLabel(
   precision: CheckpointLocationPrecision
 ): string {
   switch (precision) {
+    case 'nearby_intersection':
+      return 'Nearby intersection';
     case 'exact':
       return 'Street-level location';
     case 'city_centroid':
@@ -145,7 +149,7 @@ export function getCheckpointAreaLabel(
 ): string {
   const precision = getCheckpointLocationPrecision(checkpoint);
 
-  if (precision === 'exact') {
+  if (precision === 'nearby_intersection' || precision === 'exact') {
     return `${checkpoint.location_address}, ${checkpoint.location_city}`;
   }
 
@@ -169,6 +173,8 @@ export function getCheckpointLocationGuidance(
   const precision = getCheckpointLocationPrecision(checkpoint);
 
   switch (precision) {
+    case 'nearby_intersection':
+      return 'The pin marks the nearby intersection. The exact checkpoint position was not published.';
     case 'city_centroid':
       return 'This pin is centered on the named city because the public source did not publish a street address.';
     case 'county_centroid':
