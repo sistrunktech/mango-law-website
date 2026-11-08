@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { getDisplayStatus, type DUICheckpoint } from '../src/data/checkpoints.ts';
+import { getDisplayStatus, getCheckpointLocationPrecision, getCheckpointLocationPrecisionLabel, isApproximateCheckpointLocation, getCheckpointAreaLabel, getCheckpointLocationGuidance, type DUICheckpoint } from '../src/data/checkpoints.ts';
 import {
   isUsableOVICheckpointLocationRow,
   scrapeOVICheckpoint,
@@ -161,3 +161,10 @@ async function run() {
 }
 
 await run();
+
+// A road crossing is a reference point, not the exact position of enforcement.
+const crossing = { latitude: 39.871764, longitude: -83.102562, location_address: 'US-62, south of Rensch Road', location_city: 'Jackson Township', location_county: 'Franklin', geocoding_confidence: 'nearby_intersection' };
+assert.equal(isApproximateCheckpointLocation(crossing), true);
+assert.equal(getCheckpointLocationPrecisionLabel(getCheckpointLocationPrecision(crossing)), 'Nearby intersection');
+assert.match(getCheckpointAreaLabel(crossing), /Rensch Road, Jackson Township/);
+assert.match(getCheckpointLocationGuidance(crossing) ?? '', /exact checkpoint position was not published/);
