@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { formatEasternDateTime } from '../src/lib/formatting.ts';
 import {
   isAnnouncementFreshForPublic,
   getCheckpointFeedState,
@@ -151,3 +153,42 @@ assert.equal(getCheckpointFeedState(null, now), 'unknown');
 assert.equal(getCheckpointFeedState('invalid', now), 'unknown');
 assert.equal(getCheckpointFeedState('2026-05-04T18:00:00.000Z', now), 'unknown');
 assert.equal(getCheckpointFeedState('2026-05-02T18:00:00.000Z'), 'unknown');
+
+// A UTC-rendered server and browsers outside Ohio must hydrate the same label.
+const checkpointPageSource = readFileSync(
+  new URL('../src/views/DUICheckpointsPage.tsx', import.meta.url),
+  'utf8',
+);
+const sourceCheckFormatter = checkpointPageSource.match(
+  /function formatSourceCheckLabel[\s\S]*?\n}/,
+)?.[0];
+assert.ok(sourceCheckFormatter);
+assert.match(sourceCheckFormatter, /formatEasternDateTime\(parsed,/);
+assert.doesNotMatch(sourceCheckFormatter, /toLocaleString|timeZone:/);
+assert.match(sourceCheckFormatter, /if \(!value\) return 'not available'/);
+assert.match(sourceCheckFormatter, /Number\.isNaN\(parsed\.getTime\(\)\)/);
+
+const sourceCheckOptions: Intl.DateTimeFormatOptions = {
+  month: 'short', day: 'numeric', year: 'numeric',
+  hour: 'numeric', minute: '2-digit', timeZoneName: 'short',
+};
+const originalTimeZone = process.env.TZ;
+try {
+  for (const timeZone of ['UTC', 'America/New_York', 'America/Los_Angeles', 'Asia/Kathmandu']) {
+    process.env.TZ = timeZone;
+    for (const [timestamp, expected] of [
+      ['2026-09-13T08:17:00Z', 'Sep 13, 2026, 4:17 AM EDT'],
+      ['2026-11-08T13:17:00Z', 'Nov 8, 2026, 8:17 AM EST'],
+      ['2026-11-01T05:17:00Z', 'Nov 1, 2026, 1:17 AM EDT'],
+      ['2026-11-01T06:17:00Z', 'Nov 1, 2026, 1:17 AM EST'],
+    ]) {
+      assert.equal(formatEasternDateTime(timestamp, sourceCheckOptions), expected, timeZone);
+    }
+  }
+} finally {
+  if (originalTimeZone === undefined) delete process.env.TZ;
+  else process.env.TZ = originalTimeZone;
+}
+
+// The history fallback can appear while the source is stale or unavailable.
+assert.doesNotMatch(checkpointPageSource, /No current public checkpoint notice is live right now/);

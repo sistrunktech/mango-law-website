@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-08
+
+### Checkpoint Rendering
+- Render source-check timestamps in Ohio's Eastern timezone on both server and browser to avoid timezone-dependent hydration differences.
+- Describe historical results without implying a complete current feed.
+
 ## 2026-10-29
 
 - Require matching city/address before suppressing simultaneous checkpoints; preserve source-check timestamps during static-seed replays and warn when recorded feed activity is stale or unverified.

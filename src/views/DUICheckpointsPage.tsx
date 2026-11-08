@@ -23,7 +23,7 @@ import { buildPendingAnnouncementMapCheckpoints } from '../lib/checkpointAnnounc
 import { filterPublicCheckpointRows, isPublicCheckpointRow } from '../lib/publicCheckpointFilters';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
-import { formatCalendarDate } from '../lib/formatting';
+import { formatCalendarDate, formatEasternDateTime } from '../lib/formatting';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -109,7 +109,8 @@ function formatSourceCheckLabel(value: string | null): string {
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return 'not available';
 
-  return parsed.toLocaleString('en-US', {
+  // Keep server and browser output identical, and show Ohio's event timezone.
+  return formatEasternDateTime(parsed, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -772,7 +773,7 @@ export default function DUICheckpointsPage({
 
               {usedHistoryFallback && viewMode === 'all' && (
                 <div className="mb-4 rounded-xl border border-brand-mango/20 bg-brand-mango/5 px-4 py-3 text-sm text-brand-black/75">
-                  No current public checkpoint notice is live right now, so the page has automatically switched to recent history to keep the map and list useful.
+                  Showing previously announced checkpoints. Each entry includes its date and public source.
                 </div>
               )}
 
