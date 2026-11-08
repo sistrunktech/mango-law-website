@@ -15,8 +15,10 @@ async function run() {
   );
 
   const originalFetch = globalThis.fetch;
-  globalThis.fetch = async () =>
-    new Response(
+  globalThis.fetch = async (input, init) => {
+    assert.ok(init?.signal, 'RSS fetches must have a deadline');
+    if (String(input).endsWith('/timeout')) throw new DOMException('Source timed out', 'TimeoutError');
+    return new Response(
       `<?xml version="1.0" encoding="UTF-8"?>
       <rss version="2.0">
         <channel>
@@ -63,10 +65,12 @@ async function run() {
         headers: { 'content-type': 'application/rss+xml' },
       }
     );
+  };
 
   try {
-    const [result] = await scrapeRssSources(
+    const [failed, result] = await scrapeRssSources(
       [
+        { sourceName: 'Unavailable source', rssUrl: 'https://example.com/timeout', sourceType: 'search', tier: 'core', confidence: 'verified', notes: 'test' },
         {
           sourceName: 'Test source',
           rssUrl: 'https://example.com/feed',
@@ -79,7 +83,9 @@ async function run() {
       { maxAgeDays: 21, now: new Date('2026-04-05T20:00:00.000Z') }
     );
 
-    assert.equal(result.items.length, 1);
+    assert.match(failed.error || '', /timed out/);
+    assert.equal(failed.items.length, 0);
+    assert.equal(result.items.length, 1, 'a timed out feed must not prevent the next feed');
     assert.equal(result.items[0]?.title, 'Fresh Ohio OVI checkpoint notice');
     assert.equal(result.items[0]?.url, 'https://example.com/fresh');
   } finally {

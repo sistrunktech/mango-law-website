@@ -24,6 +24,12 @@ export interface CheckpointAnnouncement {
   updated_at: string;
 }
 
+export function getCheckpointFeedState(lastActivity: string | null, now?: Date): 'recent' | 'stale' | 'unknown' {
+  const timestamp = lastActivity ? Date.parse(lastActivity) : NaN;
+  if (!now || !Number.isFinite(timestamp) || timestamp > now.getTime()) return 'unknown';
+  return now.getTime() - timestamp > 24 * 60 * 60_000 ? 'stale' : 'recent';
+}
+
 function parseIsoDate(value: unknown): Date | null {
   if (typeof value !== 'string' || !value.trim()) return null;
   const d = new Date(value);
