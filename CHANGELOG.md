@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-08
+
+### Checkpoint Rendering
+- Render source-check timestamps in Ohio's Eastern timezone on both server and browser to avoid timezone-dependent hydration differences.
+- Describe historical results without implying a complete current feed.
+
+## 2026-10-29
+
+- Require matching city/address before suppressing simultaneous checkpoints; preserve source-check timestamps during static-seed replays and warn when recorded feed activity is stale or unverified.
+
+- Keep checkpoint announcement ingestion running when the aggregator fails; fall back to its homepage after a missing API page, report missing source tables, bound external requests to ten seconds, and record fatal run completion.
+
 ## 2026-02-02
 
 ### SEO / Outgoing Link Policy
