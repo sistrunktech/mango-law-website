@@ -84,6 +84,7 @@ export async function discoverCheckpointAnnouncements(
 
   for (const query of SEARCH_QUERIES) {
     const response = await fetchImpl('https://google.serper.dev/search', {
+      signal: AbortSignal.timeout(10_000),
       method: 'POST',
       headers: {
         'X-API-KEY': serperApiKey,
