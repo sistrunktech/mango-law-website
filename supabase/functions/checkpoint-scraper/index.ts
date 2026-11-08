@@ -1,5 +1,6 @@
-import { createClient } from 'npm:@supabase/supabase-js@2';
+import { createClient, type SupabaseClient } from 'npm:@supabase/supabase-js@2';
 import { scrapeOVICheckpoint } from './ovicheckpoint-scraper.ts';
+import { normalizeLocationAddress, matchesCheckpointEventLocation } from './checkpoint-matching.ts';
 import { geocodeCheckpointLocation, parseAddress } from './geocoding.ts';
 import { loadMasterRssSources, loadSeedSources } from './rss-sources.ts';
 import { scrapeRssSources, scrapeSeedSources } from './rss-scraper.ts';
@@ -51,23 +52,6 @@ type ExistingCheckpointMatch = {
   };
 };
 
-function normalizeLocationAddress(value: unknown): string {
-  if (typeof value !== 'string') return '';
-  return value
-    .toLowerCase()
-    .replace(/&/g, ' and ')
-    .replace(/\b(street|st)\.?\b/g, 'street')
-    .replace(/\b(avenue|ave)\.?\b/g, 'avenue')
-    .replace(/\b(road|rd)\.?\b/g, 'road')
-    .replace(/\b(northwest|nw)\b/g, 'nw')
-    .replace(/\b(northeast|ne)\b/g, 'ne')
-    .replace(/\b(southwest|sw)\b/g, 'sw')
-    .replace(/\b(southeast|se)\b/g, 'se')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
 function isSameCheckpointLocation(left: unknown, right: unknown): boolean {
   const a = normalizeLocationAddress(left);
   const b = normalizeLocationAddress(right);
@@ -79,7 +63,7 @@ function isSameCheckpointLocation(left: unknown, right: unknown): boolean {
 }
 
 async function findExistingCheckpointMatch(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   input: {
     title: string;
     locationAddress: string;
@@ -144,10 +128,12 @@ async function findExistingCheckpointMatch(
 }
 
 async function findExistingCuratedOverlap(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   input: {
     startDate: string;
     locationCounty: string;
+    locationCity: string;
+    locationAddress: string;
   }
 ): Promise<{ id: string } | null> {
   const startTimeMs = new Date(input.startDate).getTime();
@@ -158,7 +144,7 @@ async function findExistingCuratedOverlap(
 
   const { data, error } = await supabase
     .from('dui_checkpoints')
-    .select('id, source_name, source_url')
+    .select('id, source_name, source_url, location_address, location_city, location_county, start_date')
     .eq('location_county', input.locationCounty)
     .gte('start_date', windowStart)
     .lte('start_date', windowEnd)
@@ -169,7 +155,10 @@ async function findExistingCuratedOverlap(
   const curated = (data || []).find((row) => {
     const sourceName = (row as any).source_name;
     const sourceUrl = (row as any).source_url;
-    return (
+    return matchesCheckpointEventLocation(input, {
+      startDate: row.start_date, locationCounty: row.location_county,
+      locationCity: row.location_city, locationAddress: row.location_address,
+    }) && (
       (typeof sourceName === 'string' && !isAggregatorSourceName(sourceName)) ||
       (typeof sourceUrl === 'string' && !isAggregatorSourceUrl(sourceUrl))
     );
@@ -179,7 +168,7 @@ async function findExistingCuratedOverlap(
 }
 
 async function upsertAnnouncement(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   payload: Record<string, unknown>
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const sourceUrl = typeof payload.source_url === 'string' ? payload.source_url : null;
@@ -234,7 +223,7 @@ function stripUrlHash(sourceUrl: string): string {
 }
 
 async function upsertCuratedCheckpoint(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   mapboxToken: string | undefined,
   seed: CuratedAnnouncementSeed,
   stats: ScraperStats
@@ -317,7 +306,7 @@ async function upsertCuratedCheckpoint(
 }
 
 async function ingestCuratedAnnouncements(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   mapboxToken: string | undefined,
   stats: ScraperStats
 ): Promise<void> {
@@ -338,7 +327,7 @@ async function ingestCuratedAnnouncements(
       location_city: seed.locationCity,
       location_county: seed.locationCounty,
       status: seed.status,
-      last_checked_at: new Date().toISOString(),
+      // Replaying a static seed does not fetch its source or refresh prior evidence.
       raw_text: seed.rawText,
     };
 
@@ -382,6 +371,10 @@ Deno.serve(async (req: Request) => {
     errors: [],
   };
 
+  const logId = crypto.randomUUID();
+  let supabase: SupabaseClient | null = null;
+  let logStarted = false;
+
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
@@ -395,7 +388,10 @@ Deno.serve(async (req: Request) => {
       throw new Error('Missing Supabase configuration');
     }
 
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    supabase = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+      global: { fetch: (input, init) => fetch(input, { ...init, signal: AbortSignal.timeout(10_000) }) },
+    });
 
     const requestBody = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
     const mode = requestBody?.mode === 'discovery' ? 'discovery' : 'core';
@@ -405,19 +401,24 @@ Deno.serve(async (req: Request) => {
         ? requestBody.trigger
         : 'manual';
 
-    const logId = crypto.randomUUID();
     const logStartTime = new Date().toISOString();
 
-    await supabase.from('scraper_logs').insert({
+    const { error: logStartError } = await supabase.from('scraper_logs').insert({
       id: logId,
       scraper_name: 'checkpoint-scraper',
       status: 'partial',
       started_at: logStartTime,
       metadata: { trigger, mode, seedRow, source: 'OVICheckpoint + RSS + curated + search' },
     });
+    if (logStartError) throw logStartError;
+    logStarted = true;
 
     console.log('Starting OVICheckpoint.com scraper...');
-    const rawCheckpoints = await scrapeOVICheckpoint();
+    // An unavailable aggregator must not prevent independent announcement feeds.
+    const rawCheckpoints = await scrapeOVICheckpoint().catch((error) => {
+      stats.errors.push({ checkpoint: 'OVICheckpoint source', error: error instanceof Error ? error.message : String(error) });
+      return [];
+    });
     stats.checkpointsFound = rawCheckpoints.length;
 
     console.log(`Processing ${rawCheckpoints.length} checkpoints...`);
@@ -432,6 +433,8 @@ Deno.serve(async (req: Request) => {
         const existingCuratedOverlap = await findExistingCuratedOverlap(supabase, {
           startDate: raw.startDate,
           locationCounty: county,
+          locationCity: city,
+          locationAddress: address,
         });
 
         if (existingCuratedOverlap) {
@@ -664,7 +667,7 @@ Deno.serve(async (req: Request) => {
     const didWork = stats.checkpointsNew + stats.checkpointsUpdated + stats.announcementsUpserted > 0;
     const finalStatus = stats.errors.length === 0 ? 'success' : didWork ? 'partial' : 'failed';
 
-    await supabase
+    const { error: logCompletionError } = await supabase
       .from('scraper_logs')
       .update({
         status: finalStatus,
@@ -684,6 +687,7 @@ Deno.serve(async (req: Request) => {
         },
       })
       .eq('id', logId);
+    if (logCompletionError) throw logCompletionError;
 
     return new Response(
       JSON.stringify({
@@ -704,6 +708,22 @@ Deno.serve(async (req: Request) => {
     console.error('Scraper fatal error:', error);
 
     const duration = Date.now() - startTime;
+    if (supabase && logStarted) {
+      try {
+        const { error: logError } = await supabase.from('scraper_logs').update({
+          status: 'failed',
+          completed_at: new Date().toISOString(),
+          duration_ms: duration,
+          checkpoints_found: stats.checkpointsFound,
+          checkpoints_new: stats.checkpointsNew,
+          checkpoints_updated: stats.checkpointsUpdated,
+          errors: [...stats.errors, { checkpoint: 'Fatal error', error: error instanceof Error ? error.message : String(error) }],
+        }).eq('id', logId);
+        if (logError) console.error('Failed to complete scraper log:', logError.message);
+      } catch (logError) {
+        console.error('Failed to complete scraper log:', logError);
+      }
+    }
 
     return new Response(
       JSON.stringify({

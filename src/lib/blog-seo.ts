@@ -6,6 +6,10 @@ type BlogSeoOverride = {
 };
 
 const BLOG_SEO_OVERRIDES: Record<string, BlogSeoOverride> = {
+  'ohio-halloween-rideshare-credits-2026': {
+    title: 'Ohio Halloween Ride Credits 2026: $15 Offer',
+    description: "Check Ohio's Halloween rideshare-credit offer, participating counties, and key limits. Make a sober-ride plan before heading out in Central Ohio.",
+  },
   'summons-vs-arrest-delaware-county-ohio': {
     title: 'Summons vs. Arrest in Delaware County',
     description:

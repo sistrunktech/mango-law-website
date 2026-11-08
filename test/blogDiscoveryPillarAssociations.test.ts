@@ -3,8 +3,30 @@ import { blogPosts } from '../src/data/blogPosts.ts';
 import { blogIssuePathGroups, homepageBlogPrioritySlugs, oviFastPathLinks } from '../src/data/blogDiscovery.ts';
 import { getBlogCtaContent } from '../src/lib/blogCtas.ts';
 import { selectRelatedBlogPosts } from '../src/lib/relatedBlogPosts.ts';
+import { getBlogOfferNotice, isEditorialAuthor } from '../src/lib/blogEditorial.ts';
+import { buildArticleSchema } from '../src/lib/structured-data.ts';
 
 function run() {
+  const halloweenPost = blogPosts.find((post) => post.slug === 'ohio-halloween-rideshare-credits-2026');
+  assert.ok(halloweenPost);
+  assert.equal(isEditorialAuthor(halloweenPost.author), true);
+  const editorialSchema = buildArticleSchema({ headline: halloweenPost.title, author: halloweenPost.author, datePublished: halloweenPost.date, dateModified: halloweenPost.lastVerified }, 'https://mango.law/blog/ohio-halloween-rideshare-credits-2026', 'https://mango.law/image.png');
+  assert.equal(editorialSchema.author['@type'], 'Organization');
+  assert.equal(editorialSchema.author.name, 'Mango Law Editorial Team');
+  assert.equal('identifier' in editorialSchema.author, false, 'editorial byline must not inherit attorney credentials');
+  const attorneySchema = buildArticleSchema({ headline: 'Legal guide', author: 'Dominic Mango', datePublished: '2026-05-20', dateModified: '2026-05-20' }, 'https://mango.law/blog/guide', 'https://mango.law/image.png');
+  assert.equal(attorneySchema.author['@type'], 'Person');
+  assert.ok('identifier' in attorneySchema.author, 'existing attorney attribution should be preserved');
+  assert.equal(getBlogOfferNotice(undefined), null, 'ordinary articles should not show an offer notice');
+  assert.match(getBlogOfferNotice(halloweenPost.offerEndsAt, new Date('2026-11-01T06:30:00Z')) ?? '', /Time-limited/, 'offer notice should survive the Ohio clock change');
+  assert.match(getBlogOfferNotice(halloweenPost.offerEndsAt, new Date('2026-11-02T07:59:59Z')) ?? '', /Time-limited/);
+  assert.match(getBlogOfferNotice(halloweenPost.offerEndsAt, new Date('2026-11-02T08:00:00Z')) ?? '', /Expired offer/);
+  assert.match(getBlogOfferNotice(halloweenPost.offerEndsAt, new Date('2027-10-29T17:00:00Z')) ?? '', /Expired offer/, 'dated offer must not silently recur next Halloween');
+  assert.match(halloweenPost.content, /Franklin County is listed; Delaware County is not/);
+  assert.match(halloweenPost.content, /countdown rather than active claim controls/);
+  assert.match(halloweenPost.content, /start or end/);
+  assert.equal(blogPosts.filter((post) => post.slug === halloweenPost.slug).length, 1);
+
   const postsBySlug = new Map(blogPosts.map((post) => [post.slug, post]));
   const publicRoutes = new Set([
     '/resources/dui-checkpoints',

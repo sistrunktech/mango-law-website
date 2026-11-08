@@ -20,6 +20,20 @@ Rollback notes: (version ID, snapshot reference, or commit)
 
 ## Entries
 
+Date/time: 2026-10-29
+Post slug and title: ohio-halloween-rideshare-credits-2026 — Halloween 2026 in Ohio: Check the $15 Uber and Lyft Ride-Credit Offer
+Change type: major (new article; no finalized article edited)
+Summary of change: Added the approved community-safety article, official sources, unique illustration, editorial attribution and Organization author schema. Added a server-rendered offer notice that changes to expired after November 2 at 3 a.m. Ohio local time, subject to the existing five-minute page revalidation. The announcement's clock times are attributed without asserting a provider timezone. Retained the October 29 countdown caveat and made no redemption-code or guaranteed-availability claim.
+Regression checklist:
+- Hero changed? new article only
+- Images removed? no
+- Links changed? new article only
+- Headings changed? new article only
+- Meta/schema changed? yes; new article metadata and editorial Organization author; existing attorney schema preserved
+Approval token: Not supplied or fabricated. Authorization: Tim approved the Mango plan (“i'm good with the plan for mango, let me knwo when content goes live so i can review adn provide feedback as needed”); implementation was delegated with article publication authorized. No finalized content was edited.
+NEED-EXCEPTION: The approved brief specifies a short community-safety update of approximately 550 words; retain that focused scope instead of padding it to the general 750-word blog target. Necessary shared attribution/expiry changes and regression checks ship with the article to avoid a false attorney-review claim.
+Rollback notes: Revert this article release; preserve all 33 prior post records and their images.
+
 Date/time: 2026-05-29 15:40 EDT
 Post slug and title: llms.txt sitemap discovery surface
 Change type: minor

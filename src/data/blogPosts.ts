@@ -29,6 +29,7 @@ export type BlogPost = {
     answer: string;
   }[];
   imageUrl?: string;
+  offerEndsAt?: string;
 };
 
 export function resolveBlogScope(post: BlogPost): BlogScope {
@@ -47,6 +48,61 @@ export function resolveBlogScope(post: BlogPost): BlogScope {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: 'ohio-halloween-rideshare-credits-2026',
+    title: 'Halloween 2026 in Ohio: Check the $15 Uber and Lyft Ride-Credit Offer',
+    excerpt: "Check Ohio's Halloween rideshare-credit offer, participating counties, and key limits. Make a sober-ride plan before heading out in Central Ohio.",
+    imageUrl: '/images/generated/blog-ohio-halloween-rideshare-credits-2026.png',
+    date: '2026-10-29',
+    author: 'Mango Law Editorial Team',
+    lastVerified: '2026-10-29',
+    // Display expiry uses Ohio local time after the November 1 clock change.
+    offerEndsAt: '2026-11-02T03:00:00-05:00',
+    category: 'OVI/DUI Defense',
+    sources: [
+      { label: 'OTSO Halloween 2026 announcement', url: 'https://otso.ohio.gov/home/news-and-events/all-news/ohio-traffic-safety-office-activates-project-plan-ahead-for-halloween-to-prevent-impaired-driving', type: 'primary' },
+      { label: 'Official Ohio Project Plan Ahead program', url: 'https://oh.projectplanahead.com/', type: 'primary' },
+      { label: 'NHTSA: Drunk Driving', url: 'https://www.nhtsa.gov/risky-driving/drunk-driving', type: 'primary' },
+      { label: 'Ohio Revised Code 4511.19', url: 'https://codes.ohio.gov/ohio-revised-code/section-4511.19', type: 'primary' },
+    ],
+    content: `Before you head out for Halloween, decide how you will get home without driving after drinking. A ride credit can help with the cost, but your plan should work even if the discount is unavailable.
+
+## What Ohio has announced
+
+The Ohio Traffic Safety Office announced a Project Plan Ahead offer of **up to $15 toward an eligible Uber or Lyft ride** for Halloween weekend. Its announced redemption window runs from **5 p.m. Thursday, October 29, through 3 a.m. Monday, November 2, 2026**.
+
+Under the announced terms, credits are limited and available while supplies last. Riders pay any remaining cost above the credit. Qualifying rides must be requested when it is time to travel—not scheduled in advance. Check the live offer before relying on it. [Read OTSO's Halloween announcement](https://otso.ohio.gov/home/news-and-events/all-news/ohio-traffic-safety-office-activates-project-plan-ahead-for-halloween-to-prevent-impaired-driving).
+
+## Which trips qualify around Columbus and Delaware?
+
+The program lists seven participating counties: **Butler, Cuyahoga, Franklin, Hamilton, Lucas, Montgomery, and Summit**. A ride must **start or end** in a participating county. The program page also says there is no minimum purchase. [Check the official Project Plan Ahead page](https://oh.projectplanahead.com/).
+
+For Central Ohio readers, the important distinction is that **Franklin County is listed; Delaware County is not**. Based on that published geographic rule, a trip between Delaware County and a destination in Franklin County may meet the location requirement. A trip entirely within Delaware County would not. That is an interpretation of the county rule—not a guarantee that a particular voucher or trip will be accepted.
+
+Check the actual pickup and destination addresses rather than assuming every trip near Columbus qualifies.
+
+## Where to check for a credit
+
+Start with the [official Ohio program page](https://oh.projectplanahead.com/), not an old social post or a code from another state's campaign. When a current offer is available, follow its instructions and read the terms shown for your selected rideshare service.
+
+Before requesting a ride, confirm that the credit appears in your account and applies to your trip. Check the remaining fare and any exclusions. Do not assume one credit covers a round trip, that additional credits are available, or that every charge is included.
+
+At our October 29 check, the program page showed a countdown rather than active claim controls. If the offer cannot be claimed or the app does not apply it, use your backup ride plan. Do not wait for a discount if that leaves you without a safe way home.
+
+## Make the plan before the party
+
+A useful plan answers three questions: Who is getting you there? Who is getting you home? What will you do if the first option falls through?
+
+Choose a non-drinking designated driver, arrange a ride with a sober friend, or budget for a taxi or rideshare without a discount. If you are hosting, help guests arrange sober transportation. Wear a seat belt on the ride home, too. These steps align with [NHTSA's responsible-driving guidance](https://www.nhtsa.gov/risky-driving/drunk-driving).
+
+Ohio's OVI law addresses alcohol, drugs of abuse, and combinations of them. A transportation plan matters beyond drinking alone. [Ohio Revised Code 4511.19](https://codes.ohio.gov/ohio-revised-code/section-4511.19).
+
+## Already facing an OVI charge?
+
+If your question is about an existing charge rather than a ride home, Mango Law can discuss your circumstances and next steps. Read our [OVI/DUI defense overview](/ovi-dui-defense-delaware-oh) or [request a free case review](/contact). Call or text **(740) 602-2155**.
+
+*This article provides general information, not legal advice. Mango Law does not administer or guarantee this offer. Program terms and availability can change. Confirm the current offer directly with the program and rideshare provider.*`,
+  },
   {
     slug: 'summons-vs-arrest-delaware-county-ohio',
     title: 'Summons vs. Arrest in Delaware County, Ohio: What the Paperwork Means',
