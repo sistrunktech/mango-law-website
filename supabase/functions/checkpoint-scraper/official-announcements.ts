@@ -77,7 +77,7 @@ function explicitWindow(eventDate: string, window: RegExpMatchArray): { start: s
   return parsed;
 }
 
-/** Only this verified publisher template/numbered format is currently supported. */
+/** Parse the verified numbered and two-road formats from the county publisher. */
 export function parseOfficialCheckpointNotice(sourceUrl: string, html: string): OfficialNoticeResult {
   const source = registeredSource(sourceUrl);
   const hold = (pendingReason: string): OfficialNoticeResult => ({ events: [], pendingReason });
@@ -91,12 +91,17 @@ export function parseOfficialCheckpointNotice(sourceUrl: string, html: string): 
   const body = paragraphs.join('\n');
   if (!/\b(?:sobriety|ovi|dui) checkpoints?\b/i.test(title) || !/Franklin County DUI Task Force/i.test(body)) return hold('Not a supported checkpoint notice');
   if (/\b(?:not|never)\b.{0,30}\bcancel(?:led|ed)\b/i.test(`${title}\n${body}`)) return hold('Cancellation wording requires source review');
-  if (/\b(?:postponed|rescheduled)\b/i.test(body)) return hold('Rescheduling requires source review');
+  if (/\b(?:postponed|rescheduled)\b/i.test(title + ' ' + body)) return hold('Rescheduling requires source review');
   const dates = absoluteDates(`${title}\n${body}`);
+  const publishedDates = absoluteDates(publication);
+  const published = publishedDates[0];
+  if (publishedDates.length !== 1 || !published) return hold('Missing or conflicting publication date');
+  // This layout gives "TODAY" instead of a full event date. The dated title must corroborate it.
+  const sameDay = /\(2\) sobriety checkpoints are scheduled today\b/i.test(body);
+  if (sameDay && title.startsWith(published.slice(5) + ' ')) dates.push(published);
   if (!dates.length || dates.includes(null) || new Set(dates).size !== 1) return hold('Missing, invalid or conflicting explicit event date');
   const eventDate = dates[0]!;
-  const publishedDates = absoluteDates(publication);
-  if (publishedDates.length !== 1 || !publishedDates[0] || publishedDates[0] > eventDate) return hold('Missing or conflicting publication date');
+  if (published > eventDate) return hold('Event predates its announcement');
   if (!new URL(sourceUrl).pathname.includes(`/${eventDate.slice(0, 4)}/`)) return hold('Event year conflicts with publisher URL');
   const time = '(\\d{1,2}(?::\\d{2})?)\\s*(AM|PM|a\\.m\\.|p\\.m\\.)';
   const timePattern = new RegExp(`(?:Checkpoint operations will run from|conduct a sobriety checkpoint between)\\s+${time}\\s+(?:to|and)\\s+${time}`, 'gi');
@@ -107,14 +112,20 @@ export function parseOfficialCheckpointNotice(sourceUrl: string, html: string): 
   const city = body.match(/(?:today in|located in)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s+Township)\b/)?.[1];
   if (!city) return hold('Missing explicit municipality or township');
   const locationParagraph = paragraphs.find((p) => /^Checkpoint 1:/i.test(p));
-  if (!locationParagraph) return hold('Unnumbered locations require source review');
-  const locations = [...locationParagraph.matchAll(/Checkpoint\s+(\d+):\s*([\s\S]*?)(?=\s*&?\s*Checkpoint\s+\d+:|$)/gi)];
-  if (!locations.length || locations.length > 6 || locations.some((m, i) => Number(m[1]) !== i + 1 || !m[2].trim())) return hold('Ambiguous numbered checkpoint locations');
+  let locations: string[];
+  if (locationParagraph) {
+    const numbered = [...locationParagraph.matchAll(/Checkpoint\s+(\d+):\s*([\s\S]*?)(?=\s*&?\s*Checkpoint\s+\d+:|$)/gi)];
+    if (!numbered.length || numbered.length > 6 || numbered.some((m, i) => Number(m[1]) !== i + 1 || !m[2].trim())) return hold('Ambiguous numbered checkpoint locations');
+    locations = numbered.map((m) => m[2].replace(/\s*&\s*$/, '').trim());
+  } else {
+    const pair = body.match(/The checkpoints will be on ([^,\n]+), located in ([^\n]+?)\s*(?:\.|$)/im);
+    locations = pair?.[1].split(/\s+and\s+/i) ?? [];
+    if (!sameDay || pair?.[2] !== city || locations.length !== 2 || locations.some((road) => !/\b[nesw]\/o\s+\S/i.test(road))) return hold('Ambiguous unnumbered locations');
+  }
   const canonicalUrl = new URL(sourceUrl); canonicalUrl.search = ''; canonicalUrl.hash = '';
   const cancelled = /\bcancel(?:led|ed)\b/i.test(`${title}\n${body}`);
-  return { publicationDate: publishedDates[0], events: locations.map((location) => {
-    const locationText = location[2].replace(/\s*&\s*$/, '').trim();
-    const id = `checkpoint-${location[1]}`;
+  return { publicationDate: publishedDates[0], events: locations.map((locationText, index) => {
+    const id = `checkpoint-${index + 1}`;
     return {
       id, title: `Franklin County sobriety checkpoint: ${locationText}`,
       sourceUrl: `${canonicalUrl.href}#${id}`, sourceName: source.sourceName,

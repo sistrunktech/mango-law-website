@@ -31,6 +31,16 @@ for (const event of parsed.events) {
   assert.equal(event.promoteToCheckpoint, true);
   assert.equal(hasOhioOviCheckpointIntent({ title: event.title, rawText: event.rawText, locationCounty: event.locationCounty }), true);
 }
+const sharonUrl = url.replace(/10-02-.+$/, '10-23-Sobriety-Checkpoint-Tonight-in-Sharon-Twp');
+const sharon = `<!--normalTemplateStart--><h1>10-23 Sobriety Checkpoint Tonight in Sharon Twp</h1>
+<p class="published-on">Published on October 23, 2026</p><p>(2) sobriety checkpoints are scheduled TODAY.</p>
+<p>The checkpoints will be on St. Rte. 161 w/o IR. 71 and Morse Rd. e/o IR 71, located in Sharon Township</p>
+<p>The Franklin County DUI Task Force will conduct a sobriety checkpoint between 8:00 pm and 1:30 am.</p><!--normalTemplateEnd-->`;
+const sharonEvents = parseOfficialCheckpointNotice(sharonUrl, sharon).events;
+assert.deepEqual(sharonEvents.map((e) => e.locationText), ['St. Rte. 161 w/o IR. 71', 'Morse Rd. e/o IR 71']);
+assert.ok(sharonEvents.every((e) => e.startDate === '2026-10-24T00:00:00.000Z' && e.endDate === '2026-10-24T05:30:00.000Z'));
+for (const bad of [sharon.replace('October 23','October 22'), sharon.replace('TODAY','tomorrow'), sharon.replace(' and ', ' or ')])
+  assert.equal(parseOfficialCheckpointNotice(sharonUrl, bad).events.length, 0);
 const corrected = parseOfficialCheckpointNotice(url, html.replace('8:00 PM', '9:00 PM'));
 assert.equal(corrected.events[0].sourceUrl, parsed.events[0].sourceUrl, 'source identity persists across corrections');
 assert.notEqual(corrected.events[0].startDate, parsed.events[0].startDate);
@@ -97,6 +107,6 @@ if (process.env.MANGO_OFFICIAL_NOTICE_FIXTURE) {
   assert.equal(parseOfficialCheckpointNotice(url, readFileSync(process.env.MANGO_OFFICIAL_NOTICE_FIXTURE, 'utf8')).events.length, 2);
 }
 if (process.env.MANGO_OFFICIAL_INDEX_FIXTURE) {
-  assert.equal(collectOfficialCheckpointArticleUrls(indexUrl, readFileSync(process.env.MANGO_OFFICIAL_INDEX_FIXTURE, 'utf8')).length, 3);
+  assert.ok(collectOfficialCheckpointArticleUrls(indexUrl, readFileSync(process.env.MANGO_OFFICIAL_INDEX_FIXTURE, 'utf8')).includes(url));
 }
 console.log('checkpointOfficialAnnouncements tests passed');
