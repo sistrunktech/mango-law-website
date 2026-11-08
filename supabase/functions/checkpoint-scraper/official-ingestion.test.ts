@@ -20,14 +20,22 @@ Deno.test('fresh source reads, linked idempotent replay, write recovery and canc
     const data = init?.body && JSON.parse(String(init.body));
     if (url.pathname.endsWith('/dui_checkpoints')) {
       if (init?.method === 'GET') {
-        const existing = checkpoints.get(url.searchParams.get('source_url')!.slice(3));
+        const source = url.searchParams.get('source_url');
+        const existing = source ? checkpoints.get(source.slice(3)) : undefined;
         return json(existing ? [{ id: existing.id }] : []);
       }
-      const id = checkpoints.get(data.source_url)?.id ?? crypto.randomUUID();
+      assert.equal(url.searchParams.get('on_conflict'), 'id');
+      const id = data.id;
+      assert.match(id, /^[a-f0-9]{8}-[a-f0-9]{4}-8[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/);
       checkpoints.set(data.source_url, { ...data, id });
       return json({ id });
     }
     assert.ok(url.pathname.endsWith('/dui_checkpoint_announcements'));
+    if (init?.method === 'GET') {
+      const a = announcements.get(url.searchParams.get('source_url')!.slice(3));
+      return json(a ? [{ id: a.id }] : []);
+    }
+    assert.equal(url.searchParams.get('on_conflict'), 'id');
     if (failOneAnnouncement) { failOneAnnouncement = false; return json({ message: 'simulated failure' }, 400); }
     announcements.set(data.source_url, data);
     return json([]);

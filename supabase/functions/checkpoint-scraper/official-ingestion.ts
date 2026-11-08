@@ -21,12 +21,28 @@ const references = [
   { city: 'Sharon Township', road: 'Morse Rd. e/o IR 71', latitude: 40.061627, longitude: -82.997935 }, // 29299/59589/47816 × 59942/38575
 ];
 
+// Source-derived UUIDv8 keys let simultaneous first imports converge using the
+// primary key, including on installations without the optional event constraint.
+async function sourceId(table: string, url: string): Promise<string> {
+  const bytes = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(table + ':' + url))).slice(0, 16);
+  bytes[6] = (bytes[6] & 0x0f) | 0x80;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+  return [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20)].join('-');
+}
+
 async function saveEvent(db: SupabaseClient, token: string | undefined, seed: CuratedAnnouncementSeed,
   evidence: Evidence, stats: Stats, statusAt: (start: string, end: string) => Status) {
   const { locationText: road, locationCity: city, locationCounty: county, startDate: start, endDate: end } = seed;
   if (!road || !city || !county || !start || !end || !seed.promoteToCheckpoint) throw new Error('Incomplete official checkpoint');
-  const prior = await db.from('dui_checkpoints').select('id,location_address,location_city,latitude,longitude').eq('source_url', seed.sourceUrl).maybeSingle();
+  const columns = 'id,location_address,location_city,latitude,longitude';
+  const bySource = await db.from('dui_checkpoints').select(columns).eq('source_url', seed.sourceUrl).maybeSingle();
+  if (bySource.error) throw bySource.error;
+  const prior = bySource.data ? bySource : await db.from('dui_checkpoints').select(columns)
+    .eq('location_address', road).eq('location_city', city).eq('start_date', start).maybeSingle();
   if (prior.error) throw prior.error;
+  const oldAnnouncement = await db.from('dui_checkpoint_announcements').select('id').eq('source_url', seed.sourceUrl).maybeSingle();
+  if (oldAnnouncement.error) throw oldAnnouncement.error;
   const reference = references.find(r => county === 'Franklin' && r.city === city && r.road.toLowerCase() === road.toLowerCase());
   const point = reference ? { ...reference, confidence: 'nearby_intersection' }
     : await geocodeCheckpointLocation({ address: road, city, county }, db, token);
@@ -42,15 +58,15 @@ async function saveEvent(db: SupabaseClient, token: string | undefined, seed: Cu
       last_geocoded_at: evidence.fetchedAt } : keepPoint ? {} : { latitude: null, longitude: null, geocoding_confidence: 'none', last_geocoded_at: null }),
     updated_at: evidence.fetchedAt,
   };
-  const write = prior.data ? db.from('dui_checkpoints').update(checkpoint).eq('id', prior.data.id)
-    : db.from('dui_checkpoints').upsert(checkpoint, { onConflict: 'location_address,location_city,start_date' });
-  const saved = await write.select('id').single();
+  const id = prior.data?.id ?? await sourceId('checkpoint', seed.sourceUrl);
+  const saved = await db.from('dui_checkpoints').upsert({ ...checkpoint, id }, { onConflict: 'id' }).select('id').single();
   if (saved.error) throw saved.error;
   const announcement = await db.from('dui_checkpoint_announcements').upsert({
+    id: oldAnnouncement.data?.id ?? await sourceId('announcement', seed.sourceUrl),
     source_url: seed.sourceUrl, source_name: seed.sourceName, title: seed.title, event_date: seed.eventDate,
     start_date: start, end_date: end, location_text: road, location_city: city, location_county: county,
     status: seed.status, raw_text: seed.rawText, linked_checkpoint_id: saved.data.id, last_checked_at: evidence.fetchedAt,
-  }, { onConflict: 'source_url' });
+  }, { onConflict: 'id' });
   if (announcement.error) throw announcement.error;
   if (prior.data) stats.checkpointsUpdated++;
   else stats.checkpointsNew++;
