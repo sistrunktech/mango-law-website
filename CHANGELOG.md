@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-08
+
+### Checkpoint Rendering
+- Render source-check timestamps in Ohio's Eastern timezone on both server and browser to avoid timezone-dependent hydration differences.
+
 ## 2026-02-02
 
 ### SEO / Outgoing Link Policy

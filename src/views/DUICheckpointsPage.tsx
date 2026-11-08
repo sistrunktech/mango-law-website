@@ -23,7 +23,7 @@ import { buildPendingAnnouncementMapCheckpoints } from '../lib/checkpointAnnounc
 import { filterPublicCheckpointRows, isPublicCheckpointRow } from '../lib/publicCheckpointFilters';
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_PHONE_TEL } from '../lib/contactInfo';
 import { trackCtaClick, trackLeadSubmitted } from '../lib/analytics';
-import { formatCalendarDate } from '../lib/formatting';
+import { formatCalendarDate, formatEasternDateTime } from '../lib/formatting';
 
 type ViewMode = 'upcoming' | 'all';
 
@@ -109,7 +109,8 @@ function formatSourceCheckLabel(value: string | null): string {
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return 'not available';
 
-  return parsed.toLocaleString('en-US', {
+  // Keep server and browser output identical, and show Ohio's event timezone.
+  return formatEasternDateTime(parsed, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
